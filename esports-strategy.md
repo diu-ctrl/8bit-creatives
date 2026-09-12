@@ -1,6 +1,6 @@
-# esports-inside.html — Strategy & Antigravity Build Brief
+# esports.html — Strategy & Antigravity Build Brief
 
-**Scope:** Plan the structure, content, and design of a new `esports-inside.html` subpage that showcases 8Bit's competitive esports roster. Player data will be filled in later by the user — this brief covers layout, components, interactions, and responsive behavior only.
+**Scope:** Plan the structure, content, and design of a new `esports.html` subpage that showcases 8Bit's competitive esports roster. Player data will be filled in later by the user — this brief covers layout, components, interactions, and responsive behavior only.
 
 ---
 
@@ -338,7 +338,7 @@ Apply the same smooth black-to-white gradient treatment already used on `about.h
 ## 7. Antigravity prompt — the actual instruction block to send
 
 ````
-Build a new subpage called `esports-inside.html` for the 8Bit Creatives website. The page showcases 8Bit's competitive esports roster. Use the same design system, fonts, colors, footer, navbar, and black-to-white gradient treatment as the rest of the site (match `about.html` for the gradient, navbar, and footer). The page must be fully responsive (desktop, tablet, mobile).
+Build a new subpage called `esports.html` for the 8Bit Creatives website. The page showcases 8Bit's competitive esports roster. Use the same design system, fonts, colors, footer, navbar, and black-to-white gradient treatment as the rest of the site (match `about.html` for the gradient, navbar, and footer). The page must be fully responsive (desktop, tablet, mobile).
 
 Use empty placeholder data for now — the user will fill in real player data later. Use placeholder names like "Player 1", "Player 2" etc. so it's obvious where to swap in real data later. Use placeholder image URLs (can be a 4:5 SVG placeholder with the player's handle letter).
 
@@ -424,7 +424,7 @@ CRITICAL CONSTRAINTS (read again before coding):
 
 ## 8. Final checklist before sending to Antigravity
 
-- [ ] Page name: `esports-inside.html`
+- [ ] Page name: `esports.html`
 - [ ] Seven sections in order: hero, KPI ribbon, roster grid, coaching staff, tournament table, sponsors strip, footer
 - [ ] All design constraints respected: no all-caps, no Geist Mono, no orange, no eyebrows, no squarish, no hover-to-popup, no hover-to-zoom
 - [ ] Black-to-white gradient same as `about.html`
