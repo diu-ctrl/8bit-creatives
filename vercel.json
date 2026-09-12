@@ -5,25 +5,11 @@
     {
       "source": "/case-study-global-chess-league",
       "destination": "/gcl-season-4",
-      "permanent": true,
-      "statusCode": 308
-    },
-    {
-      "source": "/case-study-global-chess-league.html",
-      "destination": "/gcl-season-4",
-      "permanent": true,
       "statusCode": 308
     },
     {
       "source": "/esports-inside",
       "destination": "/esports",
-      "permanent": true,
-      "statusCode": 308
-    },
-    {
-      "source": "/esports-inside.html",
-      "destination": "/esports",
-      "permanent": true,
       "statusCode": 308
     }
   ],
