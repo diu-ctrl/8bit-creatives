@@ -1,0 +1,22 @@
+.git
+.gitignore
+.env
+.env.local
+node_modules/
+*.md
+*.docx
+*.pdf
+research*
+8Bit_Case_Study_Archive_Blueprint.*
+AGENTS.md
+Antigravity*
+walkthrough.md
+backup_before_undo/
+desktop_snapshot/
+Audit/
+Initial Research/
+Wireframe/
+Landing Page Sections as Images/
+verify*.js
+start-server.ps1
+start.bat

@@ -799,6 +799,60 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   border-radius: 16px;
 }
 
+/* ─── Hero right-column 8Bit logo — desktop sizing (surgical) ─── */
+.hero-right {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 100% !important;
+}
+
+.canvas-container {
+  width: 100% !important;
+  max-width: 520px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.hero-logo-tilt {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.hero-logo-tilt img,
+.hero-logo-img,
+#heroLogoImg {
+  width: 100% !important;
+  max-width: 480px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* ─── End hero right-column logo sizing ─── */
+
+@media (max-width: 767px) {
+  .hero-logo-tilt {
+    transform: none !important;
+    perspective: none !important;
+  }
+  .hero-logo-tilt img,
+  #heroLogoImg {
+    transform: none !important;
+    max-width: 180px !important;
+    height: auto !important;
+  }
+  .canvas-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .hero-content {

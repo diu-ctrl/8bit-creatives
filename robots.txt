@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /favicon/
+Disallow: /images-for-landing-page/
+Disallow: /ops.html
+Disallow: /api/
+
+Sitemap: https://8bit-creatives.vercel.app/sitemap.xml

@@ -34,12 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
    1. NAVBAR BEHAVIOR (Dark on light sections + Hide logo & CTA outside hero)
    ========================================================================== */
 function initNavbar() {
-  console.log('Navbar Selectors Used:', {
-    navbar: '.navbar-pill',
-    logo: '.nav-brand-topleft',
-    cta: '.nav-cta-topright',
-    hero: '#hero'
-  });
+  
 
   const navbar = document.querySelector('.navbar-pill') 
               || document.querySelector('.navbar') 
@@ -162,7 +157,7 @@ function initNavbar() {
   }, { threshold: [0, 0.4, 0.6, 1] });
   heroPosObserver.observe(hero);
 
-  console.log('Navbar hide/show JS initialized. Hero:', hero, 'Logo:', logo, 'CTA:', cta);
+  
 
   // === STEP 3: CHANGE NAVBAR TEXT COLOR TO BLACK ON WHITE/BRIGHT SECTIONS ===
   if (!navbar) { console.error('Navbar element not found'); return; }
@@ -323,7 +318,7 @@ function initNavbar() {
     checkActiveSection();
   }
 
-  console.log('Navbar bg-observer initialized. Watching', bgSections.length, 'sections.');
+  
 }
 
 /* ==========================================================================
@@ -2697,7 +2692,7 @@ function initFooterLogoTilt() {
     startAnimation();
   });
 
-  console.log('Footer logo tilt initialized on:', logoWrap, logo);
+  
 }
 
 // Re-init after delay in case images load late
@@ -2981,19 +2976,19 @@ function initCreatorStats() {
     
     let statsHtml = '';
     if (c.youtube) {
-      statsHtml += `<a class="stat-link" href="${c.youtube.url}" target="_blank" rel="noopener" data-url="${c.youtube.url}">
+      statsHtml += `<a class="stat-link" href="${c.youtube.url}" target="_blank" rel="noopener noreferrer" data-url="${c.youtube.url}">
          <span class="stat-label">YouTube</span>
          <span class="stat-count">${c.youtube.count}</span>
        </a>`;
     }
     if (c.instagram) {
-      statsHtml += `<a class="stat-link" href="${c.instagram.url}" target="_blank" rel="noopener" data-url="${c.instagram.url}">
+      statsHtml += `<a class="stat-link" href="${c.instagram.url}" target="_blank" rel="noopener noreferrer" data-url="${c.instagram.url}">
          <span class="stat-label">Instagram</span>
          <span class="stat-count">${c.instagram.count}</span>
        </a>`;
     }
     if (c.kick) {
-      statsHtml += `<a class="stat-link" href="${c.kick.url}" target="_blank" rel="noopener" data-url="${c.kick.url}">
+      statsHtml += `<a class="stat-link" href="${c.kick.url}" target="_blank" rel="noopener noreferrer" data-url="${c.kick.url}">
          <span class="stat-label">Kick</span>
          <span class="stat-count">${c.kick.count}</span>
        </a>`;
