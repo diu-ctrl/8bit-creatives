@@ -3259,3 +3259,125 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   });
 }
 
+// ============================================================
+// Formspree Submit Handler (Inline Success/Error, Honeypot, Debounce)
+// ============================================================
+(function () {
+  const form = document.getElementById('briefForm');
+  const successBox = document.getElementById('formSuccess');
+  const errorBox = document.getElementById('formError');
+  const errorMessage = document.getElementById('formErrorMessage');
+  const submitButton = form ? (form.querySelector('button[type="submit"], input[type="submit"]') || form.querySelector('#continueBtn, .form-continue')) : null;
+
+  if (form && submitButton) {
+    let lastSubmit = 0;
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      // ─── HONEYPOT CHECK ───
+      const honeypot = form.querySelector('input[name="company_website"]');
+      if (honeypot && honeypot.value.trim() !== '') {
+        // Bot filled the honeypot. Pretend success, silently drop.
+        if (successBox) successBox.hidden = false;
+        form.hidden = true;
+        return;
+      }
+
+      // ─── DEBOUNCE CHECK (2 seconds between submits) ───
+      const now = Date.now();
+      if (now - lastSubmit < 2000) {
+        return; // silently ignore double-click
+      }
+      lastSubmit = now;
+
+      // ─── BASIC VALIDATION ───
+      const name = form.querySelector('#name, input[name="name"]');
+      const email = form.querySelector('#email, input[name="email"]');
+      const pitch = form.querySelector('#pitch, textarea[name="pitch"]');
+
+      if (!name || !email || !pitch || !name.value.trim() || !email.value.trim() || !pitch.value.trim()) {
+        if (errorMessage) errorMessage.textContent = 'Please fill in your name, email, and project brief before submitting.';
+        if (errorBox) errorBox.hidden = false;
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email.value.trim())) {
+        if (errorMessage) errorMessage.textContent = 'That email doesn\'t look right. Please check and try again.';
+        if (errorBox) errorBox.hidden = false;
+        return;
+      }
+
+      // ─── DISABLE BUTTON + SHOW LOADING STATE ───
+      const originalLabel = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending…';
+      submitButton.setAttribute('aria-busy', 'true');
+      if (errorBox) errorBox.hidden = true;
+
+      try {
+        // ─── SUBMIT TO FORMSPREE VIA FETCH ───
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          // Success — show success box, hide form
+          form.hidden = true;
+          if (successBox) successBox.hidden = false;
+          // Reset for next time (in case user clicks "send another")
+          form.reset();
+        } else {
+          // Formspree returned an error
+          let serverMsg = 'Please try again, or email us directly at hello@8bitcreatives.com.';
+          try {
+            const data = await response.json();
+            if (data && data.errors && data.errors[0] && data.errors[0].message) {
+              serverMsg = data.errors[0].message;
+            }
+          } catch (jsonErr) { /* use default message */ }
+          if (errorMessage) errorMessage.textContent = serverMsg;
+          if (errorBox) errorBox.hidden = false;
+        }
+      } catch (networkErr) {
+        // Network failure (offline, DNS, CORS)
+        if (errorMessage) errorMessage.textContent = 'Network error. Please check your internet connection and try again, or email us directly at hello@8bitcreatives.com.';
+        if (errorBox) errorBox.hidden = false;
+      } finally {
+        // ─── RE-ENABLE BUTTON ───
+        submitButton.disabled = false;
+        submitButton.textContent = originalLabel;
+        submitButton.removeAttribute('aria-busy');
+      }
+    });
+
+    // ─── DISMISS BUTTON HANDLERS ───
+    const dismissSuccess = document.querySelector('.form-success-dismiss');
+    if (dismissSuccess) {
+      dismissSuccess.addEventListener('click', () => {
+        if (successBox) successBox.hidden = true;
+        form.hidden = false;
+      });
+    }
+    const dismissError = document.querySelector('.form-error-dismiss');
+    if (dismissError) {
+      dismissError.addEventListener('click', () => {
+        if (errorBox) errorBox.hidden = true;
+      });
+    }
+
+    // ─── AUTO-SHOW SUCCESS ON ?status=success REDIRECT FALLBACK ───
+    // (In case JS is disabled and Formspree's _next redirect fires)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('status') === 'success') {
+      form.hidden = true;
+      if (successBox) successBox.hidden = false;
+    }
+  }
+})();
+

@@ -4526,3 +4526,65 @@ body.light-page .back-home,
   }
 }
 
+/* ============================================================
+   Formspree Success and Error Containers
+   ============================================================ */
+.form-success,
+.form-error {
+  padding: 32px;
+  border-radius: 14px;
+  margin-top: 24px;
+  background: #0A0A0A;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.form-success h3,
+.form-error h3 {
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  margin: 0 0 12px 0;
+  color: #FFFFFF;
+}
+
+.form-success p,
+.form-error p {
+  font-family: 'Geist', sans-serif;
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.form-success a,
+.form-error a {
+  color: #FFFFFF;
+  text-decoration: underline;
+}
+
+.form-success-dismiss,
+.form-error-dismiss {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #FFFFFF;
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 200ms ease;
+}
+
+.form-success-dismiss:hover,
+.form-error-dismiss:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form-success[hidden],
+.form-error[hidden] {
+  display: none !important;
+}
