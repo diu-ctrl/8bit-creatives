@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8Bit Creatives — Map Section</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background: #0A0A0A;
+      overflow-x: hidden;
+      font-family: 'Geist', system-ui, sans-serif;
+      color: #FFFFFF;
+    }
+
+    /* ============================================================
+       Map section — polished to match the rest of the site.
+       Constrained width, smaller type, no orange text, Geist only.
+       The section uses the same max-width as the other content
+       sections on the site (1400px) so everything lines up.
+       ============================================================ */
+    .map-section {
+      position: relative;
+      width: 100%;
+      max-width: 1400px;            /* ← matches the rest of the site's content width */
+      margin: 0 auto;
+      background: #0A0A0A;          /* exact match to the site background and the PNG background */
+      overflow: hidden;
+      isolation: isolate;
+      padding: 80px 56px 80px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      align-items: center;
+      gap: 0 64px;
+      min-height: 560px;            /* tighter than the previous 1080px — feels less cavernous */
+    }
+
+    /* ── LEFT — title block ── */
+    .map-section__title-block {
+      grid-column: 1;
+      grid-row: 1;
+      max-width: 540px;              /* was 640 — tighter */
+    }
+    .map-section__title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;              /* Geist Regular (NOT italic, NOT Geist Mono) */
+      font-size: 56px;               /* was 80 — smaller, more polished */
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      color: #FFFFFF;
+      margin: 0 0 24px 0;
+    }
+    .map-section__title em {
+      font-style: italic;
+      font-weight: 300;
+      color: #FFFFFF;                /* NO ORANGE — italic accent stays white, matching the rest of the site */
+    }
+    .map-section__subtitle {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;              /* Geist Light — NOT italic, NOT Geist Mono */
+      font-size: 18px;               /* was 22 — smaller, more polished */
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.65);
+      max-width: 460px;              /* was 540 — tighter */
+      margin-bottom: 36px;           /* was 48 — tighter */
+    }
+
+    /* ── Stats row — smaller, polished ── */
+    .map-section__stats {
+      display: flex;
+      gap: 40px;                     /* was 56 — tighter */
+      align-items: flex-end;
+    }
+    .map-section__stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .map-section__stat-value {
+      font-family: 'Geist', sans-serif;       /* numbers in Geist (NOT Geist Mono) */
+      font-weight: 400;
+      font-size: 40px;               /* was 56 — smaller */
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+    }
+    .map-section__stat-label {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 12px;               /* was 14 — smaller */
+      letter-spacing: 0.01em;
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 6px;                /* was 8 — tighter */
+      /* Normal case — NOT uppercase */
+    }
+
+    /* ── RIGHT — India map (PNG image) ── */
+    .map-section__map-wrap {
+      grid-column: 2;
+      grid-row: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .map-section__map {
+      width: 100%;
+      max-width: 520px;              /* was 720 — smaller, more polished */
+      height: auto;
+      max-height: 90%;
+      display: block;
+      /* The image already has its own glow baked in.
+         The image background is now #0A0A0A — exact match to the section background,
+         so there's no visible seam between the image and the rest of the section. */
+    }
+
+    /* ────────────────────────────────────────────────
+       RESPONSIVE — Tablet (768–1279px)
+       ──────────────────────────────────────────────── */
+    @media (max-width: 1279px) {
+      .map-section {
+        padding: 64px 48px;
+        gap: 0 48px;
+        min-height: 480px;
+      }
+      .map-section__title {
+        font-size: 44px;
+        margin-bottom: 18px;
+      }
+      .map-section__subtitle {
+        font-size: 16px;
+        margin-bottom: 28px;
+      }
+      .map-section__stats {
+        gap: 32px;
+      }
+      .map-section__stat-value {
+        font-size: 32px;
+      }
+      .map-section__stat-label {
+        font-size: 11px;
+      }
+      .map-section__map {
+        max-width: 100%;
+      }
+    }
+
+    /* ────────────────────────────────────────────────
+       RESPONSIVE — Mobile (≤767px)
+       Single column: title block on top, map below.
+       ──────────────────────────────────────────────── */
+    @media (max-width: 767px) {
+      .map-section {
+        padding: 48px 24px;
+        min-height: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        gap: 32px 0;
+        align-items: start;
+      }
+      .map-section__title-block {
+        grid-column: 1;
+        grid-row: 1;
+        max-width: 100%;
+        text-align: center;
+      }
+      .map-section__title {
+        font-size: 32px;
+        margin-bottom: 14px;
+      }
+      .map-section__subtitle {
+        font-size: 14px;
+        max-width: 100%;
+        margin-bottom: 24px;
+      }
+      .map-section__stats {
+        justify-content: center;
+        gap: 24px;
+      }
+      .map-section__stat-value {
+        font-size: 26px;
+      }
+      .map-section__stat-label {
+        font-size: 10px;
+      }
+      .map-section__map-wrap {
+        grid-column: 1;
+        grid-row: 2;
+      }
+      .map-section__map {
+        max-width: 85%;
+        max-height: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="map-section" data-bg="dark" aria-label="Where we are">
+
+    <!-- LEFT — title block -->
+    <div class="map-section__title-block">
+      <h1 class="map-section__title">Built in India,<br><em>watched</em> everywhere.</h1>
+      <p class="map-section__subtitle">8Bit was founded in a Mumbai LAN room in 2018. Today, our creators, campaigns, and broadcasts reach audiences across India — from the capital to the northeast, from gaming metros to the diaspora watching worldwide.</p>
+      <div class="map-section__stats">
+        <div class="map-section__stat">
+          <div class="map-section__stat-value">50M+</div>
+          <div class="map-section__stat-label">Monthly reach</div>
+        </div>
+        <div class="map-section__stat">
+          <div class="map-section__stat-value">2</div>
+          <div class="map-section__stat-label">Key cities</div>
+        </div>
+        <div class="map-section__stat">
+          <div class="map-section__stat-value">12</div>
+          <div class="map-section__stat-label">Languages</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — India map (PNG image, now with #0A0A0A background to match the site) -->
+    <div class="map-section__map-wrap">
+      <img class="map-section__map"
+           src="images-for-landing-page/india_locations_map.png"
+           alt="India map showing 8Bit's Delhi NCR and Guwahati locations"
+           loading="lazy">
+    </div>
+
+  </section>
+
+</body>
+</html>

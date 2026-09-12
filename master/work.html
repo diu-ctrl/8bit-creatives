@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>Work — 8Bit Creatives</title>
+  <meta name="description" content="Verified campaign results across smartphone launches, live sports broadcasting, and platform migrations. Explore 8Bit Creatives' work archive.">
+
+  <!-- Geist -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="images-for-landing-page/logo_2.png">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    body {
+      background: #000000;
+      color: #FFFFFF;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      font-family: 'Geist', sans-serif;
+    }
+
+    /* ═══ 1. NAVBAR (Fixed top, hidden on hero, fades in on scroll) ═══ */
+    .navbar-pill {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .navbar-pill.navbar-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ═══ 2. HERO ═══ */
+    .work-hero {
+      position: relative;
+      background: #000000;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 48px 60px 48px;
+      box-sizing: border-box;
+      z-index: 1;
+    }
+    .work-hero-container {
+      max-width: 920px;
+      text-align: center;
+    }
+    .work-hero-eyebrow {
+      font-family: 'Geist', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #FF5931;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 20px;
+    }
+    .work-hero-title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 700;
+      font-size: clamp(36px, 5vw, 64px);
+      color: #FFFFFF;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 0 0 20px 0;
+      text-transform: none;
+    }
+    .work-hero-sub {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+      max-width: 540px;
+      margin: 0 auto;
+      text-transform: none;
+    }
+
+    /* Scroll reveal typography */
+    .scroll-reveal-text {
+      perspective: 1000px;
+    }
+    .scroll-reveal-word {
+      display: inline-block;
+      opacity: 0.1;
+      filter: blur(4px);
+      transform: translateY(16px) rotate(2deg);
+      transition: opacity 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  filter 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition-delay: calc(var(--word-index) * 0.02s);
+      will-change: opacity, filter, transform;
+    }
+    .scroll-reveal-word.revealed {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0) rotate(0deg);
+    }
+
+    /* ═══ 3. FILTER BAR ═══ */
+    .work-filter-bar {
+      background: #000000;
+      padding: 24px 48px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .work-filter-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .work-filter-pill {
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+      transition: all 200ms ease;
+      text-transform: none;
+    }
+    .work-filter-pill:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #FFFFFF;
+    }
+    .work-filter-pill.active {
+      background: #FF5931;
+      border-color: #FF5931;
+      color: #FFFFFF;
+    }
+
+    /* ═══ 4. ARCHIVE GRID (Asymmetric Masonry) ═══ */
+    .work-archive {
+      position: relative;
+      background: #000000;
+      padding: 48px 48px 80px 48px;
+      min-height: 50vh;
+      z-index: 1;
+    }
+    .work-archive-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .work-archive-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .work-card {
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .work-card.featured {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .work-card-image {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 16 / 10;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      background: #111111;
+    }
+    .work-card.featured .work-card-image {
+      aspect-ratio: 16 / 10;
+    }
+    .work-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: none;
+      transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .work-card:hover {
+      transform: none;
+    }
+    .work-card:hover .work-card-image img {
+      transform: none;
+    }
+    .work-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, transparent 80%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 300ms ease;
+    }
+    .work-card:hover .work-card-overlay {
+      opacity: 1;
+    }
+    .work-card-label {
+      font-family: 'Geist', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .work-card-name {
+      font-family: 'Geist', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #FFFFFF;
+      text-transform: none;
+      margin-bottom: 4px;
+    }
+    .work-card.featured .work-card-name {
+      font-size: 24px;
+    }
+    .work-card-metric {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      text-transform: none;
+    }
+    .work-card.hidden {
+      display: none;
+    }
+    .work-card.fade-in {
+      animation: workCardFadeIn 400ms ease forwards;
+    }
+    @keyframes workCardFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══ 5. CASE STUDY MODAL ═══ */
+    .work-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+    .work-modal-backdrop.active {
+      display: flex;
+    }
+    .work-modal {
+      background: #0A0A0A;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      padding: 48px;
+      box-sizing: border-box;
+    }
+    .work-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #FFFFFF;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 200ms ease;
+    }
+    .work-modal-close:hover {
+      background: #FF5931;
+    }
+    .work-modal-eyebrow {
+      font-family: 'Geist', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: #FFFFFF;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .work-modal-title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: #FFFFFF;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .work-modal-client {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 32px;
+      text-transform: none;
+    }
+    .work-modal-section {
+      margin-bottom: 24px;
+    }
+    .work-modal-section-title {
+      font-family: 'Geist', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+    .work-modal-section-text {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.7;
+      text-transform: none;
+    }
+    .work-modal-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 32px 0;
+    }
+    .work-modal-stat {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .work-modal-stat-value {
+      font-family: 'Geist', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #FF5931;
+    }
+    .work-modal-stat-label {
+      font-family: 'Geist', sans-serif;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .work-modal-credits {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .work-modal-credit {
+      font-family: 'Geist', sans-serif;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      padding: 6px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      text-transform: none;
+    }
+
+    /* ═══ 6. CTA ═══ */
+    .work-cta {
+      position: relative;
+      background: #000000;
+      padding: 120px 48px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      z-index: 1;
+    }
+    .work-cta-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .work-cta-title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 700;
+      font-size: clamp(28px, 4vw, 44px);
+      color: #FFFFFF;
+      margin: 0 0 16px 0;
+      text-transform: none;
+      letter-spacing: -0.02em;
+    }
+    .work-cta-sub {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+      margin: 0 0 40px 0;
+      text-transform: none;
+    }
+    .btn-obsidian {
+      display: inline-block;
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 16px 36px;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid #333333;
+      background: transparent;
+      transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                  color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-obsidian-primary { color: #FFFFFF; }
+    .btn-obsidian-primary:hover {
+      background: #1A1A1A;
+      border-color: #FF5931;
+      color: #FF5931;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .work-hero {
+        padding: 100px 24px 40px 24px;
+      }
+      .work-filter-bar {
+        padding: 16px 24px;
+      }
+      .work-archive {
+        padding: 32px 24px 60px 24px;
+      }
+      .work-archive-grid {
+        grid-template-columns: 1fr;
+      }
+      .work-card.featured {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+      .work-card-overlay {
+        opacity: 1;
+      }
+      .work-modal {
+        padding: 32px 20px;
+      }
+      .work-modal-stats {
+        grid-template-columns: 1fr;
+      }
+      .work-cta {
+        padding: 80px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-home" aria-label="Back to home">
+    <span class="back-home__arrow">←</span>
+    <span>back to home</span>
+  </a>
+
+  <!-- 1. NAVBAR (Shared Capsule, Starts Hidden on Hero) -->
+  <nav class="navbar-pill" id="top" aria-label="Main navigation">
+    <ul class="navbar__links">
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="creators.html">Creators</a></li>
+      <li><a href="work.html" class="is-active">Work</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+
+    <!-- Mobile Hamburger -->
+    <button class="navbar__hamburger" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Mobile glassmorphism dropdown panel -->
+    <div class="navbar__mobile-drawer" aria-label="Mobile navigation">
+      <a href="index.html#hero">Home</a>
+      <a href="about.html">About</a>
+      <a href="creators.html">Creators</a>
+      <a href="work.html" class="is-active">Work</a>
+      <a href="services.html">Services</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- 2. HERO -->
+  <section class="work-hero" data-bg="dark">
+    <div class="work-hero-container">
+      <h1 class="work-hero-title">Work that moved numbers.</h1>
+      <p class="work-hero-sub">Verified campaign results across smartphone launches, live sports broadcasting, and platform migrations. Click any case for deep-dive receipts.</p>
+    </div>
+  </section>
+
+  <!-- 3. FILTER BAR -->
+  <div class="work-filter-bar" id="workFilterBar">
+    <div class="work-filter-row">
+      <button class="work-filter-pill active" data-category="all">All work</button>
+      <button class="work-filter-pill" data-category="brand">Brand campaigns</button>
+      <button class="work-filter-pill" data-category="broadcast">Broadcast & production</button>
+      <button class="work-filter-pill" data-category="platform">Platform migration</button>
+      <button class="work-filter-pill" data-category="tournament">Tournament</button>
+    </div>
+  </div>
+
+  <!-- 4. ARCHIVE GRID -->
+  <section class="work-archive" data-bg="dark">
+    <div class="work-archive-container">
+      <div class="work-archive-grid" id="workArchiveGrid">
+        <!-- Cards generated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CASE STUDY MODAL -->
+  <div class="work-modal-backdrop" id="workModalBackdrop">
+    <div class="work-modal" id="workModal">
+      <button class="work-modal-close" id="workModalClose" aria-label="Close modal">✕</button>
+      <div class="work-modal-content" id="workModalContent">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. CTA -->
+  <section class="work-cta" data-bg="dark">
+    <div class="work-cta-container">
+      <h2 class="work-cta-title">Looking for bespoke campaign receipts?</h2>
+      <p class="work-cta-sub">We have produced custom IP, multi-cam live broadcasts, and brand activations across 50+ tier-1 gaming titles.</p>
+      <a href="mailto:business@8bitcreatives.in" class="btn-obsidian btn-obsidian-primary">Transmit a brief</a>
+    </div>
+  </section>
+
+  <!-- 7. FOOTER (Shared Component from index.html) -->
+  <footer class="footer-section" id="footer" data-bg="light" aria-label="Footer">
+    <div class="footer-foreground footer-card">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--left">
+          <nav class="footer-nav">
+            <a href="index.html"    class="footer-nav__link">Home</a>
+            <a href="about.html"    class="footer-nav__link">About Us</a>
+            <a href="creators.html" class="footer-nav__link">Our Creators</a>
+            <a href="work.html"     class="footer-nav__link">Case Studies</a>
+            <a href="services.html" class="footer-nav__link">Our Services</a>
+          </nav>
+        </div>
+
+        <div class="footer-col footer-col--center footer-center">
+          <div class="footer-logo-wrap" id="footerLogoWrap">
+            <img
+              src="images-for-landing-page/footer-logo.png"
+              alt="8Bit Creatives"
+              class="footer-logo"
+              id="footerLogo"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+            <span class="footer-logo-fallback" style="display:none;">8BIT</span>
+          </div>
+
+          <p class="footer-address">
+            <span class="footer-address__label">Address</span><br>
+            C/o Hotel Maitri Residency Ground Floor, Paltan Bazar, G.S.<br>
+            Road, Kamrup, Guwahati, Assam, India, 781008
+          </p>
+
+          <div class="footer-socials">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/8bit_creatives" class="footer-social" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://in.linkedin.com/company/8bit-creatives" class="footer-social" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: S8UL block (top) + Enquiry (bottom) -->
+        <div class="footer-col footer-col--right">
+          <!-- S8UL Content House block -->
+          <div class="footer-s8ul-block">
+            <div class="s8ul-logo-wrap">
+              <img
+                src="Images for Landing Page/s8ul-logo.png"
+                alt="S8UL"
+                class="footer-s8ul-logo"
+                style="width: 80px; max-width: 80px; height: auto; object-fit: contain;"
+                loading="lazy"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              >
+              <span class="s8ul-logo-fallback" style="display:none;">S8UL</span>
+            </div>
+            <div class="s8ul-caption">Our Content House</div>
+          </div>
+
+          <div class="footer-enquiry-wrap">
+            <div class="footer-enquiry-heading">Enquiry</div>
+            <a href="mailto:business@8bitcreatives.in" class="footer-enquiry-email">business@8bitcreatives.in</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div class="footer-copyright">© 2026 8Bit Creatives. All rights reserved.</div>
+        <div class="footer-signature">
+          Made with <span class="footer-heart">❤</span> by <a href="https://divyarajchauhan.in" target="_blank" rel="noopener" class="footer-signature-link footer-signature__link">Divyaraj Chauhan</a>
+        </div>
+        <a href="privacy-policy.html" class="footer-privacy footer-enquiry-privacy">Privacy Policy</a>
+      </div>
+
+      <hr class="footer-bottom-divider">
+
+      <div class="footer-wordmark" aria-hidden="true">
+        <span class="footer-wordmark__bold wordmark-bold">8BIT</span><span class="footer-wordmark__thin wordmark-thin">Creatives</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function() {
+    // 1. Navbar fade-in on scroll past hero
+    const navbar = document.querySelector('.navbar-pill');
+    const heroSection = document.querySelector('.work-hero');
+    if (navbar && heroSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+            navbar.classList.remove('navbar-visible');
+          } else {
+            navbar.classList.add('navbar-visible');
+          }
+        });
+      }, { threshold: [0, 0.1, 0.3] });
+      observer.observe(heroSection);
+    }
+
+    // Mobile drawer toggle
+    const hamburger = document.querySelector('.navbar__hamburger');
+    const drawer    = document.querySelector('.navbar__mobile-drawer');
+    if (hamburger && drawer) {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        drawer.classList.toggle('open');
+        const expanded = drawer.classList.contains('open');
+        hamburger.setAttribute('aria-expanded', expanded);
+      });
+      drawer.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          drawer.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+      document.addEventListener('click', (e) => {
+        if (!drawer.contains(e.target) && !hamburger.contains(e.target)) {
+          drawer.classList.remove('open');
+          hamburger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    // 2. Case study dataset
+    const CASE_STUDIES = [
+      {
+        id: 0, featured: true, category: 'broadcast',
+        label: 'BROADCAST & PRODUCTION', name: 'Global Chess League S4', client: 'Tech Mahindra',
+        img: '/images-for-landing-page/Case Studies/chess.jpg',
+        metric: 'Official Broadcast Agency · 9-day live production',
+        challenge: 'Tech Mahindra needed to elevate the Global Chess League Season 4 — the world\'s largest franchise chess league — into a watchable, social-first esports spectacle for a modern digital audience.',
+        approach: '8Bit Creatives was named the Official Broadcast & Production Agency, deploying a full multi-camera studio with real-time chess analytics, professional commentary, and simultaneous distribution across digital platforms.',
+        execution: 'End-to-end live broadcast production in Bengaluru (Sep 5-13, 2026) with 6 camera angles, commentary desk, real-time telemetry graphics, and live social media integration.',
+        results: '12M+ live viewers · World\'s largest chess franchise league', reach: '12M+', duration: '9 days', cameras: '6 angles',
+        credits: ['8Bit Creatives', 'Tech Mahindra', 'S8UL Production']
+      },
+      {
+        id: 1, featured: false, category: 'platform',
+        label: 'PLATFORM MIGRATION', name: 'Kick India — Day One', client: 'Kick Streaming',
+        img: '/images-for-landing-page/Case Studies/kick.jpg',
+        metric: '48 creators migrated · Kick\'s 1st India agency partner',
+        challenge: 'Kick needed to establish a credible creator presence in India from zero, competing against entrenched platforms like YouTube and Twitch.',
+        approach: '8Bit Creatives executed India\'s largest simultaneous live streaming migration, moving 48 creators to Kick on day one with an unprecedented 95/5 subscription revenue split.',
+        execution: 'Coordinated onboarding across 48 creators including Snax, Pahadi, Goblin, Mamba, and Viper. Full technical setup, audience routing, and daily live schedules.',
+        results: '500M+ reach mobilized · 95/5 creator split', reach: '500M+', duration: 'Day 1', cameras: '48 creators',
+        credits: ['8Bit Creatives', 'Kick', '48 Creators']
+      },
+      {
+        id: 2, featured: false, category: 'brand',
+        label: 'NAMING RIGHTS DEAL', name: 'iQOO Esports Naming Rights', client: 'iQOO',
+        img: '/images-for-landing-page/Case Studies/iqoo.jpg',
+        metric: 'Biggest naming rights deal in Indian esports history',
+        challenge: 'iQOO wanted to establish deep, long-term credibility with India\'s mobile gaming audience beyond one-off sponsorships.',
+        approach: '8Bit Creatives secured the mandate for India\'s largest-ever esports naming rights deal. iQOO became title sponsor for 3 teams: 8bit Esports, Reckoning Esports, and Revenant Xspark.',
+        execution: 'Multi-team title sponsorship across BGMI and mobile esports tournaments. Deepened in March 2025 to revolutionize mobile gaming integration.',
+        results: '3 teams sponsored · Largest deal in Indian esports', reach: '100M+', duration: 'Ongoing', cameras: '3 teams',
+        credits: ['8Bit Creatives', 'iQOO', '8bit Esports', 'Reckoning', 'Revenant Xspark']
+      },
+      {
+        id: 3, featured: false, category: 'brand',
+        label: 'ANNUAL MANDATE', name: 'Monster Energy Partnership', client: 'Monster Energy',
+        img: '/images-for-landing-page/Case Studies/monster.jpg',
+        metric: 'Official Energy Drink Partner · Annual ambassador program',
+        challenge: 'Monster Energy wanted to build long-term brand affinity with Indian gamers, positioning esports athletes alongside extreme sports heroes.',
+        approach: 'iQOO SOUL (the BGMI division of S8UL) partnered with Monster Energy as the official Energy Drink Partner, creating an annual ambassador program.',
+        execution: 'Year-long brand ambassadorship with custom content, tournament integrations, lifestyle crossover events, and co-branded merchandise.',
+        results: '24M+ impressions · Annual mandate', reach: '24M+', duration: '12 months', cameras: 'Multi-creator',
+        credits: ['8Bit Creatives', 'Monster Energy', 'iQOO SOUL', 'S8UL']
+      },
+      {
+        id: 4, featured: false, category: 'tournament',
+        label: 'TOURNAMENT ACTIVATION', name: 'Red Bull MEO Season', client: 'Red Bull',
+        img: '/images-for-landing-page/Case Studies/redbull.jpg',
+        metric: '18M+ impressions · 14 creators deployed',
+        challenge: 'Red Bull needed to activate their Mobile Esports Open (MEO) tournament with authentic gaming creator content that felt native, not interruptive.',
+        approach: 'We deployed 14 creators from the 8Bit roster across live qualifiers, offline LAN finals, and social reel coverage.',
+        execution: 'Live stream qualifiers, on-ground LAN event coverage, and post-event highlight reels distributed across YouTube and Instagram.',
+        results: '18M+ impressions · 14 creators', reach: '18M+', duration: 'Season-long', cameras: '14 creators',
+        credits: ['8Bit Creatives', 'Red Bull', 'MEO']
+      },
+      {
+        id: 5, featured: false, category: 'brand',
+        label: 'FMCG INTEGRATION', name: 'Mamaearth Gamified Integration', client: 'Mamaearth',
+        img: '/images-for-landing-page/Case Studies/mamaearth.jpg',
+        metric: '14M+ organic reach · 3.4× engagement lift',
+        challenge: 'Mamaearth wanted to reach gaming audiences without feeling like an intrusive FMCG advertisement interrupting the content.',
+        approach: 'We built lifestyle gaming integrations that felt native to creator content, blending product usage into organic gameplay streams.',
+        execution: 'Seamless lifestyle gaming integration across 6 creators, driving 3.4× engagement lift over traditional static ads.',
+        results: '14M+ organic reach · 3.4× engagement lift', reach: '14M+', duration: '4 weeks', cameras: '6 creators',
+        credits: ['8Bit Creatives', 'Mamaearth']
+      },
+      {
+        id: 6, featured: false, category: 'brand',
+        label: 'IN-GAME IP', name: 'BGMI Creator Voice Packs', client: 'Krafton India',
+        img: '/images-for-landing-page/Case Studies/krafton.jpg',
+        metric: 'Most-purchased cosmetic item in BGMI Q1 2022',
+        challenge: 'Krafton needed to boost in-game microtransactions (UC spending) and deepen player retention post-launch by tapping into local gaming culture.',
+        approach: '8Bit Creatives negotiated and produced official, localized voice packs featuring signature dialogue and catchphrases from top creators like Mortal, Thug, Payal, and Snax.',
+        execution: 'Integrated directly into BGMI\'s in-game shop and crates, accompanied by reveal trailers, creator live reactions, and social media rollouts across S8UL channels.',
+        results: '25M+ cumulative views · #1 cosmetic item in Q1', reach: '25M+', duration: 'Mar-May 2022', cameras: '4 creators',
+        credits: ['8Bit Creatives', 'Krafton', 'BGMI']
+      },
+      {
+        id: 7, featured: false, category: 'tournament',
+        label: 'ESPORTS IP', name: 'OnePlus Dominate Series', client: 'OnePlus India',
+        img: '/images-for-landing-page/Case Studies/oneplus.jpg',
+        metric: '5M+ live views per edition · 35M+ social impressions',
+        challenge: 'OnePlus sought to demonstrate that its mainstream flagship phones matched or beat dedicated gaming devices in sustained frame rates and thermal stability.',
+        approach: '8Bit Creatives conceptualized the "OnePlus Dominate" show-match tournament IP and deployed creators for performance testing.',
+        execution: 'Broadcast multi-stage invitational tournaments pairing creators with celebrity cricketers (e.g., KL Rahul, Yuzvendra Chahal), backed by creator-led livestream tech teardowns.',
+        results: '35M+ social impressions per launch window', reach: '35M+', duration: '2021-2023', cameras: 'Multi-creator',
+        credits: ['8Bit Creatives', 'OnePlus', 'S8UL Creators']
+      },
+      {
+        id: 8, featured: false, category: 'brand',
+        label: 'GEAR SPONSORSHIP', name: 'Logitech G Bootcamp Partnership', client: 'Logitech G',
+        img: '/images-for-landing-page/Case Studies/logitech.jpg',
+        metric: '20M+ impressions · 200+ stream VODs integrated',
+        challenge: 'Logitech G wanted to capture mindshare among India\'s expanding PC gaming demographic and convert mobile-heavy esports fans into PC peripheral consumers.',
+        approach: '8Bit Creatives equipped the entire S8UL Gaming House with Logitech G PRO series mice, mechanical keyboards, and headsets for daily competitive training and content creation.',
+        execution: 'Rolled out ambient product placements during daily live streams, custom unboxing skits, creator setup tours, and community hardware giveaways.',
+        results: '20M+ combined social impressions', reach: '20M+', duration: '2022-2023', cameras: 'Full S8UL roster',
+        credits: ['8Bit Creatives', 'Logitech G', 'S8UL']
+      },
+      {
+        id: 9, featured: false, category: 'tournament',
+        label: 'PUBLISHER MARKETING', name: 'Valorant India Expansion', client: 'Riot Games',
+        img: '/images-for-landing-page/Case Studies/riot.jpg',
+        metric: 'Sold-out venue · 2M+ live-stream impressions',
+        challenge: 'Riot Games needed to draw India\'s massive mobile-first gaming audience toward PC esports ahead of its first major international Valorant tournament in Bangalore.',
+        approach: '8Bit Creatives engaged marquee creators to transition into regular Valorant streaming, host regional watch parties, and provide on-ground presence at the event.',
+        execution: 'S8UL creators attended the LAN arena in Bangalore for fan meet-and-greets, produced behind-the-scenes vlogs, and hosted official Hindi co-streams.',
+        results: '2M+ live-stream impressions across tournament days', reach: '2M+', duration: 'Dec 2023', cameras: 'S8UL Creators',
+        credits: ['8Bit Creatives', 'Riot Games', 'S8UL']
+      },
+      {
+        id: 10, featured: false, category: 'brand',
+        label: 'FILM PROMOTION', name: 'Black Adam Gaming Crossover', client: 'Warner Bros. Discovery',
+        img: '/images-for-landing-page/Case Studies/warner.jpg',
+        metric: '10M+ reach · High coupon redemption rates',
+        challenge: 'Warner Bros. wanted to drive opening-week theatrical ticket sales among Indian Gen Z males aged 16-25 who prioritize gaming streams over traditional television ads.',
+        approach: '8Bit Creatives created a pop-culture crossover tying the anti-hero themes of Black Adam into competitive gaming culture and clutch game moments.',
+        execution: 'Mortal and select 8Bit talent produced themed sketches, hosted movie premiere livestreams, and distributed BookMyShow promo codes to their communities.',
+        results: '10M+ reach across YouTube Shorts and Reels', reach: '10M+', duration: 'Oct 2022', cameras: 'Mortal + 8Bit talent',
+        credits: ['8Bit Creatives', 'Warner Bros.', 'BookMyShow']
+      },
+      {
+        id: 11, featured: false, category: 'brand',
+        label: 'TECH ENDORSEMENT', name: 'AMD Ryzen & Radeon Integration', client: 'AMD India',
+        img: '/images-for-landing-page/Case Studies/amd.jpg',
+        metric: '12M+ views · 8 top creators deployed',
+        challenge: 'AMD wanted to prove the superior multi-core rendering and high-refresh gaming capabilities of Ryzen 7000/8000 series chips to aspirational creators and gamers.',
+        approach: '8Bit Creatives upgraded high-traffic creator setups inside S8UL with custom AMD rigs, turning creators into authentic tech advocates.',
+        execution: 'Creators showcased dual-PC streaming setups, real-time benchmark stress tests during demanding PC titles, and featured AMD branding in their stream setups.',
+        results: '12M+ views across YouTube integrations', reach: '12M+', duration: '2023-2024', cameras: '8 creators',
+        credits: ['8Bit Creatives', 'AMD India', 'S8UL']
+      },
+      {
+        id: 12, featured: false, category: 'brand',
+        label: 'FMCG / GROOMING', name: 'Gillette #KeepItSmooth Challenge', client: 'Gillette India',
+        img: '/images-for-landing-page/Case Studies/gillette.jpg',
+        metric: '18M+ views · 7.5% engagement rate in 16-24 demo',
+        challenge: 'Gillette needed to modernize its brand image among young desktop/mobile gamers who spend long hours indoors and ignore traditional grooming advertising.',
+        approach: '8Bit Creatives connected the concept of a "smooth shave" to the feeling of pulling off "smooth clutches" in high-stakes esports matches.',
+        execution: 'Integrated Gillette Mach3 into pre-stream routine videos, comedic sketches starring Mortal, Goldy, and Regaltos, and live chat Q&A segments.',
+        results: '18M+ views · 7.5% engagement rate', reach: '18M+', duration: '2021-2022', cameras: 'Mortal, Goldy, Regaltos',
+        credits: ['8Bit Creatives', 'Gillette India']
+      },
+      {
+        id: 13, featured: false, category: 'brand',
+        label: 'AUDIO STREAMING', name: 'Spotify "Play This While You Game"', client: 'Spotify India',
+        img: '/images-for-landing-page/Case Studies/spotify.jpg',
+        metric: '150K+ playlist saves · 8M+ users reached',
+        challenge: 'Spotify wanted to drive daily active listening hours and app adoption among gamers who play titles without heavy voice-comms requirements.',
+        approach: '8Bit Creatives curated official public playlists tied to creator identities (e.g., Mortal\'s Clutch Tracks, S8UL Chill Gaming Vibes).',
+        execution: 'Creators showcased running Spotify in the background during practice sessions and embedded custom track links in YouTube descriptions and Discord servers.',
+        results: '150K+ playlist saves within 30 days', reach: '8M+', duration: '2022-2023', cameras: 'S8UL Creators',
+        credits: ['8Bit Creatives', 'Spotify India', 'S8UL']
+      },
+      {
+        id: 14, featured: false, category: 'brand',
+        label: 'HARDWARE LAUNCH', name: 'Realme Narzo Performance Launches', client: 'Realme India',
+        img: '/images-for-landing-page/Case Studies/realme.jpg',
+        metric: '14M+ views · Contributed to Amazon sell-outs',
+        challenge: 'Realme sought to position its Narzo line as the premier high-FPS budget smartphone series for entry-level competitive mobile gamers.',
+        approach: '8Bit Creatives utilized competitive players to rigorously stress-test the phone\'s touch sampling rate, fast charging, and thermals in real-time gaming sessions.',
+        execution: 'Multi-hour live "Battery Drain Challenges," creator unboxings, and custom scrim tournaments hosted exclusively on Narzo smartphones.',
+        results: '14M+ views · Amazon sell-outs', reach: '14M+', duration: '2021-2022', cameras: 'Competitive players',
+        credits: ['8Bit Creatives', 'Realme India']
+      },
+      {
+        id: 15, featured: false, category: 'platform',
+        label: 'PLATFORM EXCLUSIVITY', name: 'Loco Exclusive Streaming Deal', client: 'Loco',
+        img: '/images-for-landing-page/Case Studies/loco.jpg',
+        metric: 'Accelerated Loco MAU past 50M mark',
+        challenge: 'Loco needed to establish itself as India\'s primary home-grown live streaming platform while competing with YouTube Gaming.',
+        approach: '8Bit Creatives orchestrated a multi-creator broadcasting agreement bringing prominent talent exclusively onto Loco for live hours.',
+        execution: 'Talent streamed dedicated weekly hours, hosted VIP community rooms, participated in watch parties, and ran interactive tournaments with platform users.',
+        results: '50M+ MAU milestone reached', reach: '50M+', duration: '2020-2022', cameras: 'Thug, Goldy, Snax, Beg4Mercy',
+        credits: ['8Bit Creatives', 'Loco', 'S8UL']
+      },
+      {
+        id: 16, featured: false, category: 'brand',
+        label: 'PREMIUM HARDWARE', name: 'ASUS ROG Phone & Zephyrus Campaign', client: 'ASUS ROG India',
+        img: '/images-for-landing-page/Case Studies/asus.jpg',
+        metric: '12M+ social impressions · Solidified ROG as top choice',
+        challenge: 'ASUS ROG needed to reinforce its positioning as the top-tier, no-compromise mobile and laptop hardware brand for pro-level esports athletes.',
+        approach: '8Bit Creatives leveraged competitive pros and top creators to highlight advanced features like 165Hz displays, ultrasonic triggers, and dedicated cooling accessories.',
+        execution: 'In-depth device showcases, competitive tournament scrim streams broadcast on ROG Phone units, and targeted giveaways across Instagram.',
+        results: '12M+ social impressions', reach: '12M+', duration: '2022-2023', cameras: 'Pro players + creators',
+        credits: ['8Bit Creatives', 'ASUS ROG India']
+      }
+    ];
+
+    const grid = document.getElementById('workArchiveGrid');
+    const modalBackdrop = document.getElementById('workModalBackdrop');
+    const modalContent = document.getElementById('workModalContent');
+    const modalClose = document.getElementById('workModalClose');
+    if (!grid) return;
+
+    let activeFilter = 'all';
+
+    function renderGrid() {
+      grid.innerHTML = '';
+      let visibleCount = 0;
+      
+      CASE_STUDIES.forEach((c, index) => {
+        const matchesFilter = activeFilter === 'all' || c.category === activeFilter;
+        if (matchesFilter) {
+          visibleCount++;
+          const card = document.createElement('div');
+          card.className = `work-card fade-in ${c.featured && activeFilter === 'all' ? 'featured' : ''}`;
+          card.style.animationDelay = (visibleCount * 60) + 'ms';
+          const imgSrc = (window.location.protocol === 'file:' && c.img.startsWith('/')) ? c.img.slice(1) : c.img;
+          card.innerHTML = [
+            '<div class="work-card-image">',
+            '  <img src="' + imgSrc + '" alt="' + c.name + '" loading="lazy" onerror="this.parentElement.style.background=\'linear-gradient(135deg, #FF5931, #B21C01)\'; this.style.display=\'none\';">',
+            '  <div class="work-card-overlay">',
+            '    <div class="work-card-label">' + c.label + '</div>',
+            '    <div class="work-card-name">' + c.name + '</div>',
+            '    <div class="work-card-metric">' + c.metric + '</div>',
+            '  </div>',
+            '</div>'
+          ].join('');
+          card.addEventListener('click', () => openModal(index));
+          grid.appendChild(card);
+        }
+      });
+    }
+
+    // Filter pills
+    document.querySelectorAll('.work-filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.work-filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeFilter = pill.dataset.category;
+        renderGrid();
+      });
+    });
+
+    // Modal
+    function openModal(index) {
+      const c = CASE_STUDIES[index];
+      modalContent.innerHTML = [
+        '<div class="work-modal-eyebrow">' + c.label + '</div>',
+        '<div class="work-modal-title">' + c.name + '</div>',
+        '<div class="work-modal-client">Client: ' + c.client + '</div>',
+        '<div class="work-modal-section">',
+        '  <div class="work-modal-section-title">Challenge</div>',
+        '  <div class="work-modal-section-text">' + c.challenge + '</div>',
+        '</div>',
+        '<div class="work-modal-section">',
+        '  <div class="work-modal-section-title">Approach</div>',
+        '  <div class="work-modal-section-text">' + c.approach + '</div>',
+        '</div>',
+        '<div class="work-modal-section">',
+        '  <div class="work-modal-section-title">Execution</div>',
+        '  <div class="work-modal-section-text">' + c.execution + '</div>',
+        '</div>',
+        '<div class="work-modal-stats">',
+        '  <div class="work-modal-stat">',
+        '    <div class="work-modal-stat-value">' + c.reach + '</div>',
+        '    <div class="work-modal-stat-label">Reach</div>',
+        '  </div>',
+        '  <div class="work-modal-stat">',
+        '    <div class="work-modal-stat-value">' + c.duration + '</div>',
+        '    <div class="work-modal-stat-label">Duration</div>',
+        '  </div>',
+        '  <div class="work-modal-stat">',
+        '    <div class="work-modal-stat-value">' + c.cameras + '</div>',
+        '    <div class="work-modal-stat-label">Deployment</div>',
+        '  </div>',
+        '</div>',
+        '<div class="work-modal-credits">',
+        c.credits.map(credit => '<div class="work-modal-credit">' + credit + '</div>').join(''),
+        '</div>'
+      ].join('');
+      modalBackdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    if (modalClose) {
+      modalClose.addEventListener('click', closeModal);
+    }
+    if (modalBackdrop) {
+      modalBackdrop.addEventListener('click', (e) => {
+        if (e.target === modalBackdrop) closeModal();
+      });
+    }
+    function closeModal() {
+      modalBackdrop.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    renderGrid();
+
+    // GSAP animations
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero word-by-word reveal
+      const heroTitle = document.querySelector('.work-hero-title');
+      if (heroTitle) {
+        const words = heroTitle.textContent.trim().split(/\s+/);
+        heroTitle.innerHTML = words.map((word, i) => 
+          `<span class="scroll-reveal-word" style="--word-index: ${i}">${word}</span> `
+        ).join('');
+        heroTitle.classList.add('scroll-reveal-text');
+        
+        const heroWords = heroTitle.querySelectorAll('.scroll-reveal-word');
+        setTimeout(() => {
+          heroWords.forEach(word => word.classList.add('revealed'));
+        }, 100);
+      }
+
+      gsap.from('.work-hero-sub', {
+        opacity: 0, y: 30, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: '.work-hero', start: 'top 70%' }
+      });
+      gsap.from('.work-cta-title, .work-cta-sub, .btn-obsidian', {
+        opacity: 0, y: 30, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+        scrollTrigger: { trigger: '.work-cta', start: 'top 80%' }
+      });
+    }
+  })();
+  </script>
+</body>
+</html>

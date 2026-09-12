@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0A0A0A">
+  <title>8Bit Esports — Roster & Competitive Record</title>
+  <meta name="description" content="Meet the competitive BGMI roster representing 8Bit Creatives in the 2026 BGMI Pro Series. Player stats, mentoring staff, and tournament history.">
+
+  <!-- Geist Font (Weights 100, 300, 400, 500, 700) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="images-for-landing-page/logo_2.png">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ==========================================================================
+       esports-inside.html Page-Specific Tokens & Styles
+       Zero Uppercase · Strict Sans · No Orange · Min 14px Card Radius
+       ========================================================================== */
+    :root {
+      --es-bg-dark: #0A0A0A;
+      --es-bg-light: #FFFFFF;
+      --es-surface-cream: #FBF8F1;
+      --es-surface-card: #FFFFFF;
+      --es-ink: #141210;
+      --es-ink-muted: #4A463F;
+      --es-border: rgba(20, 18, 16, 0.15);
+      --es-border-subtle: rgba(20, 18, 16, 0.08);
+      --es-border-hover: rgba(20, 18, 16, 0.30);
+      --es-dark-border: rgba(255, 255, 255, 0.15);
+      --es-dark-muted: rgba(255, 255, 255, 0.60);
+      --es-radius-card: 14px;
+      --es-radius-pill: 100px;
+      --es-radius-portrait: 18px;
+    }
+
+    html {
+      background-color: var(--es-bg-dark);
+    }
+
+    body {
+      background: var(--es-bg-dark);
+      color: var(--es-ink);
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Container */
+    .es-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      box-sizing: border-box;
+    }
+
+    /* Navbar Pill Specific Positioning for esports-inside */
+    .navbar-pill {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .navbar-pill.navbar-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Top-Right CTA */
+    .nav-cta-topright {
+      position: fixed;
+      top: 24px;
+      right: 48px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      height: 44px;
+      padding: 0 24px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #FFFFFF;
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      text-decoration: none;
+      transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+    }
+    .nav-cta-topright:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: #FFFFFF;
+    }
+    @media (max-width: 1024px) {
+      .nav-cta-topright { display: none; }
+    }
+
+    /* ==========================================================================
+       SECTION 1: TEAM HEADER (HERO — Dark Background)
+       ========================================================================== */
+    .team-header-section,
+    #team-header {
+      background: #0A0A0A !important;
+      color: #FFFFFF !important;
+      min-height: 60vh;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: stretch !important;
+      padding: 130px 0 64px !important;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .team-header-section .es-container {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* WebGL Canvas for Hero Section */
+    .gradient__canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: block;
+      z-index: 1;
+    }
+
+    /* Hero Bottom Fade Overlay for Smooth Transition */
+    .esports-hero-bottom-fade {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(10, 10, 10, 0.5) 40%,
+        #0A0A0A 100%
+      );
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    @media (max-width: 767px) {
+      .esports-hero-bottom-fade { height: 140px; }
+    }
+
+    .team-header__row {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .team-header__text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .team-header__name {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: clamp(48px, 6vw, 84px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: #FFFFFF;
+      margin: 0 0 20px 0;
+    }
+
+    .team-header__tagline {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0 0 28px 0;
+      max-width: 540px;
+    }
+
+    .team-header__meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      gap: 0;
+      border-top: 1px solid var(--es-dark-border);
+      padding-top: 24px;
+      width: 100%;
+    }
+    .team-header__meta-item {
+      display: flex;
+      align-items: center;
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: var(--es-dark-muted);
+      padding: 4px 16px;
+    }
+    .team-header__meta-item:first-child {
+      padding-left: 0;
+    }
+    .team-header__meta-item + .team-header__meta-item {
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .team-header__meta-item strong {
+      color: #FFFFFF;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .team-header__portrait-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--es-radius-portrait);
+      overflow: hidden;
+      border: 1px solid var(--es-dark-border);
+      background: #141414;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    }
+    .team-header__portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Scrim Gradient Section Transition: Dark (#0A0A0A) to Light (#FFFFFF) */
+    .section-transition {
+      width: 100%;
+      height: 180px;
+      background-color: var(--es-bg-light);
+      background-image: linear-gradient(to bottom,
+        rgba(10, 10, 10, 1)     0%,
+        rgba(10, 10, 10, 0.738) 19%,
+        rgba(10, 10, 10, 0.541) 34%,
+        rgba(10, 10, 10, 0.382) 47%,
+        rgba(10, 10, 10, 0.278) 56.5%,
+        rgba(10, 10, 10, 0.194) 65%,
+        rgba(10, 10, 10, 0.126) 73%,
+        rgba(10, 10, 10, 0.075) 80.2%,
+        rgba(10, 10, 10, 0.042) 86.1%,
+        rgba(10, 10, 10, 0.021) 91%,
+        rgba(10, 10, 10, 0.008) 95.2%,
+        rgba(10, 10, 10, 0.002) 98.2%,
+        rgba(10, 10, 10, 0)     100%
+      );
+      margin: 0 0 -1px 0;
+      padding: 0;
+      border: none;
+      pointer-events: none;
+    }
+
+    /* Main Light Body Area */
+    .es-light-zone {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background: var(--es-bg-light);
+      color: var(--es-ink);
+      padding-top: 24px;
+      padding-bottom: 0;
+    }
+
+    .es-light-zone > .es-container {
+      position: relative;
+      z-index: 1;
+      padding-bottom: 96px;
+    }
+
+    .es-light-zone .footer-section {
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        transparent 50%,
+        #FFB658 100%
+      );
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 8BIT Background in Light Zone */
+    .page-8bit-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      display: grid;
+      grid-template-columns: repeat(80, 1fr);
+      -webkit-mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        black 3%,
+        black 97%,
+        transparent 100%
+      );
+      mask-image: linear-gradient(to bottom,
+        transparent 0%,
+        black 3%,
+        black 97%,
+        transparent 100%
+      );
+    }
+
+    .page-8bit-bg__col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      user-select: none;
+      font-family: 'Geist', sans-serif;
+      font-size: 16px;
+      font-weight: 100;
+      line-height: 1;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      color: #141210;
+      opacity: 0.08;
+      will-change: transform;
+      transform: translateZ(0);
+    }
+
+    .page-8bit-bg__col > span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+    }
+
+    .page-8bit-bg__col--down { animation: pageBgScrollDown 24s linear infinite; }
+    .page-8bit-bg__col--up   { animation: pageBgScrollUp 24s linear infinite; }
+
+    @keyframes pageBgScrollDown {
+      from { transform: translateY(-50%); }
+      to   { transform: translateY(0); }
+    }
+    @keyframes pageBgScrollUp {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page-8bit-bg__col--down, .page-8bit-bg__col--up { animation: none; transform: none; }
+    }
+
+    /* Section Header */
+    .es-section-title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      color: var(--es-ink);
+      margin: 0 0 32px 0;
+    }
+
+    /* ==========================================================================
+       SECTION 2: KPI RIBBON
+       ========================================================================== */
+    .kpi-ribbon-section {
+      padding: 24px 0 64px;
+    }
+    .kpi-ribbon {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .kpi-card {
+      border: 1px solid var(--es-border);
+      border-radius: var(--es-radius-card);
+      background: var(--es-surface-cream);
+      padding: 24px;
+      box-sizing: border-box;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: border-color 200ms ease-out, transform 200ms ease-out;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .kpi-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--es-border-hover);
+      }
+    }
+    .kpi-card__value {
+      display: block;
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: clamp(32px, 3.2vw, 48px);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--es-ink);
+      white-space: nowrap;
+      margin: 0;
+    }
+    .kpi-card__label {
+      display: block;
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--es-ink-muted);
+      margin-top: 8px;
+      white-space: normal;
+    }
+
+    /* ==========================================================================
+       SECTION 3: ROSTER GRID (THE MAIN EVENT)
+       ========================================================================== */
+    .roster-grid-section {
+      padding: 32px 0 72px;
+    }
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .player-card {
+      border: 1px solid var(--es-border);
+      border-radius: var(--es-radius-card);
+      background: var(--es-surface-cream);
+      padding: 16px 16px 20px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      box-sizing: border-box;
+      transition: border-color 200ms ease-out, transform 200ms ease-out;
+      position: relative;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .player-card:hover {
+        border-color: var(--es-border-hover);
+        transform: translateY(-4px);
+      }
+    }
+
+    .player-card__avatar {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 14px 14px 4px 4px;
+      overflow: hidden;
+      background: #EDE8DD;
+      margin-bottom: 16px;
+      border: 1px solid var(--es-border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .player-card__avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .player-card__handle {
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      color: var(--es-ink);
+      margin: 0 0 4px 0;
+    }
+    .player-card__name {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--es-ink-muted);
+      margin: 0 0 12px 0;
+    }
+
+    .role-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 12px;
+      border-radius: var(--es-radius-pill);
+      border: 1px solid var(--es-border);
+      background: #FFFFFF;
+      color: var(--es-ink);
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .player-card__stats {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--es-border-subtle);
+      border-bottom: 1px solid var(--es-border-subtle);
+      padding: 12px 0;
+      margin-top: auto;
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0 8px;
+    }
+    .stat:first-child {
+      padding-left: 0;
+    }
+    .stat + .stat {
+      border-left: 1px solid var(--es-border);
+    }
+    .stat__value {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 19px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: var(--es-ink);
+    }
+    .stat__label {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      color: var(--es-ink-muted);
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    .player-card__socials {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .card-social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      color: var(--es-ink);
+      text-decoration: none;
+      transition: color 200ms ease-out;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .card-social-link:hover {
+        color: #000000;
+      }
+    }
+    .card-social-link svg {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    /* ==========================================================================
+       SECTION 4: MENTORING & SUPPORT STAFF
+       ========================================================================== */
+    .staff-section {
+      padding: 32px 0 72px;
+      border-top: 1px solid var(--es-border-subtle);
+    }
+    .staff-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .staff-card {
+      border: 1px solid var(--es-border);
+      border-radius: var(--es-radius-card);
+      background: var(--es-surface-cream);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      box-sizing: border-box;
+      transition: border-color 200ms ease-out, transform 200ms ease-out;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .staff-card:hover {
+        border-color: var(--es-border-hover);
+        transform: translateY(-4px);
+      }
+    }
+    .staff-card__name {
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 1.25;
+      color: var(--es-ink);
+      margin: 0 0 4px 0;
+    }
+    .staff-card__role {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      color: var(--es-ink-muted);
+      margin: 0 0 8px 0;
+    }
+    .staff-card__bio {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--es-ink-muted);
+      margin: 0 0 16px 0;
+    }
+    .staff-card__socials {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    /* ==========================================================================
+       SECTION 5: RECENT TOURNAMENTS TABLE
+       ========================================================================== */
+    .tournaments-section {
+      padding: 32px 0 72px;
+      border-top: 1px solid var(--es-border-subtle);
+    }
+    .tournaments__scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--es-border);
+      border-radius: var(--es-radius-card);
+      background: var(--es-surface-cream);
+    }
+    .tournaments__table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Geist', sans-serif;
+      font-size: 14px;
+      text-align: left;
+    }
+    .tournaments__table th {
+      padding: 16px 20px;
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--es-ink-muted);
+      border-bottom: 1px solid rgba(20, 18, 16, 0.15);
+      background: rgba(20, 18, 16, 0.02);
+      white-space: nowrap;
+      text-transform: none;
+    }
+    .tournaments__table td {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(20, 18, 16, 0.10);
+      color: var(--es-ink);
+      font-weight: 300;
+      font-size: 14px;
+      white-space: nowrap;
+      background: transparent;
+      text-transform: none;
+    }
+    .tournaments__table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .tournaments__table tbody tr:hover td {
+      background: rgba(20, 18, 16, 0.015);
+    }
+
+    .tournaments__table th.th-tournament-name,
+    .tournaments__table td.td-tournament-name {
+      text-align: left;
+      font-weight: 400;
+      min-width: 180px;
+    }
+    .tournaments__table th.th-num,
+    .tournaments__table td.td-num {
+      text-align: center;
+      min-width: 130px;
+    }
+    .tournaments__table th.th-position,
+    .tournaments__table td.td-position {
+      text-align: center;
+      min-width: 160px;
+      font-weight: 300;
+    }
+
+    /* ==========================================================================
+       SECTION 6: PARTNERS & SPONSORS
+       ========================================================================== */
+    .sponsors-section {
+      padding: 32px 0 64px;
+      border-top: 1px solid var(--es-border-subtle);
+    }
+    .sponsors__single {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .sponsor-item-single {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 36px;
+      border: 1px solid var(--es-border);
+      border-radius: var(--es-radius-card);
+      background: var(--es-surface-cream);
+      text-decoration: none;
+      transition: border-color 200ms ease-out, transform 200ms ease-out;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .sponsor-item-single:hover {
+        border-color: var(--es-border-hover);
+        transform: translateY(-4px);
+      }
+    }
+    .sponsor-iqoo-text {
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 1;
+      color: var(--es-ink);
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      transition: text-decoration 200ms ease-out;
+    }
+    .sponsor-item-single:hover .sponsor-iqoo-text {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE ADAPTATIONS
+       ========================================================================== */
+    /* Tablet (768px - 1279px) */
+    @media (max-width: 1279px) {
+      .team-header__row {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .team-header__portrait-wrap {
+        max-height: 520px;
+        aspect-ratio: 4 / 5;
+        max-width: 440px;
+      }
+      .kpi-ribbon {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .roster-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .staff-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Mobile (<= 767px) — Compact, proportional layout */
+    @media (max-width: 767px) {
+      .es-container {
+        padding: 0 18px !important;
+      }
+
+      /* 1. HERO SECTION (Compact, ~420-480px) */
+      .team-header-section,
+      #team-header {
+        padding: 108px 0 24px !important;
+        min-height: auto !important;
+        height: auto !important;
+      }
+      .team-header__row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 18px !important;
+        text-align: center !important;
+      }
+      .team-header__text {
+        align-items: center !important;
+        text-align: center !important;
+        width: 100% !important;
+      }
+      .team-header__name {
+        font-size: 30px !important;
+        line-height: 1.15 !important;
+        margin-bottom: 8px !important;
+        text-align: center !important;
+      }
+      .team-header__tagline {
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+        margin-bottom: 14px !important;
+        text-align: center !important;
+      }
+      .team-header__meta {
+        font-size: 11px !important;
+        padding-top: 12px !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 4px 10px !important;
+        border-top: 1px solid var(--es-dark-border) !important;
+      }
+      .team-header__meta-item {
+        font-size: 11px !important;
+        padding: 0 !important;
+        border: none !important;
+      }
+      .team-header__portrait-wrap {
+        max-width: 200px !important;
+        width: 65% !important;
+        margin: 0 auto !important;
+        aspect-ratio: 4 / 5 !important;
+        border-radius: var(--es-radius-portrait) !important;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5) !important;
+      }
+      .esports-hero-bottom-fade {
+        height: 44px !important;
+      }
+
+      /* 2. SECTION TRANSITION & LIGHT ZONE */
+      .section-transition {
+        height: 48px !important;
+      }
+      .es-light-zone {
+        padding-top: 16px !important;
+      }
+      .es-light-zone > .es-container {
+        padding-bottom: 32px !important;
+      }
+      .es-section-title {
+        font-size: 20px !important;
+        line-height: 1.25 !important;
+        margin: 0 0 16px 0 !important;
+      }
+      .page-8bit-bg {
+        grid-template-columns: repeat(36, 1fr) !important;
+      }
+
+      /* 3. KPI / STATS RIBBON (2x2 Grid) */
+      .kpi-ribbon-section {
+        padding: 14px 0 20px !important;
+        min-height: auto !important;
+      }
+      .kpi-ribbon {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
+      .kpi-card {
+        padding: 12px 14px !important;
+        border-radius: var(--es-radius-card) !important;
+      }
+      .kpi-card__value {
+        font-size: 24px !important;
+        line-height: 1.1 !important;
+      }
+      .kpi-card__label {
+        font-size: 11px !important;
+        margin-top: 4px !important;
+        line-height: 1.3 !important;
+      }
+
+      /* 4. ROSTER GRID / PLAYER CARDS (Compact Horizontal layout) */
+      .roster-grid-section {
+        padding: 18px 0 24px !important;
+        min-height: auto !important;
+      }
+      .roster-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .player-card {
+        display: grid !important;
+        grid-template-columns: 74px 1fr !important;
+        grid-template-rows: auto auto auto auto auto !important;
+        grid-template-areas:
+          "avatar handle"
+          "avatar name"
+          "avatar role"
+          "stats stats"
+          "socials socials" !important;
+        column-gap: 14px !important;
+        row-gap: 3px !important;
+        padding: 12px 14px !important;
+        border-radius: var(--es-radius-card) !important;
+        min-height: auto !important;
+        height: auto !important;
+        align-items: center !important;
+      }
+      .player-card__avatar {
+        grid-area: avatar !important;
+        width: 74px !important;
+        height: 92px !important;
+        aspect-ratio: 4 / 5 !important;
+        margin-bottom: 0 !important;
+        border-radius: 10px !important;
+      }
+      .player-card__handle {
+        grid-area: handle !important;
+        font-size: 16px !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+        align-self: end !important;
+      }
+      .player-card__name {
+        grid-area: name !important;
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+        align-self: center !important;
+      }
+      .role-chip {
+        grid-area: role !important;
+        font-size: 10px !important;
+        padding: 3px 8px !important;
+        margin-bottom: 0 !important;
+        align-self: start !important;
+        justify-self: start !important;
+        width: max-content !important;
+      }
+      .player-card__stats {
+        grid-area: stats !important;
+        padding: 8px 0 !important;
+        margin-top: 8px !important;
+        border-top: 1px solid var(--es-border-subtle) !important;
+        border-bottom: 1px solid var(--es-border-subtle) !important;
+      }
+      .stat {
+        padding: 0 8px !important;
+      }
+      .stat:first-child {
+        padding-left: 0 !important;
+      }
+      .stat__value {
+        font-size: 14px !important;
+        line-height: 1.2 !important;
+      }
+      .stat__label {
+        font-size: 10px !important;
+        margin-top: 1px !important;
+      }
+      .player-card__socials {
+        grid-area: socials !important;
+        gap: 10px !important;
+        margin-top: 6px !important;
+      }
+      .card-social-link svg {
+        width: 18px !important;
+        height: 18px !important;
+      }
+
+      /* 5. MENTORING & SUPPORT STAFF (Compact cards) */
+      .staff-section {
+        padding: 18px 0 24px !important;
+        min-height: auto !important;
+      }
+      .staff-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .staff-card {
+        padding: 12px 14px !important;
+        border-radius: var(--es-radius-card) !important;
+        min-height: auto !important;
+      }
+      .staff-card__name {
+        font-size: 15px !important;
+        margin-bottom: 2px !important;
+      }
+      .staff-card__role {
+        font-size: 12px !important;
+        margin-bottom: 4px !important;
+      }
+      .staff-card__bio {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 8px !important;
+      }
+      .staff-card__socials {
+        margin-top: 4px !important;
+        gap: 8px !important;
+      }
+      .staff-card__socials svg {
+        width: 18px !important;
+        height: 18px !important;
+      }
+
+      /* 6. TOURNAMENTS TABLE (Horizontal Scroll + Compact) */
+      .tournaments-section {
+        padding: 18px 0 24px !important;
+        min-height: auto !important;
+      }
+      .tournaments__scroll {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .tournaments__table {
+        font-size: 11px !important;
+      }
+      .tournaments__table th,
+      .tournaments__table td {
+        padding: 8px 10px !important;
+        font-size: 11px !important;
+      }
+      .tournaments__table th.th-tournament-name,
+      .tournaments__table td.td-tournament-name {
+        position: sticky !important;
+        left: 0 !important;
+        background: var(--es-surface-cream) !important;
+        z-index: 2 !important;
+        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.04) !important;
+        min-width: 105px !important;
+      }
+      .tournaments__table th.th-num,
+      .tournaments__table td.td-num {
+        min-width: 75px !important;
+        text-align: center !important;
+      }
+      .tournaments__table th.th-position,
+      .tournaments__table td.td-position {
+        min-width: 95px !important;
+        text-align: center !important;
+      }
+
+      /* 7. PARTNERS & SPONSORS */
+      .sponsors-section {
+        padding: 18px 0 24px !important;
+        min-height: auto !important;
+      }
+      .sponsors__single {
+        justify-content: center !important;
+      }
+      .sponsor-item-single {
+        padding: 10px 24px !important;
+        width: auto !important;
+        max-width: 130px !important;
+        border-radius: var(--es-radius-card) !important;
+      }
+      .sponsor-iqoo-text {
+        font-size: 20px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Back to Home Capsule Pill (First element inside body) -->
+  <a href="index.html" class="back-home" aria-label="Back to home">
+    <span class="back-home__arrow">←</span>
+    <span>back to home</span>
+  </a>
+
+  <!-- Top-Left Mascot Logo -->
+  <a href="index.html#hero" class="nav-brand-topleft" aria-label="8Bit Creatives Home">
+    <img src="images-for-landing-page/logo_2.png" alt="8Bit Logo" class="nav-brand-topleft__img">
+  </a>
+
+  <!-- Shared Capsule Navbar (Fades in on scroll past hero) -->
+  <nav class="navbar-pill" id="top" aria-label="Main navigation">
+    <!-- Active sliding pill indicator -->
+    <div class="navbar-pill__indicator" aria-hidden="true"></div>
+
+    <ul class="navbar__links">
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#creators">Creators</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#esports" class="is-active">Esports</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+
+    <!-- Mobile Hamburger -->
+    <button class="navbar__hamburger" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Mobile Drawer -->
+    <div class="navbar__mobile-drawer" aria-label="Mobile navigation">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#creators">Creators</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#esports" class="is-active">Esports</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Top-Right CTA -->
+  <a href="contact.html" class="nav-cta-topright">Start Campaign</a>
+
+  <!-- ============================================================
+       SECTION 1: HERO / TEAM HEADER (Dark Background)
+       ============================================================ -->
+  <header class="team-header-section" id="team-header" data-bg="dark">
+    <canvas class="gradient__canvas" id="esportsHeroGradient" aria-hidden="true"></canvas>
+    <div class="es-container">
+      <div class="team-header__row">
+        <div class="team-header__text">
+          <h1 class="team-header__name">8Bit Esports</h1>
+          <p class="team-header__tagline">Our competitive BGMI roster for 2026.</p>
+          <ul class="team-header__meta">
+            <li class="team-header__meta-item">Game · <strong>BGMI</strong></li>
+            <li class="team-header__meta-item">Region · <strong>India</strong></li>
+            <li class="team-header__meta-item">Founded · <strong>2018</strong></li>
+            <li class="team-header__meta-item">Roster · <strong>5 players</strong></li>
+          </ul>
+        </div>
+
+        <div class="team-header__portrait-wrap">
+          <img src="images-for-landing-page/hero-esports.png" alt="8Bit Esports roster photo" class="team-header__portrait-img" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <div class="esports-hero-bottom-fade" aria-hidden="true"></div>
+  </header>
+
+  <!-- Smooth Scrim Gradient Transition: Dark (#0A0A0A) to Light (#FFFFFF) -->
+  <div class="section-transition" aria-hidden="true"></div>
+
+  <!-- Light Zone Container for Sections 2-6 -->
+  <main class="es-light-zone" data-bg="light">
+    <div class="page-8bit-bg" aria-hidden="true"></div>
+    <div class="es-container">
+
+      <!-- ============================================================
+           SECTION 2: KPI RIBBON
+           ============================================================ -->
+      <section class="kpi-ribbon-section" data-bg="light" aria-label="Key performance metrics">
+        <div class="kpi-ribbon">
+          <div class="kpi-card">
+            <span class="kpi-card__value">12</span>
+            <span class="kpi-card__label">Tournaments played</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-card__value">847</span>
+            <span class="kpi-card__label">Total finishes</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-card__value">1st</span>
+            <span class="kpi-card__label">Best placement</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-card__value">$240K</span>
+            <span class="kpi-card__label">Prize money</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 3: ROSTER GRID (THE MAIN EVENT)
+           ============================================================ -->
+      <section class="roster-grid-section" data-bg="light" aria-label="Competitive roster">
+        <h2 class="es-section-title">Active players</h2>
+        <div class="roster-grid">
+
+          <!-- Player 1: Juicy -->
+          <article class="player-card">
+            <div class="player-card__avatar">
+              <img src="images-for-landing-page/roster/juicy.png" alt="Juicy avatar" class="player-card__avatar-img" loading="lazy">
+            </div>
+            <h3 class="player-card__handle">Juicy</h3>
+            <p class="player-card__name">Vishwas Battoo</p>
+            <span class="role-chip">IGL</span>
+            <div class="player-card__stats">
+              <div class="stat">
+                <span class="stat__value">55</span>
+                <span class="stat__label">Total finishes</span>
+              </div>
+              <div class="stat">
+                <span class="stat__value">36.8</span>
+                <span class="stat__label">Global ranking</span>
+              </div>
+            </div>
+            <div class="player-card__socials">
+              <a href="https://www.instagram.com/_juicy08/" class="card-social-link" target="_blank" rel="noopener" aria-label="Juicy on Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://www.youtube.com/@8bitjuicy153" class="card-social-link" target="_blank" rel="noopener" aria-label="Juicy on YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"></polygon></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Player 2: Sarangg -->
+          <article class="player-card">
+            <div class="player-card__avatar">
+              <img src="images-for-landing-page/roster/sarangg.png" alt="Sarangg avatar" class="player-card__avatar-img" loading="lazy">
+            </div>
+            <h3 class="player-card__handle">Sarangg</h3>
+            <p class="player-card__name">Sarangajyoti Deka</p>
+            <span class="role-chip">Assaulter</span>
+            <div class="player-card__stats">
+              <div class="stat">
+                <span class="stat__value">82</span>
+                <span class="stat__label">Total finishes</span>
+              </div>
+              <div class="stat">
+                <span class="stat__value">57</span>
+                <span class="stat__label">Global ranking</span>
+              </div>
+            </div>
+            <div class="player-card__socials">
+              <a href="https://www.instagram.com/sarangg_07/" class="card-social-link" target="_blank" rel="noopener" aria-label="Sarangg on Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://www.youtube.com/@Saranggggg7" class="card-social-link" target="_blank" rel="noopener" aria-label="Sarangg on YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"></polygon></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Player 3: Skipz -->
+          <article class="player-card">
+            <div class="player-card__avatar">
+              <img src="images-for-landing-page/roster/skipz.png" alt="Skipz avatar" class="player-card__avatar-img" loading="lazy">
+            </div>
+            <h3 class="player-card__handle">Skipz</h3>
+            <p class="player-card__name">Aman Shaikh</p>
+            <span class="role-chip">Assaulter</span>
+            <div class="player-card__stats">
+              <div class="stat">
+                <span class="stat__value">39</span>
+                <span class="stat__label">Total finishes</span>
+              </div>
+              <div class="stat">
+                <span class="stat__value">63</span>
+                <span class="stat__label">Global ranking</span>
+              </div>
+            </div>
+            <div class="player-card__socials">
+              <a href="https://www.instagram.com/skipz09/" class="card-social-link" target="_blank" rel="noopener" aria-label="Skipz on Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://www.youtube.com/@SkipzGaming-p4x" class="card-social-link" target="_blank" rel="noopener" aria-label="Skipz on YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"></polygon></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Player 4: Shubh -->
+          <article class="player-card">
+            <div class="player-card__avatar">
+              <img src="images-for-landing-page/roster/shubh.png" alt="Shubh avatar" class="player-card__avatar-img" loading="lazy">
+            </div>
+            <h3 class="player-card__handle">Shubh</h3>
+            <p class="player-card__name">Shubh</p>
+            <span class="role-chip">Assaulter</span>
+            <div class="player-card__stats">
+              <div class="stat">
+                <span class="stat__value">20</span>
+                <span class="stat__label">Total finishes</span>
+              </div>
+              <div class="stat">
+                <span class="stat__value">70</span>
+                <span class="stat__label">Global ranking</span>
+              </div>
+            </div>
+            <div class="player-card__socials">
+              <a href="https://www.instagram.com/ig_shubh1/" class="card-social-link" target="_blank" rel="noopener" aria-label="Shubh on Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://www.youtube.com/@kingshubhop484" class="card-social-link" target="_blank" rel="noopener" aria-label="Shubh on YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"></polygon></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Player 5: Shorty -->
+          <article class="player-card">
+            <div class="player-card__avatar">
+              <img src="images-for-landing-page/roster/shorty.png" alt="Shorty avatar" class="player-card__avatar-img" loading="lazy">
+            </div>
+            <h3 class="player-card__handle">Shorty</h3>
+            <p class="player-card__name">Jagrit Singh</p>
+            <span class="role-chip">Assaulter</span>
+            <div class="player-card__stats">
+              <div class="stat">
+                <span class="stat__value">15</span>
+                <span class="stat__label">Total finishes</span>
+              </div>
+              <div class="stat">
+                <span class="stat__value">90</span>
+                <span class="stat__label">Global ranking</span>
+              </div>
+            </div>
+            <div class="player-card__socials">
+              <a href="https://www.instagram.com/8bit_shorty/" class="card-social-link" target="_blank" rel="noopener" aria-label="Shorty on Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://www.youtube.com/@shortybgmi" class="card-social-link" target="_blank" rel="noopener" aria-label="Shorty on YouTube">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"></polygon></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 4: MENTORING & SUPPORT STAFF
+           ============================================================ -->
+      <section class="staff-section" data-bg="light" aria-label="Mentoring and support staff">
+        <h2 class="es-section-title">Mentoring & support staff</h2>
+        <div class="staff-grid">
+
+          <!-- Staff 1: Mentor -->
+          <article class="staff-card">
+            <h3 class="staff-card__name">Mercy</h3>
+            <p class="staff-card__role">Mentor</p>
+            <p class="staff-card__bio">Mentor to the BGMI roster.</p>
+            <div class="staff-card__socials">
+              <a href="https://www.instagram.com/8bit_beg4mercy/" class="card-social-link" target="_blank" rel="noopener" aria-label="Mercy on Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Staff 2: Analyst -->
+          <article class="staff-card">
+            <h3 class="staff-card__name">ROCKY BTC</h3>
+            <p class="staff-card__role">Analyst</p>
+            <p class="staff-card__bio">Performance analyst for the BGMI roster.</p>
+            <div class="staff-card__socials">
+              <a href="https://www.instagram.com/analyst_rocky" class="card-social-link" target="_blank" rel="noopener" aria-label="ROCKY BTC on Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 5: RECENT TOURNAMENTS TABLE
+           ============================================================ -->
+      <section class="tournaments-section" data-bg="light" aria-label="Recent competitive tournaments">
+        <h2 class="es-section-title">Recent tournaments</h2>
+        <div class="tournaments__scroll">
+          <table class="tournaments__table">
+            <thead>
+              <tr>
+                <th scope="col" class="th-tournament-name">Tournament Name</th>
+                <th scope="col" class="th-num">Position Points</th>
+                <th scope="col" class="th-num">Finish Points</th>
+                <th scope="col" class="th-num">Overall Points</th>
+                <th scope="col" class="th-position">Tournament Position</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-tournament-name">BGIS 2024</td>
+                <td class="td-num">42</td>
+                <td class="td-num">65</td>
+                <td class="td-num">107</td>
+                <td class="td-position">7th Position</td>
+              </tr>
+              <tr>
+                <td class="td-tournament-name">BMPS 2024</td>
+                <td class="td-num">9</td>
+                <td class="td-num">45</td>
+                <td class="td-num">64</td>
+                <td class="td-position">15th Position</td>
+              </tr>
+              <tr>
+                <td class="td-tournament-name">BGIS 2025</td>
+                <td class="td-num">35</td>
+                <td class="td-num">44</td>
+                <td class="td-num">79</td>
+                <td class="td-position">25th Position</td>
+              </tr>
+              <tr>
+                <td class="td-tournament-name">BMPS 2025</td>
+                <td class="td-num">38</td>
+                <td class="td-num">78</td>
+                <td class="td-num">16</td>
+                <td class="td-position">5th Position</td>
+              </tr>
+              <tr>
+                <td class="td-tournament-name">BMSD 2025</td>
+                <td class="td-num">33</td>
+                <td class="td-num">66</td>
+                <td class="td-num">99</td>
+                <td class="td-position">10th Position</td>
+              </tr>
+              <tr>
+                <td class="td-tournament-name">BMPS 2026</td>
+                <td class="td-num">30</td>
+                <td class="td-num">73</td>
+                <td class="td-num">103</td>
+                <td class="td-position">11th Position</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 6: PARTNERS & SPONSORS
+           ============================================================ -->
+      <section class="sponsors-section" data-bg="light" aria-label="Official team partners and sponsors">
+        <h2 class="es-section-title">Partners & sponsors</h2>
+        <div class="sponsors__single">
+          <a href="https://www.iqoo.com/" class="sponsor-item-single" target="_blank" rel="noopener" aria-label="iQOO Official Partner">
+            <span class="sponsor-iqoo-text">iQOO</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+  <!-- ============================================================
+       SECTION 7: FOOTER (Shared Site Component)
+       ============================================================ -->
+  <footer class="footer-section" id="footer" data-bg="light" aria-label="Footer">
+    <div class="footer-foreground footer-card">
+      <div class="footer-grid">
+
+        <!-- Left: Navigation Links -->
+        <div class="footer-col footer-col--left">
+          <nav class="footer-nav">
+            <a href="index.html"    class="footer-nav__link">Home</a>
+            <a href="about.html"    class="footer-nav__link">About Us</a>
+            <a href="creators.html" class="footer-nav__link">Our Creators</a>
+            <a href="work.html"     class="footer-nav__link">Case Studies</a>
+            <a href="services.html" class="footer-nav__link">Our Services</a>
+          <a href="esports-inside.html" class="footer-nav__link">Esports Team</a>
+          </nav>
+        </div>
+
+        <!-- Center: 8Bit Mascot Logo, Address, and Socials -->
+        <div class="footer-col footer-col--center footer-center">
+          <div class="footer-logo-wrap" id="footerLogoWrap">
+            <img
+              src="images-for-landing-page/footer-logo.png"
+              alt="8Bit Creatives"
+              class="footer-logo"
+              id="footerLogo"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+            <span class="footer-logo-fallback" style="display:none;">8BIT</span>
+          </div>
+
+          <p class="footer-address">
+            <span class="footer-address__label">Address</span><br>
+            C/o Hotel Maitri Residency Ground Floor, Paltan Bazar, G.S.<br>
+            Road, Kamrup, Guwahati, Assam, India, 781008
+          </p>
+
+          <div class="footer-socials">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/8bit_creatives" class="footer-social" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://in.linkedin.com/company/8bit-creatives" class="footer-social" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: S8UL Block (top) + Enquiry (bottom) -->
+        <div class="footer-col footer-col--right">
+          <div class="footer-s8ul-block">
+            <div class="s8ul-logo-wrap">
+              <a href="https://s8ul.gg/" target="_blank" rel="noopener" class="s8ul-logo-link">
+              <img
+                src="images-for-landing-page/s8ul-logo.png"
+                alt="S8UL"
+                class="footer-s8ul-logo"
+                style="width: 100px; max-width: 100px; height: auto; object-fit: contain;"
+                loading="lazy"
+                onerror="this.style.display='none'; this.closest('.s8ul-logo-wrap').querySelector('.s8ul-logo-fallback').style.display='flex';"
+              >
+            </a>
+              <span class="s8ul-logo-fallback" style="display:none;">S8UL</span>
+            </div>
+            <div class="s8ul-caption">Our Content House</div>
+          </div>
+
+          <div class="footer-enquiry-wrap">
+            <div class="footer-enquiry-heading">Enquiry</div>
+            <a href="mailto:business@8bitcreatives.in" class="footer-enquiry-email">business@8bitcreatives.in</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div class="footer-copyright">© 2026 8Bit Creatives. All rights reserved.</div>
+        <div class="footer-signature">
+          Made with <span class="footer-heart">❤</span> by <a href="https://divyarajchauhan.in" target="_blank" rel="noopener" class="footer-signature-link footer-signature__link">Divyaraj Chauhan</a>
+        </div>
+        <a href="privacy-policy.html" class="footer-privacy footer-enquiry-privacy">Privacy Policy</a>
+      </div>
+
+      <hr class="footer-bottom-divider">
+
+      <a href="index.html" class="footer-wordmark" aria-label="8Bit Creatives">
+        <span class="footer-wordmark__bold wordmark-bold">8BIT</span><span class="footer-wordmark__thin wordmark-thin">Creatives</span>
+      </a>
+    </div>
+  </footer>
+  </main>
+
+  <script src="navbar.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Responsive Mobile Navbar Drawer
+    (function() {
+      const burger = document.querySelector('.navbar__hamburger');
+      const drawer = document.querySelector('.navbar__mobile-drawer');
+      if (burger && drawer) {
+        burger.addEventListener('click', () => {
+          const open = drawer.classList.toggle('is-open');
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
+      // Navbar visibility on scroll past hero
+      const navbar = document.querySelector('.navbar-pill');
+      const heroSection = document.getElementById('team-header');
+      if (navbar && heroSection) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+              navbar.classList.remove('navbar-visible');
+            } else {
+              navbar.classList.add('navbar-visible');
+            }
+          });
+        }, { threshold: [0, 0.1, 0.3] });
+        observer.observe(heroSection);
+      }
+
+      // Theme toggle for navbar and back-home over light/dark sections
+      (function () {
+    var navbar = document.querySelector('.navbar-pill') ||
+                 document.querySelector('.navbar') ||
+                 document.querySelector('[class*="navbar"]') ||
+                 document.getElementById('top');
+    var backHome = document.querySelector('.back-home');
+    if (!navbar) return;
+
+    var sections = document.querySelectorAll('section[data-bg], footer[data-bg], header[data-bg], main[data-bg], div[data-bg]');
+    if (!sections.length) return;
+
+    var currentBg = null;
+
+    function setLight() {
+      if (currentBg !== 'light') {
+        navbar.classList.add('navbar-on-light');
+        if (backHome) backHome.classList.add('back-home--light');
+        currentBg = 'light';
+      }
+    }
+    function setDark() {
+      if (currentBg !== 'dark') {
+        navbar.classList.remove('navbar-on-light');
+        if (backHome) backHome.classList.remove('back-home--light');
+        currentBg = 'dark';
+      }
+    }
+
+    function checkPosition() {
+      var navY = 42;
+      var found = false;
+      for (var i = sections.length - 1; i >= 0; i--) {
+        var rect = sections[i].getBoundingClientRect();
+        if (rect.top <= navY && rect.bottom > navY) {
+          var bg = sections[i].dataset.bg || sections[i].getAttribute('data-bg') || 'dark';
+          if (bg === 'light') setLight();
+          else setDark();
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        if (window.scrollY <= 10 && sections[0]) {
+          var initialBg = sections[0].dataset.bg || sections[0].getAttribute('data-bg') || 'dark';
+          if (initialBg === 'light') setLight();
+          else setDark();
+        } else {
+          setDark();
+        }
+      }
+    }
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var bg = entry.target.dataset.bg || entry.target.getAttribute('data-bg');
+            if (bg === 'light') setLight();
+            else if (bg === 'dark') setDark();
+          }
+        });
+      }, { rootMargin: '-40px 0px -85% 0px', threshold: [0, 0.1, 0.3, 0.5, 0.8, 1] });
+      sections.forEach(function (s) { observer.observe(s); });
+    }
+
+    window.addEventListener('scroll', checkPosition, { passive: true });
+    window.addEventListener('resize', checkPosition, { passive: true });
+
+    checkPosition();
+  })();
+})();
+</script>
+
+  <script>
+  (function () {
+    function initPage8BitBg() {
+      var root = document.querySelector('.page-8bit-bg');
+      if (!root) {
+        console.warn('[page-8bit-bg] Container not found.');
+        return;
+      }
+      root.innerHTML = '';
+      var cols = window.innerWidth < 768 ? 40 : 80;
+      var wordCyclesPerCol = 50;
+      var pattern = ['8', 'B', 'I', 'T', ''];
+      var frag = document.createDocumentFragment();
+      for (var c = 0; c < cols; c++) {
+        var col = document.createElement('div');
+        col.className = 'page-8bit-bg__col ' + (c % 2 === 0 ? 'page-8bit-bg__col--down' : 'page-8bit-bg__col--up');
+        for (var w = 0; w < wordCyclesPerCol; w++) {
+          for (var p = 0; p < pattern.length; p++) {
+            var span = document.createElement('span');
+            span.textContent = pattern[p];
+            col.appendChild(span);
+          }
+        }
+        frag.appendChild(col);
+      }
+      root.appendChild(frag);
+      console.log('[page-8bit-bg] Initialized with', cols, 'columns.');
+
+      // Pause off-screen CSS animation when scrolled away
+      if ('IntersectionObserver' in window) {
+        var pageBgObserver = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting) {
+            root.classList.remove('is-paused');
+          } else {
+            root.classList.add('is-paused');
+          }
+        }, { threshold: 0.01 });
+        pageBgObserver.observe(root);
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPage8BitBg);
+    } else {
+      initPage8BitBg();
+    }
+  })();
+  </script>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg class="back-to-top__arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script>
+  (function () {
+    var button = document.getElementById('backToTop');
+    if (!button) return;
+
+    var hero = document.getElementById('team-header') || document.querySelector('.team-header-section') || document.getElementById('hero');
+    var heroHeight = hero ? hero.offsetHeight : window.innerHeight;
+
+    function checkScroll() {
+      if (window.scrollY > heroHeight * 0.8) {
+        button.classList.add('is-visible');
+      } else {
+        button.classList.remove('is-visible');
+      }
+    }
+
+    var bttTicking = false;
+    window.addEventListener('scroll', function () {
+      if (!bttTicking) {
+        requestAnimationFrame(function () {
+          checkScroll();
+          bttTicking = false;
+        });
+        bttTicking = true;
+      }
+    }, { passive: true });
+    window.addEventListener('resize', function () {
+      heroHeight = hero ? hero.offsetHeight : window.innerHeight;
+      checkScroll();
+    }, { passive: true });
+    checkScroll();
+
+    function expoOut(t) {
+      return 1 - Math.pow(2, -10 * t);
+    }
+
+    function scrollToTop() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      button.classList.add('is-launching');
+
+      if (window.lenis) {
+        window.lenis.scrollTo(0, {
+          duration: 0.8,
+          easing: expoOut,
+          onComplete: function () {
+            button.classList.remove('is-launching');
+            checkScroll();
+          }
+        });
+        return;
+      }
+
+      var startTime = null;
+      var startScroll = window.scrollY || window.pageYOffset;
+      var duration = 800;
+
+      var origScrollBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = 'auto';
+
+      function animate(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        var elapsed = currentTime - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = progress === 1 ? 1 : expoOut(progress);
+        window.scrollTo(0, Math.round(startScroll * (1 - eased)));
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          window.scrollTo(0, 0);
+          document.documentElement.style.scrollBehavior = origScrollBehavior;
+          button.classList.remove('is-launching');
+          checkScroll();
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      scrollToTop();
+    });
+  })();
+  </script>
+
+  <!-- ============================================================
+       Velaris — WebGL animated gradient for Esports Hero section
+       ============================================================ -->
+  <script>
+  (function () {
+    // ── Configuration — 8Bit color palette ──
+    var CONFIG = {
+      bg:       "#0A0A0A",
+      colors:   ["#FFB37A", "#FC964B", "#FF5931", "#141210"],
+      speed:    1.4,         // slower than the default 2.0 — calmer
+      grain:    0.25,        // subtle film grain (default 0.3)
+      height:   "100vh"
+    };
+
+    // ── Shaders (copied verbatim from the Velaris component) ──
+    var VERTEX_SHADER = `
+  attribute vec2 position;
+  varying vec2 vUv;
+  void main() {
+    vUv = position * 0.5 + 0.5;
+    gl_Position = vec4(position, 0.0, 1.0);
+  }`;
+
+    var FRAGMENT_SHADER = `
+  precision highp float;
+  varying vec2 vUv;
+
+  uniform vec2  u_resolution;
+  uniform float u_time;
+  uniform float u_grain;
+  uniform vec3  u_colors[4];
+  uniform vec3  u_bg;
+
+  vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+
+  float snoise(vec2 v){
+    const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+             -0.577350269189626, 0.024390243902439);
+    vec2 i  = floor(v + dot(v, C.yy) );
+    vec2 x0 = v -   i + dot(i, C.xx);
+    vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+    vec4 x12 = x0.xyxy + C.xxzz;
+    x12.xy -= i1;
+    i = mod(i, 289.0);
+    vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+    + i.x + vec3(0.0, i1.x, 1.0 ));
+    vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy),
+      dot(x12.zw,x12.zw)), 0.0);
+    m = m*m ;
+    m = m*m ;
+    vec3 x = 2.0 * fract(p * C.www) - 1.0;
+    vec3 h = abs(x) - 0.5;
+    vec3 ox = floor(x + 0.5);
+    vec3 a0 = x - ox;
+    m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+    vec3 g;
+    g.x  = a0.x  * x0.x  + h.x  * x0.y;
+    g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+    return 130.0 * dot(m, g);
+  }
+
+  void main() {
+    vec2 uv = vUv;
+    float ratio = u_resolution.x / u_resolution.y;
+    vec2 p = uv - 0.5;
+    p.x *= ratio;
+
+    float t = u_time * 0.1;
+
+    float n1 = snoise(p * 0.4 + vec2(t * 0.2, -t * 0.3));
+    float n2 = snoise(p * 0.55 + vec2(-t * 0.15, t * 0.25) + n1 * 0.25);
+    float n3 = snoise(p * 0.75 + vec2(t * 0.1, -t * 0.2) + n2 * 0.2);
+
+    vec3 col = u_bg;
+
+    float dist = length(p) * 1.5;
+    float vignette = 1.0 - smoothstep(0.3, 1.2, dist);
+
+    col = mix(col, u_colors[0], smoothstep(-0.2, 0.5, n1) * 0.85);
+    col = mix(col, u_colors[1], smoothstep(-0.1, 0.6, n2) * 0.7);
+    col = mix(col, u_colors[2], smoothstep(-0.3, 0.4, n3) * 0.6);
+    col = mix(col, u_colors[3], smoothstep(0.0, 0.7, n1 * n2) * 0.5);
+
+    float glow = smoothstep(0.8, 0.0, dist) * 0.3;
+    col += u_colors[1] * glow;
+
+    col = mix(col * 0.2, col, vignette);
+
+    float grain = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453 + u_time);
+    col += (grain - 0.5) * u_grain * 0.1;
+
+    gl_FragColor = vec4(col, 1.0);
+  }`;
+
+    // ── Helpers ──
+    function hexToRgb(hex) {
+      var h = hex.replace("#", "");
+      return [
+        parseInt(h.slice(0, 2), 16) / 255,
+        parseInt(h.slice(2, 4), 16) / 255,
+        parseInt(h.slice(4, 6), 16) / 255
+      ];
+    }
+
+    function createShader(gl, type, src) {
+      var s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.error("Shader compile error:", gl.getShaderInfoLog(s));
+        gl.deleteShader(s);
+        return null;
+      }
+      return s;
+    }
+
+    // ── Init WebGL ──
+    var canvas = document.getElementById("esportsHeroGradient");
+    if (!canvas) return;
+    var container = canvas.parentElement;
+
+    var gl = canvas.getContext("webgl", { antialias: true, premultipliedAlpha: false });
+    if (!gl) {
+      console.error("WebGL not supported — gradient will be blank.");
+      return;
+    }
+
+    var vs = createShader(gl, gl.VERTEX_SHADER, VERTEX_SHADER);
+    var fs = createShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_SHADER);
+    var program = gl.createProgram();
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error("Program link error:", gl.getProgramInfoLog(program));
+      return;
+    }
+    gl.useProgram(program);
+
+    // Full-screen quad (two triangles forming a rectangle)
+    var buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+      gl.STATIC_DRAW
+    );
+
+    var posLoc = gl.getAttribLocation(program, "position");
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    // Uniform locations
+    var uRes   = gl.getUniformLocation(program, "u_resolution");
+    var uTime  = gl.getUniformLocation(program, "u_time");
+    var uGrain = gl.getUniformLocation(program, "u_grain");
+    var uCols  = gl.getUniformLocation(program, "u_colors");
+    var uBg    = gl.getUniformLocation(program, "u_bg");
+
+    // ── Resize handler (cap DPR at 1 for soft gradient mesh to eliminate GPU fill bottleneck) ──
+    function resize() {
+      var dpr = 1;
+      var w = container.clientWidth;
+      var h = container.clientHeight;
+      canvas.width  = w * dpr;
+      canvas.height = h * dpr;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    resize();
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(resize);
+      ro.observe(container);
+    } else {
+      window.addEventListener("resize", resize, { passive: true });
+    }
+
+    // ── Color uniform setup (4 colors × 3 channels = 12 floats) ──
+    var flatColors = new Float32Array(
+      CONFIG.colors.slice(0, 4).reduce(function (acc, hex) {
+        return acc.concat(hexToRgb(hex));
+      }, [])
+    );
+
+    var bgRgb = hexToRgb(CONFIG.bg);
+
+    // ── Render loop ──
+    var prefersReduced = window.matchMedia &&
+                         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var raf = null;
+    var isIntersecting = false;
+
+    function render(t) {
+      if (!isIntersecting) {
+        raf = null;
+        return;
+      }
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, (t || 0) * 0.001 * CONFIG.speed);
+      gl.uniform1f(uGrain, CONFIG.grain);
+      gl.uniform3f(uBg, bgRgb[0], bgRgb[1], bgRgb[2]);
+      gl.uniform3fv(uCols, flatColors);
+
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+      if (!prefersReduced && isIntersecting) {
+        raf = requestAnimationFrame(render);
+      }
+    }
+
+    // Initial single frame render
+    render(0);
+
+    // Render loop controlled by IntersectionObserver so off-screen GPU work is zero
+    if ('IntersectionObserver' in window) {
+      var ctaObserver = new IntersectionObserver(function (entries) {
+        isIntersecting = entries[0].isIntersecting;
+        if (isIntersecting && !raf && !prefersReduced) {
+          raf = requestAnimationFrame(render);
+        } else if (!isIntersecting && raf) {
+          cancelAnimationFrame(raf);
+          raf = null;
+        }
+      }, { threshold: 0.01 });
+      ctaObserver.observe(container);
+    } else {
+      isIntersecting = true;
+      if (!prefersReduced) {
+        raf = requestAnimationFrame(render);
+      }
+    }
+
+    // Cleanup on page hide
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden && raf) {
+        cancelAnimationFrame(raf);
+        raf = null;
+      } else if (!document.hidden && !raf && !prefersReduced && isIntersecting) {
+        raf = requestAnimationFrame(render);
+      }
+    });
+  })();
+  </script>
+
+<!-- Lenis Smooth Scroll -->
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function () {
+  if (typeof Lenis === 'undefined') return;
+  var lenis = new Lenis({
+    duration: 1.2,           // smooth scroll duration — 1.2s feels natural
+    easing: function (t) {    // ease-out-expo for a natural deceleration
+      return Math.min(1, 1.001 - Math.pow(2, -10 * t));
+    },
+    smoothWheel: true,        // smooth mouse wheel scroll
+    smoothTouch: false,       // keep native touch scroll (smoother on mobile)
+    touchMultiplier: 1.5,
+  });
+  window.lenis = lenis;
+
+  // Sync with GSAP ScrollTrigger if present
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (time) {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    // No GSAP — use requestAnimationFrame
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }
+
+  // Respect reduced motion — disable Lenis smoothing if user prefers reduced motion
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    lenis.destroy();
+  }
+})();
+</script>
+</body>
+</html>

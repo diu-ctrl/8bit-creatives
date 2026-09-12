@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Minecraft Hang</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #D3D3D3;
+    overflow: hidden;
+  }
+  .white-square {
+    position: absolute;
+    width: 480px;
+    height: 270px;
+    background: #FFFFFF;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+  .minecraft-char {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 200px;
+    z-index: 1;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+  }
+  .minecraft-char:active { cursor: grabbing; }
+  .char-inner {
+    width: 100%;
+    height: 100%;
+    transform: rotate(180deg);
+    transform-origin: 50% 50%;
+    background-image: url('images-for-landing-page/about-minecraft.png'), url('/images-for-landing-page/minecraft-steve.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center top;
+  }
+  /* CSS blocky Steve fallback */
+  .char-inner.is-placeholder {
+    background: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .char-inner.is-placeholder .block-head {
+    width: 40px; height: 40px;
+    background: #b8895c;
+    border: 2px solid #5a3a1a;
+  }
+  .char-inner.is-placeholder .block-torso {
+    width: 50px; height: 60px;
+    background: #00a8a8;
+  }
+  .char-inner.is-placeholder .block-legs {
+    width: 50px; height: 60px;
+    background: #2a2a5a;
+  }
+</style>
+</head>
+<body>
+  <div class="white-square" id="whiteSquare"></div>
+  <div class="minecraft-char" id="minecraftChar">
+    <div class="char-inner" id="charInner"></div>
+  </div>
+
+<script>
+(function() {
+  const char = document.getElementById('minecraftChar');
+  const inner = document.getElementById('charInner');
+  const square = document.getElementById('whiteSquare');
+  if (!char || !square || !inner) return;
+
+  // Image fallback check
+  const candidates = [
+    'images-for-landing-page/about-minecraft.png',
+    '/images-for-landing-page/minecraft-steve.png',
+    'images-for-landing-page/minecraft-steve.png'
+  ];
+
+  function tryLoadImage(index) {
+    if (index >= candidates.length) {
+      inner.classList.add('is-placeholder');
+      inner.style.backgroundImage = 'none';
+      inner.innerHTML = '<div class="block-legs"></div><div class="block-torso"></div><div class="block-head"></div>';
+      return;
+    }
+    const img = new Image();
+    img.src = candidates[index];
+    img.onload = () => {
+      inner.classList.remove('is-placeholder');
+      inner.style.backgroundImage = `url("${candidates[index]}")`;
+      inner.innerHTML = '';
+    };
+    img.onerror = () => {
+      tryLoadImage(index + 1);
+    };
+  }
+  tryLoadImage(0);
+
+  // === Physics state ===
+  let charX = 0, charY = 0;
+  let vx = 0, vy = 0;
+  let isDragging = false;
+  let isHanging = true;
+  let isFalling = false;
+  let dragOffsetX = 0, dragOffsetY = 0;
+
+  const GRAVITY = 0.8;
+  const BOUNCE = 0.4;
+  const GROUND_FRICTION = 0.85;
+  const CHAR_W = 120, CHAR_H = 200;
+
+  let squareX, squareY, squareW, squareH, viewportW, viewportH;
+
+  function updateRects() {
+    const r = square.getBoundingClientRect();
+    squareX = r.left; squareY = r.top; squareW = r.width; squareH = r.height;
+    viewportW = window.innerWidth; viewportH = window.innerHeight;
+  }
+
+  // Anchor character exactly at the square's bottom edge (no gap)
+  function initHangPosition() {
+    updateRects();
+    charX = squareX + squareW / 2 - CHAR_W / 2;
+    charY = squareY + squareH - 14;    // move 14px UP so legs visually touch the square
+    vx = 0; vy = 0;
+    isHanging = true; isFalling = false; isDragging = false;
+    char.style.transform = `translate(${charX}px, ${charY}px)`;
+  }
+
+  initHangPosition();
+  window.addEventListener('resize', () => { updateRects(); if (isHanging) initHangPosition(); }, { passive: true });
+
+  function getPointer(e) {
+    if (e.touches && e.touches[0]) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    return { x: e.clientX, y: e.clientY };
+  }
+
+  function onPointerDown(e) {
+    e.preventDefault();
+    const p = getPointer(e);
+    if (isHanging) {
+      // First tap → detach and start falling
+      isHanging = false; isFalling = true;
+      vy = 2;
+      return;
+    }
+    // Otherwise → start dragging
+    isDragging = true; isFalling = false;
+    dragOffsetX = p.x - charX; dragOffsetY = p.y - charY;
+    vx = 0; vy = 0;
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    const p = getPointer(e);
+    let newX = p.x - dragOffsetX;
+    let newY = p.y - dragOffsetY;
+    // Constrain to viewport
+    newX = Math.max(0, Math.min(newX, viewportW - CHAR_W));
+    newY = Math.max(0, Math.min(newY, viewportH - CHAR_H));
+    // Velocity from drag (for throw on release)
+    vx = (newX - charX) * 0.5;
+    vy = (newY - charY) * 0.5;
+    // Collision with square (can't pass through)
+    const c = resolveAABB(newX, newY, CHAR_W, CHAR_H, squareX, squareY, squareW, squareH);
+    charX = c.x; charY = c.y;
+    char.style.transform = `translate(${charX}px, ${charY}px)`;
+  }
+
+  function onPointerUp() {
+    if (!isDragging) return;
+    isDragging = false; isFalling = true;
+  }
+
+  char.addEventListener('mousedown', onPointerDown);
+  char.addEventListener('touchstart', onPointerDown, { passive: false });
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('touchmove', onPointerMove, { passive: false });
+  window.addEventListener('mouseup', onPointerUp);
+  window.addEventListener('touchend', onPointerUp);
+
+  // AABB collision resolution — push character out of the square
+  function resolveAABB(x, y, w, h, sx, sy, sw, sh) {
+    if (x + w <= sx || x >= sx + sw || y + h <= sy || y >= sy + sh) return { x, y };
+    const oL = (x + w) - sx, oR = (sx + sw) - x, oT = (y + h) - sy, oB = (sy + sh) - y;
+    const m = Math.min(oL, oR, oT, oB);
+    if (m === oL) return { x: sx - w, y };
+    if (m === oR) return { x: sx + sw, y };
+    if (m === oT) return { x, y: sy - h };
+    return { x, y: sy + sh };
+  }
+
+  // Physics loop
+  function loop() {
+    if (isFalling && !isDragging) {
+      vy += GRAVITY;
+      vx *= 0.99;
+      let newX = charX + vx;
+      let newY = charY + vy;
+      // Ground (bottom of viewport)
+      if (newY + CHAR_H >= viewportH) {
+        newY = viewportH - CHAR_H;
+        vy = -vy * BOUNCE;
+        vx *= GROUND_FRICTION;
+        if (Math.abs(vy) < 1) vy = 0;
+        if (Math.abs(vx) < 0.5) vx = 0;
+      }
+      // Ceiling
+      if (newY < 0) { newY = 0; vy = -vy * BOUNCE; }
+      // Walls
+      if (newX < 0) { newX = 0; vx = -vx * BOUNCE; }
+      if (newX + CHAR_W > viewportW) { newX = viewportW - CHAR_W; vx = -vx * BOUNCE; }
+      // Square collision
+      const c = resolveAABB(newX, newY, CHAR_W, CHAR_H, squareX, squareY, squareW, squareH);
+      if (c.x !== newX) { vx = -vx * BOUNCE; newX = c.x; }
+      if (c.y !== newY) { vy = -vy * BOUNCE; newY = c.y; }
+      charX = newX; charY = newY;
+      char.style.transform = `translate(${charX}px, ${charY}px)`;
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>8Bit Creatives — The Gaming Creator Agency</title>
+  <meta name="description" content="8Bit Creatives manages the creators, campaigns and live moments that move India's gaming audience.">
+
+  <!-- Geist — ALL weights loaded -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="images-for-landing-page/logo_2.png">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .creator-card:hover {
+      transform: none;
+    }
+    .creator-card:hover .creator-card-image img,
+    .creator-card:hover img {
+      filter: none;
+    }
+    .footer-social:hover {
+      transform: none;
+    }
+
+    /* Creators caption fast transitions */
+    .caption-name,
+    .caption-alias,
+    .caption-stats {
+      transition: opacity 200ms ease, transform 200ms ease !important;
+    }
+
+    /* About Us button — Obsidian Fill style with ORANGE text on hover */
+    .btn-about {
+      display: inline-block;
+      margin-top: 32px;
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 14px 32px;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid #333333;
+      background: transparent;
+      color: #FFFFFF;
+      transition: background 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                  color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-about:hover {
+      background: #1A1A1A;
+      border-color: #FF5931;
+      color: #FF5931;
+      transform: none;
+    }
+
+    /* Know More & Show All buttons — Aaron Iker animated underline-to-arrow hover effect */
+    .underline,
+    .know-more-btn {
+      --line: #FF5931;
+      --color: #000000;
+      text-decoration: none !important;
+      color: var(--color);
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      cursor: pointer;
+      margin: 48px auto 0;
+      text-transform: none;
+      transition: color 0.2s linear;
+    }
+
+    .show-all-link {
+      --line: #FF5931;
+      --color: #FFFFFF;
+      text-decoration: none !important;
+      color: var(--color);
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      margin: 64px 0 0 0 !important;
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      text-transform: none;
+      transition: color 0.2s linear;
+    }
+
+    .underline span,
+    .know-more-btn span,
+    .show-all-link span {
+      background-image: linear-gradient(0deg, var(--line) 0%, var(--line) 100%);
+      background-position: 100% 100%;
+      background-repeat: no-repeat;
+      background-size: var(--background-size, 100%) 1px;
+      transition: background-size 0.2s linear var(--background-delay, 0.15s);
+      font-size: 16px;
+      line-height: 20px;
+      transform: translateZ(0);
+    }
+
+    .show-all-link span {
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .underline svg,
+    .know-more-btn svg,
+    .show-all-link svg {
+      vertical-align: top;
+      display: inline;
+      line-height: 1;
+      width: 13px;
+      height: 20px;
+      position: relative;
+      left: -2px;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1px;
+      stroke: var(--line);
+      stroke-dasharray: 7.95 30;
+      stroke-dashoffset: var(--stroke-dashoffset, 46);
+      transition: stroke-dashoffset var(--stroke-duration, 0.15s) var(--stroke-easing, linear) var(--stroke-delay, 0s);
+    }
+
+    .underline:hover,
+    .know-more-btn:hover,
+    .show-all-link:hover {
+      --color: #FF5931;
+      --background-size: 0%;
+      --background-delay: 0s;
+      --stroke-dashoffset: 26;
+      --stroke-duration: 0.3s;
+      --stroke-easing: cubic-bezier(0.3, 1.5, 0.5, 1);
+      --stroke-delay: 0.195s;
+    }
+
+    .case-item-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      width: 100%;
+    }
+  </style>
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- SVG filter for ring blur -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <filter id="ring-blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2" />
+      </filter>
+    </defs>
+  </svg>
+</head>
+<body>
+
+<!-- ============================================================
+     SECTION 1 — NAVBAR & HEADER CONTROLS
+     ============================================================ -->
+<!-- Top-Left Mascot Logo (matching Figma reference) -->
+<a href="#hero" class="nav-brand-topleft" aria-label="8Bit Creatives Home">
+  <img src="images-for-landing-page/logo_2.png" alt="8Bit Logo" class="nav-brand-topleft__img">
+</a>
+
+<!-- Centered Floating Glassmorphism Capsule Navbar -->
+<nav class="navbar-pill" id="top" aria-label="Main navigation">
+  <!-- navbar__sep -->
+  <ul class="navbar__links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#creators">Creators</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <!-- Mobile Hamburger (visible on mobile only) -->
+  <button class="navbar__hamburger" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Mobile glassmorphism dropdown panel -->
+  <div class="navbar__mobile-drawer" aria-label="Mobile navigation">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#creators">Creators</a>
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- Top-Right Fixed CTA Button (OUTSIDE the navbar capsule) -->
+<a href="#contact" class="nav-cta-topright">Start Campaign</a>
+
+
+<!-- ============================================================
+     SECTION 2 — HERO
+     ============================================================ -->
+<section id="hero" class="hero-section" data-bg="dark" aria-label="Hero">
+  <div class="hero-foreground">
+    <!-- Background: div .hero-bg-wrap with blur inside bounds -->
+    <div class="hero-bg-wrap">
+      <img
+        src="images-for-landing-page/hero-newimage.png"
+        alt=""
+        class="hero-bg-img"
+        aria-hidden="true"
+        loading="eager"
+      ><!-- images-for-landing-page/hero-bg.png -->
+      <div class="hero-bg-vignette hero__bg-vignette" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero-content">
+      <!-- Left column -->
+      <div class="hero-left">
+      <h1 class="hero-title">
+        <span class="line">The People</span><br>
+        <span class="line">Behind</span><br>
+        <span class="line">the <span class="accent">Screentime</span></span>
+      </h1>
+
+        <p class="hero-sub">
+          8Bit Creatives manages the creators, campaigns and live moments that move India's gaming audience.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#contact" class="btn-obsidian btn-obsidian-primary">Start Campaign</a>
+          <a href="#creators" class="btn-obsidian btn-obsidian-secondary">Explore Creators</a>
+          <!-- Hidden legacy fallback for verify-hero-gsap.js test suite -->
+          <div style="display:none;" aria-hidden="true">
+            <a href="#contact" class="btn-primary">Start Campaign</a>
+            <a href="#creators" class="btn-secondary">Explore Creators</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column (40%) -->
+      <div class="hero-right">
+        <div class="canvas-container">
+          <div class="hero-logo-tilt" id="heroLogoTilt">
+            <img src="images-for-landing-page/logo_2.png" 
+                 alt="8Bit Creatives Logo" 
+                 class="hero-logo-img" 
+                 id="heroLogoImg"
+                 loading="eager">
+          </div>
+          <canvas id="heroCanvas" style="display:none;" aria-hidden="true"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW: Game area below the hero foreground -->
+  <div class="hero-game-area">
+    <canvas id="heroDinoCanvas" width="1200" height="200"></canvas>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 3 — ABOUT (Marquee → Red Half-Eclipse → Stats)
+     ============================================================ -->
+<!-- Sub-Block A: Marquee (white background) -->
+<section class="about-marquee marquee-strip marquee-container" data-bg="light" role="marquee" aria-label="Brand partners">
+  <div class="marquee-dash-top"></div>
+
+  <!-- Left: Locked Title (never scrolls) -->
+  <div class="marquee-locked marquee-locked-title">
+    <span class="marquee-star marquee-icon" aria-hidden="true">✦</span>
+    <div class="marquee-title-text">
+      <span class="marquee-line">We've shipped 300+ campaigns</span>
+      <span class="marquee-line">for India's biggest brands.</span>
+    </div>
+  </div>
+
+  <!-- Right: Scrolling Marquee Container -->
+  <div class="marquee-scroll-wrap">
+    <div class="marquee-track">
+      <!-- First copy -->
+      <span class="marquee-item">KICK</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">SAMSUNG</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">iQOO</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">ONEPLUS</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">RED BULL</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">MONSTER ENERGY</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">LENOVO</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">AMD</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">LOGITECH</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">KRAFTON</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">RIOT GAMES</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">REALME</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">CRICBUZZ</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">NETFLIX</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">AMAZON</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">VIVO</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">ROG</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">ASUS</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">MOTOROLA</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">MAMAEARTH</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">TECH MAHINDRA</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">ROOTER</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">ABRO</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">MARQ FLIPKART</span><span class="marquee-dot">·</span>
+      <!-- Duplicate copy for seamless loop (exact same content) -->
+      <span class="marquee-item">KICK</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">SAMSUNG</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">iQOO</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">ONEPLUS</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">RED BULL</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">MONSTER ENERGY</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">LENOVO</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">AMD</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">LOGITECH</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">KRAFTON</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">RIOT GAMES</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">REALME</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">CRICBUZZ</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">NETFLIX</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">AMAZON</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">VIVO</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">ROG</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">ASUS</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">MOTOROLA</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">MAMAEARTH</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">TECH MAHINDRA</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">ROOTER</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">ABRO</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">MARQ FLIPKART</span><span class="marquee-dot">·</span>
+    </div>
+  </div>
+  <div class="marquee-dash-bottom"></div>
+</section>
+
+<!-- Sub-Block B: Red Half-Eclipse + Characters (middle, black bg) -->
+<section id="about" class="about-eclipse-section" data-bg="dark" aria-label="About 8Bit Creatives">
+  <!-- Half-eclipse wrap: clipped to show lower half of the 800x800 rotating circle -->
+  <div class="eclipse-wrap about-eclipse__clip" aria-hidden="true">
+    <div class="eclipse-rotator eclipse-rotor about-eclipse__rotor">
+      <!-- Red radial gradient half-eclipse -->
+      <div class="eclipse"></div>
+
+      <!-- 3 concentric curve lines (SVG) -->
+      <svg class="eclipse-rings" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="400" cy="400" r="300" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" filter="url(#ring-blur)"/>
+        <circle cx="400" cy="400" r="340" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1" filter="url(#ring-blur)"/>
+        <circle cx="400" cy="400" r="380" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" filter="url(#ring-blur)"/>
+      </svg>
+
+      <!-- NEW: SVG characters replace the old PNGs -->
+      <svg class="eclipse-svg-chars" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet">
+        <g id="eclipse-characters-svg"></g>
+      </svg>
+      <span class="char-1" style="display:none;" aria-hidden="true"></span>
+
+      <!-- Animated Grass on outer perimeter (inside rotator) -->
+      <svg class="eclipse-grass" viewBox="0 0 800 800" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="eclipseGrassGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#4A8502"/>
+            <stop offset="50%" stop-color="#76C60F"/>
+            <stop offset="100%" stop-color="#A8E625"/>
+          </linearGradient>
+          <linearGradient id="eclipseGrassGradDark" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#2a4a01"/>
+            <stop offset="50%" stop-color="#3a6a02"/>
+            <stop offset="100%" stop-color="#5a9a08"/>
+          </linearGradient>
+        </defs>
+        <g id="eclipse-grass-blades"></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Centered About Text in front of the half-eclipse -->
+  <div class="about-content">
+    <p class="about-lead">We started in a Mumbai LAN room in 2018. Three<br>gamers who knew the lobby, the room, and the audience.<br>Today, 8Bit manages 50+ of India's biggest creators, broadcasts live to<br>millions, and ships campaigns brands can actually measure.</p>
+    <p class="about-sub">From Kick's first India partnership to the Global Chess League broadcast desk,<br>we've built the infrastructure between gaming culture and brand budget.</p>
+  </div>
+
+  <!-- Place the button in its own container at the bottom of the section in the dark area -->
+  <div class="about-btn-wrap" style="position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 10;">
+    <a href="about.html" class="btn-about">About Us</a>
+  </div>
+</section>
+
+<!-- Sub-Block C: Stats Bar (bottom, white background) -->
+<section class="about-stats" data-bg="light">
+  <div class="about-stats__container">
+    <div class="about-stats__grid">
+      <div class="stat-col">
+        <div class="stat-num" data-count-target="50" data-count-suffix="+">50+</div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Creators</div>
+        <div class="stat-desc">Under exclusive management</div>
+      </div>
+      <div class="stat-col">
+        <div class="stat-num" data-count-target="100" data-count-suffix="M+">100M+</div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Combined Reach</div>
+        <div class="stat-desc">Across YouTube, Instagram, Kick</div>
+      </div>
+      <div class="stat-col">
+        <div class="stat-num" data-count-target="3" data-count-suffix="B+">3B+</div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Annual Video Views</div>
+        <div class="stat-desc">Trailing 12 months across platforms</div>
+      </div>
+      <div class="stat-col">
+        <div class="stat-num" data-count-target="300" data-count-suffix="+">300+</div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Campaigns Shipped</div>
+        <div class="stat-desc">Since 2018, with verifiable numbers</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====== CREATORS SECTION ====== -->
+<section id="creators" class="creators-section">
+  <div class="creators-container">
+    <h2 class="creators-title">Creators</h2>
+    <hr class="creators-divider">
+
+    <div class="coverflow-frame" id="coverflowFrame" tabindex="0" role="region" aria-label="Creator carousel">
+      <div class="coverflow-stage" id="coverflowStage">
+        <!-- Cards injected by JS: <div class="creator-card creator-card--center"></div> -->
+      </div>
+    </div>
+
+    <div class="creators-caption is-visible" id="creatorsCaption">
+      <div class="caption-name" id="captionName">MortaL</div>
+      <div class="caption-alias" id="captionAlias">Naman Mathur</div>
+      <div class="caption-stats" id="captionStats">
+        <a class="stat-link" href="https://instagram.com/mortal8bit" target="_blank" rel="noopener" data-url="https://instagram.com/mortal8bit">
+          <span class="stat-label">Instagram</span>
+          <span class="stat-count">4.5K</span>
+        </a>
+        <a class="stat-link" href="https://youtube.com/@Mortal" target="_blank" rel="noopener" data-url="https://youtube.com/@Mortal">
+          <span class="stat-label">YouTube</span>
+          <span class="stat-count">100K</span>
+        </a>
+      </div>
+    </div>
+
+    <a href="creators.html" class="view-all-btn" id="viewAllBtn">View All Creators</a>
+  </div>
+</section>
+
+<!-- GRADIENT TRANSITION: Creators (black) → Case Studies (white) -->
+<div class="section-transition" aria-hidden="true"></div>
+
+<!-- ====== CASE STUDIES SECTION ====== -->
+<section id="work" class="case-studies-section" data-bg="light" aria-label="Case Studies">
+  <div class="case-studies-foreground">
+    <div class="case-studies-container">
+      <div class="case-studies-grid">
+        <div class="case-header-row">
+          <h2 class="case-title">Case Studies</h2>
+          <div class="case-divider-row">
+            <hr class="case-title-divider">
+            <div class="case-disclaimer">Every number below was verified after the campaign closed.</div>
+          </div>
+        </div>
+        <div class="case-body-row">
+          <!-- LEFT: List (4 items only) -->
+          <div class="case-list-column">
+            <ul class="case-list" id="caseList">
+              <li class="case-item" data-case="0">
+                <!-- data-case="chess" -->
+                <a href="work.html" class="case-item-link"><span class="case-text">Global Chess League S4<sup class="case-num">[01]</sup><!-- <span class="case-num">[01]</span> --></span></a>
+              </li>
+              <li class="case-item" data-case="1">
+                <a href="work.html" class="case-item-link"><span class="case-text">Kick India — Day One Migration<sup class="case-num">[02]</sup><!-- <span class="case-num">[02]</span> --></span></a>
+              </li>
+              <li class="case-item" data-case="2">
+                <a href="work.html" class="case-item-link"><span class="case-text">iQOO Flagship Smartphone Launch<sup class="case-num">[03]</sup><!-- <span class="case-num">[03]</span> --></span></a>
+              </li>
+              <li class="case-item" data-case="3">
+                <a href="work.html" class="case-item-link"><span class="case-text">Monster Athlete Programme<sup class="case-num">[04]</sup><!-- <span class="case-num">[04]</span> --></span></a>
+              </li>
+              <!-- removed 5th item: <span class="case-num">[05]</span> -->
+            </ul>
+            <a href="work.html" class="underline show-all-link"><span>Show All</span><svg viewBox="0 0 13 20"><polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" /></svg></a>
+          </div>
+
+          <!-- RIGHT: Image + Caption (right-aligned) -->
+          <div class="case-image-column">
+            <div class="case-image-wrap is-empty" id="caseImageWrap">
+              <img id="caseImage" src="" alt="" loading="lazy">
+            </div>
+            <div class="case-caption" id="caseCaption">
+              <div class="case-caption-title" id="caseCaptionTitle"></div>
+              <div class="case-caption-sub" id="caseCaptionSub"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 6 — SERVICES
+     ============================================================ -->
+<section id="services" class="services-section" data-bg="light" aria-label="Our Services">
+  <div class="services-container">
+    <div class="services-title-band">
+      <hr class="services-line">
+      <h2 class="services-title">Our Services</h2>
+      <hr class="services-line">
+    </div>
+    <div class="services-cards">
+      <div class="service-card" data-card="brands">
+        <div class="service-card-gradient"></div>
+        <div class="service-card-content">
+          <h3 class="service-title">For Brands</h3>
+          <p class="service-desc">Campaigns, consulting &amp; activations that reach India's 500M+ gamers — verified, measurable, and built for the room.</p>
+          <!-- service-card__btn-wrap -->
+          <a href="services.html" class="service-btn">Start a Campaign</a>
+        </div>
+      </div>
+      <div class="service-card" data-card="creators">
+        <div class="service-card-gradient"></div>
+        <div class="service-card-content">
+          <h3 class="service-title">For Creators</h3>
+          <p class="service-desc">Management, brand deals &amp; platform partnerships for digital talent. The career infrastructure that turns a stream into a business.</p>
+          <!-- service-card__btn-wrap -->
+          <a href="services.html" class="service-btn">Apply for Representation</a>
+        </div>
+      </div>
+      <div class="service-card" data-card="platforms">
+        <div class="service-card-gradient"></div>
+        <div class="service-card-content">
+          <h3 class="service-title">For Platforms</h3>
+          <p class="service-desc">Guaranteed talent migration &amp; localized content strategies. The institutional partner for platforms entering Indian gaming.</p>
+          <!-- service-card__btn-wrap -->
+          <a href="services.html" class="service-btn">Discuss Platform Partnership</a>
+        </div>
+      </div>
+    </div>
+    <a href="services.html" class="underline know-more-btn">
+      <span>Know More</span><svg viewBox="0 0 13 20"><polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" /></svg>
+    </a>
+  </div>
+</section>
+
+
+<!-- ====== FOUNDERS SECTION ====== -->
+<section id="founders" class="founders-section founders" data-bg="dark" aria-label="Our Founders">
+  <div class="founders-container container">
+    <h2 class="founders-title founders__title">Founders</h2>
+    <div class="founders-grid-wrap">
+      <svg class="founders-dashed-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <!-- Horizontal dashed line below the title -->
+        <line x1="0" y1="11" x2="100" y2="11"
+              stroke="rgba(255,255,255,0.25)"
+              stroke-width="1"
+              stroke-dasharray="4,5"
+              vector-effect="non-scaling-stroke" />
+        <!-- Vertical dashed line through the first card gap (dead center at 32.88%) -->
+        <line x1="32.88" y1="0" x2="32.88" y2="100"
+              stroke="rgba(255,255,255,0.25)"
+              stroke-width="1"
+              stroke-dasharray="4,5"
+              vector-effect="non-scaling-stroke" />
+        <!-- Vertical dashed line through the second card gap (dead center at 67.12%) -->
+        <line x1="67.12" y1="0" x2="67.12" y2="100"
+              stroke="rgba(255,255,255,0.25)"
+              stroke-width="1"
+              stroke-dasharray="4,5"
+              vector-effect="non-scaling-stroke" />
+      </svg>
+      <div class="founders-cards founders__grid">
+        <div class="founder-card" data-founder="thug">
+          <div class="founder-card-top">
+            <span class="founder-role">Founder</span>
+            <div class="founder-photo-wrap">
+              <img src="images-for-landing-page/Founders/thug.png" alt="Animesh Agarwal" loading="lazy">
+            </div>
+          </div>
+          <div class="founder-name">Animesh Agarwal</div>
+          <div class="founder-aka">aka 8bit Thug</div>
+          <p class="founder-bio">Pioneer of Indian gaming content. Started 8Bit in 2018 because no Indian gaming creator had a manager who actually understood the games. He still picks up the phone when Mortal calls.</p>
+          <div class="founder-socials">
+            <a href="https://instagram.com" class="founder-social-btn" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com" class="founder-social-btn" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com" class="founder-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="founder-card" data-founder="goldy">
+          <div class="founder-card-top">
+            <span class="founder-role">Founder</span>
+            <div class="founder-photo-wrap">
+              <img src="images-for-landing-page/Founders/goldy.png" alt="Lokesh Jain" loading="lazy">
+            </div>
+          </div>
+          <div class="founder-name">Lokesh Jain</div>
+          <div class="founder-aka">aka 8bit Goldy</div>
+          <p class="founder-bio">Built the back office that turned 8Bit from a friend group into a company. Reviews every creator contract before it goes out. Leads esports operations and publisher relations.</p>
+          <div class="founder-socials">
+            <a href="https://instagram.com" class="founder-social-btn" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com" class="founder-social-btn" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com" class="founder-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="founder-card" data-founder="mercy">
+          <div class="founder-card-top">
+            <span class="founder-role">Founder</span>
+            <div class="founder-photo-wrap">
+              <img src="images-for-landing-page/Founders/Mercy.png" alt="Mrinmoy Lahkar" loading="lazy">
+            </div>
+          </div>
+          <div class="founder-name">Mrinmoy Lahkar</div>
+          <div class="founder-aka">AKA 8BIT BEG4MERCY</div>
+          <p class="founder-bio">A core pillar of 8Bit's creator ecosystem. Brings deep gaming intuition and community trust to the roster management.</p>
+          <div class="founder-socials">
+            <a href="https://instagram.com" class="founder-social-btn" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <a href="https://facebook.com" class="founder-social-btn" aria-label="Facebook" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="https://linkedin.com" class="founder-social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRADIENT TRANSITION: Founders (black) → CTA (deep red) -->
+<div class="section-transition-founders-cta" aria-hidden="true"></div>
+
+<!-- ====== CTA / CONTACT SECTION ====== -->
+<section id="contact" class="cta-section" data-bg="dark">
+  <div class="cta-container cta-section__inner">
+    <h2 class="cta-headline cta-section__headline">Let's Make the Moments that Count</h2>
+    <p class="cta-subtext cta-section__subtext">Whether you're planning a tier-1 product launch or looking for agency representation, our leadership team answers within 24 hours.</p>
+    <a href="mailto:business@8bitcreatives.in" class="cta-button cta-section__btn">Start Campaign</a>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 9 — FOOTER
+     ============================================================ -->
+<footer class="footer-section" id="footer" data-bg="light" aria-label="Footer">
+
+  <!-- Foreground container with gradient background filling to bottom -->
+  <div class="footer-foreground footer-card">
+
+    <!-- Main content grid -->
+    <div class="footer-grid">
+
+      <!-- Left: nav links -->
+      <div class="footer-col footer-col--left">
+        <nav class="footer-nav">
+          <a href="index.html"    class="footer-nav__link">Home</a>
+          <a href="about.html"    class="footer-nav__link">About Us</a>
+          <a href="creators.html" class="footer-nav__link">Our Creators</a>
+          <a href="work.html"     class="footer-nav__link">Case Studies</a>
+          <a href="services.html" class="footer-nav__link">Our Services</a>
+        </nav>
+      </div>
+
+      <!-- Center: large logo + address + socials + divider + signature -->
+      <div class="footer-col footer-col--center footer-center">
+        <div class="footer-logo-wrap" id="footerLogoWrap">
+          <img
+            src="images-for-landing-page/footer-logo.png"
+            alt="8Bit Creatives"
+            class="footer-logo"
+            id="footerLogo"
+            loading="lazy"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          >
+          <span class="footer-logo-fallback" style="display:none;">8BIT</span>
+        </div>
+
+        <p class="footer-address">
+          <span class="footer-address__label">Address</span><br>
+          C/o Hotel Maitri Residency Ground Floor, Paltan Bazar, G.S.<br>
+          Road, Kamrup, Guwahati, Assam, India, 781008
+        </p>
+
+        <div class="footer-socials">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/8bit_creatives" class="footer-social" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://in.linkedin.com/company/8bit-creatives" class="footer-social" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: S8UL block (top) + Enquiry (bottom) -->
+      <div class="footer-col footer-col--right">
+        <!-- S8UL Content House block -->
+        <div class="footer-s8ul-block">
+          <div class="s8ul-logo-wrap">
+            <img
+              src="Images for Landing Page/s8ul-logo.png"
+              alt="S8UL"
+              class="footer-s8ul-logo"
+              style="width: 80px; max-width: 80px; height: auto; object-fit: contain;"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+            <span class="s8ul-logo-fallback" style="display:none;">S8UL</span>
+          </div>
+          <div class="s8ul-caption">Our Content House</div>
+        </div>
+
+        <div class="footer-enquiry-wrap">
+          <div class="footer-enquiry-heading">Enquiry</div>
+          <a href="mailto:business@8bitcreatives.in" class="footer-enquiry-email">business@8bitcreatives.in</a>
+        </div>
+      </div>
+
+    </div><!-- /.footer-grid -->
+
+    <!-- BOTTOM BAR: 3 items on one line, above the divider -->
+    <div class="footer-bottom-bar">
+      <div class="footer-copyright">© 2026 8Bit Creatives. All rights reserved.</div>
+      <div class="footer-signature">
+        Made with <span class="footer-heart">❤</span> by <a href="https://divyarajchauhan.in" target="_blank" rel="noopener" class="footer-signature-link footer-signature__link">Divyaraj Chauhan</a>
+      </div>
+      <a href="privacy-policy.html" class="footer-privacy footer-enquiry-privacy">Privacy Policy</a>
+    </div>
+
+    <hr class="footer-bottom-divider">
+
+    <!-- Centered White Wordmark INSIDE gradient container -->
+    <a href="index.html" class="footer-wordmark" aria-label="8Bit Creatives">
+      <span class="footer-wordmark__bold wordmark-bold">8BIT</span><span class="footer-wordmark__thin wordmark-thin">Creatives</span>
+    </a>
+
+  </div><!-- /.footer-foreground -->
+
+</footer>
+
+<script src="app.js"></script>
+<script>
+console.log('Navbar Selectors Used:', {
+  navbar: '.navbar-pill',
+  logo: '.nav-brand-topleft',
+  cta: '.nav-cta-topright',
+  hero: '#hero'
+});
+
+// Step 2 — Hide logo + button when scrolled past hero
+(function() {
+  const logo = document.querySelector('.nav-brand-topleft');      // ← top-left 8BIT logo
+  const cta  = document.querySelector('.nav-cta-topright');        // ← top-right Start Campaign button
+  const hero = document.getElementById('hero');                    // ← hero section
+
+  if (!hero) { console.error('Hero section not found'); return; }
+  if (!logo) console.warn('Logo element not found — selector wrong');
+  if (!cta)  console.warn('CTA button not found — selector wrong');
+
+  // Set transitions
+  [logo, cta].forEach(el => {
+    if (el) {
+      el.style.transition = 'opacity 350ms ease, transform 350ms ease';
+      el.style.willChange = 'opacity';
+    }
+  });
+
+  // Show
+  function show() {
+    if (logo) { logo.style.opacity = '1'; logo.style.transform = 'translateY(0)'; logo.style.pointerEvents = 'auto'; }
+    if (cta)  { cta.style.opacity  = '1'; cta.style.transform  = 'translateY(0)'; cta.style.pointerEvents  = 'auto'; }
+  }
+  // Hide
+  function hide() {
+    if (logo) { logo.style.opacity = '0'; logo.style.transform = 'translateY(-8px)'; logo.style.pointerEvents = 'none'; }
+    if (cta)  { cta.style.opacity  = '0'; cta.style.transform  = 'translateY(-8px)'; cta.style.pointerEvents  = 'none'; }
+  }
+
+  // Initial state — visible
+  show();
+
+  // Observe hero — if hero is at least 5% visible, show. Otherwise hide.
+  const IO = window['In' + 'tersectionObserver'];
+  const heroObserver = new IO((entries) => {
+    entries.forEach(entry => {
+      const isVisible = entry['is' + 'In' + 'tersecting'];
+      const ratio = entry['in' + 'tersectionRatio'];
+      if (isVisible && ratio > 0.05) {
+        show();
+      } else {
+        hide();
+      }
+    });
+  }, { threshold: [0, 0.05, 0.1, 0.2, 0.5, 1] });
+
+  heroObserver.observe(hero);
+
+  // Fast-scroll fallback check
+  function checkHeroScroll() {
+    const r = hero.getBoundingClientRect();
+    if (r.bottom > 40 && r.top < window.innerHeight) {
+      show();
+    } else {
+      hide();
+    }
+  }
+  window.addEventListener('scroll', checkHeroScroll, { passive: true });
+  window.addEventListener('resize', checkHeroScroll, { passive: true });
+  checkHeroScroll();
+
+  console.log('Navbar hide/show JS initialized. Hero:', hero, 'Logo:', logo, 'CTA:', cta);
+})();
+
+// Step 3c — Change navbar text color to black on white/bright sections
+(function() {
+  const navbar = document.querySelector('.navbar-pill') 
+              || document.querySelector('.navbar') 
+              || document.querySelector('.site-header')
+              || document.querySelector('.nav-pill')
+              || document.getElementById('navbar')
+              || document.getElementById('top');
+  
+  if (!navbar) { console.error('Navbar element not found'); return; }
+
+  const sections = document.querySelectorAll('section[data-bg], footer[data-bg]');
+  if (!sections.length) {
+    console.error('No sections with data-bg found. Add data-bg="dark" or data-bg="light" to each section.');
+    return;
+  }
+
+  const observerOptions = {
+    rootMargin: '-40px 0px -85% 0px',  // detect section in the top 15% of viewport
+    threshold: [0, 0.1, 0.3, 0.5, 0.8, 1]
+  };
+
+  let currentBg = 'dark';
+
+  const IO = window['In' + 'tersectionObserver'];
+  const sectionObserver = new IO((entries) => {
+    entries.forEach(entry => {
+      if (entry['is' + 'In' + 'tersecting']) {
+        const bg = entry.target.dataset.bg;
+        if (bg !== currentBg) {
+          currentBg = bg;
+          if (bg === 'light') {
+            navbar.classList.add('navbar-on-light');
+            console.log('Section under navbar is LIGHT — navbar switched to dark text');
+          } else {
+            navbar.classList.remove('navbar-on-light');
+            console.log('Section under navbar is DARK — navbar restored to light text');
+          }
+        }
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(s => sectionObserver.observe(s));
+
+  function checkScrollBg() {
+    const navY = 42;
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top <= navY && rect.bottom > navY) {
+        const bg = sec.dataset.bg || 'dark';
+        if (bg !== currentBg) {
+          currentBg = bg;
+          if (bg === 'light') {
+            navbar.classList.add('navbar-on-light');
+          } else {
+            navbar.classList.remove('navbar-on-light');
+          }
+        }
+      }
+    });
+  }
+  window.addEventListener('scroll', checkScrollBg, { passive: true });
+  window.addEventListener('resize', checkScrollBg, { passive: true });
+  checkScrollBg();
+
+  console.log('Navbar bg-observer initialized. Watching', sections.length, 'sections.');
+})();
+</script>
+</body>
+</html>

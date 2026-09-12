@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#141414">
+  <title>8Bit Creatives — India's Premier Gaming & Creator Agency</title>
+  <meta name="description" content="8Bit Creatives manages 50+ of India's biggest gaming creators, produces live sports broadcasts, and builds measurable brand campaigns. Kick's first official creator agency partner in India.">
+  <meta property="og:title" content="8Bit Creatives — India's Premier Gaming & Creator Agency">
+  <meta property="og:description" content="50+ Top Creators, Live Sports Broadcast Mandates, Kick's First Official Creator Agency in India.">
+  <meta property="og:image" content="assets/brand-identity.png">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  
+    <!-- Google Fonts Preconnect & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Design System & Refined Tokens (Phase 5) -->
+  <link rel="stylesheet" href="styles/branding.css">
+</head>
+<body>
+
+  
+
+  <!-- ==========================================================================
+       Sticky Header (Section 6: Clean, confident 4-link nav)
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="#home" data-route="home" class="header-logo">
+        <img src="assets/logo.png" alt="8Bit Creatives Mascot Logo" width="40" height="40" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='inline'">
+        <span id="logo-fallback" style="display:none; font-family:var(--font-display); font-weight:900; color:var(--orange); letter-spacing:-0.04em">8BIT</span>
+        <div>
+          <span class="header-logo-text">8BIT</span>
+          <span style="font-family:var(--font-body); font-size:10px; display:block; color:var(--orange); font-weight:700; letter-spacing:0.08em; text-transform:uppercase;">CREATIVES</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#about" data-route="about" class="nav-link">About</a></li>
+          <li><a href="#talent" data-route="talent" class="nav-link">Talent</a></li>
+          <li><a href="#work" data-route="work" class="nav-link">Work</a></li>
+          <li><a href="#contact" data-route="contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: var(--s3);">
+        <a href="#contact" data-route="contact" class="btn btn-primary">START A CAMPAIGN <i class="fas fa-arrow-right" style="font-size:11px;"></i></a>
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+      <a href="#home" data-route="home" class="nav-link">Home</a>
+      <a href="#about" data-route="about" class="nav-link">About & Ecosystem</a>
+      <a href="#talent" data-route="talent" class="nav-link">Talent Roster (50+)</a>
+      <a href="#work" data-route="work" class="nav-link">Work & Case Studies</a>
+      <a href="#brands" data-route="brands" class="nav-link">For Brands & Playbook</a>
+      <a href="#creators" data-route="creators" class="nav-link">For Creators & Management</a>
+      <a href="#platforms" data-route="platforms" class="nav-link">For Platforms</a>
+      <a href="#kick" data-route="kick" class="nav-link">Kick Partnership</a>
+      <a href="#contact" data-route="contact" class="nav-link" style="color:var(--orange);">Start A Campaign →</a>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       VIEW: HOMEPAGE ("THE TRAILER" — CALMED 6-STOP EXPERIENCE) (updation.md Part 5.1)
+       ========================================================================== -->
+  <main id="view-home" class="subpage-view active">
+
+    <!-- STOP 1: HERO — TWO-COLUMN HERO WITH INTERACTIVE HTML5 CANVAS ARTWORK -->
+    <section class="hero-v2" id="hero-section">
+      <div class="container hero-container">
+        <div class="hero-v2-grid">
+          <!-- Left Column (55% width) -->
+          <div class="hero-left-col">
+            <div class="hero-tag"><span class="hero-diamond"></span> INDIA'S GAMING TALENT AGENCY</div>
+            <h1 class="hero-h1">
+              THE CREATORS BEHIND<br>INDIA'S GAMING<br><span class="text-orange">REVOLUTION.</span>
+            </h1>
+            <p class="hero-sub">
+              Started 2018 in a Mumbai LAN room. 50+ creators, 100M+ combined reach, 300+ brand campaigns with verifiable numbers. We do for gaming what agencies do for film.
+            </p>
+            <div class="hero-btn-row">
+              <a href="#contact" data-route="contact" class="btn btn-hero-primary">START A CAMPAIGN →</a>
+              <a href="#talent" data-route="talent" class="btn btn-hero-secondary">EXPLORE THE ROSTER</a>
+            </div>
+          </div>
+
+          <!-- Right Column (45% width: 1:1 Aspect Ratio Interactive Canvas Container) -->
+          <div class="hero-right-col">
+            <div class="canvas-container hero-pixel-canvas-wrap">
+              <!-- Left edge scatter pixels (5-7 orange pixels overlapping toward text column) -->
+              <div class="hero-canvas-scatter" aria-hidden="true">
+                <span class="scatter-px" style="top: 22%; left: -14px;"></span>
+                <span class="scatter-px" style="top: 28%; left: -24px;"></span>
+                <span class="scatter-px" style="top: 45%; left: -18px;"></span>
+                <span class="scatter-px" style="top: 52%; left: -10px;"></span>
+                <span class="scatter-px" style="top: 68%; left: -20px;"></span>
+                <span class="scatter-px" style="top: 74%; left: -12px;"></span>
+              </div>
+              <canvas id="heroCanvas" class="hero-canvas" width="500" height="500" aria-label="Interactive 8Bit Pixel Mosaic Artwork"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOP 2: PROOF STRIP (Scale Contrast & Mass System) (Section 4.2) -->
+    <section class="proof-strip-v2">
+      <div class="container">
+        <div class="proof-scale-container">
+          <!-- Hero Oversized Stat -->
+          <div class="proof-hero-block">
+            <div class="proof-hero-num"><span data-count="100" data-suffix="M+">100M+</span><span class="accent">.</span></div>
+            <div class="proof-hero-label">100M+ PEOPLE WHO ACTUALLY WATCH (NOT JUST FOLLOW)</div>
+          </div>
+
+          <!-- Companion Stats -->
+          <div class="proof-companion-stats">
+            <div class="proof-companion-item">
+              <span class="proof-companion-num"><span data-count="50" data-suffix="+">50+</span></span>
+              <span class="proof-companion-label" style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-dark); text-transform: none; letter-spacing: normal;">creators under management</span>
+            </div>
+            <span class="diamond"></span>
+            <div class="proof-companion-item">
+              <span class="proof-companion-num"><span data-count="3" data-suffix="B+">3B+</span></span>
+              <span class="proof-companion-label" style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-dark); text-transform: none; letter-spacing: normal;">views every year</span>
+            </div>
+            <span class="diamond"></span>
+            <div class="proof-companion-item">
+              <span class="proof-companion-num"><span data-count="300" data-suffix="+">300+</span></span>
+              <span class="proof-companion-label" style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-dark); text-transform: none; letter-spacing: normal;">campaigns shipped</span>
+            </div>
+          </div>
+
+          <!-- Gold Partnership Proof Badge -->
+          <div>
+            <span class="chip chip-gold">⚡ KICK'S 1ST OFFICIAL INDIA AGENCY</span>
+          </div>
+        </div>
+        <p class="proof-footnote">
+          Sum of platform-reported follower counts across all signed creators, audited quarterly. <a href="#methodology" onclick="openMethodologyModal(); return false;">How we calculate →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- STOP 3: ROSTER TEASER (Massive Overlaid Staggered Portraits) (Section 4.3, W6 Rebuild) -->
+    <section class="section-gap bg-cream roster-massive-section" id="roster-section">
+      <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--s8); flex-wrap: wrap; gap: var(--s4);">
+          <div>
+            <div class="section-tag">02 / THE ROSTER</div>
+            <h2 class="text-h2">THE FACES OF INDIAN GAMING.</h2>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 13px; color: var(--text-muted-light); font-weight: 500;">
+            50+ signed. 47 more on the full roster — sorted by game, platform, and reach.
+          </div>
+        </div>
+
+        <!-- 3 Large Side-by-Side Massive Portraits (Middle card offset 40px lower) -->
+        <div class="roster-massive-grid">
+          <!-- Card 1: Mortal -->
+          <div class="roster-card-massive pixel-corner-frame" onclick="openCreatorModal('mortal')">
+            <div class="roster-media-wrap">
+              <img src="assets/creators/mortal.jpg" alt="Mortal (Naman Mathur)" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+              <div class="roster-overlay-content">
+                <div class="roster-name-massive">MORTAL</div>
+                <div class="roster-sub-line">Naman Mathur · <strong>BGMI Esports</strong></div>
+                <div class="roster-bottom-meta">
+                  <span class="chip chip-ink"><strong>7.1M</strong> REACH</span>
+                  <span style="color:var(--orange); font-family:var(--font-mono); font-size:12px; font-weight:700;">PROFILE →</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Payal Gaming (Staggered 40px Lower) -->
+          <div class="roster-card-massive pixel-corner-frame" onclick="openCreatorModal('payal')">
+            <div class="roster-media-wrap">
+              <img src="assets/creators/payal.jpg" alt="Payal Gaming (Payal Dhare)" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+              <div class="roster-overlay-content">
+                <div class="roster-name-massive">PAYAL GAMING</div>
+                <div class="roster-sub-line">Payal Dhare · <strong>Variety & Esports</strong></div>
+                <div class="roster-bottom-meta">
+                  <span class="chip chip-ink"><strong>4.2M</strong> REACH</span>
+                  <span style="color:var(--orange); font-family:var(--font-mono); font-size:12px; font-weight:700;">PROFILE →</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Snax Gaming -->
+          <div class="roster-card-massive pixel-corner-frame" onclick="openCreatorModal('snax')">
+            <div class="roster-media-wrap">
+              <img src="assets/creators/snax.jpg" alt="Snax Gaming (Raj Varma)" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+              <div class="roster-overlay-content">
+                <div class="roster-name-massive">SNAX</div>
+                <div class="roster-sub-line">Raj Varma · <strong>FPS Competitive</strong></div>
+                <div class="roster-bottom-meta">
+                  <span class="chip chip-ink"><strong>1.8M</strong> REACH</span>
+                  <span style="color:var(--orange); font-family:var(--font-mono); font-size:12px; font-weight:700;">PROFILE →</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--s12); text-align: center;">
+          <a href="#talent" data-route="talent" class="btn btn-secondary">OPEN THE FULL ROSTER (50+ CREATORS)</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pixel Dissolve Transition into Work Section -->
+    <!-- STOP 4: WORK TEASER (Full-Bleed 60vh Media Banner + Editorial Cards) (Section 4.4, 6.4, D1, D2, D3, D6) -->
+    <section class="section-gap bg-ink" style="padding-top: var(--s8); padding-bottom: var(--s16);">
+      <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--s8); flex-wrap: wrap; gap: var(--s4);">
+          <div>
+            <div class="section-tag" style="color:var(--orange);">03 — SELECTED WORK</div>
+            <h2 class="text-h2 text-cream">CAMPAIGNS WITH RECEIPTS.</h2>
+          </div>
+          <div>
+            <span class="chip chip-ink"><strong>3.2×</strong> AVG ENGAGEMENT LIFT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flagship Featured Case Study: Full-Bleed 60vh Media Banner (Kick India) -->
+      <div class="work-fullbleed-banner" onclick="openCaseStudyModal('kick')">
+        <img class="work-banner-bg-img" src="assets/work/kick-india.jpg" alt="Kick India Launch" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+        <div class="work-banner-overlay">
+          <div class="work-banner-content">
+            <div class="work-banner-metric-block">
+              
+              <div class="work-banner-metric">48</div>
+              <div class="work-banner-metric-label" style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-dark); text-transform: none; letter-spacing: normal;">creators live on day one</div>
+            </div>
+            <div>
+              <h3 class="work-banner-title">THE LARGEST STREAMING PLATFORM MIGRATION IN INDIAN HISTORY.</h3>
+              <p class="work-banner-desc">Contracted exclusive agency rollout mobilizing 500M+ total reach, delivering 12M+ hours watched in month one with a 95/5 creator split.</p>
+              <button class="btn btn-primary" onclick="event.stopPropagation(); openCaseStudyModal('kick');">VIEW FULL CASE RECEIPTS →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 Asymmetric Secondary Case Cards -->
+      <div class="container">
+        <div class="grid-3-col" style="grid-template-columns: 1fr 1fr;">
+          <!-- Secondary Case 1: Smartphone Launch -->
+          <div class="card-v2 pixel-corner-frame" onclick="openCaseStudyModal('iqoo')" style="background:#1a1a1a; color:var(--cream);">
+            <div class="card-media card-media-16-10">
+              <img src="assets/work/iqoo-launch.jpg" alt="Smartphone Launch" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+            </div>
+            <div class="card-content">
+              <div class="work-metric-number">42M</div>
+              <div style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-dark); text-transform: none;">views on the launch</div>
+              <div class="card-title" style="color:var(--text-on-dark); font-size: 18px; margin-top: 4px;">SMARTPHONE LAUNCH DROP</div>
+              <p style="font-size:13px; color:var(--text-muted-dark); margin-top:2px;">8 top creators deployed across 6 weeks driving 96k direct product conversions.</p>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: var(--s3); border-top: 1px solid rgba(255,255,255,0.1);">
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--orange); font-weight: 700;">iQOO / ONEPLUS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Case 2: Global Chess League (Replaced with Esports Broadcast Stage) -->
+          <div class="card-v2 pixel-corner-frame" onclick="openCaseStudyModal('chess')" style="background:#1a1a1a; color:var(--cream);">
+            <div class="card-media card-media-16-10">
+              <img src="assets/work/chess-league.jpg" alt="Esports Broadcast Stage" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+            </div>
+            <div class="card-content">
+              <div class="work-metric-number">9-DAY</div>
+              <div style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-dark); text-transform: none;">continuous live broadcast</div>
+              <div class="card-title" style="color:var(--text-on-dark); font-size: 18px; margin-top: 4px;">GLOBAL CHESS LEAGUE S4</div>
+              <p style="font-size:13px; color:var(--text-muted-dark); margin-top:2px;">End-to-end multi-cam esports broadcast studio and live tournament management.</p>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: var(--s3); border-top: 1px solid rgba(255,255,255,0.1);">
+                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--orange); font-weight: 700;">TECH MAHINDRA</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--s12); text-align: center;">
+          <a href="#work" data-route="work" class="btn btn-secondary-light">SEE ALL CASE STUDIES</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOP 5: THE THREE DOORS (v2, 96px Rows with Persistent Thumbnails) (Section 4.5) -->
+    <section class="section-gap bg-cream">
+      <div class="container">
+        <div class="section-tag">04 / WAYS IN</div>
+        <h2 class="text-h2" style="margin-bottom: var(--s8);">ONE AGENCY. EVERY WAY INTO GAMING.</h2>
+
+        <div>
+          <a href="#brands" data-route="brands" class="door-row-v2">
+            <div class="door-text-wrap">
+              <span class="door-title">FOR BRANDS</span>
+              <span class="door-desc">Campaigns, consulting & activations that reach India's 500M+ gamers</span>
+            </div>
+            <div class="door-media-peek">
+              <img src="assets/doors/for-brands.jpg" alt="For Brands" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+            </div>
+            <span class="door-arrow">→</span>
+          </a>
+
+          <a href="#creators" data-route="creators" class="door-row-v2">
+            <div class="door-text-wrap">
+              <span class="door-title">FOR CREATORS</span>
+              <span class="door-desc">Management, brand deals & platform partnerships for digital talent</span>
+            </div>
+            <div class="door-media-peek">
+              <img src="assets/doors/for-creators.jpg" alt="For Creators" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+            </div>
+            <span class="door-arrow">→</span>
+          </a>
+
+          <a href="#platforms" data-route="platforms" class="door-row-v2">
+            <div class="door-text-wrap">
+              <span class="door-title">FOR PLATFORMS</span>
+              <span class="door-desc">Guaranteed talent migration & localized content strategies</span>
+            </div>
+            <div class="door-media-peek">
+              <img src="assets/doors/for-platforms.jpg" alt="For Platforms" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+            </div>
+            <span class="door-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STOP 6: FINAL CTA BAND (Single Ink Band) (Section 4.6) -->
+    <section style="padding: var(--s8) 0 var(--s16);">
+      <div class="container">
+        <div class="final-cta-band">
+          <h2 class="text-h2" style="color:var(--white); margin-bottom: var(--s4);">GOT A GAME PLAN?</h2>
+          <p style="font-size: 16px; color: var(--text-muted-dark); max-width: 540px; margin: 0 auto var(--s6);">
+            Connect your brand directly to India's most engaged gaming audience through verified creator campaigns.
+          </p>
+          <div style="display: flex; justify-content: center; gap: var(--s4); flex-wrap: wrap;">
+            <a href="#contact" data-route="contact" class="btn btn-primary">START A CAMPAIGN</a>
+            <a href="#join" data-route="join" class="btn btn-secondary-light">JOIN THE ROSTER</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       SUBPAGE VIEW: /about (Story, 5-Node Timeline, S8UL Flywheel, 4-Col Team, Awards)
+       ========================================================================== -->
+  <section id="view-about" class="subpage-view">
+    <div style="background:var(--ink); color:var(--cream); padding: var(--s16) 0 var(--s12); margin-bottom: var(--s8);">
+      <div class="container">
+        <div class="section-tag" style="color:var(--orange);">01 — ORIGIN & MISSION</div>
+        <h1 class="text-h1">THE HOUSE THAT GAMING BUILT.</h1>
+        <p style="font-size: 16px; color: var(--text-on-dark); max-width: 580px; margin-top: var(--s2);">
+          Founded by competitive esports pioneers in 2018, 8Bit Creatives is India's premier gaming, lifestyle, and live broadcast powerhouse.
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Story Intro (20px / 720px max width) & Open Mission Quote with Pixel Scatter Accent -->
+      <div style="max-width: 760px; margin-bottom: var(--s12);">
+        <p style="font-size: 20px; line-height: 1.5; color: var(--ink); font-weight: 500; margin-bottom: var(--s6);">
+          We started when Indian gaming was just custom lobbies and passionate LAN rooms. Today, we manage 50+ of India's biggest creators, partner with global platforms like Kick, and broadcast world championships.
+        </p>
+
+        <!-- Open Mission Quote on Page Background with Pixel Scatter Accent (Section 8) -->
+        <div class="about-founder-pullquote">
+          <p>
+            "To accelerate India's gaming creator economy by connecting authentic gaming voices with brands seeking meaningful, culturally native engagement."
+          </p>
+          <div class="pullquote-attribution">
+            — 8BIT CREATIVES EXECUTIVE MANDATE <span class="pixel-scatter-cluster"></span>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <!-- 5-Node Milestone Timeline Strip (Master Plan Track) -->
+      <div style="margin-bottom: var(--s12);">
+        <div class="section-tag">02 / MILESTONES</div>
+        <h2 class="text-h2" style="margin-bottom: var(--s6);">FROM LOBBY TO EMPIRE</h2>
+        <div class="timeline-track-v2">
+          <div class="timeline-node-card">
+            <div class="timeline-year-v2">2018</div>
+            <div class="timeline-title-v2">FOUNDATION</div>
+            <div class="timeline-desc-v2">Animesh "Thug" Agarwal and Lokesh "Goldy" Jain establish India's first dedicated gaming talent agency.</div>
+          </div>
+          <div class="timeline-node-card">
+            <div class="timeline-year-v2">2022</div>
+            <div class="timeline-title-v2">"A BIT EXTRA"</div>
+            <div class="timeline-desc-v2">Launch of specialized brand solutions arm providing bespoke IP, custom tournaments, and gamified campaigns.</div>
+          </div>
+          <div class="timeline-node-card">
+            <div class="timeline-year-v2">2023</div>
+            <div class="timeline-title-v2">50+ ROSTER & ROOTER</div>
+            <div class="timeline-desc-v2">Creator network crosses 50 exclusive talents; strategic multi-platform distribution agreements.</div>
+          </div>
+          <div class="timeline-node-card highlight">
+            <div class="timeline-year-v2">2024</div>
+            <div class="timeline-title-v2">S8UL HOUSE 2.0</div>
+            <div class="timeline-desc-v2">15,000 sq. ft. creator hub in Mumbai; 3× Global Esports Awards 'Content Group of the Year'.</div>
+          </div>
+          <div class="timeline-node-card highlight">
+            <div class="timeline-year-v2">2026</div>
+            <div class="timeline-title-v2">KICK & GLOBAL CHESS</div>
+            <div class="timeline-desc-v2">Kick's 1st official India creator agency (48 creators) & Tech Mahindra Global Chess League S4 broadcast mandate.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- S8UL Ecosystem Flywheel -->
+      <div style="margin-bottom: var(--s12);">
+        <div class="section-tag">03 / ECOSYSTEM</div>
+        <h2 class="text-h2" style="margin-bottom: var(--s6);">THREE PILLARS OF CULTURAL DOMINANCE</h2>
+        <div class="ecosystem-flywheel-grid">
+          <div class="ecosystem-card pixel-corner-frame">
+            <span class="ecosystem-badge">TALENT & BRANDS</span>
+            <h3 class="font-display" style="font-size: 18px;">8BIT CREATIVES</h3>
+            <p style="font-size: 14px; color: var(--text-muted-light);">Exclusive management of 50+ tier-1 creators, bespoke campaign ideation, and platform supply mandates.</p>
+          </div>
+          <div class="ecosystem-card pixel-corner-frame">
+            <span class="ecosystem-badge">COMPETITIVE ESPORTS</span>
+            <h3 class="font-display" style="font-size: 18px;">S8UL ESPORTS</h3>
+            <p style="font-size: 14px; color: var(--text-muted-light);">3× Global Esports Awards winner ('Esports Content Group of the Year') uniting Team SouL and 8Bit competitive rosters.</p>
+          </div>
+          <div class="ecosystem-card pixel-corner-frame">
+            <span class="ecosystem-badge">PRODUCTION INFRASTRUCTURE</span>
+            <h3 class="font-display" style="font-size: 18px;">GAMING HOUSE 2.0</h3>
+            <p style="font-size: 14px; color: var(--text-muted-light);">15,000 sq. ft. flagship creator facility in Mumbai housing 25+ resident creators producing 500M+ views monthly.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leadership Team in 4-Col Grid -->
+      <div style="margin-bottom: var(--s12);">
+        <div class="section-tag">04 / LEADERSHIP</div>
+        <h2 class="text-h2" style="margin-bottom: var(--s6);">THE FOUNDERS & EXECUTIVE TEAM</h2>
+        <div class="grid-4-col">
+          <!-- Founder 1: Thug -->
+          <div class="card-v2 pixel-corner-frame">
+            <div class="card-media">
+              <img src="assets/founders/animesh.jpg" alt="Animesh Agarwal" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+            </div>
+            <div class="card-content">
+              <div class="card-title" style="font-size: 18px;">ANIMESH AGARWAL</div>
+              <div style="font-size: 13px; color: var(--grey-mid);">"8Bit Thug" · <span style="color:var(--orange); font-weight:700;">CEO & Founder</span></div>
+              <p style="font-size: 13px; color: var(--text-muted-light); margin-top: 4px;">Thug started 8Bit in 2018 because no Indian gaming creator had a manager who actually understood the games. He still picks up the phone when Mortal calls.</p>
+              <div style="margin-top: auto; padding-top: var(--s3); border-top: 1px solid var(--line);">
+                <span class="chip">FOUNDER</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Founder 2: Goldy -->
+          <div class="card-v2 pixel-corner-frame">
+            <div class="card-media">
+              <img src="assets/founders/lokesh.jpg" alt="Lokesh Jain" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+            </div>
+            <div class="card-content">
+              <div class="card-title" style="font-size: 18px;">LOKESH JAIN</div>
+              <div style="font-size: 13px; color: var(--grey-mid);">"8Bit Goldy" · <span style="color:var(--orange); font-weight:700;">Co-Founder</span></div>
+              <p style="font-size: 13px; color: var(--text-muted-light); margin-top: 4px;">Goldy built the back office that turned 8Bit from a friend group into a company. He still reviews every creator contract before it goes out.</p>
+              <div style="margin-top: auto; padding-top: var(--s3); border-top: 1px solid var(--line);">
+                <span class="chip">CO-FOUNDER</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Founder 3: Mortal -->
+          <div class="card-v2 pixel-corner-frame">
+            <div class="card-media">
+              <img src="assets/founders/naman.jpg" alt="Naman Mathur" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+            </div>
+            <div class="card-content">
+              <div class="card-title" style="font-size: 18px;">NAMAN MATHUR</div>
+              <div style="font-size: 13px; color: var(--grey-mid);">"Mortal" · <span style="color:var(--orange); font-weight:700;">Co-Founder</span></div>
+              <p style="font-size: 13px; color: var(--text-muted-light); margin-top: 4px;">The face of Indian gaming. Mortal co-founded 8Bit because he wanted the next generation of creators to have the management he wished he had at 19.</p>
+              <div style="margin-top: auto; padding-top: var(--s3); border-top: 1px solid var(--line);">
+                <span class="chip">CO-FOUNDER</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Leadership 4: Swaraj -->
+          <div class="card-v2 pixel-corner-frame">
+            <div class="card-media">
+              <img src="assets/founders/swaraj.jpg" alt="Swaraj Chauhan" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+            </div>
+            <div class="card-content">
+              <div class="card-title" style="font-size: 18px;">SWARAJ CHAUHAN</div>
+              <div style="font-size: 13px; color: var(--grey-mid);">Chief Operating Officer</div>
+              <p style="font-size: 13px; color: var(--text-muted-light); margin-top: 4px;">Swaraj runs operations: creator relations, broadcast logistics, the contracts that turn a one-off stream into a multi-year deal. If a creator is paid on time, it is because Swaraj's pipeline worked.</p>
+              <div style="margin-top: auto; padding-top: var(--s3); border-top: 1px solid var(--line);">
+                <span class="chip">OPERATIONS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Global Awards & Recognition Strip -->
+      <div style="margin-bottom: var(--s12); padding: var(--s8); background: var(--white);">
+        <div class="section-tag" style="display:flex; justify-content:center; color:var(--orange);">05 / RECOGNITION</div>
+        <h3 class="font-display" style="font-size: 24px; color: var(--white); margin-bottom: var(--s6); text-align: center;">GLOBAL ACCOLADES & HONORS</h3>
+        <div style="display:flex; flex-wrap:wrap; gap: var(--s3); align-items:center;">
+          <span class="chip chip-gold">3× ESPORTS AWARDS WINNER</span>
+          <span class="chip chip-gold">MOBIES GLOBAL STREAMER OF THE YEAR</span>
+          <span class="chip">KICK'S 1ST OFFICIAL INDIA AGENCY</span>
+          <span class="chip">TECH MAHINDRA BROADCAST MANDATE</span>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-bottom: var(--s12);">
+        <a href="#contact" data-route="contact" class="btn btn-primary">COLLABORATE WITH US →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SUBPAGE VIEW: /talent (P0 B1 Grid Fix & B6 Counter Fix)
+       ========================================================================== -->
+  <section id="view-talent" class="subpage-view">
+    <div style="background:var(--ink); color:var(--cream); padding: var(--s16) 0 var(--s12); margin-bottom: var(--s8);">
+      <div class="container">
+        <div class="section-tag" style="color:var(--orange);">06 / THE ROSTER</div>
+        <h1 class="text-h1">50+ OF INDIA'S TOP CREATORS.</h1>
+        <p style="font-size: 16px; color: var(--text-on-dark); max-width: 580px; margin-top: var(--s2);">
+          Browse by gaming category, platform, or audience tier. Click any profile to inspect verified metrics.
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Filter Bar -->
+      <div class="filter-bar-v2">
+        <button class="filter-btn-v2 active" data-subpage-genre="all">ALL CATEGORIES</button>
+        <button class="filter-btn-v2" data-subpage-genre="bgmi">BGMI & ESPORTS</button>
+        <button class="filter-btn-v2" data-subpage-genre="gta rp">GTA RP</button>
+        <button class="filter-btn-v2" data-subpage-genre="variety">VARIETY</button>
+        <button class="filter-btn-v2" data-subpage-genre="lifestyle">LIFESTYLE</button>
+        
+        <button class="filter-btn-v2 active" data-subpage-platform="all">ALL PLATFORMS</button>
+        <button class="filter-btn-v2" data-subpage-platform="kick">KICK</button>
+        <button class="filter-btn-v2" data-subpage-platform="youtube">YOUTUBE</button>
+
+        <input type="text" id="subpage-talent-search" class="filter-search-v2" placeholder="Search creator by name or game...">
+      </div>
+
+      <!-- Live Count Display (B6 Fix) -->
+      <div id="subpage-talent-count" style="font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--grey-mid); text-transform: uppercase; margin-bottom: var(--s6);">
+        SHOWING <strong style="color:var(--orange)">8</strong> OF 50+ CREATORS
+      </div>
+
+      <!-- 4-Column Responsive Grid (P0 B1 Fix) -->
+      <div id="subpage-talent-grid" class="grid-4-col"></div>
+    </div>
+
+    <!-- Full-Bleed Join Band with Pixel-Dissolve Top Edge (Section 8) -->
+    <div class="talent-join-band">
+      <div class="container" style="text-align: center;">
+        <h2 class="text-h2" style="margin-bottom:var(--s3); font-size:clamp(26px, 3.5vw, 36px);">READY TO JOIN INDIA'S BIGGEST ROSTER?</h2>
+        <p style="font-size:15px; color:rgba(255,255,255,0.9); max-width:520px; margin:0 auto var(--s6);">
+          We evaluate emerging creators on engagement velocity, content discipline, and brand alignment.
+        </p>
+        <a href="#join" data-route="join" class="btn btn-secondary-light">APPLY FOR REPRESENTATION →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VIEW 4: SUBPAGE /work (Filterable Case Study Index with Modal Inspection)
+       ========================================================================== -->
+  <section id="view-work" class="subpage-view">
+    <div style="background:var(--ink); color:var(--cream); padding: var(--s16) 0 var(--s12); margin-bottom: var(--s8);">
+      <div class="container">
+        <div class="section-tag" style="color:var(--orange);">07 / CAMPAIGN ARCHIVE</div>
+        <h1 class="text-h1">WORK THAT MOVED NUMBERS.</h1>
+        <p style="font-size: 16px; color: var(--text-on-dark); max-width: 580px; margin-top: var(--s2);">
+          Verified campaign results across smartphone launches, live sports broadcasting, and platform migrations. Click any study for deep-dive receipts.
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Asymmetric Responsive Grid (Master Plan & Section 8) -->
+      <div class="grid-work-asymmetric">
+        <!-- Work 1: Flagship 2-Column Feature Card -->
+        <div class="card-v2 card-featured-2col pixel-corner-frame" onclick="openCaseStudyModal('iqoo')">
+          <div class="card-media">
+            <img src="assets/work/iqoo-flagship.jpg" alt="iQOO Flagship" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+          </div>
+          <div class="card-content" style="padding: var(--s8);">
+            <span class="chip chip-gold" style="width: fit-content; margin-bottom: var(--s2);">FLAGSHIP ACTIVATION</span>
+            <div class="card-title" style="font-size: 22px;">THE FLAGSHIP DROP</div>
+            <div style="font-size: 13px; color: var(--grey-mid); margin-bottom: var(--s2);">Client: <strong style="color:var(--ink)">iQOO / OnePlus</strong></div>
+            <div style="font-family: var(--font-display); font-size: 40px; font-weight: 900; color: var(--orange); line-height: 1; margin: var(--s2) 0 2px;">42M</div>
+            <div style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-light); text-transform: none;">views on the launch</div>
+            <p style="font-size: 14px; color: var(--text-muted-light); margin: var(--s3) 0 var(--s4);">8 top creators deployed across 6 weeks of live tournament scrims driving 96,000 direct product conversions.</p>
+            <div style="display: flex; gap: 12px; align-items: center; margin-top: auto; padding-top: var(--s4); border-top: 1px solid var(--line);">
+              <span class="chip">8 CREATORS</span>
+              <span class="chip">6 WEEKS</span>
+              <span class="chip" style="color:var(--orange); font-weight:700;">+3.1× ENG.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Work 2: Global Chess League -->
+        <div class="card-v2 pixel-corner-frame" onclick="openCaseStudyModal('chess')">
+          <div class="card-media card-media-16-10">
+            <img src="assets/work/chess-league.jpg" alt="Global Chess League" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+          </div>
+          <div class="card-content">
+            <div class="card-title" style="font-size: 18px;">GLOBAL CHESS LEAGUE S4</div>
+            <div style="font-size: 13px; color: var(--grey-mid);">Client: <strong style="color:var(--ink)">Tech Mahindra</strong></div>
+            <div style="font-family: var(--font-display); font-size: 32px; font-weight: 900; color: var(--orange); line-height: 1; margin-top: var(--s2);">9-DAY</div>
+            <div style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-light); text-transform: none;">continuous live broadcast</div>
+            <p style="font-size: 14px; color: var(--text-muted-light); margin-top: 4px;">End-to-end multi-cam tournament broadcast and studio production.</p>
+            <div style="display: flex; gap: 12px; align-items: center; margin-top: auto; padding-top: var(--s3); border-top: 1px solid var(--line);">
+              <span class="chip">GLOBAL LEAGUE</span>
+              <span class="chip" style="color:var(--orange); font-weight:700;">LIVE BROADCAST</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Work 3: Kick Platform -->
+        <div class="card-v2 pixel-corner-frame" onclick="openCaseStudyModal('kick')">
+          <div class="card-media card-media-16-10">
+            <img src="assets/work/kick-takeover.jpg" alt="Kick Platform" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+          </div>
+          <div class="card-content">
+            <div class="card-title" style="font-size: 18px;">KICK INDIA TAKEOVER</div>
+            <div style="font-size: 13px; color: var(--grey-mid);">Client: <strong style="color:var(--ink)">Kick Streaming</strong></div>
+            <div style="font-family: var(--font-display); font-size: 32px; font-weight: 900; color: var(--orange); line-height: 1; margin-top: var(--s2);">48</div>
+            <div style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-light); text-transform: none;">creators live on day one</div>
+            <p style="font-size: 14px; color: var(--text-muted-light); margin-top: 4px;">India’s first official creator agency deal, migrating 48 creators on day one.</p>
+            <div style="display: flex; gap: 12px; align-items: center; margin-top: auto; padding-top: var(--s3); border-top: 1px solid var(--line);">
+              <span class="chip">48 CREATORS</span>
+              <span class="chip" style="color:var(--orange); font-weight:700;">95/5 SPLIT</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Work 4: Mamaearth -->
+        <div class="card-v2 pixel-corner-frame" onclick="openCaseStudyModal('mamaearth')">
+          <div class="card-media card-media-16-10">
+            <img src="assets/work/mamaearth.jpg" alt="Mamaearth" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+          </div>
+          <div class="card-content">
+            <div class="card-title" style="font-size: 18px;">FMCG GAMIFIED INTEGRATION</div>
+            <div style="font-size: 13px; color: var(--grey-mid);">Client: <strong style="color:var(--ink)">Mamaearth</strong></div>
+            <div style="font-family: var(--font-display); font-size: 32px; font-weight: 900; color: var(--orange); line-height: 1; margin-top: var(--s2);">14M</div>
+            <div style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-light); text-transform: none;">organic audience reach</div>
+            <p style="font-size: 14px; color: var(--text-muted-light); margin-top: 4px;">Lifestyle gaming integration driving 3.4× engagement lift over static ads.</p>
+            <div style="display: flex; gap: 12px; align-items: center; margin-top: auto; padding-top: var(--s3); border-top: 1px solid var(--line);">
+              <span class="chip">FMCG & LIFESTYLE</span>
+              <span class="chip" style="color:var(--orange); font-weight:700;">+3.4× LIFT</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Work 5: Red Bull -->
+        <div class="card-v2 pixel-corner-frame" onclick="openCaseStudyModal('redbull')">
+          <div class="card-media card-media-16-10">
+            <img src="assets/work/redbull-meo.jpg" alt="Red Bull MEO" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+          </div>
+          <div class="card-content">
+            <div class="card-title" style="font-size: 18px;">RED BULL M.E.O. SEASON</div>
+            <div style="font-size: 13px; color: var(--grey-mid);">Client: <strong style="color:var(--ink)">Red Bull</strong></div>
+            <div style="font-family: var(--font-display); font-size: 32px; font-weight: 900; color: var(--orange); line-height: 1; margin-top: var(--s2);">18M</div>
+            <div style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-light); text-transform: none;">tournament impressions</div>
+            <p style="font-size: 14px; color: var(--text-muted-light); margin-top: 4px;">14 creators deployed across live qualifiers, offline LAN finals, and social reels.</p>
+            <div style="display: flex; gap: 12px; align-items: center; margin-top: auto; padding-top: var(--s3); border-top: 1px solid var(--line);">
+              <span class="chip">14 CREATORS</span>
+              <span class="chip" style="color:var(--orange); font-weight:700;">OFFLINE LAN</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Work 6: Monster Energy -->
+        <div class="card-v2 pixel-corner-frame" onclick="openCaseStudyModal('monster')">
+          <div class="card-media card-media-16-10">
+            <img src="assets/work/monster.jpg" alt="Monster Energy" loading="lazy" onerror="this.src='assets/logo.png'; this.style.objectFit='contain';">
+          </div>
+          <div class="card-content">
+            <div class="card-title" style="font-size: 18px;">MONSTER ATHLETE PROGRAM</div>
+            <div style="font-size: 13px; color: var(--grey-mid);">Client: <strong style="color:var(--ink)">Monster Energy</strong></div>
+            <div style="font-family: var(--font-display); font-size: 32px; font-weight: 900; color: var(--orange); line-height: 1; margin-top: var(--s2);">24M</div>
+            <div style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-light); text-transform: none;">campaign impressions</div>
+            <p style="font-size: 14px; color: var(--text-muted-light); margin-top: 4px;">Long-term brand ambassadorship positioning esports athletes alongside extreme sports heroes.</p>
+            <div style="display: flex; gap: 12px; align-items: center; margin-top: auto; padding-top: var(--s3); border-top: 1px solid var(--line);">
+              <span class="chip">ANNUAL MANDATE</span>
+              <span class="chip" style="color:var(--orange); font-weight:700;">AMBASSADOR</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Work Grid Row 3 CTA Card (Fills Intentional Grid Asymmetry per Audit Issue 11) -->
+        <a href="#contact" data-route="contact" class="work-cta-void-card pixel-corner-frame" style="grid-column: span 2;">
+          <div class="work-cta-void-title">LOOKING FOR BESPOKE CAMPAIGN RECEIPTS?</div>
+          <div class="work-cta-void-desc">We have produced custom IP, multi-cam live broadcasts, and brand activations across 50+ tier-1 gaming titles. Transmit a brief →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VIEW 5: SUBPAGE /kick (The 48 Wall, Timeline, Press, Benefits)
+       ========================================================================== -->
+  <!-- ==========================================================================
+       VIEW 5: SUBPAGE /kick (The 48 Wall, Timeline, Press, Benefits — 60/40 Balanced)
+       ========================================================================== -->
+  <section id="view-kick" class="subpage-view bg-ink">
+    <div style="padding: var(--s16) 0 var(--s8);">
+      <div class="container">
+        <div class="section-tag" style="color:var(--orange);">08 / KICK PARTNERSHIP</div>
+        <h1 class="text-h1" style="color:var(--white);">
+          ONE STRATEGIC MANDATE. <span style="color:var(--kick-green);">48 CREATORS.</span> INDIA'S FIRST.
+        </h1>
+        <p style="font-size: 16px; color: var(--text-on-dark); max-width: 640px; margin-top: var(--s2);">
+          8Bit Creatives executed India's largest simultaneous live streaming migration, establishing Kick's official agency partner presence with a 95/5 creator split, multistreaming freedom, and verified day-one viewership.
+        </p>
+      </div>
+    </div>
+
+    <!-- Pixel Dissolve Accent Band -->
+    <div class="container" style="padding-top: var(--s8);">
+      <!-- Section 1: Three Audience Benefit Cards (Borderless + Pixel Corner) -->
+      <div class="grid-3-col" style="margin-bottom: var(--s12);">
+        <div class="card-v2 pixel-corner-frame" style="background:#1a1a1a; color:var(--cream); padding: var(--s6);">
+          <div style="font-family: var(--font-display); font-size: 18px; color: var(--white); margin-bottom: 6px;">FOR CREATORS</div>
+          <p style="font-size: 14px; color: var(--text-muted-dark); line-height: 1.6;">95/5 subscription revenue split. Unrestricted multistreaming freedom and instant day-one monetization.</p>
+        </div>
+        <div class="card-v2 pixel-corner-frame" style="background:#1a1a1a; color:var(--cream); padding: var(--s6);">
+          <div style="font-family: var(--font-display); font-size: 18px; color: var(--white); margin-bottom: 6px;">FOR BRANDS</div>
+          <p style="font-size: 14px; color: var(--text-muted-dark); line-height: 1.6;">High-engagement stream integrations, interactive custom overlays, and unscripted gaming-native storylines.</p>
+        </div>
+        <div class="card-v2 pixel-corner-frame" style="background:#1a1a1a; color:var(--cream); padding: var(--s6);">
+          <div style="font-family: var(--font-display); font-size: 18px; color: var(--white); margin-bottom: 6px;">FOR PLATFORMS</div>
+          <p style="font-size: 14px; color: var(--text-muted-dark); line-height: 1.6;">48 verified Indian performers unlocked via a single institutional master agreement with turnkey supply.</p>
+        </div>
+      </div>
+
+      <!-- Section 2: The 48 Streamer Portrait Wall with Category Filter -->
+      <div style="margin-bottom: var(--s12);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:var(--s4); margin-bottom:var(--s4);">
+          <div>
+            <h3 class="text-h2" style="color:var(--white); font-size: 24px;">DAY-ONE ROSTER</h3>
+          </div>
+          <div class="filter-bar-v2" style="background: rgba(26,26,26,0.92); border-color: rgba(255,255,255,0.1); margin-bottom:0; padding:0; backdrop-filter:none;">
+            <button class="filter-btn-v2 active" data-kick-filter="all">ALL (48)</button>
+            <button class="filter-btn-v2" data-kick-filter="bgmi">BGMI & ESPORTS</button>
+            <button class="filter-btn-v2" data-kick-filter="variety">VARIETY</button>
+            <button class="filter-btn-v2" data-kick-filter="gta rp">GTA RP</button>
+            <button class="filter-btn-v2" data-kick-filter="lifestyle">LIFESTYLE</button>
+          </div>
+        </div>
+        <div id="kick-48-wall" class="the-48-wall"></div>
+      </div>
+
+      <!-- Section 3: Timeline (Borderless + Pixel Corner) -->
+      <div style="margin-bottom: var(--s12);">
+        <h3 class="text-h2" style="color:var(--white); font-size: 24px; margin-bottom: var(--s4);">HOW IT CAME TOGETHER</h3>
+        <div class="grid-3-col">
+          <div class="pixel-corner-frame" style="background:#161616; padding:var(--s6); border-left: 3px solid var(--orange);">
+            <div style="font-family:var(--font-display); font-size:16px; color:var(--white); margin: 6px 0;">AGENCY PARTNERSHIP SIGNED</div>
+            <p style="font-size:13px; color: var(--text-muted-dark); line-height:1.5;">8Bit Creatives named official creator agency partner for India, establishing local streaming infrastructure.</p>
+          </div>
+          <div class="pixel-corner-frame" style="background:#161616; padding:var(--s6); border-left: 3px solid var(--kick-green);">
+            <div style="font-family:var(--font-display); font-size:16px; color:var(--white); margin: 6px 0;">48-CREATOR ONBOARDING</div>
+            <p style="font-size:13px; color: var(--text-muted-dark); line-height:1.5;">Simultaneous onboarding wave including Snax, Goblin, Mamba, and Viper seeding instant daily live viewership.</p>
+          </div>
+          <div class="pixel-corner-frame" style="background:#161616; padding:var(--s6); border-left: 3px solid var(--orange);">
+            <div style="font-family:var(--font-display); font-size:16px; color:var(--white); margin: 4px 0;">LOCALIZED BRAND HUBS</div>
+            <p style="font-size:13px; color: var(--text-muted-dark); line-height:1.5;">Executing custom live stream tournaments, sub gift matches, and enterprise brand sponsorships.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Press Quotes (Borderless + Pixel Corner) -->
+      <div style="margin-bottom: var(--s12);">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--s6);">
+          <div class="pixel-corner-frame" style="background:#1a1a1a; padding:var(--s6);">
+            <p style="font-size:14px; color: var(--text-on-dark); font-style:italic; line-height:1.6;">"8Bit Creatives becoming Kick's first creator agency in India validates their position at the center of the country's creator economy."</p>
+            <div style="margin-top:12px; font-size:12px; color:var(--orange); font-weight:700;">— ANIMATION XPRESS</div>
+          </div>
+          <div class="pixel-corner-frame" style="background:#1a1a1a; padding:var(--s6);">
+            <p style="font-size:14px; color: var(--text-on-dark); font-style:italic; line-height:1.6;">"The mass migration of 48 creators proves 8Bit controls authentic audience distribution across streaming platforms."</p>
+            <div style="margin-top:12px; font-size:12px; color:var(--orange); font-weight:700;">— MEDIANEWS4U</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; padding-bottom: var(--s12); display:flex; justify-content:center; gap:var(--s4); flex-wrap:wrap;">
+        <a href="#contact" data-route="contact" class="btn btn-primary">DISCUSS PLATFORM PARTNERSHIP →</a>
+        <a href="#work" data-route="work" class="btn btn-secondary-light">VIEW ALL CASE STUDIES</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VIEW 6: SUBPAGE /brands (The 5-Stage Playbook & Brand Solutions)
+       ========================================================================== -->
+  <section id="view-brands" class="subpage-view">
+    <div style="background:var(--ink); color:var(--cream); padding: var(--s16) 0 var(--s12); margin-bottom: var(--s8);">
+      <div class="container">
+        <div class="section-tag" style="color:var(--orange);">09 / FOR BRANDS</div>
+        <h1 class="text-h1">YOUR AUDIENCE IS IN THE GAME.</h1>
+        <p style="font-size: 16px; color: var(--text-on-dark); max-width: 580px; margin-top: var(--s2);">
+          500M+ Indian gamers. Traditional media cannot reach them. We build native creator integrations that drive measurable awareness, clicks, and conversions.
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- 4 Capability Pillars for Brands -->
+      <div style="margin-bottom: var(--s6);">
+        <h2 class="text-h2">HOW WE DELIVER VALUE</h2>
+      </div>
+
+      <div class="grid-4-col" style="margin-bottom: var(--s12);">
+        <div class="card-v2" style="padding: var(--s6);">
+          <h3 class="font-display" style="font-size: 18px; margin-bottom:4px;">INFLUENCER CAMPAIGNS</h3>
+          <p style="font-size:13px; color: var(--text-muted-light); line-height:1.5;">End-to-end multi-creator activations across YouTube, Instagram, and Kick with verified demographic targeting.</p>
+        </div>
+
+        <div class="card-v2" style="padding: var(--s6);">
+          <h3 class="font-display" style="font-size: 18px; margin-bottom:4px;">LIVE BROADCAST & PRODUCTION</h3>
+          <p style="font-size:13px; color: var(--text-muted-light); line-height:1.5;">Multi-camera broadcast production for sports and esports tournaments (e.g. Global Chess League S4).</p>
+        </div>
+
+        <div class="card-v2" style="padding: var(--s6);">
+          <h3 class="font-display" style="font-size: 18px; margin-bottom:4px;">"A BIT EXTRA" IP CREATION</h3>
+          <p style="font-size:13px; color: var(--text-muted-light); line-height:1.5;">Custom tournament properties, co-branded merchandise, LAN event activations, and interactive game modes.</p>
+        </div>
+
+        <div class="card-v2" style="padding: var(--s6);">
+          <h3 class="font-display" style="font-size: 18px; margin-bottom:4px;">LONG-TERM AMBASSADORSHIPS</h3>
+          <p style="font-size:13px; color: var(--text-muted-light); line-height:1.5;">Deep brand alignment positioning pro athletes alongside your core messaging (e.g. Monster Energy, iQOO).</p>
+        </div>
+      </div>
+
+      <!-- Interactive 5-Stage Playbook Stepper -->
+      <div style="margin-bottom: var(--s6);">
+        <h2 class="text-h2">5 STAGES TO VERIFIED ROI</h2>
+      </div>
+
+      <div class="playbook-interactive-container">
+        <!-- Left Navigation List -->
+        <div class="playbook-nav-list">
+          <div class="playbook-nav-item active" data-playbook-step="1">
+            <span class="playbook-nav-title">DISCOVER</span>
+            <span class="playbook-nav-num">01</span>
+          </div>
+          <div class="playbook-nav-item" data-playbook-step="2">
+            <span class="playbook-nav-title">MATCH</span>
+            <span class="playbook-nav-num">02</span>
+          </div>
+          <div class="playbook-nav-item" data-playbook-step="3">
+            <span class="playbook-nav-title">CREATE</span>
+            <span class="playbook-nav-num">03</span>
+          </div>
+          <div class="playbook-nav-item" data-playbook-step="4">
+            <span class="playbook-nav-title">AMPLIFY</span>
+            <span class="playbook-nav-num">04</span>
+          </div>
+          <div class="playbook-nav-item" data-playbook-step="5">
+            <span class="playbook-nav-title">MEASURE</span>
+            <span class="playbook-nav-num">05</span>
+          </div>
+        </div>
+
+        <!-- Right Content Panels -->
+        <div>
+          <!-- Panel 1 -->
+          <div class="playbook-panel active" id="playbook-panel-1">
+            <h3 class="font-display" style="font-size:22px; margin-bottom:var(--s3); color:var(--ink);">AUDIENCE INTELLIGENCE & GOAL MAPPING</h3>
+            <p style="font-size:14px; color: var(--text-muted-light); line-height:1.6; margin-bottom:var(--s4);">
+              We analyze brand objectives, target demographic age brackets, geographic density, and category dynamics to determine optimal gaming crossover angles.
+            </p>
+            <div style="background:var(--cream); padding:var(--s4); border:1px solid var(--line); margin-bottom:var(--s4);">
+              <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--ink); margin-bottom:4px;">KEY DELIVERABLES:</div>
+              <ul style="font-size:13px; color: var(--text-muted-light); padding-left:16px; margin:0; line-height:1.6;">
+                <li>Demographic alignment index (18–24 Tier-1/2 vs. 25–34 Metro)</li>
+                <li>Competitor share-of-voice gaming audit</li>
+                <li>Campaign KPI architecture (Awareness vs. Direct Conversions)</li>
+              </ul>
+            </div>
+            <span class="chip">OUTPUT: STRATEGIC CAMPAIGN CHARTER</span>
+          </div>
+
+          <!-- Panel 2 -->
+          <div class="playbook-panel" id="playbook-panel-2">
+            <h3 class="font-display" style="font-size:22px; margin-bottom:var(--s3); color:var(--ink);">DATA-DRIVEN TALENT CURATION</h3>
+            <p style="font-size:14px; color: var(--text-muted-light); line-height:1.6; margin-bottom:var(--s4);">
+              We curate the exact creator mix from our 50+ exclusive roster based on proven affinity scores, concurrent viewership retention, and brand safety records.
+            </p>
+            <div style="background:var(--cream); padding:var(--s4); border:1px solid var(--line); margin-bottom:var(--s4);">
+              <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--ink); margin-bottom:4px;">KEY DELIVERABLES:</div>
+              <ul style="font-size:13px; color: var(--text-muted-light); padding-left:16px; margin:0; line-height:1.6;">
+                <li>Custom creator squad roster with demographic breakdown</li>
+                <li>Guaranteed deliverable schedule (Streams, VODs, Reels, Posts)</li>
+                <li>Transparent enterprise rate cards & exclusivity guarantees</li>
+              </ul>
+            </div>
+            <span class="chip">OUTPUT: LOCKED SQUAD CONTRACT</span>
+          </div>
+
+          <!-- Panel 3 -->
+          <div class="playbook-panel" id="playbook-panel-3">
+            <h3 class="font-display" style="font-size:22px; margin-bottom:var(--s3); color:var(--ink);">GAMING-NATIVE UNSCRIPTED INTEGRATION</h3>
+            <p style="font-size:14px; color: var(--text-muted-light); line-height:1.6; margin-bottom:var(--s4);">
+              We develop unscripted storytelling, tournament custom matches, live product stress tests, and unboxings tailored to each creator's organic voice.
+            </p>
+            <div style="background:var(--cream); padding:var(--s4); border:1px solid var(--line); margin-bottom:var(--s4);">
+              <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--ink); margin-bottom:4px;">KEY DELIVERABLES:</div>
+              <ul style="font-size:13px; color: var(--text-muted-light); padding-left:16px; margin:0; line-height:1.6;">
+                <li>Custom tournament and scrim rulebooks (e.g. iQOO Flagship Drop)</li>
+                <li>Bespoke broadcast graphics and dynamic stream overlays</li>
+                <li>Direct creator briefing & brand safety compliance checks</li>
+              </ul>
+            </div>
+            <span class="chip">OUTPUT: LIVE ACTIVATION ASSETS</span>
+          </div>
+
+          <!-- Panel 4 -->
+          <div class="playbook-panel" id="playbook-panel-4">
+            <h3 class="font-display" style="font-size:22px; margin-bottom:var(--s3); color:var(--ink);">MULTI-PLATFORM CROSS-STREAM AMPLIFICATION</h3>
+            <p style="font-size:14px; color: var(--text-muted-light); line-height:1.6; margin-bottom:var(--s4);">
+              Synchronized rollout across YouTube Live, Kick streams, Instagram Reels, and community hubs to generate massive concentrated audience resonance.
+            </p>
+            <div style="background:var(--cream); padding:var(--s4); border:1px solid var(--line); margin-bottom:var(--s4);">
+              <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--ink); margin-bottom:4px;">KEY DELIVERABLES:</div>
+              <ul style="font-size:13px; color: var(--text-muted-light); padding-left:16px; margin:0; line-height:1.6;">
+                <li>Multi-creator simultaneous live stream waves</li>
+                <li>Community discord watch parties and chat giveaways</li>
+                <li>Clipped highlight syndication across short-form platforms</li>
+              </ul>
+            </div>
+            <span class="chip">OUTPUT: PEAK AUDIENCE CONCURRENCY</span>
+          </div>
+
+          <!-- Panel 5 -->
+          <div class="playbook-panel" id="playbook-panel-5">
+            <h3 class="font-display" style="font-size:22px; margin-bottom:var(--s3); color:var(--ink);">COMPREHENSIVE TELEMETRY & POST-CAMPAIGN RECEIPTS</h3>
+            <p style="font-size:14px; color: var(--text-muted-light); line-height:1.6; margin-bottom:var(--s4);">
+              Full transparency on campaign reach, watch time, concurrent peaks, coupon click-throughs, and cost-per-engagement breakdowns.
+            </p>
+            <div style="background:var(--cream); padding:var(--s4); border:1px solid var(--line); margin-bottom:var(--s4);">
+              <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--ink); margin-bottom:4px;">KEY DELIVERABLES:</div>
+              <ul style="font-size:13px; color: var(--text-muted-light); padding-left:16px; margin:0; line-height:1.6;">
+                <li>Real-time telemetry reports with platform API verification</li>
+                <li>Audience sentiment analysis & brand lift indicators</li>
+                <li>Direct attribution tracking (e.g. 96,000 product clicks for iQOO)</li>
+              </ul>
+            </div>
+            <span class="chip chip-gold">OUTPUT: VERIFIED ROI REPORT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand Partner Roster -->
+      <div style="margin-bottom: var(--s12); padding: var(--s8); background: var(--white);">
+        <h3 class="font-display" style="font-size: 20px; margin-bottom: var(--s4);">SOME OF OUR BRAND COLLABORATORS</h3>
+        <div style="display:flex; flex-wrap:wrap; gap: var(--s3); align-items:center;">
+          <span class="chip">SAMSUNG</span>
+          <span class="chip">ONEPLUS</span>
+          <span class="chip">iQOO</span>
+          <span class="chip">RED BULL</span>
+          <span class="chip">MONSTER ENERGY</span>
+          <span class="chip">LENOVO</span>
+          <span class="chip">AMD</span>
+          <span class="chip">LOGITECH</span>
+          <span class="chip">KRAFTON</span>
+          <span class="chip">RIOT GAMES</span>
+          <span class="chip">MAMAEARTH</span>
+          <span class="chip">NETFLIX</span>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-bottom: var(--s12);">
+        <a href="#contact" data-route="contact" class="btn btn-primary">START A CAMPAIGN BRIEF →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VIEW 7: SUBPAGE /creators (360° Representation & Growth)
+       ========================================================================== -->
+  <section id="view-creators" class="subpage-view">
+    <div style="background:var(--ink); color:var(--cream); padding: var(--s16) 0 var(--s12); margin-bottom: var(--s8);">
+      <div class="container">
+        <div class="section-tag" style="color:var(--orange);">10 / FOR CREATORS</div>
+        <h1 class="text-h1">YOU PLAY. WE BUILD THE EMPIRE.</h1>
+        <p style="font-size: 16px; color: var(--text-on-dark); max-width: 580px; margin-top: var(--s2);">
+          We handle brand deals, platform contracts, legal advocacy, and production so you can focus 100% on creating great content.
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div style="margin-bottom: var(--s6);">
+        <h2 class="text-h2">WHAT WE PROVIDE OUR ROSTER</h2>
+      </div>
+
+      <!-- 2-Pillar Editorial Layout -->
+      <div class="pillars-2col" style="margin-bottom: var(--s12);">
+        <!-- Column 1: Commercial & Legal Armour -->
+        <div class="pillar-card">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: var(--s4); color: var(--ink);">COMMERCIAL & LEGAL ARMOUR</h3>
+          <p style="font-size: 14px; color: var(--text-muted-light); line-height: 1.6; margin-bottom: var(--s6);">
+            Protecting your career value through institutional deal structuring, standard pricing power, and ironclad contract defense.
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:var(--s4);">
+            <div style="border-left:2px solid var(--orange); padding-left:var(--s3);">
+              <div style="font-family:var(--font-display); font-size:15px; font-weight:800; color:var(--ink);">TIER-1 BRAND DEALS</div>
+              <p style="font-size:13px; color: var(--text-muted-light); margin-top:2px;">Direct inbound campaigns from Samsung, OnePlus, Red Bull, and Monster with zero predatory middleman cuts.</p>
+            </div>
+            <div style="border-left:2px solid var(--orange); padding-left:var(--s3);">
+              <div style="font-family:var(--font-display); font-size:15px; font-weight:800; color:var(--ink);">LEGAL ADVOCACY & IP DEFENSE</div>
+              <p style="font-size:13px; color: var(--text-muted-light); margin-top:2px;">Complete legal scrutiny of endorsement agreements to protect your image rights, likeness, and intellectual property.</p>
+            </div>
+            <div style="border-left:2px solid var(--orange); padding-left:var(--s3);">
+              <div style="font-family:var(--font-display); font-size:15px; font-weight:800; color:var(--ink);">PLATFORM MONETIZATION & SPLITS</div>
+              <p style="font-size:13px; color: var(--text-muted-light); margin-top:2px;">Unlocking institutional terms like the Kick 95/5 sub split, multistreaming freedom, and guaranteed platform grants.</p>
+            </div>
+            <div style="border-left:2px solid var(--orange); padding-left:var(--s3);">
+              <div style="font-family:var(--font-display); font-size:15px; font-weight:800; color:var(--ink);">STRUCTURED BILLING & ON-TIME PAYOUTS</div>
+              <p style="font-size:13px; color: var(--text-muted-light); margin-top:2px;">Corporate financial management, standardized GST invoicing, and guaranteed payment timelines.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Production & Cultural Infrastructure -->
+        <div class="pillar-card">
+          <h3 class="font-display" style="font-size: 22px; margin-bottom: var(--s4); color: var(--ink);">PRODUCTION & CULTURAL REACH</h3>
+          <p style="font-size: 14px; color: var(--text-muted-light); line-height: 1.6; margin-bottom: var(--s6);">
+            World-class creator facilities, studio hardware, mainstream media access, and cross-pollination across India's largest gaming network.
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:var(--s4);">
+            <div style="border-left:2px solid var(--orange); padding-left:var(--s3);">
+              <div style="font-family:var(--font-display); font-size:15px; font-weight:800; color:var(--ink);">S8UL GAMING HOUSE 2.0 ACCESS</div>
+              <p style="font-size:13px; color: var(--text-muted-light); margin-top:2px;">Access to Mumbai's 15,000 sq. ft. creator hub housing 25+ resident creators producing 500M+ views monthly.</p>
+            </div>
+            <div style="border-left:2px solid var(--orange); padding-left:var(--s3);">
+              <div style="font-family:var(--font-display); font-size:15px; font-weight:800; color:var(--ink);">BROADCAST-GRADE STUDIOS & GEAR</div>
+              <p style="font-size:13px; color: var(--text-muted-light); margin-top:2px;">High-spec streaming suites, multi-camera stages, podcast lounges, motion capture, and editing support.</p>
+            </div>
+            <div style="border-left:2px solid var(--orange); padding-left:var(--s3);">
+              <div style="font-family:var(--font-display); font-size:15px; font-weight:800; color:var(--ink);">INSTITUTIONAL PR (MAX LEVEL)</div>
+              <p style="font-size:13px; color: var(--text-muted-light); margin-top:2px;">Dedicated public relations coverage across national newspapers, business outlets, and international awards.</p>
+            </div>
+            <div style="border-left:2px solid var(--orange); padding-left:var(--s3);">
+              <div style="font-family:var(--font-display); font-size:15px; font-weight:800; color:var(--ink);">100M+ COMMUNITY CROSS-OVER</div>
+              <p style="font-size:13px; color: var(--text-muted-light); margin-top:2px;">Organic collaborative streams and high-velocity crossover with Mortal, Scout, Payal, and Snax to accelerate growth.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Creator Representation Callout Strip -->
+      <div style="background:var(--white); padding:var(--s8); text-align:center; margin-bottom:var(--s12);">
+        <h3 class="font-display" style="font-size:22px; color:var(--ink); margin-bottom:var(--s2);">READY FOR INSTITUTIONAL MANAGEMENT?</h3>
+        <p style="font-size:14px; color: var(--text-muted-light); max-width:520px; margin:0 auto var(--s6);">
+          We evaluate new creators based on audience engagement, content consistency, and long-term brand potential.
+        </p>
+        <a href="#join" data-route="join" class="btn btn-primary">APPLY FOR 8BIT REPRESENTATION →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VIEW 8: SUBPAGE /platforms (Platform Migration & Localization)
+       ========================================================================== -->
+  <section id="view-platforms" class="subpage-view">
+    <div style="background:var(--ink); color:var(--cream); padding: var(--s16) 0 var(--s12); margin-bottom: var(--s8);">
+      <div class="container">
+        <div class="section-tag" style="color:var(--orange);">11 / FOR PLATFORMS</div>
+        <h1 class="text-h1">ONE STRATEGIC MANDATE. 50 CREATORS. INSTANT MARKET DOMINANCE.</h1>
+        <p style="font-size: 16px; color: var(--text-on-dark); max-width: 580px; margin-top: var(--s2);">
+          When live streaming and gaming platforms enter India, we provide turnkey creator supply, community seeding, and local operations.
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="split-layout-2col" style="margin-bottom: var(--s12);">
+        <!-- Left: Turnkey Capabilities -->
+        <div>
+          <h2 class="text-h2" style="font-size:26px; margin-bottom:var(--s6);">TURNKEY PLATFORM SUPPLY</h2>
+
+          <div style="display:flex; flex-direction:column; gap:var(--s6);">
+            <div class="card-v2" style="padding:var(--s6);">
+              <h3 class="font-display" style="font-size:18px; margin:4px 0 var(--s2);">MASS TALENT ONBOARDING</h3>
+              <p style="font-size:14px; color: var(--text-muted-light); line-height:1.6;">Contractually guaranteed multi-creator migrations of 10 to 50 creators on day one, seeding daily live viewership and community chatter.</p>
+            </div>
+
+            <div class="card-v2" style="padding:var(--s6);">
+              <h3 class="font-display" style="font-size:18px; margin:4px 0 var(--s2);">EXCLUSIVE PLATFORM TOURNAMENTS</h3>
+              <p style="font-size:14px; color: var(--text-muted-light); line-height:1.6;">Turnkey esports tournaments, showmatches, and invitationals produced and broadcast exclusively on your platform.</p>
+            </div>
+
+            <div class="card-v2" style="padding:var(--s6);">
+              <h3 class="font-display" style="font-size:18px; margin:4px 0 var(--s2);">COMMUNITY SEEDING & SUB HABITUATION</h3>
+              <p style="font-size:14px; color: var(--text-muted-light); line-height:1.6;">Driving organic fan migration into chat, establishing sub gifting habits, and building sustainable daily active user metrics.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Case Proof Sidebar -->
+        <div class="sidebar-sticky-box">
+          <h3 class="font-display" style="font-size:20px; color:var(--ink); margin-bottom:var(--s2);">KICK INDIA MARKET ENTRY</h3>
+          <p style="font-size:13px; color: var(--text-muted-light); line-height:1.5; margin-bottom:var(--s4);">
+            How 8Bit Creatives executed India's largest simultaneous streaming migration.
+          </p>
+
+          <div style="background:var(--ink); color:var(--cream); padding:var(--s4); margin-bottom:var(--s4);">
+            <div style="font-family:var(--font-display); font-size:32px; font-weight:900; color:var(--orange); line-height:1;">48</div>
+            <div style="font-family: var(--font-display); font-size: 14px; color: var(--text-muted-light); text-transform: none;">creators live on day one</div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:13px; color: var(--text-muted-light); margin-bottom:var(--s6);">
+            <div><span class="diamond diamond-gold"></span> <strong>500M+</strong> Total audience reach mobilized</div>
+            <div><span class="diamond diamond-gold"></span> <strong>12M+</strong> Hours watched in month one</div>
+            <div><span class="diamond diamond-gold"></span> <strong>95/5</strong> Subscription split implemented</div>
+            <div><span class="diamond diamond-gold"></span> <strong>100%</strong> On-time contract fulfillment</div>
+          </div>
+
+          <a href="#contact" data-route="contact" class="btn btn-primary" style="width:100%;">SUBMIT PLATFORM RFP →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VIEW 9: SUBPAGE /join (Roster Application Form with Sidebar Criteria)
+       ========================================================================== -->
+  <section id="view-join" class="subpage-view">
+    <div style="background:var(--ink); color:var(--cream); padding: var(--s16) 0 var(--s12); margin-bottom: var(--s8);">
+      <div class="container text-center" style="text-align: center;">
+        <div class="section-tag" style="color:var(--orange);">12 / JOIN THE ROSTER</div>
+        <h1 class="text-h1">JOIN THE 8BIT ROSTER.</h1>
+        <p style="font-size: 16px; color: var(--text-on-dark); max-width: 500px; margin: var(--s2) auto 0;">
+          Submit your creator channels and metrics for representation review by our talent directors.
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="split-layout-2col" style="margin-bottom: var(--s12);">
+        <!-- Left: Representation Criteria & Benefits -->
+        <div class="sidebar-sticky-box">
+          <h3 class="font-display" style="font-size: 20px; color: var(--ink); margin-bottom: var(--s2);">WHAT WE LOOK FOR</h3>
+          <p style="font-size: 13px; color: var(--text-muted-light); margin-bottom: var(--s4); line-height: 1.5;">
+            8Bit Creatives maintains an exclusive roster. We evaluate all incoming applications against standard benchmarks:
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:var(--s3); font-size:13px; color: var(--text-muted-light); margin-bottom:var(--s6);">
+            <div style="padding-left:12px; border-left:2px solid var(--orange);">
+              <strong>STREAMING CONSISTENCY:</strong><br>
+              <span style="color: var(--text-muted-light);">Minimum 15+ hours/week active live streaming cadence.</span>
+            </div>
+            <div style="padding-left:12px; border-left:2px solid var(--orange);">
+              <strong>AUDIENCE SCALE:</strong><br>
+              <span style="color: var(--text-muted-light);">Minimum 100K+ combined followers across YouTube, Kick, or Instagram.</span>
+            </div>
+            <div style="padding-left:12px; border-left:2px solid var(--orange);">
+              <strong>BRAND SAFETY:</strong><br>
+              <span style="color: var(--text-muted-light);">Positive community standing with no severe policy violations.</span>
+            </div>
+            <div style="padding-left:12px; border-left:2px solid var(--orange);">
+              <strong>EXCLUSIVE COMMITMENT:</strong><br>
+              <span style="color: var(--text-muted-light);">Exclusive commercial endorsement representation.</span>
+            </div>
+          </div>
+
+          <div style="background:var(--cream); padding:var(--s4); border:1px solid var(--line); font-size:12px; color: var(--text-muted-light); line-height:1.5;">
+            <strong>REVIEW TIMELINE:</strong> Applications are reviewed weekly by our talent directors. Selected creators will receive a formal invitation within 5 business days.
+          </div>
+        </div>
+
+        <!-- Right: Application Form -->
+        <form class="form-card-v2 ajax-contact-form" style="margin: 0;">
+          <h3 class="font-display" style="font-size: 18px; margin-bottom: var(--s4); color: var(--ink);">CREATOR APPLICATION FORM</h3>
+          
+          <div class="form-grid-2">
+            <div class="form-group-v2">
+              <label class="form-label-v2">Creator Handle <span class="req">*</span></label>
+              <input type="text" class="form-input-v2" required placeholder="e.g. ViperPlays">
+            </div>
+            <div class="form-group-v2">
+              <label class="form-label-v2">Full Legal Name <span class="req">*</span></label>
+              <input type="text" class="form-input-v2" required placeholder="e.g. Yash Soni">
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group-v2">
+              <label class="form-label-v2">Primary Channel URL <span class="req">*</span></label>
+              <input type="url" class="form-input-v2" required placeholder="https://youtube.com/@handle or kick.com/handle">
+            </div>
+            <div class="form-group-v2">
+              <label class="form-label-v2">Primary Category <span class="req">*</span></label>
+              <select class="form-select-v2" required>
+                <option value="">Select Category</option>
+                <option>BGMI & Mobile Esports</option>
+                <option>PC Esports (Valorant, CS2)</option>
+                <option>GTA RP & Story</option>
+                <option>Variety Gaming & Tech</option>
+                <option>Lifestyle & Vlogging</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group-v2">
+              <label class="form-label-v2">Total Reach / Followers <span class="req">*</span></label>
+              <input type="text" class="form-input-v2" required placeholder="e.g. 500K">
+            </div>
+            <div class="form-group-v2">
+              <label class="form-label-v2">Contact Email / Phone <span class="req">*</span></label>
+              <input type="text" class="form-input-v2" required placeholder="contact@creator.in">
+            </div>
+          </div>
+
+          <div class="form-group-v2">
+            <label class="form-label-v2">Why 8Bit Creatives?</label>
+            <textarea class="form-textarea-v2" placeholder="Tell us about your streaming schedule, career aspirations, and what you hope to achieve with 8Bit..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">SUBMIT APPLICATION →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VIEW 10: SUBPAGE /contact (Routed Contact Hub with Segmented Tabs)
+       ========================================================================== -->
+  <section id="view-contact" class="subpage-view">
+    <div style="background:var(--ink); color:var(--cream); padding: var(--s16) 0 var(--s12); margin-bottom: var(--s8);">
+      <div class="container text-center" style="text-align: center;">
+        <div class="section-tag" style="color:var(--orange);">13 / CONTACT</div>
+        <h1 class="text-h1">LET'S TALK.</h1>
+        <p style="font-size: 16px; color: var(--text-on-dark); max-width: 500px; margin: var(--s2) auto 0;">
+          Submit your campaign brief, RFP, or talent request. Our strategy directors respond within 24 hours.
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="split-layout-2col" style="margin-bottom: var(--s12);">
+        <!-- Left: Executive Contact Info Box -->
+        <div class="sidebar-sticky-box">
+          <h3 class="font-display" style="font-size: 20px; color: var(--ink); margin-bottom: var(--s2);">DIRECT AGENCY ACCESS</h3>
+          <p style="font-size: 13px; color: var(--text-muted-light); margin-bottom: var(--s4); line-height: 1.5;">
+            Enterprise brand managers, tournament organizers, and platform leads can connect directly with our partnership directors.
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:var(--s4); margin-bottom:var(--s6);">
+            <div class="info-card-v2" style="text-align:left; padding:var(--s3);">
+              <div style="font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase;">DIRECT INQUIRIES</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 2px;">business@8bitcreatives.in</div>
+            </div>
+            <div class="info-card-v2" style="text-align:left; padding:var(--s3);">
+              <div style="font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase;">RESPONSE TIME GUARANTEE</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 2px;">Within 24 Business Hours (SLA)</div>
+            </div>
+            <div class="info-card-v2" style="text-align:left; padding:var(--s3);">
+              <div style="font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase;">PRESS & MEDIA (MAX LEVEL)</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 2px;">press@8bitcreatives.in</div>
+            </div>
+            <div class="info-card-v2" style="text-align:left; padding:var(--s3);">
+              <div style="font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase;">HEADQUARTERS & STUDIOS</div>
+              <div style="font-size: 13px; font-weight: 600; color: var(--ink); margin-top: 2px;">S8UL House 2.0 · Mumbai, India</div>
+            </div>
+          </div>
+
+          <div style="background:var(--cream); padding:var(--s3); font-size:12px; color: var(--text-muted-light);">
+            <span class="diamond diamond-gold"></span> Fast-track your creator campaign by submitting the dedicated tab on the right.
+          </div>
+        </div>
+
+        <!-- Right: Segmented Contact Tabs -->
+        <div>
+          <!-- Contact Category Tabs -->
+          <div class="contact-tabs-bar" style="justify-content: flex-start; margin-bottom: var(--s4);">
+            <button class="contact-tab-btn active" data-contact-tab="brands">FOR BRANDS</button>
+            <button class="contact-tab-btn" data-contact-tab="broadcast">BROADCAST & RFP</button>
+            <button class="contact-tab-btn" data-contact-tab="creators">FOR CREATORS</button>
+            <button class="contact-tab-btn" data-contact-tab="platforms">FOR PLATFORMS</button>
+            <button class="contact-tab-btn" data-contact-tab="press">PRESS & MEDIA</button>
+          </div>
+
+          <!-- Tab 1: Brands Form -->
+          <div id="contact-tab-brands" class="contact-tab-pane active">
+            <form class="form-card-v2 ajax-contact-form" style="margin:0;">
+              <h3 class="font-display" style="font-size: 18px; margin-bottom: var(--s4); color: var(--ink);">SUBMIT BRAND CAMPAIGN BRIEF</h3>
+              
+              <div class="form-grid-2">
+                <div class="form-group-v2">
+                  <label class="form-label-v2">Contact Name <span class="req">*</span></label>
+                  <input type="text" class="form-input-v2" required placeholder="e.g. Rahul Sharma">
+                </div>
+                <div class="form-group-v2">
+                  <label class="form-label-v2">Brand / Agency <span class="req">*</span></label>
+                  <input type="text" class="form-input-v2" required placeholder="e.g. Samsung, Red Bull">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group-v2">
+                  <label class="form-label-v2">Work Email <span class="req">*</span></label>
+                  <input type="email" class="form-input-v2" required placeholder="rahul@company.com">
+                </div>
+                <div class="form-group-v2">
+                  <label class="form-label-v2">Campaign Budget <span class="req">*</span></label>
+                  <select class="form-select-v2" required>
+                    <option value="">Select Range</option>
+                    <option>₹10L – ₹25L</option>
+                    <option>₹25L – ₹50L</option>
+                    <option>₹50L – ₹1 Crore</option>
+                    <option>₹1 Crore+</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group-v2">
+                <label class="form-label-v2">Campaign Objective</label>
+                <textarea class="form-textarea-v2" placeholder="Describe product launch, timeline, target game titles, or creator preferences..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">TRANSMIT BRIEF →</button>
+            </form>
+          </div>
+
+          <!-- Tab 2: Broadcast RFP Form -->
+          <div id="contact-tab-broadcast" class="contact-tab-pane">
+            <form class="form-card-v2 ajax-contact-form" style="margin:0;">
+              <h3 class="font-display" style="font-size: 18px; margin-bottom: var(--s4); color: var(--ink);">BROADCAST & PRODUCTION RFP</h3>
+              
+              <div class="form-grid-2">
+                <div class="form-group-v2">
+                  <label class="form-label-v2">Organization Name <span class="req">*</span></label>
+                  <input type="text" class="form-input-v2" required placeholder="e.g. Tech Mahindra, Global League">
+                </div>
+                <div class="form-group-v2">
+                  <label class="form-label-v2">Official Email <span class="req">*</span></label>
+                  <input type="email" class="form-input-v2" required placeholder="event@org.com">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group-v2">
+                  <label class="form-label-v2">Event Title / Type <span class="req">*</span></label>
+                  <input type="text" class="form-input-v2" required placeholder="e.g. International Chess Tournament S4">
+                </div>
+                <div class="form-group-v2">
+                  <label class="form-label-v2">Broadcast Dates / Duration <span class="req">*</span></label>
+                  <input type="text" class="form-input-v2" required placeholder="e.g. 10 Days · Q4 2026">
+                </div>
+              </div>
+
+              <div class="form-group-v2">
+                <label class="form-label-v2">Technical Requirements</label>
+                <textarea class="form-textarea-v2" placeholder="Describe multi-cam studio needs, graphics, commentary desk, live telemetry feeds..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">TRANSMIT RFP →</button>
+            </form>
+          </div>
+
+          <!-- Tab 3: Creator Inquiry Tab -->
+          <div id="contact-tab-creators" class="contact-tab-pane">
+            <div class="form-card-v2" style="text-align: center; padding: var(--s8); margin:0;">
+              <h3 class="font-display" style="font-size: 20px; margin-bottom: var(--s2);">CREATOR SCOUTING PIPELINE</h3>
+              <p style="font-size: 14px; color: var(--text-muted-light); margin-bottom: var(--s6); line-height: 1.6;">
+                Looking for Full management — brand deals, legal, production, platform contracts, Kick representation, or brand sponsorships? Apply to join the roster — 3-min form.
+              </p>
+              <a href="#join" data-route="join" class="btn btn-primary">OPEN CREATOR APPLICATION FORM →</a>
+            </div>
+          </div>
+
+          <!-- Tab 4: Platform Partnership Tab -->
+          <div id="contact-tab-platforms" class="contact-tab-pane">
+            <form class="form-card-v2 ajax-contact-form" style="margin:0;">
+              <h3 class="font-display" style="font-size: 18px; margin-bottom: var(--s4); color: var(--ink);">PLATFORM PARTNERSHIP INQUIRY</h3>
+              
+              <div class="form-grid-2">
+                <div class="form-group-v2">
+                  <label class="form-label-v2">Platform Name <span class="req">*</span></label>
+                  <input type="text" class="form-input-v2" required placeholder="e.g. Streaming Hub">
+                </div>
+                <div class="form-group-v2">
+                  <label class="form-label-v2">Partnership Lead Email <span class="req">*</span></label>
+                  <input type="email" class="form-input-v2" required placeholder="lead@platform.com">
+                </div>
+              </div>
+
+              <div class="form-group-v2">
+                <label class="form-label-v2">Migration & Content Scope</label>
+                <textarea class="form-textarea-v2" placeholder="Describe desired creator volume, localization timeline, exclusivity requirements..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">TRANSMIT PLATFORM INQUIRY →</button>
+            </form>
+          </div>
+
+          <!-- Tab 5: Press Tab -->
+          <div id="contact-tab-press" class="contact-tab-pane">
+            <div class="form-card-v2" style="text-align: center; padding: var(--s8); margin:0;">
+              <h3 class="font-display" style="font-size: 20px; margin-bottom: var(--s2);">MAX LEVEL (AFK GAMING)</h3>
+              <p style="font-size: 14px; color: var(--text-muted-light); max-width: 500px; margin: 0 auto var(--s6); line-height: 1.6;">
+                For media inquiries, press interviews with founders (Animesh "Thug", Lokesh "Goldy", Naman "Mortal"), high-res brand assets, and official press releases.
+              </p>
+              <a href="mailto:press@8bitcreatives.in" class="btn btn-primary">CONTACT PRESS OFFICE (press@8bitcreatives.in)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Global Footer
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-wordmark-wrap">
+        <div class="footer-wordmark">
+          <span>8BIT</span> <span class="text-stroke-cream">CREATIVES</span>
+        </div>
+      </div>
+
+      <div class="footer-grid">
+        <div>
+          <div style="font-family: var(--font-display); font-size: 18px; margin-bottom: var(--s2);">#THEGAMINGAGENCY</div>
+          <p style="font-size: 13px; color: var(--text-muted-dark); max-width: 300px; margin-bottom: var(--s4);">
+            India's first gaming creator agency. Founded 2018 in a Mumbai LAN room. Part of the S8UL ecosystem — same house, same founders, same standard.
+          </p>
+          </div>
+
+        <div>
+          <div class="footer-col-title">NAVIGATION</div>
+          <ul class="footer-nav">
+            <li><a href="#about" data-route="about">About & Flywheel</a></li>
+            <li><a href="#talent" data-route="talent">Creator Roster</a></li>
+            <li><a href="#work" data-route="work">Case Studies</a></li>
+            <li><a href="#kick" data-route="kick">Kick Partnership</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">SERVICES</div>
+          <ul class="footer-nav">
+            <li><a href="#brands" data-route="brands">Influencer Campaigns</a></li>
+            <li><a href="#work" data-route="work">Live Sports Broadcast</a></li>
+            <li><a href="#creators" data-route="creators">Talent Management</a></li>
+            <li><a href="#platforms" data-route="platforms">Platform Partnerships</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">CONNECT</div>
+          <ul class="footer-nav">
+            <li><a href="https://in.linkedin.com/company/8bit-creatives" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+            <li><a href="https://instagram.com/8bit_creatives" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+            <li><a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+            <li><a href="#kick" data-route="kick"><i class="fas fa-bolt"></i> Kick</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div style="font-family: var(--font-display); font-size: 13px; color: var(--text-muted-dark); text-transform: none; letter-spacing: normal;">
+          50+ creators · 100M+ community · 300+ campaigns · est. 2018
+        </div>
+        <div>
+          Made for Indian gaming. — Thug, Goldy, Mortal. Mumbai, 2018→
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       Global Modal Dialog: Creator Profile Character Sheet
+       ========================================================================== -->
+  <div id="global-modal-backdrop" class="modal-backdrop">
+    <div class="modal-content">
+      <button id="global-modal-close" class="modal-close"><i class="fas fa-times"></i></button>
+      <div id="global-modal-container"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Global Modal Dialog: Deep-Dive Case Study Narrative
+       ========================================================================== -->
+  <div id="case-study-modal-backdrop" class="modal-backdrop">
+    <div class="modal-content">
+      <button id="case-study-modal-close" class="modal-close"><i class="fas fa-times"></i></button>
+      <div id="case-study-modal-container"></div>
+    </div>
+  </div>
+
+  
+  <!-- ==========================================================================
+       Global Modal Dialog: Reach Calculation Methodology (P2.1)
+       ========================================================================== -->
+  <div id="methodology-modal-backdrop" class="modal-backdrop">
+    <div class="modal-content" style="max-width: 680px;">
+      <button id="methodology-modal-close" class="modal-close" onclick="closeAllModals()"><i class="fas fa-times"></i></button>
+      <div style="background: var(--ink); color: var(--cream); padding: var(--s8);">
+        <h2 class="text-h2" style="color:var(--white);">HOW WE CALCULATE THE NUMBERS</h2>
+        <p style="font-size:13px; color:var(--text-muted-dark); margin-top:var(--s2);">Zero inflation. Audited quarterly against verified platform APIs.</p>
+      </div>
+      <div style="padding: var(--s8); background: var(--white);">
+        <div style="margin-bottom: var(--s6);">
+          <h4 class="font-display" style="font-size: 16px; color: var(--orange); margin-bottom: var(--s2);">100M+ COMBINED REACH</h4>
+          <p style="font-size: 14px; color: #555; line-height: 1.6;">
+            Sum of verified subscriber and follower counts across YouTube, Instagram, and Kick across all 50+ signed 8Bit talent. De-duplicated where cross-platform overlap can be estimated via audience polling data.
+          </p>
+        </div>
+        <div style="margin-bottom: var(--s6);">
+          <h4 class="font-display" style="font-size: 16px; color: var(--orange); margin-bottom: var(--s2);">3B+ ANNUAL VIEWS</h4>
+          <p style="font-size: 14px; color: #555; line-height: 1.6;">
+            Total video impressions, live broadcast watch hours, and short-form video views generated across exclusive roster channels over the preceding 12 calendar months.
+          </p>
+        </div>
+        <div style="margin-bottom: var(--s6);">
+          <h4 class="font-display" style="font-size: 16px; color: var(--orange); margin-bottom: var(--s2);">300+ EXECUTED CAMPAIGNS</h4>
+          <p style="font-size: 14px; color: #555; line-height: 1.6;">
+            Contracted commercial mandates delivered since 2018 across FMCG, consumer tech, smartphone OEMs, extreme sports, and gaming publisher activations.
+          </p>
+        </div>
+        <div style="text-align: center; padding-top: var(--s4); border-top: 1px solid var(--line);">
+          <button class="btn btn-primary" onclick="closeAllModals()">UNDERSTOOD</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pixel Soul Primitives Engine & App Script -->
+  <script src="scripts/pixel-soul.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

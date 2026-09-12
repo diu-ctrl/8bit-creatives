@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0A0A0A">
+  <title>Privacy Policy — 8Bit Creatives</title>
+  <meta name="description" content="This page explains how 8Bit Creatives handles personal data — what we collect, why we collect it, how long we keep it, and how you can ask us to change or delete it.">
+
+  <!-- Geist Font (Weights 300, 400, 500, 700) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="images-for-landing-page/logo_2.png">
+
+  <style>
+    /* ==========================================================================
+       privacy-policy.html Styles
+       Zero Uppercase · Strict Sans · No Orange · Soft Corners · Pure Dark #0A0A0A
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: #0A0A0A;
+    }
+
+    body {
+      background-color: #0A0A0A;
+      color: #FFFFFF;
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Fixed Back to Home Capsule */
+    .back-home {
+      position: fixed;
+      top: 40px;
+      left: 56px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px 8px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      border-radius: 100px;
+      background: transparent;
+      color: #FFFFFF;
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: -0.005em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 200ms ease-out, border-color 200ms ease-out, color 200ms ease-out;
+    }
+
+    .back-home__arrow {
+      display: inline-block;
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1;
+      transform: translateY(-1px);
+    }
+
+    @media (hover: hover) {
+      .back-home:hover {
+        background: #FFFFFF;
+        color: #0A0A0A;
+        border-color: #FFFFFF;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .back-home {
+        top: 58px;
+        left: 16px;
+      }
+    }
+
+    /* Reading Column Wrapper */
+    .policy-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 120px 0 120px;
+    }
+
+    @media (max-width: 1279px) {
+      .policy-wrapper {
+        max-width: 100%;
+        padding: 96px 56px 96px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .policy-wrapper {
+        padding: 88px 24px 88px;
+      }
+    }
+
+    /* Header Block */
+    .policy-header {
+      margin-bottom: 64px;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.60);
+      margin-bottom: 28px;
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, 0.60);
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    .breadcrumb a:hover {
+      color: #FFFFFF;
+    }
+
+    .breadcrumb__arrow {
+      opacity: 0.5;
+    }
+
+    .policy-title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 56px;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin: 0 0 24px 0;
+    }
+
+    .policy-intro {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0 0 20px 0;
+    }
+
+    .policy-updated {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.50);
+      margin: 0;
+    }
+
+    /* Sections */
+    .policy-section {
+      margin-bottom: 64px;
+    }
+
+    .policy-section:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 1279px) {
+      .policy-header,
+      .policy-section {
+        margin-bottom: 56px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .policy-header,
+      .policy-section {
+        margin-bottom: 48px;
+      }
+    }
+
+    .section-title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+      margin: 0 0 24px 0;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .section-body p {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0 0 16px 0;
+    }
+
+    .section-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .sub-heading {
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.95);
+      margin: 24px 0 12px 0;
+    }
+
+    .sub-heading:first-child {
+      margin-top: 0;
+    }
+
+    /* Em-Dash Bulleted List */
+    .policy-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+    }
+
+    .policy-list li {
+      display: flex;
+      align-items: baseline;
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: 6px;
+    }
+
+    .policy-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .policy-list .bullet {
+      flex-shrink: 0;
+      width: 22px;
+      color: rgba(255, 255, 255, 0.50);
+      user-select: none;
+    }
+
+    /* Contact Block in Section 13 */
+    .contact-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+
+    .contact-card p {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0 0 16px 0;
+    }
+
+    .contact-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-card strong {
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+
+    .contact-link {
+      color: #FFFFFF;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: opacity 150ms ease;
+    }
+
+    .contact-link:hover {
+      opacity: 0.8;
+    }
+
+    /* Mobile Text Sizing Adaptations */
+    @media (max-width: 767px) {
+      .policy-title {
+        font-size: 36px;
+      }
+      .policy-intro {
+        font-size: 16px;
+      }
+      .section-title {
+        font-size: 19px;
+      }
+      .section-body p,
+      .policy-list li,
+      .contact-card p {
+        font-size: 14px;
+      }
+      .sub-heading {
+        font-size: 14px;
+      }
+    }
+
+    /* ============================================================
+       Back to Top Button
+       ============================================================ */
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 48px;
+      height: 48px;
+      border-radius: 100px;
+      background: #0A0A0A;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(16px);
+      transition: opacity 400ms ease-out,
+                  visibility 0ms 400ms,
+                  transform 400ms ease-out,
+                  border-color 200ms ease-out;
+      padding: 0;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity 400ms ease-out,
+                  visibility 0ms 0ms,
+                  transform 400ms ease-out,
+                  border-color 200ms ease-out;
+    }
+
+    .back-to-top:hover {
+      border-color: rgba(255, 255, 255, 0.30);
+    }
+    .back-to-top:hover .back-to-top__arrow {
+      transform: translateY(-3px);
+      transition: transform 200ms ease-out;
+    }
+
+    .back-to-top__arrow {
+      width: 20px;
+      height: 20px;
+      color: rgba(255, 255, 255, 0.70);
+      transition: transform 200ms ease-out, opacity 150ms ease-out;
+      display: block;
+    }
+
+    .back-to-top.is-launching .back-to-top__arrow {
+      transform: translateY(-12px);
+      opacity: 0;
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 200ms ease-out;
+    }
+
+    @media (max-width: 767px) {
+      .back-to-top {
+        bottom: 12px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+      }
+      .back-to-top__arrow {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .back-to-top, .back-to-top__arrow { transition: none !important; }
+      .back-to-top.is-launching .back-to-top__arrow { transform: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Back to Home Capsule Pill -->
+  <a href="index.html" class="back-home" aria-label="Back to home">
+    <span class="back-home__arrow">←</span>
+    <span>back to home</span>
+  </a>
+
+  <!-- Centered Reading Column -->
+  <main class="policy-wrapper">
+
+    <!-- 1) HEADER BLOCK -->
+    <header class="policy-header">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__arrow">→</span>
+        <span style="color: #FFFFFF;">Privacy policy</span>
+      </nav>
+
+      <h1 class="policy-title">Privacy policy</h1>
+
+      <p class="policy-intro">We collect as little as we can, tell you what we do with it, and let you decide what stays. This page explains how 8Bit Creatives handles personal data — what we collect, why we collect it, how long we keep it, and how you can ask us to change or delete it. It applies to everyone who visits our website, fills out a form, applies to be a managed creator, or works with us as a client or partner.</p>
+
+      <p class="policy-updated">Last updated: September 2026</p>
+    </header>
+
+    <!-- 2) THIRTEEN NUMBERED SECTIONS -->
+
+    <!-- Section 01 -->
+    <section class="policy-section">
+      <h2 class="section-title">01 — About 8Bit Creatives and this policy</h2>
+      <div class="section-body">
+        <p>8Bit Creatives is a gaming creator agency based in India. We manage esports talent, produce campaigns for brands that want to reach India's gaming audience, and partner with platforms entering the country. This privacy policy applies to 8BitCreatives.com and to any personal data you share with us through the website, our forms, our email, or our offline work together. Under India's Digital Personal Data Protection Act, 2023 (the "DPDP Act"), 8Bit Creatives is the Data Fiduciary — the entity that decides why and how your personal data is processed. We're responsible for handling it carefully, and this page explains how.</p>
+      </div>
+    </section>
+
+    <!-- Section 02 -->
+    <section class="policy-section">
+      <h2 class="section-title">02 — Information we collect</h2>
+      <div class="section-body">
+        <h3 class="sub-heading">Directly from you, when you fill out a form or send us a message:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>Your name</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Your email address</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Your phone number (if you choose to share it)</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Your company or role (if you mention it)</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>The content of your message or enquiry</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Any documents you attach</span></li>
+        </ul>
+
+        <h3 class="sub-heading">When you apply to be a managed creator:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>Real name, date of birth, and address</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Government-issued ID (PAN, Aadhaar, or passport)</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Bank account details (for payments and contracts)</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Social media handles and links to your content</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Portfolio or reel links</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Professional references (if you provide them)</span></li>
+        </ul>
+
+        <h3 class="sub-heading">Automatically when you visit our website:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>Your IP address</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Browser type and version</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Device type (mobile, tablet, desktop)</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>The pages you visit and how long you stay</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>The website that referred you to us</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Approximate location (city-level, derived from IP)</span></li>
+        </ul>
+
+        <h3 class="sub-heading">From third parties, in limited cases:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>Public social media profiles of creators we manage or are evaluating</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Professional references you've authorized us to contact</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Public records needed for due diligence (e.g., company registration)</span></li>
+        </ul>
+
+        <p>We don't buy data from data brokers. We don't scrape data from social platforms. We don't profile you across other websites.</p>
+      </div>
+    </section>
+
+    <!-- Section 03 -->
+    <section class="policy-section">
+      <h2 class="section-title">03 — How we use your information</h2>
+      <div class="section-body">
+        <h3 class="sub-heading">We use your data for one of these reasons at a time:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>To respond to your enquiry when you contact us through the website or by email.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>To evaluate creator applications and decide whether to offer representation.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>To run and improve our website — what pages work, what forms are confusing, what devices people use.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>To send you updates and newsletters — but only if you've explicitly opted in. You can unsubscribe at any time.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>To fulfil contracts with creators, clients, and partners — including payments, deliverables, and tax records.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>To meet legal, tax, and regulatory obligations under Indian law.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>To protect against fraud, abuse, and security incidents.</span></li>
+        </ul>
+
+        <p>We do not use your personal data for advertising you across other websites. We do not sell your data, ever.</p>
+      </div>
+    </section>
+
+    <!-- Section 04 -->
+    <section class="policy-section">
+      <h2 class="section-title">04 — Legal basis for processing</h2>
+      <div class="section-body">
+        <h3 class="sub-heading">Under the DPDP Act, we process your personal data for one of these reasons:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>With your consent — when you fill out a form, apply for representation, or subscribe to the newsletter. You can withdraw consent at any time.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>For a contract — when we're working with you as a creator, client, or partner, and processing is necessary to fulfil that contract.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>For a legal obligation — when Indian tax, labour, or company law requires us to keep certain records.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>For a legitimate purpose — limited cases like protecting our website from fraud or responding to a security incident.</span></li>
+        </ul>
+
+        <p>We don't process your data for anything not listed here. If we ever need to, we'll ask for your consent first and update this policy.</p>
+      </div>
+    </section>
+
+    <!-- Section 05 -->
+    <section class="policy-section">
+      <h2 class="section-title">05 — Cookies and similar technologies</h2>
+      <div class="section-body">
+        <h3 class="sub-heading">Our website uses cookies and similar technologies in three categories:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>Essential cookies — the site doesn't work without them. They keep your session alive and remember your settings.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Analytics cookies — they help us understand which pages people read, where they drop off, and what devices they use. We use [Google Analytics / Plausible / Fathom — pick one before publishing] for this.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Optional cookies — they remember your newsletter preferences and form inputs.</span></li>
+        </ul>
+
+        <p>You can control cookies through your browser settings. Most browsers let you block all cookies, block third-party cookies only, or clear cookies when you close the browser. If you block essential cookies, some parts of the site won't work.</p>
+      </div>
+    </section>
+
+    <!-- Section 06 -->
+    <section class="policy-section">
+      <h2 class="section-title">06 — Sharing your information</h2>
+      <div class="section-body">
+        <h3 class="sub-heading">We share your personal data only in these cases:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>Service providers who help us run the business — our website host, email provider, analytics tool, accounting software, and contract management platform. They process your data under contract and can't use it for anything else.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Brand and platform partners when running a campaign that involves you as a managed creator — only with your written consent.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Legal authorities when Indian law requires us to respond to a valid request, court order, or regulatory inquiry.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Successors in a business transaction — if 8Bit is acquired or restructured, your data transfers to the new entity under the same protections.</span></li>
+        </ul>
+
+        <p>We never sell your data. We never share it for cross-context advertising. We never share it with social media platforms for ad targeting.</p>
+      </div>
+    </section>
+
+    <!-- Section 07 -->
+    <section class="policy-section">
+      <h2 class="section-title">07 — International transfers</h2>
+      <div class="section-body">
+        <p>8Bit is based in India and most of your data stays in India. Some of our service providers (web hosting, email, analytics) may process data in countries outside India — usually the United States or the European Union. When that happens, we work with providers that offer contractual safeguards equivalent to Indian requirements, and we limit what data they can access.</p>
+        <p>You can ask us which providers process your data outside India by writing to the grievance officer (see Section 13).</p>
+      </div>
+    </section>
+
+    <!-- Section 08 -->
+    <section class="policy-section">
+      <h2 class="section-title">08 — Data retention</h2>
+      <div class="section-body">
+        <h3 class="sub-heading">We keep your data only for as long as we need it:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>Contact form enquiries: 12 months from your last message.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Creator applications (not accepted): 24 months, or until you ask us to delete them.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Creator applications (accepted): the duration of our representation contract, plus 7 years for tax and legal records.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Newsletter subscribers: until you unsubscribe, plus 30 days for record-keeping.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Client and partner contracts: the duration of the contract, plus 7 years for tax records.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Analytics data: 26 months, then aggregated and de-identified.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Government IDs and bank details: only for active contracted creators; deleted within 30 days of contract end.</span></li>
+        </ul>
+
+        <p>When retention ends, we delete the data or de-identify it so it can't be linked back to you.</p>
+      </div>
+    </section>
+
+    <!-- Section 09 -->
+    <section class="policy-section">
+      <h2 class="section-title">09 — Your rights</h2>
+      <div class="section-body">
+        <h3 class="sub-heading">Under the DPDP Act, you have the right to:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>Access — ask what data we hold about you and get a copy.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Correction — ask us to fix inaccurate or incomplete data.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Erasure — ask us to delete your data, where we're legally allowed to.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Nomination — nominate someone to exercise your rights if you can't.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Grievance redressal — file a complaint with us, and if we don't resolve it, with the Data Protection Board of India.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Withdraw consent — at any time, for any processing based on your consent. Withdrawing consent doesn't affect anything we did before you withdrew.</span></li>
+        </ul>
+
+        <p>To use any of these rights, write to the grievance officer in Section 13. We'll respond within 30 days.</p>
+      </div>
+    </section>
+
+    <!-- Section 10 -->
+    <section class="policy-section">
+      <h2 class="section-title">10 — Security measures</h2>
+      <div class="section-body">
+        <h3 class="sub-heading">We take reasonable steps to protect your data:</h3>
+        <ul class="policy-list">
+          <li><span class="bullet" aria-hidden="true">—</span><span>HTTPS encryption across the whole website.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Access restricted to staff who need it for their role.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Passwords and credentials stored in a password manager, never in plain text.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Government IDs and bank details stored separately from other records, with restricted access.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Annual review of who has access to what.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>Staff trained on data handling when they join and refreshed yearly.</span></li>
+          <li><span class="bullet" aria-hidden="true">—</span><span>A breach response plan, with notification to affected users and the Data Protection Board of India within 72 hours of a notifiable breach.</span></li>
+        </ul>
+
+        <p>No system is perfectly secure. If something goes wrong, we'll tell you.</p>
+      </div>
+    </section>
+
+    <!-- Section 11 -->
+    <section class="policy-section">
+      <h2 class="section-title">11 — Children's data</h2>
+      <div class="section-body">
+        <p>Our website is not directed at anyone under 18. We don't knowingly collect personal data from anyone under 18. If you believe we've collected data from a minor — yours, or someone you're responsible for — write to the grievance officer and we'll delete it within 30 days.</p>
+      </div>
+    </section>
+
+    <!-- Section 12 -->
+    <section class="policy-section">
+      <h2 class="section-title">12 — Changes to this policy</h2>
+      <div class="section-body">
+        <p>We update this policy when our practices change, when the DPDP Act is updated, or when we add or remove a service that processes your data. When we update, we'll change the "Last updated" date at the top of this page. For material changes — a new use of your data, a new sharing partner, or a longer retention period — we'll also post a notice on the home page for 30 days.</p>
+        <p>If you've subscribed to the newsletter, we'll email you about material changes.</p>
+      </div>
+    </section>
+
+    <!-- Section 13 -->
+    <section class="policy-section">
+      <h2 class="section-title">13 — Contact and grievance officer</h2>
+      <div class="section-body">
+        <p>If you have any question about this policy, want to use one of your rights, or want to file a complaint, write to us.</p>
+
+        <div class="contact-card">
+          <p>
+            <strong>8Bit Creatives</strong><br>
+            [Registered address — to be filled in]<br>
+            Mumbai, India
+          </p>
+
+          <p>
+            <strong>Grievance officer:</strong> [Name — to be filled in]<br>
+            <strong>Email:</strong> <a href="mailto:privacy@8bitcreatives.com" class="contact-link">[privacy@8bitcreatives.com — to be confirmed]</a><br>
+            <strong>Phone:</strong> [optional — to be filled in]
+          </p>
+        </div>
+
+        <p>We'll respond within 30 days. If you're not satisfied with our response, you may also raise a complaint with the Data Protection Board of India under the Digital Personal Data Protection Act, 2023.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg class="back-to-top__arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script>
+  (function () {
+    var button = document.getElementById('backToTop');
+    if (!button) return;
+
+    var hero = document.querySelector('.policy-header');
+    var heroHeight = hero ? hero.offsetHeight : window.innerHeight;
+
+    function checkScroll() {
+      if (window.scrollY > heroHeight * 0.8) {
+        button.classList.add('is-visible');
+      } else {
+        button.classList.remove('is-visible');
+      }
+    }
+
+    var bttTicking = false;
+    window.addEventListener('scroll', function () {
+      if (!bttTicking) {
+        requestAnimationFrame(function () {
+          checkScroll();
+          bttTicking = false;
+        });
+        bttTicking = true;
+      }
+    }, { passive: true });
+    window.addEventListener('resize', function () {
+      heroHeight = hero ? hero.offsetHeight : window.innerHeight;
+      checkScroll();
+    }, { passive: true });
+    checkScroll();
+
+    function expoOut(t) {
+      return 1 - Math.pow(2, -10 * t);
+    }
+
+    function scrollToTop() {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      button.classList.add('is-launching');
+
+      if (window.lenis) {
+        window.lenis.scrollTo(0, {
+          duration: 0.8,
+          easing: expoOut,
+          onComplete: function () {
+            button.classList.remove('is-launching');
+            checkScroll();
+          }
+        });
+        return;
+      }
+
+      var startTime = null;
+      var startScroll = window.scrollY || window.pageYOffset;
+      var duration = 800;
+
+      var origScrollBehavior = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = 'auto';
+
+      function animate(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        var elapsed = currentTime - startTime;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = progress === 1 ? 1 : expoOut(progress);
+        window.scrollTo(0, Math.round(startScroll * (1 - eased)));
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          window.scrollTo(0, 0);
+          document.documentElement.style.scrollBehavior = origScrollBehavior;
+          button.classList.remove('is-launching');
+          checkScroll();
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      scrollToTop();
+    });
+  })();
+  </script>
+
+<!-- Lenis Smooth Scroll -->
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function () {
+  if (typeof Lenis === 'undefined') return;
+  var lenis = new Lenis({
+    duration: 1.2,           // smooth scroll duration — 1.2s feels natural
+    easing: function (t) {    // ease-out-expo for a natural deceleration
+      return Math.min(1, 1.001 - Math.pow(2, -10 * t));
+    },
+    smoothWheel: true,        // smooth mouse wheel scroll
+    smoothTouch: false,       // keep native touch scroll (smoother on mobile)
+    touchMultiplier: 1.5,
+  });
+  window.lenis = lenis;
+
+  // Sync with GSAP ScrollTrigger if present
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (time) {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    // No GSAP — use requestAnimationFrame
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }
+
+  // Respect reduced motion — disable Lenis smoothing if user prefers reduced motion
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    lenis.destroy();
+  }
+})();
+</script>
+</body>
+</html>

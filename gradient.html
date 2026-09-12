@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8Bit Creatives — Gradient</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      background: #0A0A0A;
+      font-family: 'Geist', system-ui, sans-serif;
+      color: #FFFFFF;
+      overflow-x: hidden;
+    }
+
+    /* ── Gradient canvas wrapper ──
+       This is the equivalent of the Velaris <div> in the React component.
+       It's a relative-positioned container with a fixed height. The <canvas>
+       inside fills it absolutely. Any content placed inside .gradient__content
+       sits above the canvas at z-index: 10. */
+    .gradient {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .gradient__canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: block;
+    }
+    .gradient__content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    /* ── Demo content styling (small label + title + subtitle) ──
+       These match the look of the React demo: a small bordered pill, a big
+       serif/sans title, and a muted subtitle. All Geist Sans, no orange text
+       (the orange lives inside the gradient itself). */
+    .gradient__pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+      letter-spacing: 0.01em;
+    }
+    .gradient__title {
+      max-width: 720px;
+      font-weight: 600;
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: #FFFFFF;
+    }
+    .gradient__title em {
+      font-style: italic;
+      font-weight: 300;
+      color: #FF5931;
+    }
+    .gradient__subtitle {
+      max-width: 540px;
+      font-weight: 300;
+      font-size: clamp(14px, 1.6vw, 18px);
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.70);
+    }
+
+    /* ── Reduced motion ──
+       The Velaris shader animates continuously. If the user has
+       prefers-reduced-motion set, we freeze the animation by stopping
+       the render loop. The last-rendered frame stays on the canvas. */
+    @media (prefers-reduced-motion: reduce) {
+      .gradient__canvas { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- The gradient section. Drop more content inside .gradient__content if you want. -->
+  <section class="gradient" aria-label="Animated gradient">
+
+    <!-- WebGL canvas — the Velaris shader renders into this -->
+    <canvas class="gradient__canvas" id="velarisCanvas" aria-hidden="true"></canvas>
+
+    <!-- Demo content, sitting above the canvas -->
+    <div class="gradient__content">
+      <span class="gradient__pill">Powered by WebGL</span>
+      <h1 class="gradient__title">Living gradients, <em>in motion</em>.</h1>
+      <p class="gradient__subtitle">An animated simplex-noise background with color blending, vignette glow, and film grain — running on the 8Bit palette.</p>
+    </div>
+
+  </section>
+
+  <script>
+  /* ============================================================
+     Velaris — vanilla JS port of the React component.
+     Same WebGL vertex + fragment shader, same uniforms, same
+     animation loop. The only differences:
+       • No React — pure DOM + requestAnimationFrame.
+       • Colors are passed as a plain JS array of hex strings.
+       • The canvas + container are queried by ID instead of refs.
+     ============================================================ */
+
+  (function () {
+    // ── Configuration — 8Bit color palette ──
+    // Original Velaris default: ["#86efac", "#4ade80", "#059669", "#000000"] (greens)
+    // 8Bit palette adapted for the gradient:
+    //   bg     = #0A0A0A  (near-black, the page background)
+    //   colors = warm amber → orange → deep orange → ink
+    //            (#FFB37A → #FC964B → #FF5931 → #141210)
+    // This keeps the orange inside the gradient (per the anti-list:
+    // no orange TEXT, but orange in the visual art is allowed — same
+    // convention used on the esports section and the India map).
+    var CONFIG = {
+      bg:       "#0A0A0A",
+      colors:   ["#FFB37A", "#FC964B", "#FF5931", "#141210"],
+      speed:    1.4,         // slower than the default 2.0 — calmer
+      grain:    0.25,        // subtle film grain (default 0.3)
+      height:   "100vh"
+    };
+
+    // ── Shaders (copied verbatim from the Velaris component) ──
+    var VERTEX_SHADER = `
+attribute vec2 position;
+varying vec2 vUv;
+void main() {
+  vUv = position * 0.5 + 0.5;
+  gl_Position = vec4(position, 0.0, 1.0);
+}`;
+
+    var FRAGMENT_SHADER = `
+precision highp float;
+varying vec2 vUv;
+
+uniform vec2  u_resolution;
+uniform float u_time;
+uniform float u_grain;
+uniform vec3  u_colors[4];
+uniform vec3  u_bg;
+
+vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+
+float snoise(vec2 v){
+  const vec4 C = vec4(0.211324865405187, 0.366025403784439,
+           -0.577350269189626, 0.024390243902439);
+  vec2 i  = floor(v + dot(v, C.yy) );
+  vec2 x0 = v -   i + dot(i, C.xx);
+  vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+  vec4 x12 = x0.xyxy + C.xxzz;
+  x12.xy -= i1;
+  i = mod(i, 289.0);
+  vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
+  + i.x + vec3(0.0, i1.x, 1.0 ));
+  vec3 m = max(0.5 - vec3(dot(x0,x0), dot(x12.xy,x12.xy),
+    dot(x12.zw,x12.zw)), 0.0);
+  m = m*m ;
+  m = m*m ;
+  vec3 x = 2.0 * fract(p * C.www) - 1.0;
+  vec3 h = abs(x) - 0.5;
+  vec3 ox = floor(x + 0.5);
+  vec3 a0 = x - ox;
+  m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
+  vec3 g;
+  g.x  = a0.x  * x0.x  + h.x  * x0.y;
+  g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+  return 130.0 * dot(m, g);
+}
+
+void main() {
+  vec2 uv = vUv;
+  float ratio = u_resolution.x / u_resolution.y;
+  vec2 p = uv - 0.5;
+  p.x *= ratio;
+
+  float t = u_time * 0.1;
+
+  float n1 = snoise(p * 0.4 + vec2(t * 0.2, -t * 0.3));
+  float n2 = snoise(p * 0.55 + vec2(-t * 0.15, t * 0.25) + n1 * 0.25);
+  float n3 = snoise(p * 0.75 + vec2(t * 0.1, -t * 0.2) + n2 * 0.2);
+
+  vec3 col = u_bg;
+
+  float dist = length(p) * 1.5;
+  float vignette = 1.0 - smoothstep(0.3, 1.2, dist);
+
+  col = mix(col, u_colors[0], smoothstep(-0.2, 0.5, n1) * 0.85);
+  col = mix(col, u_colors[1], smoothstep(-0.1, 0.6, n2) * 0.7);
+  col = mix(col, u_colors[2], smoothstep(-0.3, 0.4, n3) * 0.6);
+  col = mix(col, u_colors[3], smoothstep(0.0, 0.7, n1 * n2) * 0.5);
+
+  float glow = smoothstep(0.8, 0.0, dist) * 0.3;
+  col += u_colors[1] * glow;
+
+  col = mix(col * 0.2, col, vignette);
+
+  float grain = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453 + u_time);
+  col += (grain - 0.5) * u_grain * 0.1;
+
+  gl_FragColor = vec4(col, 1.0);
+}`;
+
+    // ── Helpers ──
+    function hexToRgb(hex) {
+      var h = hex.replace("#", "");
+      return [
+        parseInt(h.slice(0, 2), 16) / 255,
+        parseInt(h.slice(2, 4), 16) / 255,
+        parseInt(h.slice(4, 6), 16) / 255
+      ];
+    }
+
+    function createShader(gl, type, src) {
+      var s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.error("Shader compile error:", gl.getShaderInfoLog(s));
+        gl.deleteShader(s);
+        return null;
+      }
+      return s;
+    }
+
+    // ── Init WebGL ──
+    var canvas = document.getElementById("velarisCanvas");
+    var container = canvas.parentElement;
+
+    var gl = canvas.getContext("webgl", { antialias: true, premultipliedAlpha: false });
+    if (!gl) {
+      console.error("WebGL not supported — gradient will be blank.");
+      return;
+    }
+
+    var vs = createShader(gl, gl.VERTEX_SHADER, VERTEX_SHADER);
+    var fs = createShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_SHADER);
+    var program = gl.createProgram();
+    gl.attachShader(program, vs);
+    gl.attachShader(program, fs);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      console.error("Program link error:", gl.getProgramInfoLog(program));
+      return;
+    }
+    gl.useProgram(program);
+
+    // Full-screen quad (two triangles forming a rectangle)
+    var buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+      gl.STATIC_DRAW
+    );
+
+    var posLoc = gl.getAttribLocation(program, "position");
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    // Uniform locations
+    var uRes   = gl.getUniformLocation(program, "u_resolution");
+    var uTime  = gl.getUniformLocation(program, "u_time");
+    var uGrain = gl.getUniformLocation(program, "u_grain");
+    var uCols  = gl.getUniformLocation(program, "u_colors");
+    var uBg    = gl.getUniformLocation(program, "u_bg");
+
+    // ── Resize handler (DPR-aware, like the React version) ──
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = container.clientWidth;
+      var h = container.clientHeight;
+      canvas.width  = w * dpr;
+      canvas.height = h * dpr;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    resize();
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(resize);
+      ro.observe(container);
+    } else {
+      window.addEventListener("resize", resize, { passive: true });
+    }
+
+    // ── Color uniform setup (4 colors × 3 channels = 12 floats) ──
+    var flatColors = new Float32Array(
+      CONFIG.colors.slice(0, 4).reduce(function (acc, hex) {
+        return acc.concat(hexToRgb(hex));
+      }, [])
+    );
+
+    var bgRgb = hexToRgb(CONFIG.bg);
+
+    // ── Render loop ──
+    var prefersReduced = window.matchMedia &&
+                         window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var raf;
+    function render(t) {
+      gl.uniform2f(uRes, canvas.width, canvas.height);
+      gl.uniform1f(uTime, (t || 0) * 0.001 * CONFIG.speed);
+      gl.uniform1f(uGrain, CONFIG.grain);
+      gl.uniform3f(uBg, bgRgb[0], bgRgb[1], bgRgb[2]);
+      gl.uniform3fv(uCols, flatColors);
+
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+      if (!prefersReduced) {
+        raf = requestAnimationFrame(render);
+      }
+    }
+
+    // Render one frame immediately (so reduced-motion users see something),
+    // then start the loop if motion is allowed.
+    render(0);
+    if (!prefersReduced) {
+      raf = requestAnimationFrame(render);
+    }
+
+    // Cleanup on page hide (keep things tidy)
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden && raf) {
+        cancelAnimationFrame(raf);
+        raf = null;
+      } else if (!document.hidden && !raf && !prefersReduced) {
+        raf = requestAnimationFrame(render);
+      }
+    });
+  })();
+  </script>
+
+</body>
+</html>

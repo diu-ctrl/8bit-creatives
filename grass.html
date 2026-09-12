@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grass</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+  }
+  body { position: relative; min-height: 100vh; }
+  .grass-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 160px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .grass-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+  .grass-container::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(to top, rgba(58, 106, 2, 0.5), transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
+  @keyframes grass-sway {
+    0%   { transform: rotate(var(--sway-min, -5deg)); }
+    50%  { transform: rotate(var(--sway-max, 5deg)); }
+    100% { transform: rotate(var(--sway-min, -5deg)); }
+  }
+  @-webkit-keyframes grass-sway {
+    0%   { -webkit-transform: rotate(var(--sway-min, -5deg)); }
+    50%  { -webkit-transform: rotate(var(--sway-max, 5deg)); }
+    100% { -webkit-transform: rotate(var(--sway-min, -5deg)); }
+  }
+  .grass-blade {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    -webkit-transform-origin: 50% 100%;
+    animation: grass-sway var(--sway-duration) ease-in-out infinite;
+    -webkit-animation: grass-sway var(--sway-duration) ease-in-out infinite;
+    animation-delay: var(--sway-delay);
+    -webkit-animation-delay: var(--sway-delay);
+    will-change: transform;
+  }
+</style>
+</head>
+<body>
+  <div class="grass-container">
+    <svg class="grass-svg" viewBox="0 0 1200 160" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="bladeGradDark" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#2a4a01"/>
+          <stop offset="50%" stop-color="#3a6a02"/>
+          <stop offset="100%" stop-color="#5a9a08"/>
+        </linearGradient>
+        <linearGradient id="bladeGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#4A8502"/>
+          <stop offset="40%" stop-color="#76C60F"/>
+          <stop offset="100%" stop-color="#A8E625"/>
+        </linearGradient>
+        <linearGradient id="bladeGradLight" x1="0%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#5a9a08"/>
+          <stop offset="40%" stop-color="#84D418"/>
+          <stop offset="100%" stop-color="#C5F04A"/>
+        </linearGradient>
+      </defs>
+      <g id="grass-blades"></g>
+    </svg>
+  </div>
+
+<script>
+(function() {
+  const bladesGroup = document.getElementById('grass-blades');
+  if (!bladesGroup) return;
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+
+  const VIEW_W = 1200;
+  const BASELINE = 160;
+  const MIN_W = 3;
+  const MAX_W = 7;
+
+  let seed = 42;
+  function rand() {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  }
+  function randRange(min, max) { return min + rand() * (max - min); }
+
+  function bladePath(x, h, w, curve, bend) {
+    const baseY = BASELINE;
+    const tipY = BASELINE - h;
+    const halfW = w / 2;
+    const blX = x - halfW, brX = x + halfW;
+    const tipX = x + curve;
+    const midY = baseY - h * 0.5;
+    const ctrl1X = blX + bend;
+    const ctrl2X = tipX - bend * 0.6;
+    const ctrl3X = brX + bend;
+    const ctrl4X = tipX + bend * 0.6;
+    return `M ${blX.toFixed(2)} ${baseY.toFixed(2)}
+            C ${ctrl1X.toFixed(2)} ${midY.toFixed(2)}, ${ctrl2X.toFixed(2)} ${(tipY + h * 0.2).toFixed(2)}, ${tipX.toFixed(2)} ${tipY.toFixed(2)}
+            C ${ctrl4X.toFixed(2)} ${(tipY + h * 0.2).toFixed(2)}, ${ctrl3X.toFixed(2)} ${midY.toFixed(2)}, ${brX.toFixed(2)} ${baseY.toFixed(2)}
+            Z`;
+  }
+
+  const layers = [
+    { count: 200, minH: 30, maxH: 90,  minSway: 3.5, maxSway: 6.0, opacityRange: [0.7, 0.85], grad: 'url(#bladeGradDark)' },
+    { count: 200, minH: 40, maxH: 110, minSway: 2.5, maxSway: 4.5, opacityRange: [0.85, 1.0], grad: 'url(#bladeGrad)' },
+    { count: 200, minH: 50, maxH: 120, minSway: 2.0, maxSway: 3.5, opacityRange: [0.95, 1.0], grad: 'url(#bladeGradLight)' }
+  ];
+
+  let layerIndex = 0;
+  for (const layer of layers) {
+    const g = document.createElementNS(SVG_NS, 'g');
+    g.setAttribute('id', `grass-layer-${layerIndex}`);
+    let layerSvg = '';
+    for (let i = 0; i < layer.count; i++) {
+      const x = rand() * VIEW_W;
+      const h = randRange(layer.minH, layer.maxH);
+      const w = randRange(MIN_W, MAX_W);
+      const curve = randRange(-10, 10);
+      const bend = randRange(-6, 6);
+      const baseRotation = randRange(-15, 15);
+      const swayMin = baseRotation - randRange(3, 8);
+      const swayMax = baseRotation + randRange(3, 8);
+      const swayDuration = randRange(layer.minSway, layer.maxSway).toFixed(2) + 's';
+      const swayDelay = randRange(0, 3.0).toFixed(2) + 's';
+      const opacity = randRange(layer.opacityRange[0], layer.opacityRange[1]);
+      const d = bladePath(x, h, w, curve, bend);
+      const style = `--sway-min: ${swayMin.toFixed(2)}deg; --sway-max: ${swayMax.toFixed(2)}deg; --sway-duration: ${swayDuration}; --sway-delay: ${swayDelay};`;
+      layerSvg += `<path class="grass-blade" d="${d}" fill="${layer.grad}" opacity="${opacity.toFixed(2)}" style="${style}"/>`;
+    }
+    g.innerHTML = layerSvg;
+    bladesGroup.appendChild(g);
+    layerIndex++;
+  }
+})();
+</script>
+</body>
+</html>

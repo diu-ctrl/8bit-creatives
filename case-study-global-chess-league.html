@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>Global Chess League S4 — Case Study — 8Bit Creatives</title>
+  <meta name="description" content="Case study: How 8Bit Creatives served as the Official Broadcast & Production Agency for the Global Chess League S4, making chess watchable as an esports spectacle for 12M+ viewers.">
+
+  <!-- Geist Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="images-for-landing-page/logo_2.png">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ═══ Reset & Foundations ═══ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    body {
+      background-color: #0A0A0A;
+      color: #FFFFFF;
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ═══ Scroll Progress Bar (Top) ═══ */
+    .scroll-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: #FFFFFF;
+      width: 0%;
+      z-index: 1001;
+      transition: width 80ms linear;
+      pointer-events: none;
+    }
+
+    /* ═══ Back to Home Capsule ═══ */
+    .back-home {
+      position: fixed;
+      top: 40px;
+      left: 56px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+    }
+
+    .back-home:hover {
+      background: #FFFFFF;
+      color: #0A0A0A;
+      border-color: #FFFFFF;
+    }
+
+    .back-home__arrow {
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    /* ═══ Sticky Chapter Index (Desktop) ═══ */
+    .chapter-nav {
+      position: fixed;
+      left: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 16px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      transition: opacity 300ms ease;
+    }
+
+    .chapter-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.35);
+      font-size: 12px;
+      font-weight: 400;
+      transition: color 180ms ease;
+      padding: 2px 0;
+    }
+
+    .chapter-nav-num {
+      font-size: 11px;
+      opacity: 0.7;
+      min-width: 18px;
+    }
+
+    .chapter-nav-label {
+      opacity: 0;
+      max-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: opacity 200ms ease, max-width 200ms ease;
+    }
+
+    .chapter-nav:hover .chapter-nav-label,
+    .chapter-nav-item.is-active .chapter-nav-label {
+      opacity: 1;
+      max-width: 120px;
+    }
+
+    .chapter-nav-item:hover,
+    .chapter-nav-item.is-active {
+      color: #FFFFFF;
+    }
+
+    .chapter-nav-item.is-active .chapter-nav-num {
+      opacity: 1;
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    @media (max-width: 1279px) {
+      .chapter-nav {
+        display: none;
+      }
+    }
+
+    /* ═══ Layout Containers ═══ */
+    .case-wrapper {
+      position: relative;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .reading-col {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+
+    .wide-col {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+
+    /* ═══ Section Base ═══ */
+    .case-section {
+      padding: 64px 0;
+      position: relative;
+    }
+
+    .case-section-header {
+      margin-bottom: 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 14px;
+    }
+
+    .case-section-title {
+      font-size: 22px;
+      font-weight: 400;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+      text-transform: none;
+    }
+
+    .case-p {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .case-p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ═══ 1. HERO ═══ */
+    .case-hero {
+      padding: 160px 0 80px 0;
+      text-align: center;
+    }
+
+    .case-hero-h1 {
+      font-size: clamp(38px, 5.5vw, 56px);
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      text-transform: none;
+    }
+
+    .case-hero-sub {
+      font-size: clamp(17px, 2.2vw, 20px);
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.5;
+      max-width: 680px;
+      margin: 0 auto 28px auto;
+      text-transform: none;
+    }
+
+    .case-meta-row {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      padding: 8px 24px;
+      margin-bottom: 48px;
+    }
+
+    .case-meta-divider {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ═══ Placeholders ═══ */
+    .case-placeholder-image {
+      width: 100%;
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #FFFFFF;
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: clamp(22px, 3.5vw, 32px);
+      letter-spacing: -0.01em;
+      padding: 48px 24px;
+      min-height: 440px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-placeholder-image.compact {
+      min-height: 300px;
+      font-size: clamp(18px, 2.5vw, 24px);
+    }
+
+    /* ═══ 4. APPROACH (Three Pillars) ═══ */
+    .pillar-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .pillar-card {
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 24px 28px;
+    }
+
+    .pillar-card-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .pillar-card-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.6;
+    }
+
+    /* ═══ 5. SOLUTION (Modular Blocks) ═══ */
+    .pull-quote {
+      background: #111111;
+      border-left: 2px solid rgba(255, 255, 255, 0.35);
+      border-radius: 0 14px 14px 0;
+      padding: 28px 32px;
+      margin: 36px 0;
+      font-size: clamp(17px, 2.2vw, 20px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.6;
+      color: #FFFFFF;
+    }
+
+    .pull-quote-author {
+      display: block;
+      margin-top: 14px;
+      font-size: 13px;
+      font-style: normal;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .stat-callout {
+      background: #161616;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 18px 24px;
+      margin: 32px 0;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+      color: #FFFFFF;
+      letter-spacing: 0.02em;
+    }
+
+    /* ═══ 6. DELIVERABLES ═══ */
+    .deliverables-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .deliverable-card {
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .deliverable-info {
+      flex: 1;
+    }
+
+    .deliverable-num {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 2px;
+    }
+
+    .deliverable-heading {
+      font-size: 15px;
+      font-weight: 500;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+
+    .deliverable-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.5;
+    }
+
+    .deliverable-pill-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .deliverable-pill {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      padding: 3px 12px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      white-space: nowrap;
+    }
+
+    /* ═══ 7. OUTCOMES ═══ */
+    .stat-ribbon {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin: 32px 0 36px 0;
+    }
+
+    .stat-ribbon-card {
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 24px 16px;
+      text-align: center;
+    }
+
+    .stat-ribbon-val {
+      font-size: clamp(26px, 3vw, 34px);
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .stat-ribbon-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    /* ═══ 8. TESTIMONIAL ═══ */
+    .testimonial-card {
+      background: #111111;
+      border-left: 2px solid rgba(255, 255, 255, 0.35);
+      border-radius: 0 14px 14px 0;
+      padding: 36px 32px;
+      margin-top: 24px;
+    }
+
+    .testimonial-quote {
+      font-size: clamp(18px, 2.4vw, 22px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.6;
+      color: #FFFFFF;
+      margin-bottom: 18px;
+    }
+
+    .testimonial-author {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 400;
+    }
+
+    /* ═══ 9. CREDITS ═══ */
+    .credits-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .credit-row {
+      display: flex;
+      align-items: baseline;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .credit-label {
+      width: 180px;
+      flex-shrink: 0;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 400;
+    }
+
+    .credit-value {
+      color: #FFFFFF;
+      font-weight: 300;
+    }
+
+    /* ═══ RAILS: Next & Related Projects ═══ */
+    .case-rails-section {
+      padding: 80px 0 100px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 60px;
+    }
+
+    .next-project-card {
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      text-decoration: none;
+      color: #FFFFFF;
+      margin-bottom: 64px;
+      transition: border-color 200ms ease, background 200ms ease;
+    }
+
+    .next-project-card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: #141414;
+    }
+
+    .next-project-thumb {
+      width: 200px;
+      height: 110px;
+      background: #000000;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .next-project-info {
+      flex: 1;
+    }
+
+    .next-project-tag {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 4px;
+    }
+
+    .next-project-title {
+      font-size: 22px;
+      font-weight: 500;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .next-project-link {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .related-title {
+      font-size: 18px;
+      font-weight: 400;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .related-card {
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 200ms ease, background 200ms ease;
+    }
+
+    .related-card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: #141414;
+    }
+
+    .related-thumb {
+      width: 100%;
+      height: 140px;
+      background: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .related-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .related-card-tag {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 4px;
+    }
+
+    .related-card-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+    }
+
+    .related-card-link {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ═══ CTA SECTION ═══ */
+    .case-cta {
+      padding: 100px 24px;
+      text-align: center;
+      background: #0A0A0A;
+    }
+
+    .case-cta-h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+      text-transform: none;
+    }
+
+    .case-cta-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.65);
+      max-width: 540px;
+      margin: 0 auto 32px auto;
+      line-height: 1.6;
+    }
+
+    /* Scrim gradient — black to transparent over a white base (#0A0A0A to #FFFFFF) */
+    .section-transition {
+      width: 100%;
+      height: 180px;
+      background-color: #FFFFFF;
+      background-image: linear-gradient(to bottom,
+        rgba(10, 10, 10, 1)     0%,
+        rgba(10, 10, 10, 0.738) 19%,
+        rgba(10, 10, 10, 0.541) 34%,
+        rgba(10, 10, 10, 0.382) 47%,
+        rgba(10, 10, 10, 0.278) 56.5%,
+        rgba(10, 10, 10, 0.194) 65%,
+        rgba(10, 10, 10, 0.126) 73%,
+        rgba(10, 10, 10, 0.075) 80.2%,
+        rgba(10, 10, 10, 0.042) 86.1%,
+        rgba(10, 10, 10, 0.021) 91%,
+        rgba(10, 10, 10, 0.008) 95.2%,
+        rgba(10, 10, 10, 0.002) 98.2%,
+        rgba(10, 10, 10, 0)     100%
+      );
+      margin: 0 0 -1px 0;
+      padding: 0;
+      border: none;
+      pointer-events: none;
+    }
+
+    /* ═══ Responsive Adjustments ═══ */
+    @media (max-width: 1024px) {
+      .stat-ribbon {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .related-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .back-home {
+        top: 58px;
+        left: 16px;
+        padding: 6px 14px;
+        font-size: 12px;
+      }
+      .case-hero {
+        padding: 120px 0 60px 0;
+      }
+      .stat-ribbon {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .deliverable-card {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .deliverable-pill-group {
+        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .credit-row {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .credit-label {
+        width: 100%;
+      }
+      .next-project-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .next-project-thumb {
+        width: 100%;
+        height: 140px;
+      }
+      .related-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Scroll Progress Bar -->
+  <div class="scroll-progress-bar" id="scrollProgressBar" aria-hidden="true"></div>
+
+  <!-- Back to Home Capsule Pill -->
+  <a href="index.html" class="back-home" aria-label="Back to home">
+    <span class="back-home__arrow">←</span>
+    <span>back to home</span>
+  </a>
+
+  <!-- ============================================================
+       NAVBAR (Shared Component)
+       ============================================================ -->
+  <a href="index.html#hero" class="nav-brand-topleft" aria-label="8Bit Creatives Home">
+    <img src="images-for-landing-page/logo_2.png" alt="8Bit Logo" class="nav-brand-topleft__img">
+  </a>
+
+  <nav class="navbar-pill" id="top" aria-label="Main navigation">
+    <div class="navbar-pill__indicator" aria-hidden="true"></div>
+    <ul class="navbar__links">
+      <li><a href="index.html#hero">Home</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#creators">Creators</a></li>
+      <li><a href="work.html" class="is-active">Work</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="index.html#esports">Esports</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+
+    <!-- Mobile Hamburger -->
+    <button class="navbar__hamburger" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- Mobile Drawer -->
+    <div class="navbar__mobile-drawer" aria-label="Mobile navigation">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#creators">Creators</a>
+      <a href="work.html" class="is-active">Work</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#esports">Esports</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <a href="contact.html" class="nav-cta-topright">Start Campaign</a>
+
+  <!-- ============================================================
+       STICKY CHAPTER INDEX (Desktop Left Edge)
+       ============================================================ -->
+  <aside class="chapter-nav" aria-label="Case study navigation">
+    <a href="#section-hero" class="chapter-nav-item is-active" data-section="section-hero">
+      <span class="chapter-nav-num">01</span>
+      <span class="chapter-nav-label">Hero</span>
+    </a>
+    <a href="#section-brief" class="chapter-nav-item" data-section="section-brief">
+      <span class="chapter-nav-num">02</span>
+      <span class="chapter-nav-label">Brief</span>
+    </a>
+    <a href="#section-challenge" class="chapter-nav-item" data-section="section-challenge">
+      <span class="chapter-nav-num">03</span>
+      <span class="chapter-nav-label">Challenge</span>
+    </a>
+    <a href="#section-approach" class="chapter-nav-item" data-section="section-approach">
+      <span class="chapter-nav-num">04</span>
+      <span class="chapter-nav-label">Approach</span>
+    </a>
+    <a href="#section-solution" class="chapter-nav-item" data-section="section-solution">
+      <span class="chapter-nav-num">05</span>
+      <span class="chapter-nav-label">Solution</span>
+    </a>
+    <a href="#section-deliverables" class="chapter-nav-item" data-section="section-deliverables">
+      <span class="chapter-nav-num">06</span>
+      <span class="chapter-nav-label">Deliverables</span>
+    </a>
+    <a href="#section-outcomes" class="chapter-nav-item" data-section="section-outcomes">
+      <span class="chapter-nav-num">07</span>
+      <span class="chapter-nav-label">Outcomes</span>
+    </a>
+    <a href="#section-testimonial" class="chapter-nav-item" data-section="section-testimonial">
+      <span class="chapter-nav-num">08</span>
+      <span class="chapter-nav-label">Testimonial</span>
+    </a>
+    <a href="#section-credits" class="chapter-nav-item" data-section="section-credits">
+      <span class="chapter-nav-num">09</span>
+      <span class="chapter-nav-label">Credits</span>
+    </a>
+  </aside>
+
+  <!-- ============================================================
+       MAIN CASE STUDY CONTENT (The 9 Sections)
+       ============================================================ -->
+  <main class="case-wrapper">
+
+    <!-- ── SECTION 1 — HERO ── -->
+    <section class="case-section case-hero" id="section-hero" data-bg="dark">
+      <div class="reading-col">
+        <h1 class="case-hero-h1">Global Chess League S4</h1>
+        <p class="case-hero-sub">Official broadcast &amp; production agency for the world's largest franchise chess league.</p>
+        <div class="case-meta-row">
+          <span>Client · Tech Mahindra</span>
+          <span class="case-meta-divider">|</span>
+          <span>Service · Broadcast &amp; Production</span>
+          <span class="case-meta-divider">|</span>
+          <span>Year · 2026</span>
+          <span class="case-meta-divider">|</span>
+          <span>Tier · S-Tier</span>
+        </div>
+      </div>
+      <div class="wide-col">
+        <div class="case-placeholder-image" role="img" aria-label="Global Chess League S4 Hero Thumbnail">
+          Global Chess League S4
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 2 — BRIEF ── -->
+    <section class="case-section" id="section-brief" data-bg="dark">
+      <div class="reading-col">
+        <div class="case-section-header">
+          <h2 class="case-section-title">Brief</h2>
+        </div>
+        <p class="case-p">
+          Tech Mahindra needed to elevate the Global Chess League Season 4 — the world's largest franchise chess league — into a watchable, social-first esports spectacle for a modern digital audience.
+        </p>
+        <p class="case-p">
+          The brief was simple in ambition and complex in execution: make chess feel as alive, social, and culturally urgent as a BGMI Major. Capture a non-endemic audience that doesn't normally watch chess. And do it across 9 consecutive days of live broadcast with zero room for error.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── SECTION 3 — CHALLENGE ── -->
+    <section class="case-section" id="section-challenge" data-bg="dark">
+      <div class="reading-col">
+        <div class="case-section-header">
+          <h2 class="case-section-title">Challenge</h2>
+        </div>
+        <p class="case-p">
+          Chess has always been a spectator sport for the deeply invested. The challenge was making it watchable for everyone else — the 500 million Indian gamers who scroll past chess content because it feels slow, static, and hard to follow.
+        </p>
+        <p class="case-p">
+          Tech Mahindra had invested in the league as a brand asset, but the broadcast format hadn't evolved. Single-camera setups, no graphics, no commentary that spoke to a younger audience. The product was technically sound but emotionally flat.
+        </p>
+        <p class="case-p">
+          We had 9 days. 6 camera angles. A commentary desk. And one mandate: make the Global Chess League S4 feel like the esports event it deserved to be.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── SECTION 4 — APPROACH ── -->
+    <section class="case-section" id="section-approach" data-bg="dark">
+      <div class="reading-col">
+        <div class="case-section-header">
+          <h2 class="case-section-title">Approach</h2>
+        </div>
+        <p class="case-p">
+          8Bit Creatives was named the Official Broadcast &amp; Production Agency — not a sponsor, not a media buyer, the actual production house. That meant we owned the end-to-end broadcast: camera plan, commentary, graphics, social integration, and distribution.
+        </p>
+        <p class="case-p">
+          The approach was built on three pillars:
+        </p>
+        <div class="pillar-cards">
+          <div class="pillar-card">
+            <div class="pillar-card-title">Talent-first commentary</div>
+            <div class="pillar-card-desc">
+              We cast commentators who could speak both chess and gaming fluently — people who could explain a Sicilian Defense to someone who's never played, while keeping the energy of a BGMI clutch moment.
+            </div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-card-title">Real-time telemetry</div>
+            <div class="pillar-card-desc">
+              We built a custom graphics layer that showed real-time chess analytics — move history, position evaluation, time pressure — in a visual language borrowed from esports broadcasts (think minimap overlays, kill feeds, and round timers).
+            </div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-card-title">Social-first distribution</div>
+            <div class="pillar-card-desc">
+              The broadcast wasn't just on one platform. We simultaneously distributed across YouTube, Loco, and social media — with clip-ready moments designed for Reels, Shorts, and Twitter/X.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 5 — SOLUTION ── -->
+    <section class="case-section" id="section-solution" data-bg="dark">
+      <div class="reading-col">
+        <div class="case-section-header">
+          <h2 class="case-section-title">Solution</h2>
+        </div>
+        <p class="case-p" style="color: #FFFFFF; font-weight: 400;">
+          End-to-end live broadcast production in Bengaluru (Sep 5-13, 2026).
+        </p>
+      </div>
+
+      <!-- Wide Breakout Image Placeholder -->
+      <div class="wide-col" style="margin: 28px auto;">
+        <div class="case-placeholder-image" role="img" aria-label="Broadcast setup preview">
+          Broadcast setup
+        </div>
+      </div>
+
+      <div class="reading-col">
+        <blockquote class="pull-quote">
+          “We treated chess like an esport. Same multi-cam energy. Same real-time graphics. Same social-first clip strategy. The only difference: the pieces move slower.”
+          <cite class="pull-quote-author">— [fill in: commentator/producer name]</cite>
+        </blockquote>
+
+        <div class="stat-callout">
+          6 camera angles · 9 days · 0 production errors
+        </div>
+
+        <p class="case-p">
+          The studio setup included 6 camera angles covering the main board, player reactions, commentary desk, audience, and B-roll. A custom graphics package rendered real-time position evaluations and move analysis — making every move feel like a play in a sportscast, not just a piece sliding on a board.
+        </p>
+        <p class="case-p">
+          The commentary desk was staffed by a rotating team of chess experts and gaming-native voices — ensuring both depth and accessibility. The social team clipped key moments in real-time, pushing them to Reels, Shorts, and Twitter/X within minutes of happening live.
+        </p>
+      </div>
+
+      <!-- Secondary Wide Placeholder Image -->
+      <div class="wide-col" style="margin-top: 32px;">
+        <div class="case-placeholder-image compact" role="img" aria-label="Commentary desk & live graphics">
+          Commentary desk &amp; live graphics
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 6 — DELIVERABLES ── -->
+    <section class="case-section" id="section-deliverables" data-bg="dark">
+      <div class="reading-col">
+        <div class="case-section-header">
+          <h2 class="case-section-title">Deliverables</h2>
+        </div>
+        <p class="case-p">
+          Every broadcast artifact produced and shipped across the 9-day live event:
+        </p>
+
+        <div class="deliverables-list">
+          <div class="deliverable-card">
+            <div class="deliverable-info">
+              <div class="deliverable-num">01</div>
+              <div class="deliverable-heading">Live broadcast feed (9 days × ~6 hours/day)</div>
+              <div class="deliverable-desc">54 hours of continuous high-reliability tournament live broadcast.</div>
+            </div>
+            <div class="deliverable-pill-group">
+              <span class="deliverable-pill">YouTube + Loco</span>
+              <span class="deliverable-pill">1080p60 Live</span>
+            </div>
+          </div>
+
+          <div class="deliverable-card">
+            <div class="deliverable-info">
+              <div class="deliverable-num">02</div>
+              <div class="deliverable-heading">VOD archive (full match recordings)</div>
+              <div class="deliverable-desc">Full match master recordings with indexed chapter marks.</div>
+            </div>
+            <div class="deliverable-pill-group">
+              <span class="deliverable-pill">YouTube + Loco</span>
+              <span class="deliverable-pill">Episodic VOD</span>
+            </div>
+          </div>
+
+          <div class="deliverable-card">
+            <div class="deliverable-info">
+              <div class="deliverable-num">03</div>
+              <div class="deliverable-heading">Highlight reels (3-5 minute clips per match day)</div>
+              <div class="deliverable-desc">9 daily recap reels recapping decisive moves and time-pressure finishes.</div>
+            </div>
+            <div class="deliverable-pill-group">
+              <span class="deliverable-pill">YouTube</span>
+              <span class="deliverable-pill">9 Reels (16:9)</span>
+            </div>
+          </div>
+
+          <div class="deliverable-card">
+            <div class="deliverable-info">
+              <div class="deliverable-num">04</div>
+              <div class="deliverable-heading">Social cuts (30-60 second clips for Reels/Shorts)</div>
+              <div class="deliverable-desc">45+ vertical engagement clips formatted for algorithmic virality.</div>
+            </div>
+            <div class="deliverable-pill-group">
+              <span class="deliverable-pill">Instagram · Shorts · X</span>
+              <span class="deliverable-pill">45+ Clips (9:16)</span>
+            </div>
+          </div>
+
+          <div class="deliverable-card">
+            <div class="deliverable-info">
+              <div class="deliverable-num">05</div>
+              <div class="deliverable-heading">Commentary desk segments (standalone)</div>
+              <div class="deliverable-desc">12 standalone tactical breakdown segments exploring strategic masterstrokes.</div>
+            </div>
+            <div class="deliverable-pill-group">
+              <span class="deliverable-pill">Social &amp; Web</span>
+              <span class="deliverable-pill">12 Segments</span>
+            </div>
+          </div>
+
+          <div class="deliverable-card">
+            <div class="deliverable-info">
+              <div class="deliverable-num">06</div>
+              <div class="deliverable-heading">Post-event recap video (5 minute sizzle)</div>
+              <div class="deliverable-desc">1 cinematic tournament sizzle film engineered for global partner presentations.</div>
+            </div>
+            <div class="deliverable-pill-group">
+              <span class="deliverable-pill">Cross-platform</span>
+              <span class="deliverable-pill">4K Master Film</span>
+            </div>
+          </div>
+
+          <div class="deliverable-card">
+            <div class="deliverable-info">
+              <div class="deliverable-num">07</div>
+              <div class="deliverable-heading">Real-time graphics package (chess telemetry overlay)</div>
+              <div class="deliverable-desc">1 bespoke esports-inspired broadcast overlay with eval-bars and clock alarms.</div>
+            </div>
+            <div class="deliverable-pill-group">
+              <span class="deliverable-pill">Live Stream Engine</span>
+              <span class="deliverable-pill">Custom Telemetry</span>
+            </div>
+          </div>
+
+          <div class="deliverable-card">
+            <div class="deliverable-info">
+              <div class="deliverable-num">08</div>
+              <div class="deliverable-heading">Social media live coverage (Twitter/X thread per match day)</div>
+              <div class="deliverable-desc">9 real-time play-by-play live threads with annotated board GIFs.</div>
+            </div>
+            <div class="deliverable-pill-group">
+              <span class="deliverable-pill">Twitter/X</span>
+              <span class="deliverable-pill">9 Threads</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 7 — OUTCOMES ── -->
+    <section class="case-section" id="section-outcomes" data-bg="dark">
+      <div class="reading-col">
+        <div class="case-section-header">
+          <h2 class="case-section-title">Outcomes</h2>
+        </div>
+      </div>
+
+      <!-- Stat Ribbon -->
+      <div class="wide-col">
+        <div class="stat-ribbon">
+          <div class="stat-ribbon-card">
+            <div class="stat-ribbon-val">12M+</div>
+            <div class="stat-ribbon-label">Total reach</div>
+          </div>
+          <div class="stat-ribbon-card">
+            <div class="stat-ribbon-val">9 days</div>
+            <div class="stat-ribbon-label">Live broadcast duration</div>
+          </div>
+          <div class="stat-ribbon-card">
+            <div class="stat-ribbon-val">6</div>
+            <div class="stat-ribbon-label">Camera angles deployed</div>
+          </div>
+          <div class="stat-ribbon-card">
+            <div class="stat-ribbon-val">54 hrs</div>
+            <div class="stat-ribbon-label">Total live broadcast hours</div>
+          </div>
+          <div class="stat-ribbon-card">
+            <div class="stat-ribbon-val">45+</div>
+            <div class="stat-ribbon-label">Social clips produced</div>
+          </div>
+          <div class="stat-ribbon-card">
+            <div class="stat-ribbon-val">[fill in]</div>
+            <div class="stat-ribbon-label">Engagement rate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reading-col">
+        <p class="case-p">
+          The Global Chess League S4 became the most-watched chess broadcast in Indian history. The social-first clip strategy drove a [fill in]% lift in non-endemic viewership — people who'd never watched chess before tuned in because the clips felt like esports content, not chess lectures. Tech Mahindra renewed the partnership for Season 5 before S4 ended.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── SECTION 8 — TESTIMONIAL ── -->
+    <section class="case-section" id="section-testimonial" data-bg="dark">
+      <div class="reading-col">
+        <div class="case-section-header">
+          <h2 class="case-section-title">Testimonial</h2>
+        </div>
+        <div class="testimonial-card">
+          <blockquote class="testimonial-quote">
+            “[fill in: client quote about the broadcast quality, the social reach, and the partnership with 8Bit]”
+          </blockquote>
+          <div class="testimonial-author">
+            — [fill in: name], [fill in: role], Tech Mahindra
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 9 — CREDITS ── -->
+    <section class="case-section" id="section-credits" data-bg="dark">
+      <div class="reading-col">
+        <div class="case-section-header">
+          <h2 class="case-section-title">Credits</h2>
+        </div>
+        <div class="credits-list">
+          <div class="credit-row">
+            <span class="credit-label">Client</span>
+            <span class="credit-value">Tech Mahindra</span>
+          </div>
+          <div class="credit-row">
+            <span class="credit-label">8Bit team</span>
+            <span class="credit-value">[fill in: strategy lead], [fill in: producer], [fill in: broadcast director]</span>
+          </div>
+          <div class="credit-row">
+            <span class="credit-label">Production partners</span>
+            <span class="credit-value">S8UL Production (studio + post)</span>
+          </div>
+          <div class="credit-row">
+            <span class="credit-label">Tools</span>
+            <span class="credit-value">[fill in: OBS/vMix for broadcast, After Effects for graphics, etc.]</span>
+          </div>
+          <div class="credit-row">
+            <span class="credit-label">Awards</span>
+            <span class="credit-value">[fill in if any]</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── AFTER SECTION 9: NEXT PROJECT + RELATED PROJECTS ── -->
+    <section class="case-rails-section" data-bg="dark">
+      <div class="wide-col">
+        <!-- Next Project Rail -->
+        <a href="work.html" class="next-project-card">
+          <div class="next-project-thumb">
+            Kick India — Day One
+          </div>
+          <div class="next-project-info">
+            <div class="next-project-tag">Next case study</div>
+            <div class="next-project-title">Kick India — Day One Migration</div>
+            <div class="next-project-link">Read case study →</div>
+          </div>
+        </a>
+
+        <!-- Related Projects Rail -->
+        <div class="related-title">Related Projects</div>
+        <div class="related-grid">
+          <!-- Card 1 -->
+          <a href="work.html" class="related-card">
+            <div class="related-thumb">
+              Kick India — Day One
+            </div>
+            <div class="related-body">
+              <div>
+                <div class="related-card-tag">Platform Migration · Kick Streaming</div>
+                <div class="related-card-title">Kick India — Day One Migration</div>
+              </div>
+              <div class="related-card-link">Read case study →</div>
+            </div>
+          </a>
+
+          <!-- Card 2 -->
+          <a href="work.html" class="related-card">
+            <div class="related-thumb">
+              iQOO Flagship Launch
+            </div>
+            <div class="related-body">
+              <div>
+                <div class="related-card-tag">Brand Campaign · iQOO India</div>
+                <div class="related-card-title">iQOO Flagship Smartphone Launch</div>
+              </div>
+              <div class="related-card-link">Read case study →</div>
+            </div>
+          </a>
+
+          <!-- Card 3 -->
+          <a href="work.html" class="related-card">
+            <div class="related-thumb">
+              Monster Athlete Programme
+            </div>
+            <div class="related-body">
+              <div>
+                <div class="related-card-tag">Annual Mandate · Monster Energy</div>
+                <div class="related-card-title">Monster Athlete Programme</div>
+              </div>
+              <div class="related-card-link">Read case study →</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="case-cta" data-bg="dark">
+      <div class="reading-col">
+        <h2 class="case-cta-h2">Looking for bespoke campaign receipts?</h2>
+        <p class="case-cta-sub">We have produced custom IP, multi-cam live broadcasts, and brand activations across 50+ tier-1 gaming titles.</p>
+        <a href="mailto:business@8bitcreatives.in" class="btn-obsidian btn-obsidian-primary">Transmit a brief</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- GRADIENT TRANSITION: Dark → Footer (Light) -->
+  <div class="section-transition" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       SHARED FOOTER (from index.html / work.html)
+       ============================================================ -->
+  <footer class="footer-section" id="footer" data-bg="light" aria-label="Footer">
+    <div class="footer-foreground footer-card">
+      <div class="footer-grid">
+        <div class="footer-col footer-col--left">
+          <nav class="footer-nav">
+            <a href="index.html" class="footer-nav__link">Home</a>
+            <a href="about.html" class="footer-nav__link">About Us</a>
+            <a href="creators.html" class="footer-nav__link">Our Creators</a>
+            <a href="work.html" class="footer-nav__link">Case Studies</a>
+            <a href="services.html" class="footer-nav__link">Our Services</a>
+            <a href="esports-inside.html" class="footer-nav__link">Esports Team</a>
+          </nav>
+        </div>
+
+        <div class="footer-col footer-col--center footer-center">
+          <div class="footer-logo-wrap" id="footerLogoWrap">
+            <img
+              src="images-for-landing-page/footer-logo.png"
+              alt="8Bit Creatives"
+              class="footer-logo"
+              id="footerLogo"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            >
+            <span class="footer-logo-fallback" style="display:none;">8BIT</span>
+          </div>
+
+          <p class="footer-address">
+            <span class="footer-address__label">Address</span><br>
+            C/o Hotel Maitri Residency Ground Floor, Paltan Bazar, G.S.<br>
+            Road, Kamrup, Guwahati, Assam, India, 781008
+          </p>
+
+          <div class="footer-socials">
+            <a href="https://www.instagram.com/8bit_creatives" class="footer-social" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+              </svg>
+            </a>
+            <a href="https://in.linkedin.com/company/8bit-creatives" class="footer-social" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-col footer-col--right">
+          <div class="footer-s8ul-block">
+            <div class="s8ul-logo-wrap">
+              <a href="https://s8ul.gg/" target="_blank" rel="noopener" class="s8ul-logo-link">
+                <img
+                  src="images-for-landing-page/s8ul-logo.png"
+                  alt="S8UL"
+                  class="footer-s8ul-logo"
+                  style="width: 100px; max-width: 100px; height: auto; object-fit: contain;"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.closest('.s8ul-logo-wrap').querySelector('.s8ul-logo-fallback').style.display='flex';"
+                >
+              </a>
+              <span class="s8ul-logo-fallback" style="display:none;">S8UL</span>
+            </div>
+            <div class="s8ul-caption">Our Content House</div>
+          </div>
+
+          <div class="footer-enquiry-wrap">
+            <div class="footer-enquiry-heading">Enquiry</div>
+            <a href="mailto:business@8bitcreatives.in" class="footer-enquiry-email">business@8bitcreatives.in</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div class="footer-copyright">© 2026 8Bit Creatives. All rights reserved.</div>
+        <div class="footer-signature">
+          Made with <span class="footer-heart">❤</span> by <a href="https://divyarajchauhan.in" target="_blank" rel="noopener" class="footer-signature-link footer-signature__link">Divyaraj Chauhan</a>
+        </div>
+        <a href="privacy-policy.html" class="footer-privacy footer-enquiry-privacy">Privacy Policy</a>
+      </div>
+
+      <div class="footer-bottom-divider"></div>
+
+      <a href="index.html" class="footer-wordmark" aria-label="8Bit Creatives">
+        <span class="footer-wordmark__bold wordmark-bold">8BIT</span><span class="footer-wordmark__thin wordmark-thin">Creatives</span>
+      </a>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       BACK TO TOP BUTTON
+       ============================================================ -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg class="back-to-top__arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+  <!-- ============================================================
+       INTERACTIVITY SCRIPTS
+       ============================================================ -->
+  <script>
+    (function () {
+      // 1. Initialize Lenis Smooth Scroll
+      let lenis = null;
+      if (typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          direction: 'vertical',
+          gestureDirection: 'vertical',
+          smooth: true,
+          mouseMultiplier: 1,
+          smoothTouch: false,
+          touchMultiplier: 2,
+        });
+
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      }
+
+      // 2. Mobile Drawer Toggle
+      const hamburger = document.querySelector('.navbar__hamburger');
+      const drawer = document.querySelector('.navbar__mobile-drawer');
+      if (hamburger && drawer) {
+        hamburger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          drawer.classList.toggle('open');
+          const expanded = drawer.classList.contains('open');
+          hamburger.setAttribute('aria-expanded', expanded);
+        });
+        drawer.querySelectorAll('a').forEach(a => {
+          a.addEventListener('click', () => {
+            drawer.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+          });
+        });
+        document.addEventListener('click', (e) => {
+          if (!drawer.contains(e.target) && !hamburger.contains(e.target)) {
+            drawer.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
+      // 3. Scroll Progress Bar & Sticky Chapter Index Highlighting
+      const progressBar = document.getElementById('scrollProgressBar');
+      const chapterItems = document.querySelectorAll('.chapter-nav-item');
+      const sections = Array.from(document.querySelectorAll('.case-section, .case-rails-section'));
+
+      function onScroll() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+        if (progressBar) {
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+
+        // Determine current active section
+        let activeSectionId = null;
+        const scrollMiddle = scrollTop + window.innerHeight * 0.35;
+
+        for (let i = 0; i < sections.length; i++) {
+          const s = sections[i];
+          const top = s.offsetTop;
+          const bottom = top + s.offsetHeight;
+          if (scrollMiddle >= top && scrollMiddle < bottom) {
+            activeSectionId = s.id;
+            break;
+          }
+        }
+
+        if (activeSectionId) {
+          chapterItems.forEach(item => {
+            if (item.dataset.section === activeSectionId) {
+              item.classList.add('is-active');
+            } else {
+              item.classList.remove('is-active');
+            }
+          });
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Smooth scroll for chapter links with Lenis support
+      chapterItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = item.getAttribute('href');
+          const targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            if (lenis) {
+              lenis.scrollTo(targetEl, { offset: -30, duration: 1.0 });
+            } else {
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
+
+      // 4. Back to Top Button
+      const bttButton = document.getElementById('backToTop');
+      if (bttButton) {
+        function checkBtt() {
+          if (window.scrollY > window.innerHeight * 0.7) {
+            bttButton.classList.add('is-visible');
+          } else {
+            bttButton.classList.remove('is-visible');
+          }
+        }
+
+        window.addEventListener('scroll', checkBtt, { passive: true });
+        checkBtt();
+
+        bttButton.addEventListener('click', () => {
+          bttButton.classList.add('is-launching');
+          if (lenis) {
+            lenis.scrollTo(0, {
+              duration: 0.9,
+              onComplete: () => {
+                bttButton.classList.remove('is-launching');
+                checkBtt();
+              }
+            });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => {
+              bttButton.classList.remove('is-launching');
+              checkBtt();
+            }, 800);
+          }
+        });
+      }
+
+      // 5. Navbar light/dark theme detector for footer
+      (function() {
+        const navbar = document.querySelector('.navbar-pill');
+        const footer = document.getElementById('footer');
+        if (!navbar || !footer) return;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              navbar.classList.add('navbar-light');
+            } else {
+              navbar.classList.remove('navbar-light');
+            }
+          });
+        }, { threshold: 0.05 });
+
+        observer.observe(footer);
+      })();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>About Us — 8Bit Creatives</title>
+  <meta name="description" content="We are India's first gaming-native talent agency. Discover the story, values, and leadership behind 8Bit Creatives.">
+
+  <!-- Geist — ALL weights loaded -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="images-for-landing-page/logo_2.png">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- SVG filter for ring blur -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <filter id="ring-blur" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2" />
+      </filter>
+    </defs>
+  </svg>
+
+  <style>
+    /* Specific styles for about.html standalone page */
+    body {
+      background: #0A0A0A;
+      color: #FFFFFF;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Scrim gradient — black to transparent over a white base (#0A0A0A to #FFFFFF) */
+    .section-transition {
+      width: 100%;
+      height: 180px;
+      background-color: #FFFFFF;
+      background-image: linear-gradient(to bottom,
+        rgba(10, 10, 10, 1)     0%,
+        rgba(10, 10, 10, 0.738) 19%,
+        rgba(10, 10, 10, 0.541) 34%,
+        rgba(10, 10, 10, 0.382) 47%,
+        rgba(10, 10, 10, 0.278) 56.5%,
+        rgba(10, 10, 10, 0.194) 65%,
+        rgba(10, 10, 10, 0.126) 73%,
+        rgba(10, 10, 10, 0.075) 80.2%,
+        rgba(10, 10, 10, 0.042) 86.1%,
+        rgba(10, 10, 10, 0.021) 91%,
+        rgba(10, 10, 10, 0.008) 95.2%,
+        rgba(10, 10, 10, 0.002) 98.2%,
+        rgba(10, 10, 10, 0)     100%
+      );
+      margin: 0 0 -1px 0;
+      padding: 0;
+      border: none;
+      pointer-events: none;
+    }
+
+    /* Navbar: hidden on hero, fades in when scrolling to values section */
+    .navbar,
+    .navbar-pill {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      opacity: 0 !important;                           /* start hidden */
+      pointer-events: none !important;                 /* don't block clicks when hidden */
+      transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    /* When the values section is in view, navbar fades in */
+    .navbar.navbar-visible,
+    .navbar-pill.navbar-visible {
+      opacity: 1 !important;
+      pointer-events: auto !important;                /* clickable again */
+    }
+
+    /* Red eclipse section on about.html starts directly at top */
+    .about-page-hero,
+    #about {
+      background: #0A0A0A;
+      position: relative;
+      overflow: hidden;
+      min-height: 560px;
+      padding-top: 0 !important;
+      margin-top: 0 !important;
+      padding-bottom: 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .about-page-hero .eclipse-wrap {
+      top: 0px !important;
+    }
+
+    .about-page-hero .about-content {
+      margin-top: 28px; /* moved slightly UP */
+      padding-top: 10px;
+      z-index: 10;
+    }
+
+    .about-page-hero .about-lead {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #FFFFFF !important;
+      line-height: 1.6;
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+      text-transform: none;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+    }
+
+    .about-page-hero .about-lead span {
+      color: #FFFFFF !important;
+      font-weight: 400 !important;
+    }
+
+    .btn-about,
+    .about-btn-wrap {
+      display: none !important;
+    }
+
+    /* Section 2: Guided by our values */
+    .about-values {
+      background: #0A0A0A;
+      padding: 120px 48px;
+      text-align: center;
+    }
+    .values-container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .values-title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: clamp(32px, 4vw, 56px);
+      color: #FFFFFF;
+      margin: 0 0 24px 0;
+      text-transform: none;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .values-subtitle {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 680px;
+      margin: 0 auto 64px auto;
+      line-height: 1.6;
+      text-transform: none;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .value-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 32px 32px 40px 32px;
+      text-align: left;
+      transition: border-color 300ms ease, background 300ms ease;
+    }
+    .value-card:hover {
+      background: rgba(255, 89, 49, 0.05);
+      border-color: rgba(255, 89, 49, 0.2);
+    }
+    .value-icon {
+      display: none !important;
+    }
+    .value-name {
+      font-family: 'Geist', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      text-transform: none;
+    }
+    .value-desc {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+      margin: 0;
+      text-transform: none;
+    }
+
+    /* Section 3: The Story / White content card */
+    .about-content-card-section {
+      background: #0A0A0A;
+      padding: 80px 48px 120px 48px;
+      display: flex;
+      justify-content: center;
+    }
+    .about-content-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 64px 72px;
+      max-width: 1000px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 32px 100px rgba(0, 0, 0, 0.4);
+    }
+    .about-content-card-text {
+      max-width: 760px;
+    }
+    .content-card-eyebrow {
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      color: #FF5931;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .about-body-main {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      color: #1A1A1A;
+      line-height: 1.8;
+      margin: 0 0 24px 0;
+      text-transform: none;
+    }
+    .about-body-secondary {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      color: #666666;
+      line-height: 1.8;
+      margin: 0;
+      text-transform: none;
+    }
+
+    /* Scroll Reveal paragraph blur-in animation */
+    .about-content-card-text p {
+      opacity: 0;
+      filter: blur(8px);
+      transition: opacity 400ms ease-out, filter 400ms ease-out;
+      will-change: opacity, filter;
+    }
+    .about-content-card-text p.revealed {
+      opacity: 1;
+      filter: blur(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .about-content-card-text p {
+        opacity: 1 !important;
+        filter: none !important;
+        transition: none !important;
+      }
+    }
+    .about-cta-button {
+      display: inline-block;
+      margin-top: 48px;
+      background: #FF5931;
+      color: #FFFFFF;
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 16px 36px;
+      border-radius: 999px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: background 200ms ease;
+    }
+    .about-cta-button:hover {
+      background: #B21C01;
+    }
+
+    /* Section 4: Value Propositions / Stats */
+    .about-propositions {
+      background: #0A0A0A;
+      padding: 80px 48px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .propositions-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+    .prop-column {
+      text-align: left;
+      padding: 0 16px;
+    }
+    .prop-label {
+      font-family: 'Geist', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #FFFFFF;
+      margin-bottom: 12px;
+      text-transform: none;
+    }
+    .prop-desc {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+      margin: 0;
+      text-transform: none;
+    }
+
+    /* ── MAP SECTION (Embedded from map-about.html) ── */
+    .map-section {
+      position: relative;
+      width: 100%;
+      max-width: 1400px;            /* ← matches the rest of the site's content width */
+      margin: 80px auto;            /* 80px breathing space above and below, centered */
+      background: #0A0A0A;          /* exact match to the site background and the PNG background */
+      overflow: hidden;
+      isolation: isolate;
+      padding: 80px 56px 80px 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      align-items: center;
+      gap: 0 64px;
+      min-height: 560px;            /* tighter than the previous 1080px — feels less cavernous */
+    }
+
+    /* ── LEFT — title block ── */
+    .map-section__title-block {
+      grid-column: 1;
+      grid-row: 1;
+      max-width: 600px;
+      padding-left: 60px;
+      box-sizing: border-box;
+    }
+    .map-section__title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;              /* Geist Regular (NOT italic, NOT Geist Mono) */
+      font-size: 54px;               /* was 56 — decreased by 2px */
+      line-height: 1.04;
+      letter-spacing: -0.025em;
+      color: #FFFFFF;
+      margin: 0 0 24px 0;
+    }
+    .map-section__title em {
+      font-style: italic;
+      font-weight: 300;
+      color: #FFFFFF;                /* NO ORANGE — italic accent stays white, matching the rest of the site */
+    }
+    .map-section__subtitle {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;              /* Geist Light — NOT italic, NOT Geist Mono */
+      font-size: 16px;               /* was 18 — decreased by 2px */
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.65);
+      max-width: 460px;              /* was 540 — tighter */
+      margin-bottom: 36px;           /* was 48 — tighter */
+    }
+
+    /* ── Stats row — smaller, polished ── */
+    .map-section__stats {
+      display: flex;
+      gap: 40px;                     /* was 56 — tighter */
+      align-items: flex-end;
+    }
+    .map-section__stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .map-section__stat-value {
+      font-family: 'Geist', sans-serif;       /* numbers in Geist (NOT Geist Mono) */
+      font-weight: 400;
+      font-size: 38px;               /* was 40 — decreased by 2px */
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+    }
+    .map-section__stat-label {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 10px;               /* was 12 — decreased by 2px */
+      letter-spacing: 0.01em;
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 6px;                /* was 8 — tighter */
+      /* Normal case — NOT uppercase */
+    }
+
+    /* ── RIGHT — India map (PNG image) ── */
+    .map-section__map-wrap {
+      grid-column: 2;
+      grid-row: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .map-section__map {
+      width: 100%;
+      max-width: 520px;              /* was 720 — smaller, more polished */
+      height: auto;
+      max-height: 90%;
+      display: block;
+      /* The image already has its own glow baked in.
+         The image background is now #0A0A0A — exact match to the section background,
+         so there's no visible seam between the image and the rest of the section. */
+    }
+
+    /* ────────────────────────────────────────────────
+       RESPONSIVE — Tablet (768–1279px)
+       ──────────────────────────────────────────────── */
+    @media (max-width: 1279px) {
+      .map-section {
+        padding: 64px 48px;
+        gap: 0 48px;
+        min-height: 480px;
+      }
+      .map-section__title-block {
+        padding-left: 16px;
+        max-width: 556px;
+      }
+      .map-section__title {
+        font-size: 42px;             /* was 44 — decreased by 2px */
+        margin-bottom: 18px;
+      }
+      .map-section__subtitle {
+        font-size: 14px;             /* was 16 — decreased by 2px */
+        margin-bottom: 28px;
+      }
+      .map-section__stats {
+        gap: 32px;
+      }
+      .map-section__stat-value {
+        font-size: 30px;             /* was 32 — decreased by 2px */
+      }
+      .map-section__stat-label {
+        font-size: 9px;              /* was 11 — decreased by 2px */
+      }
+      .map-section__map {
+        max-width: 100%;
+      }
+    }
+
+    /* ────────────────────────────────────────────────
+       RESPONSIVE — Mobile (≤767px)
+       Single column: title block on top, map below.
+       ──────────────────────────────────────────────── */
+    @media (max-width: 767px) {
+      .map-section {
+        margin: 16px auto !important;
+        padding: 28px 18px !important;
+        min-height: auto !important;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: auto 1fr !important;
+        gap: 16px 0 !important;
+        align-items: start !important;
+      }
+      .map-section__title-block {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        max-width: 100% !important;
+        padding-left: 0 !important;
+        text-align: center !important;
+      }
+      .map-section__title {
+        font-size: 24px !important;
+        line-height: 1.15 !important;
+        margin-bottom: 8px !important;
+      }
+      .map-section__subtitle {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        max-width: 100% !important;
+        margin-bottom: 16px !important;
+      }
+      .map-section__stats {
+        justify-content: center !important;
+        gap: 24px !important;
+      }
+      .map-section__stat-value {
+        font-size: 24px !important;
+      }
+      .map-section__stat-label {
+        font-size: 10px !important;
+        margin-top: 3px !important;
+      }
+      .map-section__map-wrap {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+      }
+      .map-section__map {
+        max-width: 80% !important;
+        max-height: 180px !important;
+        margin: 0 auto !important;
+      }
+    }
+
+    /* Section 5: Contact CTA */
+    .about-contact-cta {
+      background: #0A0A0A;
+      padding: 120px 48px;
+      text-align: center;
+    }
+    .cta-title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 700;
+      font-size: clamp(36px, 4vw, 56px);
+      color: #FFFFFF;
+      margin: 0 0 16px 0;
+      text-transform: none;
+      letter-spacing: -0.02em;
+    }
+    .cta-subtitle {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0 0 40px 0;
+      text-transform: none;
+    }
+    .cta-email-button {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #FFFFFF;
+      font-family: 'Geist', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      padding: 18px 40px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+    }
+    .cta-email-button:hover {
+      background: rgba(255, 89, 49, 0.2);
+      border-color: #FF5931;
+      color: #FF5931;
+    }
+
+    @media (max-width: 900px) {
+      .values-grid,
+      .propositions-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .about-content-card {
+        padding: 40px 28px;
+      }
+      .about-values,
+      .about-contact-cta {
+        padding: 80px 24px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      /* Back to Home capsule pill */
+      .back-home {
+        top: 56px !important;
+        left: 16px !important;
+      }
+
+      /* 1. HERO SECTION */
+      .about-page-hero,
+      #about {
+        min-height: auto !important;
+        height: auto !important;
+        padding-top: 104px !important;
+        padding-bottom: 20px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+      .about-page-hero .about-content {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+      .about-page-hero .about-lead {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        max-width: 100% !important;
+      }
+
+      /* 2. VALUES / PRINCIPLES SECTION (Compact: ~480-520px) */
+      .about-values {
+        padding: 24px 18px !important;
+        min-height: auto !important;
+        height: auto !important;
+      }
+      .values-title {
+        font-size: 20px !important;
+        line-height: 1.25 !important;
+        margin: 0 0 8px 0 !important;
+      }
+      .values-subtitle {
+        font-size: 12px !important;
+        line-height: 1.5 !important;
+        max-width: 100% !important;
+        margin: 0 auto 16px auto !important;
+      }
+      .values-grid {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+      .value-card {
+        padding: 14px 16px !important;
+        border-radius: 14px !important;
+        min-height: auto !important;
+        height: auto !important;
+      }
+      .value-name {
+        font-size: 15px !important;
+        margin-bottom: 4px !important;
+      }
+      .value-desc {
+        font-size: 12px !important;
+        line-height: 1.45 !important;
+      }
+
+      /* 3. NARRATIVE TEXT SECTION / WHITE CARD */
+      .about-content-card-section {
+        position: relative !important;
+        padding: 20px 14px !important;
+        min-height: auto !important;
+        height: auto !important;
+      }
+      .about-content-card-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 24px;
+        background: linear-gradient(to bottom, #0A0A0A 0%, transparent 100%);
+        pointer-events: none;
+        z-index: 2;
+      }
+      .about-content-card-section::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 24px;
+        background: linear-gradient(to top, #0A0A0A 0%, transparent 100%);
+        pointer-events: none;
+        z-index: 2;
+      }
+      .about-content-card {
+        padding: 20px 16px !important;
+        border-radius: 16px !important;
+        min-height: auto !important;
+        height: auto !important;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4) !important;
+      }
+      .content-card-eyebrow {
+        font-size: 11px !important;
+        letter-spacing: 0.12em !important;
+        margin-bottom: 10px !important;
+        color: #666666 !important;
+      }
+      .about-body-main {
+        font-size: 13px !important;
+        line-height: 1.55 !important;
+        margin: 0 0 10px 0 !important;
+      }
+      .about-body-secondary {
+        font-size: 12px !important;
+        line-height: 1.55 !important;
+        margin: 0 !important;
+      }
+      .about-cta-button {
+        margin-top: 16px !important;
+        padding: 10px 24px !important;
+        font-size: 12px !important;
+      }
+
+      /* 4. VALUE PROPOSITIONS */
+      .about-propositions {
+        padding: 20px 18px !important;
+        min-height: auto !important;
+        height: auto !important;
+      }
+      .propositions-container {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .prop-column {
+        padding: 0 !important;
+      }
+      .prop-label {
+        font-size: 15px !important;
+        margin-bottom: 4px !important;
+      }
+      .prop-desc {
+        font-size: 12px !important;
+        line-height: 1.45 !important;
+      }
+
+      /* 5. CONTACT CTA & FOOTER */
+      .about-contact-cta {
+        padding: 28px 18px !important;
+        min-height: auto !important;
+        height: auto !important;
+      }
+      .cta-title {
+        font-size: 24px !important;
+        line-height: 1.2 !important;
+        margin: 0 0 6px 0 !important;
+      }
+      .cta-subtitle {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+        margin: 0 0 16px 0 !important;
+      }
+      .cta-email-button {
+        font-size: 13px !important;
+        padding: 11px 26px !important;
+      }
+
+      /* Seamless dark transition into footer */
+      .section-transition {
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .footer-section {
+        background: #000000 !important;
+        padding: 28px 18px 20px !important;
+        margin-top: 0 !important;
+      }
+    }
+
+    /* ============================================================
+       Back to Top Button
+       ============================================================ */
+    .back-to-top {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 48px;
+      height: 48px;
+      border-radius: 100px;             /* fully round — capsule, matching the site's curve language */
+      background: #0A0A0A;              /* matches the site's dark background */
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      opacity: 0;                        /* hidden by default */
+      visibility: hidden;
+      transform: translateY(16px);       /* starts slightly below its final position */
+      transition: opacity 400ms ease-out,
+                  visibility 0ms 400ms,
+                  transform 400ms ease-out,
+                  border-color 200ms ease-out;
+      padding: 0;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      /* No box-shadow, no glow — clean and editorial */
+    }
+
+    /* Visible state — added by JS when user scrolls past the hero */
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity 400ms ease-out,
+                  visibility 0ms 0ms,
+                  transform 400ms ease-out,
+                  border-color 200ms ease-out;
+    }
+
+    /* Hover — the arrow nudges UP by 3px, border brightens. No scale, no glow, no popup. */
+    .back-to-top:hover {
+      border-color: rgba(255, 255, 255, 0.30);
+    }
+    .back-to-top:hover .back-to-top__arrow {
+      transform: translateY(-3px);
+      transition: transform 200ms ease-out;
+    }
+
+    /* The arrow inside the button */
+    .back-to-top__arrow {
+      width: 20px;
+      height: 20px;
+      color: rgba(255, 255, 255, 0.70);    /* muted white — NOT orange */
+      transition: transform 200ms ease-out, opacity 150ms ease-out;
+      display: block;
+    }
+
+    /* LAUNCH animation — when the button is clicked, the arrow "launches" upward and fades,
+       then a new arrow fades in from below. This creates a "reset" / "launch" effect. */
+    .back-to-top.is-launching .back-to-top__arrow {
+      transform: translateY(-12px);
+      opacity: 0;
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 200ms ease-out;
+    }
+
+    /* Mobile — slightly smaller and closer to the corner */
+    @media (max-width: 767px) {
+      .back-to-top {
+        bottom: 12px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+      }
+      .back-to-top__arrow {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    /* Reduced motion — disable the launch animation, keep the button functional */
+    @media (prefers-reduced-motion: reduce) {
+      .back-to-top, .back-to-top__arrow { transition: none !important; }
+      .back-to-top.is-launching .back-to-top__arrow { transform: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-home" aria-label="Back to home">
+    <span class="back-home__arrow">←</span>
+    <span>back to home</span>
+  </a>
+
+<!-- ============================================================
+     NAVBAR (Shared Component)
+     ============================================================ -->
+<a href="index.html#hero" class="nav-brand-topleft" aria-label="8Bit Creatives Home">
+  <img src="images-for-landing-page/logo_2.png" alt="8Bit Logo" class="nav-brand-topleft__img">
+</a>
+
+<nav class="navbar-pill" id="top" aria-label="Main navigation">
+  <!-- Active sliding pill indicator -->
+  <div class="navbar-pill__indicator" aria-hidden="true"></div>
+
+  <ul class="navbar__links">
+    <li><a href="index.html#hero">Home</a></li>
+    <li><a href="index.html#about" class="is-active">About</a></li>
+    <li><a href="index.html#creators">Creators</a></li>
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#esports">Esports</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+
+  <!-- Mobile Hamburger -->
+  <button class="navbar__hamburger" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Mobile Drawer -->
+  <div class="navbar__mobile-drawer" aria-label="Mobile navigation">
+    <a href="index.html#hero">Home</a>
+    <a href="index.html#about" class="is-active">About</a>
+    <a href="index.html#creators">Creators</a>
+    <a href="index.html#work">Work</a>
+    <a href="index.html#services">Services</a>
+    <a href="index.html#esports">Esports</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<a href="#contact" class="nav-cta-topright">Start Campaign</a>
+
+
+<!-- ============================================================
+     SECTION 1: HERO / ABOUT (Red Half-Eclipse without Marquee)
+     ============================================================ -->
+<section id="about" class="about-page-hero" data-bg="dark" aria-label="About 8Bit Creatives">
+  <!-- Half-eclipse wrap: clipped to show lower half of the 800x800 rotating circle -->
+  <div class="eclipse-wrap about-eclipse__clip" aria-hidden="true">
+    <div class="eclipse-rotator eclipse-rotor about-eclipse__rotor">
+      <!-- Red radial gradient half-eclipse -->
+      <div class="eclipse"></div>
+
+      <!-- 3 concentric curve lines (SVG) -->
+      <svg class="eclipse-rings" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="400" cy="400" r="300" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1" filter="url(#ring-blur)"/>
+        <circle cx="400" cy="400" r="340" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1" filter="url(#ring-blur)"/>
+        <circle cx="400" cy="400" r="380" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1" filter="url(#ring-blur)"/>
+      </svg>
+
+      <!-- SVG characters -->
+      <svg class="eclipse-svg-chars" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid meet">
+        <g id="eclipse-characters-svg"></g>
+      </svg>
+      <span class="char-1" style="display:none;" aria-hidden="true"></span>
+
+      <!-- Animated Grass on outer perimeter (inside rotator) -->
+      <svg class="eclipse-grass" viewBox="0 0 800 800" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="eclipseGrassGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#4A8502"/>
+            <stop offset="50%" stop-color="#76C60F"/>
+            <stop offset="100%" stop-color="#A8E625"/>
+          </linearGradient>
+          <linearGradient id="eclipseGrassGradDark" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#2a4a01"/>
+            <stop offset="50%" stop-color="#3a6a02"/>
+            <stop offset="100%" stop-color="#5a9a08"/>
+          </linearGradient>
+        </defs>
+        <g id="eclipse-grass-blades"></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Centered About Text in front of the half-eclipse -->
+  <div class="about-content">
+    <p class="about-lead">
+      We started in a Mumbai LAN room in 2018. Three gamers who knew the lobby, the room, and the audience. Today, 8Bit manages 50+ of India's biggest creators, broadcasts live to millions, and ships campaigns brands can actually measure.
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SECTION 2: "GUIDED BY OUR VALUES"
+     ============================================================ -->
+<div class="about-values" id="values" data-bg="dark">
+  <div class="values-container">
+    <h3 class="values-title">Guided by our values in every step</h3>
+    <p class="values-subtitle">We don't just manage creators; we build careers, protect culture, and bridge the gap between gaming and the brands that want to reach it. These are the principles that govern every decision we make.</p>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-name">Transparency</div>
+        <p class="value-desc">Every number, every metric, every contract term — shared openly with the brands and creators we work with. No hidden clauses, no vanity metrics, no inflated reach. Just the raw data that proves the work.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-name">Quality</div>
+        <p class="value-desc">From the first campaign brief to the final broadcast feed, we hold the bar high. We don't do filler content, we don't do generic streams, and we don't do shortcuts. If it doesn't elevate the creator or the brand, it doesn't ship.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-name">Passion</div>
+        <p class="value-desc">We're gamers first, agency second. We've been in the lobbies, we've watched the streams, and we understand the culture because we are part of it. That intrinsic understanding is the edge we bring to every partnership.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 3: THE STORY / WHITE CONTENT CARD
+     ============================================================ -->
+<div class="about-content-card-section" data-bg="dark">
+  <div class="about-content-card">
+    <div class="about-content-card-text">
+      <h4 class="content-card-eyebrow">OUR STORY</h4>
+      <p class="about-body-main">We are India's first gaming-native talent agency. Our services span the full creator economy — from talent management and brand partnerships to live broadcast production and platform strategy.</p>
+      <p class="about-body-main">In 2018, Thug, Goldy, and Mortal realized that Indian gaming creators were signing deals without anyone actually understanding their craft. We started 8Bit to change that. We built an agency that speaks the language of the lobby, the stream, and the audience, while holding the professional standards of a top-tier media firm.</p>
+      <p class="about-body-main">Today, we've built the infrastructure between gaming culture and brand budgets. From executing Kick's first India partnership to managing the Global Chess League broadcast desk, every campaign we ship is measured, reported, and optimized against real outcomes — not vanity metrics.</p>
+      <p class="about-body-main">Through the S8UL ecosystem — uniting 8Bit Creatives, S8UL Esports, and the 15,000 sq. ft. Gaming House 2.0 in Mumbai — we provide our creators with world-class production facilities, legal advocacy, and commercial infrastructure. We don't just find brand deals; we build long-term, sustainable careers for the people shaping Indian gaming.</p>
+      <p class="about-body-secondary">We work with brands entering gaming for the first time, creators building long-term careers, and platforms seeking authentic audience distribution in India. If you're looking to understand the room, we're the people who can show you in.</p>
+    </div>
+    <a href="#contact" class="about-cta-button">Get in touch</a>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 4: VALUE PROPOSITIONS / STATS
+     ============================================================ -->
+<div class="about-propositions" data-bg="dark">
+  <div class="propositions-container">
+    <div class="prop-column">
+      <div class="prop-label">Seasoned professionals</div>
+      <p class="prop-desc">Leveraging decades of combined gaming, esports, and media expertise to navigate India's complex creator landscape.</p>
+    </div>
+    <div class="prop-column">
+      <div class="prop-label">Dedicated to your success</div>
+      <p class="prop-desc">Prioritizing each creator's unique objectives and brand goals for customized, impactful, and measurable marketing solutions.</p>
+    </div>
+    <div class="prop-column">
+      <div class="prop-label">Tech-driven strategies</div>
+      <p class="prop-desc">Harnessing platform telemetry, audience data, and proprietary frameworks for smarter, more efficient campaign execution.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SECTION 4B: WHERE WE ARE (MAP SECTION)
+     ============================================================ -->
+<section class="map-section" data-bg="dark" aria-label="Where we are">
+
+  <!-- LEFT — title block -->
+  <div class="map-section__title-block">
+    <h1 class="map-section__title">Built in India,<br><em>watched</em> everywhere.</h1>
+    <p class="map-section__subtitle">8Bit was founded in a Mumbai LAN room in 2018. Today, our creators, campaigns, and broadcasts reach audiences across India — from the capital to the northeast, from gaming metros to the diaspora watching worldwide.</p>
+    <div class="map-section__stats">
+      <div class="map-section__stat">
+        <div class="map-section__stat-value">50M+</div>
+        <div class="map-section__stat-label">Monthly reach</div>
+      </div>
+      <div class="map-section__stat">
+        <div class="map-section__stat-value">2</div>
+        <div class="map-section__stat-label">Key cities</div>
+      </div>
+      <div class="map-section__stat">
+        <div class="map-section__stat-value">12</div>
+        <div class="map-section__stat-label">Languages</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — India map (PNG image, now with #0A0A0A background to match the site) -->
+  <div class="map-section__map-wrap">
+    <img class="map-section__map"
+         src="images-for-landing-page/india_locations_map.png"
+         alt="India map showing 8Bit's Delhi NCR and Guwahati locations"
+         loading="lazy">
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     SECTION 5: CONTACT CTA
+     ============================================================ -->
+<div class="about-contact-cta" id="contact" data-bg="dark">
+  <h2 class="cta-title">Ready for a chat?</h2>
+  <p class="cta-subtitle">Send us a message and let's build the future of Indian gaming together.</p>
+  <a href="mailto:business@8bitcreatives.in" class="cta-email-button">Lets Kick Start</a>
+</div>
+
+<!-- GRADIENT TRANSITION: Contact (dark) → Footer (light) -->
+<div class="section-transition" aria-hidden="true"></div>
+
+<!-- ============================================================
+     SECTION 6: FOOTER (Shared Component)
+     ============================================================ -->
+<footer class="footer-section" id="footer" data-bg="light" aria-label="Footer">
+  <div class="footer-foreground footer-card">
+    <div class="footer-grid">
+      <div class="footer-col footer-col--left">
+        <nav class="footer-nav">
+          <a href="index.html"    class="footer-nav__link">Home</a>
+          <a href="about.html"    class="footer-nav__link">About Us</a>
+          <a href="creators.html" class="footer-nav__link">Our Creators</a>
+          <a href="work.html"     class="footer-nav__link">Case Studies</a>
+          <a href="services.html" class="footer-nav__link">Our Services</a>
+          <a href="esports-inside.html" class="footer-nav__link">Esports Team</a>
+        </nav>
+      </div>
+
+      <div class="footer-col footer-col--center footer-center">
+        <div class="footer-logo-wrap" id="footerLogoWrap">
+          <img
+            src="images-for-landing-page/footer-logo.png"
+            alt="8Bit Creatives"
+            class="footer-logo"
+            id="footerLogo"
+            loading="lazy"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          >
+          <span class="footer-logo-fallback" style="display:none;">8BIT</span>
+        </div>
+
+        <p class="footer-address">
+          <span class="footer-address__label">Address</span><br>
+          C/o Hotel Maitri Residency Ground Floor, Paltan Bazar, G.S.<br>
+          Road, Kamrup, Guwahati, Assam, India, 781008
+        </p>
+
+        <div class="footer-socials">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/8bit_creatives" class="footer-social" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+            </svg>
+          </a>
+          <!-- LinkedIn -->
+          <a href="https://in.linkedin.com/company/8bit-creatives" class="footer-social" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: S8UL block (top) + Enquiry (bottom) -->
+      <div class="footer-col footer-col--right">
+        <!-- S8UL Content House block -->
+        <div class="footer-s8ul-block">
+          <div class="s8ul-logo-wrap">
+            <a href="https://s8ul.gg/" target="_blank" rel="noopener" class="s8ul-logo-link">
+              <img
+              src="images-for-landing-page/s8ul-logo.png"
+              alt="S8UL"
+              class="footer-s8ul-logo"
+              style="width: 100px; max-width: 100px; height: auto; object-fit: contain;"
+              loading="lazy"
+              onerror="this.style.display='none'; this.closest('.s8ul-logo-wrap').querySelector('.s8ul-logo-fallback').style.display='flex';"
+            >
+            </a>
+            <span class="s8ul-logo-fallback" style="display:none;">S8UL</span>
+          </div>
+          <div class="s8ul-caption">Our Content House</div>
+        </div>
+
+        <div class="footer-enquiry-wrap">
+          <div class="footer-enquiry-heading">Enquiry</div>
+          <a href="mailto:business@8bitcreatives.in" class="footer-enquiry-email">business@8bitcreatives.in</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <div class="footer-copyright">© 2026 8Bit Creatives. All rights reserved.</div>
+      <div class="footer-signature">
+        Made with <span class="footer-heart">❤</span> by <a href="https://divyarajchauhan.in" target="_blank" rel="noopener" class="footer-signature-link footer-signature__link">Divyaraj Chauhan</a>
+      </div>
+      <a href="privacy-policy.html" class="footer-privacy footer-enquiry-privacy">Privacy Policy</a>
+    </div>
+
+    <hr class="footer-bottom-divider">
+
+    <a href="index.html" class="footer-wordmark" aria-label="8Bit Creatives">
+      <span class="footer-wordmark__bold wordmark-bold">8BIT</span><span class="footer-wordmark__thin wordmark-thin">Creatives</span>
+    </a>
+  </div>
+</footer>
+
+<script src="navbar.js"></script>
+<script src="app.js"></script>
+<script>
+// GSAP animations for about.html sections
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Values section fade-up
+  gsap.from('.values-title, .values-subtitle', {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.about-values', start: 'top 75%' }
+  });
+  gsap.from('.value-card', {
+    opacity: 0,
+    y: 40,
+    duration: 0.6,
+    stagger: 0.15,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.values-grid', start: 'top 80%' }
+  });
+
+  // White content card slide-up
+  gsap.from('.about-content-card', {
+    opacity: 0,
+    y: 60,
+    duration: 1.0,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.about-content-card-section', start: 'top 80%' }
+  });
+
+  // Propositions fade-up
+  gsap.from('.prop-column', {
+    opacity: 0,
+    y: 30,
+    duration: 0.7,
+    stagger: 0.15,
+    ease: 'power2.out',
+    scrollTrigger: { trigger: '.about-propositions', start: 'top 80%' }
+  });
+
+  // Contact CTA fade-up
+  gsap.from('.cta-title, .cta-subtitle, .cta-email-button', {
+    opacity: 0,
+    y: 30,
+    duration: 0.8,
+    stagger: 0.1,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.about-contact-cta', start: 'top 80%' }
+  });
+}
+
+// Navbar mobile toggle & on-light observer
+(function() {
+  const burger = document.querySelector('.navbar__hamburger');
+  const drawer = document.querySelector('.navbar__mobile-drawer');
+  if (burger && drawer) {
+    burger.addEventListener('click', () => {
+      const open = drawer.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  const navbar = document.querySelector('.navbar-pill') 
+              || document.querySelector('.navbar') 
+              || document.querySelector('.site-header')
+              || document.querySelector('.nav-pill')
+              || document.getElementById('navbar')
+              || document.getElementById('top');
+})();
+
+// Navbar background color observer
+(function () {
+  var navbar = document.querySelector('.navbar-pill') ||
+               document.querySelector('.navbar') ||
+               document.querySelector('[class*="navbar"]') ||
+               document.getElementById('top');
+  if (!navbar) return;
+
+  var sections = document.querySelectorAll('section[data-bg], footer[data-bg], header[data-bg], main[data-bg], div[data-bg]');
+  if (!sections.length) return;
+
+  var currentBg = null;
+
+  function setLight() {
+    if (currentBg !== 'light') {
+      navbar.classList.add('navbar-on-light');
+      currentBg = 'light';
+    }
+  }
+  function setDark() {
+    if (currentBg !== 'dark') {
+      navbar.classList.remove('navbar-on-light');
+      currentBg = 'dark';
+    }
+  }
+
+  function checkPosition() {
+    var navY = 42;
+    var found = false;
+    for (var i = sections.length - 1; i >= 0; i--) {
+      var rect = sections[i].getBoundingClientRect();
+      if (rect.top <= navY && rect.bottom > navY) {
+        var bg = sections[i].dataset.bg || sections[i].getAttribute('data-bg') || 'dark';
+        if (bg === 'light') setLight();
+        else setDark();
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      if (window.scrollY <= 10 && sections[0]) {
+        var initialBg = sections[0].dataset.bg || sections[0].getAttribute('data-bg') || 'dark';
+        if (initialBg === 'light') setLight();
+        else setDark();
+      } else {
+        setDark();
+      }
+    }
+  }
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var bg = entry.target.dataset.bg || entry.target.getAttribute('data-bg');
+          if (bg === 'light') setLight();
+          else if (bg === 'dark') setDark();
+        }
+      });
+    }, { rootMargin: '-40px 0px -85% 0px', threshold: [0, 0.1, 0.3, 0.5, 0.8, 1] });
+    sections.forEach(function (s) { observer.observe(s); });
+  }
+
+  window.addEventListener('scroll', checkPosition, { passive: true });
+  window.addEventListener('resize', checkPosition, { passive: true });
+
+  checkPosition();
+})();
+
+  // Navbar visibility toggle: hidden on hero, fades in when hero scrolls out of view and stays visible
+  (function() {
+    const navbar = document.querySelector('.navbar') || document.querySelector('.navbar-pill') || document.querySelector('header');
+    // Target the hero/eclipse section
+    const heroSection = document.querySelector('.about-page-hero') || document.querySelector('.about-eclipse-section') || document.getElementById('about');
+    if (!navbar || !heroSection) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
+          // Hero is in view — HIDE navbar
+          navbar.classList.remove('navbar-visible');
+        } else {
+          // Hero is out of view (scrolled down) — SHOW navbar
+          navbar.classList.add('navbar-visible');
+        }
+      });
+    }, { threshold: [0, 0.1, 0.3] });
+    
+    observer.observe(heroSection);
+  })();
+
+  // Scroll Reveal paragraph-by-paragraph blur-in animation for white content card
+  (function() {
+    const paragraphs = document.querySelectorAll('.about-content-card-text p');
+    if (!paragraphs.length) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      paragraphs.forEach(p => p.classList.add('revealed'));
+      return;
+    }
+
+    let revealQueue = [];
+    let isRevealing = false;
+
+    function processQueue() {
+      if (isRevealing || revealQueue.length === 0) return;
+      isRevealing = true;
+      const p = revealQueue.shift();
+      p.classList.add('revealed');
+      setTimeout(() => {
+        isRevealing = false;
+        processQueue();
+      }, 150); // 150ms stagger between consecutive paragraphs
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const p = entry.target;
+          if (!p.classList.contains('revealed') && !revealQueue.includes(p)) {
+            revealQueue.push(p);
+            processQueue();
+          }
+          observer.unobserve(p);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    paragraphs.forEach(p => observer.observe(p));
+  })();
+</script>
+
+<!-- Back to Top Button -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg class="back-to-top__arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<script>
+(function () {
+  var button = document.getElementById('backToTop');
+  if (!button) return;
+
+  // ── Show/hide the button based on scroll position ──
+  // The button appears when the user scrolls past the hero section (~100vh).
+  // It disappears when they scroll back above the hero.
+  var hero = document.querySelector('.about-page-hero') || document.getElementById('about') || document.getElementById('hero');
+  var heroHeight = hero ? hero.offsetHeight : window.innerHeight;
+
+  function checkScroll() {
+    if (window.scrollY > heroHeight * 0.8) {
+      button.classList.add('is-visible');
+    } else {
+      button.classList.remove('is-visible');
+    }
+  }
+
+  var bttTicking = false;
+  window.addEventListener('scroll', function () {
+    if (!bttTicking) {
+      requestAnimationFrame(function () {
+        checkScroll();
+        bttTicking = false;
+      });
+      bttTicking = true;
+    }
+  }, { passive: true });
+  window.addEventListener('resize', function () {
+    heroHeight = hero ? hero.offsetHeight : window.innerHeight;
+    checkScroll();
+  }, { passive: true });
+  checkScroll(); // check on load
+
+  // ── Custom easing function: cubic-bezier(0.16, 1, 0.3, 1) ──
+  // This is an "expo-out" curve — starts VERY fast (the "rush"), then decelerates
+  // dramatically to a gentle stop.
+  function expoOut(t) {
+    // Approximation of cubic-bezier(0.16, 1, 0.3, 1)
+    // At t=0: speed is very high. At t=1: speed is ~0.
+    return 1 - Math.pow(2, -10 * t);
+  }
+
+  // ── Custom scroll-to-top animation ──
+  function scrollToTop() {
+    // Reduced motion fallback: instant jump
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    button.classList.add('is-launching');
+
+    if (window.lenis) {
+      window.lenis.scrollTo(0, {
+        duration: 0.8,
+        easing: expoOut,
+        onComplete: function () {
+          button.classList.remove('is-launching');
+          checkScroll();
+        }
+      });
+      return;
+    }
+
+    var startTime = null;
+    var startScroll = window.scrollY || window.pageYOffset;
+    var duration = 800; // 800ms — slightly longer than standard, giving the deceleration more room
+
+    // Ensure CSS scroll-behavior: smooth does not fight with rAF frame-by-frame interpolation
+    var origScrollBehavior = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';
+
+    function animate(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      var elapsed = currentTime - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      var eased = progress === 1 ? 1 : expoOut(progress);
+      window.scrollTo(0, Math.round(startScroll * (1 - eased)));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        window.scrollTo(0, 0);
+        document.documentElement.style.scrollBehavior = origScrollBehavior;
+        // Scroll complete — remove the launching class (arrow resets)
+        button.classList.remove('is-launching');
+        checkScroll();
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  // ── Click handler ──
+  button.addEventListener('click', function (e) {
+    e.preventDefault();
+    scrollToTop();
+  });
+})();
+</script>
+
+<!-- Lenis Smooth Scroll -->
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function () {
+  if (typeof Lenis === 'undefined') return;
+  var lenis = new Lenis({
+    duration: 1.2,           // smooth scroll duration — 1.2s feels natural
+    easing: function (t) {    // ease-out-expo for a natural deceleration
+      return Math.min(1, 1.001 - Math.pow(2, -10 * t));
+    },
+    smoothWheel: true,        // smooth mouse wheel scroll
+    smoothTouch: false,       // keep native touch scroll (smoother on mobile)
+    touchMultiplier: 1.5,
+  });
+  window.lenis = lenis;
+
+  // Sync with GSAP ScrollTrigger if present
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (time) {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    // No GSAP — use requestAnimationFrame
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }
+
+  // Respect reduced motion — disable Lenis smoothing if user prefers reduced motion
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    lenis.destroy();
+  }
+})();
+</script>
+</body>
+</html>

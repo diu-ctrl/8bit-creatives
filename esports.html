@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <title>8BIT — Esports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Geist Mono — full weight range so 'thin' (100) is available -->
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100;200;300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 1920px;
+      height: 1080px;
+      background: #FFFFFF;
+      overflow: hidden;
+      font-family: 'Geist Mono', ui-monospace, monospace;
+      color: #000000;
+    }
+    /* Body is a grid of "blocks". Each block = a vertical 8BIT column pair
+       (left col: 8 B I T, right col: 8 B I T) → reads as "8 8 / B B / I I / T T".
+       10 blocks across × 192px  = 1920px → exact fit
+       5  blocks down  × 216px  = 1080px → exact fit */
+    body {
+      display: grid;
+      grid-template-columns: repeat(10, 192px);
+      grid-template-rows: repeat(5, 216px);
+      gap: 0;
+    }
+    /* Each block is a 2-col × 4-row mini-grid holding the 8 letters
+       in order: 8 8 / B B / I I / T T (top-to-bottom). */
+    .block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(4, 1fr);
+      width: 192px;
+      height: 216px;
+      text-transform: uppercase;
+      font-weight: 100;       /* Thin weight as requested */
+      font-size: 84px;
+      line-height: 1;
+      letter-spacing: 0;
+      text-align: center;
+      color: #000000;
+    }
+    .block > span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    /* Generate the tiled vertical 8BIT pattern across the whole 1920x1080 page.
+       Each block is: 8 8 / B B / I I / T T (top-to-bottom).
+       10 blocks across × 5 blocks down = 50 blocks = 400 letters, exact fit. */
+    (function () {
+      var letters = ['8', 'B', 'I', 'T'];
+      var cols = 10;
+      var rows = 5;
+      var body = document.body;
+      var frag = document.createDocumentFragment();
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          var block = document.createElement('div');
+          block.className = 'block';
+          for (var li = 0; li < letters.length; li++) {
+            for (var dup = 0; dup < 2; dup++) {  // 8 8, then B B, then I I, then T T
+              var span = document.createElement('span');
+              span.textContent = letters[li];
+              block.appendChild(span);
+            }
+          }
+          frag.appendChild(block);
+        }
+      }
+      body.appendChild(frag);
+    })();
+  </script>
+</body>
+</html>

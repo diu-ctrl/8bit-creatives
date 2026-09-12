@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, initial-scale=1.0">
+  <title>8Bit Creatives — Esports Section</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 1920px;
+      height: 1080px;
+      background: #FFFFFF;
+      overflow: hidden;
+      font-family: 'Geist', system-ui, sans-serif;
+      color: #141210;
+    }
+
+    /* ============================================================
+       LAYER 1 — Background: animated 8BIT letter grid (same pattern
+       as esports.html — vertical 8-B-I-T-gap columns scrolling up
+       and down alternately in an infinite loop).
+       ============================================================ */
+    .bg {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 1080px;
+      display: grid;
+      grid-template-columns: repeat(100, 1fr);
+      z-index: 1;
+      opacity: 1;
+    }
+    .bg__col {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Geist', sans-serif;
+      font-weight: 100;
+      font-size: 16px;
+      text-transform: uppercase;
+      color: #ECECEC;       /* very faint gray on white */
+      line-height: 1;
+      will-change: transform;
+    }
+    .bg__col > span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 21.6px;        /* 1080 / 50 rows = 21.6 — matches the original */
+    }
+    :root { --scroll-duration: 18s; }
+    .bg__col--down { animation: scrollDown var(--scroll-duration) linear infinite; }
+    .bg__col--up   { animation: scrollUp   var(--scroll-duration) linear infinite; }
+    @keyframes scrollDown {
+      from { transform: translateY(-1080px); }
+      to   { transform: translateY(0); }
+    }
+    @keyframes scrollUp {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-1080px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bg__col--down, .bg__col--up { animation: none; transform: none; }
+    }
+
+    /* ============================================================
+       LAYER 2 — Central black card.
+       1600 × 857 px, 92px border-radius, centered.
+       ============================================================ */
+    .card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1600px;
+      height: 857px;
+      background: #0A0A0A;
+      border-radius: 92px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      padding: 64px 72px 64px 72px;
+      overflow: hidden;       /* keep the orange glow contained inside the card */
+    }
+
+    /* Card header — "Esports" centered top, hairline below */
+    .card__header {
+      flex: 0 0 auto;
+      text-align: center;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.33);
+      margin-bottom: 56px;
+    }
+    .card__title {
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 56px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin: 0;
+    }
+
+    /* Card body — two columns: left text, right image */
+    .card__body {
+      flex: 1 1 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    /* LEFT — text column */
+    .text-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-right: 32px;
+    }
+    .text-col__about {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;        /* Geist Light */
+      font-size: 40px;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+      margin: 0 0 28px 0;
+    }
+    .text-col__paragraphs {
+      flex: 1 1 auto;
+    }
+    .text-col__p {
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;        /* Geist Light */
+      font-size: 28px;
+      line-height: 1.45;
+      letter-spacing: -0.005em;
+      color: rgba(255, 255, 255, 0.78);
+      margin: 0 0 22px 0;
+    }
+    .text-col__cta {
+      flex: 0 0 auto;
+      display: inline-block;
+      font-family: 'Geist', sans-serif;
+      font-weight: 300;        /* Geist Light */
+      font-size: 36px;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+      text-decoration: underline;
+      text-decoration-color: #FFFFFF;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 8px;
+      margin-top: 16px;
+      transition: text-decoration-color 200ms ease;
+      cursor: pointer;
+    }
+    .text-col__cta:hover {
+      text-decoration-color: #FFFFFF;
+      color: #FFFFFF;
+    }
+    @media (hover: none) and (pointer: coarse) {
+      .text-col__cta:hover { text-decoration-color: rgba(255, 255, 255, 0.50); }
+    }
+
+    /* RIGHT — hero image column with very soft orange glow */
+    .image-col {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .image-col__glow {
+      position: absolute;
+      inset: -24px;
+      background: radial-gradient(ellipse at center,
+                                  rgba(255, 89, 49, 0.22) 0%,
+                                  rgba(255, 89, 49, 0.12) 35%,
+                                  rgba(255, 89, 49, 0.04) 65%,
+                                  rgba(255, 89, 49, 0.00) 100%);
+      filter: blur(40px);
+      border-radius: 48px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .image-col__img {
+  position: relative;
+  z-index: 2;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border-radius: 32px;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  display: block;
+}
+  /* Tablet (768px–1279px) */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .card {
+    width: calc(100% - 96px);
+    max-width: 1600px;
+    height: auto;
+    padding: 48px 56px;
+  }
+  .card__title {
+    font-size: 48px;
+  }
+  .card__body {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .text-col__about {
+    font-size: 32px;
+  }
+  .text-col__p {
+    font-size: 22px;
+  }
+  .text-col__cta {
+    font-size: 28px;
+  }
+  .image-col__img {
+    border-radius: 24px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+}
+
+/* Mobile (≤767px) */
+@media (max-width: 767px) {
+  .card {
+    width: calc(100% - 32px);
+    padding: 32px 24px;
+    border-radius: 32px;
+  }
+  .card__title {
+    font-size: 32px;
+  }
+  .card__body {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .text-col__about {
+    font-size: 26px;
+  }
+  .text-col__p {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .text-col__cta {
+    font-size: 22px;
+  }
+  .image-col__img {
+    border-radius: 16px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+}
+</style>
+</head>
+<body>
+
+  <!-- LAYER 1: animated 8BIT background -->
+  <div class="bg" id="bg"></div>
+
+  <!-- LAYER 2: central black card -->
+  <div class="card">
+
+    <!-- Card header -->
+    <div class="card__header">
+      <h1 class="card__title">Esports</h1>
+    </div>
+
+    <!-- Card body: left text + right image -->
+    <div class="card__body">
+
+      <!-- LEFT: text column -->
+      <div class="text-col">
+        <h2 class="text-col__about">About</h2>
+        <div class="text-col__paragraphs">
+          <p class="text-col__p">iQOO8BIT Esports is our competitive BGMI roster — five players, one shared instinct, and a habit of showing up when the pressure is highest. We've competed since 2019.</p>
+          <p class="text-col__p">Two assaulters, one IGL, one sniper, one entry. The roster is built for aggressive play and quick reads. We train six days a week, review every drop, and show up to win.</p>
+        </div>
+        <a href="esports-inside.html" class="text-col__cta">View Roster</a>
+      </div>
+
+      <!-- RIGHT: hero image with soft orange glow -->
+      <div class="image-col">
+        <div class="image-col__glow" aria-hidden="true"></div>
+        <img class="image-col__img"
+             src="images-for-landing-page/roster/hero-esports.png"
+             alt="8Bit Esports roster photo"
+             loading="lazy">
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /* Generate the animated 8BIT background.
+       Same pattern as esports.html — 100 columns of 8-B-I-T-gap cycles,
+       alternating scroll-down / scroll-up, 2× viewport tall for seamless loop. */
+    (function () {
+      var cols = 100;
+      var wordCyclesPerCol = 20;     /* 20 cycles × 5 rows = 100 rows = 2160px = 2× viewport */
+      var pattern = ['8', 'B', 'I', 'T', ''];   /* T followed by GAP row */
+      var bg = document.getElementById('bg');
+      var frag = document.createDocumentFragment();
+      for (var c = 0; c < cols; c++) {
+        var col = document.createElement('div');
+        col.className = 'bg__col ' + (c % 2 === 0 ? 'bg__col--down' : 'bg__col--up');
+        for (var w = 0; w < wordCyclesPerCol; w++) {
+          for (var p = 0; p < pattern.length; p++) {
+            var span = document.createElement('span');
+            span.textContent = pattern[p];
+            col.appendChild(span);
+          }
+        }
+        frag.appendChild(col);
+      }
+      bg.appendChild(frag);
+    })();
+  </script>
+</body>
+</html>

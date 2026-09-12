@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8Bit Game Characters — Enhanced SVG Art</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%; min-height: 100vh; background: #0A0A0A;
+    font-family: 'Geist', sans-serif; overflow-x: hidden;
+  }
+  body {
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px 24px;
+  }
+  .characters-row {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    align-items: flex-end; gap: 20px; max-width: 1800px; width: 100%;
+  }
+  .character-slot {
+    width: 120px; height: 200px;
+    display: flex; align-items: flex-end; justify-content: center;
+    position: relative; cursor: pointer;
+    transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), filter 300ms ease;
+    opacity: 0; animation: char-enter 600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+  }
+  .character-slot:hover {
+    transform: scale(1.15) translateY(-8px);
+    filter: drop-shadow(0 8px 24px rgba(255, 89, 49, 0.4)); z-index: 10;
+  }
+  .character-slot svg { width: 100%; height: 100%; overflow: visible; }
+  .character-label {
+    position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%);
+    font-family: 'Geist', sans-serif; font-size: 9px; font-weight: 500;
+    color: #FF5931; text-transform: uppercase; letter-spacing: 0.15em;
+    opacity: 0; transition: opacity 200ms ease; white-space: nowrap; pointer-events: none;
+  }
+  .character-slot:hover .character-label { opacity: 1; }
+  @keyframes char-enter {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .character-slot:nth-child(n) { animation-delay: calc(var(--i, 0) * 70ms); }
+  .character-slot:nth-child(1) { --i: 0; }
+  .character-slot:nth-child(2) { --i: 1; }
+  .character-slot:nth-child(3) { --i: 2; }
+  .character-slot:nth-child(4) { --i: 3; }
+  .character-slot:nth-child(5) { --i: 4; }
+  .character-slot:nth-child(6) { --i: 5; }
+  .character-slot:nth-child(7) { --i: 6; }
+  .character-slot:nth-child(8) { --i: 7; }
+  .character-slot:nth-child(9) { --i: 8; }
+  .character-slot:nth-child(10) { --i: 9; }
+  .character-slot:nth-child(11) { --i: 10; }
+  .character-slot:nth-child(12) { --i: 11; }
+  @media (max-width: 1024px) {
+    .character-slot { width: 100px; height: 160px; }
+    .characters-row { gap: 16px; }
+  }
+  @media (max-width: 768px) {
+    .character-slot { width: 80px; height: 130px; }
+    .characters-row { gap: 12px; }
+  }
+  @media (max-width: 480px) {
+    .character-slot { width: 65px; height: 105px; }
+    .characters-row { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="characters-row">
+
+  <!-- 1. APEX LEGENDS -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="apexPurple" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#8A2BE2"/><stop offset="100%" stop-color="#5D1A8F"/>
+        </linearGradient>
+        <linearGradient id="apexTorsoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#2A2A2A"/><stop offset="100%" stop-color="#1F1F1F"/>
+        </linearGradient>
+        <radialGradient id="apexGlow">
+          <stop offset="0%" stop-color="#00FFFF"/><stop offset="100%" stop-color="#00FFFF" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="apexSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#D8C0A8"/><stop offset="100%" stop-color="#C0A088"/>
+        </linearGradient>
+      </defs>
+      <!-- Hair bun -->
+      <ellipse cx="60" cy="12" rx="14" ry="10" fill="#1A1A1A"/>
+      <rect x="48" y="8" width="24" height="8" rx="4" fill="#1A1A1A"/>
+      <!-- Shaved side lines -->
+      <line x1="48" y1="16" x2="52" y2="20" stroke="#0A0A0A" stroke-width="1"/>
+      <line x1="72" y1="16" x2="68" y2="20" stroke="#0A0A0A" stroke-width="1"/>
+      <!-- Head with face definition -->
+      <path d="M48 18 L72 18 L74 40 L46 40 Z" fill="url(#apexSkin)"/>
+      <path d="M58 28 L62 28 L60 34 Z" fill="#B89878" opacity="0.6"/>
+      <path d="M48 37 Q60 41 72 37 L72 40 L48 40 Z" fill="#000" opacity="0.1"/>
+      <!-- Symmetrical glowing eyes -->
+      <ellipse cx="54" cy="28" rx="3" ry="2" fill="#00FFFF" filter="url(#apexGlow)"/>
+      <ellipse cx="66" cy="28" rx="3" ry="2" fill="#00FFFF" filter="url(#apexGlow)"/>
+      <circle cx="54" cy="28" r="1.2" fill="#FFFFFF"/>
+      <circle cx="66" cy="28" r="1.2" fill="#FFFFFF"/>
+      <!-- Neck connector -->
+      <rect x="54" y="38" width="12" height="6" fill="#C0A088"/>
+      <!-- Scarf / collar -->
+      <path d="M40 42 L80 42 L84 54 L36 54 Z" fill="#4A4A4A"/>
+      <line x1="44" y1="46" x2="76" y2="46" stroke="#3A3A3A" stroke-width="1"/>
+      <!-- Torso with subtle gradient -->
+      <path d="M44 54 L76 54 L80 108 L40 108 Z" fill="url(#apexTorsoGrad)"/>
+      <path d="M44 54 L76 54 L74 80 L46 80 Z" fill="#2A2A2A" opacity="0.3"/>
+      <!-- Purple chest accent (V-shape) -->
+      <path d="M50 56 L70 56 L65 82 L55 82 Z" fill="url(#apexPurple)"/>
+      <line x1="60" y1="56" x2="60" y2="82" stroke="#A040E0" stroke-width="1" opacity="0.5"/>
+      <!-- Belt -->
+      <rect x="40" y="106" width="40" height="5" fill="#555"/>
+      <rect x="56" y="106" width="8" height="5" fill="#777"/>
+      <!-- Left arm (armored, purple) -->
+      <rect x="28" y="58" width="12" height="40" rx="3" fill="url(#apexPurple)"/>
+      <line x1="28" y1="68" x2="40" y2="68" stroke="#3D1A6F" stroke-width="1"/>
+      <line x1="28" y1="78" x2="40" y2="78" stroke="#3D1A6F" stroke-width="1"/>
+      <line x1="28" y1="88" x2="40" y2="88" stroke="#3D1A6F" stroke-width="1"/>
+      <rect x="28" y="96" width="12" height="8" rx="2" fill="#333"/>
+      <circle cx="34" cy="103" r="5" fill="#D8C0A8"/>
+      <!-- Right arm & Connected Energy Hand -->
+      <rect x="80" y="58" width="12" height="38" rx="3" fill="#222"/>
+      <line x1="80" y1="68" x2="92" y2="68" stroke="#333" stroke-width="1"/>
+      <!-- Right hand circle seamlessly attached to arm -->
+      <circle cx="86" cy="98" r="6" fill="#1A1A1A"/>
+      <!-- Energy glow centered directly on hand -->
+      <circle cx="86" cy="98" r="8" fill="#00FFFF" opacity="0.4" filter="url(#apexGlow)"/>
+      <circle cx="86" cy="98" r="4.5" fill="#00FFFF" opacity="0.85"/>
+      <circle cx="86" cy="98" r="1.5" fill="#FFFFFF"/>
+      <!-- Legs -->
+      <rect x="42" y="111" width="16" height="55" rx="4" fill="#121212"/>
+      <rect x="62" y="111" width="16" height="55" rx="4" fill="#121212"/>
+      <rect x="44" y="120" width="6" height="10" rx="1" fill="#1A1A1A" opacity="0.6"/>
+      <rect x="70" y="120" width="6" height="10" rx="1" fill="#1A1A1A" opacity="0.6"/>
+      <rect x="42" y="140" width="16" height="6" rx="2" fill="#333"/>
+      <rect x="62" y="140" width="16" height="6" rx="2" fill="#333"/>
+      <!-- Boots with toe separation lines -->
+      <rect x="40" y="163" width="20" height="14" rx="2" fill="#2B2B2B"/>
+      <rect x="60" y="163" width="20" height="14" rx="2" fill="#2B2B2B"/>
+      <line x1="46" y1="166" x2="46" y2="175" stroke="#181818" stroke-width="1"/>
+      <line x1="52" y1="166" x2="52" y2="175" stroke="#181818" stroke-width="1"/>
+      <line x1="66" y1="166" x2="66" y2="175" stroke="#181818" stroke-width="1"/>
+      <line x1="72" y1="166" x2="72" y2="175" stroke="#181818" stroke-width="1"/>
+      <rect x="40" y="175" width="20" height="3" fill="#8B0000"/>
+      <rect x="60" y="175" width="20" height="3" fill="#8B0000"/>
+    </svg>
+    <div class="character-label">Apex Legends</div>
+  </div>
+
+  <!-- 2. BGMI — LV3 SPETSNAZ HELMET + WHITE SHIRT & TIE -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bgmiHelmet" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#3A3A3A"/><stop offset="100%" stop-color="#1A1A1A"/>
+        </linearGradient>
+        <linearGradient id="bgmiShirt" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#E8E8E8"/>
+        </linearGradient>
+        <linearGradient id="bgmiPants" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#2A2A2A"/><stop offset="100%" stop-color="#1A1A1A"/>
+        </linearGradient>
+      </defs>
+      <!-- Head -->
+      <rect x="48" y="24" width="24" height="22" rx="4" fill="#D8B88C"/>
+      <!-- Face details -->
+      <circle cx="54" cy="35" r="1.5" fill="#222"/>
+      <circle cx="66" cy="35" r="1.5" fill="#222"/>
+      <line x1="60" y1="37" x2="60" y2="40" stroke="#B89878" stroke-width="1.5"/>
+      <line x1="56" y1="42" x2="64" y2="42" stroke="#A87858" stroke-width="1"/>
+      <!-- Neck -->
+      <rect x="54" y="44" width="12" height="6" fill="#D8B88C"/>
+      <!-- LV3 Spetsnaz Helmet with Top Bump, Visor Mount & Side Rails -->
+      <ellipse cx="60" cy="14" rx="16" ry="6" fill="#444444"/>
+      <ellipse cx="60" cy="22" rx="21" ry="16" fill="url(#bgmiHelmet)"/>
+      <rect x="39" y="28" width="42" height="6" rx="1" fill="#1A1A1A"/>
+      <!-- Front visor/goggle mount bracket -->
+      <rect x="52" y="20" width="16" height="4" rx="1" fill="#2A2A2A" stroke="#111" stroke-width="0.5"/>
+      <!-- Helmet side rails -->
+      <rect x="37" y="24" width="4" height="8" rx="1" fill="#2A2A2A"/>
+      <rect x="79" y="24" width="4" height="8" rx="1" fill="#2A2A2A"/>
+      <!-- Chin strap with buckle -->
+      <path d="M42 32 Q40 43 45 46 L75 46 Q80 43 78 32" stroke="#2A2A2A" stroke-width="2" fill="none"/>
+      <rect x="57" y="44" width="6" height="4" rx="1" fill="#777" stroke="#333" stroke-width="0.5"/>
+      <!-- White shirt / torso -->
+      <path d="M38 48 L82 48 L86 108 L34 108 Z" fill="url(#bgmiShirt)"/>
+      <!-- Collar & Black tie -->
+      <path d="M48 48 L60 56 L72 48 L70 44 L50 44 Z" fill="#E0E0E0"/>
+      <path d="M57 48 L63 48 L62 56 L58 56 Z" fill="#1A1A1A"/>
+      <path d="M58 56 L62 56 L64 90 L56 90 Z" fill="#1A1A1A"/>
+      <!-- Tactical vest overlay -->
+      <path d="M40 52 L80 52 L82 100 L38 100 Z" fill="#333" opacity="0.4"/>
+      <!-- Vest straps (2 vertical + 1 horizontal) -->
+      <line x1="46" y1="52" x2="46" y2="100" stroke="#1A1A1A" stroke-width="2"/>
+      <line x1="74" y1="52" x2="74" y2="100" stroke="#1A1A1A" stroke-width="2"/>
+      <line x1="40" y1="76" x2="80" y2="76" stroke="#1A1A1A" stroke-width="2"/>
+      <!-- Badge/patch on vest -->
+      <rect x="42" y="58" width="10" height="6" rx="1" fill="#B22222"/>
+      <line x1="42" y1="61" x2="52" y2="61" stroke="#FFD700" stroke-width="1"/>
+      <!-- Vest pouches -->
+      <rect x="40" y="64" width="10" height="12" rx="1" fill="#333" opacity="0.7"/>
+      <rect x="70" y="64" width="10" height="12" rx="1" fill="#333" opacity="0.7"/>
+      <!-- Arms -->
+      <rect x="26" y="52" width="12" height="44" rx="3" fill="url(#bgmiShirt)"/>
+      <rect x="82" y="52" width="12" height="44" rx="3" fill="url(#bgmiShirt)"/>
+      <circle cx="32" cy="99" r="6" fill="#D8B88C"/>
+      <circle cx="88" cy="99" r="6" fill="#D8B88C"/>
+      <!-- Rifle -->
+      <rect x="20" y="94" width="50" height="5" rx="1" fill="#2A2A2A"/>
+      <rect x="20" y="92" width="8" height="3" fill="#1A1A1A"/>
+      <rect x="30" y="90" width="8" height="4" rx="1" fill="#333"/>
+      <rect x="34" y="99" width="6" height="12" rx="1" fill="#2A2A2A"/>
+      <rect x="50" y="99" width="14" height="6" rx="1" fill="#1A1A1A"/>
+      <!-- Black army pants -->
+      <rect x="40" y="108" width="18" height="58" rx="4" fill="url(#bgmiPants)"/>
+      <rect x="62" y="108" width="18" height="58" rx="4" fill="url(#bgmiPants)"/>
+      <rect x="42" y="118" width="6" height="12" rx="1" fill="#0A0A0A" opacity="0.5"/>
+      <rect x="72" y="118" width="6" height="12" rx="1" fill="#0A0A0A" opacity="0.5"/>
+      <rect x="40" y="140" width="18" height="7" rx="2" fill="#0A0A0A"/>
+      <rect x="62" y="140" width="18" height="7" rx="2" fill="#0A0A0A"/>
+      <!-- Black boots -->
+      <rect x="38" y="163" width="22" height="16" rx="2" fill="#0A0A0A"/>
+      <rect x="60" y="163" width="22" height="16" rx="2" fill="#0A0A0A"/>
+      <line x1="38" y1="166" x2="60" y2="166" stroke="#333" stroke-width="1"/>
+      <line x1="60" y1="166" x2="82" y2="166" stroke="#333" stroke-width="1"/>
+    </svg>
+    <div class="character-label">BGMI</div>
+  </div>
+
+  <!-- 3. CHESS — PROPORTIONED IVORY ROOK -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="chessGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FAF5E8"/><stop offset="45%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#E8DFD0"/>
+        </linearGradient>
+        <linearGradient id="chessShadow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity="0.16"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(6, 12) scale(0.9)">
+        <!-- Sharpened battlement edges (polygons) -->
+        <polygon points="35,24 35,11 40,8 45,11 45,24" fill="url(#chessGrad)"/>
+        <polygon points="48,24 48,11 53,8 58,11 58,24" fill="url(#chessGrad)"/>
+        <polygon points="62,24 62,11 67,8 72,11 72,24" fill="url(#chessGrad)"/>
+        <polygon points="75,24 75,11 80,8 85,11 85,24" fill="url(#chessGrad)"/>
+        <!-- Battlement shadow gaps -->
+        <rect x="45" y="10" width="3" height="12" fill="#1A1A1A"/>
+        <rect x="58" y="10" width="3" height="12" fill="#1A1A1A"/>
+        <rect x="72" y="10" width="3" height="12" fill="#1A1A1A"/>
+        <!-- Top band -->
+        <rect x="33" y="24" width="54" height="4" rx="1" fill="#C8BDA5"/>
+        <rect x="35" y="28" width="50" height="5" rx="1" fill="url(#chessGrad)"/>
+        <!-- Upper body (tapered) with shadow -->
+        <path d="M39 33 L81 33 L75 82 L45 82 Z" fill="url(#chessGrad)"/>
+        <path d="M39 33 L81 33 L75 82 L45 82 Z" fill="url(#chessShadow)"/>
+        <!-- Left edge highlight line (15% opacity) -->
+        <path d="M41 34 L46 81" stroke="#FFFFFF" stroke-width="2" opacity="0.15" fill="none"/>
+        <!-- Wood/stone grain texture lines -->
+        <line x1="51" y1="36" x2="49" y2="80" stroke="#C0B5A0" stroke-width="0.5"/>
+        <line x1="60" y1="36" x2="60" y2="80" stroke="#C0B5A0" stroke-width="0.5"/>
+        <line x1="69" y1="36" x2="71" y2="80" stroke="#C0B5A0" stroke-width="0.5"/>
+        <!-- Middle band -->
+        <rect x="43" y="82" width="34" height="3" rx="1" fill="#C8BDA5"/>
+        <rect x="45" y="85" width="30" height="4" rx="1" fill="url(#chessGrad)"/>
+        <!-- Lower body (wider, tapered) -->
+        <path d="M45 89 L75 89 L78 152 L42 152 Z" fill="url(#chessGrad)"/>
+        <path d="M45 89 L75 89 L78 152 L42 152 Z" fill="url(#chessShadow)"/>
+        <path d="M44 91 L43 151" stroke="#FFFFFF" stroke-width="2" opacity="0.15" fill="none"/>
+        <line x1="50" y1="95" x2="48" y2="148" stroke="#C0B5A0" stroke-width="0.5"/>
+        <line x1="64" y1="95" x2="65" y2="148" stroke="#C0B5A0" stroke-width="0.5"/>
+        <!-- Stepped, slightly narrower base (width: 56px) -->
+        <rect x="36" y="152" width="48" height="6" rx="1" fill="#C8BDA5"/>
+        <rect x="34" y="158" width="52" height="7" rx="2" fill="url(#chessGrad)"/>
+        <rect x="32" y="165" width="56" height="15" rx="3" fill="url(#chessGrad)"/>
+        <rect x="32" y="165" width="56" height="15" rx="3" fill="url(#chessShadow)"/>
+        <rect x="32" y="178" width="56" height="2" fill="#A89D85"/>
+      </g>
+    </svg>
+    <div class="character-label">Chess</div>
+  </div>
+
+  <!-- 4. COD MOBILE — CURVED VISOR & ELBOW JOINTS -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="codmDark" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#2A2A2A"/><stop offset="100%" stop-color="#1A1A1A"/>
+        </linearGradient>
+        <radialGradient id="codmGoggle">
+          <stop offset="0%" stop-color="#00CCFF"/><stop offset="100%" stop-color="#0066AA"/>
+        </radialGradient>
+      </defs>
+      <!-- Helmet -->
+      <path d="M44 8 Q60 2 76 8 L78 22 L42 22 Z" fill="#1A1A1A"/>
+      <rect x="42" y="20" width="36" height="4" fill="#0A0A0A"/>
+      <rect x="52" y="22" width="16" height="3" fill="#333"/>
+      <!-- Head with balaclava -->
+      <rect x="50" y="22" width="20" height="24" rx="5" fill="#C8A878"/>
+      <!-- Curved visor following head contour -->
+      <path d="M47 28 Q60 25 73 28 L73 37 Q60 34 47 37 Z" fill="#2A2A2A" rx="2"/>
+      <circle cx="53" cy="33" r="2.8" fill="url(#codmGoggle)"/>
+      <circle cx="60" cy="32" r="2.8" fill="url(#codmGoggle)"/>
+      <circle cx="67" cy="33" r="2.8" fill="url(#codmGoggle)"/>
+      <circle cx="53" cy="33" r="1" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="60" cy="32" r="1" fill="#FFFFFF" opacity="0.6"/>
+      <circle cx="67" cy="33" r="1" fill="#FFFFFF" opacity="0.6"/>
+      <!-- Tactical mask with balaclava seam lines -->
+      <path d="M48 40 L72 40 L70 48 L50 48 Z" fill="#2A2A2A"/>
+      <line x1="50" y1="42" x2="70" y2="42" stroke="#111" stroke-width="1"/>
+      <line x1="51" y1="46" x2="69" y2="46" stroke="#111" stroke-width="1"/>
+      <!-- Torso -->
+      <path d="M40 48 L80 48 L84 105 L36 105 Z" fill="url(#codmDark)"/>
+      <line x1="40" y1="60" x2="80" y2="60" stroke="#0A0A0A" stroke-width="1"/>
+      <line x1="40" y1="85" x2="80" y2="85" stroke="#0A0A0A" stroke-width="1"/>
+      <rect x="44" y="62" width="10" height="12" rx="2" fill="#333"/>
+      <rect x="66" y="62" width="10" height="12" rx="2" fill="#333"/>
+      <!-- Arms with rounded corners (rx: 5) and elbow joints -->
+      <rect x="24" y="52" width="14" height="35" rx="5" fill="url(#codmDark)" transform="rotate(15, 31, 69)"/>
+      <circle cx="29" cy="68" r="3.5" fill="#1A1A1A"/>
+      <rect x="82" y="52" width="14" height="38" rx="5" fill="url(#codmDark)" transform="rotate(-10, 89, 71)"/>
+      <circle cx="89" cy="70" r="3.5" fill="#1A1A1A"/>
+      <!-- Hands -->
+      <circle cx="22" cy="90" r="5" fill="#C8A878"/>
+      <circle cx="96" cy="92" r="5" fill="#C8A878"/>
+      <ellipse cx="48" cy="120" rx="10" ry="5" fill="#333"/>
+      <ellipse cx="72" cy="120" rx="10" ry="5" fill="#333"/>
+      <!-- Legs with rx: 5 -->
+      <rect x="40" y="105" width="18" height="40" rx="5" fill="#1A1A1A" transform="rotate(12, 49, 125)"/>
+      <rect x="62" y="105" width="18" height="40" rx="5" fill="#1A1A1A" transform="rotate(-10, 71, 125)"/>
+      <rect x="38" y="145" width="16" height="30" rx="4" fill="#1A1A1A"/>
+      <rect x="66" y="145" width="16" height="30" rx="4" fill="#1A1A1A"/>
+      <rect x="36" y="173" width="20" height="14" rx="2" fill="#0A0A0A"/>
+      <rect x="64" y="173" width="20" height="14" rx="2" fill="#0A0A0A"/>
+      <line x1="36" y1="176" x2="56" y2="176" stroke="#333" stroke-width="1"/>
+      <line x1="64" y1="176" x2="84" y2="176" stroke="#333" stroke-width="1"/>
+    </svg>
+    <div class="character-label">COD Mobile</div>
+  </div>
+
+  <!-- 5. CS2 — HELMET VENTS, ARMOR PANELS & NECK -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="cs2Uniform" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#3A5066"/><stop offset="100%" stop-color="#2A3A4E"/>
+        </linearGradient>
+        <linearGradient id="cs2Helmet" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#2A3A4E"/><stop offset="100%" stop-color="#1A2A3E"/>
+        </linearGradient>
+      </defs>
+      <!-- Helmet with vents -->
+      <path d="M44 6 Q60 0 76 6 L78 24 L42 24 Z" fill="url(#cs2Helmet)"/>
+      <rect x="42" y="22" width="36" height="4" fill="#1A2A3E"/>
+      <line x1="60" y1="6" x2="60" y2="22" stroke="#1A2A3E" stroke-width="0.5"/>
+      <!-- Helmet ventilation slits -->
+      <line x1="45" y1="14" x2="50" y2="14" stroke="#111" stroke-width="1.2"/>
+      <line x1="45" y1="17" x2="50" y2="17" stroke="#111" stroke-width="1.2"/>
+      <line x1="70" y1="14" x2="75" y2="14" stroke="#111" stroke-width="1.2"/>
+      <line x1="70" y1="17" x2="75" y2="17" stroke="#111" stroke-width="1.2"/>
+      <!-- Head with balaclava -->
+      <rect x="50" y="22" width="20" height="28" rx="6" fill="#3A4A5E"/>
+      <rect x="52" y="33" width="16" height="5" rx="1" fill="#1A1A1A"/>
+      <rect x="54" y="34" width="5" height="2" fill="#00CCFF" opacity="0.8"/>
+      <rect x="61" y="34" width="5" height="2" fill="#00CCFF" opacity="0.8"/>
+      <!-- Neck connector -->
+      <rect x="54" y="47" width="12" height="7" rx="1" fill="#2A3A4E"/>
+      <!-- Torso -->
+      <path d="M38 54 L82 54 L84 112 L36 112 Z" fill="url(#cs2Uniform)"/>
+      <path d="M42 57 L78 57 L80 105 L40 105 Z" fill="#2A3A4E" opacity="0.7"/>
+      <!-- Chest armor panel lines -->
+      <line x1="42" y1="68" x2="78" y2="68" stroke="#1A2A3E" stroke-width="1"/>
+      <line x1="42" y1="80" x2="78" y2="80" stroke="#1A2A3E" stroke-width="1"/>
+      <line x1="42" y1="92" x2="78" y2="92" stroke="#1A2A3E" stroke-width="1"/>
+      <line x1="60" y1="57" x2="60" y2="105" stroke="#1A2A3E" stroke-width="0.8"/>
+      <!-- Straps & Pouches -->
+      <rect x="48" y="60" width="3" height="44" fill="#1A2A3E"/>
+      <rect x="69" y="60" width="3" height="44" fill="#1A2A3E"/>
+      <rect x="38" y="76" width="8" height="12" rx="1" fill="#2A3A4E"/>
+      <rect x="74" y="76" width="8" height="12" rx="1" fill="#2A3A4E"/>
+      <!-- Arms -->
+      <rect x="26" y="57" width="12" height="46" rx="3" fill="url(#cs2Uniform)"/>
+      <rect x="82" y="57" width="12" height="46" rx="3" fill="url(#cs2Uniform)"/>
+      <circle cx="32" cy="106" r="5" fill="#1A1A1A"/>
+      <circle cx="88" cy="106" r="5" fill="#1A1A1A"/>
+      <!-- Legs -->
+      <rect x="40" y="112" width="18" height="58" rx="4" fill="#2A3A4E"/>
+      <rect x="62" y="112" width="18" height="58" rx="4" fill="#2A3A4E"/>
+      <rect x="40" y="140" width="18" height="7" rx="2" fill="#1A2A3E"/>
+      <rect x="62" y="140" width="18" height="7" rx="2" fill="#1A2A3E"/>
+      <!-- Slightly wider boots (24px) for solid proportion -->
+      <rect x="37" y="167" width="24" height="16" rx="2" fill="#1A1A1A"/>
+      <rect x="59" y="167" width="24" height="16" rx="2" fill="#1A1A1A"/>
+      <line x1="37" y1="170" x2="61" y2="170" stroke="#333" stroke-width="1"/>
+      <line x1="59" y1="170" x2="83" y2="170" stroke="#333" stroke-width="1"/>
+    </svg>
+    <div class="character-label">CS2</div>
+  </div>
+
+  <!-- 6. EA FC — BENT KICKING LEG & CLASSIC SOCCER BALL -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="efcJersey" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#E03C31"/><stop offset="100%" stop-color="#B71C1C"/>
+        </linearGradient>
+        <linearGradient id="efcSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#D8B88C"/><stop offset="100%" stop-color="#C8A878"/>
+        </linearGradient>
+      </defs>
+      <!-- Head & Face -->
+      <circle cx="55" cy="22" r="13" fill="url(#efcSkin)"/>
+      <path d="M42 18 A13 13 0 0 1 68 18 L68 12 L42 12 Z" fill="#3A2A1A"/>
+      <path d="M45 14 Q55 8 65 14 L65 18 L45 18 Z" fill="#2A1A0A"/>
+      <circle cx="51" cy="24" r="1.5" fill="#333"/>
+      <circle cx="59" cy="24" r="1.5" fill="#333"/>
+      <path d="M50 30 Q55 33 60 30" stroke="#A87858" stroke-width="1" fill="none"/>
+      <rect x="50" y="34" width="10" height="6" fill="#C8A878"/>
+      <!-- Jersey / torso -->
+      <path d="M38 40 L72 40 L76 92 L34 92 Z" fill="url(#efcJersey)"/>
+      <rect x="53" y="40" width="4" height="52" fill="#FFFFFF" opacity="0.3"/>
+      <path d="M46 40 L64 40 L60 46 L50 46 Z" fill="#B71C1C"/>
+      <!-- Both arms clearly visible for balance -->
+      <g transform="rotate(-32, 38, 44)">
+        <rect x="28" y="44" width="12" height="38" rx="4" fill="url(#efcJersey)"/>
+        <circle cx="34" cy="84" r="5" fill="url(#efcSkin)"/>
+      </g>
+      <g transform="rotate(20, 74, 44)">
+        <rect x="70" y="44" width="12" height="36" rx="4" fill="url(#efcJersey)"/>
+        <circle cx="76" cy="82" r="5" fill="url(#efcSkin)"/>
+      </g>
+      <!-- Shorts -->
+      <path d="M36 92 L74 92 L72 112 L56 112 L52 112 L38 112 Z" fill="#1A1A1A"/>
+      <!-- Standing leg -->
+      <rect x="40" y="112" width="14" height="55" rx="4" fill="url(#efcSkin)"/>
+      <ellipse cx="47" cy="138" rx="7" ry="3" fill="#B89878"/>
+      <rect x="38" y="165" width="18" height="10" rx="2" fill="#1A1A1A"/>
+      <!-- Clearly bent kicking leg: shorter thigh, prominent knee, angled longer shin -->
+      <path d="M58 112 L72 112 L78 128 L64 128 Z" fill="url(#efcSkin)"/>
+      <!-- Prominent knee joint -->
+      <circle cx="71" cy="128" r="6" fill="#B89878"/>
+      <!-- Shin angled down-forward to the ball -->
+      <path d="M66 130 L76 130 L88 154 L78 154 Z" fill="url(#efcSkin)"/>
+      <ellipse cx="83" cy="154" rx="4.5" ry="3" fill="#C8A878"/>
+      <!-- Cleat pointing at ball -->
+      <path d="M79 153 L92 153 L96 160 L79 160 Z" fill="#1A1A1A"/>
+      <!-- Classic soccer ball pattern with central & perimeter pentagons -->
+      <g transform="translate(102, 160)">
+        <circle cx="0" cy="0" r="9.5" fill="#FFFFFF" stroke="#222" stroke-width="1.2"/>
+        <!-- Central pentagon -->
+        <polygon points="0,-3 3,-1 2,3 -2,3 -3,-1" fill="#1A1A1A"/>
+        <!-- 5 connecting seam lines -->
+        <line x1="0" y1="-3" x2="0" y2="-8" stroke="#1A1A1A" stroke-width="1"/>
+        <line x1="3" y1="-1" x2="7.5" y2="-3" stroke="#1A1A1A" stroke-width="1"/>
+        <line x1="2" y1="3" x2="5.5" y2="7" stroke="#1A1A1A" stroke-width="1"/>
+        <line x1="-2" y1="3" x2="-5.5" y2="7" stroke="#1A1A1A" stroke-width="1"/>
+        <line x1="-3" y1="-1" x2="-7.5" y2="-3" stroke="#1A1A1A" stroke-width="1"/>
+        <!-- Outer edge patches -->
+        <polygon points="-2,-8 2,-8 0,-6" fill="#1A1A1A"/>
+        <polygon points="7.5,-4 8.5,-1 6,-2" fill="#1A1A1A"/>
+        <polygon points="5,6.5 7.5,4.5 4,5" fill="#1A1A1A"/>
+      </g>
+    </svg>
+    <div class="character-label">EA FC</div>
+  </div>
+
+  <!-- 7. FREE FIRE — ROUND HOOD, KANGAROO POCKET & LACES -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="ffHoodie" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FF6B35"/><stop offset="100%" stop-color="#CC4A1E"/>
+        </linearGradient>
+        <linearGradient id="ffSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#D8B88C"/><stop offset="100%" stop-color="#C8A878"/>
+        </linearGradient>
+      </defs>
+      <!-- Backpack -->
+      <rect x="34" y="48" width="52" height="50" rx="6" fill="#8B4513" opacity="0.4"/>
+      <!-- Rounded 3D Hood with curves -->
+      <path d="M38 10 Q60 -4 82 10 Q88 22 82 34 Q60 40 38 34 Q32 22 38 10 Z" fill="url(#ffHoodie)"/>
+      <path d="M44 14 Q60 4 76 14 L74 30 L46 30 Z" fill="#000" opacity="0.38"/>
+      <!-- Head inside hood -->
+      <ellipse cx="60" cy="25" rx="12" ry="14" fill="url(#ffSkin)"/>
+      <path d="M48 20 Q60 12 72 20 L72 16 L48 16 Z" fill="#000" opacity="0.25"/>
+      <circle cx="55" cy="27" r="1.5" fill="#333"/>
+      <circle cx="65" cy="27" r="1.5" fill="#333"/>
+      <rect x="56" y="33" width="8" height="2" rx="1" fill="#A87858"/>
+      <!-- Hood opening collar -->
+      <ellipse cx="60" cy="36" rx="18" ry="6" fill="url(#ffHoodie)"/>
+      <!-- Torso -->
+      <path d="M38 38 L82 38 L86 108 L34 108 Z" fill="url(#ffHoodie)"/>
+      <!-- Hoodie drawstrings with terminal knot circles -->
+      <line x1="56" y1="40" x2="56" y2="64" stroke="#FFFFFF" stroke-width="2" opacity="0.8"/>
+      <circle cx="56" cy="65" r="2.5" fill="#FFFFFF" opacity="0.9"/>
+      <line x1="64" y1="40" x2="64" y2="64" stroke="#FFFFFF" stroke-width="2" opacity="0.8"/>
+      <circle cx="64" cy="65" r="2.5" fill="#FFFFFF" opacity="0.9"/>
+      <!-- Curved kangaroo pocket -->
+      <path d="M44 72 Q60 68 76 72 L73 88 Q60 92 47 88 Z" fill="#B73C14" stroke="#8E2D0E" stroke-width="0.8"/>
+      <!-- Arms -->
+      <rect x="24" y="42" width="12" height="48" rx="3" fill="url(#ffHoodie)"/>
+      <rect x="84" y="42" width="12" height="40" rx="3" fill="url(#ffHoodie)"/>
+      <!-- Hands & Pistol -->
+      <circle cx="90" cy="85" r="5" fill="url(#ffSkin)"/>
+      <rect x="84" y="82" width="4" height="14" rx="1" fill="#2A2A2A"/>
+      <rect x="84" y="82" width="14" height="4" rx="1" fill="#2A2A2A"/>
+      <rect x="96" y="83" width="2" height="3" fill="#444"/>
+      <circle cx="30" cy="92" r="5" fill="url(#ffSkin)"/>
+      <!-- Legs -->
+      <rect x="42" y="108" width="16" height="58" rx="4" fill="#3A3A3A"/>
+      <rect x="62" y="108" width="16" height="58" rx="4" fill="#3A3A3A"/>
+      <rect x="44" y="118" width="6" height="12" rx="1" fill="#2A2A2A" opacity="0.5"/>
+      <rect x="70" y="118" width="6" height="12" rx="1" fill="#2A2A2A" opacity="0.5"/>
+      <!-- Boots with shoelaces -->
+      <rect x="40" y="163" width="20" height="14" rx="2" fill="#1A1A1A"/>
+      <rect x="60" y="163" width="20" height="14" rx="2" fill="#1A1A1A"/>
+      <line x1="44" y1="166" x2="56" y2="166" stroke="#666" stroke-width="1"/>
+      <line x1="44" y1="169" x2="56" y2="169" stroke="#666" stroke-width="1"/>
+      <line x1="64" y1="166" x2="76" y2="166" stroke="#666" stroke-width="1"/>
+      <line x1="64" y1="169" x2="76" y2="169" stroke="#666" stroke-width="1"/>
+    </svg>
+    <div class="character-label">Free Fire</div>
+  </div>
+
+  <!-- 8. MOBA — METALLIC ARMOR, VISOR GRILL & FINGER GRIP -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="mobaArmor" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#5A8AD5"/><stop offset="50%" stop-color="#3D649A"/><stop offset="100%" stop-color="#2A4A7A"/>
+        </linearGradient>
+        <linearGradient id="mobaCape" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#B21C01"/><stop offset="100%" stop-color="#7A1001"/>
+        </linearGradient>
+        <linearGradient id="mobaBlade" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#E0E0E0"/><stop offset="50%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#C0C0C0"/>
+        </linearGradient>
+      </defs>
+      <!-- Cape with 3 fold lines -->
+      <path d="M38 42 L82 42 L92 155 L28 155 Z" fill="url(#mobaCape)" opacity="0.85"/>
+      <path d="M46 45 Q42 100 34 155" stroke="#5A0800" stroke-width="2" fill="none" opacity="0.7"/>
+      <path d="M60 45 Q60 100 60 155" stroke="#5A0800" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M74 45 Q78 100 86 155" stroke="#5A0800" stroke-width="2" fill="none" opacity="0.7"/>
+      <!-- Helmet with visor slit & breathing grill -->
+      <path d="M46 4 L74 4 L78 32 L42 32 Z" fill="url(#mobaArmor)"/>
+      <path d="M50 4 L60 -2 L70 4 Z" fill="#75A5F0"/>
+      <!-- Visor slit -->
+      <rect x="50" y="20" width="20" height="5" rx="1" fill="#1A2A4A"/>
+      <rect x="53" y="22" width="14" height="2" fill="#00CCFF" opacity="0.85"/>
+      <!-- Breathing grill below visor -->
+      <line x1="54" y1="27" x2="54" y2="30" stroke="#1A2A4A" stroke-width="1.2"/>
+      <line x1="58" y1="27" x2="58" y2="30" stroke="#1A2A4A" stroke-width="1.2"/>
+      <line x1="62" y1="27" x2="62" y2="30" stroke="#1A2A4A" stroke-width="1.2"/>
+      <line x1="66" y1="27" x2="66" y2="30" stroke="#1A2A4A" stroke-width="1.2"/>
+      <!-- Pauldrons -->
+      <ellipse cx="34" cy="46" rx="14" ry="12" fill="url(#mobaArmor)"/>
+      <ellipse cx="86" cy="46" rx="14" ry="12" fill="url(#mobaArmor)"/>
+      <!-- Chest plate with metallic sheen -->
+      <path d="M42 42 L78 42 L80 98 L40 98 Z" fill="url(#mobaArmor)"/>
+      <path d="M44 44 L76 44 L78 75 L42 75 Z" fill="#75A5F0" opacity="0.25"/>
+      <!-- Chest emblem -->
+      <path d="M55 56 L65 56 L62 72 L58 72 Z" fill="#FFD700"/>
+      <path d="M58 58 L62 58 L60 68 Z" fill="#FFA500"/>
+      <!-- Belt -->
+      <rect x="40" y="96" width="40" height="6" fill="#5A3A1A"/>
+      <rect x="56" y="96" width="8" height="6" fill="#FFD700"/>
+      <!-- Shield arm -->
+      <rect x="22" y="48" width="12" height="42" rx="3" fill="url(#mobaArmor)"/>
+      <ellipse cx="18" cy="75" rx="15" ry="22" fill="#5A8AD5" opacity="0.95"/>
+      <ellipse cx="18" cy="75" rx="12" ry="18" fill="#3A5A85"/>
+      <ellipse cx="18" cy="75" rx="15" ry="22" fill="none" stroke="#FFD700" stroke-width="1.5"/>
+      <path d="M12 70 L24 70 L20 80 L16 80 Z" fill="#FFD700"/>
+      <!-- Sword arm with gripped fingers on handle -->
+      <rect x="86" y="48" width="12" height="30" rx="3" fill="url(#mobaArmor)"/>
+      <rect x="92" y="18" width="4" height="55" fill="url(#mobaBlade)"/>
+      <path d="M92 18 L96 18 L94 10 Z" fill="#E0E0E0"/>
+      <rect x="86" y="72" width="16" height="4" rx="1" fill="#8B4513"/>
+      <rect x="93" y="76" width="3" height="10" fill="#5A3A1A"/>
+      <!-- Hand fingers wrapped around handle -->
+      <rect x="91" y="76" width="6" height="2.5" rx="1" fill="#D8B88C"/>
+      <rect x="91" y="79" width="6" height="2.5" rx="1" fill="#D8B88C"/>
+      <rect x="91" y="82" width="6" height="2.5" rx="1" fill="#D8B88C"/>
+      <circle cx="94" cy="88" r="2.5" fill="#FFD700"/>
+      <!-- Armored legs -->
+      <rect x="42" y="102" width="16" height="55" rx="4" fill="url(#mobaArmor)"/>
+      <rect x="62" y="102" width="16" height="55" rx="4" fill="url(#mobaArmor)"/>
+      <rect x="40" y="155" width="20" height="18" rx="3" fill="#2A4A7A"/>
+      <rect x="60" y="155" width="20" height="18" rx="3" fill="#2A4A7A"/>
+    </svg>
+    <div class="character-label">MOBA</div>
+  </div>
+
+  <!-- 9. PIKACHU — PEAR BODY, LOWER EARS & BROWN TAIL BASE -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="pikaBody" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFD93D"/><stop offset="100%" stop-color="#FFB800"/>
+        </linearGradient>
+        <linearGradient id="pikaBelly" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFE680"/><stop offset="100%" stop-color="#FFCC33"/>
+        </linearGradient>
+      </defs>
+      <!-- Ears lower & further apart with solid black tips -->
+      <path d="M34 46 L14 12 L44 38 Z" fill="url(#pikaBody)"/>
+      <path d="M34 46 L20 18 L42 38 Z" fill="#2A2A2A"/>
+      <path d="M86 46 L106 12 L76 38 Z" fill="url(#pikaBody)"/>
+      <path d="M86 46 L100 18 L78 38 Z" fill="#2A2A2A"/>
+      <!-- Brown patch where tail meets lower back -->
+      <path d="M86 124 L94 116 L98 122 L90 130 Z" fill="#8B5A2B"/>
+      <!-- Zigzag lightning tail -->
+      <path d="M92 122 L106 102 L98 98 L110 76 L102 72 L114 46 L106 42 L114 16" 
+            stroke="#FFD93D" stroke-width="8.5" fill="none" stroke-linejoin="miter" stroke-linecap="round"/>
+      <path d="M92 122 L106 102 L98 98 L110 76 L102 72 L114 46 L106 42 L114 16" 
+            stroke="#FF9900" stroke-width="3" fill="none" stroke-linejoin="miter" opacity="0.45"/>
+      <path d="M106 16 L118 8 L114 22 L118 30 L108 26 Z" fill="#FFD93D" stroke="#FF9900" stroke-width="1"/>
+      <!-- Head -->
+      <ellipse cx="60" cy="54" rx="28" ry="24" fill="url(#pikaBody)"/>
+      <ellipse cx="60" cy="62" rx="20" ry="14" fill="url(#pikaBelly)" opacity="0.6"/>
+      <!-- Eyes & Proportioned Cheek Circles (cheeks smaller relative to eyes) -->
+      <circle cx="47" cy="50" r="5.5" fill="#2A2A2A"/>
+      <circle cx="48.5" cy="49" r="2.2" fill="#FFFFFF"/>
+      <circle cx="73" cy="50" r="5.5" fill="#2A2A2A"/>
+      <circle cx="74.5" cy="49" r="2.2" fill="#FFFFFF"/>
+      <circle cx="38" cy="61" r="5.5" fill="#FF2222"/>
+      <circle cx="82" cy="61" r="5.5" fill="#FF2222"/>
+      <!-- Tiny nose & cat '3' mouth -->
+      <circle cx="60" cy="57" r="1.2" fill="#2A2A2A"/>
+      <path d="M54 62 Q57 65 60 62 Q63 65 66 62" stroke="#2A2A2A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <!-- Chonky pear-shaped body (wider at base) -->
+      <ellipse cx="60" cy="116" rx="36" ry="40" fill="url(#pikaBody)"/>
+      <ellipse cx="60" cy="122" rx="24" ry="28" fill="url(#pikaBelly)" opacity="0.75"/>
+      <!-- Stubby arms -->
+      <ellipse cx="30" cy="106" rx="9" ry="15" fill="url(#pikaBody)" transform="rotate(-20, 30, 106)"/>
+      <ellipse cx="90" cy="106" rx="9" ry="15" fill="url(#pikaBody)" transform="rotate(20, 90, 106)"/>
+      <!-- Feet with 3 distinct visible toe lines each -->
+      <ellipse cx="44" cy="158" rx="13" ry="7" fill="#FFB800"/>
+      <ellipse cx="76" cy="158" rx="13" ry="7" fill="#FFB800"/>
+      <line x1="39" y1="160" x2="39" y2="164" stroke="#CC9900" stroke-width="1.5"/>
+      <line x1="44" y1="160" x2="44" y2="165" stroke="#CC9900" stroke-width="1.5"/>
+      <line x1="49" y1="160" x2="49" y2="164" stroke="#CC9900" stroke-width="1.5"/>
+      <line x1="71" y1="160" x2="71" y2="164" stroke="#CC9900" stroke-width="1.5"/>
+      <line x1="76" y1="160" x2="76" y2="165" stroke="#CC9900" stroke-width="1.5"/>
+      <line x1="81" y1="160" x2="81" y2="164" stroke="#CC9900" stroke-width="1.5"/>
+    </svg>
+    <div class="character-label">Pikachu</div>
+  </div>
+
+  <!-- 10. TEKKEN — POLYGON HAIR SPIKES, V-NECK OVERLAP & OBI -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="tekkenGi" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#B71C1C"/><stop offset="100%" stop-color="#7A1010"/>
+        </linearGradient>
+        <linearGradient id="tekkenSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#D8B88C"/><stop offset="100%" stop-color="#C8A878"/>
+        </linearGradient>
+      </defs>
+      <!-- Distinct sharp hair spikes using separate polygons -->
+      <polygon points="40,20 45,4 52,18" fill="#1A1A1A"/>
+      <polygon points="49,18 55,1 61,17" fill="#1A1A1A"/>
+      <polygon points="58,17 65,2 71,18" fill="#1A1A1A"/>
+      <polygon points="68,18 75,5 80,21" fill="#1A1A1A"/>
+      <rect x="44" y="16" width="32" height="6" fill="#1A1A1A"/>
+      <!-- Head with defined jawline -->
+      <path d="M46 18 L74 18 L76 38 L44 38 Z" fill="url(#tekkenSkin)"/>
+      <path d="M46 32 Q60 38 74 32 L74 36 L46 36 Z" fill="#000" opacity="0.1"/>
+      <path d="M50 26 L58 24 L56 30 Z" fill="#2A2A2A"/>
+      <path d="M62 24 L70 26 L66 30 Z" fill="#2A2A2A"/>
+      <line x1="48" y1="22" x2="58" y2="24" stroke="#2A2A2A" stroke-width="1.5"/>
+      <line x1="62" y1="24" x2="72" y2="22" stroke="#2A2A2A" stroke-width="1.5"/>
+      <rect x="56" y="34" width="8" height="3" rx="1" fill="#5A3A2A" opacity="0.5"/>
+      <rect x="54" y="36" width="12" height="2" rx="1" fill="#5A3A2A"/>
+      <rect x="54" y="38" width="12" height="6" fill="#C8A878"/>
+      <!-- Gi base -->
+      <path d="M34 44 L86 44 L88 100 L32 100 Z" fill="url(#tekkenGi)"/>
+      <!-- Visible V-neck opening: Left lapel crossing OVER right lapel with white inner lining -->
+      <path d="M72 44 L60 74 L68 100 L78 100 L78 50 Z" fill="#5A1010"/>
+      <!-- White inner edge of left lapel -->
+      <line x1="48" y1="44" x2="60" y2="76" stroke="#FFFFFF" stroke-width="1.5" opacity="0.8"/>
+      <!-- Left lapel overlapping -->
+      <path d="M48 44 L60 76 L52 100 L42 100 L42 50 Z" fill="#6A1212"/>
+      <!-- Prominent Black Belt (Obi) with knot and hanging ends -->
+      <rect x="32" y="96" width="56" height="8" fill="#1A1A1A"/>
+      <rect x="54" y="94" width="12" height="12" rx="1" fill="#1A1A1A"/>
+      <!-- Two hanging belt ends -->
+      <rect x="55" y="104" width="4" height="14" fill="#1A1A1A"/>
+      <rect x="61" y="104" width="4" height="12" fill="#1A1A1A"/>
+      <!-- Arms -->
+      <rect x="20" y="50" width="14" height="35" rx="4" fill="url(#tekkenGi)" transform="rotate(20, 27, 67)"/>
+      <!-- Left fist with knuckle arcs -->
+      <circle cx="16" cy="90" r="8" fill="#B71C1C"/>
+      <rect x="12" y="84" width="8" height="4" fill="#7A1010"/>
+      <path d="M13 88 Q16 86 19 88" stroke="#5A0808" stroke-width="1.2" fill="none"/>
+      <path d="M13 92 Q16 90 19 92" stroke="#5A0808" stroke-width="1.2" fill="none"/>
+      <rect x="86" y="50" width="14" height="30" rx="4" fill="url(#tekkenGi)" transform="rotate(-15, 93, 65)"/>
+      <!-- Right fist with knuckle arcs -->
+      <circle cx="100" cy="82" r="8" fill="#B71C1C"/>
+      <rect x="96" y="76" width="8" height="4" fill="#7A1010"/>
+      <path d="M97 80 Q100 78 103 80" stroke="#5A0808" stroke-width="1.2" fill="none"/>
+      <path d="M97 84 Q100 82 103 84" stroke="#5A0808" stroke-width="1.2" fill="none"/>
+      <!-- Gi pants -->
+      <rect x="38" y="104" width="20" height="58" rx="4" fill="#7A1010"/>
+      <rect x="62" y="104" width="20" height="58" rx="4" fill="#7A1010"/>
+      <rect x="40" y="132" width="16" height="8" rx="2" fill="#5A1010"/>
+      <rect x="64" y="132" width="16" height="8" rx="2" fill="#5A1010"/>
+      <!-- Bare feet with toes -->
+      <ellipse cx="46" cy="168" rx="13" ry="7" fill="url(#tekkenSkin)"/>
+      <ellipse cx="74" cy="168" rx="13" ry="7" fill="url(#tekkenSkin)"/>
+      <line x1="38" y1="168" x2="38" y2="173" stroke="#B89878" stroke-width="1.5"/>
+      <line x1="42" y1="168" x2="42" y2="174" stroke="#B89878" stroke-width="1.5"/>
+      <line x1="46" y1="168" x2="46" y2="174" stroke="#B89878" stroke-width="1.5"/>
+      <line x1="50" y1="168" x2="50" y2="174" stroke="#B89878" stroke-width="1.5"/>
+      <line x1="68" y1="168" x2="68" y2="173" stroke="#B89878" stroke-width="1.5"/>
+      <line x1="72" y1="168" x2="72" y2="174" stroke="#B89878" stroke-width="1.5"/>
+      <line x1="76" y1="168" x2="76" y2="174" stroke="#B89878" stroke-width="1.5"/>
+      <line x1="80" y1="168" x2="80" y2="174" stroke="#B89878" stroke-width="1.5"/>
+    </svg>
+    <div class="character-label">Tekken</div>
+  </div>
+
+  <!-- 11. VALORANT (Reyna) — CONNECTED ENERGY WISPS & THIGH-HIGH BOOTS -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="valHair" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#2A2A35"/><stop offset="60%" stop-color="#6A2070"/><stop offset="100%" stop-color="#E02E9D"/>
+        </linearGradient>
+        <linearGradient id="valSuit" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#1A1A1F"/><stop offset="100%" stop-color="#0A0A0F"/>
+        </linearGradient>
+        <radialGradient id="valChest">
+          <stop offset="0%" stop-color="#FFFFFF"/><stop offset="30%" stop-color="#9B30FF"/><stop offset="100%" stop-color="#4A0A8A" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="valSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#C48B6D"/><stop offset="100%" stop-color="#B07B5D"/>
+        </linearGradient>
+        <filter id="reynaGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="2.5" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <!-- Flowing hair -->
+      <path d="M42 12 Q38 50 36 100 L48 100 L48 18 Z" fill="url(#valHair)"/>
+      <path d="M78 12 Q82 50 84 100 L72 100 L72 18 Z" fill="url(#valHair)"/>
+      <!-- Head & Eyes -->
+      <path d="M48 10 L72 10 L74 32 L46 32 Z" fill="url(#valSkin)"/>
+      <path d="M44 8 L76 8 L78 16 L42 16 Z" fill="#2A2A35"/>
+      <ellipse cx="54" cy="22" rx="3" ry="2" fill="#FF00FF"/>
+      <ellipse cx="66" cy="22" rx="3" ry="2" fill="#FF00FF"/>
+      <circle cx="54" cy="22" r="1" fill="#FFFFFF"/>
+      <circle cx="66" cy="22" r="1" fill="#FFFFFF"/>
+      <!-- Gold jewelry -->
+      <circle cx="46" cy="30" r="3" fill="none" stroke="#C5A059" stroke-width="1.5"/>
+      <circle cx="74" cy="30" r="3" fill="none" stroke="#C5A059" stroke-width="1.5"/>
+      <rect x="48" y="34" width="24" height="4" rx="1" fill="#C5A059"/>
+      <circle cx="60" cy="36" r="2" fill="#FF0000"/>
+      <!-- Bodysuit torso -->
+      <path d="M40 38 L80 38 L82 102 L38 102 Z" fill="url(#valSuit)"/>
+      <!-- Glowing chest core -->
+      <ellipse cx="60" cy="55" rx="12" ry="10" fill="url(#valChest)"/>
+      <circle cx="60" cy="55" r="5" fill="#9B30FF" opacity="0.85"/>
+      <circle cx="60" cy="55" r="2" fill="#FFFFFF" opacity="0.95"/>
+      <!-- Gold belt -->
+      <rect x="38" y="96" width="44" height="6" fill="#C5A059"/>
+      <polygon points="54,96 66,96 70,102 62,106 58,106 50,102" fill="#FF00FF"/>
+      <!-- Clean, unified bodysuit pelvic area -->
+      <path d="M38 102 L82 102 L70 120 L50 120 Z" fill="url(#valSuit)"/>
+      <!-- Right arm & Vandal rifle -->
+      <rect x="22" y="42" width="12" height="35" rx="3" fill="url(#valSuit)" transform="rotate(-30, 28, 60)"/>
+      <circle cx="20" cy="78" r="5" fill="url(#valSkin)" transform="rotate(-30, 20, 78)"/>
+      <rect x="4" y="68" width="40" height="4" rx="1" fill="#111111"/>
+      <rect x="4" y="66" width="6" height="3" fill="#333"/>
+      <rect x="14" y="72" width="5" height="12" rx="1" fill="#111111"/>
+      <rect x="30" y="65" width="8" height="3" rx="1" fill="#333"/>
+      <!-- Left arm with hand -->
+      <rect x="84" y="42" width="12" height="45" rx="3" fill="url(#valSuit)"/>
+      <circle cx="90" cy="88" r="5" fill="url(#valSkin)"/>
+      <!-- Connected Energy Wisps with glow filter -->
+      <g filter="url(#reynaGlow)">
+        <path d="M90 88 Q102 96 112 92 Q118 90 120 98" stroke="#E02E9D" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M90 90 Q98 104 108 100 Q116 98 118 108" stroke="#9B30FF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M90 86 Q104 92 114 86 Q120 84 122 92" stroke="#FF00FF" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="106" cy="94" r="2.2" fill="#E02E9D"/>
+        <circle cx="114" cy="98" r="1.8" fill="#FF00FF"/>
+      </g>
+      <!-- Proportional legs with thigh-high boot line -->
+      <!-- Exposed upper thighs -->
+      <path d="M40 106 L56 106 L55 128 L41 128 Z" fill="url(#valSkin)"/>
+      <path d="M64 106 L80 106 L79 128 L65 128 Z" fill="url(#valSkin)"/>
+      <!-- Thigh-high boot gold rim cuffs -->
+      <rect x="40" y="128" width="16" height="3" rx="1" fill="#C5A059"/>
+      <rect x="64" y="128" width="16" height="3" rx="1" fill="#C5A059"/>
+      <!-- Thigh-high boots (slightly thicker for proportion) -->
+      <rect x="40" y="131" width="16" height="35" rx="3" fill="url(#valSuit)"/>
+      <rect x="64" y="131" width="16" height="35" rx="3" fill="url(#valSuit)"/>
+      <!-- Gold armored feet -->
+      <rect x="39" y="165" width="18" height="16" rx="2" fill="#C5A059"/>
+      <rect x="63" y="165" width="18" height="16" rx="2" fill="#C5A059"/>
+      <circle cx="48" cy="173" r="2" fill="#FF00FF" opacity="0.8"/>
+      <circle cx="72" cy="173" r="2" fill="#FF00FF" opacity="0.8"/>
+      <rect x="39" y="179" width="18" height="3" fill="#1A1A1A"/>
+      <rect x="63" y="179" width="18" height="3" fill="#1A1A1A"/>
+    </svg>
+    <div class="character-label">Valorant</div>
+  </div>
+
+  <!-- 12. MINECRAFT (Steve) — PROPORTIONAL 44x40 HEAD, NOSE & THICKER ARMS -->
+  <div class="character-slot">
+    <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="mcHead" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#C4A484"/><stop offset="100%" stop-color="#B89868"/>
+        </linearGradient>
+      </defs>
+      <!-- LARGE SQUARE 44x40 HEAD (Steve's iconic 1:1 proportion with torso width) -->
+      <rect x="38" y="6" width="44" height="40" fill="url(#mcHead)"/>
+      <!-- Dark brown blocky hair covering top and sides -->
+      <rect x="38" y="6" width="44" height="12" fill="#2D1E16"/>
+      <rect x="38" y="18" width="6" height="12" fill="#2D1E16"/>
+      <rect x="76" y="18" width="6" height="12" fill="#2D1E16"/>
+      <!-- Blue Eyes (white sclera, dark blue pupil) -->
+      <rect x="46" y="24" width="7" height="6" fill="#3D3DA0"/>
+      <rect x="46" y="24" width="3.5" height="3" fill="#FFFFFF"/>
+      <rect x="49.5" y="27" width="3.5" height="3" fill="#1A1A5A"/>
+      <rect x="67" y="24" width="7" height="6" fill="#3D3DA0"/>
+      <rect x="67" y="24" width="3.5" height="3" fill="#FFFFFF"/>
+      <rect x="70.5" y="27" width="3.5" height="3" fill="#1A1A5A"/>
+      <!-- Minecraft Nose (small 4x4px rectangle between eyes) -->
+      <rect x="58" y="28" width="4" height="4" fill="#A89070"/>
+      <!-- Mouth & Beard Stubble -->
+      <rect x="52" y="34" width="16" height="3" fill="#8B5A2B"/>
+      <rect x="48" y="37" width="24" height="5" fill="#4A2A1A" opacity="0.6"/>
+      <rect x="54" y="37" width="12" height="5" fill="#3A1E10"/>
+      <!-- Subtle pixel-grid overlay lines on head -->
+      <line x1="38" y1="16" x2="82" y2="16" stroke="#000" stroke-width="0.75" opacity="0.06"/>
+      <line x1="38" y1="26" x2="82" y2="26" stroke="#000" stroke-width="0.75" opacity="0.06"/>
+      <line x1="38" y1="36" x2="82" y2="36" stroke="#000" stroke-width="0.75" opacity="0.06"/>
+      <line x1="48" y1="6" x2="48" y2="46" stroke="#000" stroke-width="0.75" opacity="0.06"/>
+      <line x1="60" y1="6" x2="60" y2="46" stroke="#000" stroke-width="0.75" opacity="0.06"/>
+      <line x1="72" y1="6" x2="72" y2="46" stroke="#000" stroke-width="0.75" opacity="0.06"/>
+      <!-- BLOCKY TORSO (44px wide — teal/cyan shirt) -->
+      <rect x="38" y="46" width="44" height="46" fill="#00AA9B"/>
+      <rect x="68" y="46" width="14" height="46" fill="#008B7A" opacity="0.45"/>
+      <rect x="54" y="46" width="12" height="4" fill="#008B7A"/>
+      <!-- Torso grid lines -->
+      <line x1="38" y1="58" x2="82" y2="58" stroke="#000" stroke-width="0.75" opacity="0.06"/>
+      <line x1="38" y1="70" x2="82" y2="70" stroke="#000" stroke-width="0.75" opacity="0.06"/>
+      <line x1="38" y1="82" x2="82" y2="82" stroke="#000" stroke-width="0.75" opacity="0.06"/>
+      <!-- THICKER BLOCKY ARMS (width 14px) -->
+      <!-- Right Arm (hanging down) -->
+      <rect x="24" y="46" width="14" height="30" fill="#00AA9B"/>
+      <rect x="24" y="76" width="14" height="14" fill="url(#mcHead)"/>
+      <rect x="33" y="46" width="5" height="44" fill="#008B7A" opacity="0.45"/>
+      <!-- Left Arm (angled outward slightly) -->
+      <g transform="rotate(16, 86, 52)">
+        <rect x="82" y="46" width="14" height="30" fill="#00AA9B"/>
+        <rect x="82" y="76" width="14" height="14" fill="url(#mcHead)"/>
+        <rect x="91" y="46" width="5" height="44" fill="#008B7A" opacity="0.45"/>
+      </g>
+      <!-- BLOCKY LEGS (blue pants) -->
+      <rect x="39" y="92" width="19" height="50" fill="#1F3299"/>
+      <rect x="62" y="92" width="19" height="50" fill="#1F3299"/>
+      <rect x="71" y="92" width="10" height="50" fill="#1A2880" opacity="0.45"/>
+      <!-- BLOCKY FEET (dark grey shoes) -->
+      <rect x="37" y="142" width="23" height="12" fill="#3A3A3A"/>
+      <rect x="60" y="142" width="23" height="12" fill="#3A3A3A"/>
+      <rect x="50" y="142" width="10" height="12" fill="#222222" opacity="0.45"/>
+      <rect x="73" y="142" width="10" height="12" fill="#222222" opacity="0.45"/>
+    </svg>
+    <div class="character-label">Minecraft</div>
+  </div>
+
+</div>
+</body>
+</html>

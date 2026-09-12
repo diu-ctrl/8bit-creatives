@@ -1,0 +1,2742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insider Ops Portal — 8Bit Creatives</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;700;900&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface-2: #161616;
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.3);
+    --accent: #ffffff;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --blue: #3b82f6;
+    --red: #ef4444;
+    --font: 'Geist', -apple-system, sans-serif;
+  }
+  
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  /* Top Bar */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .topbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .topbar-logo img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
+  
+  .topbar-title {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  
+  .topbar-title span {
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-left: 8px;
+  }
+  
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .bell-btn {
+    position: relative;
+    background: transparent;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    border-radius: 6px;
+    transition: color 150ms ease, background 150ms ease;
+  }
+  
+  .bell-btn:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+  
+  .bell-dot {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ef4444;
+  }
+  
+  .topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .user-badge {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  
+  .user-badge.admin {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+  }
+  
+  /* Layout */
+  .layout {
+    display: flex;
+    min-height: calc(100vh - 60px);
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    flex-shrink: 0;
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 24px;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background 150ms ease, color 150ms ease;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    font-size: 13px;
+  }
+  
+  .nav-item:hover {
+    background: var(--surface-2);
+    color: var(--text);
+  }
+  
+  .nav-item.active {
+    background: var(--surface-2);
+    color: #ffffff;
+    border-left-color: #ffffff;
+    font-weight: 500;
+  }
+  
+  .nav-icon {
+    width: 18px; height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    color: currentColor;
+    flex-shrink: 0;
+  }
+
+  .nav-item:hover .nav-icon,
+  .nav-item.active .nav-icon {
+    opacity: 1;
+  }
+  
+  .nav-section {
+    padding: 16px 24px 8px;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  
+  /* Main Content */
+  .main {
+    flex: 1;
+    padding: 32px;
+    overflow-y: auto;
+  }
+  
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  
+  .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  
+  .page-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 150ms ease, opacity 150ms ease;
+  }
+  
+  .btn:hover { background: rgba(255, 255, 255, 0.08); }
+  
+  .btn-accent {
+    background: #ffffff;
+    color: #0a0a0a;
+    border-color: #ffffff;
+    font-weight: 600;
+  }
+  
+  .btn-accent:hover { background: rgba(255, 255, 255, 0.85); }
+  
+  /* Stats Row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  .stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  
+  .stat-value.accent { color: #ffffff; }
+  .stat-value.green { color: var(--green); }
+  .stat-value.yellow { color: var(--yellow); }
+  
+  .stat-trend {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  
+  /* Kanban Board */
+  .kanban-board {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    min-height: 500px;
+  }
+  
+  .kanban-column {
+    min-width: 280px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    flex-shrink: 0;
+  }
+  
+  .kanban-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .kanban-title {
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .kanban-count {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  
+  .kanban-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  
+  .kanban-dot.briefing { background: #eab308; }
+  .kanban-dot.production { background: #3b82f6; }
+  .kanban-dot.approval { background: #ffffff; }
+  .kanban-dot.delivered { background: #22c55e; }
+  
+  .kanban-card {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 150ms ease;
+  }
+  
+  .kanban-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .card-brand {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+  }
+  
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  
+  .card-creators {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .creator-pill {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 10px;
+    color: #ffffff;
+  }
+  
+  .card-deadline {
+    font-weight: 500;
+  }
+  
+  .card-deadline.urgent { color: #ef4444; font-weight: 600; }
+  
+  /* Roster Grid */
+  .roster-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  
+  .roster-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .roster-avatar {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+    color: #fff;
+  }
+  
+  .roster-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  
+  .roster-alias {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  
+  .roster-status {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  
+  .roster-status.available {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--green);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+  
+  .roster-status.booked {
+    background: rgba(234, 179, 8, 0.1);
+    color: var(--yellow);
+    border: 1px solid rgba(234, 179, 8, 0.2);
+  }
+  
+  .roster-status.production {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+  
+  .roster-reach {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+  
+  /* View Toggle */
+  .view-toggle {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .view-btn {
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: var(--font);
+    font-size: 13px;
+    transition: background 150ms ease;
+  }
+  
+  .view-btn.active {
+    background: var(--surface-2);
+    color: var(--text);
+  }
+  
+  /* Section Divider */
+  .section-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+
+  /* Form & Inputs */
+  .form-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    max-width: 760px;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group.full {
+    grid-column: span 2;
+  }
+  
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    letter-spacing: 0.01em;
+  }
+  
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13px;
+    transition: border-color 150ms ease;
+  }
+  
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .form-textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+
+  /* Tables */
+  .table-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .ops-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .ops-table th, .ops-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  
+  .ops-table th {
+    background: var(--surface-2);
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 12px;
+  }
+  
+  .ops-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .ops-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  
+  .badge-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  
+  .badge-tag.green {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--green);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+  
+  .badge-tag.yellow {
+    background: rgba(234, 179, 8, 0.1);
+    color: var(--yellow);
+    border: 1px solid rgba(234, 179, 8, 0.2);
+  }
+  
+  .badge-tag.blue {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--blue);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+  
+  .badge-tag.neutral {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .sidebar { width: 60px; }
+    .nav-item span { display: none; }
+    .nav-section { display: none; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .roster-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .stats-row { grid-template-columns: 1fr; }
+    .roster-grid { grid-template-columns: 1fr; }
+    .main { padding: 16px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: span 1; }
+  }
+
+  /* Roster card interactive */
+  .roster-card {
+    cursor: pointer;
+    transition: transform 150ms ease, border-color 150ms ease;
+  }
+  .roster-card:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Modals */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-overlay.active {
+    display: flex;
+  }
+  .modal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    width: 100%;
+    max-width: 580px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+  }
+  .modal-card.large {
+    max-width: 800px;
+  }
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 150ms ease, background 150ms ease;
+  }
+  .modal-close:hover {
+    color: var(--text);
+    background: var(--surface-2);
+  }
+  .modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .modal-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .modal-section {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .modal-section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    margin-bottom: 12px;
+  }
+
+  /* Guide Accordion */
+  .accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 900px;
+  }
+  .accordion-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 150ms ease;
+  }
+  .accordion-item:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  .accordion-header {
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .accordion-item.open .accordion-header {
+    border-bottom: 1px solid var(--border);
+  }
+  .accordion-chevron {
+    width: 16px;
+    height: 16px;
+    transition: transform 200ms ease;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+  .accordion-item.open .accordion-chevron {
+    transform: rotate(180deg);
+  }
+  .accordion-content {
+    display: none;
+    padding: 20px 24px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .accordion-item.open .accordion-content {
+    display: block;
+  }
+
+  /* Deliverable interactive items */
+  .deliverable-item {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .deliverable-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .deliverable-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .deliverable-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .deliverable-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .status-select-pill {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: var(--font);
+    cursor: pointer;
+    border: 1px solid transparent;
+    outline: none;
+    transition: background 150ms ease, color 150ms ease;
+  }
+  .status-select-pill[data-status="not-started"] {
+    background: rgba(107, 114, 128, 0.15);
+    color: #9ca3af;
+    border-color: rgba(107, 114, 128, 0.3);
+  }
+  .status-select-pill[data-status="in-progress"] {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+  .status-select-pill[data-status="in-review"] {
+    background: rgba(234, 179, 8, 0.15);
+    color: #eab308;
+    border-color: rgba(234, 179, 8, 0.3);
+  }
+  .status-select-pill[data-status="delivered"] {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+    border-color: rgba(34, 197, 94, 0.3);
+  }
+  .status-select-pill option {
+    background: #161616;
+    color: #ffffff;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <img src="images-for-landing-page/logo_2.png" alt="8Bit Creatives">
+    <div class="topbar-title">Insider Ops <span>8Bit Creatives</span></div>
+  </div>
+  <div class="topbar-actions">
+    <button class="bell-btn" aria-label="Notifications" title="Notifications">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </svg>
+      <span class="bell-dot"></span>
+    </button>
+    <div class="topbar-user">
+      <div class="user-badge admin">Admin · Thug</div>
+      <div class="user-badge">Sep 10, 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- Layout -->
+<div class="layout">
+  
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="nav-section">Main</div>
+    <div class="nav-item active" onclick="showView('dashboard', this)">
+      <span class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      </span> <span>Dashboard</span>
+    </div>
+    <div class="nav-item" onclick="showView('pipeline', this)">
+      <span class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="5" height="18" rx="1"/><rect x="10" y="3" width="5" height="12" rx="1"/><rect x="17" y="3" width="5" height="16" rx="1"/></svg>
+      </span> <span>Campaign pipeline</span>
+    </div>
+    <div class="nav-item" onclick="showView('roster', this)">
+      <span class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </span> <span>Creator roster</span>
+    </div>
+    <div class="nav-item" onclick="showView('briefs', this)">
+      <span class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </span> <span>Brief intake</span>
+    </div>
+    
+    <div class="nav-section">Workflow</div>
+    <div class="nav-item" onclick="showView('approvals', this)">
+      <span class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </span> <span>Approvals queue</span>
+    </div>
+    <div class="nav-item" onclick="showView('files', this)">
+      <span class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      </span> <span>File vault</span>
+    </div>
+    <div class="nav-item" onclick="showView('reports', this)">
+      <span class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+      </span> <span>Reports</span>
+    </div>
+    
+    <div class="nav-section">System</div>
+    <div class="nav-item" onclick="showView('settings', this)">
+      <span class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </span> <span>Settings</span>
+    </div>
+        <div class="nav-item" onclick="showView('permissions', this)">
+      <span class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </span> <span>Permissions</span>
+    </div>
+    <div class="nav-section">Help</div>
+    <div class="nav-item" onclick="showView('guide', this)">
+      <span class="nav-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </span> <span>Guide</span>
+    </div>
+  </div>
+  
+  <!-- Main Content -->
+  <div class="main" id="mainContent">
+    
+    <!-- Dashboard View -->
+    <div id="view-dashboard">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Dashboard</div>
+          <div class="page-subtitle">Overview of active campaigns, pending approvals, and upcoming deadlines.</div>
+        </div>
+        <button class="btn btn-accent" onclick="showView('briefs')">+ New campaign</button>
+      </div>
+      
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Active campaigns</div>
+          <div class="stat-value accent">12</div>
+          <div class="stat-trend">3 in production · 4 pending approval</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Available creators</div>
+          <div class="stat-value green">8</div>
+          <div class="stat-trend">42 booked · 2 in production</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Pending approvals</div>
+          <div class="stat-value yellow">4</div>
+          <div class="stat-trend">2 brand review · 2 internal review</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Deliverables due (7d)</div>
+          <div class="stat-value">7</div>
+          <div class="stat-trend">2 urgent (within 48h)</div>
+        </div>
+      </div>
+      
+      <div class="page-header" style="margin-bottom: 16px;">
+        <div class="page-title" style="font-size: 20px;">Campaign pipeline</div>
+        <div class="view-toggle">
+          <button class="view-btn active">Kanban</button>
+          <button class="view-btn">List</button>
+          <button class="view-btn">Calendar</button>
+        </div>
+      </div>
+      
+      <div class="kanban-board">
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title"><span class="kanban-dot briefing"></span> Briefing</div>
+            <span class="kanban-count">2</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Samsung</div>
+            <div class="card-title">Galaxy Gaming Cup</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mortal</span></span>
+              <span class="card-deadline">Oct 1</span>
+            </div>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Lenovo</div>
+            <div class="card-title">Legion PC Launch</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Snax</span></span>
+              <span class="card-deadline">Oct 5</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title"><span class="kanban-dot production"></span> In production</div>
+            <span class="kanban-count">3</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Red Bull</div>
+            <div class="card-title">MEO Season Finals</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mortal</span><span class="creator-pill">Scout</span></span>
+              <span class="card-deadline urgent">Sep 12</span>
+            </div>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">ASUS ROG</div>
+            <div class="card-title">Phone 8 Showcase</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Payal</span></span>
+              <span class="card-deadline">Sep 15</span>
+            </div>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Spotify</div>
+            <div class="card-title">Gaming Playlist S2</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Goblin</span></span>
+              <span class="card-deadline">Sep 20</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title"><span class="kanban-dot approval"></span> Pending approval</div>
+            <span class="kanban-count">4</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">iQOO</div>
+            <div class="card-title">Flagship Drop v2</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mortal</span><span class="creator-pill">Payal</span></span>
+              <span class="card-deadline urgent">Sep 11</span>
+            </div>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Monster Energy</div>
+            <div class="card-title">Athlete Program Q3</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Snax</span></span>
+              <span class="card-deadline">Sep 14</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title"><span class="kanban-dot delivered"></span> Delivered</div>
+            <span class="kanban-count">3</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Warner Bros</div>
+            <div class="card-title">Black Adam Crossover</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mortal</span></span>
+              <span class="card-deadline">Done</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Roster View (hidden by default) -->
+    <div id="view-roster" style="display: none;">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Creator roster</div>
+          <div class="page-subtitle">50+ creators · 8 available · 42 booked · 2 in production</div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn">Filter by category</button>
+          <button class="btn btn-accent" onclick="openAddCreatorModal()">+ Add creator</button>
+        </div>
+      </div>
+      
+      <div class="roster-grid">
+        <div class="roster-card" onclick="openCreatorDetail(this)">
+          <div class="roster-avatar">M</div>
+          <div class="roster-name">Mortal</div>
+          <div class="roster-alias">Naman Mathur</div>
+          <div class="roster-status booked">Booked · iQOO</div>
+          <div class="roster-reach">6.9M YouTube</div>
+        </div>
+        <div class="roster-card" onclick="openCreatorDetail(this)">
+          <div class="roster-avatar">P</div>
+          <div class="roster-name">Payal</div>
+          <div class="roster-alias">Payal Dhare</div>
+          <div class="roster-status production">In production</div>
+          <div class="roster-reach">2.6M YouTube</div>
+        </div>
+        <div class="roster-card" onclick="openCreatorDetail(this)">
+          <div class="roster-avatar">S</div>
+          <div class="roster-name">Snax</div>
+          <div class="roster-alias">Raj Varma</div>
+          <div class="roster-status available">Available</div>
+          <div class="roster-reach">2.6M YouTube</div>
+        </div>
+        <div class="roster-card" onclick="openCreatorDetail(this)">
+          <div class="roster-avatar">G</div>
+          <div class="roster-name">Goblin</div>
+          <div class="roster-alias">Abhijeet Andhare</div>
+          <div class="roster-status booked">Booked · Spotify</div>
+          <div class="roster-reach">2.1M YouTube</div>
+        </div>
+        <div class="roster-card" onclick="openCreatorDetail(this)">
+          <div class="roster-avatar">S</div>
+          <div class="roster-name">ScoutOP</div>
+          <div class="roster-alias">Tanmay Singh</div>
+          <div class="roster-status booked">Booked · Red Bull</div>
+          <div class="roster-reach">4.8M YouTube</div>
+        </div>
+        <div class="roster-card" onclick="openCreatorDetail(this)">
+          <div class="roster-avatar">M</div>
+          <div class="roster-name">Mamba</div>
+          <div class="roster-alias">Sahil Soni</div>
+          <div class="roster-status available">Available</div>
+          <div class="roster-reach">1.2M YouTube</div>
+        </div>
+        <div class="roster-card" onclick="openCreatorDetail(this)">
+          <div class="roster-avatar">V</div>
+          <div class="roster-name">Viper</div>
+          <div class="roster-alias">Akash Anand</div>
+          <div class="roster-status available">Available</div>
+          <div class="roster-reach">900K YouTube</div>
+        </div>
+        <div class="roster-card" onclick="openCreatorDetail(this)">
+          <div class="roster-avatar">B</div>
+          <div class="roster-name">Beg4Mercy</div>
+          <div class="roster-alias">Mrinmoy Lahkar</div>
+          <div class="roster-status available">Available</div>
+          <div class="roster-reach">1.3M YouTube</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Approvals View (hidden by default) -->
+    <div id="view-approvals" style="display: none;">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Approvals queue</div>
+          <div class="page-subtitle">4 deliverables pending review</div>
+        </div>
+      </div>
+      
+      <div class="kanban-board">
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title">Pending internal review</div>
+            <span class="kanban-count">2</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">iQOO · Flagship Drop v2</div>
+            <div class="card-title">Launch stream VOD</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mortal</span></span>
+              <span class="card-deadline urgent">Review by Sep 11</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title">Pending brand approval</div>
+            <span class="kanban-count">2</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Monster · Athlete Program</div>
+            <div class="card-title">Brand integration reel</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Snax</span></span>
+              <span class="card-deadline">Brand review by Sep 14</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title">Approved</div>
+            <span class="kanban-count">1</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Warner Bros · Black Adam</div>
+            <div class="card-title">Crossover sketch video</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mortal</span></span>
+              <span class="card-deadline">Delivered</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campaign Pipeline View (Full Kanban) -->
+    <div id="view-pipeline" style="display: none;">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Campaign pipeline</div>
+          <div class="page-subtitle">Visual workflow from brief intake to final post-campaign reporting.</div>
+        </div>
+        <button class="btn btn-accent" onclick="showView('briefs')">+ New campaign</button>
+      </div>
+
+      <div class="kanban-board">
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title"><span class="kanban-dot briefing"></span> Brief intake</div>
+            <span class="kanban-count">2</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Red Bull · Brand Campaign</div>
+            <div class="card-title">Campus Cricket 2026</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">ScoutOP</span></span>
+              <span class="card-deadline">Oct 12</span>
+            </div>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">boAt · Product Launch</div>
+            <div class="card-title">Immortal Gaming Headsets</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mamba</span></span>
+              <span class="card-deadline">Oct 18</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title"><span class="kanban-dot production"></span> In production</div>
+            <span class="kanban-count">3</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Red Bull</div>
+            <div class="card-title">MEO Season Finals</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mortal</span><span class="creator-pill">ScoutOP</span></span>
+              <span class="card-deadline urgent">Sep 12</span>
+            </div>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">ASUS ROG</div>
+            <div class="card-title">Phone 8 Showcase</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Payal</span></span>
+              <span class="card-deadline">Sep 15</span>
+            </div>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Spotify</div>
+            <div class="card-title">Gaming Playlist S2</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Goblin</span></span>
+              <span class="card-deadline">Sep 20</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title"><span class="kanban-dot approval"></span> Pending approval</div>
+            <span class="kanban-count">2</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">iQOO · Flagship Drop v2</div>
+            <div class="card-title">Launch stream VOD</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mortal</span><span class="creator-pill">Payal</span></span>
+              <span class="card-deadline urgent">Sep 11</span>
+            </div>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Monster Energy</div>
+            <div class="card-title">Athlete Program Q3</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Snax</span></span>
+              <span class="card-deadline">Sep 14</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title"><span class="kanban-dot delivered"></span> Delivered</div>
+            <span class="kanban-count">2</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Warner Bros</div>
+            <div class="card-title">Black Adam Crossover</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mortal</span></span>
+              <span class="card-deadline">Done</span>
+            </div>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Intel</div>
+            <div class="card-title">Gamer Days Tournament</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Snax</span><span class="creator-pill">Viper</span></span>
+              <span class="card-deadline">Done</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kanban-column">
+          <div class="kanban-header">
+            <div class="kanban-title"><span class="kanban-dot" style="background: rgba(255,255,255,0.4);"></span> Live &amp; reporting</div>
+            <span class="kanban-count">2</span>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">Krafton · BGMI</div>
+            <div class="card-title">Masters Series Season 3</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">Mortal</span><span class="creator-pill">Goblin</span></span>
+              <span class="card-deadline">Live</span>
+            </div>
+          </div>
+          <div class="kanban-card" onclick="openCampaignDetail(this)">
+            <div class="card-brand">OnePlus</div>
+            <div class="card-title">Dominate 2.0 Invitational</div>
+            <div class="card-meta">
+              <span class="card-creators"><span class="creator-pill">ScoutOP</span></span>
+              <span class="card-deadline">Metrics in</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Brief Intake View -->
+    <div id="view-briefs" style="display: none;">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Brief intake form</div>
+          <div class="page-subtitle">Submit brand requirements to auto-create campaign records and notify the ops team.</div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form onsubmit="event.preventDefault(); alert('Campaign brief submitted successfully! Record created in Airtable and notified #campaign-alerts on Slack.');">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Brand name</label>
+              <input type="text" class="form-input" placeholder="e.g. Red Bull, Samsung, Lenovo" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Campaign title</label>
+              <input type="text" class="form-input" placeholder="e.g. Q4 Flagship Launch" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-select">
+                <option>Brand Campaign</option>
+                <option>Tournament / Esports</option>
+                <option>Broadcast Live Stream</option>
+                <option>Platform Integration</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target timeline</label>
+              <input type="text" class="form-input" placeholder="e.g. Oct 1 - Oct 20, 2026">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Desired creators</label>
+              <input type="text" class="form-input" placeholder="e.g. Mortal, Payal, Snax">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Deliverable formats</label>
+              <select class="form-select">
+                <option>YouTube Main Video + Shorts</option>
+                <option>Instagram Reels + Stories</option>
+                <option>Live Stream Integration</option>
+                <option>Multi-platform Package</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Objective &amp; key message</label>
+              <textarea class="form-textarea" placeholder="Outline campaign goals, core talking points, and brand guidelines..."></textarea>
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Google Drive asset folder or brief document link</label>
+              <input type="url" class="form-input" placeholder="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr">
+            </div>
+          </div>
+          <div style="display: flex; gap: 12px; margin-top: 8px;">
+            <button type="submit" class="btn btn-accent">Submit brief</button>
+            <button type="reset" class="btn">Clear</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- File Vault View -->
+    <div id="view-files" style="display: none;">
+      <div class="page-header">
+        <div>
+          <div class="page-title">File vault</div>
+          <div class="page-subtitle">Centralized deliverable storage linked with Google Drive and version history.</div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener" class="btn btn-accent" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open Google Drive
+          </a>
+          <button class="btn">+ Upload deliverable</button>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <table class="ops-table">
+          <thead>
+            <tr>
+              <th>Deliverable name</th>
+              <th>Campaign</th>
+              <th>Creator</th>
+              <th>Version</th>
+              <th>Storage</th>
+              <th>Uploaded</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>launch_stream_vod_v2.mp4</td>
+              <td>iQOO · Flagship Drop v2</td>
+              <td>Mortal</td>
+              <td>v2.1</td>
+              <td><a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Google Drive</a></td>
+              <td>Sep 10, 2026</td>
+              <td><span class="badge-tag yellow">In brand review</span></td>
+            </tr>
+            <tr>
+              <td>integration_reel_final.mp4</td>
+              <td>Monster · Athlete Program</td>
+              <td>Snax</td>
+              <td>v1.0</td>
+              <td><a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Google Drive</a></td>
+              <td>Sep 9, 2026</td>
+              <td><span class="badge-tag blue">Internal review</span></td>
+            </tr>
+            <tr>
+              <td>crossover_sketch_master.mp4</td>
+              <td>Warner Bros · Black Adam</td>
+              <td>Mortal</td>
+              <td>v3.0</td>
+              <td><a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Google Drive</a></td>
+              <td>Sep 7, 2026</td>
+              <td><span class="badge-tag green">Approved</span></td>
+            </tr>
+            <tr>
+              <td>rog8_showcase_draft.mov</td>
+              <td>ASUS ROG · Phone 8</td>
+              <td>Payal</td>
+              <td>v1.2</td>
+              <td><a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Google Drive</a></td>
+              <td>Sep 8, 2026</td>
+              <td><span class="badge-tag yellow">Pending feedback</span></td>
+            </tr>
+            <tr>
+              <td>spotify_gaming_s2_promo.mp4</td>
+              <td>Spotify · Playlist S2</td>
+              <td>Goblin</td>
+              <td>v1.0</td>
+              <td><a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline;">Google Drive</a></td>
+              <td>Sep 6, 2026</td>
+              <td><span class="badge-tag green">Approved</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Reports View -->
+    <div id="view-reports" style="display: none;">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Campaign reports &amp; analytics</div>
+          <div class="page-subtitle">Consolidated performance metrics and brand handoff reporting.</div>
+        </div>
+        <button class="btn">Export CSV</button>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Total campaign reach</div>
+          <div class="stat-value">48.5M</div>
+          <div class="stat-trend">+14% vs last quarter</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Total video views</div>
+          <div class="stat-value">18.2M</div>
+          <div class="stat-trend">Across YouTube &amp; Instagram</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Avg engagement rate</div>
+          <div class="stat-value green">8.4%</div>
+          <div class="stat-trend">Benchmark: 5.2%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completed campaigns</div>
+          <div class="stat-value">16</div>
+          <div class="stat-trend">100% on-time delivery</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <table class="ops-table">
+          <thead>
+            <tr>
+              <th>Campaign</th>
+              <th>Brand</th>
+              <th>Creators involved</th>
+              <th>Total reach</th>
+              <th>Total views</th>
+              <th>Engagement</th>
+              <th>Report</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Black Adam Crossover</td>
+              <td>Warner Bros</td>
+              <td>Mortal</td>
+              <td>4.2M</td>
+              <td>1.8M</td>
+              <td>9.1%</td>
+              <td><a href="#" style="color: #ffffff; text-decoration: underline;">View report</a></td>
+            </tr>
+            <tr>
+              <td>Gamer Days Tournament</td>
+              <td>Intel</td>
+              <td>Snax, Viper</td>
+              <td>3.6M</td>
+              <td>1.2M</td>
+              <td>7.8%</td>
+              <td><a href="#" style="color: #ffffff; text-decoration: underline;">View report</a></td>
+            </tr>
+            <tr>
+              <td>Galaxy Gaming Fest</td>
+              <td>Samsung</td>
+              <td>Mortal, Payal</td>
+              <td>8.1M</td>
+              <td>3.4M</td>
+              <td>8.9%</td>
+              <td><a href="#" style="color: #ffffff; text-decoration: underline;">View report</a></td>
+            </tr>
+            <tr>
+              <td>Dominate 2.0 Invitational</td>
+              <td>OnePlus</td>
+              <td>ScoutOP</td>
+              <td>2.9M</td>
+              <td>1.1M</td>
+              <td>8.2%</td>
+              <td><a href="#" style="color: #ffffff; text-decoration: underline;">View report</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Settings View -->
+    <div id="view-settings" style="display: none;">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Settings &amp; integrations</div>
+          <div class="page-subtitle">Connected stack for automated notifications, sync, and storage.</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+        <div class="stat-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+            <div>
+              <div style="font-size: 16px; font-weight: 600;">Airtable database</div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Core relational database for creators, campaigns &amp; deliverables</div>
+            </div>
+            <span class="badge-tag green">Connected</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 12px;">
+            Base: <strong>8Bit_Ops_Master_2026</strong> · Sync frequency: Realtime Webhooks
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+            <div>
+              <div style="font-size: 16px; font-weight: 600;">Slack notifications</div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Automated team alerts and creator deadline reminders</div>
+            </div>
+            <span class="badge-tag green">Connected</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 12px;">
+            Channels: <strong>#campaign-alerts</strong>, <strong>#ops-digest</strong> · Bot: @8bit-ops
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+            <div>
+              <div style="font-size: 16px; font-weight: 600;">Google Drive vault</div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Campaign asset storage and automated folder generation</div>
+            </div>
+            <span class="badge-tag green">Connected</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 12px;">
+            Root: <strong>8Bit_Campaigns_Archive</strong> · Auto-versioning enabled
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+            <div>
+              <div style="font-size: 16px; font-weight: 600;">Zapier automation engine</div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Multi-step workflow triggers between Airtable, Drive &amp; Slack</div>
+            </div>
+            <span class="badge-tag green">Active</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 12px;">
+            Active zaps: <strong>6 automated pipelines</strong> · Zero error rate
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!-- Guide View -->
+    <div id="view-guide" style="display: none;">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Guide</div>
+          <div class="page-subtitle">Everything you need to know about the ops portal. Plain English, no jargon.</div>
+        </div>
+      </div>
+
+      <div class="accordion-list">
+        <!-- Section 1 -->
+        <div class="accordion-item open">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 1 — Dashboard</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            This is your home base. It shows active campaigns, available creators, pending approvals, and deliverables due this week. Use it to get a quick snapshot of what's happening across all campaigns.
+          </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 2 — Campaign Pipeline</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            This is your Kanban board. Campaigns move left to right: Brief Intake → In Production → Pending Approval → Delivered → Live &amp; Reporting. Click any card to see full details, including the brief, assigned creators, deliverables checklist, SOW, and next steps.
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 3 — Creator Roster</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            This is your creator list. Each card shows the creator's handle, real name, current status (Available, Booked, In Production), and subscriber count. Click a creator to see their current campaigns, deliverables count, payment status, contract status, and performance metrics.
+          </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 4 — Brief Intake</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            Use this form to submit a new brand brief. Fill in the brand name, campaign title, category, timeline, desired creators, deliverable formats, and a Google Drive link to the brief document. The system auto-creates a campaign record and notifies the ops team.
+          </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 5 — Approvals Queue</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            Deliverables that need review appear here. Internal review means the 8Bit ops team needs to approve it first. Brand approval means the brand needs to sign off. Once both approve, the deliverable moves to Delivered.
+          </div>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 6 — File Vault</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            All deliverable files are stored here, linked to Google Drive. Each file shows the campaign, creator, version, upload date, and status. Upload new versions, download approved files, and track version history.
+          </div>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 7 — Reports</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            Post-campaign metrics and performance reports. Download PDF reports for client presentations.
+          </div>
+        </div>
+
+        <!-- Section 8 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 8 — Creator Dashboard</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            If you're a creator, this is your personal dashboard (separate file: <a href="creator-dashboard.html" style="color: #ffffff; text-decoration: underline;">creator-dashboard.html</a>). See your active campaigns, deliverables checklist, payment status, contract, and performance metrics.
+          </div>
+        </div>
+
+        <!-- Section 9 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 9 — Brand Dashboard</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            If you're a brand partner, this is your campaign overview (separate file: <a href="brand-dashboard.html" style="color: #ffffff; text-decoration: underline;">brand-dashboard.html</a>). See your campaigns, performance metrics, deliverables status, assigned creators, budget tracking, and post-campaign reports.
+          </div>
+        </div>
+
+        <!-- Section 10 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 10 — Platform Dashboard</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            If you're a platform partner (separate file: <a href="platform-dashboard.html" style="color: #ffffff; text-decoration: underline;">platform-dashboard.html</a>), this shows your talent migration status, content performance on your platform, growth metrics, and contract status.
+          </div>
+        </div>
+
+        <!-- Section 11 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 11 — Settings</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            Configure your account, notification preferences, and integrations.
+          </div>
+        </div>
+
+        <!-- Section 12 -->
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">
+            <span>Section 12 — Permissions</span>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="accordion-content">
+            Manage who has access to what. Admins can see everything. Creators see only their own data. Brands see only their campaigns. Platforms see only their migration data.
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Permissions View -->
+    <div id="view-permissions" style="display: none;">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Role-based permissions</div>
+          <div class="page-subtitle">Security boundaries across internal team members, external brands, and talent.</div>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <table class="ops-table">
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Description</th>
+              <th>Pipeline access</th>
+              <th>Financials &amp; payouts</th>
+              <th>Deliverable approval</th>
+              <th>Internal notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Admin (Founders / Ops Lead)</strong></td>
+              <td>Full authority across all operations</td>
+              <td><span class="badge-tag green">Full read/write</span></td>
+              <td><span class="badge-tag green">Visible</span></td>
+              <td><span class="badge-tag green">Direct sign-off</span></td>
+              <td><span class="badge-tag green">Visible</span></td>
+            </tr>
+            <tr>
+              <td><strong>Account Manager</strong></td>
+              <td>Day-to-day campaign routing &amp; creator coordination</td>
+              <td><span class="badge-tag green">Full read/write</span></td>
+              <td><span class="badge-tag neutral">Hidden</span></td>
+              <td><span class="badge-tag green">Review &amp; submit</span></td>
+              <td><span class="badge-tag green">Visible</span></td>
+            </tr>
+            <tr>
+              <td><strong>Brand Manager (External)</strong></td>
+              <td>Submit briefs and approve content via shared view</td>
+              <td><span class="badge-tag blue">Shared view only</span></td>
+              <td><span class="badge-tag neutral">Hidden</span></td>
+              <td><span class="badge-tag green">Final brand sign-off</span></td>
+              <td><span class="badge-tag neutral">Hidden</span></td>
+            </tr>
+            <tr>
+              <td><strong>Creator (Talent)</strong></td>
+              <td>Upload deliverables and track assigned deadlines</td>
+              <td><span class="badge-tag blue">Assigned briefs only</span></td>
+              <td><span class="badge-tag neutral">Personal payout only</span></td>
+              <td><span class="badge-tag neutral">Submit draft</span></td>
+              <td><span class="badge-tag neutral">Hidden</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+// Toggle View
+function showView(viewName, el) {
+  document.querySelectorAll('[id^="view-"]').forEach(v => v.style.display = 'none');
+  const view = document.getElementById('view-' + viewName);
+  if (view) {
+    view.style.display = 'block';
+  }
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (el) {
+    el.classList.add('active');
+  } else {
+    const matchingNav = Array.from(document.querySelectorAll('.nav-item')).find(n => n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + viewName + "'"));
+    if (matchingNav) matchingNav.classList.add('active');
+  }
+}
+
+// Guide Accordion Toggle
+function toggleAccordion(headerEl) {
+  const item = headerEl.closest('.accordion-item');
+  if (item) {
+    item.classList.toggle('open');
+  }
+}
+
+// Modal: Add Creator
+function openAddCreatorModal() {
+  const modal = document.getElementById('modal-add-creator');
+  if (modal) modal.classList.add('active');
+}
+
+function closeAddCreatorModal() {
+  const modal = document.getElementById('modal-add-creator');
+  if (modal) modal.classList.remove('active');
+}
+
+function handleAddCreatorSubmit(e) {
+  e.preventDefault();
+  const handle = document.getElementById('creator-handle').value.trim();
+  const realname = document.getElementById('creator-realname').value.trim();
+  const category = document.getElementById('creator-category').value;
+  const status = document.getElementById('creator-status').value;
+  const reach = document.getElementById('creator-reach').value.trim();
+  const yt = document.getElementById('creator-youtube').value.trim();
+  const ig = document.getElementById('creator-instagram').value.trim();
+  const kick = document.getElementById('creator-kick').value.trim();
+
+  let statusClass = 'available';
+  let statusText = 'Available';
+  if (status === 'booked') {
+    statusClass = 'booked';
+    statusText = 'Booked';
+  } else if (status === 'production') {
+    statusClass = 'production';
+    statusText = 'In production';
+  }
+
+  // Create new roster card
+  const grid = document.querySelector('.roster-grid');
+  if (grid) {
+    const card = document.createElement('div');
+    card.className = 'roster-card';
+    card.setAttribute('onclick', 'openCreatorDetail(this)');
+    card.dataset.handle = handle;
+    card.dataset.realname = realname;
+    card.dataset.reach = reach;
+    card.dataset.status = statusText;
+    card.dataset.category = category;
+    card.dataset.youtube = yt;
+    card.dataset.instagram = ig;
+    card.dataset.kick = kick;
+
+    card.innerHTML = `
+      <div class="roster-avatar">${handle.charAt(0).toUpperCase()}</div>
+      <div class="roster-name">${handle}</div>
+      <div class="roster-alias">${realname}</div>
+      <div class="roster-status ${statusClass}">${statusText}</div>
+      <div class="roster-reach">${reach}</div>
+    `;
+    grid.appendChild(card);
+  }
+
+  // Save in custom creator data store
+  customCreators[handle.toLowerCase()] = {
+    handle: handle,
+    realname: realname + ' · ' + category,
+    status: statusText,
+    statusClass: statusClass,
+    yt: reach,
+    ig: ig ? '@' + ig.split('/').filter(Boolean).pop() : '450K',
+    kick: kick ? '@' + kick.split('/').filter(Boolean).pop() : '50K',
+    campaigns: [
+      { name: 'Initial Onboarding Campaign', deadline: 'Oct 15, 2026', status: 'Briefing', badge: 'neutral' }
+    ],
+    totalDel: '2',
+    doneDel: '0',
+    pendDel: '2',
+    payment: '<div><strong>Onboarding Retainer:</strong> <span style="color: var(--yellow);">Scheduled next cycle</span></div>',
+    contract: '<div><strong>Type:</strong> Standard Talent Representation</div><div style="margin-top: 4px;"><strong>End date:</strong> Dec 31, 2027</div><div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active</span></div>',
+    perf: '<div>Total views: <strong>--</strong></div><div>Completed campaigns: <strong>0</strong></div><div>Avg engagement rate: <strong>--</strong></div>',
+    contact: '<div>Email: <strong>' + handle.toLowerCase() + '@8bitcreatives.in</strong></div><div>Direct line: <strong>+91 (022) 8BIT-OPS</strong></div>'
+  };
+
+  alert('Creator "' + handle + '" added to the roster successfully!');
+  document.getElementById('add-creator-form').reset();
+  closeAddCreatorModal();
+}
+
+// Campaign Database
+const campaignData = {
+  'galaxy gaming cup': {
+    brand: 'Samsung',
+    title: 'Galaxy Gaming Cup',
+    status: 'Briefing',
+    statusColor: 'yellow',
+    brief: 'Promote Samsung Galaxy ecosystem during national gaming cup. Highlight latency, refresh rate, and sustained performance across live tournament streams.',
+    timeline: 'Oct 1 - Oct 24, 2026',
+    milestones: 'Brief Signoff: Sep 25 · Creative Drop: Oct 10 · Live Tournament: Oct 24',
+    creators: ['Mortal', 'ScoutOP'],
+    deliverables: [
+      { title: 'Dedicated live tournament broadcast integration', creator: 'Mortal', status: 'in-progress', deadline: 'Oct 10' },
+      { title: 'YouTube Community announcement post + giveaway', creator: 'Mortal', status: 'not-started', deadline: 'Oct 12' },
+      { title: 'Highlight reel on Instagram featuring device display', creator: 'ScoutOP', status: 'not-started', deadline: 'Oct 18' }
+    ],
+    sow: 'Scope: 1 tournament live stream integration + 2 Instagram Reels + 1 community post.<br>Payment terms: 50% upon brief signoff, 50% Net 30 post delivery.<br>Creator split: 75% talent payout / 25% management fee.',
+    nextsteps: ['Finalize approved game titles for livestream', 'Send Galaxy flagship test units to Mortal', 'Draft brand talking points for tournament broadcast'],
+    comms: [
+      '<strong>Sep 9, 2026 · 16:00</strong> — Samsung brand team approved primary tournament graphics.',
+      '<strong>Sep 8, 2026 · 11:30</strong> — Initial brief received and reviewed by 8Bit ops.'
+    ]
+  },
+  'legion pc launch': {
+    brand: 'Lenovo',
+    title: 'Legion PC Launch',
+    status: 'Briefing',
+    statusColor: 'yellow',
+    brief: 'High-end PC gaming campaign focusing on raw FPS, thermals, and esports ready specifications. Targeted at competitive gamers and tech enthusiasts.',
+    timeline: 'Oct 5 - Nov 2, 2026',
+    milestones: 'Hardware Delivery: Sep 28 · Benchmarking: Oct 5 · Video Drop: Oct 20',
+    creators: ['Snax'],
+    deliverables: [
+      { title: 'Full benchmark review and unboxing video on YouTube', creator: 'Snax', status: 'in-progress', deadline: 'Oct 15' },
+      { title: 'Instagram Reel highlighting cooling and thermals', creator: 'Snax', status: 'not-started', deadline: 'Oct 22' }
+    ],
+    sow: 'Scope: 1 Long-form YouTube video + 1 Instagram Reel.<br>Payment terms: 100% Net 30 post-publication.<br>Creator split: 80% talent / 20% agency.',
+    nextsteps: ['Confirm delivery address for Legion PC review unit', 'Approve thumbnail concepts before recording'],
+    comms: ['<strong>Sep 10, 2026 · 10:00</strong> — Lenovo agency shared brand guidelines and legal disclaimers.']
+  },
+  'meo season finals': {
+    brand: 'Red Bull',
+    title: 'MEO Season Finals',
+    status: 'In production',
+    statusColor: 'blue',
+    brief: 'Global esports competition celebration. Creators create high-octane hype reels and live host appearances during national finals.',
+    timeline: 'Aug 20 - Sep 18, 2026',
+    milestones: 'Broadcast rehearsal: Sep 10 · Live event: Sep 12 · Post-recap: Sep 18',
+    creators: ['Mortal', 'ScoutOP'],
+    deliverables: [
+      { title: 'Live co-stream and watch party broadcast', creator: 'Mortal', status: 'in-review', deadline: 'Sep 12' },
+      { title: 'Behind the scenes vlog at the arena', creator: 'ScoutOP', status: 'in-progress', deadline: 'Sep 15' },
+      { title: 'Pre-event countdown teaser on Instagram Stories', creator: 'Mortal', status: 'delivered', deadline: 'Sep 10' }
+    ],
+    sow: 'Scope: 2 Live co-streams, 1 arena vlog, 4 Instagram Story sets.<br>Payment terms: 50% advance, 50% within 15 days of event.<br>Creator split: 75% talent payout / 25% agency fee.',
+    nextsteps: ['Coordinate arena access badges for talent crew', 'Submit co-stream technical test link to Red Bull producers'],
+    comms: ['<strong>Sep 10, 2026 · 18:20</strong> — Teaser stories published with 2.1M combined reach.']
+  },
+  'phone 8 showcase': {
+    brand: 'ASUS ROG',
+    title: 'Phone 8 Showcase',
+    status: 'In production',
+    statusColor: 'blue',
+    brief: 'Showcase ergonomic gaming triggers and cooling accessories in action through BGMI gameplay streams and quick tutorials.',
+    timeline: 'Sep 1 - Sep 25, 2026',
+    milestones: 'Device hands-on: Sep 5 · Gameplay stream: Sep 15 · Short clips: Sep 20',
+    creators: ['Payal'],
+    deliverables: [
+      { title: 'BGMI competitive live stream using AirTriggers', creator: 'Payal', status: 'in-progress', deadline: 'Sep 15' },
+      { title: '2x Instagram Reels demonstrating accessory attachment', creator: 'Payal', status: 'not-started', deadline: 'Sep 20' }
+    ],
+    sow: 'Scope: 1 live stream (minimum 2 hours) + 2 Reels.<br>Payment: Net 30.<br>Creator split: 75% talent / 25% agency.',
+    nextsteps: ['Review test stream recording for brand watermark placement'],
+    comms: ['<strong>Sep 8, 2026 · 14:15</strong> — ROG India confirmed delivery of Phone 8 unit.']
+  },
+  'gaming playlist s2': {
+    brand: 'Spotify',
+    title: 'Gaming Playlist S2',
+    status: 'In production',
+    statusColor: 'blue',
+    brief: 'Curate creator gaming soundtracks and drive playlist saves through in-stream music playback and Spotify playlist links in description.',
+    timeline: 'Sep 5 - Sep 30, 2026',
+    milestones: 'Playlist curation: Sep 8 · Stream integration: Sep 20 · Story campaign: Sep 25',
+    creators: ['Goblin'],
+    deliverables: [
+      { title: 'Custom Spotify playlist curation and shareable graphic', creator: 'Goblin', status: 'delivered', deadline: 'Sep 8' },
+      { title: '3x Live stream background music integrations with on-screen QR', creator: 'Goblin', status: 'in-progress', deadline: 'Sep 20' }
+    ],
+    sow: 'Scope: Curated playlist + 3 on-stream QR overlays.<br>Payment: 100% on delivery.<br>Creator split: 80% talent / 20% agency.',
+    nextsteps: ['Verify on-screen QR code trackability with Spotify campaign tag'],
+    comms: ['<strong>Sep 6, 2026 · 11:00</strong> — Playlist link live on Spotify with over 15,000 saves on day one.']
+  },
+  'flagship drop v2': {
+    brand: 'iQOO',
+    title: 'Flagship Drop v2',
+    status: 'Pending approval',
+    statusColor: 'yellow',
+    brief: 'High-visibility launch for iQOO gaming flagship. Emphasize monster benchmark scores, charging speed, and esports credibility.',
+    timeline: 'Aug 25 - Sep 16, 2026',
+    milestones: 'Teaser phase: Aug 28 · Launch Stream VOD: Sep 10 · Review by Brand: Sep 11',
+    creators: ['Mortal', 'Payal'],
+    deliverables: [
+      { title: 'Launch stream VOD with benchmark comparisons', creator: 'Mortal', status: 'in-review', deadline: 'Sep 11' },
+      { title: 'Dedicated Instagram Reel unboxing and fast charge test', creator: 'Payal', status: 'in-review', deadline: 'Sep 12' }
+    ],
+    sow: 'Scope: 1 multi-camera launch VOD + 2 unboxing Reels.<br>Payment terms: 50% advance (paid), 50% post approval.<br>Creator split: 75% talent / 25% agency fee.',
+    nextsteps: ['Incorporate final legal disclaimer in VOD description', 'Brand manager sign-off on Instagram Reel cut'],
+    comms: [
+      '<strong>Sep 10, 2026 · 19:45</strong> — VOD cut v2.1 uploaded to File Vault and shared with iQOO brand team.',
+      '<strong>Sep 9, 2026 · 14:00</strong> — Brand requested louder game audio during benchmark segment.'
+    ]
+  },
+  'athlete program q3': {
+    brand: 'Monster Energy',
+    title: 'Athlete Program Q3',
+    status: 'Pending approval',
+    statusColor: 'yellow',
+    brief: 'Integrate Monster Energy into creator workout and streaming regimen. Lifestyle-led gaming content with high visual polish.',
+    timeline: 'Aug 15 - Sep 18, 2026',
+    milestones: 'Filming: Aug 25 · Rough cut: Sep 5 · Brand review: Sep 14',
+    creators: ['Snax'],
+    deliverables: [
+      { title: 'Brand integration reel featuring gaming & fitness routine', creator: 'Snax', status: 'in-review', deadline: 'Sep 14' },
+      { title: 'Stream overlay integration with Monster branding', creator: 'Snax', status: 'delivered', deadline: 'Sep 1' }
+    ],
+    sow: 'Scope: 1 high production Reel + stream logo placement.<br>Payment: 50/50 split.<br>Creator split: 75% talent / 25% agency.',
+    nextsteps: ['Brand review of color grading on fitness reel'],
+    comms: ['<strong>Sep 9, 2026 · 15:30</strong> — Snax completed final sound mix for review cut.']
+  },
+  'black adam crossover': {
+    brand: 'Warner Bros',
+    title: 'Black Adam Crossover',
+    status: 'Delivered',
+    statusColor: 'green',
+    brief: 'Theatrical release hype with customized gaming sketch video integrating characters and gaming team banter.',
+    timeline: 'Jul 10 - Sep 7, 2026',
+    milestones: 'Script approval: Jul 20 · Shoot: Aug 5 · Post production: Aug 25 · Release: Sep 7',
+    creators: ['Mortal'],
+    deliverables: [
+      { title: 'Crossover sketch video on YouTube Main', creator: 'Mortal', status: 'delivered', deadline: 'Sep 7' },
+      { title: 'Movie premiere attendance Instagram Stories', creator: 'Mortal', status: 'delivered', deadline: 'Sep 7' }
+    ],
+    sow: 'Scope: 1 studio comedy sketch + 3 premiere Stories.<br>Payment terms: 100% paid.<br>Creator split: 75% talent / 25% agency.',
+    nextsteps: ['Post-campaign performance deck sent to Warner Bros team', 'Final payment processed'],
+    comms: [
+      '<strong>Sep 8, 2026 · 09:00</strong> — Campaign wrapped with 4.2M reach and 9.1% engagement.',
+      '<strong>Sep 7, 2026 · 18:00</strong> — Sketch video published on YouTube.'
+    ]
+  }
+};
+
+function openCampaignDetail(elOrKey) {
+  let title = '';
+  let brand = '';
+  if (typeof elOrKey === 'string') {
+    title = elOrKey;
+  } else if (elOrKey && elOrKey.querySelector) {
+    const tEl = elOrKey.querySelector('.card-title');
+    const bEl = elOrKey.querySelector('.card-brand');
+    title = tEl ? tEl.textContent.trim() : '';
+    brand = bEl ? bEl.textContent.trim() : '';
+  }
+
+  const key = title.toLowerCase();
+  const data = campaignData[key] || {
+    brand: brand || 'Partner Brand',
+    title: title || 'Campaign Overview',
+    status: 'In production',
+    statusColor: 'blue',
+    brief: 'Brand awareness and creator integration campaign targeting relevant gaming and esports demographics across India.',
+    timeline: 'Current Cycle',
+    milestones: 'Kickoff: Day 1 · Production: Day 10 · Handoff: Day 20',
+    creators: ['Mortal'],
+    deliverables: [
+      { title: 'Main Campaign Video Integration', creator: 'Mortal', status: 'in-progress', deadline: 'Pending' },
+      { title: 'Social Media Supporting Assets', creator: 'Mortal', status: 'not-started', deadline: 'Pending' }
+    ],
+    sow: 'Standard campaign scope and deliverable commitments per SOW.<br>Payment terms: Standard Net 30.<br>Talent split: 75% talent / 25% agency.',
+    nextsteps: ['Monitor deliverables timeline', 'Review draft deliverables in Google Drive vault'],
+    comms: ['<strong>Recent:</strong> Campaign record loaded from operations pipeline.']
+  };
+
+  document.getElementById('campaign-modal-brand').textContent = data.brand;
+  document.getElementById('campaign-modal-title').textContent = data.title;
+  
+  const badge = document.getElementById('campaign-modal-badge');
+  badge.textContent = data.status;
+  badge.className = 'badge-tag ' + (data.statusColor || 'neutral');
+
+  document.getElementById('campaign-modal-brief').textContent = data.brief;
+  document.getElementById('campaign-modal-timeline').textContent = data.timeline;
+  document.getElementById('campaign-modal-milestones').textContent = data.milestones;
+
+  // Creators
+  const cCont = document.getElementById('campaign-modal-creators');
+  cCont.innerHTML = data.creators.map(c => `<span class="creator-pill">${c}</span>`).join('');
+
+  // Deliverables (Interactive A6)
+  const dCont = document.getElementById('campaign-modal-deliverables');
+  dCont.innerHTML = data.deliverables.map((del, idx) => `
+    <div class="deliverable-item">
+      <div class="deliverable-info">
+        <div class="deliverable-title">${del.title}</div>
+        <div class="deliverable-meta">
+          <span>Assigned: <strong>${del.creator}</strong></span>
+          <span>Due: <strong>${del.deadline}</strong></span>
+          <a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener" style="color: #ffffff; text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;">
+            Drive file
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="deliverable-actions">
+        <select class="status-select-pill" data-status="${del.status}" onchange="updateDeliverableBadge(this)">
+          <option value="not-started" ${del.status==='not-started'?'selected':''}>Not Started</option>
+          <option value="in-progress" ${del.status==='in-progress'?'selected':''}>In Progress</option>
+          <option value="in-review" ${del.status==='in-review'?'selected':''}>In Review</option>
+          <option value="delivered" ${del.status==='delivered'?'selected':''}>Delivered</option>
+        </select>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('campaign-modal-sow').innerHTML = data.sow;
+  
+  const stepsCont = document.getElementById('campaign-modal-nextsteps');
+  stepsCont.innerHTML = data.nextsteps.map(s => `<li>${s}</li>`).join('');
+
+  const commsCont = document.getElementById('campaign-modal-comms');
+  commsCont.innerHTML = data.comms.map(c => `
+    <div style="font-size: 12px; color: var(--text-muted); background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px;">${c}</div>
+  `).join('');
+
+  const modal = document.getElementById('modal-campaign-detail');
+  if (modal) modal.classList.add('active');
+}
+
+function closeCampaignDetail() {
+  const modal = document.getElementById('modal-campaign-detail');
+  if (modal) modal.classList.remove('active');
+}
+
+function updateDeliverableBadge(selectEl) {
+  const val = selectEl.value;
+  selectEl.setAttribute('data-status', val);
+}
+
+// Creator Database
+const customCreators = {};
+const creatorData = {
+  'mortal': {
+    handle: 'Mortal',
+    realname: 'Naman Mathur · BGMI & Variety Gaming',
+    status: 'Booked · iQOO',
+    statusClass: 'booked',
+    yt: '6.9M',
+    ig: '4.2M',
+    kick: '180K',
+    campaigns: [
+      { name: 'iQOO Flagship Drop v2', deadline: 'Sep 11, 2026', status: 'Pending approval', badge: 'yellow' },
+      { name: 'Samsung Galaxy Gaming Cup', deadline: 'Oct 1, 2026', status: 'Briefing', badge: 'yellow' },
+      { name: 'Red Bull MEO Season Finals', deadline: 'Sep 12, 2026', status: 'In production', badge: 'blue' }
+    ],
+    totalDel: '14',
+    doneDel: '11',
+    pendDel: '3',
+    payment: '<div><strong>iQOO Flagship v2:</strong> <span style="color: var(--yellow);">Pending client sign-off (₹3,50,000)</span></div><div style="margin-top: 4px;"><strong>Warner Bros Black Adam:</strong> <span style="color: var(--green);">Paid in full (₹4,20,000)</span></div>',
+    contract: '<div><strong>Type:</strong> Exclusive Representation Agreement</div><div style="margin-top: 4px;"><strong>End date:</strong> Dec 31, 2027 (Auto-renewal option)</div><div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active &amp; in good standing</span></div>',
+    perf: '<div>Total views: <strong>48.2M</strong></div><div>Completed campaigns: <strong>32</strong></div><div>Avg engagement rate: <strong>9.4%</strong></div>',
+    contact: '<div>Email: <strong>mortal@8bitcreatives.in</strong></div><div>Talent Lead: <strong>Animesh Agarwal (Thug)</strong></div><div>Direct line: <strong>+91 (022) 8BIT-OPS</strong></div>'
+  },
+  'payal': {
+    handle: 'Payal',
+    realname: 'Payal Dhare · Streaming & Lifestyle',
+    status: 'In production',
+    statusClass: 'production',
+    yt: '2.6M',
+    ig: '3.1M',
+    kick: '95K',
+    campaigns: [
+      { name: 'ASUS ROG Phone 8 Showcase', deadline: 'Sep 15, 2026', status: 'In production', badge: 'blue' },
+      { name: 'iQOO Flagship Drop v2', deadline: 'Sep 11, 2026', status: 'Pending approval', badge: 'yellow' }
+    ],
+    totalDel: '8',
+    doneDel: '6',
+    pendDel: '2',
+    payment: '<div><strong>ASUS ROG:</strong> <span style="color: var(--yellow);">Milestone 1 paid (₹1,80,000)</span></div><div style="margin-top: 4px;"><strong>Nykaa Gamer Edition:</strong> <span style="color: var(--green);">Paid in full (₹2,10,000)</span></div>',
+    contract: '<div><strong>Type:</strong> Exclusive Representation</div><div style="margin-top: 4px;"><strong>End date:</strong> Oct 30, 2027</div><div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active</span></div>',
+    perf: '<div>Total views: <strong>22.5M</strong></div><div>Completed campaigns: <strong>18</strong></div><div>Avg engagement rate: <strong>8.8%</strong></div>',
+    contact: '<div>Email: <strong>payal@8bitcreatives.in</strong></div><div>Direct line: <strong>+91 (022) 8BIT-OPS</strong></div>'
+  },
+  'snax': {
+    handle: 'Snax',
+    realname: 'Raj Varma · PC Gaming & Esports',
+    status: 'Available',
+    statusClass: 'available',
+    yt: '2.6M',
+    ig: '1.8M',
+    kick: '60K',
+    campaigns: [
+      { name: 'Lenovo Legion PC Launch', deadline: 'Oct 5, 2026', status: 'Briefing', badge: 'yellow' },
+      { name: 'Monster Energy Athlete Program', deadline: 'Sep 14, 2026', status: 'Pending approval', badge: 'yellow' }
+    ],
+    totalDel: '6',
+    doneDel: '5',
+    pendDel: '1',
+    payment: '<div><strong>Intel Gamer Days:</strong> <span style="color: var(--green);">Paid in full (₹2,80,000)</span></div><div style="margin-top: 4px;"><strong>Monster Energy:</strong> <span style="color: var(--yellow);">Pending client sign-off (₹1,50,000)</span></div>',
+    contract: '<div><strong>Type:</strong> Exclusive Representation</div><div style="margin-top: 4px;"><strong>End date:</strong> Aug 15, 2027</div><div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active</span></div>',
+    perf: '<div>Total views: <strong>19.8M</strong></div><div>Completed campaigns: <strong>15</strong></div><div>Avg engagement rate: <strong>7.9%</strong></div>',
+    contact: '<div>Email: <strong>snax@8bitcreatives.in</strong></div><div>Direct line: <strong>+91 (022) 8BIT-OPS</strong></div>'
+  },
+  'goblin': {
+    handle: 'Goblin',
+    realname: 'Abhijeet Andhare · BGMI & Competitive',
+    status: 'Booked · Spotify',
+    statusClass: 'booked',
+    yt: '2.1M',
+    ig: '1.5M',
+    kick: '45K',
+    campaigns: [
+      { name: 'Spotify Gaming Playlist S2', deadline: 'Sep 20, 2026', status: 'In production', badge: 'blue' },
+      { name: 'Krafton BGMI Masters Series S3', deadline: 'Live', status: 'Live & reporting', badge: 'neutral' }
+    ],
+    totalDel: '7',
+    doneDel: '5',
+    pendDel: '2',
+    payment: '<div><strong>Spotify Playlist:</strong> <span style="color: var(--yellow);">50% advance received (₹1,20,000)</span></div>',
+    contract: '<div><strong>Type:</strong> Exclusive Representation</div><div style="margin-top: 4px;"><strong>End date:</strong> Jan 31, 2028</div><div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active</span></div>',
+    perf: '<div>Total views: <strong>16.4M</strong></div><div>Completed campaigns: <strong>12</strong></div><div>Avg engagement rate: <strong>8.5%</strong></div>',
+    contact: '<div>Email: <strong>goblin@8bitcreatives.in</strong></div><div>Direct line: <strong>+91 (022) 8BIT-OPS</strong></div>'
+  },
+  'scoutop': {
+    handle: 'ScoutOP',
+    realname: 'Tanmay Singh · Esports & Variety',
+    status: 'Booked · Red Bull',
+    statusClass: 'booked',
+    yt: '4.8M',
+    ig: '3.9M',
+    kick: '140K',
+    campaigns: [
+      { name: 'Red Bull MEO Season Finals', deadline: 'Sep 12, 2026', status: 'In production', badge: 'blue' },
+      { name: 'OnePlus Dominate 2.0', deadline: 'Metrics in', status: 'Live & reporting', badge: 'neutral' }
+    ],
+    totalDel: '10',
+    doneDel: '8',
+    pendDel: '2',
+    payment: '<div><strong>Red Bull MEO:</strong> <span style="color: var(--yellow);">50% advance received (₹3,00,000)</span></div><div style="margin-top: 4px;"><strong>OnePlus Dominate:</strong> <span style="color: var(--green);">Paid in full (₹3,80,000)</span></div>',
+    contract: '<div><strong>Type:</strong> Exclusive Representation</div><div style="margin-top: 4px;"><strong>End date:</strong> Dec 31, 2027</div><div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active</span></div>',
+    perf: '<div>Total views: <strong>38.9M</strong></div><div>Completed campaigns: <strong>26</strong></div><div>Avg engagement rate: <strong>8.7%</strong></div>',
+    contact: '<div>Email: <strong>scout@8bitcreatives.in</strong></div><div>Direct line: <strong>+91 (022) 8BIT-OPS</strong></div>'
+  },
+  'mamba': {
+    handle: 'Mamba',
+    realname: 'Sahil Soni · Variety Gaming',
+    status: 'Available',
+    statusClass: 'available',
+    yt: '1.2M',
+    ig: '950K',
+    kick: '35K',
+    campaigns: [
+      { name: 'boAt Immortal Gaming Headsets', deadline: 'Oct 18, 2026', status: 'Brief intake', badge: 'yellow' }
+    ],
+    totalDel: '5',
+    doneDel: '4',
+    pendDel: '1',
+    payment: '<div><strong>boAt Headsets:</strong> <span style="color: var(--neutral);">Pending campaign contract</span></div>',
+    contract: '<div><strong>Type:</strong> Exclusive Representation</div><div style="margin-top: 4px;"><strong>End date:</strong> Jun 30, 2027</div><div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active</span></div>',
+    perf: '<div>Total views: <strong>11.2M</strong></div><div>Completed campaigns: <strong>10</strong></div><div>Avg engagement rate: <strong>7.4%</strong></div>',
+    contact: '<div>Email: <strong>mamba@8bitcreatives.in</strong></div><div>Direct line: <strong>+91 (022) 8BIT-OPS</strong></div>'
+  },
+  'viper': {
+    handle: 'Viper',
+    realname: 'Akash Anand · Esports',
+    status: 'Available',
+    statusClass: 'available',
+    yt: '900K',
+    ig: '680K',
+    kick: '25K',
+    campaigns: [
+      { name: 'Intel Gamer Days Tournament', deadline: 'Done', status: 'Delivered', badge: 'green' }
+    ],
+    totalDel: '4',
+    doneDel: '4',
+    pendDel: '0',
+    payment: '<div><strong>Intel Gamer Days:</strong> <span style="color: var(--green);">Paid in full (₹1,50,000)</span></div>',
+    contract: '<div><strong>Type:</strong> Exclusive Representation</div><div style="margin-top: 4px;"><strong>End date:</strong> Sep 30, 2027</div><div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active</span></div>',
+    perf: '<div>Total views: <strong>8.6M</strong></div><div>Completed campaigns: <strong>8</strong></div><div>Avg engagement rate: <strong>7.1%</strong></div>',
+    contact: '<div>Email: <strong>viper@8bitcreatives.in</strong></div><div>Direct line: <strong>+91 (022) 8BIT-OPS</strong></div>'
+  },
+  'beg4mercy': {
+    handle: 'Beg4Mercy',
+    realname: 'Mrinmoy Lahkar · GTA V RP',
+    status: 'Available',
+    statusClass: 'available',
+    yt: '1.3M',
+    ig: '820K',
+    kick: '40K',
+    campaigns: [
+      { name: 'Upcoming Community Invitational', deadline: 'Oct 20, 2026', status: 'Briefing', badge: 'neutral' }
+    ],
+    totalDel: '4',
+    doneDel: '3',
+    pendDel: '1',
+    payment: '<div><strong>All active cycles:</strong> <span style="color: var(--green);">Cleared</span></div>',
+    contract: '<div><strong>Type:</strong> Exclusive Representation</div><div style="margin-top: 4px;"><strong>End date:</strong> Nov 30, 2027</div><div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active</span></div>',
+    perf: '<div>Total views: <strong>12.1M</strong></div><div>Completed campaigns: <strong>9</strong></div><div>Avg engagement rate: <strong>8.0%</strong></div>',
+    contact: '<div>Email: <strong>beg4mercy@8bitcreatives.in</strong></div><div>Direct line: <strong>+91 (022) 8BIT-OPS</strong></div>'
+  }
+};
+
+function openCreatorDetail(elOrHandle) {
+  let handle = '';
+  let realname = '';
+  let reach = '';
+  let status = 'Available';
+
+  if (typeof elOrHandle === 'string') {
+    handle = elOrHandle;
+  } else if (elOrHandle && elOrHandle.dataset && elOrHandle.dataset.handle) {
+    handle = elOrHandle.dataset.handle;
+    realname = elOrHandle.dataset.realname || '';
+    reach = elOrHandle.dataset.reach || '';
+    status = elOrHandle.dataset.status || 'Available';
+  } else if (elOrHandle && elOrHandle.querySelector) {
+    const nameEl = elOrHandle.querySelector('.roster-name');
+    const aliasEl = elOrHandle.querySelector('.roster-alias');
+    const reachEl = elOrHandle.querySelector('.roster-reach');
+    const statusEl = elOrHandle.querySelector('.roster-status');
+    handle = nameEl ? nameEl.textContent.trim() : '';
+    realname = aliasEl ? aliasEl.textContent.trim() : '';
+    reach = reachEl ? reachEl.textContent.trim() : '';
+    status = statusEl ? statusEl.textContent.trim() : 'Available';
+  }
+
+  const key = handle.toLowerCase();
+  const data = customCreators[key] || creatorData[key] || {
+    handle: handle || 'Creator Profile',
+    realname: realname || 'Exclusive 8Bit Talent',
+    status: status,
+    statusClass: 'available',
+    yt: reach || '1.0M',
+    ig: '500K',
+    kick: '50K',
+    campaigns: [{ name: 'Scheduled Campaign', deadline: 'Next Cycle', status: 'Briefing', badge: 'neutral' }],
+    totalDel: '4',
+    doneDel: '3',
+    pendDel: '1',
+    payment: '<div><strong>Active cycle:</strong> <span style="color: var(--green);">In good standing</span></div>',
+    contract: '<div><strong>Type:</strong> Standard Representation Agreement</div><div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active</span></div>',
+    perf: '<div>Total views: <strong>10M+</strong></div><div>Completed campaigns: <strong>5</strong></div>',
+    contact: '<div>Email: <strong>talent@8bitcreatives.in</strong></div>'
+  };
+
+  document.getElementById('creator-modal-avatar').textContent = data.handle.charAt(0).toUpperCase();
+  document.getElementById('creator-modal-handle').textContent = data.handle;
+  document.getElementById('creator-modal-realname').textContent = data.realname;
+  
+  const statusEl = document.getElementById('creator-modal-status');
+  statusEl.textContent = data.status;
+  statusEl.className = 'roster-status ' + (data.statusClass || 'available');
+
+  document.getElementById('creator-modal-yt').textContent = data.yt;
+  document.getElementById('creator-modal-ig').textContent = data.ig;
+  document.getElementById('creator-modal-kick').textContent = data.kick;
+
+  const campCont = document.getElementById('creator-modal-campaigns');
+  campCont.innerHTML = data.campaigns.map(c => `
+    <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <div style="font-size: 13px; font-weight: 600;">${c.name}</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Deadline: ${c.deadline} · ${c.status}</div>
+      </div>
+      <span class="badge-tag ${c.badge || 'neutral'}">${c.status}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('creator-modal-total-del').textContent = data.totalDel;
+  document.getElementById('creator-modal-done-del').textContent = data.doneDel;
+  document.getElementById('creator-modal-pend-del').textContent = data.pendDel;
+
+  document.getElementById('creator-modal-payment').innerHTML = data.payment;
+  document.getElementById('creator-modal-contract').innerHTML = data.contract;
+  document.getElementById('creator-modal-perf').innerHTML = data.perf;
+  document.getElementById('creator-modal-contact').innerHTML = data.contact;
+
+  const modal = document.getElementById('modal-creator-detail');
+  if (modal) modal.classList.add('active');
+}
+
+function closeCreatorDetail() {
+  const modal = document.getElementById('modal-creator-detail');
+  if (modal) modal.classList.remove('active');
+}
+</script>
+
+
+
+<!-- Modal: Add New Creator -->
+<div id="modal-add-creator" class="modal-overlay" onclick="if(event.target===this) closeAddCreatorModal()">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeAddCreatorModal()" aria-label="Close modal">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-title">Add new creator</div>
+    <div class="modal-subtitle">Onboard a talent partner to the 8Bit Creatives roster.</div>
+
+    <form id="add-creator-form" onsubmit="handleAddCreatorSubmit(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Handle</label>
+          <input type="text" id="creator-handle" class="form-input" placeholder="e.g. Mortal" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Real name</label>
+          <input type="text" id="creator-realname" class="form-input" placeholder="e.g. Naman Mathur" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select id="creator-category" class="form-select" required>
+            <option value="BGMI">BGMI</option>
+            <option value="Variety Gaming">Variety Gaming</option>
+            <option value="Streaming">Streaming</option>
+            <option value="Esports">Esports</option>
+            <option value="GTA V RP">GTA V RP</option>
+            <option value="Free Fire">Free Fire</option>
+            <option value="PC Gaming">PC Gaming</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select id="creator-status" class="form-select" required>
+            <option value="available">Available</option>
+            <option value="booked">Booked</option>
+            <option value="production">In production</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Subscriber / Follower count</label>
+          <input type="text" id="creator-reach" class="form-input" placeholder="e.g. 1.5M YouTube" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">YouTube URL</label>
+          <input type="url" id="creator-youtube" class="form-input" placeholder="https://youtube.com/@handle" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Instagram URL</label>
+          <input type="url" id="creator-instagram" class="form-input" placeholder="https://instagram.com/handle" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Kick URL (optional)</label>
+          <input type="url" id="creator-kick" class="form-input" placeholder="https://kick.com/handle">
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Google Drive folder link (creator assets)</label>
+          <input type="url" id="creator-gdrive" class="form-input" placeholder="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" value="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr">
+        </div>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px;">
+        <button type="button" class="btn" onclick="closeAddCreatorModal()">Cancel</button>
+        <button type="submit" class="btn btn-accent">Add creator</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Campaign Detail -->
+<div id="modal-campaign-detail" class="modal-overlay" onclick="if(event.target===this) closeCampaignDetail()">
+  <div class="modal-card large">
+    <button class="modal-close" onclick="closeCampaignDetail()" aria-label="Close modal">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- Campaign Header -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px;">
+      <div>
+        <div style="font-size: 12px; color: var(--text-dim); margin-bottom: 4px;" id="campaign-modal-brand">Samsung</div>
+        <div class="modal-title" id="campaign-modal-title">Galaxy Gaming Cup</div>
+      </div>
+      <span class="badge-tag yellow" id="campaign-modal-badge">Briefing</span>
+    </div>
+
+    <!-- Brief Summary -->
+    <div class="modal-section" style="margin-top: 16px; padding-top: 16px;">
+      <div class="modal-section-title">Brief summary &amp; objective</div>
+      <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;" id="campaign-modal-brief">
+        Promote the tournament ecosystem across Tier 1 &amp; Tier 2 gaming communities. Highlight high-refresh display and latency benchmarks during live competitive matches.
+      </p>
+    </div>
+
+    <!-- Timeline & Assigned Creators -->
+    <div class="modal-section" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+      <div>
+        <div class="modal-section-title">Timeline &amp; milestones</div>
+        <div style="font-size: 13px; color: var(--text);" id="campaign-modal-timeline">Oct 1 - Oct 24, 2026</div>
+        <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="campaign-modal-milestones">Kickoff: Oct 1 · Content Drop: Oct 14 · Live Finals: Oct 24</div>
+      </div>
+      <div>
+        <div class="modal-section-title">Assigned creators</div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="campaign-modal-creators">
+          <span class="creator-pill">Mortal</span>
+          <span class="creator-pill">ScoutOP</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deliverables Checklist (Interactive) -->
+    <div class="modal-section">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <div class="modal-section-title" style="margin-bottom: 0;">Deliverables checklist</div>
+        <span style="font-size: 12px; color: var(--text-muted);">Change status to update badge color</span>
+      </div>
+      <div id="campaign-modal-deliverables">
+        <!-- populated dynamically -->
+      </div>
+    </div>
+
+    <!-- SOW (Statement of Work) -->
+    <div class="modal-section">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <div class="modal-section-title" style="margin-bottom: 0;">Statement of work (SOW)</div>
+        <a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener" style="font-size: 12px; color: #ffffff; text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;">
+          View in Google Drive
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+      <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; font-size: 12px; color: var(--text-muted); line-height: 1.6;" id="campaign-modal-sow">
+        <strong>Scope:</strong> 1 dedicated YouTube live stream integration, 2 Instagram Reels, 1 community post.<br>
+        <strong>Payment terms:</strong> 50% on contract signing, 50% within 30 days of campaign completion.<br>
+        <strong>Creator split:</strong> 75% talent payout / 25% agency management fee.
+      </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="modal-section">
+      <div class="modal-section-title">Next steps</div>
+      <ul style="padding-left: 20px; font-size: 13px; color: var(--text-muted); line-height: 1.7;" id="campaign-modal-nextsteps">
+        <li>Ops team: Review first draft submission in Google Drive vault</li>
+        <li>Brand team: Provide feedback on stream integration key message</li>
+        <li>Creator: Lock scheduled live stream date on calendar</li>
+      </ul>
+    </div>
+
+    <!-- Communication Log -->
+    <div class="modal-section">
+      <div class="modal-section-title">Communication log</div>
+      <div style="display: flex; flex-direction: column; gap: 8px;" id="campaign-modal-comms">
+        <div style="font-size: 12px; color: var(--text-muted); background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px;">
+          <strong style="color: var(--text);">Sep 10, 2026 · 14:30</strong> — Ops team shared updated talking points deck with talent manager.
+        </div>
+        <div style="font-size: 12px; color: var(--text-muted); background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 8px 12px;">
+          <strong style="color: var(--text);">Sep 8, 2026 · 11:15</strong> — Brand approved initial storyboards for Instagram Reels with no revisions.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Creator Detail -->
+<div id="modal-creator-detail" class="modal-overlay" onclick="if(event.target===this) closeCreatorDetail()">
+  <div class="modal-card large">
+    <button class="modal-close" onclick="closeCreatorDetail()" aria-label="Close modal">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <!-- Creator Header -->
+    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+      <div class="roster-avatar" style="margin: 0;" id="creator-modal-avatar">M</div>
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="modal-title" style="margin-bottom: 0;" id="creator-modal-handle">Mortal</div>
+          <span class="roster-status booked" id="creator-modal-status">Booked</span>
+        </div>
+        <div style="font-size: 13px; color: var(--text-muted); margin-top: 2px;" id="creator-modal-realname">Naman Mathur · Gaming &amp; Esports</div>
+      </div>
+    </div>
+
+    <!-- Social Stats Row -->
+    <div class="stats-row" style="margin-bottom: 20px; grid-template-columns: repeat(3, 1fr);" id="creator-modal-stats">
+      <div class="stat-card" style="padding: 14px;">
+        <div class="stat-label">YouTube Subscribers</div>
+        <div class="stat-value" style="font-size: 20px;" id="creator-modal-yt">6.9M</div>
+        <div class="stat-trend">Main channel</div>
+      </div>
+      <div class="stat-card" style="padding: 14px;">
+        <div class="stat-label">Instagram Followers</div>
+        <div class="stat-value" style="font-size: 20px;" id="creator-modal-ig">4.2M</div>
+        <div class="stat-trend">@ig_mortal</div>
+      </div>
+      <div class="stat-card" style="padding: 14px;">
+        <div class="stat-label">Kick Followers</div>
+        <div class="stat-value" style="font-size: 20px;" id="creator-modal-kick">180K</div>
+        <div class="stat-trend">Exclusive stream partner</div>
+      </div>
+    </div>
+
+    <!-- Current Campaigns & Deliverables Count -->
+    <div class="modal-section" style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px;">
+      <div>
+        <div class="modal-section-title">Current campaigns</div>
+        <div style="display: flex; flex-direction: column; gap: 8px;" id="creator-modal-campaigns">
+          <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 13px; font-weight: 600;">iQOO Flagship Drop v2</div>
+              <div style="font-size: 11px; color: var(--text-muted);">Deadline: Sep 11 · In production</div>
+            </div>
+            <span class="badge-tag yellow">In review</span>
+          </div>
+          <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <div style="font-size: 13px; font-weight: 600;">Samsung Galaxy Gaming Cup</div>
+              <div style="font-size: 11px; color: var(--text-muted);">Deadline: Oct 1 · Briefing</div>
+            </div>
+            <span class="badge-tag neutral">Scheduled</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="modal-section-title">Deliverables count</div>
+        <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 14px;">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+            <span style="color: var(--text-muted);">Total deliverables:</span>
+            <strong style="color: var(--text);" id="creator-modal-total-del">12</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+            <span style="color: var(--text-muted);">Delivered / Approved:</span>
+            <strong style="color: var(--green);" id="creator-modal-done-del">10</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px;">
+            <span style="color: var(--text-muted);">Pending review:</span>
+            <strong style="color: var(--yellow);" id="creator-modal-pend-del">2</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Status & Contract Status -->
+    <div class="modal-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div>
+        <div class="modal-section-title">Payment status</div>
+        <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-size: 12px; line-height: 1.6;" id="creator-modal-payment">
+          <div><strong>iQOO Flagship v2:</strong> <span style="color: var(--yellow);">Pending client sign-off (₹3,50,000)</span></div>
+          <div style="margin-top: 4px;"><strong>Warner Bros Black Adam:</strong> <span style="color: var(--green);">Paid in full (₹4,20,000)</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="modal-section-title">Contract status</div>
+        <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-size: 12px; line-height: 1.6;" id="creator-modal-contract">
+          <div><strong>Type:</strong> Exclusive Representation Agreement</div>
+          <div style="margin-top: 4px;"><strong>End date:</strong> Dec 31, 2027 (Auto-renewal option)</div>
+          <div style="margin-top: 4px;"><strong>Status:</strong> <span style="color: var(--green);">Active &amp; in good standing</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aggregate Performance & Contact -->
+    <div class="modal-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div>
+        <div class="modal-section-title">Performance metrics</div>
+        <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-size: 12px; line-height: 1.6;" id="creator-modal-perf">
+          <div>Total campaign views: <strong>42.8M</strong></div>
+          <div>Total completed campaigns: <strong>28</strong></div>
+          <div>Avg engagement rate: <strong>9.4%</strong></div>
+        </div>
+      </div>
+      <div>
+        <div class="modal-section-title">Contact &amp; Talent Management</div>
+        <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-size: 12px; line-height: 1.6;" id="creator-modal-contact">
+          <div>Email: <strong>talent@8bitcreatives.in</strong></div>
+          <div>Talent Lead: <strong>Animesh Agarwal (Thug)</strong></div>
+          <div>Direct line: <strong>+91 (022) 8BIT-OPS</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Google Drive Assets Link (Part C) -->
+    <div class="modal-section" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <div class="modal-section-title" style="margin-bottom: 2px;">Creator digital assets</div>
+        <div style="font-size: 12px; color: var(--text-muted);">Channel art, profile photos, reels, and raw footage files.</div>
+      </div>
+      <a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener" class="btn btn-accent" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View creator assets in Google Drive
+      </a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

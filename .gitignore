@@ -1,0 +1,19 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.local
+backup_*/
+desktop_snapshot/
+scratch/
+scratch_*/
+verify-*.js
+verify*.js
+start-server.ps1
+start.bat
+Audit/
+Initial Research/
+Landing Page Sections as Images/
+Wireframe/
+word/
