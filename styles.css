@@ -835,23 +835,6 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 /* ─── End hero right-column logo sizing ─── */
 
-@media (max-width: 767px) {
-  .hero-logo-tilt {
-    transform: none !important;
-    perspective: none !important;
-  }
-  .hero-logo-tilt img,
-  #heroLogoImg {
-    transform: none !important;
-    max-width: 180px !important;
-    height: auto !important;
-  }
-  .canvas-container {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-  }
-}
 
 /* Responsive */
 @media (max-width: 900px) {
@@ -3612,51 +3595,68 @@ body.light-page .back-home,
     padding: 24px 20px 24px !important;
     position: relative !important;
   }
+  /* === MOBILE HERO LOGO FIX — bigger + moved up === */
   .hero-content {
     min-height: auto !important;
     height: auto !important;
     padding: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 0 !important;
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
   }
+
   .hero-left {
     position: relative !important;
     width: 100% !important;
   }
+
   .hero-right {
-    position: absolute !important;
-    top: 24px !important;
-    right: 20px !important;
-    width: 40px !important;
-    height: 40px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    z-index: 10 !important;
-    pointer-events: none !important;
-  }
-  .hero-right .canvas-container,
-  .hero-logo-tilt {
     position: static !important;
-    width: 40px !important;
-    height: 40px !important;
-    transform: none !important;
-    transition: none !important;
-    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    margin-top: -32px !important;
+    order: 0 !important;
+    pointer-events: auto !important;
     padding: 0 !important;
+    z-index: 2 !important;
   }
-  .hero-logo-img {
-    width: 40px !important;
-    height: 40px !important;
-    max-width: 40px !important;
-    max-height: 40px !important;
-    object-fit: contain !important;
+
+  .canvas-container {
+    width: 100% !important;
+    max-width: 260px !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
     transform: none !important;
-    transition: none !important;
-    display: block !important;
-    margin: 0 !important;
-    filter: none !important;
   }
+
+  .hero-logo-tilt {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transform: none !important;
+    perspective: none !important;
+  }
+
+  .hero-logo-tilt img,
+  .hero-logo-img,
+  #heroLogoImg {
+    width: 100% !important;
+    max-width: 240px !important;
+    max-height: none !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block !important;
+    transform: none !important;
+  }
+  /* === END MOBILE HERO LOGO FIX === */
   .hero-game-area {
     padding: 12px 0 !important;
     width: 100% !important;
@@ -3674,7 +3674,6 @@ body.light-page .back-home,
   .hero-title {
     font-size: 28px !important;
     line-height: 1.15 !important;
-    padding-right: 48px !important;
     margin-bottom: 14px !important;
   }
   .hero-sub {
