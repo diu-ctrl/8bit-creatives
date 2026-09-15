@@ -2760,15 +2760,15 @@ function initCreatorStats() {
       kick: { handle: 'snaxgaming', count: '17.6K', url: 'https://kick.com/snaxgaming' }
     },
     {
-      id: 'scout',
-      name: 'Scout',
-      realName: 'Tanmay Singh',
-      img: 'images-for-landing-page/creator-scout.png',
-      bio: 'Founder of Team XSpark and iconic esports athlete, recognized internationally for aggressive assault rifling, high-intensity gameplay, and PC gaming streams.',
-      categories: 'BGMI, PC Gaming, Esports, Streaming',
-      youtube: { handle: '@scoutopi', count: '4.98M', url: 'https://www.youtube.com/@scoutopi' },
-      instagram: { handle: '@scout_op', count: '4.2M', url: 'https://www.instagram.com/scout_op' },
-      kick: { handle: 'scoutop', count: '12.1K', url: 'https://kick.com/scoutop' }
+      id: 'jokerkihaveli',
+      name: 'Jokerkihaveli',
+      realName: 'Joker',
+      img: 'images-for-landing-page/joker.png',
+      bio: 'Dynamic gaming creator and entertainer with a strong multi-platform footprint across YouTube, Instagram, and Kick, celebrated for high-energy streams, engaging gameplay, and dedicated community culture.',
+      categories: 'Gaming, Entertainment, Variety Streaming',
+      youtube: { handle: '@jokerkihavelii', count: '2.33M', url: 'https://www.youtube.com/@jokerkihavelii' },
+      instagram: { handle: '@jokerkihaveli', count: '1.9M', url: 'https://www.instagram.com/jokerkihaveli/' },
+      kick: { handle: 'jokerkihaveli', count: '8.9K', url: 'https://kick.com/jokerkihaveli' }
     },
     {
       id: 'soulgoblin',
