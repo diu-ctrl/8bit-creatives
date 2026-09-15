@@ -1009,22 +1009,37 @@
       }
     }
 
+    var cachedSectionOffsets = [];
+    function updateSectionOffsets() {
+      cachedSectionOffsets = [];
+      for (var i = 0; i < sections.length; i++) {
+        var s = sections[i];
+        var top = s.offsetTop;
+        var height = s.offsetHeight;
+        cachedSectionOffsets.push({
+          top: top,
+          bottom: top + height,
+          bg: s.dataset.bg || s.getAttribute('data-bg') || 'dark'
+        });
+      }
+    }
+    updateSectionOffsets();
+
     function checkPosition() {
-      var navY = 42;
+      var currentY = window.scrollY + 42;
       var found = false;
-      for (var i = sections.length - 1; i >= 0; i--) {
-        var rect = sections[i].getBoundingClientRect();
-        if (rect.top <= navY && rect.bottom > navY) {
-          var bg = sections[i].dataset.bg || sections[i].getAttribute('data-bg') || 'dark';
-          if (bg === 'light') setLight();
+      for (var i = cachedSectionOffsets.length - 1; i >= 0; i--) {
+        var s = cachedSectionOffsets[i];
+        if (s.top <= currentY && s.bottom > currentY) {
+          if (s.bg === 'light') setLight();
           else setDark();
           found = true;
           break;
         }
       }
       if (!found) {
-        if (window.scrollY <= 10 && sections[0]) {
-          var initialBg = sections[0].dataset.bg || sections[0].getAttribute('data-bg') || 'dark';
+        if (window.scrollY <= 10 && cachedSectionOffsets[0]) {
+          var initialBg = cachedSectionOffsets[0].bg;
           if (initialBg === 'light') setLight();
           else setDark();
         } else {
@@ -1046,8 +1061,24 @@
       sections.forEach(function (s) { observer.observe(s); });
     }
 
-    window.addEventListener('scroll', checkPosition, { passive: true });
-    window.addEventListener('resize', checkPosition, { passive: true });
+    var posTicking = false;
+    window.addEventListener('scroll', function () {
+      if (!posTicking) {
+        requestAnimationFrame(function () {
+          checkPosition();
+          posTicking = false;
+        });
+        posTicking = true;
+      }
+    }, { passive: true });
+    window.addEventListener('resize', function () {
+      updateSectionOffsets();
+      checkPosition();
+    }, { passive: true });
+    window.addEventListener('load', function () {
+      updateSectionOffsets();
+      checkPosition();
+    }, { passive: true });
 
     checkPosition();
   })();
@@ -1700,7 +1731,7 @@
     gsap.ticker.add(function (time) {
       lenis.raf(time * 1000);
     });
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
   } else {
     // No GSAP — use requestAnimationFrame
     function raf(time) {

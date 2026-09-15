@@ -53,8 +53,10 @@ html.lenis, html.lenis body {
   overflow: hidden;
 }
 
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
+/* Disable pointer events during active smooth scrolling to prevent hover thrashing across thousands of elements */
+html.lenis.lenis-scrolling,
+html.lenis.lenis-scrolling * {
+  pointer-events: none !important;
 }
 
 body {
@@ -67,8 +69,6 @@ body {
 
 section {
   scroll-margin-top: 80px;
-  content-visibility: auto;
-  contain-intrinsic-size: auto 500px;
 }
 
 .container {
@@ -3294,6 +3294,7 @@ body.light-page .back-home,
   grid-template-columns: repeat(100, 1fr);
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 3%, black 97%, transparent 100%);
+  contain: layout paint;
 }
 .hero-8bit-bg__col {
   display: flex;
@@ -3309,7 +3310,6 @@ body.light-page .back-home,
   color: #141210;
   opacity: 0.08;
   will-change: transform;
-  transform: translateZ(0);
 }
 .hero-8bit-bg__col > span {
   display: flex;

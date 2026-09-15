@@ -78,7 +78,7 @@ function initNavbar() {
   }
 
   // === STEP 2: HIDE LOGO + BUTTON WHEN SCROLLED PAST HERO ===
-  if (!hero) { console.error('Hero section not found'); return; }
+  if (!hero) return;
   if (!logo) console.warn('Logo element not found — selector wrong');
   if (!cta)  console.warn('CTA button not found — selector wrong');
 
@@ -117,16 +117,20 @@ function initNavbar() {
 
   heroObserver.observe(hero);
 
+  let cachedHeroHeight = hero.offsetHeight || window.innerHeight;
+  function updateHeroMetrics() {
+    cachedHeroHeight = hero.offsetHeight || window.innerHeight;
+  }
   function checkHeroScroll() {
-    const r = hero.getBoundingClientRect();
-    if (r.bottom > 40 && r.top < window.innerHeight) {
+    const scrollY = window.scrollY;
+    if (scrollY < cachedHeroHeight - 40) {
       show();
     } else {
       hide();
     }
 
     // Drop navbar lower on hero (80px), top (24px) on other sections
-    if (r.bottom > window.innerHeight * 0.4 && r.top <= 100) {
+    if (scrollY < cachedHeroHeight * 0.6) {
       navbar.classList.add('navbar-on-hero');
     } else {
       navbar.classList.remove('navbar-on-hero');
@@ -142,7 +146,10 @@ function initNavbar() {
       heroScrollTicking = true;
     }
   }, { passive: true });
-  window.addEventListener('resize', checkHeroScroll, { passive: true });
+  window.addEventListener('resize', function () {
+    updateHeroMetrics();
+    checkHeroScroll();
+  }, { passive: true });
   checkHeroScroll();
 
   // Observer for navbar-on-hero
@@ -184,23 +191,37 @@ function initNavbar() {
     }
   }
 
+  let cachedBgOffsets = [];
+  function updateBgOffsets() {
+    cachedBgOffsets = [];
+    for (let i = 0; i < bgSections.length; i++) {
+      const s = bgSections[i];
+      const top = s.offsetTop;
+      const height = s.offsetHeight;
+      cachedBgOffsets.push({
+        top: top,
+        bottom: top + height,
+        bg: s.dataset.bg || s.getAttribute('data-bg') || 'dark'
+      });
+    }
+  }
+  updateBgOffsets();
+
   function checkNavbarBg() {
-    const navY = 42;
+    const currentY = window.scrollY + 42;
     let found = false;
-    for (let i = bgSections.length - 1; i >= 0; i--) {
-      const rect = bgSections[i].getBoundingClientRect();
-      if (rect.top <= navY && rect.bottom > navY) {
-        const bg = bgSections[i].dataset.bg || bgSections[i].getAttribute('data-bg') || 'dark';
-        if (bg === 'light') setLight();
+    for (let i = cachedBgOffsets.length - 1; i >= 0; i--) {
+      const s = cachedBgOffsets[i];
+      if (s.top <= currentY && s.bottom > currentY) {
+        if (s.bg === 'light') setLight();
         else setDark();
         found = true;
         break;
       }
     }
     if (!found) {
-      if (window.scrollY <= 10 && bgSections[0]) {
-        const bg = bgSections[0].dataset.bg || bgSections[0].getAttribute('data-bg') || 'dark';
-        if (bg === 'light') setLight();
+      if (window.scrollY <= 10 && cachedBgOffsets[0]) {
+        if (cachedBgOffsets[0].bg === 'light') setLight();
         else setDark();
       } else {
         setDark();
@@ -232,7 +253,10 @@ function initNavbar() {
       navBgTicking = true;
     }
   }, { passive: true });
-  window.addEventListener('resize', checkNavbarBg, { passive: true });
+  window.addEventListener('resize', function () {
+    updateBgOffsets();
+    checkNavbarBg();
+  }, { passive: true });
   checkNavbarBg();
   // === STEP 4: ACTIVE SECTION HIGHLIGHTING (ORANGE TEXT, NO UNDERLINE) ===
   const navLinks = document.querySelectorAll('.navbar .nav-link, .navbar nav a, .navbar__links a, .navbar-pill .navbar__links a');
@@ -258,17 +282,30 @@ function initNavbar() {
       }
     }
 
+    let cachedActiveOffsets = [];
+    function updateActiveOffsets() {
+      cachedActiveOffsets = [];
+      targetSections.forEach(sec => {
+        cachedActiveOffsets.push({
+          id: sec.id,
+          top: sec.offsetTop,
+          bottom: sec.offsetTop + sec.offsetHeight
+        });
+      });
+    }
+    updateActiveOffsets();
+
     function checkActiveSection() {
       const scrollPos = window.scrollY + 160;
       let currentId = null;
 
-      targetSections.forEach(sec => {
-        const top = sec.offsetTop;
-        const height = sec.offsetHeight;
-        if (scrollPos >= top && scrollPos < top + height) {
+      for (let i = 0; i < cachedActiveOffsets.length; i++) {
+        const sec = cachedActiveOffsets[i];
+        if (scrollPos >= sec.top && scrollPos < sec.bottom) {
           currentId = sec.id;
+          break;
         }
-      });
+      }
 
       // Bottom of page bias to contact
       if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 80) {
@@ -292,7 +329,16 @@ function initNavbar() {
         activeSecTicking = true;
       }
     }, { passive: true });
-    window.addEventListener('resize', checkActiveSection, { passive: true });
+    window.addEventListener('resize', function () {
+      updateActiveOffsets();
+      checkActiveSection();
+    }, { passive: true });
+
+    window.addEventListener('load', function () {
+      updateHeroMetrics();
+      updateBgOffsets();
+      updateActiveOffsets();
+    }, { passive: true });
 
     const activeSectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
