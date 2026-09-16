@@ -53,11 +53,6 @@ html.lenis, html.lenis body {
   overflow: hidden;
 }
 
-/* Disable pointer events during active smooth scrolling to prevent hover thrashing across thousands of elements */
-html.lenis.lenis-scrolling,
-html.lenis.lenis-scrolling * {
-  pointer-events: none !important;
-}
 
 body {
   font-family: var(--font);
@@ -3310,6 +3305,7 @@ body.light-page .back-home,
   color: #141210;
   opacity: 0.08;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 .hero-8bit-bg__col > span {
   display: flex;
@@ -3331,12 +3327,12 @@ body.light-page .back-home,
 }
 
 @keyframes heroBgScrollDown {
-  from { transform: translateY(-50%); }
-  to   { transform: translateY(0); }
+  from { transform: translate3d(0, -50%, 0); }
+  to   { transform: translate3d(0, 0, 0); }
 }
 @keyframes heroBgScrollUp {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -50%, 0); }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-8bit-bg__col--down, .hero-8bit-bg__col--up { animation: none; transform: none; }
@@ -4588,3 +4584,17 @@ body.light-page .back-home,
 .form-error[hidden] {
   display: none !important;
 }
+
+/* === SCROLL-INTERACTION FIX — preserve pointer events during scroll === */
+body, html {
+  pointer-events: auto !important;
+}
+a, button, [role="button"], input, textarea, select,
+.creator-card, .case-item-link, .founder-card, .stat-link,
+.btn-primary, .btn-secondary, .btn-about, .know-more-btn,
+.show-all-link, .underline, .esports-section__cta,
+.footer-social, .footer-nav__link, .footer-wordmark,
+.eclipse-char-item, .eclipse-physics-char, .coverflow-frame, .coverflow-card {
+  pointer-events: auto !important;
+}
+/* === END SCROLL-INTERACTION FIX === */
