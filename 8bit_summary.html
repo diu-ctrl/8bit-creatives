@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>8Bit Creatives — Website Summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+@page { size: 720px 1020px; margin: 0; }
+:root {
+  --c-bg-dark: #0A0A0A;
+  --c-bg-light: #FFFFFF;
+  --c-accent: #FF5931;
+}
+html, body {
+  margin: 0; padding: 0; width: 720px;
+  background: #0A0A0A; color: #0A0A0A;
+  font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 300; font-size: 13px; line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+@media screen {
+  html { height: auto; display: flex; justify-content: center; background: #0A0A0A; }
+  body { transform-origin: top center; margin: 20px auto; box-shadow: 0 0 40px rgba(0,0,0,0.4); }
+}
+.cover {
+  width: 720px; height: 1020px; box-sizing: border-box;
+  break-after: page; overflow: hidden;
+  background: #0A0A0A; color: #FFFFFF;
+  padding: 64px 60px 50px 60px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+.cover-8 { font-size: 220px; font-weight: 100; line-height: 0.85; color: #FFFFFF; letter-spacing: -0.05em; }
+.cover-brand { font-size: 12px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-top: 10px; }
+.cover-meta { text-align: right; font-size: 11px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.85); line-height: 1.7; min-width: 180px; }
+.cover-center { margin-top: 60px; }
+.cover-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 28px; }
+.cover-title { font-size: 64px; font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: #FFFFFF; margin-bottom: 28px; }
+.cover-desc { font-size: 15px; font-weight: 300; line-height: 1.65; color: rgba(255,255,255,0.78); max-width: 500px; }
+.cover-bottom { display: flex; justify-content: space-between; align-items: flex-end; font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.6); gap: 40px; }
+.cover-bottom .left, .cover-bottom .right { flex: 1; }
+.cover-bottom .right { text-align: right; }
+.main-content { background: #FFFFFF; color: #0A0A0A; padding: 70px 65px 50px 65px; }
+.chapter-header { break-after: avoid; break-inside: avoid; margin-top: 36px; margin-bottom: 22px; }
+.chapter-header:first-child { margin-top: 0; }
+.chapter-num { font-size: 11px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 10px; }
+.chapter-title { font-size: 34px; font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; color: #0A0A0A; margin-bottom: 14px; }
+.intro-paragraph { font-size: 13.5px; font-weight: 400; line-height: 1.7; color: rgba(10,10,10,0.85); margin: 0 0 24px 0; max-width: 580px; }
+.page-entry { break-inside: avoid; margin-bottom: 20px; }
+.page-entry-title { font-size: 15px; font-weight: 500; color: #0A0A0A; margin-bottom: 7px; letter-spacing: -0.005em; }
+.page-entry-body { font-size: 12.5px; font-weight: 300; line-height: 1.65; color: rgba(10,10,10,0.78); }
+.ending {
+  width: 720px; height: 1020px; box-sizing: border-box;
+  break-before: page; overflow: hidden;
+  background: #0A0A0A; color: #FFFFFF;
+  padding: 64px 60px 50px 60px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.ending-top { font-size: 10px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.55); display: flex; justify-content: space-between; }
+.ending-center { margin-top: 80px; }
+.ending-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 28px; }
+.ending-headline { font-size: 60px; font-weight: 300; line-height: 1.05; letter-spacing: -0.03em; color: #FFFFFF; margin-bottom: 32px; }
+.ending-body { font-size: 14px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.78); max-width: 530px; }
+.ending-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+.ending-8 { font-size: 72px; font-weight: 100; line-height: 0.9; color: #FFFFFF; letter-spacing: -0.05em; }
+.ending-brand { margin-top: 8px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-weight: 500; }
+.ending-meta { text-align: right; font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.55); line-height: 1.7; }
+.ending-fin { margin-top: 10px; color: var(--c-accent); font-weight: 500; font-size: 11px; letter-spacing: 0.3em; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-top">
+    <div>
+      <div class="cover-8">8</div>
+      <div class="cover-brand">8Bit Creatives</div>
+    </div>
+    <div class="cover-meta">September 2026</div>
+  </div>
+  <div class="cover-center">
+    <div class="cover-eyebrow">Website &amp; Ops Portal Summary</div>
+    <div class="cover-title">The full build,<br>documented.</div>
+    <div class="cover-desc">A concise summary of every page and feature on the 8Bit Creatives website — plus the internal ops portal and partner dashboards.</div>
+  </div>
+  <div class="cover-bottom">
+    <div class="left">14 Pages · Website + Ops Portal + Dashboards</div>
+    <div class="right">Internal · V 1.0</div>
+  </div>
+</div>
+
+<div class="main-content">
+
+  <div class="chapter-header">
+    <div class="chapter-num">01 · Public Website</div>
+    <div class="chapter-title">The website, page by page.</div>
+  </div>
+
+  <p class="intro-paragraph">The 8Bit Creatives website is a dark-mode, editorial, gaming-native creative agency site with animated 8BIT letter backgrounds and an orange accent. It is fully responsive (desktop + mobile) and includes 9 public pages plus an internal ops portal.</p>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Landing Page</div>
+    <div class="page-entry-body">The homepage. Sections: (1) Hero with the "The People Behind the Screentime" title, a playable dino runner game, animated 8BIT letter background, and the 8Bit logo. (2) About section with a rotating red half-eclipse featuring 12 game characters, plus a brand marquee strip (300+ campaigns shipped for ASUS, Red Bull, Krafton, Netflix, etc.). (3) Creators section with a 3D coverflow carousel showing Mortal, Snax, Scout, Payal, and more. (4) Case Studies section with a two-column layout (list + hover-to-show image). (5) Services section with 3 cards (For Brands / For Creators / For Platforms). (6) Esports section with a black card, animated 8BIT background, team description, View Roster + See KIE Report + Instagram buttons. (7) Founders section with 3 founder cards (Thug, Goldy, Beg4Mercy). (8) CTA section with a live gradient and "Start Campaign" button. (9) Shared footer with 8Bit logo, S8UL block, navigation, address, enquiry, and social icons.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">About Page</div>
+    <div class="page-entry-body">Sections: Hero with "We are India's first gaming-native talent agency" statement. Narrative text about 8Bit's founding in 2018. Three principles (Seasoned professionals, Dedicated to your success, Tech-driven strategies) with descriptions. An embedded India map section ("Built in India, watched everywhere") showing Delhi NCR and Guwahati markers. A black-to-white smooth gradient transition throughout. Back-to-top button.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Creator Roster</div>
+    <div class="page-entry-body">A searchable, filterable archive of 12 8Bit creators (Mortal, Payal, Snax, Scout, Soul Goblin, Mamba, Viper, Pahadi, Thug, Goldy, Beg4Mercy, Regaltos). Each card shows handle, real name, role, category tags, subscriber counts, and Instagram + YouTube social icons. A filter bar with category tags (BGMI, Variety, GTA V RP, etc.) and a search bar. Clicking a card smoothly expands it to show a detailed creator view.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Case Study Archive</div>
+    <div class="page-entry-body">A searchable, filterable archive of 17 case studies. Filter by category (Brand campaigns, Broadcast & production, Platform migration, Tournament). Each card has a thumbnail that expands into a detailed case study with challenge, approach, execution, metrics, and a "View Case Study" button linking to the full case study page.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Services Page</div>
+    <div class="page-entry-body">Nine sections: (1) Hero with positioning statement. (2) Positioning paragraph. (3) Services breakdown — 3 numbered blocks (For Brands / For Creators / For Platforms) with descriptions and deliverable tags. (4) The Approach — 3 steps (Brief, Build, Measure). (5) Selected Work — 3 case study cards. (6) Capabilities — 6 items in a 2-column list (Multi-cam broadcast, Content production, Creator roster, Platform partnerships, Data & analytics, Studio infrastructure) with a hover effect. (7) Brands logo strip. (8) CTA. (9) Footer.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Esports Roster</div>
+    <div class="page-entry-body">The competitive BGMI roster page. Sections: (1) Hero with "8Bit Esports" title, subtitle, meta row (Game, Region, Founded, Roster), and team portrait — with a live gradient background. (2) KPI ribbon (Tournaments played, Total finishes, Best placement, Prize money). (3) Roster grid — 5 player cards (Juicy, Sarangg, Skipz, Shubh, Shorty) with avatars, handles, real names, roles, and Instagram + YouTube icons. (4) Mentoring & support staff (Mercy as Mentor, ROCKY BTC as Analyst). (5) Tournament history table (6 tournaments with Position Points, Finish Points, Overall Points, Tournament Position). (6) Partners (iQOO only). (7) Animated 8BIT letter background in the white body area.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Full Case Study</div>
+    <div class="page-entry-body">A complete case study with 9 sections: (1) Hero with project name, client, service, year, tier. (2) Brief. (3) Challenge. (4) Approach (3 pillars: talent-first commentary, real-time telemetry, social-first distribution). (5) Solution with editorial blocks, pull-quotes, and stat callouts. (6) Deliverables list (8 items). (7) Outcomes (12M+ reach, 9 days, 6 angles, 54 hours, 45+ clips). (8) Testimonial. (9) Credits. Plus a chapter index that stays visible while scrolling and a Next Project link.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Privacy Policy</div>
+    <div class="page-entry-body">A dark-mode, text-heavy privacy policy page with 13 numbered sections covering: about 8Bit and the policy, information collected, how data is used, legal basis (DPDP Act 2023), cookies, sharing, international transfers, data retention, user rights, security measures, children's data, changes to the policy, and contact/grievance officer.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Contact Page</div>
+    <div class="page-entry-body">A conversational 3-step brief form for brands to submit campaign requirements. Includes brand name, campaign title, category, timeline, desired creators, deliverable formats, and a Google Drive link field.</div>
+  </div>
+
+  <div class="chapter-header">
+    <div class="chapter-num">Shared Features</div>
+    <div class="chapter-title">Across all pages.</div>
+  </div>
+
+  <p class="intro-paragraph">Navbar with all links (Home, About, Creators, Work, Services, Esports, Founders, Contact). "← back to home" button on subpages. Back-to-top button (appears after hero, fixed bottom-right). Black-to-white smooth gradient transitions. Smooth scroll. Scroll-reveal text animations. Footer with 8Bit logo block, S8UL block, navigation, address, enquiry email, Instagram + LinkedIn social icons, and copyright line. Mobile responsive.</p>
+
+  <div class="chapter-header">
+    <div class="chapter-num">02 · Ops Portal</div>
+    <div class="chapter-title">Internal operations portal.</div>
+  </div>
+
+  <p class="intro-paragraph">The ops portal is an internal dashboard for the 8Bit Creatives operations team. It uses the same dark-mode design language as the public website. It has 9 views plus 3 partner dashboards:</p>
+
+  <div class="page-entry">
+    <div class="page-entry-title">01 · Dashboard</div>
+    <div class="page-entry-body">Stats row (active campaigns, available creators, pending approvals, deliverables due) + Kanban board (Briefing → In production → Pending approval → Delivered).</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">02 · Roster</div>
+    <div class="page-entry-body">Creator grid with avatar, handle, real name, status, subscriber count. "+ Add creator" form. Click a creator to see campaigns, deliverables count, payment status, contract, and performance.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">03 · Approvals</div>
+    <div class="page-entry-body">3-column Kanban (internal review, brand approval, approved).</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">04 · Campaign Pipeline</div>
+    <div class="page-entry-body">Full Kanban (Brief intake → In production → Pending approval → Delivered → Live & reporting). Click a card to see the campaign's brief, timeline, creators, deliverables checklist (with status: Not Started / In Progress / In Review / Delivered), SOW, next steps, and communication log.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">05 · Brief Intake</div>
+    <div class="page-entry-body">Form (brand name, campaign title, category, timeline, desired creators, deliverable formats, objective, Google Drive link).</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">06 · File Vault</div>
+    <div class="page-entry-body">Deliverable storage table linked to Google Drive.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">07 · Reports</div>
+    <div class="page-entry-body">Post-campaign metrics and performance reports.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">08 · Guide</div>
+    <div class="page-entry-body">Plain-English documentation page (12 accordion sections explaining every feature).</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">09 · Settings & Permissions</div>
+    <div class="page-entry-body">Account configuration and access management.</div>
+  </div>
+
+  <div class="chapter-header">
+    <div class="chapter-num">Partner Dashboards</div>
+    <div class="chapter-title">Three external dashboards.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Creator Dashboard</div>
+    <div class="page-entry-body">A creator's personal dashboard. Sections: stats row (active campaigns, deliverables due, payments pending, total views), my active campaigns, my deliverables checklist, my payments (per-campaign status), my contract, my performance metrics. Sidebar: My Dashboard, My Campaigns, My Deliverables, My Payments, My Contract, Guide.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Brand Dashboard</div>
+    <div class="page-entry-body">A brand partner's dashboard. Sections: stats row (active campaigns, deliverables delivered, total reach, campaign ROI), my campaigns with performance metrics, deliverables status (progress bars), assigned creators, budget tracking (spent vs allocated), campaign performance per campaign. Sidebar: My Dashboard, My Campaigns, My Deliverables, My Creators, My Reports, Guide.</div>
+  </div>
+
+  <div class="page-entry">
+    <div class="page-entry-title">Platform Dashboard</div>
+    <div class="page-entry-body">A platform partner's dashboard (Kick, YouTube, etc.). Sections: stats row (creators migrated, total watch hours, subscriber growth, active content), talent migration status, content performance per creator, growth metrics (subscriber/viewer growth), contract status. Sidebar: My Dashboard, Talent Migration, Content Performance, Growth Metrics, My Contract, Guide.</div>
+  </div>
+
+  <div class="chapter-header">
+    <div class="chapter-num">Google Drive Integration</div>
+    <div class="chapter-title">Shared folder structure.</div>
+  </div>
+
+  <p class="intro-paragraph">A shared Google Drive folder structure for asset collection and management. Folders: 01_Brand_Campaigns (per brand → per campaign → Briefs, Creative Assets, Deliverables, SOW Contracts, Reports), 02_Creator_Assets (per creator → Profile Photos, Channel Art, Reels, Long Form), 03_Templates (SOW, Contract, Brief, Report templates), 04_Finance (Invoices, Payments, Budgets), 05_Internal (Meeting Notes, Strategy Docs, Team Handbook), 06_Platform_Partnerships (Kick, YouTube, Loco), 07_Archive (Completed Campaigns).</p>
+
+</div>
+
+<div class="ending">
+  <div class="ending-top">
+    <div>8Bit Creatives · Internal Summary</div>
+    <div>V 1.0 · September 2026</div>
+  </div>
+  <div class="ending-center">
+    <div class="ending-eyebrow">— One Final Note —</div>
+    <div class="ending-headline">Built in seven days,<br>by one person.</div>
+    <div class="ending-body">Every page, every animation, every interaction — designed and deployed by a single person. The ops portal, the dashboards, the case study blueprint, the India map, the dino game, the 8BIT backgrounds, the gradients, the mobile responsive design — all of it. In 90 hours over 7 days.</div>
+  </div>
+  <div class="ending-bottom">
+    <div>
+      <div class="ending-8">8</div>
+      <div class="ending-brand">8Bit Creatives</div>
+    </div>
+    <div class="ending-meta">
+      <div>Prepared for internal reference</div>
+      <div class="ending-fin">— Fin —</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
