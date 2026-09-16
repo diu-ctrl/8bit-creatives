@@ -1579,6 +1579,7 @@ function initAboutPhysics() {
     startY = Math.max(0, Math.min(startY, secRect.height - CHAR_H));
 
     // Hide original element in SVG rotator
+    targetG.style.transition = '';
     targetG.style.opacity = '0';
     targetG.style.pointerEvents = 'none';
 
@@ -1591,6 +1592,7 @@ function initAboutPhysics() {
 
     const body = {
       el: charDiv,
+      targetG: targetG,
       x: startX,
       y: startY,
       vx: (Math.random() - 0.5) * 2,
@@ -1801,6 +1803,137 @@ function initAboutPhysics() {
     isAboutVisible = true;
     physicsRaf = requestAnimationFrame(physicsLoop);
   }
+
+  // Respawn character from physics back to hanging rotator
+  function respawnCharacter(targetG, body) {
+    if (!targetG) return;
+    if (!body) {
+      body = physicsBodies.find(b => b.targetG === targetG);
+    }
+    if (body) {
+      const idx = physicsBodies.indexOf(body);
+      if (idx !== -1) physicsBodies.splice(idx, 1);
+      if (body.el && body.el.parentNode) {
+        body.el.style.transition = 'opacity 0.4s ease';
+        body.el.style.opacity = '0';
+        setTimeout(() => {
+          if (body.el && body.el.parentNode) {
+            body.el.parentNode.removeChild(body.el);
+          }
+        }, 400);
+      }
+    }
+    targetG.dataset.detached = 'false';
+    targetG.style.pointerEvents = 'auto';
+    targetG.style.transition = 'opacity 0.5s ease';
+    targetG.style.opacity = '1';
+  }
+
+  function resetAllCharactersToHanging() {
+    if (!charactersSvg) return;
+    const allChars = charactersSvg.querySelectorAll('.eclipse-char-item');
+    allChars.forEach(targetG => {
+      if (targetG.dataset.detached === 'true') {
+        respawnCharacter(targetG);
+      } else {
+        targetG.style.opacity = '1';
+        targetG.style.pointerEvents = 'auto';
+        targetG.dataset.detached = 'false';
+      }
+    });
+  }
+
+  // === AUTO-FALL DEMO TRIGGER ===
+  // When the About section scrolls into view, ONE random character
+  // auto-falls as a visual hint that the characters are interactive.
+  // Triggers ONCE per page load.
+  let autoFallTriggered = false;
+
+  function pickRandomCharacter() {
+    if (!charactersSvg) return null;
+    const available = Array.from(charactersSvg.querySelectorAll('.eclipse-char-item')).filter(
+      el => el.dataset.detached !== 'true'
+    );
+    if (available.length === 0) return null;
+    return available[Math.floor(Math.random() * available.length)];
+  }
+
+  function triggerAutoFall() {
+    if (autoFallTriggered) return;
+    autoFallTriggered = true;
+
+    const pickedCharG = pickRandomCharacter();
+    if (!pickedCharG) return;
+
+    // Detach and let physics drop the character
+    const body = detachCharacter(pickedCharG);
+    if (!body) return;
+
+    // Respawn after fall completes so character returns to hanging position
+    setTimeout(() => {
+      // If user interacted and is dragging, wait until drag ends
+      if (body.isDragging) {
+        const checkInterval = setInterval(() => {
+          if (!body.isDragging) {
+            clearInterval(checkInterval);
+            setTimeout(() => respawnCharacter(pickedCharG, body), 2000);
+          }
+        }, 500);
+        return;
+      }
+      respawnCharacter(pickedCharG, body);
+    }, 4000);
+  }
+
+  // Expose for debugging and verification
+  window.__autoFallDemo = {
+    triggerAutoFall,
+    resetAllCharactersToHanging,
+    respawnCharacter,
+    pickRandomCharacter
+  };
+
+  // Check if About section is already in view on load (e.g. refresh at #about)
+  let isAlreadyInViewOnLoad = false;
+  const initialRect = section.getBoundingClientRect();
+  if (initialRect && initialRect.top < window.innerHeight * 0.7 && initialRect.bottom > 0) {
+    isAlreadyInViewOnLoad = true;
+  }
+
+  if ('IntersectionObserver' in window) {
+    const autoFallObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!isAlreadyInViewOnLoad && entry.isIntersecting && (entry.intersectionRatio >= 0.2 || entry.boundingClientRect.top < window.innerHeight * 0.8)) {
+          triggerAutoFall();
+          autoFallObserver.disconnect();
+        }
+      });
+    }, {
+      threshold: [0, 0.15, 0.25, 0.5, 0.75, 1],
+      rootMargin: '0px 0px -10% 0px'
+    });
+    autoFallObserver.observe(section);
+  }
+
+  // Handle the page-refresh-while-at-About case:
+  // If the page loads with the About section already in view,
+  // ensure characters are reset to hanging, then auto-fall after delay.
+  function handleLoadRefreshCase() {
+    setTimeout(() => {
+      const aboutRect = section.getBoundingClientRect();
+      if (aboutRect && aboutRect.top < window.innerHeight * 0.7 && aboutRect.bottom > 0) {
+        resetAllCharactersToHanging();
+        setTimeout(triggerAutoFall, 600);
+      }
+    }, 300);
+  }
+
+  if (document.readyState === 'complete') {
+    handleLoadRefreshCase();
+  } else {
+    window.addEventListener('load', handleLoadRefreshCase);
+  }
+  // === END AUTO-FALL DEMO TRIGGER ===
 }
 
 /* ==========================================================================
