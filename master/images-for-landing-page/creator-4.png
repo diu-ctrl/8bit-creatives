@@ -22,11 +22,11 @@
   
   <!-- Center Monogram Box -->
   <rect x="220" y="160" width="160" height="160" fill="#181818" stroke="#FF4D00" stroke-width="2" />
-  <text x="300" y="255" font-family="'Space Grotesk', 'Archivo', sans-serif" font-size="44" font-weight="900" fill="#FF4D00" text-anchor="middle">SCO</text>
+  <text x="300" y="255" font-family="'Space Grotesk', 'Archivo', sans-serif" font-size="44" font-weight="900" fill="#FF4D00" text-anchor="middle">JOK</text>
   
   <!-- Labels -->
-  <text x="300" y="380" font-family="'Space Grotesk', sans-serif" font-size="28" font-weight="700" fill="#F7F5F1" text-anchor="middle">SCOUTOP</text>
-  <text x="300" y="415" font-family="'Inter', sans-serif" font-size="16" font-weight="500" fill="#A8A399" text-anchor="middle">Tanmay Singh · 5.2M Reach</text>
+  <text x="300" y="380" font-family="'Space Grotesk', sans-serif" font-size="28" font-weight="700" fill="#F7F5F1" text-anchor="middle">JOKERKIHAVELI</text>
+  <text x="300" y="415" font-family="'Inter', sans-serif" font-size="16" font-weight="500" fill="#A8A399" text-anchor="middle">Gulrez Khan · 5.2M Reach</text>
   
   <!-- Badge -->
   <rect x="200" y="460" width="200" height="32" fill="#FF4D00" rx="2" />

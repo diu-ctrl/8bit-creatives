@@ -299,9 +299,9 @@ const CREATOR_DATABASE = [
     image: 'assets/creators/nishu.jpg'
   },
   {
-    id: 'scout',
-    name: 'Tanmay Singh',
-    handle: 'ScoutOP',
+    id: 'jokerkihaveli',
+    name: 'Gulrez Khan',
+    handle: 'Jokerkihaveli',
     game: 'BGMI',
     genre: 'FPS / Global Pro',
     platforms: ['YouTube', 'Instagram'],
@@ -311,7 +311,7 @@ const CREATOR_DATABASE = [
     bio: 'Pioneer of aggressive mobile esports in India. Represented the nation at multiple international tournaments with massive live audience loyalty.',
     ageDemo: '18-24 (68%) · 25-34 (22%)',
     topGeo: 'India (95%) · National',
-    image: 'assets/creators/scout.jpg'
+    image: 'assets/creators/joker.png'
   },
   {
     id: 'goblin',
@@ -467,14 +467,14 @@ function initCoverflowRoster() {
       image: 'assets/creators/snax.jpg'
     },
     {
-      id: 'scout',
-      name: 'SCOUT',
-      handle: 'Scout',
-      fullName: 'Tanmay Singh',
+      id: 'jokerkihaveli',
+      name: 'JOKERKIHAVELI',
+      handle: 'Jokerkihaveli',
+      fullName: 'Gulrez Khan',
       role: 'Global Mobile Pro',
       reach: '5.2M',
       game: 'FPS / Global Pro',
-      image: 'assets/creators/scout.jpg'
+      image: 'assets/creators/joker.png'
     },
     {
       id: 'regaltos',
@@ -819,7 +819,7 @@ function initKickWall() {
     { name: 'Viper', genre: 'variety', avatar: 'assets/creators/viper.jpg' },
     { name: 'Mortal', genre: 'bgmi', avatar: 'assets/creators/mortal.jpg' },
     { name: 'Payal', genre: 'variety', avatar: 'assets/creators/payal.jpg' },
-    { name: 'Scout', genre: 'bgmi', avatar: 'assets/creators/scout.jpg' },
+    { name: 'Jokerkihaveli', genre: 'bgmi', avatar: 'assets/creators/joker.png' },
     { name: 'Regaltos', genre: 'bgmi', avatar: 'assets/creators/regaltos.jpg' },
     { name: 'Kaashvi', genre: 'variety', avatar: 'assets/creators/kaashvi.jpg' },
     { name: 'Krutika', genre: 'variety', avatar: 'assets/creators/krutika.jpg' },
@@ -929,7 +929,7 @@ const CASE_STUDY_DATABASE = {
     metric: '42M VIEWS',
     metricLabel: 'views on the launch',
     brief: 'Launch a high-performance gaming flagship device to hard-to-reach Gen-Z mobile gamers in India.',
-    solution: 'Curated an 8-creator squad (Mortal, Scout, Snax, Payal, Regaltos, Goblin, Mamba, Viper) across 6 weeks of live unboxings, custom tournament scrims, and performance stress tests.',
+    solution: 'Curated an 8-creator squad (Mortal, Jokerkihaveli, Snax, Payal, Regaltos, Goblin, Mamba, Viper) across 6 weeks of live unboxings, custom tournament scrims, and performance stress tests.',
     results: ['42M+ Total Video Views', '96,000 Direct Product Clicks', '+3.1× Engagement Lift vs. Industry Benchmark', '100% Sold Out Initial Launch Batch'],
     quote: '"8Bit Creatives delivered the single highest converting gaming campaign in our brand history." — Regional Brand Director'
   },

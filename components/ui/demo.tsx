@@ -38,11 +38,11 @@ const ROSTER_SLIDES: CoverflowSlide[] = [
     ],
   },
   {
-    id: "scout",
+    id: "jokerkihaveli",
     src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80",
-    alt: "Scout - Tanmay Singh",
-    title: "SCOUT",
-    subtitle: "Tanmay Singh · Global Esports Pioneer",
+    alt: "Jokerkihaveli - Gulrez Khan",
+    title: "JOKERKIHAVELI",
+    subtitle: "Gulrez Khan · Global Esports Pioneer",
     meta: [
       { label: "REACH", value: "5.2M" },
       { label: "PLATFORM", value: "YouTube" },

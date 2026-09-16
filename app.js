@@ -2808,7 +2808,7 @@ function initCreatorStats() {
     {
       id: 'jokerkihaveli',
       name: 'Jokerkihaveli',
-      realName: 'Joker',
+      realName: 'Gulrez Khan',
       img: 'images-for-landing-page/joker.png',
       bio: 'Dynamic gaming creator and entertainer with a strong multi-platform footprint across YouTube, Instagram, and Kick, celebrated for high-energy streams, engaging gameplay, and dedicated community culture.',
       categories: 'Gaming, Entertainment, Variety Streaming',
