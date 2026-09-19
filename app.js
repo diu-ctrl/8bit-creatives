@@ -543,16 +543,19 @@ function initAboutGSAP() {
     );
 
     // 2. Characters entrance (fade in without overriding rotational transforms)
-    gsap.from('.eclipse-wrap .character', {
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.03,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.about-eclipse-section',
-        start: 'top 60%'
-      }
-    });
+    const characterElements = gsap.utils.toArray('.eclipse-wrap .character');
+    if (characterElements.length > 0) {
+      gsap.from(characterElements, {
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.03,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.about-eclipse-section',
+          start: 'top 60%'
+        }
+      });
+    }
 
     // 3. About text & CTA entrance
     gsap.from('.about-content > *, .about-cta-wrap', {
