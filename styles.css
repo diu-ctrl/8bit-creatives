@@ -515,6 +515,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   overflow: hidden;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
+  transform: translateZ(0);          /* GPU compositing — stabilizes border-radius during child transforms */
 }
 
 .hero-game-area {
