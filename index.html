@@ -182,6 +182,20 @@
     section[id="services"] {
       scroll-margin-top: 57px !important;
     }
+
+    /* === PERFORMANCE: Skip rendering off-screen sections === */
+    /* content-visibility: auto tells the browser "don't render this section's
+       contents until it's near the viewport" — massive performance win
+       for long-scrolling pages with many sections. */
+    .case-studies-section,
+    .services-section,
+    .esports-section,
+    .founders-section,
+    .cta-section {
+      content-visibility: auto;
+      contain-intrinsic-size: 800px;
+    }
+    /* === END PERFORMANCE === */
   </style>
 
   <!-- GSAP & ScrollTrigger -->

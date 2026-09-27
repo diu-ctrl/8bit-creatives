@@ -1863,14 +1863,31 @@ function initAboutPhysics() {
 
   function triggerAutoFall() {
     if (autoFallTriggered) return;
-    autoFallTriggered = true;
 
     const pickedCharG = pickRandomCharacter();
-    if (!pickedCharG) return;
+    if (!pickedCharG) {
+      // Characters not generated yet — retry in 500ms (up to 10 times)
+      if (!triggerAutoFall._retries) triggerAutoFall._retries = 0;
+      triggerAutoFall._retries++;
+      if (triggerAutoFall._retries <= 10) {
+        setTimeout(triggerAutoFall, 500);
+      }
+      return;
+    }
 
-    // Detach and let physics drop the character
     const body = detachCharacter(pickedCharG);
-    if (!body) return;
+    if (!body) {
+      // Detach failed — retry with a different character in 500ms (up to 5 times)
+      if (!triggerAutoFall._detachRetries) triggerAutoFall._detachRetries = 0;
+      triggerAutoFall._detachRetries++;
+      if (triggerAutoFall._detachRetries <= 5) {
+        setTimeout(triggerAutoFall, 500);
+      }
+      return;
+    }
+
+    // ONLY set the flag after the character has been successfully detached
+    autoFallTriggered = true;
 
     // Respawn after fall completes so character returns to hanging position
     setTimeout(() => {
