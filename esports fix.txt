@@ -1,0 +1,241 @@
+# Antigravity Prompt — Fix Hero Section Scroll Lag (Remove Excess will-change)
+
+> **Goal:** The 8Bit Creatives landing page has severe scroll lag in the hero section after a recent change ("move image slightly down"). The page feels janky and then suddenly jumps to the next section. Root cause: **too many `will-change` CSS properties** creating 100+ GPU compositing layers that overwhelm the browser's compositor on every scroll frame.
+>
+> **Fix:** Remove `will-change` from elements that don't need permanent GPU promotion. Keep it ONLY on elements with continuous CSS keyframe animations. Zero visual change — `will-change` only affects how the browser renders the element internally, not how it looks.
+
+---
+
+## STRICT SCOPE — DO NOT TOUCH
+
+Antigravity may ONLY modify:
+- `styles.css` — remove specific `will-change` declarations from specific selectors (listed below)
+
+Antigravity may NOT touch:
+- Any HTML file
+- `app.js`
+- `navbar.js`
+- `vercel.json`
+- Any other CSS property besides `will-change` (don't change colors, fonts, transforms, filters, animations, etc.)
+- The 8BIT letter background animation
+- The hero gradient (Velaris shader)
+- The dino runner game
+- The Matter.js physics engine
+- Any GSAP animation
+- The smooth scroll (Lenis)
+- Any backdrop-filter rule
+- Any filter rule (blur, drop-shadow — all stay)
+- Any transform rule
+- Any other section of the page
+
+If Antigravity wants to change anything outside removing the specific `will-change` declarations listed below, STOP and report it as a follow-up suggestion.
+
+---
+
+## THE FIX — Remove 12 `will-change` declarations
+
+### Step 1 — Find and DELETE these `will-change` lines
+
+Open `styles.css`. Find each of the following selectors and DELETE the `will-change` line from each rule. Do NOT change any other property in these rules.
+
+**DELETE `will-change` from these 12 selectors:**
+
+| # | Selector | Current `will-change` value | Why it's safe to remove |
+|---|---|---|---|
+| 1 | `.hero-bg-img` | `will-change: transform;` | The GSAP parallax handles the transform via inline style — GSAP manages its own GPU promotion internally during the animation. The `filter: blur(10px)` already forces a GPU layer, making `will-change` redundant. |
+| 2 | `.hero-title .line` | `will-change: transform, opacity;` | Only animated during the GSAP entrance (fade-in) — GSAP sets `will-change` internally during the tween, then removes it. Permanent `will-change` wastes GPU memory for an animation that runs once. |
+| 3 | `.hero-sub` | `will-change: transform, opacity;` | Same as #2 — GSAP entrance animation only. |
+| 4 | `.hero-cta-group a` | `will-change: transform, opacity;` | Same as #2 — GSAP entrance animation only. |
+| 5 | `.about-content > *` | `will-change: transform, opacity;` | GSAP entrance animation only. Also, `> *` applies to ALL children — if there are 10 children, that's 10 GPU layers wasted. |
+| 6 | `.stat-num` | `will-change: transform, opacity;` | GSAP entrance animation only. |
+| 7 | `.stat-label` | `will-change: transform, opacity;` | GSAP entrance animation only. |
+| 8 | `.stat-desc` | `will-change: transform, opacity;` | GSAP entrance animation only. |
+| 9 | `.creator-card` | `will-change: transform, opacity;` | GSAP entrance animation only. With 12+ creator cards, that's 12+ wasted GPU layers. |
+| 10 | `.eclipse-characters .character` | `will-change: transform, opacity;` | **DEAD CODE** — characters were migrated from PNG (`.character` class) to SVG (`.eclipse-char-item` class). This selector matches NOTHING but the browser still evaluates it on every style recalculation. |
+| 11 | `.footer-logo-wrap` | `will-change: transform;` | Only animated on hover — the CSS `transition` property handles GPU promotion during the transition. |
+| 12 | `.nav-brand-topleft` | `will-change: opacity, transform;` | Only animated on scroll past hero — the IntersectionObserver + JS toggle handles this. CSS `transition` handles the GPU promotion during the transition. |
+
+### Step 2 — KEEP `will-change` on these elements (do NOT remove)
+
+These elements have CONTINUOUS CSS keyframe animations that genuinely need permanent GPU promotion:
+
+| Selector | Why `will-change` stays |
+|---|---|
+| `.hero-8bit-bg__col` | 100 columns with infinite CSS `@keyframes` animation — needs GPU promotion for smooth 60fps |
+| `.canvas-container` | GSAP infinite float animation (`y: -12`, `repeat: -1`) — needs GPU promotion |
+| `.hero-logo-img` | Has mouse-tilt interaction + `filter: drop-shadow` + `transform-style: preserve-3d` — the drop-shadow already forces a GPU layer, but keep `will-change` for the tilt responsiveness |
+| `.marquee-track` | Infinite CSS `@keyframes` marquee animation — needs GPU promotion |
+| `.eclipse` | Infinite CSS `@keyframes` rotation — needs GPU promotion |
+| `.eclipse-grass .grass-blade` | CSS `@keyframes` sway animation — needs GPU promotion |
+| `.navbar-pill__indicator` | Animates on nav hover (width + transform transition) — keep for smooth hover |
+| `.nav-cta-topright` | Animates on scroll past hero — keep for smooth transition |
+
+### Step 3 — How to delete each `will-change` line
+
+For each of the 12 selectors above, find the CSS rule, find the `will-change: ...;` line, and DELETE that entire line. Do NOT change any other property in the same rule.
+
+**Example for `.hero-bg-img`:**
+
+Before:
+```css
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(10px) brightness(0.45);
+  transform: scale(1.08);
+  will-change: transform;              /* ← DELETE THIS LINE */
+}
+```
+
+After:
+```css
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(10px) brightness(0.45);
+  transform: scale(1.08);
+}
+```
+
+**Example for `.hero-title .line`:**
+
+Before:
+```css
+.hero-title .line {
+  display: inline-block;
+  will-change: transform, opacity;     /* ← DELETE THIS LINE */
+}
+```
+
+After:
+```css
+.hero-title .line {
+  display: inline-block;
+}
+```
+
+Repeat for all 12 selectors. Delete ONLY the `will-change` line — leave every other property (display, width, height, color, filter, transform, transition, etc.) untouched.
+
+### Step 4 — Verify the changes
+
+After deleting the 12 `will-change` lines, run:
+
+```bash
+grep -c "will-change" styles.css
+```
+
+**Before the fix:** 20 `will-change` declarations
+**After the fix:** 8 `will-change` declarations (the 8 listed in Step 2 that should be kept)
+
+Verify which 8 remain:
+```bash
+grep -n "will-change" styles.css
+```
+
+The remaining 8 should be on these selectors ONLY:
+1. `.hero-8bit-bg__col`
+2. `.canvas-container`
+3. `.hero-logo-img`
+4. `.marquee-track`
+5. `.eclipse`
+6. `.eclipse-grass .grass-blade`
+7. `.navbar-pill__indicator`
+8. `.nav-cta-topright`
+
+If any of the 12-to-be-deleted selectors still have `will-change`, delete them. If any of the 8-to-keep selectors lost their `will-change`, add it back.
+
+### Step 5 — Visual sanity check
+
+Open `index.html` in a browser. Verify:
+
+1. The hero section displays IDENTICALLY — same background blur, same dino game, same 8BIT letter background, same headline, same buttons, same 8Bit logo with tilt
+2. Scroll through the hero section — VERIFY it's NOW SMOOTH (no lag, no jank, no sudden jumps)
+3. Scroll to the About section — the rotating eclipse + characters + auto-fall still work
+4. Scroll to the Creators section — the coverflow carousel works
+5. Scroll through the entire page — everything feels responsive
+6. The 8BIT letter background still animates at 60fps (no change — `will-change` is kept on `.hero-8bit-bg__col`)
+7. The marquee strip still scrolls smoothly (no change — `will-change` is kept on `.marquee-track`)
+8. The hero logo tilt still works on mouse move (no change — `will-change` is kept on `.hero-logo-img`)
+9. The navbar transitions are still smooth (no change — `will-change` is kept on `.navbar-pill__indicator` and `.nav-cta-topright`)
+10. NO visual changes to ANY element — the page looks identical to before
+
+### Step 6 — Scroll performance test
+
+Open Chrome DevTools → Performance tab. Record a 10-second scroll session through the hero section.
+
+VERIFY:
+1. No long tasks (>50ms) during scroll
+2. The frame rate stays near 60fps during scroll (was dropping to 10-20fps before the fix)
+3. The GPU compositor is not creating excessive layers (the "Compositing Layers" count should be lower)
+
+### Step 7 — Verify scope was respected
+
+```bash
+git diff --stat
+```
+
+Expected: only `styles.css` shows as modified. No other file should be touched.
+
+```bash
+git diff styles.css
+```
+
+Should show ONLY 12 lines deleted (the `will-change` declarations from the 12 selectors). No other lines changed — no property added, no property modified, no rule added, no rule removed.
+
+---
+
+## PHASE 8 — Commit
+
+```bash
+git add styles.css
+git commit -m "fix: remove 12 excess will-change declarations causing GPU compositing overload + scroll lag in hero section"
+```
+
+Do NOT push. The user will push via GitHub Desktop.
+
+---
+
+## Why this fix works (and is 100% safe)
+
+### What `will-change` does
+`will-change: transform` tells the browser: "I'm going to animate this element — promote it to its own GPU compositing layer NOW so the animation is smooth." This is useful for elements with CONTINUOUS animations (infinite CSS keyframes, infinite GSAP loops).
+
+### The problem
+When 20 CSS rules (some applying to 100+ elements) ALL have `will-change`, the browser creates 100+ GPU layers. Each layer uses GPU memory and requires compositing work on every frame. When the user scrolls, the GPU compositor has to:
+1. Composite 100+ layers
+2. Re-rasterize layers with filters (blur, drop-shadow)
+3. Handle 28 backdrop-filter blur layers
+4. Handle GSAP animations (parallax, float, entrance)
+5. Handle CSS animations (8BIT columns, eclipse, marquee)
+
+This overwhelms the GPU → frame drops → Lenis can't keep up → "suddenly scrolls to next section."
+
+### The fix
+Removing `will-change` from elements that DON'T need permanent GPU promotion:
+- Elements with ONE-TIME entrance animations (GSAP `.from()` with no `repeat`) — GSAP sets `will-change` internally during the tween, then removes it. The permanent CSS `will-change` is redundant.
+- Elements that are only animated on hover/interaction — CSS `transition` handles GPU promotion during the transition.
+- DEAD CODE selectors (`.eclipse-characters .character`) — match nothing, but the browser still evaluates them.
+
+After the fix, the GPU compositor only has to handle ~20 layers (the 8BIT columns + eclipse + marquee + canvas-container + logo + navbar) instead of 100+. The scroll becomes smooth again.
+
+### Zero visual impact
+- `will-change` ONLY affects how the browser RENDERS the element internally (GPU compositing)
+- It does NOT affect the element's appearance, size, color, position, or animation
+- The GSAP animations still run identically (GSAP manages its own GPU promotion during tweens)
+- The CSS `transition` properties still work identically (the browser promotes to GPU during the transition)
+- The `filter: blur()` and `filter: drop-shadow()` still render identically (they force GPU layers regardless of `will-change`)
+
+---
+
+## How to use this prompt
+
+1. Paste the prompt into Antigravity.
+2. Antigravity finds the 12 selectors with `will-change` that should be removed.
+3. Antigravity deletes ONLY the `will-change` line from each of the 12 rules — no other property changed.
+4. Antigravity verifies the remaining 8 `will-change` declarations are on the correct selectors.
+5. Antigravity runs the visual sanity check (10 checks) + scroll performance test.
+6. Antigravity commits — you push via GitHub Desktop.
+
+After deploy, the hero section scroll will be SMOOTH again — no lag, no jank, no sudden jumps. The page looks 100% identical. The only difference is that the browser's GPU compositor has 80% fewer layers to composite on every scroll frame.
