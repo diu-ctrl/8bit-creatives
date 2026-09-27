@@ -1839,8 +1839,8 @@ void main() {
 // 3. On each requestAnimationFrame, moves 10% of the way toward the target
 // 4. The 10% lerp factor gives the smooth ease-out curve
 //
-// Why this won't stutter like Lenis:
-// - Lenis's RAF callback was complex (easing calc + scroll tracking + GSAP sync)
+// Why this won't stutter:
+// - Heavy scroll libraries have complex RAF callbacks (easing calc + scroll tracking + GSAP sync)
 // - This RAF callback is trivial (one multiplication + one scrollTo call)
 // - Even under GPU load, this completes in <1ms per frame
 //
