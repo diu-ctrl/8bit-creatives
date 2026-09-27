@@ -177,7 +177,7 @@
     section[id] {
       scroll-margin-top: 100px !important;
     }
-    section[id="hero"] {
+    section[id="home"] {
       scroll-margin-top: 0 !important;
     }
     section[id="esports"] {
@@ -231,7 +231,7 @@
      SECTION 1 — NAVBAR & HEADER CONTROLS
      ============================================================ -->
 <!-- Top-Left Mascot Logo (matching Figma reference) -->
-<a href="#hero" class="nav-brand-topleft" aria-label="8Bit Creatives Home">
+<a href="/" data-section="home" onclick="return false;" class="nav-brand-topleft" aria-label="8Bit Creatives Home">
   <img src="images-for-landing-page/logo_2.png" alt="8Bit Logo" class="nav-brand-topleft__img">
 </a>
 
@@ -242,13 +242,13 @@
 
   <!-- navbar__sep -->
   <ul class="navbar__links">
-    <li><a href="#hero">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#creators">Creators</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#esports">Esports</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="/" data-section="home" onclick="return false;">Home</a></li>
+    <li><a href="/" data-section="about" onclick="return false;">About</a></li>
+    <li><a href="/" data-section="creators" onclick="return false;">Creators</a></li>
+    <li><a href="/" data-section="work" onclick="return false;">Work</a></li>
+    <li><a href="/" data-section="services" onclick="return false;">Services</a></li>
+    <li><a href="/" data-section="esports" onclick="return false;">Esports</a></li>
+    <li><a href="/" data-section="contact" onclick="return false;">Contact</a></li>
   </ul>
 
   <!-- Mobile Hamburger (visible on mobile only) -->
@@ -258,24 +258,24 @@
 
   <!-- Mobile glassmorphism dropdown panel -->
   <div class="navbar__mobile-drawer" aria-label="Mobile navigation">
-    <a href="#hero">Home</a>
-    <a href="#about">About</a>
-    <a href="#creators">Creators</a>
-    <a href="#work">Work</a>
-    <a href="#services">Services</a>
-    <a href="#esports">Esports</a>
-    <a href="#contact">Contact</a>
+    <a href="/" data-section="home" onclick="return false;">Home</a>
+    <a href="/" data-section="about" onclick="return false;">About</a>
+    <a href="/" data-section="creators" onclick="return false;">Creators</a>
+    <a href="/" data-section="work" onclick="return false;">Work</a>
+    <a href="/" data-section="services" onclick="return false;">Services</a>
+    <a href="/" data-section="esports" onclick="return false;">Esports</a>
+    <a href="/" data-section="contact" onclick="return false;">Contact</a>
   </div>
 </nav>
 
 <!-- Top-Right Fixed CTA Button (OUTSIDE the navbar capsule) -->
-<a href="#contact" class="nav-cta-topright">Start Campaign</a>
+<a href="/" data-section="contact" onclick="return false;" class="nav-cta-topright">Start Campaign</a>
 
 
 <!-- ============================================================
      SECTION 2 — HERO
      ============================================================ -->
-<section id="hero" class="hero-section" data-bg="light" aria-label="Hero">
+<section id="home" class="hero-section" data-bg="light" aria-label="Home">
   <div class="hero-8bit-bg" aria-hidden="true"></div>
   <div class="hero-foreground">
     <!-- Background: div .hero-bg-wrap with blur inside bounds -->
@@ -304,12 +304,12 @@
         </p>
 
         <div class="hero-cta-group">
-          <a href="#contact" class="btn-obsidian btn-obsidian-primary">Start Campaign</a>
-          <a href="#creators" class="btn-obsidian btn-obsidian-secondary">Explore Creators</a>
+          <a href="/" data-section="contact" onclick="return false;" class="btn-obsidian btn-obsidian-primary">Start Campaign</a>
+          <a href="/" data-section="creators" onclick="return false;" class="btn-obsidian btn-obsidian-secondary">Explore Creators</a>
           <!-- Hidden legacy fallback for verify-hero-gsap.js test suite -->
           <div style="display:none;" aria-hidden="true">
-            <a href="#contact" class="btn-primary">Start Campaign</a>
-            <a href="#creators" class="btn-secondary">Explore Creators</a>
+            <a href="/" data-section="contact" onclick="return false;" class="btn-primary">Start Campaign</a>
+            <a href="/" data-section="creators" onclick="return false;" class="btn-secondary">Explore Creators</a>
           </div>
         </div>
       </div>
@@ -1338,35 +1338,16 @@
 <script src="navbar.js"></script>
 <script src="app.js"></script>
 
-<!-- Navbar Anchor Redirect & Smooth Scroll (Esports, Creators, Work, Services) -->
+<!-- Navbar Clean URL Smooth Scroll (No Hashes) & Active Section Detection -->
 <script>
 (function() {
   if (window.__navbarAnchorInit) return;
   window.__navbarAnchorInit = true;
 
-  window.scrollToEsports = function(smooth) {
-    var target = document.querySelector('.esports-section__card') || document.getElementById('esports') || document.querySelector('.esports-section');
-    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-    if (window.history && window.history.pushState) window.history.pushState(null, null, '#esports');
-  };
-
-  window.scrollToCreators = function(smooth) {
-    var target = document.querySelector('.creators-container') || document.getElementById('creators');
-    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-    if (window.history && window.history.pushState) window.history.pushState(null, null, '#creators');
-  };
-
-  window.scrollToWork = function(smooth) {
-    var target = document.querySelector('.case-card') || document.getElementById('work');
-    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-    if (window.history && window.history.pushState) window.history.pushState(null, null, '#work');
-  };
-
-  window.scrollToServices = function(smooth) {
-    var target = document.querySelector('.services-title-band') || document.getElementById('services');
-    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-    if (window.history && window.history.pushState) window.history.pushState(null, null, '#services');
-  };
+  // Clean any initial hash from URL
+  if (window.history && window.history.replaceState && window.location.href.indexOf('#') !== -1) {
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
 
   var closeMobileDrawer = function() {
     var drawer = document.querySelector('.navbar__mobile-drawer');
@@ -1375,6 +1356,60 @@
       drawer.classList.remove('open', 'is-open');
       if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
     }
+  };
+
+  // === CLEAN URL SCROLL — no #hash in the address bar ===
+  // When a navbar/CTA link with data-section is clicked:
+  // 1. Prevent default (don't navigate to href="/")
+  // 2. Find the target section by ID
+  // 3. Scroll to it smoothly via scrollIntoView
+  // 4. Update the URL to stay clean (replaceState removes any existing hash)
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('[data-section]');
+    if (!link) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    var sectionId = link.getAttribute('data-section');
+    var target = document.getElementById(sectionId);
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Clean the URL — remove any #hash
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+
+    closeMobileDrawer();
+  });
+  // === END CLEAN URL SCROLL ===
+
+  window.scrollToHome = function(smooth) {
+    var target = document.getElementById('home') || document.querySelector('.hero-section');
+    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+  };
+
+  window.scrollToEsports = function(smooth) {
+    var target = document.querySelector('.esports-section__card') || document.getElementById('esports') || document.querySelector('.esports-section');
+    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+  };
+
+  window.scrollToCreators = function(smooth) {
+    var target = document.querySelector('.creators-container') || document.getElementById('creators');
+    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+  };
+
+  window.scrollToWork = function(smooth) {
+    var target = document.querySelector('.case-card') || document.getElementById('work');
+    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+  };
+
+  window.scrollToServices = function(smooth) {
+    var target = document.querySelector('.services-title-band') || document.getElementById('services');
+    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
   };
 
   var hamburgerBtn = document.querySelector('.navbar__hamburger');
@@ -1392,44 +1427,56 @@
     });
   }
 
-  var sections = [
-    { id: 'esports', scrollFn: window.scrollToEsports, checkTarget: function() { return document.querySelector('.esports-section__card'); } },
-    { id: 'creators', scrollFn: window.scrollToCreators, checkTarget: function() { return document.querySelector('.creators-container') || document.getElementById('creators'); } },
-    { id: 'work', scrollFn: window.scrollToWork, checkTarget: function() { return document.querySelector('.case-card') || document.getElementById('work'); } },
-    { id: 'services', scrollFn: window.scrollToServices, checkTarget: function() { return document.querySelector('.services-title-band') || document.getElementById('services'); } }
-  ];
-
-  sections.forEach(function(sec) {
-    var links = document.querySelectorAll('a[href="#' + sec.id + '"], a[href$="#' + sec.id + '"]');
-    links.forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        if (sec.checkTarget()) {
-          e.preventDefault();
-          sec.scrollFn(true);
-          closeMobileDrawer();
-        }
-      });
-    });
-  });
-
-  var currentHash = (window.location.hash || '').replace('#', '');
-  var activeSec = sections.filter(function(s) { return s.id === currentHash; })[0];
-  if (activeSec) {
-    var handleHashJump = function() {
-      activeSec.scrollFn(false);
-    };
-    requestAnimationFrame(handleHashJump);
-    setTimeout(handleHashJump, 50);
-    setTimeout(handleHashJump, 250);
-  }
-
-  window.addEventListener('hashchange', function() {
-    var newHash = (window.location.hash || '').replace('#', '');
-    var matchingSec = sections.filter(function(s) { return s.id === newHash; })[0];
-    if (matchingSec) {
-      matchingSec.scrollFn(true);
+  // === ACTIVE SECTION DETECTION (IntersectionObserver — no URL hash needed) ===
+  var navLinks = document.querySelectorAll('.navbar__links a[data-section], .navbar__mobile-drawer a[data-section]');
+  var linkMap = {};
+  navLinks.forEach(function(link) {
+    var sec = link.getAttribute('data-section');
+    if (sec) {
+      if (!linkMap[sec]) linkMap[sec] = [];
+      linkMap[sec].push(link);
     }
   });
+
+  var activeSectionId = 'home';
+  function setActiveSection(sectionId) {
+    if (!sectionId) return;
+    activeSectionId = sectionId;
+    navLinks.forEach(function(l) { l.classList.remove('is-active'); });
+    if (linkMap[sectionId]) {
+      linkMap[sectionId].forEach(function(l) { l.classList.add('is-active'); });
+      var desktopLink = linkMap[sectionId].find(function(l) { return l.closest('.navbar__links'); });
+      if (desktopLink && typeof window.updateNavbarIndicator === 'function') {
+        window.updateNavbarIndicator(desktopLink, false);
+      }
+    }
+  }
+
+  var observedSections = document.querySelectorAll('section[id]');
+  if ('IntersectionObserver' in window) {
+    var activeSecObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, {
+      threshold: [0.3, 0.5],
+      rootMargin: '-80px 0px -40% 0px'
+    });
+    observedSections.forEach(function(s) { activeSecObserver.observe(s); });
+  }
+
+  window.addEventListener('scroll', function() {
+    if (window.scrollY < 120) {
+      setActiveSection('home');
+    } else if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 80) {
+      setActiveSection('contact');
+    }
+  }, { passive: true });
+
+  // Initial highlight on load
+  setActiveSection('home');
 })();
 </script>
 
@@ -1740,7 +1787,7 @@ void main() {
   var button = document.getElementById('backToTop');
   if (!button) return;
 
-  var hero = document.getElementById('hero') || document.querySelector('.hero-section');
+  var hero = document.getElementById('home') || document.querySelector('.hero-section');
   var heroHeight = hero ? hero.offsetHeight : window.innerHeight;
 
   function checkScroll() {
