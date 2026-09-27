@@ -767,8 +767,11 @@
   </style>
   <!-- Vercel Web Analytics — tracks page views, unique visitors, top pages, referrers, devices -->
   <script defer src="/_vercel/insights/script.js"></script>
-  <!-- Vercel Speed Insights — tracks Core Web Vitals (LCP, CLS, TTFB) -->
-  <script defer src="/_vercel/insights/speed.js"></script>
+  <!-- Vercel Speed Insights — tracks Core Web Vitals (LCP, CLS, TTFB, INP) via @vercel/speed-insights CDN -->
+  <script type="module">
+    import { inject } from 'https://esm.sh/@vercel/speed-insights@1';
+    inject();
+  </script>
 </head>
 <body>
   <a href="index.html" class="back-home" aria-label="Back to home">
