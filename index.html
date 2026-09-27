@@ -188,6 +188,8 @@
        contents until it's near the viewport" — massive performance win
        for long-scrolling pages with many sections. */
     .case-studies-section,
+    .services-section,
+    .esports-section,
     .founders-section,
     .cta-section {
       content-visibility: auto;
@@ -1002,9 +1004,8 @@
 }
 .esports-section__image-col__glow{
   position:absolute;
-  inset:-28px;
-  background:radial-gradient(ellipse at center,rgba(255,89,49,0.30)0%,rgba(255,89,49,0.18)35%,rgba(255,89,49,0.06)65%,rgba(255,89,49,0)100%);
-  filter:blur(48px);
+  inset:-56px;
+  background:radial-gradient(ellipse at center,rgba(255,89,49,0.20)0%,rgba(255,89,49,0.12)30%,rgba(255,89,49,0.04)60%,rgba(255,89,49,0)100%);
   border-radius:48px;
   z-index:1;
   pointer-events:none;
@@ -1026,7 +1027,7 @@
 @media (max-width:767px){
   .esports-section__image-col{transform:none;width:100%;margin-top:0;}
   .esports-section__image-col__img{width:100%;height:auto;aspect-ratio:16/9;border-radius:14px;}
-  .esports-section__image-col__glow{inset:-14px;filter:blur(24px);}
+  .esports-section__image-col__glow{inset:-28px !important;}
 }
 </style>
 <section class="esports-section" id="esports" data-bg="light" aria-label="Esports">

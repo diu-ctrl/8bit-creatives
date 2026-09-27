@@ -2091,18 +2091,15 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   z-index: 0;
 }
 .service-card[data-card="brands"] .service-card-gradient {
-  background: linear-gradient(180deg, #FFB658 0%, #FF9041 25%, #FF5931 50%, #B21C01 75%, #000000 100%); /* var(--orange-light) 0% */
-  filter: blur(20px);
+  background: radial-gradient(ellipse at 50% 40%, #FF9041 0%, #FF5931 25%, #B21C01 50%, #5A0E00 75%, #000000 100%);
   transform: scale(1.1) translateZ(0);
 }
 .service-card[data-card="creators"] .service-card-gradient {
-  background: linear-gradient(165deg, #FFB658 0%, #FF9041 25%, #FF5931 50%, #B21C01 75%, #000000 100%);
-  filter: blur(20px);
+  background: radial-gradient(ellipse at 55% 40%, #FF9041 0%, #FF5931 25%, #B21C01 50%, #5A0E00 75%, #000000 100%);
   transform: scale(1.1) translateZ(0);
 }
 .service-card[data-card="platforms"] .service-card-gradient {
-  background: linear-gradient(195deg, #FFB658 0%, #FF9041 25%, #FF5931 50%, #B21C01 75%, #000000 100%);
-  filter: blur(20px);
+  background: radial-gradient(ellipse at 45% 40%, #FF9041 0%, #FF5931 25%, #B21C01 50%, #5A0E00 75%, #000000 100%);
   transform: scale(1.1) translateZ(0);
 }
 .service-card:hover .service-card-gradient,
@@ -4499,8 +4496,7 @@ body.light-page .back-home,
     border-radius: 14px !important;
   }
   .esports-section__image-col__glow {
-    inset: -14px !important;
-    filter: blur(24px) !important;
+    inset: -28px !important;
   }
 
   /* 8BIT Columns Mobile Layout */
