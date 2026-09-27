@@ -2133,618 +2133,637 @@ function initHeroCanvas() {
    2b. HERO DINO RUNNER GAME (#heroDinoCanvas)
    ========================================================================== */
 function initHeroDinoGame() {
+  /* ============================================================
+     8BIT DINO V3 - FULL REWRITE (single self-contained function)
+     - Hand-designed faithful pixel sprites (T-Rex, duck, pterosaur)
+     - DPR-perfect rendering: canvas buffer matches its real display
+       box, so art is never stretched and looks identical on every screen
+     - Variable-height jump, duck (ArrowDown or C), fast-fall
+     - Distance-based obstacle spawning, 3 bird altitudes, clusters
+     - Persistent high score (localStorage), milestone beeps (WebAudio)
+     ============================================================ */
   const canvas = document.getElementById('heroDinoCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+  // === 8BIT DINO V3 MARKER ===
 
-  // Mobile scale factor
-  let isMobile = window.innerWidth < 768;
-  let SCALE = isMobile ? 2 : 1;
+  // ---------- palette (site-branded, same as the original game) ----------
+  const BG = '#FFFFFF';
+  const FG = '#FF5931';        // dino orange
+  const FG_LIGHT = '#535353';  // text + ground
+  const OBSTACLE = '#000000';  // cacti + birds
+  const CLOUD = '#DCDCDC';
 
-  // Responsive dimensions — canvas internal width matches the display width
-  // (eliminates non-integer scaling artifacts on pixel art)
-  let dpr = Math.min(window.devicePixelRatio || 1, 2);
-  let W, H, groundY;
+  // ---------- sprite maps ('.'=empty, 'B'=body, 'W'=eye white) ----------
+  const DINO3_ART = {
+    // T-Rex (22 x 24 cells -> 44 x 48 px). Faces right; toes point right.
+    stand: [
+      '...........BBBBBBBBB..',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBWWBBBB',
+      '..........BBBBBBWWBBBB',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBBBB...',
+      'B.........BBBBBBBB....',
+      'BB.......BBBBBBBBB....',
+      'BBB...BBBBBBBBBBB.....',
+      'BBBBBBBBBBBBBBBBBB....',
+      'BBBBBBBBBBBBBBBBBB....',
+      '.BBBBBBBBBBBBBBBBBB...',
+      '..BBBBBBBBBBBBBBBBBB..',
+      '...BBBBBBBBBBBBBBBBB..',
+      '....BBBBBBBBBBBBBBBB..',
+      '......BBBBBBBBB...BB..',
+      '.......BBBBBBBB...BB..',
+      '.......BBBBBBB........',
+      '.......BB...BB........',
+      '.......BB...BB........',
+      '.......BB...BB........',
+      '.......BB...BB........',
+      '.......BBBB.BBBB......'
+    ],
+    dead: [
+      '...........BBBBBBBBB..',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBWBWBBB',
+      '..........BBBBBBBWBBBB',
+      '..........BBBBBBWBWBBB',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBBBB...',
+      'B.........BBBBBBBB....',
+      'BB.......BBBBBBBBB....',
+      'BBB...BBBBBBBBBBB.....',
+      'BBBBBBBBBBBBBBBBBB....',
+      'BBBBBBBBBBBBBBBBBB....',
+      '.BBBBBBBBBBBBBBBBBB...',
+      '..BBBBBBBBBBBBBBBBBB..',
+      '...BBBBBBBBBBBBBBBBB..',
+      '....BBBBBBBBBBBBBBBB..',
+      '......BBBBBBBBB...BB..',
+      '.......BBBBBBBB...BB..',
+      '.......BBBBBBB........',
+      '.......BB...BB........',
+      '.......BB...BB........',
+      '.......BB...BB........',
+      '.......BB...BB........',
+      '.......BBBB.BBBB......'
+    ],
+    runA: [
+      '...........BBBBBBBBB..',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBWWBBBB',
+      '..........BBBBBBWWBBBB',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBBBB...',
+      'B.........BBBBBBBB....',
+      'BB.......BBBBBBBBB....',
+      'BBB...BBBBBBBBBBB.....',
+      'BBBBBBBBBBBBBBBBBB....',
+      'BBBBBBBBBBBBBBBBBB....',
+      '.BBBBBBBBBBBBBBBBBB...',
+      '..BBBBBBBBBBBBBBBBBB..',
+      '...BBBBBBBBBBBBBBBBB..',
+      '....BBBBBBBBBBBBBBBB..',
+      '......BBBBBBBBB...BB..',
+      '.......BBBBBBBB...BB..',
+      '.......BBBBBBB........',
+      '.......BB...BB........',
+      '.......BB...BB........',
+      '.......BB...BB........',
+      '.......BB....BB.......',
+      '.......BBBB...........'
+    ],
+    runB: [
+      '...........BBBBBBBBB..',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBWWBBBB',
+      '..........BBBBBBWWBBBB',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBBBBBBB',
+      '..........BBBBBBBBB...',
+      'B.........BBBBBBBB....',
+      'BB.......BBBBBBBBB....',
+      'BBB...BBBBBBBBBBB.....',
+      'BBBBBBBBBBBBBBBBBB....',
+      'BBBBBBBBBBBBBBBBBB....',
+      '.BBBBBBBBBBBBBBBBBB...',
+      '..BBBBBBBBBBBBBBBBBB..',
+      '...BBBBBBBBBBBBBBBBB..',
+      '....BBBBBBBBBBBBBBBB..',
+      '......BBBBBBBBB...BB..',
+      '.......BBBBBBBB...BB..',
+      '.......BBBBBBB........',
+      '.......BB...BB........',
+      '.......BB...BB........',
+      '.......BB...BB........',
+      '......BBB...BB........',
+      '............BBBB......'
+    ],
+    // Ducking (35 x 14 cells -> 70 x 28 px)
+    duckA: [
+      '.........................BBBBBBBB..',
+      '........................BBBBBBBBBBB',
+      '........................BBBBBWWBBBB',
+      'B.......................BBBBBBBBBBB',
+      'BB......................BBBBBBBBB..',
+      'BBB..BBBBBBBBBBBBBBBBBBBBBBBBBB....',
+      'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB.....',
+      '.BBBBBBBBBBBBBBBBBBBBBBBBBBBBB.....',
+      '..BBBBBBBBBBBBBBBBBBBBBBBBBBB......',
+      '...BBBBBBBBBBBBBBBBBBBBBBBB........',
+      '....................BB.....BB......',
+      '....................BB.....BB......',
+      '....................BB.....BB......',
+      '...................BBBB...BBBB.....'
+    ],
+    duckB: [
+      '.........................BBBBBBBB..',
+      '........................BBBBBBBBBBB',
+      '........................BBBBBWWBBBB',
+      'B.......................BBBBBBBBBBB',
+      'BB......................BBBBBBBBB..',
+      'BBB..BBBBBBBBBBBBBBBBBBBBBBBBBB....',
+      'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB.....',
+      '.BBBBBBBBBBBBBBBBBBBBBBBBBBBBB.....',
+      '..BBBBBBBBBBBBBBBBBBBBBBBBBBB......',
+      '...BBBBBBBBBBBBBBBBBBBBBBBB........',
+      '....................BB.....BB......',
+      '....................BB.....BB......',
+      '...................BB.......BB.....',
+      '..................BBBB.....BBB.....'
+    ],
+    // Pterosaur (20 x 12 cells -> 40 x 24 px), flies leftward, beak at left
+    birdA: [
+      '.............BBB....',
+      '............BBBB....',
+      '...........BBBB.....',
+      '..........BBBB......',
+      '.........BBBB.......',
+      '....BB...BBB........',
+      '..BBBBBBBBBBBBB.....',
+      'BBBBBBBBBBBBBBBBBBB.',
+      '......BBBBBBBBBBB...',
+      '....................',
+      '....................',
+      '....................'
+    ],
+    birdB: [
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '....................',
+      '....BB...BBB........',
+      '..BBBBBBBBBBBBB.....',
+      'BBBBBBBBBBBBBBBBBBB.',
+      '......BBBBBBBBBBB...',
+      '.........BBBB.......',
+      '..........BBBB......',
+      '...........BBBB.....'
+    ]
+  };
+
+  // ---------- responsive, distortion-free sizing ----------
+  let cssW = 900, cssH = 200, groundY = 160;
+  const CELL = 2;                    // 2 CSS px per sprite pixel
+  const DINO_W = 22 * CELL, DINO_H = 24 * CELL;
+  const DUCK_W = 35 * CELL, DUCK_H = 14 * CELL;
+  const BIRD_W = 20 * CELL, BIRD_H = 12 * CELL;
 
   function resizeCanvas() {
-    // Read the CSS display width of the canvas
-    const displayWidth = canvas.clientWidth || canvas.offsetWidth || window.innerWidth;
-    // Set the internal resolution to match the display width (1:1 pixel mapping)
-    // For retina sharpness, multiply by devicePixelRatio (but cap at 2x to avoid memory issues on mobile)
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.round(displayWidth * dpr);
-    // Height stays at 200 * dpr for consistent game area
-    canvas.height = 200 * dpr;
-    // Update the game variables
-    W = canvas.width;
-    H = canvas.height;
-    isMobile = window.innerWidth < 768;
-    SCALE = isMobile ? 2 : 1;
-    // Update ground position (proportional to new height)
-    groundY = Math.round(H * 0.8);  // 80% of canvas height (was 160/200 = 80%)
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cssW = canvas.clientWidth || canvas.offsetWidth || 900;
+    cssH = canvas.clientHeight || canvas.offsetHeight || 200;
+    if (cssH < 120) cssH = 120;
+    canvas.width = Math.round(cssW * dpr);
+    canvas.height = Math.round(cssH * dpr);
+    ctx.setTransform(Math.round(cssW * dpr) / cssW, 0, 0, Math.round(cssH * dpr) / cssH, 0, 0);
+    groundY = Math.round(cssH * 0.82);
   }
+  resizeCanvas();
 
-  resizeCanvas();  // initial sizing
-
-  // Colors (white mode + orange dino)
-  const BG = '#FFFFFF';
-  const FG = '#FF5931';             // orange dino
-  const OBSTACLE_COLOR = '#000000'; // black obstacles
-  const FG_LIGHT = '#535353';       // dark grey text
-  const GROUND = '#535353';
-  const CLOUD = '#c4c4c4';
-
-  // Game state
-  let state = 'waiting';            // waiting, playing, gameover
+  // ---------- game state ----------
+  let state = 'waiting';           // waiting | playing | gameover
   let score = 0;
   let highScore = 0;
-  let speed = isMobile ? 5.5 : 6.5;
-  let frameCount = 0;
-
-  // Dino adjusted proportionally (h: 40, w: 38)
-  let dino = {
-    x: isMobile ? 40 : 60, y: groundY,
-    w: Math.round(38 * SCALE), h: Math.round(40 * SCALE),
-    vy: 0,
-    isJumping: false,
-    isDucking: false,
-    legFrame: 0
+  try { highScore = parseFloat(localStorage.getItem('eightbit_dino_hi_v1')) || 0; } catch (err) { highScore = 0; }
+  let speed = 6.2;
+  let legFrame = 0;
+  let legAccum = 0;
+  let flashTimer = 0;
+  let groundOffset = 0;
+  let milestone = 0;
+  const isTouch = window.matchMedia('(hover: none)').matches;
+  const dino = {
+    x: 60, y: 0, vy: 0,
+    jumping: false, ducking: false
   };
-  let GRAVITY = isMobile ? 0.7 : 0.55;
-  let JUMP_VEL = isMobile ? -13.5 : -10.5;
-  let DUCK_H = Math.round(23 * SCALE);
 
-  // Re-init on resize/orientation change (debounced to avoid excessive re-inits)
-  let resizeTimer = null;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      const wasMobile = isMobile;
-      resizeCanvas();
-      // If mobile/desktop state changed, re-init the game with new physics
-      if (wasMobile !== isMobile) {
-        // Reset game state with new physics constants
-        speed = isMobile ? 5.5 : 6.5;
-        GRAVITY = isMobile ? 0.7 : 0.55;
-        JUMP_VEL = isMobile ? -13.5 : -10.5;
-        dino.x = isMobile ? 40 : 60;
-        dino.w = Math.round(38 * SCALE);
-        dino.h = Math.round(40 * SCALE);
-        DUCK_H = Math.round(23 * SCALE);
-      }
-      // Clamp dino position to new dimensions
-      dino.y = Math.min(dino.y, groundY);
-    }, 250);
-  });
-  window.addEventListener('orientationchange', () => {
-    setTimeout(() => {
-      const wasMobile = isMobile;
-      resizeCanvas();
-      if (wasMobile !== isMobile) {
-        speed = isMobile ? 5.5 : 6.5;
-        GRAVITY = isMobile ? 0.7 : 0.55;
-        JUMP_VEL = isMobile ? -13.5 : -10.5;
-        dino.x = isMobile ? 40 : 60;
-        dino.w = Math.round(38 * SCALE);
-        dino.h = Math.round(40 * SCALE);
-        DUCK_H = Math.round(23 * SCALE);
-      }
-      dino.y = Math.min(dino.y, groundY);
-    }, 250);
-  });
-
-  // Obstacles
   let obstacles = [];
   let clouds = [];
-  let nextObstacleTime = 0;
-  let nextCloudTime = 0;
+  let distToSpawn = 500;
+  let cloudTimer = 40;
+  let lastTs = 0;
 
-  // Input
+  // ---------- audio (tiny WebAudio blips, created on first gesture) ----------
+  let audioCtx = null;
+  function beep(freq, dur, type, vol) {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = type || 'square';
+      o.frequency.value = freq;
+      g.gain.value = vol || 0.03;
+      o.connect(g); g.connect(audioCtx.destination);
+      const t = audioCtx.currentTime;
+      g.gain.setValueAtTime(vol || 0.03, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.start(t); o.stop(t + dur);
+    } catch (err) { /* audio is optional */ }
+  }
+
+  // ---------- input ----------
+  let diedAt = 0;
+  function onPressAction() {
+    if (state === 'waiting') startGame();
+    else if (state === 'gameover') {
+      if (performance.now() - diedAt > 600) startGame();
+    }
+    else if (!dino.jumping && !dino.ducking) jump();
+  }
   window.addEventListener('keydown', (e) => {
-    // Only intercept when hero is in view
-    const heroSec = document.getElementById('home') || document.getElementById('hero');
+    // Only react when the hero (and therefore the game) is on screen
+    const heroSec = document.getElementById('hero');
     if (heroSec) {
-      const rect = heroSec.getBoundingClientRect();
-      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
-    } else {
-      return;
+      const r = heroSec.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
     }
-
-    if (e.code === 'Space' || e.code === 'Enter') {
-      if (state === 'waiting') {
-        e.preventDefault();
-        startGame();
-      } else if (state === 'gameover') {
-        e.preventDefault();
-        restart();
-      } else if (state === 'playing' && !dino.isJumping && !dino.isDucking) {
-        e.preventDefault();
-        jump();
-      }
-    } else if (e.code === 'ArrowUp') {
-      // Only jump and prevent scroll if game is actively being played
-      if (state === 'playing' && !dino.isJumping && !dino.isDucking) {
-        e.preventDefault();
-        jump();
-      }
-    } else if ((e.code === 'ArrowDown' || e.code === 'KeyC') && state === 'playing') {
+    if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'Enter') {
       e.preventDefault();
-      dino.isDucking = true;
-      if (dino.isJumping) dino.vy += 2; // fast fall
+      if (e.repeat) return;
+      onPressAction();
+    }
+    if ((e.code === 'ArrowDown' || e.code === 'KeyC') && state === 'playing') {
+      e.preventDefault();
+      dino.ducking = true;
+      if (dino.jumping) dino.vy += 1.6;   // fast-fall
     }
   });
-
   window.addEventListener('keyup', (e) => {
-    if (e.code === 'ArrowDown' || e.code === 'KeyC') dino.isDucking = false;
+    if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'Enter') {
+      if (state === 'playing' && dino.jumping && dino.vy < -4.6) dino.vy = -4.6;  // variable jump
+    }
+    if (e.code === 'ArrowDown' || e.code === 'KeyC') dino.ducking = false;
   });
-
-  // Touch / Click on canvas
   canvas.addEventListener('pointerdown', (e) => {
     e.preventDefault();
-    if (state === 'waiting') startGame();
-    else if (state === 'gameover') restart();
-    else if (state === 'playing' && !dino.isJumping && !dino.isDucking) jump();
+    onPressAction();
   });
 
+  // ---------- lifecycle ----------
   function startGame() {
     state = 'playing';
-    score = 0; speed = isMobile ? 5.5 : 6.5; frameCount = 0;
+    score = 0; speed = 6.2; milestone = 0; flashTimer = 0; legAccum = 0;
     obstacles = []; clouds = [];
-    nextObstacleTime = isMobile ? 50 : 60; nextCloudTime = 0;
-    dino.y = groundY; dino.vy = 0; dino.isJumping = false; dino.isDucking = false;
+    distToSpawn = 420;
+    cloudTimer = 30;
+    dino.y = 0; dino.vy = 0; dino.jumping = false; dino.ducking = false;
+    beep(660, 0.07, 'square', 0.025);
   }
-
-  function restart() { startGame(); }
 
   function jump() {
-    if (!dino.isJumping) {
-      dino.vy = JUMP_VEL;
-      dino.isJumping = true;
-    }
+    dino.vy = -11.8;
+    dino.jumping = true;
+    dino.ducking = false;
+    beep(500, 0.05, 'square', 0.02);
   }
 
+  // ---------- obstacles ----------
+  // kinds: S small cactus, M medium, L large, C2/C3 clusters, B bird
   function spawnObstacle() {
-    const types = ['cactus-small', 'cactus-medium', 'cactus-large', 'bird'];
-    const type = types[Math.floor(Math.random() * types.length)];
-    let obs;
-    if (type === 'cactus-small') {
-      // 6px wide, 12px tall (matches the pixel art grid)
-      obs = { type, x: W + 20, y: groundY - Math.round(12 * SCALE), w: Math.round(6 * SCALE), h: Math.round(12 * SCALE) };
-    } else if (type === 'cactus-medium') {
-      obs = { type, x: W + 20, y: groundY - Math.round(14 * SCALE), w: Math.round(6 * SCALE), h: Math.round(14 * SCALE) };
-    } else if (type === 'cactus-large') {
-      obs = { type, x: W + 20, y: groundY - Math.round(15 * SCALE), w: Math.round(10 * SCALE), h: Math.round(15 * SCALE) };
-    } else {
-      // Bird at 3 different heights — low (must jump), mid (must duck or jump), high (run under)
-      const heights = [
-        groundY - Math.round(20 * SCALE),   // low — must jump
-        groundY - Math.round(35 * SCALE),   // mid — must duck
-        groundY - Math.round(50 * SCALE)    // high — run under
-      ];
-      obs = { type, x: W + 20, y: heights[Math.floor(Math.random() * 3)], w: Math.round(13 * SCALE), h: Math.round(7 * SCALE), wing: 0 };
+    const canBird = score > 260;
+    const r = Math.random();
+    let kind;
+    if (canBird && r < 0.24) kind = 'B';
+    else if (r < 0.42) kind = 'S';
+    else if (r < 0.62) kind = 'M';
+    else if (r < 0.80) kind = 'L';
+    else if (r < 0.92) kind = 'C2';
+    else kind = 'C3';
+
+    let w, h;
+    if (kind === 'S') { w = 8 * CELL; h = 17 * CELL; }
+    else if (kind === 'M') { w = 8 * CELL; h = 21 * CELL; }
+    else if (kind === 'L') { w = 12 * CELL; h = 25 * CELL; }
+    else if (kind === 'C2') { w = 18 * CELL; h = 17 * CELL; }
+    else if (kind === 'C3') { w = 27 * CELL; h = 17 * CELL; }
+    else { w = BIRD_W; h = BIRD_H; }
+
+    const o = { kind, x: cssW + 30, w: w, h: h, y: groundY - h, wing: 0 };
+    if (kind === 'B') {
+      // three altitudes: low (jump), mid (duck), high (safe to ignore)
+      const lanes = [groundY - 26, groundY - 58, groundY - 92];
+      o.y = lanes[Math.floor(Math.random() * lanes.length)];
     }
-    obstacles.push(obs);
+    obstacles.push(o);
 
-    // Gap decreases with score but never below a minimum (ensures fair gameplay)
-    const minGap = Math.round((isMobile ? 55 : 70) - Math.min(25, Math.floor(score / 100)));
-    const maxGap = Math.round((isMobile ? 95 : 130) - Math.min(40, Math.floor(score / 100)));
-    nextObstacleTime = frameCount + minGap + Math.floor(Math.random() * Math.max(10, maxGap - minGap));
+    // distance-based gap, slightly tighter as score grows (never unfair)
+    const base = 300 - Math.min(60, score / 12);
+    distToSpawn = base + Math.random() * 260 + (o.kind === 'C3' ? 60 : 0);
   }
 
-  function spawnCloud() {
-    clouds.push({ x: W + 20, y: (isMobile ? 20 : 25) + Math.random() * (isMobile ? 40 : 50), w: Math.round(36 * SCALE), h: Math.round(10 * SCALE) });
-    nextCloudTime = frameCount + (isMobile ? 60 : 80) + Math.floor(Math.random() * (isMobile ? 90 : 120));
-  }
+  function update(dt) {
+    if (state !== 'playing') return;
+    const k = dt / 16.667;              // 1.0 at 60fps, 0.5 at 120fps, etc.
 
-  function checkCollision(o) {
-    // Forgiving hitbox — slightly smaller than visual size
-    // (the original Chrome dino game uses the same technique)
-    var hitboxInset = 2 * SCALE;
-    var dx = dino.x + hitboxInset;
-    var dw = dino.w - hitboxInset * 2;
-    var dy, dh;
-    if (dino.isDucking) {
-      dh = DUCK_H - hitboxInset;
-      dy = dino.y - DUCK_H + hitboxInset;
-    } else {
-      dh = dino.h - hitboxInset * 2;
-      dy = dino.y - dino.h + hitboxInset;
+    speed = 6.2 + Math.min(5.6, score / 240);
+    groundOffset = (groundOffset + speed * k) % 806;
+
+    // physics
+    if (dino.jumping || dino.y < 0) {
+      dino.vy += 0.62 * k;
+      dino.y += dino.vy * k;
+      if (dino.y >= 0) { dino.y = 0; dino.vy = 0; dino.jumping = false; }
     }
-    var oInset = 1 * SCALE;
-    var ox = o.x + oInset;
-    var ow = o.w - oInset * 2;
-    var oy = o.y + oInset;
-    var oh = o.h - oInset * 2;
 
-    return dx < ox + ow && dx + dw > ox && dy < oy + oh && dy + dh > oy;
-  }
+    legAccum += dt;
+    if (legAccum >= 100) { legAccum = 0; legFrame ^= 1; }
 
-  function drawDino() {
-    ctx.save();
-    ctx.translate(dino.x, dino.y);
-    ctx.scale(SCALE, SCALE);
+    // spawn by distance travelled
+    distToSpawn -= speed * k;
+    if (distToSpawn <= 0) spawnObstacle();
 
-    if (dino.isDucking) {
-      // Ducking dino — lower profile, head forward
-      // Pixel grid: 1 = orange (FG), 0 = transparent, 2 = white (eye)
-      var duckArt = [
-        "........................",
-        "........................",
-        "....11111111............",
-        "...11111111111..........",
-        "..1111111111111.........",
-        "..1111111111111.........",
-        "..1112111111111.........",
-        "..111111111111..........",
-        "..11111111..............",
-        ".1111111111.............",
-        "111111111111............",
-        "1111111111111...........",
-        "1111111111111...........",
-        "1111111111111...........",
-        "1111111111111...........",
-        ".11111111111............",
-        "..11111111..............",
-        "..11....11..............",
-        "..11....11..............",
-        "...1....1...............",
-      ];
-      drawPixelArt(duckArt, 0, -20);
-    } else {
-      // Standing/running dino — classic T-Rex pose
-      var standArt = [
-        "..............111111....",
-        ".............11111111...",
-        "............1111111111..",
-        "...........111111111111.",
-        "..........1111111111111",
-        "..........1111111111111",
-        "..........111211111111.",
-        "..........11111111111..",
-        "..........111111111....",
-        ".........11111111......",
-        ".........1111111.......",
-        ".........111111........",
-        "........1111111.......",
-        ".......11111111.......",
-        "......11111111........",
-        ".....1111111..........",
-        "....111111............",
-        "...11111..............",
-        "..1111................",
-        ".111..................",
-        "11....................",
-        "1.....................",
-      ];
-      // Legs animation
-      if (dino.isJumping) {
-        // Jumping — both legs tucked
-        var jumpArt = standArt.slice(0);
-        jumpArt[18] = "..1111..................";
-        jumpArt[19] = "...111..................";
-        jumpArt[20] = "....1...................";
-        jumpArt[21] = "....1...................";
-        drawPixelArt(jumpArt, 0, -42);
-      } else if (state === 'gameover') {
-        // Dead — X eye, legs still
-        var deadArt = standArt.slice(0);
-        deadArt[6] = "..........1111111111111";
-        deadArt[7] = "..........1111211111111";
-        deadArt[8] = "..........11111111111..";
-        drawPixelArt(deadArt, 0, -42);
-      } else {
-        // Running — alternating legs
-        if (dino.legFrame < 5) {
-          // Left leg forward, right leg back
-          var runArt1 = standArt.slice(0);
-          runArt1[18] = "..1111..................";
-          runArt1[19] = "...11...................";
-          runArt1[20] = "....1...................";
-          runArt1[21] = ".......................";
-          drawPixelArt(runArt1, 0, -42);
-        } else {
-          // Right leg forward, left leg back
-          var runArt2 = standArt.slice(0);
-          runArt2[18] = "..1111..................";
-          runArt2[19] = "..111...................";
-          runArt2[20] = "..11....................";
-          runArt2[21] = ".......................";
-          drawPixelArt(runArt2, 0, -42);
+    // clouds
+    cloudTimer -= k;
+    if (cloudTimer <= 0) {
+      clouds.push({ x: cssW + 20, y: 18 + Math.random() * (groundY * 0.4), s: 0.85 + Math.random() * 0.6 });
+      cloudTimer = 130 + Math.floor(Math.random() * 220);
+    }
+
+    // move world
+    for (const o of obstacles) {
+      o.x -= speed * k;
+      if (o.kind === 'B') { o.x -= 1.4 * k; o.wing += dt; }
+    }
+    obstacles = obstacles.filter((o) => o.x + o.w > -30);
+    for (const c of clouds) c.x -= speed * 0.35 * c.s * k;
+    clouds = clouds.filter((c) => c.x > -70);
+
+    // score + milestones
+    score += 0.12 * k;
+    const m = Math.floor(score / 100);
+    if (m > milestone) {
+      milestone = m;
+      flashTimer = 800;
+      beep(1040, 0.06, 'square', 0.03);
+      setTimeout(() => beep(1320, 0.08, 'square', 0.03), 90);
+    }
+    if (flashTimer > 0) flashTimer -= dt;
+
+    // collisions
+    for (const o of obstacles) {
+      if (collides(o)) {
+        state = 'gameover';
+        diedAt = performance.now();
+        beep(140, 0.22, 'sawtooth', 0.04);
+        if (score > highScore) {
+          highScore = score;
+          try { localStorage.setItem('eightbit_dino_hi_v1', String(Math.floor(highScore))); } catch (err) {}
         }
-      }
-    }
-    ctx.restore();
-  }
-
-  // Helper: render a pixel art grid
-  function drawPixelArt(art, offsetX, offsetY) {
-    var pxSize = 1; // each "pixel" is 1 canvas unit (scaled by SCALE)
-    for (var row = 0; row < art.length; row++) {
-      var line = art[row];
-      for (var col = 0; col < line.length; col++) {
-        var ch = line[col];
-        if (ch === '1') {
-          ctx.fillStyle = FG;
-          ctx.fillRect(offsetX + col * pxSize, offsetY + row * pxSize, pxSize, pxSize);
-        } else if (ch === '2') {
-          ctx.fillStyle = BG;
-          ctx.fillRect(offsetX + col * pxSize, offsetY + row * pxSize, pxSize, pxSize);
-        }
+        break;
       }
     }
   }
 
-  function drawCactus(o) {
-    ctx.save();
-    ctx.translate(o.x, o.y);
-    ctx.scale(SCALE, SCALE);
-    ctx.fillStyle = OBSTACLE_COLOR;
-
-    if (o.type === 'cactus-small') {
-      // Small cactus — single stem with 2 arms
-      var smallCactus = [
-        "..1...",
-        "..1...",
-        ".1.1..",
-        ".1.1..",
-        ".1.1..",
-        "..1...",
-        "..1...",
-        "..1...",
-        "..1...",
-        "..1...",
-        "..1...",
-        "..1...",
-      ];
-      drawObsArt(smallCactus, 0, 0);
-    } else if (o.type === 'cactus-medium') {
-      // Medium cactus — taller with 2 arms
-      var medCactus = [
-        "..1...",
-        "..1...",
-        ".1.1..",
-        ".1.1..",
-        ".1.1..",
-        "..1...",
-        ".1.1..",
-        ".1.1..",
-        ".1.1..",
-        "..1...",
-        "..1...",
-        "..1...",
-        "..1...",
-        "..1...",
-      ];
-      drawObsArt(medCactus, 0, 0);
-    } else if (o.type === 'cactus-large') {
-      // Large cactus — double stem with arms
-      var largeCactus = [
-        "..1...1...",
-        "..1...1...",
-        ".1.1.1.1..",
-        ".1.1.1.1..",
-        ".1.1.1.1..",
-        "..1...1...",
-        "..1...1...",
-        "..1...1...",
-        "..1...1...",
-        "..1...1...",
-        "..1...1...",
-        "..1...1...",
-        "..1...1...",
-        "..1...1...",
-        "..1...1...",
-      ];
-      drawObsArt(largeCactus, 0, 0);
+  function dinoBox() {
+    if (dino.ducking && !dino.jumping) {
+      return { x: dino.x + 4, y: groundY + dino.y - DUCK_H + 4, w: DUCK_W - 10, h: DUCK_H - 6 };
     }
-    ctx.restore();
+    return { x: dino.x + 6, y: groundY + dino.y - DINO_H + 4, w: DINO_W - 14, h: DINO_H - 8 };
   }
 
-  // Helper for obstacle pixel art
-  function drawObsArt(art, offsetX, offsetY) {
-    for (var row = 0; row < art.length; row++) {
-      var line = art[row];
-      for (var col = 0; col < line.length; col++) {
-        if (line[col] === '1') {
-          ctx.fillRect(offsetX + col, offsetY + row, 1, 1);
+  function collides(o) {
+    const b = dinoBox();
+    const inset = 3;
+    return b.x < o.x + o.w - inset &&
+           b.x + b.w > o.x + inset &&
+           b.y < o.y + o.h - inset &&
+           b.y + b.h > o.y + inset;
+  }
+
+  // ---------- drawing ----------
+  function drawSprite(map, ox, oy, color, cell) {
+    const u = cell || CELL;
+    ctx.fillStyle = color;
+    for (let r = 0; r < map.length; r++) {
+      const row = map[r];
+      let runStart = -1;
+      for (let c = 0; c <= row.length; c++) {
+        const on = row[c] === 'B';
+        if (on && runStart < 0) runStart = c;
+        else if (!on && runStart >= 0) {
+          ctx.fillRect(ox + runStart * u, oy + r * u, (c - runStart) * u, u);
+          runStart = -1;
         }
       }
     }
   }
-
-  function drawBird(o) {
-    o.wing = (o.wing + 1) % 12;
-    const flap = o.wing < 6;
-    ctx.save();
-    ctx.translate(o.x, o.y);
-    ctx.scale(SCALE, SCALE);
-    ctx.fillStyle = OBSTACLE_COLOR;
-
-    if (flap) {
-      // Wings up
-      var birdUp = [
-        "....11111....",
-        "...1111111...",
-        "..111111111..",
-        ".11111111111.",
-        "1111111111111",
-        ".....111.....",
-        ".....111.....",
-      ];
-      drawObsArt(birdUp, 0, -7);
-    } else {
-      // Wings down
-      var birdDown = [
-        ".............",
-        ".............",
-        "1111111111111",
-        ".11111111111.",
-        "..111111111..",
-        "...1111111...",
-        "....11111....",
-        ".....111.....",
-        ".....111.....",
-      ];
-      drawObsArt(birdDown, 0, 0);
-    }
-
-    // Eye
+  function drawEyeWhite(map, ox, oy, cell) {
+    const u = cell || CELL;
     ctx.fillStyle = BG;
-    ctx.fillRect(8, 2, 1, 1);
-    ctx.restore();
+    for (let r = 0; r < map.length; r++) {
+      const row = map[r];
+      for (let c = 0; c < row.length; c++) {
+        if (row[c] === 'W') ctx.fillRect(ox + c * u, oy + r * u, u, u);
+      }
+    }
+  }
+
+  const drawDino = () => {
+    const yTop = groundY + dino.y;
+    if (dino.ducking && !dino.jumping && state === 'playing') {
+      const map = legFrame ?
+        DINO3_ART.duckA :
+        DINO3_ART.duckB;
+      drawSprite(map, dino.x, yTop - DUCK_H, FG);
+      drawEyeWhite(map, dino.x, yTop - DUCK_H);
+    } else {
+      let map = DINO3_ART.stand;
+      if (state === 'gameover') map = DINO3_ART.dead;
+      else if (dino.jumping) map = DINO3_ART.stand;
+      else if (state === 'playing') map = legFrame ? DINO3_ART.runA : DINO3_ART.runB;
+      drawSprite(map, dino.x, yTop - DINO_H, FG);
+      drawEyeWhite(map, dino.x, yTop - DINO_H);
+    }
+  }
+
+  function drawObstacle(o) {
+    ctx.fillStyle = OBSTACLE;
+    if (o.kind === 'B') {
+      const map = (o.wing % 420) < 210 ?
+        DINO3_ART.birdA :
+        DINO3_ART.birdB;
+      drawSprite(map, o.x, o.y, OBSTACLE);
+      return;
+    }
+    const u = CELL;
+    if (o.kind === 'S') { cactusSingle(o.x, o.y, 17, u); return; }
+    if (o.kind === 'M') { cactusSingle(o.x, o.y, 21, u); return; }
+    if (o.kind === 'L') { cactusLarge(o.x, o.y, 25, u); return; }
+    if (o.kind === 'C2') {
+      cactusSingle(o.x, o.y, 17, u);
+      cactusSingle(o.x + 9 * u, o.y, 17, u);
+      return;
+    }
+    // C3
+    cactusSingle(o.x, o.y, 17, u);
+    cactusSingle(o.x + 9 * u, o.y, 17, u);
+    cactusSingle(o.x + 18 * u, o.y, 17, u);
+  }
+
+  function cactusSingle(x, y, hc, u) {
+    // chunky cactus in cell units: 4u trunk + 2u arms; art spans x+u .. x+9u
+    const h = hc * u;
+    ctx.fillRect(x + 3 * u, y, 4 * u, h);             // trunk
+    ctx.fillRect(x + 4 * u, y, 2 * u, 2 * u);         // rounded-top step
+    ctx.fillRect(x + 1 * u, y + 5 * u, 2 * u, 8 * u); // left arm
+    ctx.fillRect(x + 7 * u, y + 2 * u, 2 * u, 9 * u); // right arm
+  }
+  function cactusLarge(x, y, hc, u) {
+    // 5u trunk; art spans x+2u .. x+11u
+    const h = hc * u;
+    ctx.fillRect(x + 4 * u, y, 5 * u, h);
+    ctx.fillRect(x + 5 * u, y, 3 * u, 2 * u);
+    ctx.fillRect(x + 1 * u, y + 9 * u, 3 * u, 10 * u);
+    ctx.fillRect(x + 9 * u, y + 5 * u, 3 * u, 12 * u);
   }
 
   function drawCloud(c) {
-    ctx.save();
-    ctx.translate(c.x, c.y);
-    ctx.scale(SCALE, SCALE);
     ctx.fillStyle = CLOUD;
-    ctx.fillRect(0, 0, 36, 10);
-    ctx.fillRect(5, -3, 26, 3);
-    ctx.fillRect(10, -6, 16, 3);
-    ctx.restore();
+    const s = c.s;
+    ctx.fillRect(c.x, c.y, 46 * s, 9 * s);
+    ctx.fillRect(c.x + 8 * s, c.y - 7 * s, 30 * s, 8 * s);
+    ctx.fillRect(c.x + 16 * s, c.y - 13 * s, 14 * s, 7 * s);
   }
 
+  // deterministic scrolling ground texture
+  const groundDashes = [];
+  (function buildGround() {
+    for (let i = 0; i < 26; i++) {
+      groundDashes.push({
+        x: i * 31 + ((i * 137) % 23),
+        y: 6 + (i % 3) * 6,
+        w: 5 + ((i * 7) % 10)
+      });
+    }
+  })();
   function drawGround() {
-    // Main ground line
-    ctx.strokeStyle = GROUND;
-    ctx.lineWidth = Math.max(1, Math.round(dpr));
-    ctx.beginPath();
-    ctx.moveTo(0, groundY);
-    ctx.lineTo(W, groundY);
-    ctx.stroke();
-
-    // Dotted texture below the ground line (like the original Chrome game)
-    ctx.fillStyle = GROUND;
-    var dotSize = Math.max(1, Math.round(dpr * 0.5));
-    var dotGap = Math.round(8 * dpr);
-    var offset = Math.round(frameCount * speed * 0.3) % dotGap;
-    for (var x = -offset; x < W; x += dotGap) {
-      ctx.fillRect(x, groundY + dotSize + 1, dotSize, dotSize);
+    ctx.fillStyle = FG_LIGHT;
+    ctx.fillRect(0, groundY, cssW, 2);
+    const PW = 806;
+    for (const d of groundDashes) {
+      let sx = ((d.x - groundOffset) % PW + PW) % PW;
+      for (let k = 0; k < 2; k++) {
+        const x = sx - k * PW;
+        if (x > -20 && x < cssW + 20) ctx.fillRect(x, groundY + d.y, d.w, 2);
+      }
     }
   }
 
+  function scoreText() {
+    return String(Math.floor(score)).padStart(5, '0');
+  }
   function drawScore() {
+    if (flashTimer > 0 && Math.floor(flashTimer / 90) % 2 === 0) return; // milestone blink
     ctx.fillStyle = FG_LIGHT;
-    ctx.font = Math.round((isMobile ? 16 : 14) * dpr) + 'px "Geist", sans-serif';
+    ctx.font = '600 13px "Geist", monospace';
     ctx.textAlign = 'right';
-    const s = String(Math.floor(score)).padStart(5, '0');
-    ctx.fillText(s, W - Math.round((isMobile ? 14 : 20) * dpr), Math.round((isMobile ? 26 : 25) * dpr));
+    ctx.fillText(scoreText(), cssW - 18, 26);
     if (highScore > 0) {
-      const hs = String(Math.floor(highScore)).padStart(5, '0');
-      ctx.fillText('HI ' + hs, W - Math.round((isMobile ? 75 : 90) * dpr), Math.round((isMobile ? 26 : 25) * dpr));
+      ctx.fillText('HI ' + String(Math.floor(highScore)).padStart(5, '0'), cssW - 74, 26);
+    }
+    ctx.textAlign = 'left';
+  }
+
+  function drawWaiting() {
+    const cx = cssW / 2;
+    ctx.fillStyle = FG_LIGHT;
+    ctx.textAlign = 'center';
+    ctx.font = '700 22px "Geist", sans-serif';
+    ctx.fillText('8BIT DINO RUNNER', cx, cssH * 0.30);
+    ctx.font = '500 12px "Geist", sans-serif';
+    ctx.fillText(isTouch ? 'TAP TO START' : 'SPACE or CLICK to start', cx, cssH * 0.30 + 26);
+    if (!isTouch) {
+      ctx.fillStyle = '#9a9a9a';
+      ctx.fillText('SPACE / \u2191 jump      \u2193 / C duck', cx, cssH * 0.30 + 48);
     }
     ctx.textAlign = 'left';
   }
 
   function drawGameOver() {
+    const cx = cssW / 2;
     ctx.fillStyle = FG_LIGHT;
     ctx.textAlign = 'center';
-
-    ctx.font = 'bold ' + Math.round((isMobile ? 20 : 16) * dpr) + 'px "Geist", sans-serif';
-    ctx.fillText('G A M E   O V E R', W / 2, H / 2 - Math.round(10 * dpr));
-
-    ctx.font = Math.round((isMobile ? 12 : 10) * dpr) + 'px "Geist", sans-serif';
-    ctx.fillText('Press SPACE or Tap to restart', W / 2, H / 2 + Math.round(15 * dpr));
-
+    ctx.font = '700 24px "Geist", sans-serif';
+    ctx.fillText('G A M E   O V E R', cx, cssH * 0.34);
+    ctx.font = '500 13px "Geist", sans-serif';
+    ctx.fillText('SCORE ' + scoreText() + '   /   BEST ' + String(Math.floor(highScore)).padStart(5, '0'), cx, cssH * 0.34 + 28);
+    ctx.fillStyle = '#9a9a9a';
+    ctx.font = '500 11px "Geist", sans-serif';
+    ctx.fillText(isTouch ? 'Tap to run again' : 'Press SPACE or click to run again', cx, cssH * 0.34 + 50);
     ctx.textAlign = 'left';
-  }
-
-  function drawWaiting() {
-    ctx.fillStyle = FG_LIGHT;
-    ctx.textAlign = 'center';
-
-    // Title
-    ctx.font = 'bold ' + Math.round((isMobile ? 18 : 14) * dpr) + 'px "Geist", sans-serif';
-    ctx.fillText('8BIT DINO RUNNER', W / 2, H / 2 - Math.round(30 * dpr));
-
-    // Controls
-    ctx.font = Math.round((isMobile ? 14 : 11) * dpr) + 'px "Geist", sans-serif';
-    ctx.fillText('SPACE / ↑  to Jump', W / 2, H / 2 - Math.round(5 * dpr));
-    ctx.fillText('↓ / C  to Duck', W / 2, H / 2 + Math.round(12 * dpr));
-
-    // Start prompt
-    ctx.font = Math.round((isMobile ? 13 : 10) * dpr) + 'px "Geist", sans-serif';
-    ctx.fillStyle = FG;
-    ctx.fillText('Press SPACE or Tap to Start', W / 2, H / 2 + Math.round(35 * dpr));
-
-    ctx.textAlign = 'left';
-  }
-
-  function update() {
-    frameCount++;
-    if (state === 'playing') {
-      speed = (isMobile ? 5.5 : 6.5) + Math.min(isMobile ? 5.0 : 6.5, score / 200);
-      if (dino.isJumping || dino.y < groundY) {
-        dino.vy += GRAVITY;
-        dino.y += dino.vy;
-        if (dino.y >= groundY) {
-          dino.y = groundY;
-          dino.vy = 0;
-          dino.isJumping = false;
-        }
-      }
-      if (frameCount % 6 === 0) dino.legFrame = (dino.legFrame + 1) % 10;
-      if (frameCount >= nextObstacleTime) spawnObstacle();
-      if (frameCount >= nextCloudTime) spawnCloud();
-      obstacles.forEach(o => { o.x -= speed; if (o.type === 'bird') o.x -= speed * 0.5; });
-      obstacles = obstacles.filter(o => o.x + o.w > -10);
-      clouds.forEach(c => { c.x -= speed * 0.4; });
-      clouds = clouds.filter(c => c.x + c.w > -10);
-      score += 0.1;
-      for (const o of obstacles) {
-        if (checkCollision(o)) {
-          state = 'gameover';
-          if (score > highScore) highScore = score;
-        }
-      }
-    }
   }
 
   function render() {
     ctx.fillStyle = BG;
-    ctx.fillRect(0, 0, W, H);
-    clouds.forEach(drawCloud);
+    ctx.fillRect(0, 0, cssW, cssH);
+    for (const c of clouds) drawCloud(c);
     drawGround();
-    obstacles.forEach(o => {
-      if (o.type === 'bird') drawBird(o);
-      else drawCactus(o);
-    });
+    for (const o of obstacles) drawObstacle(o);
     drawDino();
     if (state === 'playing' || state === 'gameover') drawScore();
     if (state === 'gameover') drawGameOver();
     if (state === 'waiting') drawWaiting();
   }
 
-  let dinoRaf = null;
-  let isDinoVisible = false;
-
-  function gameLoop() {
-    if (!isDinoVisible) {
-      dinoRaf = null;
-      return;
-    }
-    update();
+  // ---------- loop (paused off-screen via IntersectionObserver) ----------
+  let rafId = null;
+  let isVisible = false;
+  function gameLoop(ts) {
+    if (!isVisible) { rafId = null; return; }
+    const dt = lastTs ? Math.min(50, ts - lastTs) : 16.7;   // clamp: no teleports after tab switches
+    lastTs = ts;
+    update(dt);
     render();
-    dinoRaf = requestAnimationFrame(gameLoop);
+    rafId = requestAnimationFrame(gameLoop);
+  }
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      isVisible = entries[0].isIntersecting;
+      if (isVisible && !rafId) rafId = requestAnimationFrame(gameLoop);
+      else if (!isVisible && rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    }, { threshold: 0.01 });
+    io.observe(canvas);
+  } else {
+    isVisible = true;
+    rafId = requestAnimationFrame(gameLoop);
   }
 
-  if ('IntersectionObserver' in window) {
-    const dinoObserver = new IntersectionObserver((entries) => {
-      isDinoVisible = entries[0].isIntersecting;
-      if (isDinoVisible && !dinoRaf) {
-        dinoRaf = requestAnimationFrame(gameLoop);
-      } else if (!isDinoVisible && dinoRaf) {
-        cancelAnimationFrame(dinoRaf);
-        dinoRaf = null;
-      }
-    }, { threshold: 0.01 });
-    dinoObserver.observe(canvas);
-  } else {
-    isDinoVisible = true;
-    dinoRaf = requestAnimationFrame(gameLoop);
-  }
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resizeCanvas, 200);
+  });
+  window.addEventListener('orientationchange', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(resizeCanvas, 250);
+  });
 }
+
 
 /* ==========================================================================
    3. SCROLL REVEAL — IntersectionObserver on .reveal elements
