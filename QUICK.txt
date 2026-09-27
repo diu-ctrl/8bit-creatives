@@ -1,0 +1,624 @@
+# Antigravity Prompt — Restore Auto-Fall + Fix Lag/Slow Images + Add Jonty Creator
+
+> **3 issues to fix in one commit:**
+>
+> 1. **Auto-fall character logic stopped working** — the "one random character falls when About section scrolls into view" feature is broken. Root cause: `autoFallTriggered = true` is set BEFORE the character detach succeeds — if the detach fails (race condition with SVG character generation), the flag is locked to true and the auto-fall never retries.
+>
+> 2. **Lag + slow image loading on creators section** — root cause: all 12 creator images are **7.5 MB PNG files** (90 MB total for the page). Bigger websites use WebP (~300 KB each). Plus missing `width`/`height`/`decoding`/`fetchpriority` attributes + no `content-visibility: auto` on off-screen sections.
+>
+> 3. **Add Jonty as a new creator** — Jonty (AJAY KUMAR BANGA), IG 557K, YT 2.64M, Kick 5.5K. Image at `C:\Users\levol\Desktop\8bit\assets\creators\jonty`.
+
+---
+
+## STRICT SCOPE — DO NOT TOUCH
+
+Antigravity may ONLY modify:
+- `app.js` (fix the auto-fall race condition — move `autoFallTriggered = true` after successful detach + add retry mechanism)
+- `creators.html` (add Jonty to the creators array + add image optimization attributes to all creator `<img>` tags)
+- `index.html` (add `content-visibility: auto` to off-screen sections in the inline `<style>` block ONLY — do NOT touch any other CSS)
+- Convert all 12 creator PNG images to WebP format (create new `.webp` files, keep the `.png` originals as backup)
+- Copy Jonty's image from `assets/creators/jonty/` to `images-for-landing-page/` and convert to WebP
+
+Antigravity may NOT touch:
+- Any CSS file (`styles.css`) — except adding `content-visibility: auto` rules to the INLINE `<style>` block in `index.html` only
+- `navbar.js`
+- `vercel.json`
+- Any other HTML file (about, work, services, esports, gcl-season-4, contact, privacy-policy, 404)
+- The 8BIT letter background animations (100 columns, unchanged)
+- The hero gradient (Velaris shader)
+- The dino runner game
+- The Matter.js physics engine (red eclipse characters) — the custom AABB physics code stays
+- The rotating red half-eclipse
+- The coverflow carousel
+- The case study morphing dialogs
+- The smooth scroll behavior (Lenis)
+- The GSAP ScrollTrigger animations (all 21 stay — don't reduce)
+- The backdrop-filter rules (the user said "don't change effects" — these stay)
+- The founders cards, esports section, services section, etc.
+- The contact form (Formspree integration)
+- The favicon, robots.txt, sitemap.xml, .vercelignore
+
+If Antigravity wants to change anything outside these specific fixes, STOP and report it as a follow-up suggestion instead.
+
+---
+
+## PHASE 0 — Audit current state
+
+### Step 0.1 — Confirm the auto-fall race condition in `app.js`
+
+Open `app.js`. Find the `triggerAutoFall()` function (at approximately line 1864).
+
+Report:
+- The full function (file:line:HTML)
+- Confirm the bug: `autoFallTriggered = true;` is set at the TOP of the function (before `pickRandomCharacter()` and `detachCharacter()`)
+- If either `pickRandomCharacter()` or `detachCharacter()` returns null, the function returns early — but `autoFallTriggered` is ALREADY true, so the auto-fall can never retry
+
+**Expected current (buggy) code:**
+```javascript
+function triggerAutoFall() {
+    if (autoFallTriggered) return;
+    autoFallTriggered = true;    // ← BUG: set BEFORE the detach succeeds
+
+    const pickedCharG = pickRandomCharacter();
+    if (!pickedCharG) return;    // ← returns early, but flag is already locked to true
+
+    const body = detachCharacter(pickedCharG);
+    if (!body) return;            // ← returns early, but flag is already locked to true
+    ...
+}
+```
+
+### Step 0.2 — Confirm the creator image file sizes
+
+Check the file sizes of all 12 creator PNG images:
+
+```bash
+ls -la images-for-landing-page/creator-*.png
+ls -la images-for-landing-page/joker.png
+```
+
+Report:
+- Each file's size in MB
+- The total combined size of all creator images
+- Confirm they're all PNG format (not WebP)
+
+Expected (from live-site audit): each image is ~7.5 MB, total ~90 MB for 12 images.
+
+### Step 0.3 — Confirm the creator data structure in `creators.html`
+
+Open `creators.html`. Find the creators data array.
+
+Report:
+- The structure of ONE creator object (e.g. Mortal's) — all fields: `name`, `alias`, `category`, `categoryLabel`, `platforms`, `img`, `reach`, `youtube`, `youtubeHandle`, `youtubeUrl`, `instagram`, `instagramHandle`, `instagramUrl`, and any other fields (kick, kickHandle, kickUrl, bio, description, etc.)
+- Whether each creator has a `bio` or `description` field (for the morphing dialog extended view)
+- The total number of creators currently in the array (should be 12)
+
+### Step 0.4 — Find Jonty's image file
+
+List the contents of the user's Jonty image folder:
+
+```powershell
+Get-ChildItem -Path "C:\Users\levol\Desktop\8bit\assets\creators\jonty" -Recurse | Select-Object FullName, Length
+```
+
+Report:
+- The image filename(s) found (likely a .png or .jpg)
+- The file size
+- The image dimensions (use `file <image>` or Python PIL)
+
+---
+
+## PHASE 1 — Fix the auto-fall race condition in `app.js`
+
+### Step 1.1 — Move `autoFallTriggered = true` to AFTER the successful detach
+
+Find the `triggerAutoFall()` function (from Phase 0 Step 0.1). Restructure it so the flag is set ONLY after the character has been successfully detached.
+
+**Before (buggy):**
+```javascript
+function triggerAutoFall() {
+    if (autoFallTriggered) return;
+    autoFallTriggered = true;
+
+    const pickedCharG = pickRandomCharacter();
+    if (!pickedCharG) return;
+
+    const body = detachCharacter(pickedCharG);
+    if (!body) return;
+
+    // Respawn after fall completes...
+    setTimeout(() => { ... }, 4000);
+}
+```
+
+**After (fixed):**
+```javascript
+function triggerAutoFall() {
+    if (autoFallTriggered) return;
+
+    const pickedCharG = pickRandomCharacter();
+    if (!pickedCharG) {
+        // Characters not generated yet — retry in 500ms (up to 10 times)
+        if (!triggerAutoFall._retries) triggerAutoFall._retries = 0;
+        triggerAutoFall._retries++;
+        if (triggerAutoFall._retries <= 10) {
+          setTimeout(triggerAutoFall, 500);
+        }
+        return;
+    }
+
+    const body = detachCharacter(pickedCharG);
+    if (!body) {
+        // Detach failed — retry with a different character in 500ms (up to 5 times)
+        if (!triggerAutoFall._detachRetries) triggerAutoFall._detachRetries = 0;
+        triggerAutoFall._detachRetries++;
+        if (triggerAutoFall._detachRetries <= 5) {
+          setTimeout(triggerAutoFall, 500);
+        }
+        return;
+    }
+
+    // ONLY set the flag after the character has been successfully detached
+    autoFallTriggered = true;
+
+    // Respawn after fall completes so character returns to hanging position
+    setTimeout(() => {
+      if (body.isDragging) {
+        const checkInterval = setInterval(() => {
+          if (!body.isDragging) {
+            clearInterval(checkInterval);
+            setTimeout(() => respawnCharacter(pickedCharG, body), 2000);
+          }
+        }, 500);
+        return;
+      }
+      respawnCharacter(pickedCharG, body);
+    }, 4000);
+}
+```
+
+**Key changes:**
+1. `autoFallTriggered = true` is moved to AFTER `detachCharacter()` succeeds — the flag is only locked when a character actually falls
+2. If `pickRandomCharacter()` returns null (SVG characters not generated yet), the function retries up to 10 times with 500ms delay — this handles the race condition where the IntersectionObserver fires before `buildEclipseCharacters()` has populated the SVG group
+3. If `detachCharacter()` returns null (character already detached or element not found), the function retries up to 5 times with 500ms delay — this handles edge cases where the randomly picked character was already clicked by the user
+
+### Step 1.2 — Verify the auto-fall fix
+
+After Phase 1, open `index.html` in a browser. Verify:
+
+1. Scroll down to the About section
+2. When the About section comes into view (~20% visible), ONE random character should fall down by itself
+3. The fallen character respawns at its hanging position after ~4 seconds
+4. Scroll back up and down — the auto-fall triggers only ONCE per page load (the flag is set after the first successful fall)
+5. Hard reload (Ctrl+Shift+R) at the About section — characters reset to hanging, then one auto-falls after ~600ms
+6. The user can still click any character to make it fall (click interaction unchanged)
+7. No console errors
+
+---
+
+## PHASE 2 — Convert creator PNG images to WebP + add optimization attributes
+
+### Step 2.1 — Convert all 12 creator PNG images to WebP
+
+For each creator PNG image in `images-for-landing-page/`:
+- `creator-mortal.png`
+- `creator-payal.png`
+- `creator-snax.png`
+- `joker.png` (Jokerkihaveli)
+- `creator-goblin.png`
+- `creator-mamba.png`
+- `creator-viper.png`
+- `creator-pahadi.png`
+- `creator-thug.png`
+- `creator-goldy.png`
+- `creator-mercy.png`
+- `creator-regaltos.png`
+
+Convert each to WebP format using one of these methods:
+
+**Method A — Using cwebp (Google's WebP encoder, if installed):**
+```bash
+cwebp -q 85 images-for-landing-page/creator-mortal.png -o images-for-landing-page/creator-mortal.webp
+# Repeat for each image
+```
+
+**Method A — Using cwebp (Google's WebP encoder, if installed):**
+```bash
+cwebp -q 85 images-for-landing-page/creator-mortal.png -o images-for-landing-page/creator-mortal.webp
+# Repeat for each image
+```
+
+**Method B — Using Python PIL/Pillow:**
+```python
+from PIL import Image
+import os
+
+creators = ['creator-mortal', 'creator-payal', 'creator-snax', 'joker',
+            'creator-goblin', 'creator-mamba', 'creator-viper', 'creator-pahadi',
+            'creator-thug', 'creator-goldy', 'creator-mercy', 'creator-regaltos']
+
+for name in creators:
+    png_path = f'images-for-landing-page/{name}.png'
+    webp_path = f'images-for-landing-page/{name}.webp'
+    if os.path.exists(png_path):
+        img = Image.open(png_path)
+        img.save(webp_path, 'WEBP', quality=85, method=6)
+        print(f'Converted: {png_path} → {webp_path}')
+```
+
+**Method C — Using ImageMagick:**
+```bash
+magick images-for-landing-page/creator-mortal.png -quality 85 images-for-landing-page/creator-mortal.webp
+# Repeat for each image
+```
+
+**Quality setting:** Use `quality=85` — this is the sweet spot for WebP. Visual quality is indistinguishable from the original PNG, but file size is 80-90% smaller (7.5 MB → ~300-500 KB).
+
+**Do NOT delete the original PNG files** — keep them as backup. The HTML will reference the `.webp` files.
+
+### Step 2.2 — Copy Jonty's image to the images folder
+
+From Phase 0 Step 0.4, Antigravity found Jonty's image at `C:\Users\levol\Desktop\8bit\assets\creators\jonty\<filename>`.
+
+Copy it to the website's images folder:
+
+```powershell
+Copy-Item "C:\Users\levol\Desktop\8bit\assets\creators\jonty\<filename>" "images-for-landing-page\creator-jonty.png"
+```
+
+Then convert it to WebP (same as Step 2.1):
+
+```bash
+cwebp -q 85 images-for-landing-page/creator-jonty.png -o images-for-landing-page/creator-jonty.webp
+```
+
+### Step 2.3 — Update `creators.html` to reference `.webp` images
+
+In `creators.html`, find the creators data array. For EACH creator object, change the `img` field from `.png` to `.webp`:
+
+**Before:**
+```javascript
+img: 'images-for-landing-page/creator-mortal.png',
+```
+
+**After:**
+```javascript
+img: 'images-for-landing-page/creator-mortal.webp',
+```
+
+Do this for ALL 12 existing creators + the new Jonty creator (added in Phase 4).
+
+### Step 2.4 — Add image optimization attributes to the creator `<img>` tags
+
+In `creators.html`, find the line that generates the creator card image HTML (approximately line 1382):
+
+**Before:**
+```javascript
+'  <img src="' + getImgSrc(c.img) + '" alt="' + c.name + ' (' + c.alias + ')" loading="lazy">',
+```
+
+**After:**
+```javascript
+'  <img src="' + getImgSrc(c.img) + '" alt="' + c.name + ' (' + c.alias + ')" width="400" height="500" loading="lazy" decoding="async">',
+```
+
+**Key additions:**
+1. `width="400" height="500"` — explicit dimensions matching the creator image aspect ratio (Antigravity should verify the actual aspect ratio from the image files and use the correct values — 400×500 is a common portrait aspect ratio for creator cards; adjust if the actual images are different)
+2. `decoding="async"` — allows the browser to decode images OFF the main thread, preventing jank during image load
+
+**Why not `fetchpriority="high"`?** The creators section is below the fold (users have to scroll past the hero, about, etc. to reach it). `fetchpriority="high"` is for above-the-fold images. For below-the-fold images, `loading="lazy"` + `decoding="async"` is the correct combo.
+
+### Step 2.5 — Verify the WebP conversion + image optimization
+
+After Phase 2:
+
+1. Check the file sizes of the new WebP images:
+```bash
+ls -la images-for-landing-page/creator-*.webp images-for-landing-page/joker.webp
+```
+Expected: each WebP file should be 200-500 KB (down from 7.5 MB PNG).
+
+2. Open `creators.html` in a browser. Verify:
+   - All creator images load correctly (no broken images)
+   - Images load MUCH faster (seconds, not the previous 10-30 seconds)
+   - No layout shift when images load (the `width`/`height` attributes reserve space)
+   - Visual quality is identical to the PNG versions (WebP at quality=85 is visually lossless)
+   - The creator cards look identical to before (same layout, same colors, same hover effects)
+
+---
+
+## PHASE 3 — Add `content-visibility: auto` to off-screen sections in `index.html`
+
+### Step 3.1 — Add `content-visibility: auto` CSS rules to the inline `<style>` block
+
+In `index.html`, find the inline `<style>` block in the `<head>`. Add these rules at the END of the `<style>` block (before the closing `</style>` tag):
+
+```css
+/* === PERFORMANCE: Skip rendering off-screen sections === */
+/* content-visibility: auto tells the browser "don't render this section's
+   contents until it's near the viewport" — massive performance win
+   for long-scrolling pages with many sections. */
+.case-studies-section,
+.services-section,
+.esports-section,
+.founders-section,
+.cta-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
+/* === END PERFORMANCE === */
+```
+
+**Why this works:**
+
+`content-visibility: auto` tells the browser: "Skip rendering this section's contents until the user scrolls near it." The browser reserves space for the section (using `contain-intrinsic-size: 800px` as the placeholder height) but doesn't actually paint the section's children, run its animations, or compute its layout until it's about to scroll into view.
+
+This is a MASSIVE performance win for long-scrolling pages with many sections — the browser only does the heavy rendering work for sections the user can actually see.
+
+**Zero visual impact:**
+- The sections look IDENTICAL when scrolled into view
+- The `contain-intrinsic-size: 800px` is just a placeholder height estimate — the actual section height is computed when it scrolls into view
+- No animation changes, no design changes, no interaction changes
+
+**Do NOT add `content-visibility: auto` to:**
+- The hero section (it's above the fold — needs to render immediately)
+- The about section (it has the Matter.js physics + auto-fall — needs to be ready when the user scrolls to it)
+- The footer (it's simple enough to not need optimization)
+
+### Step 3.2 — Verify the content-visibility fix
+
+After Phase 3, open `index.html` in a browser. Verify:
+
+1. Scroll through the entire page — all sections display correctly when scrolled into view
+2. No visual changes to any section (same layout, same colors, same animations)
+3. The page FEELS faster when scrolling (the browser skips rendering off-screen sections)
+4. The hero section loads immediately (it's NOT affected by content-visibility)
+5. The About section + auto-fall still work correctly (the auto-fall triggers when the About section scrolls into view — content-visibility doesn't interfere because the About section is NOT in the content-visibility list)
+6. No console errors
+
+---
+
+## PHASE 4 — Add Jonty as a new creator in `creators.html`
+
+### Step 4.1 — Study the existing creator data structure
+
+From Phase 0 Step 0.3, Antigravity identified the structure of a creator object. The existing creators have fields like:
+- `name` (e.g. 'MortaL')
+- `alias` (real name, e.g. 'Naman Mathur')
+- `category` (e.g. 'bgmi')
+- `categoryLabel` (e.g. 'BGMI · Variety Gaming · Streaming · Esports')
+- `platforms` (array, e.g. ['youtube', 'instagram'])
+- `img` (path, e.g. 'images-for-landing-page/creator-mortal.webp')
+- `reach` (e.g. '7.05M')
+- `youtube`, `youtubeHandle`, `youtubeUrl`
+- `instagram`, `instagramHandle`, `instagramUrl`
+- Possibly `kick`, `kickHandle`, `kickUrl`
+- Possibly `bio` or `description` (for the morphing dialog extended view)
+
+### Step 4.2 — Add Jonty's creator object to the array
+
+Add a new creator object for Jonty at the END of the creators array (or wherever it makes sense in the ordering — match the existing order pattern):
+
+```javascript
+{
+    name: 'Jonty',
+    alias: 'Ajay Kumar Banga',
+    category: 'bgmi',
+    categoryLabel: 'BGMI · Variety Gaming · Streaming · Esports',
+    platforms: ['youtube', 'instagram', 'kick'],
+    img: 'images-for-landing-page/creator-jonty.webp',
+    reach: '2.64M',
+    youtube: '2.64M',
+    youtubeHandle: '@JONTYGAMING',
+    youtubeUrl: 'https://www.youtube.com/@JONTYGAMING/',
+    instagram: '557K',
+    instagramHandle: '@ab_jonty',
+    instagramUrl: 'https://www.instagram.com/ab_jonty/',
+    kick: '5.5K',
+    kickHandle: 'jontygamings8ul',
+    kickUrl: 'https://kick.com/jontygamings8ul',
+    bio: 'Write a bio here matching the tone and length of other creators' bios. Antigravity should study the existing bios (e.g. Mortal's, Snax's, etc.) and write a similar one for Jonty — 1-3 sentences covering his content lane, multi-platform reach, and what he brings to the 8Bit roster. Do NOT invent biographical details (real name is provided, age/location are NOT — don't fabricate).'
+},
+```
+
+**Important:**
+- Antigravity should STUDY the existing creator bios in the morphing dialog (the `bio` or `description` field) and write a similar-length, similar-tone bio for Jonty
+- The bio should mention: his YouTube + Instagram + Kick presence, his content lane (BGMI/variety gaming, matching the other creators), and his multi-platform reach
+- Do NOT invent: real name (provided: Ajay Kumar Banga), age, location, gaming titles played — stick to what's provided + what can be inferred from the platform mix
+- Use the EXACT same field structure as the other creators (if they have a `bio` field, use `bio`; if they have a `description` field, use `description`)
+
+### Step 4.3 — Verify Jonty's card appears correctly
+
+After Phase 4, open `creators.html` in a browser. Verify:
+
+1. The creator grid now shows 13 cards (was 12)
+2. Jonty's card appears in the grid with the correct image, name, alias, stats, and social icons
+3. Clicking Jonty's card opens the morphing dialog with his bio + social links
+4. The Instagram link opens `https://www.instagram.com/ab_jonty/` in a new tab
+5. The YouTube link opens `https://www.youtube.com/@JONTYGAMING/` in a new tab
+6. The Kick link opens `https://kick.com/jontygamings8ul` in a new tab
+7. Jonty's card looks visually identical to the other creator cards (same size, same styling, same hover effects)
+8. The search bar + filter chips still work (Jonty appears when filtering by 'bgmi' or searching 'Jonty')
+9. No console errors
+
+### Step 4.4 — Also add Jonty to the index.html coverflow carousel (if applicable)
+
+Check if `index.html` has a separate creators array for the coverflow carousel (the landing page shows a subset of creators in a 3D coverflow). If yes, add Jonty to that array too — OR replace one of the existing coverflow creators with Jonty (the user's choice).
+
+If the coverflow array is separate and limited to ~5 creators, the user may want to keep the existing 5 and NOT add Jonty (to keep the coverflow compact). Antigravity should check the existing coverflow array and report its size — then the user can decide.
+
+For now, add Jonty ONLY to the `creators.html` full grid. Flag the coverflow question as a follow-up for the user.
+
+---
+
+## PHASE 5 — Verify all fixes work together
+
+### Step 5.1 — Full-page performance test
+
+Open `index.html` in Chrome. Open DevTools → Performance tab. Record a 10-second scroll session through the entire page.
+
+VERIFY:
+1. The page loads faster (the 8BIT background, hero, about sections render quickly)
+2. Scrolling feels smooth (no jank, no stutter)
+3. The creators section images load quickly (WebP instead of 7.5 MB PNG)
+4. No layout shift when images load (width/height attributes reserve space)
+5. The auto-fall in the About section triggers correctly (one character falls when the section scrolls into view)
+
+### Step 5.2 — Creators page performance test
+
+Open `creators.html` in Chrome. Open DevTools → Network tab. Reload the page.
+
+VERIFY:
+1. All 13 creator images load as `.webp` files (not `.png`)
+2. Each WebP image is 200-500 KB (not 7.5 MB)
+3. Total page weight is under 10 MB (was ~90 MB with PNG images)
+4. Images load in seconds, not 10-30 seconds
+5. No layout shift (CLS = 0)
+6. Jonty's card appears as the 13th creator
+7. All 13 cards look visually identical (same styling, same hover effects)
+
+### Step 5.3 — Auto-fall test
+
+Open `index.html` in Chrome. Scroll to the About section.
+
+VERIFY:
+1. ONE random character falls down automatically when the About section scrolls into view
+2. The fallen character respawns after ~4 seconds
+3. Hard reload at the About section — characters reset, then one auto-falls after ~600ms
+4. The user can still click any character to make it fall (click interaction unchanged)
+5. No console errors
+
+### Step 5.4 — No-regression test
+
+Open these pages and verify they still work:
+1. `index.html` — all sections display correctly (hero, about with auto-fall, creators coverflow, case studies, services, esports, founders, CTA, footer)
+2. `creators.html` — all 13 creator cards display correctly, search + filter work, morphing dialogs open
+3. `work.html` — case study archive works
+4. `services.html` — services page works
+5. `esports.html` — esports roster works
+6. `contact.html` — contact form works
+7. Browser console — no JavaScript errors
+
+### Step 5.5 — Verify scope was respected
+
+```bash
+git diff --stat
+```
+
+Expected: `app.js`, `creators.html`, `index.html` show as modified. New `.webp` image files are added. No other file should be touched.
+
+```bash
+git diff --name-only
+# Expected: app.js, creators.html, index.html
+# Plus untracked .webp files in images-for-landing-page/
+```
+
+---
+
+## PHASE 6 — Commit and report
+
+### Step 6.1 — Commit
+
+```bash
+git add app.js creators.html index.html images-for-landing-page/creator-*.webp images-for-landing-page/joker.webp images-for-landing-page/creator-jonty.png images-for-landing-page/creator-jonty.webp
+git commit -m "fix: restore auto-fall race condition + convert creator images to WebP (90MB→5MB) + add content-visibility: auto + add Jonty creator"
+```
+
+Do NOT push. The user will push via GitHub Desktop.
+
+### Step 6.2 — Final report
+
+Report back with:
+
+1. **Phase 0 — Audit findings:**
+   - The auto-fall `triggerAutoFall()` function (file:line:HTML) — confirm the `autoFallTriggered = true` bug
+   - The 12 creator PNG image file sizes (confirm ~7.5 MB each, ~90 MB total)
+   - The creator data structure (one example object with all fields)
+   - Jonty's image file found at `C:\Users\levol\Desktop\8bit\assets\creators\jonty\` (filename + size + dimensions)
+
+2. **Phase 1 — Auto-fall fix:**
+   - The old `triggerAutoFall()` code (with `autoFallTriggered = true` at the top)
+   - The new `triggerAutoFall()` code (with flag moved after successful detach + retry mechanism)
+   - The git diff of `app.js` (showing ONLY the `triggerAutoFall()` function changed)
+
+3. **Phase 2 — WebP conversion + image optimization:**
+   - For each of the 12+1 creator images: the old PNG file size vs. the new WebP file size
+   - The total page weight reduction (e.g. "90 MB → 5 MB, 94% reduction")
+   - The updated `<img>` tag in `creators.html` (with `width`, `height`, `decoding="async"` attributes added)
+   - The git diff of `creators.html` (showing the `img` field changes + the `<img>` tag optimization + the Jonty creator object added)
+
+4. **Phase 3 — content-visibility:**
+   - The CSS rules added to the inline `<style>` block in `index.html`
+   - Confirmation that only the `.case-studies-section`, `.services-section`, `.esports-section`, `.founders-section`, `.cta-section` got `content-visibility: auto` (NOT the hero or about sections)
+   - The git diff of `index.html` (showing ONLY the new CSS rules added to the inline `<style>` block)
+
+5. **Phase 4 — Jonty creator:**
+   - Jonty's creator object (with all fields including the bio Antigravity wrote)
+   - Confirmation that the image was copied from `assets/creators/jonty/` to `images-for-landing-page/creator-jonty.webp`
+   - Confirmation that Jonty's card appears as the 13th creator in the grid
+   - Whether the index.html coverflow carousel was also updated (or flagged as a follow-up)
+
+6. **Phase 5 — Verification:**
+   - Performance test results (Step 5.1) — page feels faster, images load in seconds
+   - Creators page Network tab results (Step 5.2) — WebP files loaded, total weight under 10 MB
+   - Auto-fall test results (Step 5.3) — one character falls when About section scrolls into view
+   - No-regression test results (Step 5.4) — all pages work
+   - `git diff --stat` output (Step 5.5)
+
+7. **Phase 6 — Commit:**
+   - Commit hash
+   - Explicit confirmation that NO other file was modified
+
+8. **Follow-up recommendations (NOT applied in this commit — just flagged):**
+   - The 5+ `backdrop-filter: blur(20px) saturate(180%)` rules in `styles.css` are GPU-expensive. The user said "don't change effects" — so these stay. But if the user ever wants to reduce GPU load further, replacing `backdrop-filter: blur()` with a solid `rgba()` background would be the next biggest performance win after the WebP conversion.
+   - The 21 GSAP ScrollTrigger animations are a lot. Each runs on every scroll frame. If the user ever wants to reduce scroll jank further, consolidating multiple ScrollTriggers into fewer batch animations would help. But the user said "don't change animations" — so these stay.
+   - If the user wants to add Jonty to the index.html coverflow carousel too, that's a separate follow-up task.
+
+---
+
+## Why these fixes are safe (zero visual impact)
+
+### Fix 1 — Auto-fall race condition
+- The `triggerAutoFall()` function is restructured so the flag is set AFTER success
+- A retry mechanism (up to 10 retries with 500ms delay) handles the race condition where SVG characters aren't generated yet
+- The visual behavior is IDENTICAL to the original design — one random character falls when the About section scrolls into view, respawns after 4 seconds, triggers only once per page load
+- The click-to-fall interaction is UNCHANGED
+
+### Fix 2 — WebP conversion
+- WebP at quality=85 is VISUALLY INDISTINGUISHABLE from the original PNG
+- The only difference is file size: 7.5 MB → 300-500 KB (94% reduction)
+- The creator card images look IDENTICAL — same resolution, same colors, same aspect ratio
+- Adding `width`/`height` attributes only reserves space before load — CSS still controls the displayed size
+- Adding `decoding="async"` only moves image decoding off the main thread — zero visual change
+
+### Fix 3 — content-visibility: auto
+- Sections look IDENTICAL when scrolled into view
+- The browser just skips rendering off-screen sections (which the user can't see anyway)
+- `contain-intrinsic-size: 800px` is a placeholder — the actual section height is computed when it scrolls into view
+- No animation changes, no design changes, no interaction changes
+
+### Fix 4 — Jonty creator
+- Jonty's card uses the EXACT same HTML structure, CSS classes, and data fields as the other 12 creators
+- The card looks visually identical to the others (same size, same styling, same hover effects, same morphing dialog)
+- Jonty's bio is written in the same tone and length as the other creators' bios
+
+---
+
+## How to use this prompt
+
+1. Paste the prompt into Antigravity.
+2. Antigravity does Phase 0 — audits the auto-fall bug, confirms the 7.5 MB PNG image sizes, studies the creator data structure, finds Jonty's image.
+3. Antigravity does Phase 1 — fixes the auto-fall race condition in `app.js` (moves `autoFallTriggered = true` after successful detach + adds retry mechanism).
+4. Antigravity does Phase 2 — converts all 12 creator PNG images to WebP (using cwebp or Python PIL), copies + converts Jonty's image, updates `creators.html` to reference `.webp` files, adds `width`/`height`/`decoding="async"` to the `<img>` tag template.
+5. Antigravity does Phase 3 — adds `content-visibility: auto` CSS rules to the inline `<style>` block in `index.html` for off-screen sections.
+6. Antigravity does Phase 4 — adds Jonty's creator object to the `creators.html` array (with a bio written in the same tone as other creators).
+7. Antigravity does Phase 5 — runs the 5 verification tests.
+8. Antigravity commits in Phase 6 — you push via GitHub Desktop.
+
+After deploy:
+- ✅ Auto-fall works again (one random character falls when About section scrolls into view)
+- ✅ Creators page loads in seconds (not 30+ seconds) — 90 MB of PNG → 5 MB of WebP
+- ✅ No layout shift when images load (width/height attributes)
+- ✅ Scrolling feels smoother (content-visibility skips off-screen rendering)
+- ✅ Jonty appears as the 13th creator with his IG/YT/Kick links
+- ✅ Zero visual changes to any section, animation, or effect

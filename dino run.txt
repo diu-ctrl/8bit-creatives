@@ -1,0 +1,514 @@
+# Antigravity Prompt — Fix Dino Runner Game for Mobile
+
+> **Goal:** The dino runner game on the 8Bit Creatives landing page (https://8bit-creatives.vercel.app/) looks and runs poorly on mobile. The canvas is tiny inside a tall container, the text is unreadable, the pixel art is blurry from non-integer scaling, and the game doesn't re-init on orientation change. Fix all of these WITHOUT changing the game's visual design, speed, physics, or interactions.
+
+---
+
+## STRICT SCOPE — DO NOT TOUCH
+
+Antigravity may ONLY modify:
+- `styles.css` — fix the `.hero-game-area` and `#heroDinoCanvas` mobile CSS rules (height, canvas sizing)
+- `app.js` — fix the `initHeroDinoGame()` function to use responsive canvas dimensions + add resize/orientation handler + increase mobile text sizes
+
+Antigravity may NOT touch:
+- Any HTML file (the `<canvas id="heroDinoCanvas" width="1200" height="200">` tag stays as-is in the HTML — the width/height HTML attributes will be overridden by JS)
+- `navbar.js`
+- `vercel.json`
+- Any other JS function in `app.js` (only `initHeroDinoGame()` and its internal code may be touched)
+- The game's visual design (colors, dino shape, cactus shapes, bird shapes — all stay identical)
+- The game's physics (gravity, jump velocity, bounce, friction — all stay identical)
+- The game's speed (mobile 5.5, desktop 6.5 — stays identical)
+- The game's interaction (spacebar to jump, tap/click to jump, arrow down to duck — all stay identical)
+- The game's states (waiting → playing → gameover → restart — all stay identical)
+- The hero section, about section, creators section, or any other part of the page
+- The 8BIT letter background, Velaris shader, smooth scroll, GSAP animations
+
+If Antigravity wants to change anything outside the dino game's canvas sizing + text sizes + resize handler, STOP and report it as a follow-up suggestion.
+
+---
+
+## PHASE 0 — Audit current state
+
+### Step 0.1 — Read the current mobile CSS for `.hero-game-area` and `#heroDinoCanvas`
+
+Open `styles.css`. Find the mobile media query that contains the `.hero-game-area` rules (inside the `@media (max-width: 767px)` block at approximately line 3657).
+
+Report:
+- The full mobile `.hero-game-area` rule (confirm it has `padding: 12px 0 !important; width: 100% !important; max-width: 100% !important;` but NO `height` override)
+- The full mobile `#heroDinoCanvas` rule (confirm it has `width: 100% !important; max-width: 100% !important; height: auto !important; display: block !important;`)
+
+### Step 0.2 — Read the current `initHeroDinoGame()` function in `app.js`
+
+Open `app.js`. Find `function initHeroDinoGame()` (at approximately line 2094).
+
+Report:
+- The canvas dimension setup (confirm: `const W = canvas.width = isMobile ? 600 : 1200;` and `const H = canvas.height = 200;`)
+- The `isMobile` check (confirm: `const isMobile = window.innerWidth < 768;`)
+- The text rendering code (confirm the font sizes: `isMobile ? '16px' : '13px'` for waiting text, `isMobile ? '22px' : '18px'` for game over, `isMobile ? '13px' : '11px'` for restart text, `isMobile ? '16px' : '14px'` for score)
+- Whether there's a resize/orientation handler (confirm: NONE exists for the dino game)
+
+---
+
+## PHASE 1 — Fix the mobile CSS for `.hero-game-area` and `#heroDinoCanvas`
+
+### Step 1.1 — Set explicit mobile height for `.hero-game-area`
+
+In `styles.css`, find the mobile `.hero-game-area` rule (inside `@media (max-width: 767px)`).
+
+**Before (current):**
+```css
+.hero-game-area {
+    padding: 12px 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+```
+
+**After (fixed):**
+```css
+.hero-game-area {
+    padding: 12px 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 200px !important;          /* matches canvas internal height — eliminates empty space */
+}
+```
+
+**Why 200px:** The canvas internal height is 200px. Setting the container to exactly 200px means the canvas fills the container with 1:1 pixel mapping (no vertical scaling, no empty space, no distortion).
+
+### Step 1.2 — Fix the canvas CSS on mobile
+
+In the same mobile media query, find the `#heroDinoCanvas` rule.
+
+**Before (current):**
+```css
+.hero-game-area canvas,
+#heroDinoCanvas {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;           /* ← BUG: calculates height from aspect ratio, making canvas too small */
+    display: block !important;
+}
+```
+
+**After (fixed):**
+```css
+.hero-game-area canvas,
+#heroDinoCanvas {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;            /* ← fills the 200px container exactly */
+    display: block !important;
+}
+```
+
+**Why `height: 100%` instead of `height: auto`:** `height: auto` calculates the CSS height from the canvas's internal aspect ratio (600:200 = 3:1), giving a tiny 125px canvas on a 375px-wide screen. `height: 100%` makes the canvas fill the full 200px container height — the canvas now uses the full game area with no wasted space.
+
+---
+
+## PHASE 2 — Make canvas width responsive + add resize handler in `app.js`
+
+### Step 2.1 — Replace the hardcoded canvas dimensions with responsive values
+
+In `app.js`, find the `initHeroDinoGame()` function. At the top of the function, replace the hardcoded dimension setup:
+
+**Before (current):**
+```javascript
+function initHeroDinoGame() {
+  const canvas = document.getElementById('heroDinoCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // Mobile scale factor
+  const isMobile = window.innerWidth < 768;
+  const SCALE = isMobile ? 2 : 1;
+
+  // Dimensions
+  const W = canvas.width = isMobile ? 600 : 1200;
+  const H = canvas.height = 200;
+```
+
+**After (fixed):**
+```javascript
+function initHeroDinoGame() {
+  const canvas = document.getElementById('heroDinoCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // Mobile scale factor
+  let isMobile = window.innerWidth < 768;
+  let SCALE = isMobile ? 2 : 1;
+
+  // Responsive dimensions — canvas internal width matches the display width
+  // (eliminates non-integer scaling artifacts on pixel art)
+  function resizeCanvas() {
+    // Read the CSS display width of the canvas
+    const displayWidth = canvas.clientWidth || canvas.offsetWidth || window.innerWidth;
+    // Set the internal resolution to match the display width (1:1 pixel mapping)
+    // For retina sharpness, multiply by devicePixelRatio (but cap at 2x to avoid memory issues on mobile)
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(displayWidth * dpr);
+    // Height stays at 200 * dpr for consistent game area
+    canvas.height = 200 * dpr;
+    // Update the game variables
+    W = canvas.width;
+    H = canvas.height;
+    isMobile = window.innerWidth < 768;
+    SCALE = isMobile ? 2 : 1;
+    // Update ground position (proportional to new height)
+    groundY = Math.round(H * 0.8);  // 80% of canvas height (was 160/200 = 80%)
+  }
+
+  // Dimensions — now responsive (declared with let so they can be updated)
+  let W, H, groundY;
+  resizeCanvas();  // initial sizing
+
+  // Re-init on resize/orientation change (debounced to avoid excessive re-inits)
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const wasMobile = isMobile;
+      resizeCanvas();
+      // If mobile/desktop state changed, re-init the game with new physics
+      if (wasMobile !== isMobile) {
+        // Reset game state with new physics constants
+        speed = isMobile ? 5.5 : 6.5;
+        GRAVITY = isMobile ? 0.7 : 0.55;
+        JUMP_VEL = isMobile ? -13.5 : -10.5;
+        dino.x = isMobile ? 40 : 60;
+        dino.w = Math.round(38 * SCALE);
+        dino.h = Math.round(40 * SCALE);
+      }
+      // Clamp dino position to new dimensions
+      dino.y = Math.min(dino.y, groundY);
+    }, 250);
+  });
+  window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+      const wasMobile = isMobile;
+      resizeCanvas();
+      if (wasMobile !== isMobile) {
+        speed = isMobile ? 5.5 : 6.5;
+        GRAVITY = isMobile ? 0.7 : 0.55;
+        JUMP_VEL = isMobile ? -13.5 : -10.5;
+        dino.x = isMobile ? 40 : 60;
+        dino.w = Math.round(38 * SCALE);
+        dino.h = Math.round(40 * SCALE);
+      }
+      dino.y = Math.min(dino.y, groundY);
+    }, 250);
+  });
+```
+
+**Key changes:**
+
+1. `W`, `H`, `groundY` are now declared with `let` (mutable) instead of `const` (immutable) — they can be updated on resize
+2. `isMobile` and `SCALE` are now `let` — they can be updated on resize
+3. `resizeCanvas()` function reads the actual CSS display width (`canvas.clientWidth`) and sets the canvas internal width to match (× `devicePixelRatio` for retina sharpness) — eliminates non-integer scaling
+4. The canvas height is `200 * dpr` (proportional to the original 200px, but sharper on retina)
+5. `groundY` is recalculated as 80% of the new `H` (matching the original 160/200 = 80% ratio)
+6. A debounced resize handler (250ms) re-sizes the canvas when the user rotates or resizes the browser
+7. If the mobile/desktop state changes (crossing the 768px breakpoint), the physics constants (speed, gravity, jump velocity) and dino dimensions are updated to match the new state
+8. The dino's Y position is clamped to the new groundY to prevent it from being below the ground after resize
+
+### Step 2.2 — Update all references to use the mutable variables
+
+The game code uses `W`, `H`, `groundY`, `isMobile`, `SCALE`, `speed`, `GRAVITY`, `JUMP_VEL` throughout the function. Since they were originally `const`, they can't be reassigned.
+
+After Step 2.1 changes them to `let`, verify that all references still work. The game logic (jump, spawn, collision, draw) uses these variables — they should all work with the new `let` declarations because the values are the same (just mutable now).
+
+**Specifically, find and update these declarations (change `const` to `let`):**
+
+```javascript
+// Before:
+const groundY = 160;
+const GRAVITY = isMobile ? 0.7 : 0.55;
+const JUMP_VEL = isMobile ? -13.5 : -10.5;
+const DUCK_H = Math.round(23 * SCALE);
+let speed = isMobile ? 5.5 : 6.5;
+
+// After:
+let groundY = 160;          // will be recalculated by resizeCanvas()
+let GRAVITY = isMobile ? 0.7 : 0.55;
+let JUMP_VEL = isMobile ? -13.5 : -10.5;
+let DUCK_H = Math.round(23 * SCALE);
+let speed = isMobile ? 5.5 : 6.5;
+```
+
+Also update the `dino` object to use `let`:
+```javascript
+// Before:
+const dino = { ... };
+
+// After:
+let dino = { ... };
+```
+
+And the obstacles/clouds arrays can stay `let` (they already are).
+
+### Step 2.3 — Update the groundY calculation in resizeCanvas
+
+In the `resizeCanvas()` function from Step 2.1, the groundY is calculated as:
+```javascript
+groundY = Math.round(H * 0.8);
+```
+
+On the original 200px canvas, groundY was 160 (= 200 × 0.8). On the new responsive canvas with `H = 200 * dpr`, groundY = `200 * dpr * 0.8`. For dpr=1: groundY=160 (same as before). For dpr=2 (retina): groundY=320 (double, but the canvas is also double — so the visual position is the same).
+
+This is correct — the ground position scales proportionally with the canvas height.
+
+### Step 2.4 — Update the dino Y position on resize
+
+In the resize handler from Step 2.1, after resizing the canvas, clamp the dino's Y position:
+```javascript
+dino.y = Math.min(dino.y, groundY);
+```
+
+This prevents the dino from being stuck below the ground line after a resize.
+
+---
+
+## PHASE 3 — Increase text sizes for mobile
+
+### Step 3.1 — Increase the mobile font sizes to compensate for canvas scaling
+
+In `app.js`, find the text rendering functions (`drawScore`, `drawGameOver`, `drawWaiting`). These functions set `ctx.font` with mobile-specific sizes.
+
+The current mobile font sizes are in the canvas's INTERNAL coordinate space. Since the canvas is now responsive (internal width = display width × dpr), the font sizes need to scale with the dpr to appear at the correct visual size.
+
+**Option A (simpler):** Scale font sizes by dpr:
+```javascript
+// In drawScore():
+ctx.font = Math.round((isMobile ? 16 : 14) * (window.devicePixelRatio || 1)) + 'px "Geist", sans-serif';
+
+// In drawGameOver():
+ctx.font = Math.round((isMobile ? 22 : 18) * (window.devicePixelRatio || 1)) + 'px "Geist", sans-serif';
+ctx.font = Math.round((isMobile ? 13 : 11) * (window.devicePixelRatio || 1)) + 'px "Geist", sans-serif';
+
+// In drawWaiting():
+ctx.font = Math.round((isMobile ? 16 : 13) * (window.devicePixelRatio || 1)) + 'px "Geist", sans-serif';
+```
+
+**Option B (cleaner):** Store dpr in a variable and use it:
+```javascript
+// At the top of initHeroDinoGame(), after resizeCanvas():
+let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+// In resizeCanvas():
+dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+// In drawScore():
+ctx.font = Math.round((isMobile ? 16 : 14) * dpr) + 'px "Geist", sans-serif';
+
+// In drawGameOver():
+ctx.font = Math.round((isMobile ? 22 : 18) * dpr) + 'px "Geist", sans-serif';
+ctx.font = Math.round((isMobile ? 13 : 11) * dpr) + 'px "Geist", sans-serif';
+
+// In drawWaiting():
+ctx.font = Math.round((isMobile ? 16 : 13) * dpr) + 'px "Geist", sans-serif';
+```
+
+Use Option B (cleaner).
+
+Also update the text POSITION coordinates to scale with dpr:
+
+```javascript
+// In drawScore():
+ctx.fillText(s, W - Math.round((isMobile ? 14 : 20) * dpr), Math.round((isMobile ? 26 : 25) * dpr));
+// High score:
+ctx.fillText('HI ' + hs, W - Math.round((isMobile ? 75 : 90) * dpr), Math.round((isMobile ? 26 : 25) * dpr));
+
+// In drawGameOver():
+ctx.fillText('G A M E   O V E R', W / 2, H / 2 - Math.round((isMobile ? 10 : 15) * dpr));
+ctx.fillText('Press SPACE or Tap to restart', W / 2, H / 2 + Math.round((isMobile ? 18 : 12) * dpr));
+
+// In drawWaiting():
+ctx.fillText('Press SPACE or Tap to Start', W / 2, H / 2 - Math.round(10 * dpr));
+```
+
+This scales the text positions proportionally with the canvas's internal resolution, so the text appears at the same VISUAL position regardless of the dpr.
+
+---
+
+## PHASE 4 — Verify
+
+### Step 4.1 — Desktop test (regression check)
+
+Open `index.html` on desktop. Verify:
+
+1. The dino game still works exactly as before (same canvas size, same speed, same physics)
+2. The "Press SPACE or Tap to Start" text is visible and correctly positioned
+3. The game plays normally — spacebar to jump, arrow down to duck
+4. Obstacles spawn correctly, collision detection works
+5. Score and high score display correctly
+6. Game over screen appears on collision
+7. Restart works (spacebar or tap)
+8. No console errors
+
+### Step 4.2 — Mobile test (the fix)
+
+Open `index.html` in Chrome DevTools mobile mode (e.g. iPhone 14: 393×852px). Verify:
+
+1. The `.hero-game-area` is now exactly 200px tall (not 237px from the old 30vh calculation) — no empty white space
+2. The canvas fills the full 200px height — no tiny canvas floating in a tall container
+3. The canvas width fills the full screen width — no horizontal gaps
+4. The "Press SPACE or Tap to Start" text is READABLE (not tiny) — should be clearly visible
+5. The "G A M E O V E R" text is readable
+6. The score number is readable
+7. Tapping the canvas starts the game (touch input works)
+8. Tapping during gameplay makes the dino jump
+9. The dino and obstacles are crisp (no blurry scaling artifacts) — `image-rendering: pixelated` + 1:1 pixel mapping via responsive canvas width
+10. The game speed feels right (not too fast, not too slow)
+11. The ground line is at the correct position (80% of canvas height)
+12. No console errors
+
+### Step 4.3 — Orientation change test
+
+1. Open `index.html` in Chrome DevTools mobile mode (portrait)
+2. Start the game (tap)
+3. Rotate to landscape (in DevTools: click the rotate icon)
+4. VERIFY: the canvas resizes to fill the new landscape dimensions
+5. VERIFY: the game continues running (or resets to waiting state — either is acceptable, but no crash)
+6. VERIFY: the text is still readable in landscape
+7. Rotate back to portrait
+8. VERIFY: the canvas resizes back and the game works
+
+### Step 4.4 — Different device sizes test
+
+Test at these mobile sizes:
+- iPhone SE: 375×667px (small screen)
+- iPhone 14: 393×852px (medium screen)
+- iPad Mini: 768×1024px (tablet — should switch to desktop layout at 768px+)
+- Samsung Galaxy S20: 360×800px (Android)
+
+For each:
+1. The game area is 200px tall
+2. The canvas fills the full width and height
+3. Text is readable
+4. Game plays correctly
+5. No layout issues
+
+### Step 4.5 — No-regression test
+
+Verify that nothing else on the page is broken:
+1. The hero section still displays correctly (headline, 8Bit logo, CTA buttons)
+2. The 8BIT letter background still animates
+3. The About section + auto-fall still works
+4. The creators coverflow carousel works
+5. All other sections (case studies, services, esports, founders, CTA, footer) work
+6. The smooth scroll (Lenis) works
+7. No console errors anywhere on the page
+
+### Step 4.6 — Verify scope was respected
+
+```bash
+git diff --stat
+```
+
+Expected: only `styles.css` and `app.js` show as modified. No other file should be touched.
+
+```bash
+# Verify CSS changes
+git diff styles.css
+# Should show ONLY the mobile .hero-game-area height + #heroDinoCanvas height changes
+
+# Verify JS changes
+git diff app.js
+# Should show ONLY the initHeroDinoGame() function changes (responsive canvas + resize handler + text scaling)
+```
+
+---
+
+## PHASE 5 — Commit and report
+
+### Step 5.1 — Commit
+
+```bash
+git add styles.css app.js
+git commit -m "fix: dino game mobile — responsive canvas dimensions + explicit 200px container height + dpr-scaled text + resize/orientation handler"
+```
+
+Do NOT push. The user will push via GitHub Desktop.
+
+### Step 5.2 — Final report
+
+Report back with:
+
+1. **Phase 0 — Audit:**
+   - The current mobile `.hero-game-area` CSS (confirm no height override)
+   - The current mobile `#heroDinoCanvas` CSS (confirm `height: auto`)
+   - The current `initHeroDinoGame()` dimension setup (confirm hardcoded 600/1200 width, no resize handler)
+
+2. **Phase 1 — CSS fix:**
+   - The old `.hero-game-area` mobile rule (no height)
+   - The new `.hero-game-area` mobile rule (with `height: 200px !important`)
+   - The old `#heroDinoCanvas` mobile rule (`height: auto`)
+   - The new `#heroDinoCanvas` mobile rule (`height: 100%`)
+   - The git diff of `styles.css`
+
+3. **Phase 2 — Responsive canvas + resize handler:**
+   - The old dimension setup (hardcoded `const W = canvas.width = isMobile ? 600 : 1200`)
+   - The new dimension setup (responsive `resizeCanvas()` function with `let` variables)
+   - The resize/orientation handler code
+   - Confirmation that all `const` → `let` changes were applied to `groundY`, `GRAVITY`, `JUMP_VEL`, `DUCK_H`, `speed`, `dino`
+   - The git diff of `app.js`
+
+4. **Phase 3 — Text scaling:**
+   - The old font sizes (e.g. `isMobile ? '16px' : '13px'`)
+   - The new font sizes (e.g. `Math.round((isMobile ? 16 : 13) * dpr) + 'px'`)
+   - The text position scaling (all x/y coordinates multiplied by dpr)
+
+5. **Phase 4 — Verification:**
+   - Desktop regression test results (Step 4.1) — all 8 checks pass
+   - Mobile test results (Step 4.2) — all 12 checks pass
+   - Orientation change test results (Step 4.3)
+   - Different device sizes test results (Step 4.4)
+   - No-regression test results (Step 4.5)
+   - `git diff --stat` output (Step 4.6)
+
+6. **Phase 5 — Commit:**
+   - Commit hash
+   - Explicit confirmation that NO other file was modified
+   - Explicit confirmation that NO game design, physics, speed, colors, or interactions were changed
+
+---
+
+## Why this fix is safe (zero design impact)
+
+### What changes
+- **CSS:** 2 properties changed in the mobile media query (`.hero-game-area` gets `height: 200px`, `#heroDinoCanvas` gets `height: 100%` instead of `height: auto`)
+- **JS:** The canvas dimension setup becomes responsive (reads `canvas.clientWidth` instead of hardcoding 600/1200), `const` → `let` for mutable variables, a debounced resize handler is added, text sizes are multiplied by `dpr`
+
+### What stays identical
+- The game's visual design (colors, dino shape, cactus shapes, bird shapes)
+- The game's physics (gravity, jump velocity, bounce, friction)
+- The game's speed (mobile 5.5, desktop 6.5)
+- The game's interactions (spacebar, tap/click, arrow down to duck)
+- The game's states (waiting → playing → gameover → restart)
+- The game's scoring system
+- The ground line position (80% of canvas height — same ratio)
+- The dino size (38×40 × SCALE — same proportional size)
+- The obstacle sizes
+- The cloud rendering
+- Everything else on the page (hero, about, creators, case studies, services, esports, founders, CTA, footer)
+- The 8BIT letter background, Velaris shader, smooth scroll, GSAP animations
+
+---
+
+## How to use this prompt
+
+1. Paste the prompt into Antigravity.
+2. Antigravity does Phase 0 — audits the current mobile CSS + JS for the dino game.
+3. Antigravity does Phase 1 — fixes the mobile CSS (`.hero-game-area` height: 200px, `#heroDinoCanvas` height: 100%).
+4. Antigravity does Phase 2 — makes the canvas dimensions responsive + adds resize/orientation handler + changes `const` to `let` for mutable game variables.
+5. Antigravity does Phase 3 — scales text sizes by `dpr` so they're readable on mobile.
+6. Antigravity does Phase 4 — runs the 6 verification tests (desktop regression, mobile test, orientation change, different devices, no-regression, scope check).
+7. Antigravity commits in Phase 5 — you push via GitHub Desktop.
+
+After deploy, the dino game on mobile will:
+- Fill the full game area (200px height, full screen width) — no more tiny canvas in a tall container
+- Have crisp pixel art (responsive canvas width = display width × dpr, 1:1 pixel mapping)
+- Have readable text ("Press SPACE or Tap to Start", score, game over — all scaled by dpr)
+- Re-init on orientation change (portrait → landscape → portrait works correctly)
+- Play identically to before (same speed, same physics, same interactions)
