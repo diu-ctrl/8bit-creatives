@@ -3658,12 +3658,13 @@ body.light-page .back-home,
     padding: 12px 0 !important;
     width: 100% !important;
     max-width: 100% !important;
+    height: 200px !important;
   }
   .hero-game-area canvas,
   #heroDinoCanvas {
     width: 100% !important;
     max-width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
     display: block !important;
   }
 

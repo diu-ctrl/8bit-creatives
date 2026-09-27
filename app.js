@@ -2114,12 +2114,33 @@ function initHeroDinoGame() {
   const ctx = canvas.getContext('2d');
 
   // Mobile scale factor
-  const isMobile = window.innerWidth < 768;
-  const SCALE = isMobile ? 2 : 1;
+  let isMobile = window.innerWidth < 768;
+  let SCALE = isMobile ? 2 : 1;
 
-  // Dimensions
-  const W = canvas.width = isMobile ? 600 : 1200;
-  const H = canvas.height = 200;
+  // Responsive dimensions — canvas internal width matches the display width
+  // (eliminates non-integer scaling artifacts on pixel art)
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+  let W, H, groundY;
+
+  function resizeCanvas() {
+    // Read the CSS display width of the canvas
+    const displayWidth = canvas.clientWidth || canvas.offsetWidth || window.innerWidth;
+    // Set the internal resolution to match the display width (1:1 pixel mapping)
+    // For retina sharpness, multiply by devicePixelRatio (but cap at 2x to avoid memory issues on mobile)
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(displayWidth * dpr);
+    // Height stays at 200 * dpr for consistent game area
+    canvas.height = 200 * dpr;
+    // Update the game variables
+    W = canvas.width;
+    H = canvas.height;
+    isMobile = window.innerWidth < 768;
+    SCALE = isMobile ? 2 : 1;
+    // Update ground position (proportional to new height)
+    groundY = Math.round(H * 0.8);  // 80% of canvas height (was 160/200 = 80%)
+  }
+
+  resizeCanvas();  // initial sizing
 
   // Colors (white mode + orange dino)
   const BG = '#FFFFFF';
@@ -2136,11 +2157,8 @@ function initHeroDinoGame() {
   let speed = isMobile ? 5.5 : 6.5;
   let frameCount = 0;
 
-  // Ground adjusted for 200px height
-  const groundY = 160;
-
   // Dino adjusted proportionally (h: 40, w: 38)
-  const dino = {
+  let dino = {
     x: isMobile ? 40 : 60, y: groundY,
     w: Math.round(38 * SCALE), h: Math.round(40 * SCALE),
     vy: 0,
@@ -2148,9 +2166,48 @@ function initHeroDinoGame() {
     isDucking: false,
     legFrame: 0
   };
-  const GRAVITY = isMobile ? 0.7 : 0.55;
-  const JUMP_VEL = isMobile ? -13.5 : -10.5;
-  const DUCK_H = Math.round(23 * SCALE);
+  let GRAVITY = isMobile ? 0.7 : 0.55;
+  let JUMP_VEL = isMobile ? -13.5 : -10.5;
+  let DUCK_H = Math.round(23 * SCALE);
+
+  // Re-init on resize/orientation change (debounced to avoid excessive re-inits)
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const wasMobile = isMobile;
+      resizeCanvas();
+      // If mobile/desktop state changed, re-init the game with new physics
+      if (wasMobile !== isMobile) {
+        // Reset game state with new physics constants
+        speed = isMobile ? 5.5 : 6.5;
+        GRAVITY = isMobile ? 0.7 : 0.55;
+        JUMP_VEL = isMobile ? -13.5 : -10.5;
+        dino.x = isMobile ? 40 : 60;
+        dino.w = Math.round(38 * SCALE);
+        dino.h = Math.round(40 * SCALE);
+        DUCK_H = Math.round(23 * SCALE);
+      }
+      // Clamp dino position to new dimensions
+      dino.y = Math.min(dino.y, groundY);
+    }, 250);
+  });
+  window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+      const wasMobile = isMobile;
+      resizeCanvas();
+      if (wasMobile !== isMobile) {
+        speed = isMobile ? 5.5 : 6.5;
+        GRAVITY = isMobile ? 0.7 : 0.55;
+        JUMP_VEL = isMobile ? -13.5 : -10.5;
+        dino.x = isMobile ? 40 : 60;
+        dino.w = Math.round(38 * SCALE);
+        dino.h = Math.round(40 * SCALE);
+        DUCK_H = Math.round(23 * SCALE);
+      }
+      dino.y = Math.min(dino.y, groundY);
+    }, 250);
+  });
 
   // Obstacles
   let obstacles = [];
@@ -2350,32 +2407,32 @@ function initHeroDinoGame() {
 
   function drawScore() {
     ctx.fillStyle = FG_LIGHT;
-    ctx.font = (isMobile ? '16px' : '14px') + ' "Geist", sans-serif';
+    ctx.font = Math.round((isMobile ? 16 : 14) * dpr) + 'px "Geist", sans-serif';
     ctx.textAlign = 'right';
     const s = String(Math.floor(score)).padStart(5, '0');
-    ctx.fillText(s, W - (isMobile ? 14 : 20), isMobile ? 26 : 25);
+    ctx.fillText(s, W - Math.round((isMobile ? 14 : 20) * dpr), Math.round((isMobile ? 26 : 25) * dpr));
     if (highScore > 0) {
       const hs = String(Math.floor(highScore)).padStart(5, '0');
-      ctx.fillText('HI ' + hs, W - (isMobile ? 75 : 90), isMobile ? 26 : 25);
+      ctx.fillText('HI ' + hs, W - Math.round((isMobile ? 75 : 90) * dpr), Math.round((isMobile ? 26 : 25) * dpr));
     }
     ctx.textAlign = 'left';
   }
 
   function drawGameOver() {
     ctx.fillStyle = FG_LIGHT;
-    ctx.font = (isMobile ? '22px' : '18px') + ' "Geist", sans-serif';
+    ctx.font = Math.round((isMobile ? 22 : 18) * dpr) + 'px "Geist", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('G A M E   O V E R', W / 2, H / 2 - (isMobile ? 10 : 15));
-    ctx.font = (isMobile ? '13px' : '11px') + ' "Geist", sans-serif';
-    ctx.fillText('Press SPACE or Tap to restart', W / 2, H / 2 + (isMobile ? 18 : 12));
+    ctx.fillText('G A M E   O V E R', W / 2, H / 2 - Math.round((isMobile ? 10 : 15) * dpr));
+    ctx.font = Math.round((isMobile ? 13 : 11) * dpr) + 'px "Geist", sans-serif';
+    ctx.fillText('Press SPACE or Tap to restart', W / 2, H / 2 + Math.round((isMobile ? 18 : 12) * dpr));
     ctx.textAlign = 'left';
   }
 
   function drawWaiting() {
     ctx.fillStyle = FG_LIGHT;
-    ctx.font = (isMobile ? '16px' : '13px') + ' "Geist", sans-serif';
+    ctx.font = Math.round((isMobile ? 16 : 13) * dpr) + 'px "Geist", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Press SPACE or Tap to Start', W / 2, H / 2 - 10);
+    ctx.fillText('Press SPACE or Tap to Start', W / 2, H / 2 - Math.round(10 * dpr));
     ctx.textAlign = 'left';
   }
 
