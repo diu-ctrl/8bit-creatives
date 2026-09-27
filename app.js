@@ -3056,6 +3056,17 @@ function initCreatorStats() {
       youtube: { handle: '@SoulRegaltos', count: '2.32M', url: 'https://www.youtube.com/@SoulRegaltos' },
       instagram: { handle: '@soul_regaltos', count: '1.9M', url: 'https://www.instagram.com/soul_regaltos' },
       kick: { handle: 'regaltos', count: '53.8K', url: 'https://kick.com/regaltos' }
+    },
+    {
+      id: 'jonty',
+      name: 'Jonty',
+      realName: 'Ajay Kumar Banga',
+      img: 'images-for-landing-page/creator-jonty.webp',
+      bio: 'Accomplished Free Fire esports athlete and high-energy content creator with a massive multi-platform community across YouTube, Instagram, and Kick, celebrated for tactical gameplay and engaging variety streams.',
+      categories: 'Free Fire, Variety Gaming, Streaming, Esports',
+      youtube: { handle: '@JONTYGAMING', count: '2.64M', url: 'https://www.youtube.com/@JONTYGAMING/' },
+      instagram: { handle: '@ab_jonty', count: '557K', url: 'https://www.instagram.com/ab_jonty/' },
+      kick: { handle: 'jontygamings8ul', count: '5.5K', url: 'https://kick.com/jontygamings8ul' }
     }
   ];
 
