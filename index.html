@@ -164,6 +164,16 @@
       width: 100%;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
     section[id] {
       scroll-margin-top: 100px !important;
     }
@@ -1334,73 +1344,27 @@
   if (window.__navbarAnchorInit) return;
   window.__navbarAnchorInit = true;
 
-  function getNavbarOffset() {
-    var nav = document.querySelector('.navbar-pill') || document.querySelector('.navbar');
-    var isMobile = window.innerWidth <= 767;
-    var navTop = isMobile ? 16 : 24;
-    var navHeight = nav ? nav.offsetHeight : (isMobile ? 44 : 52);
-    var navBottom = navTop + navHeight;
-    var desiredGap = 28;
-    return navBottom + desiredGap;
-  }
-
-  function getEsportsTargetScrollY() {
-    var card = document.querySelector('.esports-section__card');
-    if (!card) return null;
-    var targetOffset = getNavbarOffset();
-    var cardAbsoluteTop = card.getBoundingClientRect().top + window.scrollY;
-    return Math.max(0, Math.round(cardAbsoluteTop - targetOffset));
-  }
-
-  function getCreatorsTargetScrollY() {
-    var target = document.querySelector('.creators-container') || document.getElementById('creators');
-    if (!target) return null;
-    var targetOffset = getNavbarOffset();
-    var targetAbsoluteTop = target.getBoundingClientRect().top + window.scrollY;
-    return Math.max(0, Math.round(targetAbsoluteTop - targetOffset));
-  }
-
-  function getWorkTargetScrollY() {
-    var target = document.querySelector('.case-card') || document.getElementById('work');
-    if (!target) return null;
-    var targetOffset = getNavbarOffset();
-    var targetAbsoluteTop = target.getBoundingClientRect().top + window.scrollY;
-    return Math.max(0, Math.round(targetAbsoluteTop - targetOffset));
-  }
-
-  function getServicesTargetScrollY() {
-    var target = document.querySelector('.services-title-band') || document.getElementById('services');
-    if (!target) return null;
-    var targetOffset = getNavbarOffset();
-    var targetAbsoluteTop = target.getBoundingClientRect().top + window.scrollY;
-    return Math.max(0, Math.round(targetAbsoluteTop - targetOffset));
-  }
-
   window.scrollToEsports = function(smooth) {
-    var targetY = getEsportsTargetScrollY();
-    if (targetY === null) return;
-    window.scrollTo({ top: targetY, behavior: smooth ? 'smooth' : 'auto' });
+    var target = document.querySelector('.esports-section__card') || document.getElementById('esports') || document.querySelector('.esports-section');
+    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
     if (window.history && window.history.pushState) window.history.pushState(null, null, '#esports');
   };
 
   window.scrollToCreators = function(smooth) {
-    var targetY = getCreatorsTargetScrollY();
-    if (targetY === null) return;
-    window.scrollTo({ top: targetY, behavior: smooth ? 'smooth' : 'auto' });
+    var target = document.querySelector('.creators-container') || document.getElementById('creators');
+    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
     if (window.history && window.history.pushState) window.history.pushState(null, null, '#creators');
   };
 
   window.scrollToWork = function(smooth) {
-    var targetY = getWorkTargetScrollY();
-    if (targetY === null) return;
-    window.scrollTo({ top: targetY, behavior: smooth ? 'smooth' : 'auto' });
+    var target = document.querySelector('.case-card') || document.getElementById('work');
+    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
     if (window.history && window.history.pushState) window.history.pushState(null, null, '#work');
   };
 
   window.scrollToServices = function(smooth) {
-    var targetY = getServicesTargetScrollY();
-    if (targetY === null) return;
-    window.scrollTo({ top: targetY, behavior: smooth ? 'smooth' : 'auto' });
+    var target = document.querySelector('.services-title-band') || document.getElementById('services');
+    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
     if (window.history && window.history.pushState) window.history.pushState(null, null, '#services');
   };
 
@@ -1429,10 +1393,10 @@
   }
 
   var sections = [
-    { id: 'esports', scrollFn: window.scrollToEsports, checkTarget: function() { return document.querySelector('.esports-section__card'); }, getScrollY: getEsportsTargetScrollY },
-    { id: 'creators', scrollFn: window.scrollToCreators, checkTarget: function() { return document.querySelector('.creators-container') || document.getElementById('creators'); }, getScrollY: getCreatorsTargetScrollY },
-    { id: 'work', scrollFn: window.scrollToWork, checkTarget: function() { return document.querySelector('.case-card') || document.getElementById('work'); }, getScrollY: getWorkTargetScrollY },
-    { id: 'services', scrollFn: window.scrollToServices, checkTarget: function() { return document.querySelector('.services-title-band') || document.getElementById('services'); }, getScrollY: getServicesTargetScrollY }
+    { id: 'esports', scrollFn: window.scrollToEsports, checkTarget: function() { return document.querySelector('.esports-section__card'); } },
+    { id: 'creators', scrollFn: window.scrollToCreators, checkTarget: function() { return document.querySelector('.creators-container') || document.getElementById('creators'); } },
+    { id: 'work', scrollFn: window.scrollToWork, checkTarget: function() { return document.querySelector('.case-card') || document.getElementById('work'); } },
+    { id: 'services', scrollFn: window.scrollToServices, checkTarget: function() { return document.querySelector('.services-title-band') || document.getElementById('services'); } }
   ];
 
   sections.forEach(function(sec) {
@@ -1452,10 +1416,7 @@
   var activeSec = sections.filter(function(s) { return s.id === currentHash; })[0];
   if (activeSec) {
     var handleHashJump = function() {
-      var targetY = activeSec.getScrollY();
-      if (targetY !== null) {
-        window.scrollTo({ top: targetY, behavior: 'instant' });
-      }
+      activeSec.scrollFn(false);
     };
     requestAnimationFrame(handleHashJump);
     setTimeout(handleHashJump, 50);
@@ -1806,55 +1767,8 @@ void main() {
   }, { passive: true });
   checkScroll();
 
-  function expoOut(t) {
-    return 1 - Math.pow(2, -10 * t);
-  }
-
   function scrollToTop() {
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      window.scrollTo(0, 0);
-      return;
-    }
-
-    button.classList.add('is-launching');
-
-    if (window.lenis) {
-      window.lenis.scrollTo(0, {
-        duration: 0.8,
-        easing: expoOut,
-        onComplete: function () {
-          button.classList.remove('is-launching');
-          checkScroll();
-        }
-      });
-      return;
-    }
-
-    var startTime = null;
-    var startScroll = window.scrollY || window.pageYOffset;
-    var duration = 800;
-
-    var origScrollBehavior = document.documentElement.style.scrollBehavior;
-    document.documentElement.style.scrollBehavior = 'auto';
-
-    function animate(currentTime) {
-      if (startTime === null) startTime = currentTime;
-      var elapsed = currentTime - startTime;
-      var progress = Math.min(elapsed / duration, 1);
-      var eased = progress === 1 ? 1 : expoOut(progress);
-      window.scrollTo(0, Math.round(startScroll * (1 - eased)));
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        window.scrollTo(0, 0);
-        document.documentElement.style.scrollBehavior = origScrollBehavior;
-        button.classList.remove('is-launching');
-        checkScroll();
-      }
-    }
-
-    requestAnimationFrame(animate);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   button.addEventListener('click', function (e) {
@@ -1864,43 +1778,5 @@ void main() {
 })();
 </script>
 
-<!-- Lenis Smooth Scroll -->
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous"></script>
-<script>
-(function () {
-  if (typeof Lenis === 'undefined') return;
-  var lenis = new Lenis({
-    duration: 1.2,           // smooth scroll duration — 1.2s feels natural
-    easing: function (t) {    // ease-out-expo for a natural deceleration
-      return Math.min(1, 1.001 - Math.pow(2, -10 * t));
-    },
-    smoothWheel: true,        // smooth mouse wheel scroll
-    smoothTouch: false,       // keep native touch scroll (smoother on mobile)
-    touchMultiplier: 1.5,
-  });
-  window.lenis = lenis;
-
-  // Sync with GSAP ScrollTrigger if present
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(function (time) {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(500, 33);
-  } else {
-    // No GSAP — use requestAnimationFrame
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-  }
-
-  // Respect reduced motion — disable Lenis smoothing if user prefers reduced motion
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    lenis.destroy();
-  }
-})();
-</script>
 </body>
 </html>
