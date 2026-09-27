@@ -2445,7 +2445,7 @@ function initHeroDinoGame() {
   // ---------- obstacles ----------
   // kinds: S small cactus, M medium, L large, C2/C3 clusters, B bird
   function spawnObstacle() {
-    const canBird = score > 260;
+    const canBird = score > 100;
     const r = Math.random();
     let kind;
     if (canBird && r < 0.24) kind = 'B';
@@ -2666,10 +2666,11 @@ function initHeroDinoGame() {
     ctx.fillRect(0, groundY, cssW, 2);
     const PW = 806;
     for (const d of groundDashes) {
-      let sx = ((d.x - groundOffset) % PW + PW) % PW;
-      for (let k = 0; k < 2; k++) {
-        const x = sx - k * PW;
-        if (x > -20 && x < cssW + 20) ctx.fillRect(x, groundY + d.y, d.w, 2);
+      const sx = ((d.x - groundOffset) % PW + PW) % PW;
+      // Tile the dash pattern across the FULL canvas width (not just one
+      // 806px period), so dashes are visible on every screen size.
+      for (let x = sx - PW; x < cssW + 20; x += PW) {
+        if (x > -20) ctx.fillRect(x, groundY + d.y, d.w, 2);
       }
     }
   }
@@ -2693,13 +2694,14 @@ function initHeroDinoGame() {
     const cx = cssW / 2;
     ctx.fillStyle = FG_LIGHT;
     ctx.textAlign = 'center';
-    ctx.font = '700 22px "Geist", sans-serif';
-    ctx.fillText('8BIT DINO RUNNER', cx, cssH * 0.30);
-    ctx.font = '500 12px "Geist", sans-serif';
-    ctx.fillText(isTouch ? 'TAP TO START' : 'SPACE or CLICK to start', cx, cssH * 0.30 + 26);
-    if (!isTouch) {
-      ctx.fillStyle = '#9a9a9a';
-      ctx.fillText('SPACE / \u2191 jump      \u2193 / C duck', cx, cssH * 0.30 + 48);
+    if (isTouch) {
+      ctx.font = '700 26px "Geist", sans-serif';
+      ctx.fillText('TAP TO START', cx, cssH * 0.35);
+    } else {
+      ctx.font = '700 22px "Geist", sans-serif';
+      ctx.fillText('SPACE or click to start', cx, cssH * 0.30);
+      ctx.font = '600 13px "Geist", sans-serif';
+      ctx.fillText('SPACE / UP for jump      DOWN / C for crouch', cx, cssH * 0.30 + 30);
     }
     ctx.textAlign = 'left';
   }
