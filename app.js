@@ -2267,7 +2267,7 @@ function initHeroDinoGame() {
         e.preventDefault();
         jump();
       }
-    } else if (e.code === 'ArrowDown' && state === 'playing') {
+    } else if ((e.code === 'ArrowDown' || e.code === 'KeyC') && state === 'playing') {
       e.preventDefault();
       dino.isDucking = true;
       if (dino.isJumping) dino.vy += 2; // fast fall
@@ -2275,7 +2275,7 @@ function initHeroDinoGame() {
   });
 
   window.addEventListener('keyup', (e) => {
-    if (e.code === 'ArrowDown') dino.isDucking = false;
+    if (e.code === 'ArrowDown' || e.code === 'KeyC') dino.isDucking = false;
   });
 
   // Touch / Click on canvas
@@ -2308,20 +2308,27 @@ function initHeroDinoGame() {
     const type = types[Math.floor(Math.random() * types.length)];
     let obs;
     if (type === 'cactus-small') {
-      obs = { type, x: W + 20, y: groundY - Math.round(20 * SCALE), w: Math.round(14 * SCALE), h: Math.round(20 * SCALE) };
+      // 6px wide, 12px tall (matches the pixel art grid)
+      obs = { type, x: W + 20, y: groundY - Math.round(12 * SCALE), w: Math.round(6 * SCALE), h: Math.round(12 * SCALE) };
     } else if (type === 'cactus-medium') {
-      obs = { type, x: W + 20, y: groundY - Math.round(25 * SCALE), w: Math.round(14 * SCALE), h: Math.round(25 * SCALE) };
+      obs = { type, x: W + 20, y: groundY - Math.round(14 * SCALE), w: Math.round(6 * SCALE), h: Math.round(14 * SCALE) };
     } else if (type === 'cactus-large') {
-      obs = { type, x: W + 20, y: groundY - Math.round(32 * SCALE), w: Math.round(20 * SCALE), h: Math.round(32 * SCALE) };
+      obs = { type, x: W + 20, y: groundY - Math.round(15 * SCALE), w: Math.round(10 * SCALE), h: Math.round(15 * SCALE) };
     } else {
-      const heights = [groundY - Math.round(18 * SCALE), groundY - Math.round(38 * SCALE), groundY - Math.round(55 * SCALE)];
-      obs = { type, x: W + 20, y: heights[Math.floor(Math.random() * 3)], w: Math.round(32 * SCALE), h: Math.round(22 * SCALE), wing: 0 };
+      // Bird at 3 different heights — low (must jump), mid (must duck or jump), high (run under)
+      const heights = [
+        groundY - Math.round(20 * SCALE),   // low — must jump
+        groundY - Math.round(35 * SCALE),   // mid — must duck
+        groundY - Math.round(50 * SCALE)    // high — run under
+      ];
+      obs = { type, x: W + 20, y: heights[Math.floor(Math.random() * 3)], w: Math.round(13 * SCALE), h: Math.round(7 * SCALE), wing: 0 };
     }
     obstacles.push(obs);
 
-    const minGap = Math.round((isMobile ? 50 : 60) - Math.min(25, Math.floor(score / 100)));
-    const maxGap = Math.round((isMobile ? 90 : 120) - Math.min(40, Math.floor(score / 100)));
-    nextObstacleTime = frameCount + minGap + Math.floor(Math.random() * (maxGap - minGap));
+    // Gap decreases with score but never below a minimum (ensures fair gameplay)
+    const minGap = Math.round((isMobile ? 55 : 70) - Math.min(25, Math.floor(score / 100)));
+    const maxGap = Math.round((isMobile ? 95 : 130) - Math.min(40, Math.floor(score / 100)));
+    nextObstacleTime = frameCount + minGap + Math.floor(Math.random() * Math.max(10, maxGap - minGap));
   }
 
   function spawnCloud() {
@@ -2330,53 +2337,141 @@ function initHeroDinoGame() {
   }
 
   function checkCollision(o) {
-    let dx = dino.x + 6 * SCALE, dy = dino.y - dino.h + 3 * SCALE;
-    let dw = dino.w - 12 * SCALE, dh = dino.h - 6 * SCALE;
-    if (dino.isDucking) { dh = DUCK_H; dy = dino.y - DUCK_H + 3 * SCALE; }
-    return dx < o.x + o.w - 3 * SCALE && dx + dw > o.x + 3 * SCALE &&
-           dy < o.y + o.h - 3 * SCALE && dy + dh > o.y + 3 * SCALE;
-  }
+    // Forgiving hitbox — slightly smaller than visual size
+    // (the original Chrome dino game uses the same technique)
+    var hitboxInset = 2 * SCALE;
+    var dx = dino.x + hitboxInset;
+    var dw = dino.w - hitboxInset * 2;
+    var dy, dh;
+    if (dino.isDucking) {
+      dh = DUCK_H - hitboxInset;
+      dy = dino.y - DUCK_H + hitboxInset;
+    } else {
+      dh = dino.h - hitboxInset * 2;
+      dy = dino.y - dino.h + hitboxInset;
+    }
+    var oInset = 1 * SCALE;
+    var ox = o.x + oInset;
+    var ow = o.w - oInset * 2;
+    var oy = o.y + oInset;
+    var oh = o.h - oInset * 2;
 
-  function px(x, y, w, h, c) { ctx.fillStyle = c || FG; ctx.fillRect(x, y, w, h); }
+    return dx < ox + ow && dx + dw > ox && dy < oy + oh && dy + dh > oy;
+  }
 
   function drawDino() {
     ctx.save();
     ctx.translate(dino.x, dino.y);
     ctx.scale(SCALE, SCALE);
-    let x = 0, y = -40;
+
     if (dino.isDucking) {
-      y = -23;
-      px(x, y, 38, 10);
-      px(x + 30, y - 7, 8, 7);
-      px(x + 34, y - 3, 4, 3);
-      px(x - 2, y + 10, 8, 13);
-      px(x + 26, y + 10, 8, 13);
-      ctx.fillStyle = BG; ctx.fillRect(x + 36, y - 2, 2, 2);
+      // Ducking dino — lower profile, head forward
+      // Pixel grid: 1 = orange (FG), 0 = transparent, 2 = white (eye)
+      var duckArt = [
+        "........................",
+        "........................",
+        "....11111111............",
+        "...11111111111..........",
+        "..1111111111111.........",
+        "..1111111111111.........",
+        "..1112111111111.........",
+        "..111111111111..........",
+        "..11111111..............",
+        ".1111111111.............",
+        "111111111111............",
+        "1111111111111...........",
+        "1111111111111...........",
+        "1111111111111...........",
+        "1111111111111...........",
+        ".11111111111............",
+        "..11111111..............",
+        "..11....11..............",
+        "..11....11..............",
+        "...1....1...............",
+      ];
+      drawPixelArt(duckArt, 0, -20);
     } else {
-      px(x + 18, y, 20, 18);
-      px(x + 32, y + 5, 6, 5);
-      ctx.fillStyle = BG; ctx.fillRect(x + 28, y + 5, 2, 2);
-      px(x + 6, y + 15, 22, 16);
-      px(x, y + 15, 6, 9);
-      px(x + 24, y + 19, 7, 5);
-      px(x + 10, y + 19, 3, 5);
+      // Standing/running dino — classic T-Rex pose
+      var standArt = [
+        "..............111111....",
+        ".............11111111...",
+        "............1111111111..",
+        "...........111111111111.",
+        "..........1111111111111",
+        "..........1111111111111",
+        "..........111211111111.",
+        "..........11111111111..",
+        "..........111111111....",
+        ".........11111111......",
+        ".........1111111.......",
+        ".........111111........",
+        "........1111111.......",
+        ".......11111111.......",
+        "......11111111........",
+        ".....1111111..........",
+        "....111111............",
+        "...11111..............",
+        "..1111................",
+        ".111..................",
+        "11....................",
+        "1.....................",
+      ];
+      // Legs animation
       if (dino.isJumping) {
-        px(x + 8, y + 31, 7, 9);
-        px(x + 18, y + 31, 7, 9);
+        // Jumping — both legs tucked
+        var jumpArt = standArt.slice(0);
+        jumpArt[18] = "..1111..................";
+        jumpArt[19] = "...111..................";
+        jumpArt[20] = "....1...................";
+        jumpArt[21] = "....1...................";
+        drawPixelArt(jumpArt, 0, -42);
       } else if (state === 'gameover') {
-        px(x + 8, y + 32, 7, 8);
-        px(x + 18, y + 32, 7, 8);
+        // Dead — X eye, legs still
+        var deadArt = standArt.slice(0);
+        deadArt[6] = "..........1111111111111";
+        deadArt[7] = "..........1111211111111";
+        deadArt[8] = "..........11111111111..";
+        drawPixelArt(deadArt, 0, -42);
       } else {
+        // Running — alternating legs
         if (dino.legFrame < 5) {
-          px(x + 6, y + 31, 7, 9);
-          px(x + 18, y + 34, 5, 6);
+          // Left leg forward, right leg back
+          var runArt1 = standArt.slice(0);
+          runArt1[18] = "..1111..................";
+          runArt1[19] = "...11...................";
+          runArt1[20] = "....1...................";
+          runArt1[21] = ".......................";
+          drawPixelArt(runArt1, 0, -42);
         } else {
-          px(x + 10, y + 34, 5, 6);
-          px(x + 18, y + 31, 7, 9);
+          // Right leg forward, left leg back
+          var runArt2 = standArt.slice(0);
+          runArt2[18] = "..1111..................";
+          runArt2[19] = "..111...................";
+          runArt2[20] = "..11....................";
+          runArt2[21] = ".......................";
+          drawPixelArt(runArt2, 0, -42);
         }
       }
     }
     ctx.restore();
+  }
+
+  // Helper: render a pixel art grid
+  function drawPixelArt(art, offsetX, offsetY) {
+    var pxSize = 1; // each "pixel" is 1 canvas unit (scaled by SCALE)
+    for (var row = 0; row < art.length; row++) {
+      var line = art[row];
+      for (var col = 0; col < line.length; col++) {
+        var ch = line[col];
+        if (ch === '1') {
+          ctx.fillStyle = FG;
+          ctx.fillRect(offsetX + col * pxSize, offsetY + row * pxSize, pxSize, pxSize);
+        } else if (ch === '2') {
+          ctx.fillStyle = BG;
+          ctx.fillRect(offsetX + col * pxSize, offsetY + row * pxSize, pxSize, pxSize);
+        }
+      }
+    }
   }
 
   function drawCactus(o) {
@@ -2384,21 +2479,77 @@ function initHeroDinoGame() {
     ctx.translate(o.x, o.y);
     ctx.scale(SCALE, SCALE);
     ctx.fillStyle = OBSTACLE_COLOR;
+
     if (o.type === 'cactus-small') {
-      ctx.fillRect(0, 0, 4, 20);
-      ctx.fillRect(-3, 6, 3, 6);
-      ctx.fillRect(4, 4, 3, 8);
+      // Small cactus — single stem with 2 arms
+      var smallCactus = [
+        "..1...",
+        "..1...",
+        ".1.1..",
+        ".1.1..",
+        ".1.1..",
+        "..1...",
+        "..1...",
+        "..1...",
+        "..1...",
+        "..1...",
+        "..1...",
+        "..1...",
+      ];
+      drawObsArt(smallCactus, 0, 0);
     } else if (o.type === 'cactus-medium') {
-      ctx.fillRect(0, 0, 4, 25);
-      ctx.fillRect(-4, 8, 4, 8);
-      ctx.fillRect(4, 5, 3, 10);
+      // Medium cactus — taller with 2 arms
+      var medCactus = [
+        "..1...",
+        "..1...",
+        ".1.1..",
+        ".1.1..",
+        ".1.1..",
+        "..1...",
+        ".1.1..",
+        ".1.1..",
+        ".1.1..",
+        "..1...",
+        "..1...",
+        "..1...",
+        "..1...",
+        "..1...",
+      ];
+      drawObsArt(medCactus, 0, 0);
     } else if (o.type === 'cactus-large') {
-      ctx.fillRect(0, 0, 5, 32);
-      ctx.fillRect(-5, 10, 5, 11);
-      ctx.fillRect(5, 6, 5, 13);
-      ctx.fillRect(5, 24, 3, 8);
+      // Large cactus — double stem with arms
+      var largeCactus = [
+        "..1...1...",
+        "..1...1...",
+        ".1.1.1.1..",
+        ".1.1.1.1..",
+        ".1.1.1.1..",
+        "..1...1...",
+        "..1...1...",
+        "..1...1...",
+        "..1...1...",
+        "..1...1...",
+        "..1...1...",
+        "..1...1...",
+        "..1...1...",
+        "..1...1...",
+        "..1...1...",
+      ];
+      drawObsArt(largeCactus, 0, 0);
     }
     ctx.restore();
+  }
+
+  // Helper for obstacle pixel art
+  function drawObsArt(art, offsetX, offsetY) {
+    for (var row = 0; row < art.length; row++) {
+      var line = art[row];
+      for (var col = 0; col < line.length; col++) {
+        if (line[col] === '1') {
+          ctx.fillRect(offsetX + col, offsetY + row, 1, 1);
+        }
+      }
+    }
   }
 
   function drawBird(o) {
@@ -2408,18 +2559,38 @@ function initHeroDinoGame() {
     ctx.translate(o.x, o.y);
     ctx.scale(SCALE, SCALE);
     ctx.fillStyle = OBSTACLE_COLOR;
-    ctx.fillRect(0, 0, 16, 5);
-    ctx.fillRect(13, -2, 8, 7);
-    ctx.fillStyle = BG; ctx.fillRect(18, 0, 2, 2);
+
     if (flap) {
-      ctx.fillStyle = OBSTACLE_COLOR;
-      ctx.fillRect(3, -7, 11, 3);
-      ctx.fillRect(6, -10, 5, 3);
+      // Wings up
+      var birdUp = [
+        "....11111....",
+        "...1111111...",
+        "..111111111..",
+        ".11111111111.",
+        "1111111111111",
+        ".....111.....",
+        ".....111.....",
+      ];
+      drawObsArt(birdUp, 0, -7);
     } else {
-      ctx.fillStyle = OBSTACLE_COLOR;
-      ctx.fillRect(3, 5, 11, 3);
-      ctx.fillRect(6, 8, 5, 3);
+      // Wings down
+      var birdDown = [
+        ".............",
+        ".............",
+        "1111111111111",
+        ".11111111111.",
+        "..111111111..",
+        "...1111111...",
+        "....11111....",
+        ".....111.....",
+        ".....111.....",
+      ];
+      drawObsArt(birdDown, 0, 0);
     }
+
+    // Eye
+    ctx.fillStyle = BG;
+    ctx.fillRect(8, 2, 1, 1);
     ctx.restore();
   }
 
@@ -2435,12 +2606,22 @@ function initHeroDinoGame() {
   }
 
   function drawGround() {
+    // Main ground line
     ctx.strokeStyle = GROUND;
-    ctx.lineWidth = isMobile ? 3 : 1;
+    ctx.lineWidth = Math.max(1, Math.round(dpr));
     ctx.beginPath();
     ctx.moveTo(0, groundY);
     ctx.lineTo(W, groundY);
     ctx.stroke();
+
+    // Dotted texture below the ground line (like the original Chrome game)
+    ctx.fillStyle = GROUND;
+    var dotSize = Math.max(1, Math.round(dpr * 0.5));
+    var dotGap = Math.round(8 * dpr);
+    var offset = Math.round(frameCount * speed * 0.3) % dotGap;
+    for (var x = -offset; x < W; x += dotGap) {
+      ctx.fillRect(x, groundY + dotSize + 1, dotSize, dotSize);
+    }
   }
 
   function drawScore() {
@@ -2458,19 +2639,35 @@ function initHeroDinoGame() {
 
   function drawGameOver() {
     ctx.fillStyle = FG_LIGHT;
-    ctx.font = Math.round((isMobile ? 22 : 18) * dpr) + 'px "Geist", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('G A M E   O V E R', W / 2, H / 2 - Math.round((isMobile ? 10 : 15) * dpr));
-    ctx.font = Math.round((isMobile ? 13 : 11) * dpr) + 'px "Geist", sans-serif';
-    ctx.fillText('Press SPACE or Tap to restart', W / 2, H / 2 + Math.round((isMobile ? 18 : 12) * dpr));
+
+    ctx.font = 'bold ' + Math.round((isMobile ? 20 : 16) * dpr) + 'px "Geist", sans-serif';
+    ctx.fillText('G A M E   O V E R', W / 2, H / 2 - Math.round(10 * dpr));
+
+    ctx.font = Math.round((isMobile ? 12 : 10) * dpr) + 'px "Geist", sans-serif';
+    ctx.fillText('Press SPACE or Tap to restart', W / 2, H / 2 + Math.round(15 * dpr));
+
     ctx.textAlign = 'left';
   }
 
   function drawWaiting() {
     ctx.fillStyle = FG_LIGHT;
-    ctx.font = Math.round((isMobile ? 16 : 13) * dpr) + 'px "Geist", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Press SPACE or Tap to Start', W / 2, H / 2 - Math.round(10 * dpr));
+
+    // Title
+    ctx.font = 'bold ' + Math.round((isMobile ? 18 : 14) * dpr) + 'px "Geist", sans-serif';
+    ctx.fillText('8BIT DINO RUNNER', W / 2, H / 2 - Math.round(30 * dpr));
+
+    // Controls
+    ctx.font = Math.round((isMobile ? 14 : 11) * dpr) + 'px "Geist", sans-serif';
+    ctx.fillText('SPACE / ↑  to Jump', W / 2, H / 2 - Math.round(5 * dpr));
+    ctx.fillText('↓ / C  to Duck', W / 2, H / 2 + Math.round(12 * dpr));
+
+    // Start prompt
+    ctx.font = Math.round((isMobile ? 13 : 10) * dpr) + 'px "Geist", sans-serif';
+    ctx.fillStyle = FG;
+    ctx.fillText('Press SPACE or Tap to Start', W / 2, H / 2 + Math.round(35 * dpr));
+
     ctx.textAlign = 'left';
   }
 
