@@ -164,9 +164,33 @@ function initNavbar() {
   }, { threshold: [0, 0.4, 0.6, 1] });
   heroPosObserver.observe(hero);
 
-  
+  // === PAUSE ESPORTS 8BIT BACKGROUND WHEN OFF-SCREEN ===
+  // The esports section has its own animated 8BIT letter columns.
+  // Without this observer, they run forever — even when off-screen —
+  // consuming GPU compositing cycles. This pauses them when the
+  // esports section is not visible, and resumes when it scrolls into view.
+  (function() {
+    const esportsSection = document.querySelector('.esports-section');
+    const esportsBg = document.querySelector('.esports-section__bg');
+    if (!esportsSection || !esportsBg) return;
 
-  // === STEP 3: CHANGE NAVBAR TEXT COLOR TO BLACK ON WHITE/BRIGHT SECTIONS ===
+    if ('IntersectionObserver' in window) {
+      const esportsBgObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            esportsBg.classList.remove('is-paused');
+          } else {
+            esportsBg.classList.add('is-paused');
+          }
+        });
+      }, {
+        threshold: 0,
+        rootMargin: '50px 0px'  // small buffer — pause slightly after the section leaves the viewport
+      });
+      esportsBgObserver.observe(esportsSection);
+    }
+  })();
+  // === END PAUSE ESPORTS 8BIT BACKGROUND ===
   if (!navbar) { console.error('Navbar element not found'); return; }
 
   const sections = document.querySelectorAll('section[data-bg], footer[data-bg], header[data-bg], main[data-bg], div[data-bg]');

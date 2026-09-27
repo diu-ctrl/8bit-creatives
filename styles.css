@@ -2093,17 +2093,17 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .service-card[data-card="brands"] .service-card-gradient {
   background: linear-gradient(180deg, #FFB658 0%, #FF9041 25%, #FF5931 50%, #B21C01 75%, #000000 100%); /* var(--orange-light) 0% */
   filter: blur(20px);
-  transform: scale(1.1);
+  transform: scale(1.1) translateZ(0);
 }
 .service-card[data-card="creators"] .service-card-gradient {
   background: linear-gradient(165deg, #FFB658 0%, #FF9041 25%, #FF5931 50%, #B21C01 75%, #000000 100%);
   filter: blur(20px);
-  transform: scale(1.1);
+  transform: scale(1.1) translateZ(0);
 }
 .service-card[data-card="platforms"] .service-card-gradient {
   background: linear-gradient(195deg, #FFB658 0%, #FF9041 25%, #FF5931 50%, #B21C01 75%, #000000 100%);
   filter: blur(20px);
-  transform: scale(1.1);
+  transform: scale(1.1) translateZ(0);
 }
 .service-card:hover .service-card-gradient,
 .service-card.is-active .service-card-gradient {
