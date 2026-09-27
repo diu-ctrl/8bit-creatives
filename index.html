@@ -164,16 +164,6 @@
       width: 100%;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-    }
-
     /* === MOBILE: pure native scroll — no smooth-behavior, no JS smoothing === */
     @media (max-width: 767px) {
       html {
@@ -203,20 +193,6 @@
     section[id="services"] {
       scroll-margin-top: 57px !important;
     }
-
-    /* === PERFORMANCE: Skip rendering off-screen sections === */
-    /* content-visibility: auto tells the browser "don't render this section's
-       contents until it's near the viewport" — massive performance win
-       for long-scrolling pages with many sections. */
-    .case-studies-section,
-    .services-section,
-    .esports-section,
-    .founders-section,
-    .cta-section {
-      content-visibility: auto;
-      contain-intrinsic-size: 800px;
-    }
-    /* === END PERFORMANCE === */
   </style>
 
   <!-- GSAP & ScrollTrigger -->
@@ -1836,105 +1812,5 @@ void main() {
 })();
 </script>
 
-<script>
-// === BUTTERY SMOOTH WHEEL SCROLL (mini lerp smoother) ===
-// Gives mouse wheel scrolling the "After Effects ease-out" feel:
-// fast start, gradual deceleration. Ultra-lightweight (~50 lines).
-//
-// How it works:
-// 1. Intercepts wheel events on desktop
-// 2. Adds the wheel delta to a "target" scroll position
-// 3. On each requestAnimationFrame, moves 10% of the way toward the target
-// 4. The 10% lerp factor gives the smooth ease-out curve
-//
-// Why this won't stutter:
-// - Heavy scroll libraries have complex RAF callbacks (easing calc + scroll tracking + GSAP sync)
-// - This RAF callback is trivial (one multiplication + one scrollTo call)
-// - Even under GPU load, this completes in <1ms per frame
-//
-// Mobile is NOT affected — native touch scroll is already smooth.
-(function() {
-    // Skip on mobile/touch devices
-    if (window.matchMedia('(hover: none)').matches) return;
-    if (window.innerWidth < 768) return;
-
-    var lerpFactor = 0.1;           // 0.1 = balanced smooth (ease-out feel)
-                                    // 0.06 = very smooth/cinematic
-                                    // 0.15 = snappy
-    var targetScroll = window.scrollY;
-    var currentScroll = window.scrollY;
-    var isAnimating = false;
-    var scrollMultiplier = 1.5;     // 1.5 = slightly faster than native wheel delta
-
-    // Intercept wheel events
-    window.addEventListener('wheel', function(e) {
-        // Don't intercept inside scrollable elements (coverflow, drawers, etc.)
-        var scrollable = e.target.closest('[data-scrollable], .creator-coverflow, .navbar__mobile-drawer, .esports-section__card__body, .creators-grid-container');
-        if (scrollable) return;
-
-        // Don't intercept ctrl+wheel (browser zoom)
-        if (e.ctrlKey) return;
-
-        e.preventDefault();
-
-        // Add wheel delta to target position
-        targetScroll += e.deltaY * scrollMultiplier;
-
-        // Clamp to document bounds
-        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
-
-        // Start animation if not already running
-        if (!isAnimating) {
-            isAnimating = true;
-            requestAnimationFrame(animate);
-        }
-    }, { passive: false });
-
-    function animate() {
-        // Lerp: move lerpFactor% of the way toward target each frame
-        currentScroll += (targetScroll - currentScroll) * lerpFactor;
-
-        // Snap and stop when close enough
-        if (Math.abs(targetScroll - currentScroll) < 0.5) {
-            currentScroll = targetScroll;
-            document.documentElement.scrollTop = currentScroll;
-            isAnimating = false;
-            return;
-        }
-
-        document.documentElement.scrollTop = Math.round(currentScroll);
-        requestAnimationFrame(animate);
-    }
-
-    // Sync when user uses keyboard (arrows, Page Up/Down, Space, Home, End)
-    window.addEventListener('keydown', function(e) {
-        var scrollKeys = ['PageDown', 'PageUp', 'ArrowDown', 'ArrowUp', ' ', 'Home', 'End'];
-        if (scrollKeys.indexOf(e.key) !== -1) {
-            setTimeout(function() {
-                targetScroll = window.scrollY;
-                currentScroll = window.scrollY;
-                isAnimating = false;
-            }, 0);
-        }
-    });
-
-    // Sync when user drags the scrollbar
-    window.addEventListener('scroll', function() {
-        if (!isAnimating) {
-            targetScroll = window.scrollY;
-            currentScroll = window.scrollY;
-        }
-    }, { passive: true });
-
-    // Re-sync on resize (document height changes)
-    window.addEventListener('resize', function() {
-        targetScroll = window.scrollY;
-        currentScroll = window.scrollY;
-        isAnimating = false;
-    }, { passive: true });
-})();
-// === END BUTTERY SMOOTH WHEEL SCROLL ===
-</script>
 </body>
 </html>
