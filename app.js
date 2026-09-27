@@ -2242,19 +2242,33 @@ function initHeroDinoGame() {
   // Input
   window.addEventListener('keydown', (e) => {
     // Only intercept when hero is in view
-    const heroSec = document.getElementById('hero');
+    const heroSec = document.getElementById('home') || document.getElementById('hero');
     if (heroSec) {
       const rect = heroSec.getBoundingClientRect();
       if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+    } else {
+      return;
     }
 
-    if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'Enter') {
+    if (e.code === 'Space' || e.code === 'Enter') {
+      if (state === 'waiting') {
+        e.preventDefault();
+        startGame();
+      } else if (state === 'gameover') {
+        e.preventDefault();
+        restart();
+      } else if (state === 'playing' && !dino.isJumping && !dino.isDucking) {
+        e.preventDefault();
+        jump();
+      }
+    } else if (e.code === 'ArrowUp') {
+      // Only jump and prevent scroll if game is actively being played
+      if (state === 'playing' && !dino.isJumping && !dino.isDucking) {
+        e.preventDefault();
+        jump();
+      }
+    } else if (e.code === 'ArrowDown' && state === 'playing') {
       e.preventDefault();
-      if (state === 'waiting') startGame();
-      else if (state === 'gameover') restart();
-      else if (state === 'playing' && !dino.isJumping && !dino.isDucking) jump();
-    }
-    if (e.code === 'ArrowDown' && state === 'playing') {
       dino.isDucking = true;
       if (dino.isJumping) dino.vy += 2; // fast fall
     }
