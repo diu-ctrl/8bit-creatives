@@ -1901,12 +1901,12 @@ void main() {
         // Snap and stop when close enough
         if (Math.abs(targetScroll - currentScroll) < 0.5) {
             currentScroll = targetScroll;
-            window.scrollTo(0, currentScroll);
+            document.documentElement.scrollTop = currentScroll;
             isAnimating = false;
             return;
         }
 
-        window.scrollTo(0, Math.round(currentScroll));
+        document.documentElement.scrollTop = Math.round(currentScroll);
         requestAnimationFrame(animate);
     }
 
