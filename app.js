@@ -3249,6 +3249,10 @@ function initServicesGSAP() {
 function initServicesTouch() {
   document.querySelectorAll('.service-card').forEach(card => {
     card.addEventListener('click', (e) => {
+      // If clicking or tapping the CTA button itself, allow natural navigation
+      if (e.target.closest('.service-btn')) {
+        return;
+      }
       // Only toggle on touch / small screens
       if (window.matchMedia('(hover: none)').matches) {
         e.preventDefault();
@@ -3258,6 +3262,13 @@ function initServicesTouch() {
         });
         card.classList.toggle('is-active');
       }
+    });
+  });
+
+  // Ensure service buttons navigate cleanly without card click interception
+  document.querySelectorAll('.service-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
     });
   });
 }

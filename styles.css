@@ -2184,6 +2184,13 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   border-color: #FFFFFF;            /* white border */
   color: #000000;                   /* BLACK text — maximum contrast */
 }
+@media (hover: none) {
+  .service-btn {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+}
 
 /* Know More */
 .know-more-btn {
@@ -3872,8 +3879,10 @@ body.light-page .back-home,
     box-sizing: border-box !important;
     text-decoration: none !important;
     position: relative !important;
-    z-index: 5 !important;
+    z-index: 10 !important;
     cursor: pointer !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
   }
   .know-more-btn {
     display: inline-flex !important;
