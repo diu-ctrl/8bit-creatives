@@ -1222,7 +1222,7 @@
   if (window.__navbarAnchorInit) return;
   window.__navbarAnchorInit = true;
 
-  // === ACTIVE SECTION DETECTION (IntersectionObserver — no URL hash needed) ===
+  // === ACTIVE SECTION MAP & INDICATOR ===
   var navLinks = document.querySelectorAll('.navbar__links a[data-section], .navbar__mobile-drawer a[data-section]');
   var linkMap = {};
   navLinks.forEach(function(link) {
@@ -1236,6 +1236,7 @@
   var activeSectionId = 'home';
   function setActiveSection(sectionId) {
     if (!sectionId) return;
+    if (sectionId === 'hero') sectionId = 'home';
     activeSectionId = sectionId;
     navLinks.forEach(function(l) { l.classList.remove('is-active'); });
     if (linkMap[sectionId]) {
@@ -1247,45 +1248,88 @@
     }
   }
 
-  // Check if there is a target section from URL hash or sessionStorage
-  var rawHash = window.location.hash ? window.location.hash.replace('#', '') : '';
-  var storedTarget = '';
-  try {
-    storedTarget = sessionStorage.getItem('8bit_nav_target') || '';
-    if (storedTarget) sessionStorage.removeItem('8bit_nav_target');
-  } catch (e) {}
-
-  var targetId = rawHash || storedTarget;
-  if (targetId === 'hero') targetId = 'home';
-
-  function scrollToSection(id, smooth) {
-    if (!id) return;
-    var target = document.getElementById(id);
-    if (!target) return;
-    target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-    setActiveSection(id);
-    if (typeof ScrollTrigger !== 'undefined') {
-      setTimeout(function() { ScrollTrigger.refresh(); }, 100);
-      setTimeout(function() { ScrollTrigger.refresh(); }, 400);
+  // === PRECISE SCROLL-Y CALCULATION (floating navbar offset aware) ===
+  function getSectionScrollY(sectionId) {
+    if (!sectionId || sectionId === 'home' || sectionId === 'hero') return 0;
+    var target = document.getElementById(sectionId);
+    if (!target) {
+      if (sectionId === 'about') target = document.querySelector('.about-intro-section') || document.querySelector('.about-section');
+      else if (sectionId === 'creators') target = document.querySelector('.creators-container') || document.getElementById('creators');
+      else if (sectionId === 'work') target = document.querySelector('.case-card') || document.getElementById('work');
+      else if (sectionId === 'services') target = document.querySelector('.services-title-band') || document.getElementById('services');
+      else if (sectionId === 'esports') target = document.querySelector('.esports-section__card') || document.getElementById('esports');
+      else if (sectionId === 'contact') target = document.getElementById('contact') || document.querySelector('.footer-section');
     }
+    if (!target) return null;
+
+    var nav = document.querySelector('.navbar-pill') || document.querySelector('.navbar');
+    var isMobile = window.innerWidth <= 767;
+    var navHeight = nav ? nav.offsetHeight : (isMobile ? 44 : 52);
+    var navOffset = navHeight + (isMobile ? 16 : 28);
+
+    var rect = target.getBoundingClientRect();
+    var targetTop = rect.top + window.scrollY - navOffset;
+    var maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    return Math.max(0, Math.min(Math.round(targetTop), maxScroll));
   }
 
-  if (targetId) {
-    scrollToSection(targetId, false);
-    requestAnimationFrame(function() {
-      scrollToSection(targetId, false);
-    });
-    setTimeout(function() {
-      scrollToSection(targetId, true);
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  // === UNINTERRUPTIBLE SMOOTH SCROLLER (immune to layout reflows) ===
+  var activeScrollAnim = null;
+  function smoothScrollTo(targetY, duration, onComplete) {
+    if (typeof duration !== 'number') duration = 550;
+
+    if (activeScrollAnim) {
+      cancelAnimationFrame(activeScrollAnim);
+      activeScrollAnim = null;
+    }
+
+    var startY = window.scrollY || window.pageYOffset;
+    var diff = targetY - startY;
+    if (Math.abs(diff) < 2) {
+      window.scrollTo(0, targetY);
+      if (onComplete) onComplete();
+      return;
+    }
+
+    var startTime = null;
+    var isInterrupted = false;
+
+    function onUserGesture() {
+      isInterrupted = true;
+      cleanup();
+    }
+    function cleanup() {
+      window.removeEventListener('wheel', onUserGesture);
+      window.removeEventListener('touchmove', onUserGesture);
+    }
+
+    window.addEventListener('wheel', onUserGesture, { passive: true });
+    window.addEventListener('touchmove', onUserGesture, { passive: true });
+
+    function step(timestamp) {
+      if (isInterrupted) {
+        activeScrollAnim = null;
+        return;
       }
-    }, 150);
-    window.addEventListener('load', function() {
-      scrollToSection(targetId, false);
-    });
-  } else if (window.history && window.history.replaceState && window.location.href.indexOf('#') !== -1) {
-    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      if (!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      // Buttery smooth ease-out cubic
+      var ease = 1 - Math.pow(1 - progress, 3);
+
+      window.scrollTo(0, Math.round(startY + diff * ease));
+
+      if (progress < 1) {
+        activeScrollAnim = requestAnimationFrame(step);
+      } else {
+        activeScrollAnim = null;
+        cleanup();
+        window.scrollTo(0, targetY);
+        if (onComplete) onComplete();
+      }
+    }
+
+    activeScrollAnim = requestAnimationFrame(step);
   }
 
   var closeMobileDrawer = function() {
@@ -1297,63 +1341,37 @@
     }
   };
 
-  // === CLEAN URL SCROLL — no #hash in the address bar ===
-  // When a navbar/CTA link with data-section is clicked:
-  // 1. Prevent default (don't navigate to href="/")
-  // 2. Find the target section by ID
-  // 3. Scroll to it smoothly via scrollIntoView
-  // 4. Update the URL to stay clean (replaceState removes any existing hash)
+  // === ONE-CLICK NAVBAR NAVIGATION (Instant Capture Phase Handler) ===
   document.addEventListener('click', function(e) {
-    var link = e.target.closest('[data-section]');
+    var link = e.target.closest('a[data-section], a[href*="#"]');
     if (!link) return;
 
-    e.preventDefault();
-    e.stopPropagation();
+    var dataSec = link.getAttribute('data-section');
+    var href = link.getAttribute('href') || '';
+    var hashIndex = href.indexOf('#');
+    var targetSec = dataSec;
+    if (!targetSec && hashIndex !== -1) {
+      targetSec = href.substring(hashIndex + 1);
+    }
+    if (targetSec === 'hero') targetSec = 'home';
 
-    var sectionId = link.getAttribute('data-section');
-    var target = document.getElementById(sectionId);
+    if (targetSec) {
+      var targetY = getSectionScrollY(targetSec);
+      if (targetY !== null) {
+        e.preventDefault();
+        e.stopPropagation();
 
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (typeof ScrollTrigger !== 'undefined') {
-        setTimeout(function() { ScrollTrigger.refresh(); }, 150);
-        setTimeout(function() { ScrollTrigger.refresh(); }, 600);
+        setActiveSection(targetSec);
+        closeMobileDrawer();
+
+        smoothScrollTo(targetY, 550, function() {
+          if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        });
       }
     }
-
-    // Clean the URL — remove any #hash
-    if (window.history && window.history.replaceState) {
-      window.history.replaceState(null, '', window.location.pathname + window.location.search);
-    }
-
-    closeMobileDrawer();
-  });
-  // === END CLEAN URL SCROLL ===
-
-  window.scrollToHome = function(smooth) {
-    var target = document.getElementById('home') || document.querySelector('.hero-section');
-    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-  };
-
-  window.scrollToEsports = function(smooth) {
-    var target = document.querySelector('.esports-section__card') || document.getElementById('esports') || document.querySelector('.esports-section');
-    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-  };
-
-  window.scrollToCreators = function(smooth) {
-    var target = document.querySelector('.creators-container') || document.getElementById('creators');
-    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-  };
-
-  window.scrollToWork = function(smooth) {
-    var target = document.querySelector('.case-card') || document.getElementById('work');
-    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-  };
-
-  window.scrollToServices = function(smooth) {
-    var target = document.querySelector('.services-title-band') || document.getElementById('services');
-    if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-  };
+  }, true); // Capture phase ensures instant 100% reliable interception!
 
   // Mobile drawer outside click closer
   document.addEventListener('click', function (e) {
@@ -1362,9 +1380,73 @@
     }
   });
 
+  // === INCOMING NAVIGATION FROM SUBPAGES (e.g. work.html -> index.html#work) ===
+  var rawHash = window.location.hash ? window.location.hash.replace('#', '') : '';
+  var storedTarget = '';
+  try {
+    storedTarget = sessionStorage.getItem('8bit_nav_target') || '';
+    if (storedTarget) sessionStorage.removeItem('8bit_nav_target');
+  } catch (e) {}
+
+  var incomingTarget = rawHash || storedTarget;
+  if (incomingTarget === 'hero') incomingTarget = 'home';
+
+  if (incomingTarget && incomingTarget !== 'home') {
+    function jumpToTarget() {
+      var y = getSectionScrollY(incomingTarget);
+      if (y !== null) {
+        window.scrollTo(0, y);
+        setActiveSection(incomingTarget);
+      }
+    }
+
+    jumpToTarget();
+    requestAnimationFrame(jumpToTarget);
+    setTimeout(jumpToTarget, 60);
+    setTimeout(jumpToTarget, 200);
+    setTimeout(jumpToTarget, 500);
+
+    window.addEventListener('load', function() {
+      jumpToTarget();
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    });
+  } else if (window.history && window.history.replaceState && window.location.href.indexOf('#') !== -1) {
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+  }
+
+  // === GLOBAL SCROLL HELPERS ===
+  window.scrollToHome = function(smooth) {
+    var y = getSectionScrollY('home');
+    if (y !== null) smooth !== false ? smoothScrollTo(y, 500) : window.scrollTo(0, y);
+  };
+  window.scrollToAbout = function(smooth) {
+    var y = getSectionScrollY('about');
+    if (y !== null) smooth !== false ? smoothScrollTo(y, 500) : window.scrollTo(0, y);
+  };
+  window.scrollToCreators = function(smooth) {
+    var y = getSectionScrollY('creators');
+    if (y !== null) smooth !== false ? smoothScrollTo(y, 500) : window.scrollTo(0, y);
+  };
+  window.scrollToWork = function(smooth) {
+    var y = getSectionScrollY('work');
+    if (y !== null) smooth !== false ? smoothScrollTo(y, 500) : window.scrollTo(0, y);
+  };
+  window.scrollToServices = function(smooth) {
+    var y = getSectionScrollY('services');
+    if (y !== null) smooth !== false ? smoothScrollTo(y, 500) : window.scrollTo(0, y);
+  };
+  window.scrollToEsports = function(smooth) {
+    var y = getSectionScrollY('esports');
+    if (y !== null) smooth !== false ? smoothScrollTo(y, 500) : window.scrollTo(0, y);
+  };
+
+  // === SCROLL SPY FOR NAVBAR ACTIVE PILL ===
   var observedSections = document.querySelectorAll('section[id]');
   if ('IntersectionObserver' in window) {
     var activeSecObserver = new IntersectionObserver(function(entries) {
+      if (activeScrollAnim) return; // Don't flip active pill while smooth scrolling!
       entries.forEach(function(entry) {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
           setActiveSection(entry.target.id);
@@ -1378,6 +1460,7 @@
   }
 
   window.addEventListener('scroll', function() {
+    if (activeScrollAnim) return;
     if (window.scrollY < 120) {
       setActiveSection('home');
     } else if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 80) {
@@ -1386,7 +1469,9 @@
   }, { passive: true });
 
   // Initial highlight on load
-  setActiveSection('home');
+  if (!incomingTarget || incomingTarget === 'home') {
+    setActiveSection('home');
+  }
 })();
 </script>
 
