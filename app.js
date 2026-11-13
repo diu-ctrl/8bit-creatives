@@ -2913,16 +2913,20 @@ function initCaseStudies() {
     }, 200);
   }
 
-  // Default state: strictly empty and dark
-  caseImageWrap.classList.add('is-empty');
-  caseImageWrap.classList.remove('is-visible');
-  caseCaption.classList.remove('is-visible');
-  caseImage.src = '';
-  caseImage.alt = '';
-  caseCaptionTitle.textContent = '';
-  caseCaptionSub.textContent = '';
-  const initPlaceholder = caseImageWrap.querySelector('.case-placeholder');
-  if (initPlaceholder) initPlaceholder.style.display = 'none';
+  // Default state: Global Chess League S4 (first case study) highlighted and displayed
+  const defaultIdx = 0;
+  showCase(defaultIdx);
+  if (caseItems[defaultIdx]) {
+    caseItems[defaultIdx].classList.add('is-active');
+  }
+
+  function resetToDefault() {
+    caseItems.forEach((i, idx) => {
+      if (idx === defaultIdx) i.classList.add('is-active');
+      else i.classList.remove('is-active');
+    });
+    showCase(defaultIdx);
+  }
 
   caseItems.forEach(item => {
     const idx = parseInt(item.dataset.case, 10);
@@ -2933,8 +2937,7 @@ function initCaseStudies() {
       showCase(idx);
     });
     item.addEventListener('mouseleave', () => {
-      item.classList.remove('is-active');
-      clearCase();
+      // Handled by container mouseleave to keep smooth active state
     });
     // Tap / Click -> redirect to work.html
     item.addEventListener('click', () => {
@@ -2951,19 +2954,17 @@ function initCaseStudies() {
     });
   });
 
-  // Clear when mouse leaves the whole list or foreground
+  // Reset to default Global Chess League S4 when mouse leaves the list or foreground
   const caseList = document.getElementById('caseList');
   if (caseList) {
     caseList.addEventListener('mouseleave', () => {
-      caseItems.forEach(i => i.classList.remove('is-active'));
-      clearCase();
+      resetToDefault();
     });
   }
   const caseForeground = document.querySelector('.case-studies-foreground');
   if (caseForeground) {
     caseForeground.addEventListener('mouseleave', () => {
-      caseItems.forEach(i => i.classList.remove('is-active'));
-      clearCase();
+      resetToDefault();
     });
   }
 }
