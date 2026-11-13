@@ -69,7 +69,7 @@
     }
 
     window.updateNavbarIndicator = function (targetLink, isInstant) {
-      if (isClickScrolling) return;
+      if (isClickScrolling || window.__isSmoothScrolling) return;
       if (targetLink) {
         currentActive = targetLink;
       }

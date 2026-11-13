@@ -1288,21 +1288,30 @@
   // === PRECISE SCROLL-Y CALCULATION (floating navbar offset aware) ===
   function getSectionScrollY(sectionId) {
     if (!sectionId || sectionId === 'home' || sectionId === 'hero') return 0;
-    var target = document.getElementById(sectionId);
-    if (!target) {
-      if (sectionId === 'about') target = document.querySelector('.about-intro-section') || document.querySelector('.about-section');
-      else if (sectionId === 'creators') target = document.querySelector('.creators-container') || document.getElementById('creators');
-      else if (sectionId === 'work') target = document.querySelector('.case-card') || document.getElementById('work');
-      else if (sectionId === 'services') target = document.querySelector('.services-title-band') || document.getElementById('services');
-      else if (sectionId === 'esports') target = document.querySelector('.esports-section__card') || document.getElementById('esports');
-      else if (sectionId === 'contact') target = document.getElementById('contact') || document.querySelector('.footer-section');
+    
+    var target = null;
+    if (sectionId === 'about') {
+      target = document.querySelector('.about-intro-section') || document.getElementById('about');
+    } else if (sectionId === 'creators') {
+      target = document.querySelector('.creators-container') || document.getElementById('creators');
+    } else if (sectionId === 'work') {
+      target = document.querySelector('.case-card') || document.getElementById('work');
+    } else if (sectionId === 'services') {
+      target = document.querySelector('.services-title-band') || document.querySelector('.services-container') || document.getElementById('services');
+    } else if (sectionId === 'esports') {
+      target = document.querySelector('.esports-section__card') || document.getElementById('esports');
+    } else if (sectionId === 'contact') {
+      target = document.getElementById('contact') || document.querySelector('.footer-section');
+    } else {
+      target = document.getElementById(sectionId);
     }
     if (!target) return null;
 
     var nav = document.querySelector('.navbar-pill') || document.querySelector('.navbar');
     var isMobile = window.innerWidth <= 767;
     var navHeight = nav ? nav.offsetHeight : (isMobile ? 44 : 52);
-    var navOffset = navHeight + (isMobile ? 16 : 28);
+    // Clearance: distance from top of viewport to bottom of navbar pill + comfortable breathing gap (24px desktop / 16px mobile)
+    var navOffset = (isMobile ? 16 : 24) + navHeight + (isMobile ? 16 : 24);
 
     var rect = target.getBoundingClientRect();
     var targetTop = rect.top + window.scrollY - navOffset;
@@ -1324,9 +1333,12 @@
     var diff = targetY - startY;
     if (Math.abs(diff) < 2) {
       window.scrollTo(0, targetY);
+      window.__isSmoothScrolling = false;
       if (onComplete) onComplete();
       return;
     }
+
+    window.__isSmoothScrolling = true;
 
     var startTime = null;
     var isInterrupted = false;
@@ -1338,6 +1350,7 @@
     function cleanup() {
       window.removeEventListener('wheel', onUserGesture);
       window.removeEventListener('touchmove', onUserGesture);
+      window.__isSmoothScrolling = false;
     }
 
     window.addEventListener('wheel', onUserGesture, { passive: true });
@@ -1346,6 +1359,7 @@
     function step(timestamp) {
       if (isInterrupted) {
         activeScrollAnim = null;
+        cleanup();
         return;
       }
       if (!startTime) startTime = timestamp;

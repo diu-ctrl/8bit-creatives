@@ -322,18 +322,41 @@ function initNavbar() {
     let cachedActiveOffsets = [];
     function updateActiveOffsets() {
       cachedActiveOffsets = [];
+      let esportsVisualTop = null;
+      const esportsCard = document.querySelector('.esports-section__card');
+      if (esportsCard) {
+        esportsVisualTop = Math.round(esportsCard.getBoundingClientRect().top + window.scrollY - 120);
+      }
+
       targetSections.forEach(sec => {
+        let top = sec.offsetTop;
+        let bottom = sec.offsetTop + sec.offsetHeight;
+
+        if (sec.id === 'esports') {
+          if (esportsVisualTop !== null) {
+            top = esportsVisualTop;
+          }
+        } else if (sec.id === 'services') {
+          const band = sec.querySelector('.services-title-band') || sec.querySelector('.services-container');
+          if (band) {
+            top = Math.round(band.getBoundingClientRect().top + window.scrollY - 120);
+          }
+          if (esportsVisualTop !== null && esportsVisualTop > top) {
+            bottom = esportsVisualTop;
+          }
+        }
         cachedActiveOffsets.push({
           id: sec.id,
-          top: sec.offsetTop,
-          bottom: sec.offsetTop + sec.offsetHeight
+          top: top,
+          bottom: bottom
         });
       });
     }
     updateActiveOffsets();
 
     function checkActiveSection() {
-      const scrollPos = window.scrollY + 160;
+      if (window.__isSmoothScrolling) return;
+      const scrollPos = window.scrollY + 140;
       let currentId = null;
 
       for (let i = 0; i < cachedActiveOffsets.length; i++) {
@@ -378,6 +401,7 @@ function initNavbar() {
     }, { passive: true });
 
     const activeSectionObserver = new IntersectionObserver((entries) => {
+      if (window.__isSmoothScrolling) return;
       entries.forEach(entry => {
         if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
           const id = entry.target.id;
