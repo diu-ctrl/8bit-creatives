@@ -224,6 +224,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .navbar .nav-links,
 .navbar nav,
 .navbar__links {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -236,6 +238,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   align-items: center;
 }
 .navbar__links a {
+  position: relative;
+  z-index: 2;
   font-family: var(--font);
   font-weight: 500;
   font-size: 13px;
@@ -264,7 +268,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 #top.navbar-on-light .navbar__links a.is-active,
 #top .navbar__links a.is-active {
   position: relative;
-  z-index: 2 !important;
+  z-index: 3 !important;
   color: #FFFFFF !important;
   font-weight: 600 !important;
   text-decoration: none !important;
@@ -313,7 +317,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   height: 38px;
   border-radius: 999px;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
   transform: translate3d(0, -50%, 0);
   opacity: 0;
   box-sizing: border-box;

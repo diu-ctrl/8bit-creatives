@@ -1237,16 +1237,18 @@
   function setActiveSection(sectionId) {
     if (!sectionId) return;
     if (sectionId === 'hero') sectionId = 'home';
+    // Guard against unmapped sections (e.g. 'founders') so active state is NEVER stripped
+    if (!linkMap[sectionId] || !linkMap[sectionId].length) return;
+
     activeSectionId = sectionId;
     navLinks.forEach(function(l) { l.classList.remove('is-active'); });
-    if (linkMap[sectionId]) {
-      linkMap[sectionId].forEach(function(l) { l.classList.add('is-active'); });
-      var desktopLink = linkMap[sectionId].find(function(l) { return l.closest('.navbar__links'); });
-      if (desktopLink && typeof window.updateNavbarIndicator === 'function') {
-        window.updateNavbarIndicator(desktopLink, false);
-      }
+    linkMap[sectionId].forEach(function(l) { l.classList.add('is-active'); });
+    var desktopLink = linkMap[sectionId].find(function(l) { return l.closest('.navbar__links'); });
+    if (desktopLink && typeof window.updateNavbarIndicator === 'function') {
+      window.updateNavbarIndicator(desktopLink, false);
     }
   }
+  window.setActiveSection = setActiveSection;
 
   // === PRECISE SCROLL-Y CALCULATION (floating navbar offset aware) ===
   function getSectionScrollY(sectionId) {
@@ -1456,7 +1458,11 @@
       threshold: [0.3, 0.5],
       rootMargin: '-80px 0px -40% 0px'
     });
-    observedSections.forEach(function(s) { activeSecObserver.observe(s); });
+    observedSections.forEach(function(s) {
+      if (linkMap[s.id] || s.id === 'hero' || s.id === 'home') {
+        activeSecObserver.observe(s);
+      }
+    });
   }
 
   window.addEventListener('scroll', function() {

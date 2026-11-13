@@ -34,6 +34,14 @@
       if (!targetLink || !indicator || !navbar) return;
       if (window.innerWidth <= 768) return; // Hidden on mobile
 
+      // Guarantee targetLink has is-active so its text is always pure #FFFFFF white
+      if (!targetLink.classList.contains('is-active')) {
+        links.forEach(l => {
+          if (l !== targetLink) l.classList.remove('is-active');
+        });
+        targetLink.classList.add('is-active');
+      }
+
       const navRect = navbar.getBoundingClientRect();
       const linkRect = targetLink.getBoundingClientRect();
 
@@ -126,6 +134,10 @@
           if (activeLink && activeLink !== currentActive) {
             currentActive = activeLink;
             moveIndicator(currentActive, false);
+          } else if (!activeLink && currentActive) {
+            // Restore is-active to currentActive immediately so text never falls back to black
+            currentActive.classList.add('is-active');
+            moveIndicator(currentActive, false);
           }
         }
       });
@@ -139,6 +151,9 @@
     function placeInitial() {
       const activeLink = linksContainer.querySelector('a.is-active') || links[0];
       if (activeLink) {
+        if (!activeLink.classList.contains('is-active')) {
+          activeLink.classList.add('is-active');
+        }
         currentActive = activeLink;
         moveIndicator(currentActive, true);
       }

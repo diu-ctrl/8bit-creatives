@@ -305,7 +305,7 @@ function initNavbar() {
       }
     });
 
-    const targetSections = document.querySelectorAll('section[id]');
+    const targetSections = Array.from(document.querySelectorAll('section[id]')).filter(s => linkMap.has(s.id) || s.id === 'hero' || s.id === 'home');
     let currentActive = null;
 
     function setActive(newActive) {
