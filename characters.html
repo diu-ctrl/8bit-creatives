@@ -416,65 +416,70 @@
   <!-- 6. EA FC — BENT KICKING LEG & CLASSIC SOCCER BALL -->
   <div class="character-slot">
     <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
-      <defs>
+<defs>
         <linearGradient id="efcJersey" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#E03C31"/><stop offset="100%" stop-color="#B71C1C"/>
+          <stop offset="0%" stop-color="#FF5931"/><stop offset="100%" stop-color="#C82808"/>
         </linearGradient>
         <linearGradient id="efcSkin" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#D8B88C"/><stop offset="100%" stop-color="#C8A878"/>
+          <stop offset="0%" stop-color="#E2B897"/><stop offset="100%" stop-color="#C89A78"/>
+        </linearGradient>
+        <linearGradient id="efcDark" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#242220"/><stop offset="100%" stop-color="#141210"/>
         </linearGradient>
       </defs>
-      <!-- Head & Face -->
-      <circle cx="55" cy="22" r="13" fill="url(#efcSkin)"/>
-      <path d="M42 18 A13 13 0 0 1 68 18 L68 12 L42 12 Z" fill="#3A2A1A"/>
-      <path d="M45 14 Q55 8 65 14 L65 18 L45 18 Z" fill="#2A1A0A"/>
-      <circle cx="51" cy="24" r="1.5" fill="#333"/>
-      <circle cx="59" cy="24" r="1.5" fill="#333"/>
-      <path d="M50 30 Q55 33 60 30" stroke="#A87858" stroke-width="1" fill="none"/>
-      <rect x="50" y="34" width="10" height="6" fill="#C8A878"/>
-      <!-- Jersey / torso -->
-      <path d="M38 40 L72 40 L76 92 L34 92 Z" fill="url(#efcJersey)"/>
-      <rect x="53" y="40" width="4" height="52" fill="#FFFFFF" opacity="0.3"/>
-      <path d="M46 40 L64 40 L60 46 L50 46 Z" fill="#B71C1C"/>
-      <!-- Both arms clearly visible for balance -->
-      <g transform="rotate(-32, 38, 44)">
-        <rect x="28" y="44" width="12" height="38" rx="4" fill="url(#efcJersey)"/>
-        <circle cx="34" cy="84" r="5" fill="url(#efcSkin)"/>
-      </g>
-      <g transform="rotate(20, 74, 44)">
-        <rect x="70" y="44" width="12" height="36" rx="4" fill="url(#efcJersey)"/>
-        <circle cx="76" cy="82" r="5" fill="url(#efcSkin)"/>
-      </g>
-      <!-- Shorts -->
-      <path d="M36 92 L74 92 L72 112 L56 112 L52 112 L38 112 Z" fill="#1A1A1A"/>
-      <!-- Standing leg -->
-      <rect x="40" y="112" width="14" height="55" rx="4" fill="url(#efcSkin)"/>
-      <ellipse cx="47" cy="138" rx="7" ry="3" fill="#B89878"/>
-      <rect x="38" y="165" width="18" height="10" rx="2" fill="#1A1A1A"/>
-      <!-- Clearly bent kicking leg: shorter thigh, prominent knee, angled longer shin -->
-      <path d="M58 112 L72 112 L78 128 L64 128 Z" fill="url(#efcSkin)"/>
-      <!-- Prominent knee joint -->
-      <circle cx="71" cy="128" r="6" fill="#B89878"/>
-      <!-- Shin angled down-forward to the ball -->
-      <path d="M66 130 L76 130 L88 154 L78 154 Z" fill="url(#efcSkin)"/>
-      <ellipse cx="83" cy="154" rx="4.5" ry="3" fill="#C8A878"/>
-      <!-- Cleat pointing at ball -->
-      <path d="M79 153 L92 153 L96 160 L79 160 Z" fill="#1A1A1A"/>
-      <!-- Classic soccer ball pattern with central & perimeter pentagons -->
-      <g transform="translate(102, 160)">
-        <circle cx="0" cy="0" r="9.5" fill="#FFFFFF" stroke="#222" stroke-width="1.2"/>
-        <!-- Central pentagon -->
-        <polygon points="0,-3 3,-1 2,3 -2,3 -3,-1" fill="#1A1A1A"/>
-        <!-- 5 connecting seam lines -->
-        <line x1="0" y1="-3" x2="0" y2="-8" stroke="#1A1A1A" stroke-width="1"/>
-        <line x1="3" y1="-1" x2="7.5" y2="-3" stroke="#1A1A1A" stroke-width="1"/>
-        <line x1="2" y1="3" x2="5.5" y2="7" stroke="#1A1A1A" stroke-width="1"/>
-        <line x1="-2" y1="3" x2="-5.5" y2="7" stroke="#1A1A1A" stroke-width="1"/>
-        <line x1="-3" y1="-1" x2="-7.5" y2="-3" stroke="#1A1A1A" stroke-width="1"/>
-        <!-- Outer edge patches -->
-        <polygon points="-2,-8 2,-8 0,-6" fill="#1A1A1A"/>
-        <polygon points="7.5,-4 8.5,-1 6,-2" fill="#1A1A1A"/>
-        <polygon points="5,6.5 7.5,4.5 4,5" fill="#1A1A1A"/>
+      <!-- Head & Athletic Jawline (boxy-cut with clean chamfers) -->
+      <path d="M44 14 L76 14 L78 34 L72 42 L48 42 L42 34 Z" fill="url(#efcSkin)"/>
+      <!-- Hair: sharp modern athletic crop -->
+      <path d="M42 14 L78 14 L78 22 L72 20 L68 24 L56 18 L48 22 L42 20 Z" fill="#1A1816"/>
+      <!-- Serious tournament game-face: focused brow, intense gaze (no cartoon smile) -->
+      <rect x="47" y="24" width="9" height="2" fill="#141210"/>
+      <rect x="64" y="24" width="9" height="2" fill="#141210"/>
+      <rect x="48" y="27" width="7" height="3" rx="0.5" fill="#141210"/>
+      <rect x="65" y="27" width="7" height="3" rx="0.5" fill="#141210"/>
+      <rect x="52" y="27" width="2" height="2" fill="#FFFFFF"/>
+      <rect x="69" y="27" width="2" height="2" fill="#FFFFFF"/>
+      <line x1="57" y1="36" x2="63" y2="36" stroke="#8C5838" stroke-width="1.8" stroke-linecap="round"/>
+      <rect x="54" y="42" width="12" height="6" fill="#C89A78"/>
+      <!-- Structured 8-Bit Athlete Jersey (boxy with curved bevel edges) -->
+      <rect x="36" y="46" width="48" height="52" rx="4" fill="url(#efcJersey)"/>
+      <rect x="48" y="46" width="24" height="6" rx="1" fill="#141210"/>
+      <!-- Vertical carbon stripe with gold #8 -->
+      <rect x="54" y="52" width="12" height="46" fill="#141210"/>
+      <text x="60" y="74" fill="#FFFFFF" font-family="monospace" font-size="12" font-weight="900" text-anchor="middle">8</text>
+      <!-- Shoulder panels with gold trim -->
+      <rect x="36" y="46" width="12" height="4" fill="#FFA500"/>
+      <rect x="72" y="46" width="12" height="4" fill="#FFA500"/>
+      <!-- Arms resting straight near to body normally -->
+      <rect x="23" y="48" width="12" height="38" rx="3" fill="url(#efcJersey)"/>
+      <rect x="23" y="78" width="12" height="6" rx="1" fill="#141210"/>
+      <rect x="24" y="84" width="10" height="12" rx="3" fill="url(#efcSkin)"/>
+      <rect x="85" y="48" width="12" height="38" rx="3" fill="url(#efcJersey)"/>
+      <rect x="85" y="78" width="12" height="6" rx="1" fill="#141210"/>
+      <rect x="86" y="84" width="10" height="12" rx="3" fill="url(#efcSkin)"/>
+      <!-- Athletic Compression Shorts -->
+      <rect x="36" y="98" width="48" height="22" rx="3" fill="url(#efcDark)"/>
+      <line x1="60" y1="98" x2="60" y2="120" stroke="#000" stroke-width="1.5"/>
+      <rect x="36" y="116" width="48" height="4" fill="#FF5931"/>
+      <!-- Symmetrical normal straight legs -->
+      <!-- Left leg -->
+      <rect x="41" y="120" width="14" height="42" rx="3" fill="url(#efcSkin)"/>
+      <rect x="40" y="146" width="16" height="16" rx="2" fill="#FFFFFF"/>
+      <rect x="39" y="162" width="18" height="12" rx="2" fill="#141210"/>
+      <rect x="39" y="172" width="18" height="2" fill="#FF5931"/>
+      <!-- Right leg straight and normal -->
+      <rect x="65" y="120" width="14" height="42" rx="3" fill="url(#efcSkin)"/>
+      <rect x="64" y="146" width="16" height="16" rx="2" fill="#FFFFFF"/>
+      <rect x="63" y="162" width="18" height="12" rx="2" fill="#141210"/>
+      <rect x="63" y="172" width="18" height="2" fill="#FF5931"/>
+      <!-- Pro Match Ball placed near right boot in connection -->
+      <g transform="translate(91, 166)">
+        <circle cx="0" cy="0" r="9.5" fill="#FFFFFF" stroke="#141210" stroke-width="1.5"/>
+        <polygon points="0,-3.5 3,-1.2 1.8,2.8 -1.8,2.8 -3,-1.2" fill="#FF5931"/>
+        <line x1="0" y1="-3.5" x2="0" y2="-8" stroke="#141210" stroke-width="1"/>
+        <line x1="3" y1="-1.2" x2="7.5" y2="-3.5" stroke="#141210" stroke-width="1"/>
+        <line x1="1.8" y1="2.8" x2="5.5" y2="7.5" stroke="#141210" stroke-width="1"/>
+        <line x1="-1.8" y1="2.8" x2="-5.5" y2="7.5" stroke="#141210" stroke-width="1"/>
+        <line x1="-3" y1="-1.2" x2="-7.5" y2="-3.5" stroke="#141210" stroke-width="1"/>
       </g>
     </svg>
     <div class="character-label">EA FC</div>
@@ -609,55 +614,70 @@
   <!-- 9. PIKACHU — PEAR BODY, LOWER EARS & BROWN TAIL BASE -->
   <div class="character-slot">
     <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
-      <defs>
+<defs>
         <linearGradient id="pikaBody" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#FFD93D"/><stop offset="100%" stop-color="#FFB800"/>
+          <stop offset="0%" stop-color="#FFDE43"/><stop offset="100%" stop-color="#FFA800"/>
         </linearGradient>
         <linearGradient id="pikaBelly" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#FFE680"/><stop offset="100%" stop-color="#FFCC33"/>
+          <stop offset="0%" stop-color="#FFF2A3"/><stop offset="100%" stop-color="#FFD659"/>
         </linearGradient>
       </defs>
-      <!-- Ears lower & further apart with solid black tips -->
-      <path d="M34 46 L14 12 L44 38 Z" fill="url(#pikaBody)"/>
-      <path d="M34 46 L20 18 L42 38 Z" fill="#2A2A2A"/>
-      <path d="M86 46 L106 12 L76 38 Z" fill="url(#pikaBody)"/>
-      <path d="M86 46 L100 18 L78 38 Z" fill="#2A2A2A"/>
-      <!-- Brown patch where tail meets lower back -->
+      <!-- Iconic Pointed Ears with Black Tips -->
+      <path d="M34 46 L14 10 L28 8 L44 38 Z" fill="url(#pikaBody)"/>
+      <polygon points="14,10 28,8 24,20 18,22" fill="#141210"/>
+      <path d="M86 46 L106 10 L92 8 L76 38 Z" fill="url(#pikaBody)"/>
+      <polygon points="106,10 92,8 96,20 102,22" fill="#141210"/>
+      <!-- Brown Tail Connection Patch -->
       <path d="M86 124 L94 116 L98 122 L90 130 Z" fill="#8B5A2B"/>
-      <!-- Zigzag lightning tail -->
-      <path d="M92 122 L106 102 L98 98 L110 76 L102 72 L114 46 L106 42 L114 16" 
-            stroke="#FFD93D" stroke-width="8.5" fill="none" stroke-linejoin="miter" stroke-linecap="round"/>
-      <path d="M92 122 L106 102 L98 98 L110 76 L102 72 L114 46 L106 42 L114 16" 
-            stroke="#FF9900" stroke-width="3" fill="none" stroke-linejoin="miter" opacity="0.45"/>
-      <path d="M106 16 L118 8 L114 22 L118 30 L108 26 Z" fill="#FFD93D" stroke="#FF9900" stroke-width="1"/>
-      <!-- Head -->
+      <!-- Zigzag Lightning Tail with electric energy core -->
+      <path d="M92 122 L106 102 L98 98 L110 76 L102 72 L114 46 L106 42 L118 16"
+            stroke="#141210" stroke-width="8" fill="none" stroke-linejoin="miter" stroke-linecap="square"/>
+      <path d="M92 122 L106 102 L98 98 L110 76 L102 72 L114 46 L106 42 L118 16"
+            stroke="url(#pikaBody)" stroke-width="6" fill="none" stroke-linejoin="miter" stroke-linecap="square"/>
+      <path d="M92 122 L106 102 L98 98 L110 76 L102 72 L114 46 L106 42 L118 16"
+            stroke="#FFF587" stroke-width="2" fill="none" stroke-linejoin="miter"/>
+      <!-- Authentic Pokemon Pear-shaped Body (no boxy armor) -->
+      <ellipse cx="60" cy="116" rx="34" ry="38" fill="url(#pikaBody)"/>
+      <ellipse cx="60" cy="122" rx="22" ry="26" fill="url(#pikaBelly)" opacity="0.6"/>
+      <!-- Classic Brown Back Stripes -->
+      <path d="M40 92 Q60 97 80 92" stroke="#8B5A2B" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+      <path d="M42 106 Q60 111 78 106" stroke="#8B5A2B" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+      <!-- Electric Energy Sign on Chest -->
+      <polygon points="60,88 65,97 61,97 64,107 55,98 59,98" fill="#00E5FF"/>
+      <polygon points="60,89 64,96 61,96 63,105 56,98 59,98" fill="#FFFFFF"/>
+      <!-- Radiant Electric Sparks -->
+      <polygon points="18,74 22,79 20,79 23,86 16,80 19,80" fill="#FFDE43"/>
+      <polygon points="102,74 106,79 104,79 107,86 100,80 103,80" fill="#FFDE43"/>
+      <!-- Little Yellow Paws resting naturally -->
+      <ellipse cx="32" cy="106" rx="8" ry="14" fill="url(#pikaBody)" transform="rotate(-15, 32, 106)"/>
+      <ellipse cx="88" cy="106" rx="8" ry="14" fill="url(#pikaBody)" transform="rotate(15, 88, 106)"/>
+      <circle cx="28" cy="117" r="3" fill="#FFA800"/>
+      <circle cx="92" cy="117" r="3" fill="#FFA800"/>
+      <!-- Cute Rounded Feet with toe pads -->
+      <ellipse cx="44" cy="154" rx="12" ry="7" fill="url(#pikaBody)"/>
+      <ellipse cx="76" cy="154" rx="12" ry="7" fill="url(#pikaBody)"/>
+      <line x1="40" y1="156" x2="40" y2="160" stroke="#8B5A2B" stroke-width="1.2"/>
+      <line x1="44" y1="156" x2="44" y2="161" stroke="#8B5A2B" stroke-width="1.2"/>
+      <line x1="48" y1="156" x2="48" y2="160" stroke="#8B5A2B" stroke-width="1.2"/>
+      <line x1="72" y1="156" x2="72" y2="160" stroke="#8B5A2B" stroke-width="1.2"/>
+      <line x1="76" y1="156" x2="76" y2="161" stroke="#8B5A2B" stroke-width="1.2"/>
+      <line x1="80" y1="156" x2="80" y2="160" stroke="#8B5A2B" stroke-width="1.2"/>
+      <!-- Cute Pokemon Head -->
       <ellipse cx="60" cy="54" rx="28" ry="24" fill="url(#pikaBody)"/>
-      <ellipse cx="60" cy="62" rx="20" ry="14" fill="url(#pikaBelly)" opacity="0.6"/>
-      <!-- Eyes & Proportioned Cheek Circles (cheeks smaller relative to eyes) -->
-      <circle cx="47" cy="50" r="5.5" fill="#2A2A2A"/>
-      <circle cx="48.5" cy="49" r="2.2" fill="#FFFFFF"/>
-      <circle cx="73" cy="50" r="5.5" fill="#2A2A2A"/>
-      <circle cx="74.5" cy="49" r="2.2" fill="#FFFFFF"/>
-      <circle cx="38" cy="61" r="5.5" fill="#FF2222"/>
-      <circle cx="82" cy="61" r="5.5" fill="#FF2222"/>
-      <!-- Tiny nose & cat '3' mouth -->
-      <circle cx="60" cy="57" r="1.2" fill="#2A2A2A"/>
-      <path d="M54 62 Q57 65 60 62 Q63 65 66 62" stroke="#2A2A2A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-      <!-- Chonky pear-shaped body (wider at base) -->
-      <ellipse cx="60" cy="116" rx="36" ry="40" fill="url(#pikaBody)"/>
-      <ellipse cx="60" cy="122" rx="24" ry="28" fill="url(#pikaBelly)" opacity="0.75"/>
-      <!-- Stubby arms -->
-      <ellipse cx="30" cy="106" rx="9" ry="15" fill="url(#pikaBody)" transform="rotate(-20, 30, 106)"/>
-      <ellipse cx="90" cy="106" rx="9" ry="15" fill="url(#pikaBody)" transform="rotate(20, 90, 106)"/>
-      <!-- Feet with 3 distinct visible toe lines each -->
-      <ellipse cx="44" cy="158" rx="13" ry="7" fill="#FFB800"/>
-      <ellipse cx="76" cy="158" rx="13" ry="7" fill="#FFB800"/>
-      <line x1="39" y1="160" x2="39" y2="164" stroke="#CC9900" stroke-width="1.5"/>
-      <line x1="44" y1="160" x2="44" y2="165" stroke="#CC9900" stroke-width="1.5"/>
-      <line x1="49" y1="160" x2="49" y2="164" stroke="#CC9900" stroke-width="1.5"/>
-      <line x1="71" y1="160" x2="71" y2="164" stroke="#CC9900" stroke-width="1.5"/>
-      <line x1="76" y1="160" x2="76" y2="165" stroke="#CC9900" stroke-width="1.5"/>
-      <line x1="81" y1="160" x2="81" y2="164" stroke="#CC9900" stroke-width="1.5"/>
+      <ellipse cx="60" cy="62" rx="20" ry="14" fill="url(#pikaBelly)" opacity="0.4"/>
+      <!-- Large Shiny Pokemon Eyes -->
+      <circle cx="47" cy="52" r="5.5" fill="#141210"/>
+      <circle cx="48.5" cy="50.5" r="2.2" fill="#FFFFFF"/>
+      <circle cx="73" cy="52" r="5.5" fill="#141210"/>
+      <circle cx="74.5" cy="50.5" r="2.2" fill="#FFFFFF"/>
+      <!-- Iconic Round Red Electric Cheek Pouches -->
+      <circle cx="37" cy="62" r="6" fill="#FF2A2A"/>
+      <circle cx="83" cy="62" r="6" fill="#FF2A2A"/>
+      <circle cx="36" cy="61" r="2" fill="#FFA3A3" opacity="0.6"/>
+      <circle cx="82" cy="61" r="2" fill="#FFA3A3" opacity="0.6"/>
+      <!-- Cute Nose & Mouth -->
+      <circle cx="60" cy="57" r="1.3" fill="#141210"/>
+      <path d="M54 62 Q57 65 60 62 Q63 65 66 62" stroke="#141210" stroke-width="1.8" fill="none" stroke-linecap="round"/>
     </svg>
     <div class="character-label">Pikachu</div>
   </div>
@@ -739,7 +759,7 @@
   <!-- 11. VALORANT (Reyna) — CONNECTED ENERGY WISPS & THIGH-HIGH BOOTS -->
   <div class="character-slot">
     <svg viewBox="0 0 120 200" xmlns="http://www.w3.org/2000/svg">
-      <defs>
+<defs>
         <linearGradient id="valHair" x1="0%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stop-color="#2A2A35"/><stop offset="60%" stop-color="#6A2070"/><stop offset="100%" stop-color="#E02E9D"/>
         </linearGradient>
@@ -760,67 +780,71 @@
           </feMerge>
         </filter>
       </defs>
-      <!-- Flowing hair -->
-      <path d="M42 12 Q38 50 36 100 L48 100 L48 18 Z" fill="url(#valHair)"/>
-      <path d="M78 12 Q82 50 84 100 L72 100 L72 18 Z" fill="url(#valHair)"/>
-      <!-- Head & Eyes -->
-      <path d="M48 10 L72 10 L74 32 L46 32 Z" fill="url(#valSkin)"/>
-      <path d="M44 8 L76 8 L78 16 L42 16 Z" fill="#2A2A35"/>
-      <ellipse cx="54" cy="22" rx="3" ry="2" fill="#FF00FF"/>
-      <ellipse cx="66" cy="22" rx="3" ry="2" fill="#FF00FF"/>
-      <circle cx="54" cy="22" r="1" fill="#FFFFFF"/>
-      <circle cx="66" cy="22" r="1" fill="#FFFFFF"/>
-      <!-- Gold jewelry -->
-      <circle cx="46" cy="30" r="3" fill="none" stroke="#C5A059" stroke-width="1.5"/>
-      <circle cx="74" cy="30" r="3" fill="none" stroke="#C5A059" stroke-width="1.5"/>
-      <rect x="48" y="34" width="24" height="4" rx="1" fill="#C5A059"/>
-      <circle cx="60" cy="36" r="2" fill="#FF0000"/>
-      <!-- Bodysuit torso -->
-      <path d="M40 38 L80 38 L82 102 L38 102 Z" fill="url(#valSuit)"/>
-      <!-- Glowing chest core -->
-      <ellipse cx="60" cy="55" rx="12" ry="10" fill="url(#valChest)"/>
-      <circle cx="60" cy="55" r="5" fill="#9B30FF" opacity="0.85"/>
-      <circle cx="60" cy="55" r="2" fill="#FFFFFF" opacity="0.95"/>
-      <!-- Gold belt -->
-      <rect x="38" y="96" width="44" height="6" fill="#C5A059"/>
-      <polygon points="54,96 66,96 70,102 62,106 58,106 50,102" fill="#FF00FF"/>
-      <!-- Clean, unified bodysuit pelvic area -->
-      <path d="M38 102 L82 102 L70 120 L50 120 Z" fill="url(#valSuit)"/>
-      <!-- Right arm & Vandal rifle -->
-      <rect x="22" y="42" width="12" height="35" rx="3" fill="url(#valSuit)" transform="rotate(-30, 28, 60)"/>
-      <circle cx="20" cy="78" r="5" fill="url(#valSkin)" transform="rotate(-30, 20, 78)"/>
-      <rect x="4" y="68" width="40" height="4" rx="1" fill="#111111"/>
-      <rect x="4" y="66" width="6" height="3" fill="#333"/>
-      <rect x="14" y="72" width="5" height="12" rx="1" fill="#111111"/>
-      <rect x="30" y="65" width="8" height="3" rx="1" fill="#333"/>
-      <!-- Left arm with hand -->
-      <rect x="84" y="42" width="12" height="45" rx="3" fill="url(#valSuit)"/>
-      <circle cx="90" cy="88" r="5" fill="url(#valSkin)"/>
-      <!-- Connected Energy Wisps with glow filter -->
-      <g filter="url(#reynaGlow)">
-        <path d="M90 88 Q102 96 112 92 Q118 90 120 98" stroke="#E02E9D" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-        <path d="M90 90 Q98 104 108 100 Q116 98 118 108" stroke="#9B30FF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <path d="M90 86 Q104 92 114 86 Q120 84 122 92" stroke="#FF00FF" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <circle cx="106" cy="94" r="2.2" fill="#E02E9D"/>
-        <circle cx="114" cy="98" r="1.8" fill="#FF00FF"/>
-      </g>
-      <!-- Proportional legs with thigh-high boot line -->
-      <!-- Exposed upper thighs -->
-      <path d="M40 106 L56 106 L55 128 L41 128 Z" fill="url(#valSkin)"/>
-      <path d="M64 106 L80 106 L79 128 L65 128 Z" fill="url(#valSkin)"/>
-      <!-- Thigh-high boot gold rim cuffs -->
-      <rect x="40" y="128" width="16" height="3" rx="1" fill="#C5A059"/>
-      <rect x="64" y="128" width="16" height="3" rx="1" fill="#C5A059"/>
-      <!-- Thigh-high boots (slightly thicker for proportion) -->
-      <rect x="40" y="131" width="16" height="35" rx="3" fill="url(#valSuit)"/>
-      <rect x="64" y="131" width="16" height="35" rx="3" fill="url(#valSuit)"/>
-      <!-- Gold armored feet -->
-      <rect x="39" y="165" width="18" height="16" rx="2" fill="#C5A059"/>
-      <rect x="63" y="165" width="18" height="16" rx="2" fill="#C5A059"/>
-      <circle cx="48" cy="173" r="2" fill="#FF00FF" opacity="0.8"/>
-      <circle cx="72" cy="173" r="2" fill="#FF00FF" opacity="0.8"/>
-      <rect x="39" y="179" width="18" height="3" fill="#1A1A1A"/>
-      <rect x="63" y="179" width="18" height="3" fill="#1A1A1A"/>
+      <!-- Flowing cascading hair framing shoulders -->
+      <path d="M38 10 Q31 40 32 96 L42 96 Q40 46 45 16 Z" fill="url(#valHair)"/>
+      <path d="M82 10 Q89 40 88 96 L78 96 Q80 46 75 16 Z" fill="url(#valHair)"/>
+      <!-- Sleek feminine head & tapered jawline -->
+      <path d="M47 12 L73 12 L74 25 L68 35 L60 38 L52 35 L46 25 Z" fill="url(#valSkin)"/>
+      <path d="M42 6 Q60 2 78 6 L80 14 L72 16 L68 12 L60 14 L52 12 L48 16 L40 14 Z" fill="#201C2B"/>
+      <!-- Slender graceful neck -->
+      <rect x="56" y="36" width="8" height="8" fill="url(#valSkin)"/>
+      <!-- Fierce feminine almond eyes with winged liner -->
+      <path d="M49 20 L56 19 L57 23 L50 23 Z" fill="#141210"/>
+      <path d="M71 20 L64 19 L63 23 L70 23 Z" fill="#141210"/>
+      <ellipse cx="53.5" cy="22" rx="2.5" ry="1.8" fill="#FF00FF"/>
+      <ellipse cx="66.5" cy="22" rx="2.5" ry="1.8" fill="#FF00FF"/>
+      <circle cx="53.5" cy="22" r="0.9" fill="#FFFFFF"/>
+      <circle cx="66.5" cy="22" r="0.9" fill="#FFFFFF"/>
+      <!-- Arched brows & feminine lips -->
+      <path d="M49 17 Q53 15 57 17" stroke="#1A1A22" stroke-width="1.2" fill="none"/>
+      <path d="M71 17 Q67 15 63 17" stroke="#1A1A22" stroke-width="1.2" fill="none"/>
+      <path d="M57 32 Q60 30.5 63 32 Q60 34 57 32" fill="#B83A70"/>
+      <!-- Gold jewelry earrings & choker -->
+      <circle cx="44" cy="26" r="2.5" fill="none" stroke="#C5A059" stroke-width="1.2"/>
+      <circle cx="76" cy="26" r="2.5" fill="none" stroke="#C5A059" stroke-width="1.2"/>
+      <rect x="55" y="41" width="10" height="2" rx="0.5" fill="#C5A059"/>
+      <polygon points="60,42 62,45 60,47 58,45" fill="#FF00FF"/>
+      <!-- Hourglass Bodysuit Torso (narrow waist, curved bust & hips) -->
+      <path d="M42 42 L78 42 Q80 58 75 66 Q69 73 68 80 Q77 88 77 98 L43 98 Q43 88 52 80 Q51 73 45 66 Q40 58 42 42 Z" fill="url(#valSuit)"/>
+      <!-- V-neck décolletage -->
+      <polygon points="54,42 66,42 60,52" fill="url(#valSkin)"/>
+      <!-- Glowing chest soul core -->
+      <ellipse cx="60" cy="58" rx="8" ry="7" fill="url(#valChest)"/>
+      <circle cx="60" cy="58" r="3.5" fill="#9B30FF" opacity="0.9"/>
+      <circle cx="60" cy="58" r="1.5" fill="#FFFFFF"/>
+      <!-- Cinched Gold Corset Belt at waist -->
+      <path d="M51 77 L69 77 L71 85 L49 85 Z" fill="#C5A059"/>
+      <polygon points="56,77 64,77 66,85 60,89 54,85" fill="#8C185C"/>
+      <circle cx="60" cy="83" r="2" fill="#FF00FF"/>
+      <!-- Hands resting straight normally along body -->
+      <!-- Left arm & hand straight -->
+      <rect x="29" y="42" width="10" height="46" rx="4" fill="url(#valSuit)"/>
+      <rect x="28" y="86" width="12" height="3" rx="1" fill="#C5A059"/>
+      <rect x="30" y="90" width="8" height="10" rx="3" fill="url(#valSkin)"/>
+      <!-- Right arm & hand straight -->
+      <rect x="81" y="42" width="10" height="46" rx="4" fill="url(#valSuit)"/>
+      <rect x="80" y="86" width="12" height="3" rx="1" fill="#C5A059"/>
+      <rect x="82" y="90" width="8" height="10" rx="3" fill="url(#valSkin)"/>
+      <!-- Subtle soul glow around hands -->
+      <circle cx="34" cy="98" r="2" fill="#FF00FF" opacity="0.75" filter="url(#reynaGlow)"/>
+      <circle cx="86" cy="98" r="2" fill="#FF00FF" opacity="0.75" filter="url(#reynaGlow)"/>
+      <!-- Feminine curved pelvis & thighs -->
+      <path d="M43 98 L77 98 L70 114 L50 114 Z" fill="url(#valSuit)"/>
+      <!-- Slender thighs with skin accents -->
+      <path d="M43 104 L55 104 L54 122 L42 122 Z" fill="url(#valSkin)"/>
+      <path d="M65 104 L77 104 L78 122 L66 122 Z" fill="url(#valSkin)"/>
+      <rect x="42" y="122" width="12" height="2.5" rx="0.5" fill="#C5A059"/>
+      <rect x="66" y="122" width="12" height="2.5" rx="0.5" fill="#C5A059"/>
+      <!-- Form-fitting thigh-high boots with gold vertical accents -->
+      <rect x="42" y="125" width="12" height="38" rx="2" fill="url(#valSuit)"/>
+      <rect x="66" y="125" width="12" height="38" rx="2" fill="url(#valSuit)"/>
+      <line x1="48" y1="126" x2="48" y2="158" stroke="#C5A059" stroke-width="1.2"/>
+      <line x1="72" y1="126" x2="72" y2="158" stroke="#C5A059" stroke-width="1.2"/>
+      <!-- Stylish heeled boots -->
+      <rect x="40" y="163" width="15" height="14" rx="2" fill="#C5A059"/>
+      <rect x="65" y="163" width="15" height="14" rx="2" fill="#C5A059"/>
+      <rect x="40" y="174" width="15" height="3" fill="#141210"/>
+      <rect x="65" y="174" width="15" height="3" fill="#141210"/>
     </svg>
     <div class="character-label">Valorant</div>
   </div>
