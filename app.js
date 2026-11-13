@@ -2706,7 +2706,7 @@ function initHeroDinoGame() {
       ctx.font = '700 22px "Geist", sans-serif';
       ctx.fillText('Space or Click to Start', cx, cssH * 0.30);
       ctx.font = '600 13px "Geist", sans-serif';
-      ctx.fillText('SPACE / UP for jump      DOWN / C for crouch', cx, cssH * 0.30 + 30);
+      ctx.fillText('SPACE / UP for jump  —  DOWN / C for crouch', cx, cssH * 0.30 + 30);
     }
     ctx.textAlign = 'left';
   }
