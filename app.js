@@ -1053,118 +1053,169 @@ const characters = [
   `<g>
 <defs>
         <linearGradient id="efcJersey" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#E03C31"/><stop offset="100%" stop-color="#B71C1C"/>
+          <stop offset="0%" stop-color="#FF5931"/><stop offset="100%" stop-color="#C82808"/>
         </linearGradient>
         <linearGradient id="efcSkin" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#D8B88C"/><stop offset="100%" stop-color="#C8A878"/>
+          <stop offset="0%" stop-color="#E2B897"/><stop offset="100%" stop-color="#C89A78"/>
+        </linearGradient>
+        <linearGradient id="efcDark" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#242220"/><stop offset="100%" stop-color="#141210"/>
         </linearGradient>
       </defs>
-      <!-- Head & Face -->
-      <circle cx="55" cy="22" r="13" fill="url(#efcSkin)"/>
-      <path d="M42 18 A13 13 0 0 1 68 18 L68 12 L42 12 Z" fill="#3A2A1A"/>
-      <path d="M45 14 Q55 8 65 14 L65 18 L45 18 Z" fill="#2A1A0A"/>
-      <circle cx="51" cy="24" r="1.5" fill="#333"/>
-      <circle cx="59" cy="24" r="1.5" fill="#333"/>
-      <path d="M50 30 Q55 33 60 30" stroke="#A87858" stroke-width="1" fill="none"/>
-      <rect x="50" y="34" width="10" height="6" fill="#C8A878"/>
-      <!-- Jersey / torso -->
-      <path d="M38 40 L72 40 L76 92 L34 92 Z" fill="url(#efcJersey)"/>
-      <rect x="53" y="40" width="4" height="52" fill="#FFFFFF" opacity="0.3"/>
-      <path d="M46 40 L64 40 L60 46 L50 46 Z" fill="#B71C1C"/>
-      <!-- Both arms clearly visible for balance -->
-      <g transform="rotate(-32, 38, 44)">
-        <rect x="28" y="44" width="12" height="38" rx="4" fill="url(#efcJersey)"/>
-        <circle cx="34" cy="84" r="5" fill="url(#efcSkin)"/>
+      <!-- Head & Athletic Jawline (boxy-cut with clean chamfers) -->
+      <path d="M44 14 L76 14 L78 34 L72 42 L48 42 L42 34 Z" fill="url(#efcSkin)"/>
+      <!-- Hair: sharp modern athletic crop -->
+      <path d="M42 14 L78 14 L78 22 L72 20 L68 24 L56 18 L48 22 L42 20 Z" fill="#1A1816"/>
+      <!-- Serious tournament game-face: focused brow, intense gaze (no cartoon smile) -->
+      <rect x="47" y="24" width="9" height="2" fill="#141210"/>
+      <rect x="64" y="24" width="9" height="2" fill="#141210"/>
+      <rect x="48" y="27" width="7" height="3" rx="0.5" fill="#141210"/>
+      <rect x="65" y="27" width="7" height="3" rx="0.5" fill="#141210"/>
+      <rect x="52" y="27" width="2" height="2" fill="#FFFFFF"/>
+      <rect x="69" y="27" width="2" height="2" fill="#FFFFFF"/>
+      <line x1="57" y1="36" x2="63" y2="36" stroke="#8C5838" stroke-width="1.8" stroke-linecap="round"/>
+      <rect x="54" y="42" width="12" height="6" fill="#C89A78"/>
+      <!-- Structured 8-Bit Athlete Jersey (boxy with curved bevel edges) -->
+      <rect x="36" y="46" width="48" height="52" rx="4" fill="url(#efcJersey)"/>
+      <rect x="48" y="46" width="24" height="6" rx="1" fill="#141210"/>
+      <!-- Vertical carbon stripe with gold #8 -->
+      <rect x="54" y="52" width="12" height="46" fill="#141210"/>
+      <text x="60" y="74" fill="#FFFFFF" font-family="monospace" font-size="12" font-weight="900" text-anchor="middle">8</text>
+      <!-- Shoulder panels with gold trim -->
+      <rect x="36" y="46" width="12" height="4" fill="#FFA500"/>
+      <rect x="72" y="46" width="12" height="4" fill="#FFA500"/>
+      <!-- Arms in balanced athletic running motion -->
+      <g transform="rotate(-24, 38, 48)">
+        <rect x="26" y="48" width="12" height="38" rx="3" fill="url(#efcJersey)"/>
+        <rect x="26" y="78" width="12" height="8" rx="1" fill="#141210"/>
+        <circle cx="32" cy="90" r="5" fill="url(#efcSkin)"/>
       </g>
-      <g transform="rotate(20, 74, 44)">
-        <rect x="70" y="44" width="12" height="36" rx="4" fill="url(#efcJersey)"/>
-        <circle cx="76" cy="82" r="5" fill="url(#efcSkin)"/>
+      <g transform="rotate(18, 74, 48)">
+        <rect x="72" y="48" width="12" height="38" rx="3" fill="url(#efcJersey)"/>
+        <rect x="72" y="78" width="12" height="8" rx="1" fill="#141210"/>
+        <circle cx="78" cy="90" r="5" fill="url(#efcSkin)"/>
       </g>
-      <!-- Shorts -->
-      <path d="M36 92 L74 92 L72 112 L56 112 L52 112 L38 112 Z" fill="#1A1A1A"/>
+      <!-- Athletic Compression Shorts -->
+      <rect x="36" y="98" width="48" height="22" rx="3" fill="url(#efcDark)"/>
+      <line x1="60" y1="98" x2="60" y2="120" stroke="#000" stroke-width="1.5"/>
+      <rect x="36" y="116" width="48" height="4" fill="#FF5931"/>
+      <!-- Muscular Boxy Legs -->
       <!-- Standing leg -->
-      <rect x="40" y="112" width="14" height="55" rx="4" fill="url(#efcSkin)"/>
-      <ellipse cx="47" cy="138" rx="7" ry="3" fill="#B89878"/>
-      <rect x="38" y="165" width="18" height="10" rx="2" fill="#1A1A1A"/>
-      <!-- Clearly bent kicking leg: shorter thigh, prominent knee, angled longer shin -->
-      <path d="M58 112 L72 112 L78 128 L64 128 Z" fill="url(#efcSkin)"/>
-      <!-- Prominent knee joint -->
-      <circle cx="71" cy="128" r="6" fill="#B89878"/>
-      <!-- Shin angled down-forward to the ball -->
-      <path d="M66 130 L76 130 L88 154 L78 154 Z" fill="url(#efcSkin)"/>
-      <ellipse cx="83" cy="154" rx="4.5" ry="3" fill="#C8A878"/>
-      <!-- Cleat pointing at ball -->
-      <path d="M79 153 L92 153 L96 160 L79 160 Z" fill="#1A1A1A"/>
-      <!-- Classic soccer ball pattern with central & perimeter pentagons -->
+      <rect x="40" y="120" width="14" height="42" rx="3" fill="url(#efcSkin)"/>
+      <rect x="39" y="146" width="16" height="16" rx="2" fill="#FFFFFF"/>
+      <rect x="38" y="162" width="20" height="12" rx="2" fill="#141210"/>
+      <rect x="38" y="172" width="20" height="2" fill="#FF5931"/>
+      <!-- Kicking leg bent at knee with dynamic strike angle -->
+      <g transform="rotate(28, 68, 120)">
+        <rect x="64" y="120" width="14" height="24" rx="3" fill="url(#efcSkin)"/>
+        <circle cx="71" cy="144" r="7" fill="#C89A78"/>
+        <rect x="64" y="144" width="14" height="22" rx="3" fill="#FFFFFF"/>
+        <rect x="62" y="164" width="20" height="12" rx="2" fill="#141210"/>
+        <rect x="62" y="174" width="20" height="2" fill="#FF5931"/>
+      </g>
+      <!-- Modern Hexagonal Pro Match Ball -->
       <g transform="translate(102, 160)">
-        <circle cx="0" cy="0" r="9.5" fill="#FFFFFF" stroke="#222" stroke-width="1.2"/>
-        <!-- Central pentagon -->
-        <polygon points="0,-3 3,-1 2,3 -2,3 -3,-1" fill="#1A1A1A"/>
-        <!-- 5 connecting seam lines -->
-        <line x1="0" y1="-3" x2="0" y2="-8" stroke="#1A1A1A" stroke-width="1"/>
-        <line x1="3" y1="-1" x2="7.5" y2="-3" stroke="#1A1A1A" stroke-width="1"/>
-        <line x1="2" y1="3" x2="5.5" y2="7" stroke="#1A1A1A" stroke-width="1"/>
-        <line x1="-2" y1="3" x2="-5.5" y2="7" stroke="#1A1A1A" stroke-width="1"/>
-        <line x1="-3" y1="-1" x2="-7.5" y2="-3" stroke="#1A1A1A" stroke-width="1"/>
-        <!-- Outer edge patches -->
-        <polygon points="-2,-8 2,-8 0,-6" fill="#1A1A1A"/>
-        <polygon points="7.5,-4 8.5,-1 6,-2" fill="#1A1A1A"/>
-        <polygon points="5,6.5 7.5,4.5 4,5" fill="#1A1A1A"/>
+        <circle cx="0" cy="0" r="10" fill="#FFFFFF" stroke="#141210" stroke-width="1.5"/>
+        <polygon points="0,-4 3.5,-1.5 2,3 -2,3 -3.5,-1.5" fill="#FF5931"/>
+        <line x1="0" y1="-4" x2="0" y2="-9" stroke="#141210" stroke-width="1"/>
+        <line x1="3.5" y1="-1.5" x2="8" y2="-4" stroke="#141210" stroke-width="1"/>
+        <line x1="2" y1="3" x2="6" y2="8" stroke="#141210" stroke-width="1"/>
+        <line x1="-2" y1="3" x2="-6" y2="8" stroke="#141210" stroke-width="1"/>
+        <line x1="-3.5" y1="-1.5" x2="-8" y2="-4" stroke="#141210" stroke-width="1"/>
       </g>
   </g>`,
   // Character 7
   `<g>
 <defs>
         <linearGradient id="ffHoodie" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#FF6B35"/><stop offset="100%" stop-color="#CC4A1E"/>
+          <stop offset="0%" stop-color="#FF5931"/><stop offset="100%" stop-color="#C83815"/>
         </linearGradient>
         <linearGradient id="ffSkin" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#D8B88C"/><stop offset="100%" stop-color="#C8A878"/>
+          <stop offset="0%" stop-color="#E2B897"/><stop offset="100%" stop-color="#C89A78"/>
+        </linearGradient>
+        <linearGradient id="ffPants" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#242220"/><stop offset="100%" stop-color="#141210"/>
+        </linearGradient>
+        <linearGradient id="ffSneaker" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FFFFFF"/><stop offset="60%" stop-color="#E8E8E8"/><stop offset="100%" stop-color="#FF5931"/>
         </linearGradient>
       </defs>
-      <!-- Backpack -->
-      <rect x="34" y="48" width="52" height="50" rx="6" fill="#8B4513" opacity="0.4"/>
-      <!-- Rounded 3D Hood with curves -->
-      <path d="M38 10 Q60 -4 82 10 Q88 22 82 34 Q60 40 38 34 Q32 22 38 10 Z" fill="url(#ffHoodie)"/>
-      <path d="M44 14 Q60 4 76 14 L74 30 L46 30 Z" fill="#000" opacity="0.38"/>
-      <!-- Head inside hood -->
-      <ellipse cx="60" cy="25" rx="12" ry="14" fill="url(#ffSkin)"/>
-      <path d="M48 20 Q60 12 72 20 L72 16 L48 16 Z" fill="#000" opacity="0.25"/>
-      <circle cx="55" cy="27" r="1.5" fill="#333"/>
-      <circle cx="65" cy="27" r="1.5" fill="#333"/>
-      <rect x="56" y="33" width="8" height="2" rx="1" fill="#A87858"/>
-      <!-- Hood opening collar -->
-      <ellipse cx="60" cy="36" rx="18" ry="6" fill="url(#ffHoodie)"/>
-      <!-- Torso -->
-      <path d="M38 38 L82 38 L86 108 L34 108 Z" fill="url(#ffHoodie)"/>
-      <!-- Hoodie drawstrings with terminal knot circles -->
-      <line x1="56" y1="40" x2="56" y2="64" stroke="#FFFFFF" stroke-width="2" opacity="0.8"/>
-      <circle cx="56" cy="65" r="2.5" fill="#FFFFFF" opacity="0.9"/>
-      <line x1="64" y1="40" x2="64" y2="64" stroke="#FFFFFF" stroke-width="2" opacity="0.8"/>
-      <circle cx="64" cy="65" r="2.5" fill="#FFFFFF" opacity="0.9"/>
-      <!-- Curved kangaroo pocket -->
-      <path d="M44 72 Q60 68 76 72 L73 88 Q60 92 47 88 Z" fill="#B73C14" stroke="#8E2D0E" stroke-width="0.8"/>
-      <!-- Arms -->
-      <rect x="24" y="42" width="12" height="48" rx="3" fill="url(#ffHoodie)"/>
-      <rect x="84" y="42" width="12" height="40" rx="3" fill="url(#ffHoodie)"/>
-      <!-- Hands & Pistol -->
-      <circle cx="90" cy="85" r="5" fill="url(#ffSkin)"/>
-      <rect x="84" y="82" width="4" height="14" rx="1" fill="#2A2A2A"/>
-      <rect x="84" y="82" width="14" height="4" rx="1" fill="#2A2A2A"/>
-      <rect x="96" y="83" width="2" height="3" fill="#444"/>
-      <circle cx="30" cy="92" r="5" fill="url(#ffSkin)"/>
-      <!-- Legs -->
-      <rect x="42" y="108" width="16" height="58" rx="4" fill="#3A3A3A"/>
-      <rect x="62" y="108" width="16" height="58" rx="4" fill="#3A3A3A"/>
-      <rect x="44" y="118" width="6" height="12" rx="1" fill="#2A2A2A" opacity="0.5"/>
-      <rect x="70" y="118" width="6" height="12" rx="1" fill="#2A2A2A" opacity="0.5"/>
-      <!-- Boots with shoelaces -->
-      <rect x="40" y="163" width="20" height="14" rx="2" fill="#1A1A1A"/>
-      <rect x="60" y="163" width="20" height="14" rx="2" fill="#1A1A1A"/>
-      <line x1="44" y1="166" x2="56" y2="166" stroke="#666" stroke-width="1"/>
-      <line x1="44" y1="169" x2="56" y2="169" stroke="#666" stroke-width="1"/>
-      <line x1="64" y1="166" x2="76" y2="166" stroke="#666" stroke-width="1"/>
-      <line x1="64" y1="169" x2="76" y2="169" stroke="#666" stroke-width="1"/>
+      <!-- Esports Gaming Headset (matte obsidian band with brand orange glowing earcups) -->
+      <path d="M36 22 Q60 10 84 22" stroke="#141210" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M42 18 Q60 12 78 18" stroke="#333333" stroke-width="1.5" fill="none" opacity="0.6"/>
+      <!-- Left Earcup with orange LED accent -->
+      <rect x="31" y="20" width="10" height="18" rx="3" fill="#141210" stroke="#2B2824" stroke-width="0.8"/>
+      <rect x="33" y="23" width="6" height="12" rx="2" fill="#FF5931"/>
+      <circle cx="36" cy="29" r="1.5" fill="#FFFFFF" opacity="0.8"/>
+      <!-- Right Earcup with orange LED accent -->
+      <rect x="79" y="20" width="10" height="18" rx="3" fill="#141210" stroke="#2B2824" stroke-width="0.8"/>
+      <rect x="81" y="23" width="6" height="12" rx="2" fill="#FF5931"/>
+      <circle cx="84" cy="29" r="1.5" fill="#FFFFFF" opacity="0.8"/>
+      <!-- Boom Microphone -->
+      <path d="M41 33 L48 38 L54 37" stroke="#141210" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="55" cy="37" r="2.2" fill="#FF5931"/>
+      <!-- Head with boxy-pixel jaw and serious focused gamer expression -->
+      <rect x="44" y="16" width="32" height="26" rx="3" fill="url(#ffSkin)"/>
+      <!-- Hair: dark textured fringe with boxy pixel cuts -->
+      <path d="M43 16 L77 16 L77 24 L72 24 L70 20 L62 25 L54 19 L48 24 L43 23 Z" fill="#1A1816"/>
+      <!-- Serious focused eyes & determined brows (esports tournament focus) -->
+      <rect x="47" y="25" width="9" height="2" fill="#141210"/>
+      <rect x="64" y="25" width="9" height="2" fill="#141210"/>
+      <rect x="48" y="28" width="7" height="3" rx="0.5" fill="#141210"/>
+      <rect x="65" y="28" width="7" height="3" rx="0.5" fill="#141210"/>
+      <rect x="52" y="28" width="2" height="2" fill="#FFFFFF"/>
+      <rect x="69" y="28" width="2" height="2" fill="#FFFFFF"/>
+      <line x1="57" y1="34" x2="63" y2="34" stroke="#8A5A3C" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Neck -->
+      <rect x="54" y="42" width="12" height="6" fill="#C89A78"/>
+      <!-- 8-Bit Structured Orange Streetwear Hoodie (boxy with curved bevel edges) -->
+      <rect x="36" y="46" width="48" height="62" rx="4" fill="url(#ffHoodie)"/>
+      <!-- High collar with bevel -->
+      <rect x="44" y="42" width="32" height="8" rx="2" fill="#D03816"/>
+      <!-- Obsidian geometric chest armor / vest plate -->
+      <rect x="44" y="52" width="32" height="26" rx="2" fill="#141210"/>
+      <!-- 8-Bit Crest on Chest: crisp pixel gamepad emblem in brand orange -->
+      <rect x="52" y="58" width="16" height="8" rx="1.5" fill="#FF5931"/>
+      <!-- D-pad & action buttons -->
+      <rect x="54" y="60" width="3" height="4" fill="#FFFFFF"/>
+      <rect x="53" y="61" width="5" height="2" fill="#FFFFFF"/>
+      <circle cx="64" cy="61" r="0.9" fill="#FFFFFF"/>
+      <circle cx="66" cy="63" r="0.9" fill="#FFFFFF"/>
+      <!-- Tactical harness straps with metallic buckles -->
+      <line x1="42" y1="48" x2="42" y2="84" stroke="#141210" stroke-width="2.5"/>
+      <line x1="78" y1="48" x2="78" y2="84" stroke="#141210" stroke-width="2.5"/>
+      <rect x="40" y="60" width="4" height="4" rx="0.5" fill="#999999"/>
+      <rect x="76" y="60" width="4" height="4" rx="0.5" fill="#999999"/>
+      <!-- Kangaroo pocket with beveled corners -->
+      <path d="M42 82 L78 82 L75 98 L45 98 Z" fill="#B83212" stroke="#8C240A" stroke-width="0.8"/>
+      <!-- Ribbed hoodie hem -->
+      <rect x="36" y="104" width="48" height="6" rx="1" fill="#8C240A"/>
+      <!-- Boxy Arms & Tactical Sleeves with brand contrast piping -->
+      <rect x="24" y="48" width="13" height="46" rx="3" fill="url(#ffHoodie)"/>
+      <rect x="83" y="48" width="13" height="46" rx="3" fill="url(#ffHoodie)"/>
+      <line x1="24" y1="62" x2="37" y2="62" stroke="#141210" stroke-width="2"/>
+      <line x1="83" y1="62" x2="96" y2="62" stroke="#141210" stroke-width="2"/>
+      <!-- Fingerless gaming combat gloves -->
+      <rect x="24" y="90" width="13" height="8" rx="2" fill="#141210"/>
+      <rect x="83" y="90" width="13" height="8" rx="2" fill="#141210"/>
+      <circle cx="30" cy="100" r="4.5" fill="url(#ffSkin)"/>
+      <circle cx="90" cy="100" r="4.5" fill="url(#ffSkin)"/>
+      <!-- Streetwear Cargo Pants (obsidian with boxy pockets) -->
+      <rect x="40" y="108" width="18" height="54" rx="3" fill="url(#ffPants)"/>
+      <rect x="62" y="108" width="18" height="54" rx="3" fill="url(#ffPants)"/>
+      <!-- Cargo pockets with orange pull tabs -->
+      <rect x="38" y="122" width="6" height="14" rx="1" fill="#2E2C2A"/>
+      <rect x="38" y="124" width="2" height="4" fill="#FF5931"/>
+      <rect x="76" y="122" width="6" height="14" rx="1" fill="#2E2C2A"/>
+      <rect x="80" y="124" width="2" height="4" fill="#FF5931"/>
+      <!-- Futuristic Chunky High-Top Sneakers (clean bevels and curved athletic sole) -->
+      <rect x="36" y="162" width="22" height="12" rx="2" fill="#141210"/>
+      <rect x="62" y="162" width="22" height="12" rx="2" fill="#141210"/>
+      <!-- Orange & white curved sole -->
+      <path d="M34 174 L60 174 Q61 174 61 171 L59 170 L34 170 Z" fill="url(#ffSneaker)"/>
+      <path d="M60 174 L86 174 Q87 174 87 171 L85 170 L60 170 Z" fill="url(#ffSneaker)"/>
+      <rect x="34" y="174" width="26" height="2" fill="#141210"/>
+      <rect x="60" y="174" width="26" height="2" fill="#141210"/>
   </g>`,
   // Character 8
   `<g>
@@ -1233,124 +1284,135 @@ const characters = [
   // Character 9
   `<g>
 <defs>
-        <linearGradient id="pikaBody" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#FFD93D"/><stop offset="100%" stop-color="#FFB800"/>
+        <linearGradient id="pikaArmor" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FFDE43"/><stop offset="100%" stop-color="#FFA800"/>
         </linearGradient>
-        <linearGradient id="pikaBelly" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#FFE680"/><stop offset="100%" stop-color="#FFCC33"/>
+        <linearGradient id="pikaDark" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#242220"/><stop offset="100%" stop-color="#141210"/>
+        </linearGradient>
+        <linearGradient id="pikaCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#00FFFF"/><stop offset="100%" stop-color="#00B8D4"/>
         </linearGradient>
       </defs>
-      <!-- Ears lower & further apart with solid black tips -->
-      <path d="M34 46 L14 12 L44 38 Z" fill="url(#pikaBody)"/>
-      <path d="M34 46 L20 18 L42 38 Z" fill="#2A2A2A"/>
-      <path d="M86 46 L106 12 L76 38 Z" fill="url(#pikaBody)"/>
-      <path d="M86 46 L100 18 L78 38 Z" fill="#2A2A2A"/>
-      <!-- Brown patch where tail meets lower back -->
-      <path d="M86 124 L94 116 L98 122 L90 130 Z" fill="#8B5A2B"/>
-      <!-- Zigzag lightning tail -->
-      <path d="M92 122 L106 102 L98 98 L110 76 L102 72 L114 46 L106 42 L114 16" 
-            stroke="#FFD93D" stroke-width="8.5" fill="none" stroke-linejoin="miter" stroke-linecap="round"/>
-      <path d="M92 122 L106 102 L98 98 L110 76 L102 72 L114 46 L106 42 L114 16" 
-            stroke="#FF9900" stroke-width="3" fill="none" stroke-linejoin="miter" opacity="0.45"/>
-      <path d="M106 16 L118 8 L114 22 L118 30 L108 26 Z" fill="#FFD93D" stroke="#FF9900" stroke-width="1"/>
-      <!-- Head -->
-      <ellipse cx="60" cy="54" rx="28" ry="24" fill="url(#pikaBody)"/>
-      <ellipse cx="60" cy="62" rx="20" ry="14" fill="url(#pikaBelly)" opacity="0.6"/>
-      <!-- Eyes & Proportioned Cheek Circles (cheeks smaller relative to eyes) -->
-      <circle cx="47" cy="50" r="5.5" fill="#2A2A2A"/>
-      <circle cx="48.5" cy="49" r="2.2" fill="#FFFFFF"/>
-      <circle cx="73" cy="50" r="5.5" fill="#2A2A2A"/>
-      <circle cx="74.5" cy="49" r="2.2" fill="#FFFFFF"/>
-      <circle cx="38" cy="61" r="5.5" fill="#FF2222"/>
-      <circle cx="82" cy="61" r="5.5" fill="#FF2222"/>
-      <!-- Tiny nose & cat '3' mouth -->
-      <circle cx="60" cy="57" r="1.2" fill="#2A2A2A"/>
-      <path d="M54 62 Q57 65 60 62 Q63 65 66 62" stroke="#2A2A2A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-      <!-- Chonky pear-shaped body (wider at base) -->
-      <ellipse cx="60" cy="116" rx="36" ry="40" fill="url(#pikaBody)"/>
-      <ellipse cx="60" cy="122" rx="24" ry="28" fill="url(#pikaBelly)" opacity="0.75"/>
-      <!-- Stubby arms -->
-      <ellipse cx="30" cy="106" rx="9" ry="15" fill="url(#pikaBody)" transform="rotate(-20, 30, 106)"/>
-      <ellipse cx="90" cy="106" rx="9" ry="15" fill="url(#pikaBody)" transform="rotate(20, 90, 106)"/>
-      <!-- Feet with 3 distinct visible toe lines each -->
-      <ellipse cx="44" cy="158" rx="13" ry="7" fill="#FFB800"/>
-      <ellipse cx="76" cy="158" rx="13" ry="7" fill="#FFB800"/>
-      <line x1="39" y1="160" x2="39" y2="164" stroke="#CC9900" stroke-width="1.5"/>
-      <line x1="44" y1="160" x2="44" y2="165" stroke="#CC9900" stroke-width="1.5"/>
-      <line x1="49" y1="160" x2="49" y2="164" stroke="#CC9900" stroke-width="1.5"/>
-      <line x1="71" y1="160" x2="71" y2="164" stroke="#CC9900" stroke-width="1.5"/>
-      <line x1="76" y1="160" x2="76" y2="165" stroke="#CC9900" stroke-width="1.5"/>
-      <line x1="81" y1="160" x2="81" y2="164" stroke="#CC9900" stroke-width="1.5"/>
+      <!-- Stepped 8-Bit Lightning Ears with solid pixel-block tips -->
+      <!-- Left Ear (angled sharply) -->
+      <path d="M34 46 L16 12 L28 10 L44 38 Z" fill="url(#pikaArmor)"/>
+      <polygon points="16,12 28,10 24,20 18,22" fill="#141210"/>
+      <line x1="20" y1="20" x2="36" y2="40" stroke="#00FFFF" stroke-width="1.2" opacity="0.8"/>
+      <!-- Right Ear (angled sharply) -->
+      <path d="M86 46 L104 12 L92 10 L76 38 Z" fill="url(#pikaArmor)"/>
+      <polygon points="104,12 92,10 96,20 102,22" fill="#141210"/>
+      <line x1="100" y1="20" x2="84" y2="40" stroke="#00FFFF" stroke-width="1.2" opacity="0.8"/>
+      <!-- Stepped 8-Bit Pixel Lightning Tail (heavy faceted zig-zag with energy core) -->
+      <path d="M88 126 L104 106 L96 102 L110 78 L100 74 L114 46 L104 42 L116 16"
+            stroke="#141210" stroke-width="9.5" fill="none" stroke-linejoin="miter" stroke-linecap="square"/>
+      <path d="M88 126 L104 106 L96 102 L110 78 L100 74 L114 46 L104 42 L116 16"
+            stroke="url(#pikaArmor)" stroke-width="7" fill="none" stroke-linejoin="miter" stroke-linecap="square"/>
+      <path d="M88 126 L104 106 L96 102 L110 78 L100 74 L114 46 L104 42 L116 16"
+            stroke="#00FFFF" stroke-width="2" fill="none" stroke-linejoin="miter" opacity="0.9"/>
+      <!-- Head: Boxy Voxel Helmet / Head Silhouette with chamfered corners -->
+      <rect x="36" y="38" width="48" height="40" rx="4" fill="url(#pikaArmor)"/>
+      <rect x="38" y="40" width="44" height="6" rx="2" fill="#FFEAA0" opacity="0.4"/>
+      <!-- Tactical Carbon Brow -->
+      <path d="M38 48 L82 48 L80 52 L40 52 Z" fill="#141210"/>
+      <!-- Serious Combat Battle Eyes: Narrow intense electric visor slits (no round anime eyes) -->
+      <rect x="42" y="52" width="16" height="8" rx="2" fill="#141210"/>
+      <rect x="62" y="52" width="16" height="8" rx="2" fill="#141210"/>
+      <!-- Glowing cyan/amber battle pupils -->
+      <polygon points="44,55 54,53 56,58 46,58" fill="#00FFFF"/>
+      <polygon points="76,55 66,53 64,58 74,58" fill="#00FFFF"/>
+      <circle cx="49" cy="56" r="1.2" fill="#FFFFFF"/>
+      <circle cx="71" cy="56" r="1.2" fill="#FFFFFF"/>
+      <!-- Electric Cheek Capacitors: Angular lightning bolts (no blushing circles) -->
+      <polygon points="34,64 42,60 40,68 44,68 36,76 38,70 34,70" fill="#FF5931"/>
+      <polygon points="86,64 78,60 80,68 76,68 84,76 82,70 86,70" fill="#FF5931"/>
+      <!-- Serious battle-mask jawline / nose -->
+      <polygon points="58,66 62,66 60,68" fill="#141210"/>
+      <path d="M53 72 L60 74 L67 72" stroke="#141210" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <!-- Boxy Body Armor with curved corners (rx: 6) -->
+      <rect x="34" y="80" width="52" height="52" rx="5" fill="url(#pikaArmor)"/>
+      <!-- Carbon-fiber chest plate -->
+      <rect x="44" y="84" width="32" height="34" rx="3" fill="url(#pikaDark)"/>
+      <!-- Electric Lightning Crest on Chest -->
+      <polygon points="60,88 66,98 61,98 64,110 54,100 59,100" fill="url(#pikaCyan)"/>
+      <!-- Boxy Armored Arms with combat gauntlets -->
+      <rect x="22" y="84" width="14" height="26" rx="3" fill="url(#pikaArmor)"/>
+      <rect x="22" y="100" width="14" height="10" rx="2" fill="#141210"/>
+      <circle cx="29" cy="112" r="4" fill="url(#pikaArmor)"/>
+      <rect x="84" y="84" width="14" height="26" rx="3" fill="url(#pikaArmor)"/>
+      <rect x="84" y="100" width="14" height="10" rx="2" fill="#141210"/>
+      <circle cx="91" cy="112" r="4" fill="url(#pikaArmor)"/>
+      <!-- Boxy Combat Paws with heavy rubber soles -->
+      <rect x="36" y="132" width="20" height="26" rx="4" fill="url(#pikaArmor)"/>
+      <rect x="64" y="132" width="20" height="26" rx="4" fill="url(#pikaArmor)"/>
+      <!-- Heavy armored boots / paws with tread -->
+      <rect x="34" y="156" width="24" height="10" rx="2" fill="#141210"/>
+      <rect x="62" y="156" width="24" height="10" rx="2" fill="#141210"/>
+      <line x1="38" y1="162" x2="54" y2="162" stroke="#FF5931" stroke-width="1.5"/>
+      <line x1="66" y1="162" x2="82" y2="162" stroke="#FF5931" stroke-width="1.5"/>
   </g>`,
   // Character 10
   `<g>
 <defs>
         <linearGradient id="tekkenGi" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#B71C1C"/><stop offset="100%" stop-color="#7A1010"/>
+          <stop offset="0%" stop-color="#C82818"/><stop offset="100%" stop-color="#7A1008"/>
         </linearGradient>
         <linearGradient id="tekkenSkin" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#D8B88C"/><stop offset="100%" stop-color="#C8A878"/>
+          <stop offset="0%" stop-color="#E2B897"/><stop offset="100%" stop-color="#C89A78"/>
         </linearGradient>
       </defs>
-      <!-- Distinct sharp hair spikes using separate polygons -->
-      <polygon points="40,20 45,4 52,18" fill="#1A1A1A"/>
-      <polygon points="49,18 55,1 61,17" fill="#1A1A1A"/>
-      <polygon points="58,17 65,2 71,18" fill="#1A1A1A"/>
-      <polygon points="68,18 75,5 80,21" fill="#1A1A1A"/>
-      <rect x="44" y="16" width="32" height="6" fill="#1A1A1A"/>
-      <!-- Head with defined jawline -->
-      <path d="M46 18 L74 18 L76 38 L44 38 Z" fill="url(#tekkenSkin)"/>
-      <path d="M46 32 Q60 38 74 32 L74 36 L46 36 Z" fill="#000" opacity="0.1"/>
-      <path d="M50 26 L58 24 L56 30 Z" fill="#2A2A2A"/>
-      <path d="M62 24 L70 26 L66 30 Z" fill="#2A2A2A"/>
-      <line x1="48" y1="22" x2="58" y2="24" stroke="#2A2A2A" stroke-width="1.5"/>
-      <line x1="62" y1="24" x2="72" y2="22" stroke="#2A2A2A" stroke-width="1.5"/>
-      <rect x="56" y="34" width="8" height="3" rx="1" fill="#5A3A2A" opacity="0.5"/>
-      <rect x="54" y="36" width="12" height="2" rx="1" fill="#5A3A2A"/>
-      <rect x="54" y="38" width="12" height="6" fill="#C8A878"/>
-      <!-- Gi base -->
-      <path d="M34 44 L86 44 L88 100 L32 100 Z" fill="url(#tekkenGi)"/>
-      <!-- Visible V-neck opening: Left lapel crossing OVER right lapel with white inner lining -->
-      <path d="M72 44 L60 74 L68 100 L78 100 L78 50 Z" fill="#5A1010"/>
-      <!-- White inner edge of left lapel -->
-      <line x1="48" y1="44" x2="60" y2="76" stroke="#FFFFFF" stroke-width="1.5" opacity="0.8"/>
-      <!-- Left lapel overlapping -->
-      <path d="M48 44 L60 76 L52 100 L42 100 L42 50 Z" fill="#6A1212"/>
-      <!-- Prominent Black Belt (Obi) with knot and hanging ends -->
-      <rect x="32" y="96" width="56" height="8" fill="#1A1A1A"/>
-      <rect x="54" y="94" width="12" height="12" rx="1" fill="#1A1A1A"/>
-      <!-- Two hanging belt ends -->
-      <rect x="55" y="104" width="4" height="14" fill="#1A1A1A"/>
-      <rect x="61" y="104" width="4" height="12" fill="#1A1A1A"/>
-      <!-- Arms -->
-      <rect x="20" y="50" width="14" height="35" rx="4" fill="url(#tekkenGi)" transform="rotate(20, 27, 67)"/>
-      <!-- Left fist with knuckle arcs -->
-      <circle cx="16" cy="90" r="8" fill="#B71C1C"/>
-      <rect x="12" y="84" width="8" height="4" fill="#7A1010"/>
-      <path d="M13 88 Q16 86 19 88" stroke="#5A0808" stroke-width="1.2" fill="none"/>
-      <path d="M13 92 Q16 90 19 92" stroke="#5A0808" stroke-width="1.2" fill="none"/>
-      <rect x="86" y="50" width="14" height="30" rx="4" fill="url(#tekkenGi)" transform="rotate(-15, 93, 65)"/>
-      <!-- Right fist with knuckle arcs -->
-      <circle cx="100" cy="82" r="8" fill="#B71C1C"/>
-      <rect x="96" y="76" width="8" height="4" fill="#7A1010"/>
-      <path d="M97 80 Q100 78 103 80" stroke="#5A0808" stroke-width="1.2" fill="none"/>
-      <path d="M97 84 Q100 82 103 84" stroke="#5A0808" stroke-width="1.2" fill="none"/>
-      <!-- Gi pants -->
-      <rect x="38" y="104" width="20" height="58" rx="4" fill="#7A1010"/>
-      <rect x="62" y="104" width="20" height="58" rx="4" fill="#7A1010"/>
-      <rect x="40" y="132" width="16" height="8" rx="2" fill="#5A1010"/>
-      <rect x="64" y="132" width="16" height="8" rx="2" fill="#5A1010"/>
-      <!-- Bare feet with toes -->
-      <ellipse cx="46" cy="168" rx="13" ry="7" fill="url(#tekkenSkin)"/>
-      <ellipse cx="74" cy="168" rx="13" ry="7" fill="url(#tekkenSkin)"/>
-      <line x1="38" y1="168" x2="38" y2="173" stroke="#B89878" stroke-width="1.5"/>
-      <line x1="42" y1="168" x2="42" y2="174" stroke="#B89878" stroke-width="1.5"/>
-      <line x1="46" y1="168" x2="46" y2="174" stroke="#B89878" stroke-width="1.5"/>
-      <line x1="50" y1="168" x2="50" y2="174" stroke="#B89878" stroke-width="1.5"/>
-      <line x1="68" y1="168" x2="68" y2="173" stroke="#B89878" stroke-width="1.5"/>
-      <line x1="72" y1="168" x2="72" y2="174" stroke="#B89878" stroke-width="1.5"/>
-      <line x1="76" y1="168" x2="76" y2="174" stroke="#B89878" stroke-width="1.5"/>
-      <line x1="80" y1="168" x2="80" y2="174" stroke="#B89878" stroke-width="1.5"/>
+      <!-- Sharp Spiky Hair Polygons (iconic Jin Kazama fringe) -->
+      <polygon points="40,20 44,2 52,18" fill="#141210"/>
+      <polygon points="48,18 55,0 62,17" fill="#141210"/>
+      <polygon points="58,17 66,1 72,18" fill="#141210"/>
+      <polygon points="68,18 76,4 82,21" fill="#141210"/>
+      <rect x="42" y="16" width="36" height="8" rx="2" fill="#141210"/>
+      <!-- Head with Defined Angular Jawline -->
+      <path d="M44 18 L76 18 L78 38 L70 44 L50 44 L42 38 Z" fill="url(#tekkenSkin)"/>
+      <!-- Fierce Tournament Battle Eyes & Furrowed Brow -->
+      <polygon points="46,24 57,27 55,29 46,26" fill="#141210"/>
+      <polygon points="74,24 63,27 65,29 74,26" fill="#141210"/>
+      <rect x="48" y="27" width="8" height="3" rx="0.5" fill="#141210"/>
+      <rect x="64" y="27" width="8" height="3" rx="0.5" fill="#141210"/>
+      <circle cx="52" cy="28.5" r="1.2" fill="#FF5931"/>
+      <circle cx="68" cy="28.5" r="1.2" fill="#FF5931"/>
+      <rect x="54" y="36" width="12" height="2" rx="1" fill="#6A321A"/>
+      <rect x="54" y="42" width="12" height="6" fill="#C89A78"/>
+      <!-- Structured Karate Gi Torso (crisp V-lapels) -->
+      <rect x="34" y="46" width="52" height="54" rx="4" fill="url(#tekkenGi)"/>
+      <!-- Left lapel overlapping right lapel with white edge lining -->
+      <path d="M72 46 L60 76 L68 100 L78 100 L78 50 Z" fill="#6A0C08"/>
+      <line x1="46" y1="46" x2="60" y2="78" stroke="#FFFFFF" stroke-width="1.8" opacity="0.9"/>
+      <path d="M46 46 L60 78 L52 100 L42 100 L42 50 Z" fill="#8C1410"/>
+      <!-- Prominent Heavy Black Obi Belt with gold embroidery -->
+      <rect x="32" y="96" width="56" height="9" rx="1" fill="#141210"/>
+      <rect x="54" y="94" width="12" height="13" rx="1" fill="#141210"/>
+      <rect x="55" y="105" width="4.5" height="16" fill="#141210"/>
+      <rect x="60.5" y="105" width="4.5" height="14" fill="#141210"/>
+      <rect x="55" y="117" width="4.5" height="4" fill="#FFD700"/>
+      <rect x="60.5" y="115" width="4.5" height="4" fill="#FFD700"/>
+      <!-- Muscular Boxy Arms in Combat Stance -->
+      <rect x="20" y="50" width="14" height="36" rx="4" fill="url(#tekkenGi)" transform="rotate(20, 27, 68)"/>
+      <rect x="86" y="50" width="14" height="32" rx="4" fill="url(#tekkenGi)" transform="rotate(-15, 93, 66)"/>
+      <!-- Studded Armored Gauntlets & Clenched Fists -->
+      <circle cx="16" cy="92" r="8.5" fill="#8C1410"/>
+      <rect x="12" y="85" width="9" height="5" rx="1" fill="#141210"/>
+      <circle cx="14" cy="87.5" r="1" fill="#FFFFFF"/>
+      <circle cx="18" cy="87.5" r="1" fill="#FFFFFF"/>
+      <circle cx="102" cy="84" r="8.5" fill="#8C1410"/>
+      <rect x="97" y="77" width="9" height="5" rx="1" fill="#141210"/>
+      <circle cx="99" cy="79.5" r="1" fill="#FFFFFF"/>
+      <circle cx="103" cy="79.5" r="1" fill="#FFFFFF"/>
+      <!-- Structured Gi Pants -->
+      <rect x="38" y="104" width="20" height="56" rx="4" fill="#7A1008"/>
+      <rect x="62" y="104" width="20" height="56" rx="4" fill="#7A1008"/>
+      <!-- Wrapped Martial Arts Footguards & Ankle Supports (no drawn toe lines) -->
+      <rect x="40" y="148" width="17" height="14" rx="2" fill="#141210"/>
+      <rect x="63" y="148" width="17" height="14" rx="2" fill="#141210"/>
+      <rect x="38" y="162" width="21" height="12" rx="3" fill="#8C1410"/>
+      <rect x="61" y="162" width="21" height="12" rx="3" fill="#8C1410"/>
+      <line x1="38" y1="166" x2="59" y2="166" stroke="#FFFFFF" stroke-width="1.5"/>
+      <line x1="61" y1="166" x2="82" y2="166" stroke="#FFFFFF" stroke-width="1.5"/>
   </g>`,
   // Character 11
   `<g>
@@ -1547,6 +1609,12 @@ function initAboutPhysics() {
   const CHAR_W = 84;
   const CHAR_H = 140;
 
+  // Collision hitbox calibrated to character body inside 84x140 container
+  const HIT_OX = 14;
+  const HIT_OY = 8;
+  const HIT_W = 56;
+  const HIT_H = 124;
+
   const physicsBodies = [];
   let activeDragBody = null;
   let dragOffsetX = 0, dragOffsetY = 0;
@@ -1557,43 +1625,112 @@ function initAboutPhysics() {
     return { x: e.clientX, y: e.clientY };
   }
 
-  // AABB collision resolution — push character out of the solid obstacle along shallowest penetration edge
-  function resolveAABB(x, y, w, h, sx, sy, sw, sh) {
-    if (x + w <= sx || x >= sx + sw || y + h <= sy || y >= sy + sh) return { x, y };
-    const oL = (x + w) - sx, oR = (sx + sw) - x, oT = (y + h) - sy, oB = (sy + sh) - y;
-    const m = Math.min(oL, oR, oT, oB);
-    if (m === oL) return { x: sx - w, y };
-    if (m === oR) return { x: sx + sw, y };
-    if (m === oT) return { x, y: sy - h };
-    return { x, y: sy + sh };
+  // Circular obstacle collision (pushes character radially away from the red globe)
+  function resolveCircleObstacle(x, y, w, h, cx, cy, r) {
+    const clampX = Math.max(x, Math.min(cx, x + w));
+    const clampY = Math.max(y, Math.min(cy, y + h));
+    const dx = clampX - cx;
+    const dy = clampY - cy;
+    const distSq = dx * dx + dy * dy;
+
+    if (distSq < r * r) {
+      const dist = Math.sqrt(distSq);
+      if (dist < 0.001) {
+        return { x, y: cy + r, hit: true, nx: 0, ny: 1 };
+      }
+      const penetration = r - dist;
+      const nx = dx / dist;
+      const ny = dy / dist;
+      return {
+        x: x + nx * penetration,
+        y: y + ny * penetration,
+        hit: true,
+        nx,
+        ny
+      };
+    }
+    return { x, y, hit: false, nx: 0, ny: 0 };
   }
 
-  // Get obstacle bounding rects relative to the About section
-  function getColliders() {
+  // AABB collision resolution — push character out of the solid obstacle along shallowest penetration edge
+  function resolveAABB(x, y, w, h, sx, sy, sw, sh) {
+    if (x + w <= sx || x >= sx + sw || y + h <= sy || y >= sy + sh) {
+      return { x, y, hit: false, nx: 0, ny: 0 };
+    }
+    const oL = (x + w) - sx, oR = (sx + sw) - x, oT = (y + h) - sy, oB = (sy + sh) - y;
+    const m = Math.min(oL, oR, oT, oB);
+    if (m === oL) return { x: sx - w, y, hit: true, nx: -1, ny: 0, axis: 'x' };
+    if (m === oR) return { x: sx + sw, y, hit: true, nx: 1, ny: 0, axis: 'x' };
+    if (m === oT) return { x, y: sy - h, hit: true, nx: 0, ny: -1, axis: 'y' };
+    return { x, y: sy + sh, hit: true, nx: 0, ny: 1, axis: 'y' };
+  }
+
+  // Get dynamic obstacles in section coordinate space
+  function getObstacles() {
     const secRect = section.getBoundingClientRect();
-    const colliders = [];
+    let globe = null;
+    let button = null;
 
     if (eclipseEl) {
       const r = eclipseEl.getBoundingClientRect();
-      colliders.push({
-        x: r.left - secRect.left,
-        y: r.top - secRect.top,
-        w: r.width,
-        h: r.height
-      });
+      const radius = r.width / 2;
+      const cx = (r.left + r.right) / 2 - secRect.left;
+      const cy = (r.top + r.bottom) / 2 - secRect.top;
+      // Red globe circle (+2px buffer so character doesn't clip into perimeter)
+      globe = { cx, cy, radius: radius + 2 };
     }
 
     if (btnAbout) {
       const r = btnAbout.getBoundingClientRect();
-      colliders.push({
+      button = {
         x: r.left - secRect.left,
         y: r.top - secRect.top,
         w: r.width,
         h: r.height
-      });
+      };
     }
 
-    return { secRect, colliders };
+    return { secRect, globe, button };
+  }
+
+  // Apply constraints and obstacle collisions
+  function applyObstacles(x, y, secW, secH, globe, button) {
+    let boxX = x + HIT_OX;
+    let boxY = y + HIT_OY;
+    let hitGlobe = null;
+    let hitButton = null;
+
+    for (let iter = 0; iter < 2; iter++) {
+      if (globe) {
+        const cRes = resolveCircleObstacle(boxX, boxY, HIT_W, HIT_H, globe.cx, globe.cy, globe.radius);
+        if (cRes.hit) {
+          boxX = cRes.x;
+          boxY = cRes.y;
+          hitGlobe = cRes;
+        }
+      }
+
+      if (button) {
+        const bRes = resolveAABB(boxX, boxY, HIT_W, HIT_H, button.x, button.y, button.w, button.h);
+        if (bRes.hit) {
+          boxX = bRes.x;
+          boxY = bRes.y;
+          hitButton = bRes;
+        }
+      }
+
+      // Keep visual body inside section bounds:
+      // Left edge touches 0, right edge touches secW, top touches 0, feet touch secH
+      boxX = Math.max(0, Math.min(boxX, secW - HIT_W));
+      boxY = Math.max(0, Math.min(boxY, secH - HIT_H));
+    }
+
+    return {
+      x: boxX - HIT_OX,
+      y: boxY - HIT_OY,
+      hitGlobe,
+      hitButton
+    };
   }
 
   // Detach a character from the rotating circle and create a falling physics body
@@ -1606,14 +1743,15 @@ function initAboutPhysics() {
 
     // Get current on-screen location relative to section
     const charRect = targetG.getBoundingClientRect();
-    const secRect = section.getBoundingClientRect();
+    const { secRect, globe, button } = getObstacles();
 
     let startX = charRect.left - secRect.left;
     let startY = charRect.top - secRect.top;
 
-    // Constrain to inside section
-    startX = Math.max(0, Math.min(startX, secRect.width - CHAR_W));
-    startY = Math.max(0, Math.min(startY, secRect.height - CHAR_H));
+    // Smoothly resolve initial detached position outside obstacles
+    const solved = applyObstacles(startX, startY, secRect.width, secRect.height, globe, button);
+    startX = solved.x;
+    startY = solved.y;
 
     // Hide original element in SVG rotator
     targetG.style.transition = '';
@@ -1712,21 +1850,15 @@ function initAboutPhysics() {
     if (!activeDragBody) return;
     e.preventDefault();
     const p = getPointer(e);
-    const { secRect, colliders } = getColliders();
+    const { secRect, globe, button } = getObstacles();
 
     let newX = (p.x - secRect.left) - dragOffsetX;
     let newY = (p.y - secRect.top) - dragOffsetY;
 
-    // Constrain to section bounds (left, right, top, bottom)
-    newX = Math.max(0, Math.min(newX, secRect.width - CHAR_W));
-    newY = Math.max(0, Math.min(newY, secRect.height - CHAR_H));
-
-    // Collision with solid obstacles (red circle & about us button)
-    colliders.forEach(col => {
-      const c = resolveAABB(newX, newY, CHAR_W, CHAR_H, col.x, col.y, col.w, col.h);
-      newX = c.x;
-      newY = c.y;
-    });
+    // Apply obstacle and boundary constraints (freely moves anywhere except red globe & button)
+    const solved = applyObstacles(newX, newY, secRect.width, secRect.height, globe, button);
+    newX = solved.x;
+    newY = solved.y;
 
     // Velocity from drag movement (for release throw)
     activeDragBody.vx = (newX - activeDragBody.x) * 0.5;
@@ -1765,7 +1897,7 @@ function initAboutPhysics() {
     }
 
     if (physicsBodies.length > 0) {
-      const { secRect, colliders } = getColliders();
+      const { secRect, globe, button } = getObstacles();
       const secW = secRect.width;
       const secH = secRect.height;
 
@@ -1778,43 +1910,46 @@ function initAboutPhysics() {
         let newX = body.x + body.vx;
         let newY = body.y + body.vy;
 
-        // Ground collision (bottom of About section)
-        if (newY + CHAR_H >= secH) {
-          newY = secH - CHAR_H;
+        // Ground collision (feet touch floor)
+        if (newY + HIT_OY + HIT_H >= secH) {
+          newY = secH - HIT_H - HIT_OY;
           body.vy = -body.vy * BOUNCE;
           body.vx *= GROUND_FRICTION;
           if (Math.abs(body.vy) < 1) body.vy = 0;
           if (Math.abs(body.vx) < 0.5) body.vx = 0;
         }
 
-        // Ceiling
-        if (newY < 0) {
-          newY = 0;
+        // Ceiling collision
+        if (newY + HIT_OY < 0) {
+          newY = -HIT_OY;
           body.vy = -body.vy * BOUNCE;
         }
 
-        // Left & Right walls
-        if (newX < 0) {
-          newX = 0;
+        // Left & Right wall collisions
+        if (newX + HIT_OX < 0) {
+          newX = -HIT_OX;
           body.vx = -body.vx * BOUNCE;
         }
-        if (newX + CHAR_W > secW) {
-          newX = secW - CHAR_W;
+        if (newX + HIT_OX + HIT_W > secW) {
+          newX = secW - HIT_W - HIT_OX;
           body.vx = -body.vx * BOUNCE;
         }
 
         // Solid obstacle collisions (red circle & About Us button)
-        colliders.forEach(col => {
-          const c = resolveAABB(newX, newY, CHAR_W, CHAR_H, col.x, col.y, col.w, col.h);
-          if (c.x !== newX) {
-            body.vx = -body.vx * BOUNCE;
-            newX = c.x;
+        const solved = applyObstacles(newX, newY, secW, secH, globe, button);
+        if (solved.hitGlobe) {
+          const dot = body.vx * solved.hitGlobe.nx + body.vy * solved.hitGlobe.ny;
+          if (dot < 0) {
+            body.vx = (body.vx - (1 + BOUNCE) * dot * solved.hitGlobe.nx) * 0.95;
+            body.vy = (body.vy - (1 + BOUNCE) * dot * solved.hitGlobe.ny) * 0.95;
           }
-          if (c.y !== newY) {
-            body.vy = -body.vy * BOUNCE;
-            newY = c.y;
-          }
-        });
+        }
+        if (solved.hitButton) {
+          if (solved.hitButton.axis === 'x') body.vx = -body.vx * BOUNCE;
+          if (solved.hitButton.axis === 'y') body.vy = -body.vy * BOUNCE;
+        }
+        newX = solved.x;
+        newY = solved.y;
 
         body.x = newX;
         body.y = newY;
