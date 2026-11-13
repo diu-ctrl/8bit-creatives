@@ -202,6 +202,24 @@
       margin: 0 0 24px 0;
       text-transform: none;
     }
+    .service-block-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      color: #FFFFFF;
+      font-family: 'Geist', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      opacity: 0.8;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+    .service-block-cta:hover {
+      opacity: 1;
+      transform: translateX(4px);
+    }
     .service-tags {
       display: flex;
       flex-wrap: wrap;
@@ -834,6 +852,7 @@
           <span class="service-tag">Platform migration</span>
           <span class="service-tag">Esports tournaments</span>
         </div>
+        <a href="contact.html?type=brand" class="service-block-cta">Start a Campaign &rarr;</a>
       </div>
 
       <!-- Block 2 — For Creators -->
@@ -849,6 +868,7 @@
           <span class="service-tag">Legal & compliance</span>
           <span class="service-tag">Career infrastructure</span>
         </div>
+        <a href="contact.html?type=creator" class="service-block-cta">Apply for Representation &rarr;</a>
       </div>
 
       <!-- Block 3 — For Platforms -->
@@ -863,6 +883,7 @@
           <span class="service-tag">Growth consulting</span>
           <span class="service-tag">Community building</span>
         </div>
+        <a href="contact.html?type=platform" class="service-block-cta">Discuss Platform Partnership &rarr;</a>
       </div>
     </div>
   </section>

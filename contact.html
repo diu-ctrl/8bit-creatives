@@ -262,6 +262,62 @@
         font-size: 24px;
       }
     }
+
+    /* Category / Track Switcher */
+    .track-tabs-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 32px;
+      width: 100%;
+    }
+    .track-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 5px;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .track-tab-btn {
+      padding: 10px 22px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      font-family: 'Geist', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      outline: none;
+    }
+    .track-tab-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .track-tab-btn.active {
+      background: #FFFFFF;
+      color: #0A0A0A;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+    @media (max-width: 600px) {
+      .track-tabs {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+      .track-tab-btn {
+        flex: 1;
+        padding: 9px 10px;
+        font-size: 12px;
+      }
+    }
   </style>
   <!-- Vercel Web Analytics — tracks page views, unique visitors, top pages, referrers, devices -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -315,10 +371,19 @@
 <a href="contact.html" class="nav-cta-topright">Start Campaign</a>
 
 <!-- ============================================================
-     THE FORM: 3-STEP CONVERSATIONAL BRIEF
+     THE FORM: 3-TRACK CONVERSATIONAL BRIEF (BRANDS / CREATORS / PLATFORMS)
      ============================================================ -->
 <section class="contact-form-section" data-bg="dark">
   <div class="form-container">
+    <!-- Category Track Switcher -->
+    <div class="track-tabs-wrap">
+      <div class="track-tabs" role="tablist" aria-label="Inquiry Category">
+        <button type="button" class="track-tab-btn active" data-track="brand" role="tab" aria-selected="true" id="tab-brand">For Brands</button>
+        <button type="button" class="track-tab-btn" data-track="creator" role="tab" aria-selected="false" id="tab-creator">For Creators</button>
+        <button type="button" class="track-tab-btn" data-track="platform" role="tab" aria-selected="false" id="tab-platform">For Platforms</button>
+      </div>
+    </div>
+
     <div class="form-progress"><div class="form-progress-fill" id="progressFill"></div></div>
     
     <div class="form-header">
@@ -336,99 +401,298 @@
           aria-live="polite">
 
       <!-- Formspree configuration -->
-      <input type="hidden" name="_subject" value="New brief submitted via 8bit-creatives.vercel.app">
+      <input type="hidden" name="_subject" id="formSubject" value="New Brand Brief via 8bit-creatives.vercel.app">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_language" value="en">
       <input type="hidden" name="_next" value="https://8bit-creatives.vercel.app/contact?status=success">
 
+      <!-- Active Track / Inquiry Type -->
+      <input type="hidden" name="inquiry_type" id="inquiry_type" value="Brand Campaign">
+
       <!-- Honeypot field (bots fill it, humans do not) -->
       <input type="text" name="company_website" id="company_website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
 
       <!-- Pill selection hidden inputs for Formspree table -->
-      <input type="hidden" name="project_type" id="selected_project_type" value="">
+      <input type="hidden" name="project_type" id="selected_project_type" value="Brand Campaign">
       <input type="hidden" name="budget" id="selected_budget" value="">
       <input type="hidden" name="timeline" id="selected_timeline" value="">
 
-      <!-- Step 1 -->
-      <div class="form-step active" id="step1">
-        <div class="form-group">
-          <label class="form-label" for="name">What should we call you?</label>
-          <input type="text" class="form-input" id="name" name="name" placeholder="Your name" autocomplete="name" maxlength="120" required aria-required="true">
+      <!-- Creator pill hidden inputs -->
+      <input type="hidden" name="gaming_category" id="selected_gaming_category" value="BGMI & Mobile Esports">
+      <input type="hidden" name="reach_followers" id="selected_reach_followers" value="100K - 250K">
+      <input type="hidden" name="streaming_cadence" id="selected_streaming_cadence" value="15+ hrs/week">
+      <input type="hidden" name="representation_status" id="selected_representation_status" value="Independent / Unsigned">
+
+      <!-- Platform pill hidden inputs -->
+      <input type="hidden" name="platform_scope" id="selected_platform_scope" value="Talent Migration">
+      <input type="hidden" name="roster_volume" id="selected_roster_volume" value="1-5 Flagship Talent">
+      <input type="hidden" name="platform_timeline" id="selected_platform_timeline" value="Immediate (Within 30 days)">
+
+      <!-- ==============================================
+           TRACK 1: FOR BRANDS
+           ============================================== -->
+      <div class="track-content active" id="track-content-brand">
+        <!-- Step 1 (Brand) -->
+        <div class="form-step active" id="brand-step1">
+          <div class="form-group">
+            <label class="form-label" for="brand_name">What should we call you? <span style="color:#cc4444;">*</span></label>
+            <input type="text" class="form-input" id="brand_name" name="brand_name" placeholder="Your name" autocomplete="name" maxlength="120">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="brand_email">Where should we send the reply? <span style="color:#cc4444;">*</span></label>
+            <input type="email" class="form-input" id="brand_email" name="brand_email" placeholder="you@brand.com" autocomplete="email" inputmode="email" maxlength="254" spellcheck="false">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="brand_company">Who are you representing?</label>
+            <input type="text" class="form-input" id="brand_company" name="brand_company" placeholder="Brand, Company or Agency name" autocomplete="organization" maxlength="200">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="brand_role">What's your role?</label>
+            <select class="form-select" id="brand_role" name="brand_role" autocomplete="off">
+              <option value="">Select your role</option>
+              <option>Brand Manager</option>
+              <option>Founder / CXO</option>
+              <option>Marketing Lead</option>
+              <option>Agency Lead</option>
+              <option>Media Planner</option>
+              <option>Other</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="email">Where should we send the reply?</label>
-          <input type="email" class="form-input" id="email" name="email" placeholder="you@brand.com" autocomplete="email" inputmode="email" maxlength="254" spellcheck="false" required aria-required="true">
+
+        <!-- Step 2 (Brand) -->
+        <div class="form-step" id="brand-step2">
+          <div class="form-group">
+            <label class="form-label">What are we building?</label>
+            <div class="pill-group" id="brandProjectType">
+              <button type="button" class="pill-btn selected" data-value="Brand Campaign">Brand Campaign</button>
+              <button type="button" class="pill-btn" data-value="Creator Integration">Creator Integration</button>
+              <button type="button" class="pill-btn" data-value="Live Broadcast">Live Broadcast</button>
+              <button type="button" class="pill-btn" data-value="Tournament">Tournament</button>
+              <button type="button" class="pill-btn" data-value="Platform Deal">Platform Deal</button>
+              <button type="button" class="pill-btn" data-value="Not Sure Yet">Not sure yet</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">What's the ballpark budget?</label>
+            <div class="pill-group" id="brandBudget">
+              <button type="button" class="pill-btn" data-value="<10L">Under ₹10L</button>
+              <button type="button" class="pill-btn" data-value="10-25L">₹10L - ₹25L</button>
+              <button type="button" class="pill-btn" data-value="25-50L">₹25L - ₹50L</button>
+              <button type="button" class="pill-btn" data-value="50L-1Cr">₹50L - ₹1Cr</button>
+              <button type="button" class="pill-btn" data-value="1Cr+">₹1Cr+</button>
+              <button type="button" class="pill-btn" data-value="Let's talk">Let's talk</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">When does this need to happen?</label>
+            <div class="pill-group" id="brandTimeline">
+              <button type="button" class="pill-btn" data-value="ASAP">ASAP</button>
+              <button type="button" class="pill-btn" data-value="1-3 months">1-3 months</button>
+              <button type="button" class="pill-btn" data-value="3-6 months">3-6 months</button>
+              <button type="button" class="pill-btn" data-value="Just exploring">Just exploring</button>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="company">Who are you representing?</label>
-          <input type="text" class="form-input" id="company" name="company" placeholder="Company / Brand name" autocomplete="organization" maxlength="200">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="role">What's your role?</label>
-          <select class="form-select" id="role" name="role" autocomplete="off">
-            <option value="">Select your role</option>
-            <option>Brand Manager</option>
-            <option>Founder</option>
-            <option>Marketing Lead</option>
-            <option>Agency</option>
-            <option>Other</option>
-          </select>
+
+        <!-- Step 3 (Brand) -->
+        <div class="form-step" id="brand-step3">
+          <div class="form-group">
+            <label class="form-label" for="brand_pitch">Tell us about the project. <span style="color:#cc4444;">*</span></label>
+            <textarea class="form-textarea" id="brand_pitch" name="brand_pitch" placeholder="What's the goal, the game, the audience?" maxlength="2000"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="brand_source">How did you find us? (Optional)</label>
+            <select class="form-select" id="brand_source" name="brand_source" autocomplete="off">
+              <option value="">Select source</option>
+              <option>LinkedIn</option>
+              <option>Instagram</option>
+              <option>YouTube</option>
+              <option>Word of mouth</option>
+              <option>Search</option>
+              <option>Other</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      <!-- Step 2 -->
-      <div class="form-step" id="step2">
-        <div class="form-group">
-          <label class="form-label">What are we building?</label>
-          <div class="pill-group" id="projectType">
-            <button type="button" class="pill-btn" data-value="Brand Campaign">Brand Campaign</button>
-            <button type="button" class="pill-btn" data-value="Live Broadcast">Live Broadcast</button>
-            <button type="button" class="pill-btn" data-value="Tournament">Tournament</button>
-            <button type="button" class="pill-btn" data-value="Creator Integration">Creator Integration</button>
-            <button type="button" class="pill-btn" data-value="Platform Deal">Platform Deal</button>
-            <button type="button" class="pill-btn" data-value="Not Sure Yet">Not sure yet</button>
+      <!-- ==============================================
+           TRACK 2: FOR CREATORS
+           ============================================== -->
+      <div class="track-content" id="track-content-creator" style="display:none;">
+        <!-- Step 1 (Creator) -->
+        <div class="form-step" id="creator-step1">
+          <div class="form-group">
+            <label class="form-label" for="creator_handle">What's your creator handle / gamertag? <span style="color:#cc4444;">*</span></label>
+            <input type="text" class="form-input" id="creator_handle" name="creator_handle" placeholder="e.g. ViperPlays, Mortal, Goldy" autocomplete="nickname" maxlength="120">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="creator_legal_name">Full Legal Name <span style="color:#cc4444;">*</span></label>
+            <input type="text" class="form-input" id="creator_legal_name" name="creator_legal_name" placeholder="Your full name" autocomplete="name" maxlength="120">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="creator_email">Where can our talent directors reach you? <span style="color:#cc4444;">*</span></label>
+            <input type="email" class="form-input" id="creator_email" name="creator_email" placeholder="you@creator.in or personal email" autocomplete="email" inputmode="email" maxlength="254" spellcheck="false">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="creator_phone">Contact Number / WhatsApp</label>
+            <input type="tel" class="form-input" id="creator_phone" name="creator_phone" placeholder="+91 98765 43210" autocomplete="tel" maxlength="25">
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">What's the ballpark budget?</label>
-          <div class="pill-group" id="budget">
-            <button type="button" class="pill-btn" data-value="<10L">Under ₹10L</button>
-            <button type="button" class="pill-btn" data-value="10-25L">₹10L - ₹25L</button>
-            <button type="button" class="pill-btn" data-value="25-50L">₹25L - ₹50L</button>
-            <button type="button" class="pill-btn" data-value="50L-1Cr">₹50L - ₹1Cr</button>
-            <button type="button" class="pill-btn" data-value="1Cr+">₹1Cr+</button>
-            <button type="button" class="pill-btn" data-value="Let's talk">Let's talk</button>
+
+        <!-- Step 2 (Creator) -->
+        <div class="form-step" id="creator-step2">
+          <div class="form-group">
+            <label class="form-label" for="creator_channel_url">Primary Channel / Stream URL <span style="color:#cc4444;">*</span></label>
+            <input type="url" class="form-input" id="creator_channel_url" name="creator_channel_url" placeholder="https://youtube.com/@handle or kick.com/handle" maxlength="250">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Primary Content Category</label>
+            <div class="pill-group" id="creatorCategory">
+              <button type="button" class="pill-btn selected" data-value="BGMI & Mobile Esports">BGMI &amp; Mobile Esports</button>
+              <button type="button" class="pill-btn" data-value="PC Esports (Valorant, CS2)">PC Esports (Valorant, CS2)</button>
+              <button type="button" class="pill-btn" data-value="Free Fire">Free Fire</button>
+              <button type="button" class="pill-btn" data-value="GTA RP & Story">GTA RP &amp; Story</button>
+              <button type="button" class="pill-btn" data-value="Variety Gaming & Tech">Variety Gaming &amp; Tech</button>
+              <button type="button" class="pill-btn" data-value="Lifestyle & Vlogging">Lifestyle &amp; Vlogging</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total Reach / Followers (Combined)</label>
+            <div class="pill-group" id="creatorReach">
+              <button type="button" class="pill-btn" data-value="50K - 100K">50K - 100K</button>
+              <button type="button" class="pill-btn selected" data-value="100K - 250K">100K - 250K</button>
+              <button type="button" class="pill-btn" data-value="250K - 500K">250K - 500K</button>
+              <button type="button" class="pill-btn" data-value="500K - 1M">500K - 1M</button>
+              <button type="button" class="pill-btn" data-value="1M+">1M+</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Weekly Streaming / Upload Cadence</label>
+            <div class="pill-group" id="creatorCadence">
+              <button type="button" class="pill-btn" data-value="Daily Streamer (20+ hrs/wk)">Daily Streamer (20+ hrs/wk)</button>
+              <button type="button" class="pill-btn selected" data-value="15+ hrs/week">15+ hrs/week</button>
+              <button type="button" class="pill-btn" data-value="4-5 videos/week">4-5 videos/week</button>
+              <button type="button" class="pill-btn" data-value="Part-time / Weekends">Part-time / Weekends</button>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">When does this need to happen?</label>
-          <div class="pill-group" id="timeline">
-            <button type="button" class="pill-btn" data-value="ASAP">ASAP</button>
-            <button type="button" class="pill-btn" data-value="1-3 months">1-3 months</button>
-            <button type="button" class="pill-btn" data-value="3-6 months">3-6 months</button>
-            <button type="button" class="pill-btn" data-value="Just exploring">Just exploring</button>
+
+        <!-- Step 3 (Creator) -->
+        <div class="form-step" id="creator-step3">
+          <div class="form-group">
+            <label class="form-label">Current Representation Status</label>
+            <div class="pill-group" id="creatorStatus">
+              <button type="button" class="pill-btn selected" data-value="Independent / Unsigned">Independent / Unsigned</button>
+              <button type="button" class="pill-btn" data-value="Contract Expiring Soon">Contract Expiring Soon</button>
+              <button type="button" class="pill-btn" data-value="Agency Switch">Agency Switch</button>
+              <button type="button" class="pill-btn" data-value="Part of an Esports Org">Part of an Esports Org</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="creator_pitch">Why 8Bit Creatives? What are your career aspirations? <span style="color:#cc4444;">*</span></label>
+            <textarea class="form-textarea" id="creator_pitch" name="creator_pitch" placeholder="Tell us about your streaming journey, target milestones, and what support you need (brand deals, production, legal, platform contracts)..." maxlength="2000"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="creator_source">How did you hear about 8Bit? (Optional)</label>
+            <select class="form-select" id="creator_source" name="creator_source" autocomplete="off">
+              <option value="">Select source</option>
+              <option>Existing 8Bit Creator</option>
+              <option>Instagram</option>
+              <option>YouTube</option>
+              <option>Esports Tournament</option>
+              <option>Word of mouth</option>
+              <option>Other</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <!-- Step 3 -->
-      <div class="form-step" id="step3">
-        <div class="form-group">
-          <label class="form-label" for="pitch">Tell us about the project.</label>
-          <textarea class="form-textarea" id="pitch" name="pitch" placeholder="What's the goal, the game, the audience?" maxlength="2000" required aria-required="true"></textarea>
+      <!-- ==============================================
+           TRACK 3: FOR PLATFORMS
+           ============================================== -->
+      <div class="track-content" id="track-content-platform" style="display:none;">
+        <!-- Step 1 (Platform) -->
+        <div class="form-step" id="platform-step1">
+          <div class="form-group">
+            <label class="form-label" for="platform_contact_name">What should we call you? <span style="color:#cc4444;">*</span></label>
+            <input type="text" class="form-input" id="platform_contact_name" name="platform_contact_name" placeholder="Your name" autocomplete="name" maxlength="120">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="platform_email">Official Work Email <span style="color:#cc4444;">*</span></label>
+            <input type="email" class="form-input" id="platform_email" name="platform_email" placeholder="name@platform.com" autocomplete="email" inputmode="email" maxlength="254" spellcheck="false">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="platform_name">Platform / Publisher / Service Name</label>
+            <input type="text" class="form-input" id="platform_name" name="platform_name" placeholder="e.g. Kick, YouTube Gaming, Rooter, Krafton" autocomplete="organization" maxlength="200">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="platform_role">Your Role</label>
+            <select class="form-select" id="platform_role" name="platform_role" autocomplete="off">
+              <option value="">Select your role</option>
+              <option>Platform Partnerships Lead</option>
+              <option>Business Development</option>
+              <option>Content &amp; Creator Strategy</option>
+              <option>Country Head / GM</option>
+              <option>Talent Relations</option>
+              <option>Other</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="source">How did you find us? (Optional)</label>
-          <select class="form-select" id="source" name="source" autocomplete="off">
-            <option value="">Select source</option>
-            <option>LinkedIn</option>
-            <option>Instagram</option>
-            <option>YouTube</option>
-            <option>Word of mouth</option>
-            <option>Search</option>
-            <option>Other</option>
-          </select>
+
+        <!-- Step 2 (Platform) -->
+        <div class="form-step" id="platform-step2">
+          <div class="form-group">
+            <label class="form-label">Scope of Platform Partnership</label>
+            <div class="pill-group" id="platformScope">
+              <button type="button" class="pill-btn selected" data-value="Talent Migration">Talent Migration</button>
+              <button type="button" class="pill-btn" data-value="Exclusive Platform Deal">Exclusive Platform Deal</button>
+              <button type="button" class="pill-btn" data-value="Localized Content Strategy">Localized Content Strategy</button>
+              <button type="button" class="pill-btn" data-value="Live Tournament Broadcast">Live Tournament Broadcast</button>
+              <button type="button" class="pill-btn" data-value="Creator Cohort Supply">Creator Cohort Supply</button>
+              <button type="button" class="pill-btn" data-value="Market Entry Consulting">Market Entry Consulting</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Expected Creator Volume</label>
+            <div class="pill-group" id="platformVolume">
+              <button type="button" class="pill-btn selected" data-value="1-5 Flagship Talent">1-5 Flagship Talent</button>
+              <button type="button" class="pill-btn" data-value="5-15 Mid-tier Creators">5-15 Mid-tier Creators</button>
+              <button type="button" class="pill-btn" data-value="20+ Creator Cohort">20+ Creator Cohort</button>
+              <button type="button" class="pill-btn" data-value="Network-wide Deal">Network-wide Deal</button>
+              <button type="button" class="pill-btn" data-value="Custom Scope">Custom Scope</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Deployment Timeline</label>
+            <div class="pill-group" id="platformTimeline">
+              <button type="button" class="pill-btn selected" data-value="Immediate (Within 30 days)">Immediate (Within 30 days)</button>
+              <button type="button" class="pill-btn" data-value="1-3 months (Upcoming Quarter)">1-3 months (Upcoming Quarter)</button>
+              <button type="button" class="pill-btn" data-value="3-6 months">3-6 months</button>
+              <button type="button" class="pill-btn" data-value="Exploratory / RFP">Exploratory / RFP</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 (Platform) -->
+        <div class="form-step" id="platform-step3">
+          <div class="form-group">
+            <label class="form-label" for="platform_pitch">Tell us about your platform goals in Indian gaming. <span style="color:#cc4444;">*</span></label>
+            <textarea class="form-textarea" id="platform_pitch" name="platform_pitch" placeholder="Describe target demographics, exclusive streaming hours, platform migration expectations, and event integrations..." maxlength="2000"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="platform_source">How did you find us? (Optional)</label>
+            <select class="form-select" id="platform_source" name="platform_source" autocomplete="off">
+              <option value="">Select source</option>
+              <option>LinkedIn</option>
+              <option>Industry Referral</option>
+              <option>Gaming Event / LAN</option>
+              <option>Creator Endorsement</option>
+              <option>Search</option>
+              <option>Other</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -445,11 +709,9 @@
          role="status"
          aria-live="polite"
          hidden>
-      <h3>Got it. Brief received.</h3>
-      <p>We'll get back to you within 1 business day. Check your inbox
-      (and spam folder, just in case) for a reply from
-      hello@8bitcreatives.com.</p>
-      <button type="button" class="form-success-dismiss">Send another brief</button>
+      <h3 id="successHeading">Got it. Brief received.</h3>
+      <p id="successSubtext">We'll get back to you within 1 business day. Check your inbox (and spam folder, just in case) for a reply from business@8bitcreatives.in.</p>
+      <button type="button" class="form-success-dismiss" id="successDismissBtn">Send another brief</button>
     </div>
 
     <div id="formError"
@@ -459,7 +721,7 @@
          hidden>
       <h3>Something went wrong.</h3>
       <p id="formErrorMessage">Please try again, or email us directly at
-      <a href="mailto:hello@8bitcreatives.com">hello@8bitcreatives.com</a>.</p>
+      <a href="mailto:business@8bitcreatives.in">business@8bitcreatives.in</a>.</p>
       <button type="button" class="form-error-dismiss">Try again</button>
     </div>
   </div>
@@ -686,130 +948,261 @@
   checkPosition();
 })();
 
-// Conversational Brief Flow (Hardened)
+// Conversational Multi-Track Brief Flow (Brands / Creators / Platforms)
 (function() {
+  let currentTrack = 'brand';
   let currentStep = 1;
   const totalSteps = 3;
+
   const progressFill = document.getElementById('progressFill');
   const formTitle = document.getElementById('formTitle');
   const formSubtitle = document.getElementById('formSubtitle');
   const continueBtn = document.getElementById('continueBtn');
   const backBtn = document.getElementById('backBtn');
-  const confirmation = document.getElementById('confirmation');
   const honeypot = document.getElementById('company_website');
-  
-  const titles = ['Let\'s start with the basics.', 'Tell us about the project.', 'What\'s the vision?'];
-  const subs = ['We just need to know who you are.', 'Don\'t worry, you can change these later.', 'The more context you give, the better we can respond.'];
-
-  function updateUI() {
-    document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-    const currentStepEl = document.getElementById('step' + currentStep);
-    if (currentStepEl) currentStepEl.classList.add('active');
-    
-    formTitle.textContent = titles[currentStep - 1];
-    formSubtitle.textContent = subs[currentStep - 1];
-    
-    progressFill.style.width = (currentStep / totalSteps * 100) + '%';
-    
-    backBtn.style.display = currentStep > 1 ? 'inline' : 'none';
-    continueBtn.textContent = currentStep === totalSteps ? 'Send the brief' : 'Continue';
-    
-    if (currentStep === totalSteps) {
-      continueBtn.setAttribute('type', 'submit');
-    } else {
-      continueBtn.setAttribute('type', 'button');
-    }
-  }
-
-  function validateStep(step) {
-    if (step === 1) {
-      const nameInput = document.getElementById('name');
-      const emailInput = document.getElementById('email');
-      let valid = true;
-
-      if (!nameInput.value.trim()) {
-        nameInput.classList.add('error');
-        valid = false;
-      } else {
-        nameInput.classList.remove('error');
-      }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailInput.value.trim() || !emailRegex.test(emailInput.value.trim())) {
-        emailInput.classList.add('error');
-        valid = false;
-      } else {
-        emailInput.classList.remove('error');
-      }
-      return valid;
-    }
-
-    if (step === 3) {
-      const pitchInput = document.getElementById('pitch');
-      if (!pitchInput.value.trim()) {
-        pitchInput.classList.add('error');
-        return false;
-      }
-      pitchInput.classList.remove('error');
-      return true;
-    }
-
-    return true;
-  }
+  const inquiryTypeInput = document.getElementById('inquiry_type');
+  const formSubjectInput = document.getElementById('formSubject');
 
   const form = document.getElementById('briefForm');
   const successBox = document.getElementById('formSuccess');
   const errorBox = document.getElementById('formError');
   const errorMessage = document.getElementById('formErrorMessage');
+  const successHeading = document.getElementById('successHeading');
+  const successSubtext = document.getElementById('successSubtext');
+  const successDismissBtn = document.getElementById('successDismissBtn');
+
+  const trackCopy = {
+    brand: {
+      inquiryType: 'Brand Campaign Brief',
+      subjectPrefix: 'New Brand Brief via 8Bit Creatives',
+      titles: ["Let's start with the basics.", "Tell us about the campaign.", "What's the vision?"],
+      subs: ["We just need to know who you are.", "Don't worry, you can change these later.", "The more context you give, the better we can respond."],
+      submitLabel: 'Send the brief',
+      successHeading: 'Got it. Brief received.',
+      successSubtext: "We'll get back to you within 1 business day. Check your inbox (and spam folder, just in case) for a reply from business@8bitcreatives.in.",
+      dismissLabel: 'Send another brief'
+    },
+    creator: {
+      inquiryType: 'Creator Representation Application',
+      subjectPrefix: 'New Creator Application via 8Bit Creatives',
+      titles: ['Apply for 8Bit Representation.', 'Your channels & audience.', 'Career goals & ambition.'],
+      subs: ["Join India's premier gaming & esports talent roster.", 'Help our talent directors evaluate your content and consistency.', 'Tell us what you want to build with 8Bit Creatives.'],
+      submitLabel: 'Submit Application',
+      successHeading: 'Application received. Welcome to the pipeline.',
+      successSubtext: "Our talent directors review new creator submissions weekly. If your channel matches our roster criteria, we'll reach out within 5 business days.<br>Check your inbox for a confirmation from hello@8bitcreatives.com.",
+      dismissLabel: 'Submit another application'
+    },
+    platform: {
+      inquiryType: 'Platform Partnership Inquiry',
+      subjectPrefix: 'New Platform Inquiry via 8Bit Creatives',
+      titles: ['Platform & Institutional Inquiries.', 'Scope of platform partnership.', 'Platform vision & roadmap.'],
+      subs: ['Guaranteed talent migration, exclusive licensing & localized strategy.', "Tell us about the talent volume and deliverables you're looking for.", 'Our strategic partnership directors will prepare a customized deck.'],
+      submitLabel: 'Transmit Platform Inquiry',
+      successHeading: 'Platform inquiry received. Thank you.',
+      successSubtext: 'Our strategic partnership directors review institutional briefs daily and will reply within 24 hours with case studies and availability.<br>Direct line: business@8bitcreatives.in.',
+      dismissLabel: 'Send another inquiry'
+    }
+  };
+
+  function setTrack(trackKey, resetStep = true) {
+    if (!trackCopy[trackKey]) trackKey = 'brand';
+    currentTrack = trackKey;
+    if (resetStep) currentStep = 1;
+
+    // Update Track tabs UI
+    document.querySelectorAll('.track-tab-btn').forEach(btn => {
+      const active = btn.dataset.track === trackKey;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+
+    // Update Track content containers
+    document.querySelectorAll('.track-content').forEach(container => {
+      container.style.display = container.id === `track-content-${trackKey}` ? 'block' : 'none';
+      container.classList.toggle('active', container.id === `track-content-${trackKey}`);
+    });
+
+    // Update hidden inputs
+    if (inquiryTypeInput) inquiryTypeInput.value = trackCopy[trackKey].inquiryType;
+    if (formSubjectInput) formSubjectInput.value = trackCopy[trackKey].subjectPrefix;
+
+    updateUI();
+  }
+
+  function updateUI() {
+    const config = trackCopy[currentTrack];
+
+    // Show only the active step in the active track
+    const activeTrackContainer = document.getElementById(`track-content-${currentTrack}`);
+    if (activeTrackContainer) {
+      activeTrackContainer.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+      const activeStepEl = document.getElementById(`${currentTrack}-step${currentStep}`);
+      if (activeStepEl) activeStepEl.classList.add('active');
+    }
+
+    formTitle.textContent = config.titles[currentStep - 1];
+    formSubtitle.textContent = config.subs[currentStep - 1];
+
+    progressFill.style.width = (currentStep / totalSteps * 100) + '%';
+    backBtn.style.display = currentStep > 1 ? 'inline' : 'none';
+
+    if (currentStep === totalSteps) {
+      continueBtn.textContent = config.submitLabel;
+      continueBtn.setAttribute('type', 'submit');
+    } else {
+      continueBtn.textContent = 'Continue';
+      continueBtn.setAttribute('type', 'button');
+    }
+  }
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function validateStep(track, step) {
+    let valid = true;
+
+    if (track === 'brand') {
+      if (step === 1) {
+        const name = document.getElementById('brand_name');
+        const email = document.getElementById('brand_email');
+        if (!name.value.trim()) { name.classList.add('error'); valid = false; }
+        else { name.classList.remove('error'); }
+        if (!email.value.trim() || !validateEmail(email.value.trim())) { email.classList.add('error'); valid = false; }
+        else { email.classList.remove('error'); }
+      } else if (step === 3) {
+        const pitch = document.getElementById('brand_pitch');
+        if (!pitch.value.trim()) { pitch.classList.add('error'); valid = false; }
+        else { pitch.classList.remove('error'); }
+      }
+    } else if (track === 'creator') {
+      if (step === 1) {
+        const handle = document.getElementById('creator_handle');
+        const legalName = document.getElementById('creator_legal_name');
+        const email = document.getElementById('creator_email');
+        if (!handle.value.trim()) { handle.classList.add('error'); valid = false; }
+        else { handle.classList.remove('error'); }
+        if (!legalName.value.trim()) { legalName.classList.add('error'); valid = false; }
+        else { legalName.classList.remove('error'); }
+        if (!email.value.trim() || !validateEmail(email.value.trim())) { email.classList.add('error'); valid = false; }
+        else { email.classList.remove('error'); }
+      } else if (step === 2) {
+        const channel = document.getElementById('creator_channel_url');
+        if (!channel.value.trim()) { channel.classList.add('error'); valid = false; }
+        else { channel.classList.remove('error'); }
+      } else if (step === 3) {
+        const pitch = document.getElementById('creator_pitch');
+        if (!pitch.value.trim()) { pitch.classList.add('error'); valid = false; }
+        else { pitch.classList.remove('error'); }
+      }
+    } else if (track === 'platform') {
+      if (step === 1) {
+        const name = document.getElementById('platform_contact_name');
+        const email = document.getElementById('platform_email');
+        const platformName = document.getElementById('platform_name');
+        if (!name.value.trim()) { name.classList.add('error'); valid = false; }
+        else { name.classList.remove('error'); }
+        if (!email.value.trim() || !validateEmail(email.value.trim())) { email.classList.add('error'); valid = false; }
+        else { email.classList.remove('error'); }
+        if (!platformName.value.trim()) { platformName.classList.add('error'); valid = false; }
+        else { platformName.classList.remove('error'); }
+      } else if (step === 3) {
+        const pitch = document.getElementById('platform_pitch');
+        if (!pitch.value.trim()) { pitch.classList.add('error'); valid = false; }
+        else { pitch.classList.remove('error'); }
+      }
+    }
+
+    return valid;
+  }
+
+  // Sync pill values into hidden inputs
+  function syncPillValues() {
+    const pType = document.querySelector('#brandProjectType .pill-btn.selected');
+    const pBudget = document.querySelector('#brandBudget .pill-btn.selected');
+    const pTimeline = document.querySelector('#brandTimeline .pill-btn.selected');
+    if (document.getElementById('selected_project_type') && pType) {
+      document.getElementById('selected_project_type').value = pType.dataset.value || pType.textContent.trim();
+    }
+    if (document.getElementById('selected_budget') && pBudget) {
+      document.getElementById('selected_budget').value = pBudget.dataset.value || pBudget.textContent.trim();
+    }
+    if (document.getElementById('selected_timeline') && pTimeline) {
+      document.getElementById('selected_timeline').value = pTimeline.dataset.value || pTimeline.textContent.trim();
+    }
+
+    const cCategory = document.querySelector('#creatorCategory .pill-btn.selected');
+    const cReach = document.querySelector('#creatorReach .pill-btn.selected');
+    const cCadence = document.querySelector('#creatorCadence .pill-btn.selected');
+    const cStatus = document.querySelector('#creatorStatus .pill-btn.selected');
+    if (document.getElementById('selected_gaming_category') && cCategory) {
+      document.getElementById('selected_gaming_category').value = cCategory.dataset.value || cCategory.textContent.trim();
+    }
+    if (document.getElementById('selected_reach_followers') && cReach) {
+      document.getElementById('selected_reach_followers').value = cReach.dataset.value || cReach.textContent.trim();
+    }
+    if (document.getElementById('selected_streaming_cadence') && cCadence) {
+      document.getElementById('selected_streaming_cadence').value = cCadence.dataset.value || cCadence.textContent.trim();
+    }
+    if (document.getElementById('selected_representation_status') && cStatus) {
+      document.getElementById('selected_representation_status').value = cStatus.dataset.value || cStatus.textContent.trim();
+    }
+
+    const plScope = document.querySelector('#platformScope .pill-btn.selected');
+    const plVolume = document.querySelector('#platformVolume .pill-btn.selected');
+    const plTimeline = document.querySelector('#platformTimeline .pill-btn.selected');
+    if (document.getElementById('selected_platform_scope') && plScope) {
+      document.getElementById('selected_platform_scope').value = plScope.dataset.value || plScope.textContent.trim();
+    }
+    if (document.getElementById('selected_roster_volume') && plVolume) {
+      document.getElementById('selected_roster_volume').value = plVolume.dataset.value || plVolume.textContent.trim();
+    }
+    if (document.getElementById('selected_platform_timeline') && plTimeline) {
+      document.getElementById('selected_platform_timeline').value = plTimeline.dataset.value || plTimeline.textContent.trim();
+    }
+  }
+
   let lastSubmit = 0;
 
   async function handleSubmit(e) {
     if (e) e.preventDefault();
 
-    // 1. Honeypot check: silently abort if bot filled the hidden trap field
+    // 1. Honeypot check
     if (honeypot && honeypot.value.trim() !== '') {
       if (form) form.hidden = true;
       if (successBox) successBox.hidden = false;
       return;
     }
 
-    // 2. Debounce check (2 seconds between submits)
+    // 2. Debounce check
     const now = Date.now();
-    if (now - lastSubmit < 2000) {
-      return;
-    }
+    if (now - lastSubmit < 2000) return;
     lastSubmit = now;
 
-    // 3. Validation
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const pitchInput = document.getElementById('pitch');
-
-    if (!nameInput || !emailInput || !pitchInput || !nameInput.value.trim() || !emailInput.value.trim() || !pitchInput.value.trim()) {
-      if (errorMessage) errorMessage.textContent = 'Please fill in your name, email, and project brief before submitting.';
+    // 3. Validate Step 3
+    if (!validateStep(currentTrack, 3)) {
+      if (errorMessage) errorMessage.textContent = 'Please complete the required details before submitting.';
       if (errorBox) errorBox.hidden = false;
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(emailInput.value.trim())) {
-      if (errorMessage) errorMessage.textContent = 'That email doesn\'t look right. Please check and try again.';
-      if (errorBox) errorBox.hidden = false;
-      return;
+    syncPillValues();
+
+    // Set dynamic subject
+    if (formSubjectInput) {
+      if (currentTrack === 'creator') {
+        const handle = document.getElementById('creator_handle').value.trim();
+        formSubjectInput.value = `New Creator Application: @${handle} via 8bit-creatives.vercel.app`;
+      } else if (currentTrack === 'platform') {
+        const pname = document.getElementById('platform_name').value.trim();
+        formSubjectInput.value = `New Platform Inquiry: ${pname} via 8bit-creatives.vercel.app`;
+      } else {
+        const bname = document.getElementById('brand_name').value.trim();
+        formSubjectInput.value = `New Brand Brief: ${bname} via 8bit-creatives.vercel.app`;
+      }
     }
 
-    // 4. Sync pill values into hidden inputs
-    const pType = document.querySelector('#projectType .pill-btn.selected');
-    const pBudget = document.querySelector('#budget .pill-btn.selected');
-    const pTimeline = document.querySelector('#timeline .pill-btn.selected');
-    const inputPType = document.getElementById('selected_project_type');
-    const inputPBudget = document.getElementById('selected_budget');
-    const inputPTimeline = document.getElementById('selected_timeline');
-    if (inputPType) inputPType.value = pType ? (pType.dataset.value || pType.textContent.trim()) : '';
-    if (inputPBudget) inputPBudget.value = pBudget ? (pBudget.dataset.value || pBudget.textContent.trim()) : '';
-    if (inputPTimeline) inputPTimeline.value = pTimeline ? (pTimeline.dataset.value || pTimeline.textContent.trim()) : '';
-
-    // 5. Disable button + show loading state
+    // 4. Disable button + show loading state
     const originalLabel = continueBtn.textContent;
     continueBtn.disabled = true;
     continueBtn.textContent = 'Sending…';
@@ -822,29 +1215,30 @@
       const response = await fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
       });
 
       if (response.ok) {
         form.hidden = true;
+        const config = trackCopy[currentTrack];
+        if (successHeading) successHeading.textContent = config.successHeading;
+        if (successSubtext) successSubtext.innerHTML = config.successSubtext;
+        if (successDismissBtn) successDismissBtn.textContent = config.dismissLabel;
         if (successBox) successBox.hidden = false;
         form.reset();
-        document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('selected'));
       } else {
-        let serverMsg = 'Please try again, or email us directly at hello@8bitcreatives.com.';
+        let serverMsg = 'Please try again, or email us directly at business@8bitcreatives.in.';
         try {
           const data = await response.json();
           if (data && data.errors && data.errors[0] && data.errors[0].message) {
             serverMsg = data.errors[0].message;
           }
-        } catch (jsonErr) { /* use default message */ }
+        } catch (jsonErr) {}
         if (errorMessage) errorMessage.textContent = serverMsg;
         if (errorBox) errorBox.hidden = false;
       }
     } catch (networkErr) {
-      if (errorMessage) errorMessage.textContent = 'Network error. Please check your internet connection and try again, or email us directly at hello@8bitcreatives.com.';
+      if (errorMessage) errorMessage.textContent = 'Network error. Please check your internet connection or email us directly at business@8bitcreatives.in.';
       if (errorBox) errorBox.hidden = false;
     } finally {
       continueBtn.disabled = false;
@@ -855,20 +1249,31 @@
     }
   }
 
+  // Handle Tab Switch
+  document.querySelectorAll('.track-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.track;
+      setTrack(target, true);
+      try {
+        const newUrl = new URL(window.location);
+        newUrl.searchParams.set('type', target);
+        window.history.replaceState({}, '', newUrl);
+      } catch (e) {}
+    });
+  });
+
   if (form) {
     form.addEventListener('submit', handleSubmit);
   }
 
   continueBtn.addEventListener('click', (e) => {
-    // 1. Honeypot check
     if (honeypot && honeypot.value.trim() !== '') {
       if (form) form.hidden = true;
       if (successBox) successBox.hidden = false;
       return;
     }
 
-    // 2. Validate current step inputs
-    if (!validateStep(currentStep)) {
+    if (!validateStep(currentTrack, currentStep)) {
       return;
     }
 
@@ -888,42 +1293,39 @@
     }
   });
 
-  // Pill button selection
-  const pillMap = {
-    'projectType': 'selected_project_type',
-    'budget': 'selected_budget',
-    'timeline': 'selected_timeline'
-  };
+  // Handle Enter key on text inputs
+  document.querySelectorAll('#briefForm input').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        continueBtn.click();
+      }
+    });
+  });
+
+  // Pill button selection logic
   document.querySelectorAll('.pill-group').forEach(group => {
     group.addEventListener('click', (e) => {
       const btn = e.target.closest('.pill-btn');
       if (btn) {
         group.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
-        const targetId = pillMap[group.id] || ('selected_' + group.id);
-        const hiddenInput = document.getElementById(targetId);
-        if (hiddenInput) {
-          hiddenInput.value = btn.dataset.value || btn.textContent.trim();
-        }
+        syncPillValues();
       }
     });
   });
 
-  // Clear errors on input
-  ['name', 'email', 'pitch'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('input', () => {
-        el.classList.remove('error');
-        if (errorBox) errorBox.hidden = true;
-      });
-    }
+  // Clear validation errors on input typing
+  document.querySelectorAll('#briefForm input, #briefForm textarea, #briefForm select').forEach(el => {
+    el.addEventListener('input', () => {
+      el.classList.remove('error');
+      if (errorBox) errorBox.hidden = true;
+    });
   });
 
   // Dismiss buttons
-  const dismissSuccess = document.querySelector('.form-success-dismiss');
-  if (dismissSuccess) {
-    dismissSuccess.addEventListener('click', () => {
+  if (successDismissBtn) {
+    successDismissBtn.addEventListener('click', () => {
       if (successBox) successBox.hidden = true;
       if (form) {
         form.hidden = false;
@@ -940,14 +1342,21 @@
     });
   }
 
-  // Auto-show success on ?status=success redirect fallback
+  // Initialize track from URL param: ?type=creator | ?type=platform | ?type=brand
   const urlParams = new URLSearchParams(window.location.search);
+  const typeParam = urlParams.get('type') || urlParams.get('track');
+  if (typeParam === 'creator' || typeParam === 'creators') {
+    setTrack('creator', true);
+  } else if (typeParam === 'platform' || typeParam === 'platforms') {
+    setTrack('platform', true);
+  } else {
+    setTrack('brand', true);
+  }
+
   if (urlParams.get('status') === 'success') {
     if (form) form.hidden = true;
     if (successBox) successBox.hidden = false;
   }
-
-  updateUI();
 })();
 </script>
 
