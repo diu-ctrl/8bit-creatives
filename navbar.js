@@ -32,7 +32,6 @@
 
     function moveIndicator(targetLink, isInstant) {
       if (!targetLink || !indicator || !navbar) return;
-      if (window.innerWidth <= 768) return; // Hidden on mobile
 
       // Guarantee targetLink has is-active so its text is always pure #FFFFFF white
       if (!targetLink.classList.contains('is-active')) {
@@ -48,9 +47,11 @@
       // Bail if element is hidden or not rendered
       if (linkRect.width === 0 || navRect.width === 0) return;
 
-      const width = Math.round(linkRect.width + 24);
-      const x = Math.round((linkRect.left - navRect.left) - 12);
-      const height = Math.round(linkRect.height + 12);
+      const isMobile = window.innerWidth <= 767;
+      const padX = isMobile ? 12 : 24;
+      const width = Math.round(linkRect.width + padX);
+      const x = Math.round((linkRect.left - navRect.left) - (padX / 2));
+      const height = isMobile ? 30 : Math.round(linkRect.height + 12);
 
       if (isInstant) {
         indicator.style.transition = 'none';
