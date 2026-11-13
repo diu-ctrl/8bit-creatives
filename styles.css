@@ -142,7 +142,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   transform: scale(1.05);
 }
 
-/* Centered Floating Glassmorphism Capsule Navbar */
+/* Centered Floating White Capsule Navbar */
 .navbar,
 .navbar-pill {
   position: fixed;
@@ -156,11 +156,9 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   width: fit-content;
   max-width: 640px;
   height: 52px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,21 +168,19 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 .navbar.navbar-on-hero,
 .navbar-pill.navbar-on-hero {
-  top: 80px;
+  top: 24px;
 }
 
-/* When navbar is over a light/white section, switch text to black */
+/* When navbar is over a light/white section, add a thin black border around the navbar */
 .navbar.navbar-on-light,
 .site-header.navbar-on-light,
 .nav-pill.navbar-on-light,
 .navbar-pill.navbar-on-light,
 #navbar.navbar-on-light,
 #top.navbar-on-light {
-  background: rgba(255, 255, 255, 0.7) !important; /* rgba(0, 0, 0, 0.65) */
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+  background: #FFFFFF !important;
+  border: 1px solid #000000 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
 }
 
 /* All text inside the navbar turns BLACK on light sections */
@@ -241,9 +237,9 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 .navbar__links a {
   font-family: var(--font);
-  font-weight: 400;
+  font-weight: 500;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.85);
+  color: #000000;
   padding: 4px 6px;
   white-space: nowrap;
   text-decoration: none;
@@ -423,7 +419,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   display: block;
   height: 2px;
   width: 100%;
-  background: var(--white);
+  background: #000000;
   border-radius: 2px;
   transition: transform var(--dur-hover) var(--ease-entrance), color var(--dur-hover) ease, background-color var(--dur-hover) ease, border-color var(--dur-hover) ease;
 }
@@ -3468,12 +3464,12 @@ body.light-page .back-home,
     padding: 3px 6px !important;
     white-space: nowrap !important;
     letter-spacing: -0.01em !important;
-    color: rgba(255, 255, 255, 0.75) !important;
+    color: #000000 !important;
     text-decoration: none !important;
   }
   .navbar__links a:hover,
   .navbar__links a.is-active {
-    color: #FFFFFF !important;
+    color: #FF5931 !important;
   }
   .navbar-pill__indicator {
     display: none !important;

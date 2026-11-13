@@ -45,7 +45,7 @@ function initNavbar() {
 
   const logo = document.querySelector('.nav-brand-topleft');
   const cta  = document.querySelector('.nav-cta-topright');
-  const hero = document.getElementById('hero');
+  const hero = document.getElementById('hero') || document.getElementById('home') || document.querySelector('.hero-section');
 
   // Mobile drawer toggle
   const hamburger = document.querySelector('.navbar__hamburger');
@@ -220,7 +220,12 @@ function initNavbar() {
     cachedBgOffsets = [];
     for (let i = 0; i < bgSections.length; i++) {
       const s = bgSections[i];
-      const top = s.offsetTop;
+      let top = 0;
+      let el = s;
+      while (el) {
+        top += el.offsetTop || 0;
+        el = el.offsetParent;
+      }
       const height = s.offsetHeight;
       cachedBgOffsets.push({
         top: top,

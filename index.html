@@ -263,9 +263,9 @@
 <!-- ============================================================
      SECTION 2 — HERO
      ============================================================ -->
-<section id="home" class="hero-section" data-bg="light" aria-label="Home">
+<section id="home" class="hero-section" aria-label="Home">
   <div class="hero-8bit-bg" aria-hidden="true"><canvas class="glyph-fall" id="heroGlyphCanvas"></canvas></div>
-  <div class="hero-foreground">
+  <div class="hero-foreground" data-bg="dark">
     <!-- Background: div .hero-bg-wrap with blur inside bounds -->
     <div class="hero-bg-wrap">
       <img
@@ -323,7 +323,7 @@
   </div>
 
   <!-- NEW: Game area below the hero foreground -->
-  <div class="hero-game-area">
+  <div class="hero-game-area" data-bg="light">
     <canvas id="heroDinoCanvas" width="1200" height="200"></canvas>
   </div>
 </section>
