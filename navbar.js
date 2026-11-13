@@ -70,13 +70,8 @@
       }
     };
 
-    // Hover & click listeners on each nav link
+    // Click listeners on each nav link — indicator stays rock-solid on active link
     links.forEach(link => {
-      link.addEventListener('mouseenter', () => {
-        isHovering = true;
-        moveIndicator(link, false);
-      });
-
       link.addEventListener('click', () => {
         isClickScrolling = true;
         clearTimeout(clickScrollTimer);
@@ -121,15 +116,6 @@
           } catch (err) {}
         }
       });
-    });
-
-    linksContainer.addEventListener('mouseleave', () => {
-      isHovering = false;
-      const activeLink = linksContainer.querySelector('a.is-active') || currentActive;
-      if (activeLink) {
-        currentActive = activeLink;
-        moveIndicator(activeLink, false);
-      }
     });
 
     // Observe class attribute changes (e.g. scroll spy in app.js)

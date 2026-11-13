@@ -183,40 +183,40 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* All text inside the navbar turns BLACK on light sections */
-.navbar.navbar-on-light a,
-.navbar.navbar-on-light .nav-link,
-.navbar.navbar-on-light span,
-.site-header.navbar-on-light a,
-.site-header.navbar-on-light .nav-link,
-.site-header.navbar-on-light span,
-.nav-pill.navbar-on-light a,
-.nav-pill.navbar-on-light .nav-link,
-.nav-pill.navbar-on-light span,
-.navbar-pill.navbar-on-light a,
-.navbar-pill.navbar-on-light span,
-.navbar-pill.navbar-on-light .navbar__links a,
+/* All inactive text inside the navbar turns BLACK on light sections */
+.navbar.navbar-on-light a:not(.is-active),
+.navbar.navbar-on-light .nav-link:not(.is-active),
+.navbar.navbar-on-light span:not(.is-active),
+.site-header.navbar-on-light a:not(.is-active),
+.site-header.navbar-on-light .nav-link:not(.is-active),
+.site-header.navbar-on-light span:not(.is-active),
+.nav-pill.navbar-on-light a:not(.is-active),
+.nav-pill.navbar-on-light .nav-link:not(.is-active),
+.nav-pill.navbar-on-light span:not(.is-active),
+.navbar-pill.navbar-on-light a:not(.is-active),
+.navbar-pill.navbar-on-light span:not(.is-active),
+.navbar-pill.navbar-on-light .navbar__links a:not(.is-active),
 .navbar-pill.navbar-on-light .navbar__sep,
-#navbar.navbar-on-light a,
-#navbar.navbar-on-light .nav-link,
-#navbar.navbar-on-light span,
-#top.navbar-on-light a,
-#top.navbar-on-light span {
+#navbar.navbar-on-light a:not(.is-active),
+#navbar.navbar-on-light .nav-link:not(.is-active),
+#navbar.navbar-on-light span:not(.is-active),
+#top.navbar-on-light a:not(.is-active),
+#top.navbar-on-light span:not(.is-active) {
   color: #000000 !important;
 }
 
-/* Hover state stays orange */
-.navbar.navbar-on-light a:hover,
-.navbar.navbar-on-light .nav-link:hover,
-.site-header.navbar-on-light a:hover,
-.site-header.navbar-on-light .nav-link:hover,
-.nav-pill.navbar-on-light a:hover,
-.nav-pill.navbar-on-light .nav-link:hover,
-.navbar-pill.navbar-on-light a:hover,
-.navbar-pill.navbar-on-light .navbar__links a:hover,
-#navbar.navbar-on-light a:hover,
-#navbar.navbar-on-light .nav-link:hover,
-#top.navbar-on-light a:hover {
+/* Hover state for inactive links stays orange */
+.navbar.navbar-on-light a:not(.is-active):hover,
+.navbar.navbar-on-light .nav-link:not(.is-active):hover,
+.site-header.navbar-on-light a:not(.is-active):hover,
+.site-header.navbar-on-light .nav-link:not(.is-active):hover,
+.nav-pill.navbar-on-light a:not(.is-active):hover,
+.nav-pill.navbar-on-light .nav-link:not(.is-active):hover,
+.navbar-pill.navbar-on-light a:not(.is-active):hover,
+.navbar-pill.navbar-on-light .navbar__links a:not(.is-active):hover,
+#navbar.navbar-on-light a:not(.is-active):hover,
+#navbar.navbar-on-light .nav-link:not(.is-active):hover,
+#top.navbar-on-light a:not(.is-active):hover {
   color: #FF5931 !important;
 }
 
@@ -249,15 +249,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   color: var(--orange-red);
 }
 
-/* Active section nav link highlighting with Glassmorphism capsule behind */
-.navbar .nav-link,
-.navbar nav a,
-.navbar__links a,
-.navbar-pill .navbar__links a {
-  position: relative;
-  z-index: 1;
-}
-
+/* Active section nav link highlighting — crisp pure white inside black capsule indicator */
 .navbar .nav-link.is-active,
 .navbar nav a.is-active,
 .navbar nav a.active,
@@ -268,13 +260,27 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .navbar.navbar-on-light .navbar__links a.is-active,
 .navbar-pill.navbar-on-light .navbar__links a.is-active,
 #navbar.navbar-on-light a.is-active,
-#top.navbar-on-light a.is-active {
+#top.navbar-on-light a.is-active,
+#top.navbar-on-light .navbar__links a.is-active,
+#top .navbar__links a.is-active {
   position: relative;
-  color: #FF5931 !important;
+  z-index: 2 !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
   text-decoration: none !important;
   border-bottom: none !important;
   border: none !important;
   outline: none !important;
+}
+
+.navbar .nav-link.is-active:hover,
+.navbar nav a.is-active:hover,
+.navbar__links a.is-active:hover,
+.navbar-pill .navbar__links a.is-active:hover,
+.navbar.navbar-on-light .navbar__links a.is-active:hover,
+.navbar-pill.navbar-on-light .navbar__links a.is-active:hover,
+#top.navbar-on-light .navbar__links a.is-active:hover {
+  color: #FFFFFF !important;
 }
 
 /* The capsule — sits behind the text */
@@ -321,18 +327,12 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 /* Default on dark sections (default navbar) — subtle white tint */
 .navbar:not(.navbar-on-light) .navbar-pill__indicator,
-.navbar-pill:not(.navbar-on-light) .navbar-pill__indicator {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(14, 14, 14, 0.95);
-}
-
-/* On light/white sections (dark navbar) — subtle tint */
+.navbar-pill:not(.navbar-on-light) .navbar-pill__indicator,
 .navbar.navbar-on-light .navbar-pill__indicator,
 .navbar-pill.navbar-on-light .navbar-pill__indicator {
-  background: rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: rgba(14, 14, 14, 0.95);
+  background: #0E0E0E !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18) !important;
 }
 
 .navbar-pill .navbar__links a.is-active::before {

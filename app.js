@@ -292,9 +292,17 @@ function initNavbar() {
   if (navLinks.length) {
     const linkMap = new Map();
     navLinks.forEach(link => {
+      const dataSec = link.getAttribute('data-section') || '';
       const href = link.getAttribute('href') || '';
-      const id = href.replace('#', '');
-      if (id) linkMap.set(id, link);
+      let id = dataSec;
+      if (!id && href.indexOf('#') !== -1) {
+        id = href.split('#')[1];
+      }
+      if (id === 'hero') id = 'home';
+      if (id) {
+        linkMap.set(id, link);
+        if (id === 'home') linkMap.set('hero', link);
+      }
     });
 
     const targetSections = document.querySelectorAll('section[id]');
