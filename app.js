@@ -645,7 +645,7 @@ function initEclipseGrass() {
 
   const CX = 400, CY = 400;            // center of the 800x800 viewBox
   const GRASS_RADIUS = 400;            // was 405 — remove the gap, anchor exactly on the circle edge
-  const NUM_BLADES = 800;              // was 320 — much denser
+  const NUM_BLADES = 240;              // was 320 — much denser
   const MIN_H = 12;                    // SHORT — so characters stay visible
   const MAX_H = 22;
   const MIN_W = 2;
@@ -686,26 +686,31 @@ function initEclipseGrass() {
             Z`;
   }
 
-  let svgString = '';
+  const NUM_GROUPS = 6;
+  const groups = Array.from({ length: NUM_GROUPS }, () => '');
+
   for (let i = 0; i < NUM_BLADES; i++) {
-    // Distribute around the full circle with slight jitter
     const angle = (i / NUM_BLADES) * Math.PI * 2 + randRange(-0.015, 0.015);
     const anchorX = CX + Math.cos(angle) * GRASS_RADIUS;
     const anchorY = CY + Math.sin(angle) * GRASS_RADIUS;
-    // Outward direction = the same angle (from center → outward)
     const outwardAngle = angle;
     const h = randRange(MIN_H, MAX_H);
     const w = randRange(MIN_W, MAX_W);
     const d = bladePath(anchorX, anchorY, h, w, outwardAngle);
-    // Per-blade sway
-    const swayMin = (randRange(-6, -2)).toFixed(2);
-    const swayMax = (randRange(2, 6)).toFixed(2);
-    const swayDuration = randRange(2.5, 5.0).toFixed(2) + 's';
-    const swayDelay = randRange(0, 3.0).toFixed(2) + 's';
     const opacity = randRange(0.8, 1.0).toFixed(2);
     const grad = rand() < 0.3 ? 'url(#eclipseGrassGradDark)' : 'url(#eclipseGrassGrad)';
-    const style = `--sway-min: ${swayMin}deg; --sway-max: ${swayMax}deg; --sway-duration: ${swayDuration}; --sway-delay: ${swayDelay}; will-change: transform; transform-origin: ${anchorX.toFixed(2)}px ${anchorY.toFixed(2)}px; transform-box: view-box;`;
-    svgString += `<path class="grass-blade" d="${d}" fill="${grad}" opacity="${opacity}" style="${style}"/>`;
+    
+    // Assign blade to one of the 6 sector groups
+    const gIdx = Math.floor((i / NUM_BLADES) * NUM_GROUPS) % NUM_GROUPS;
+    groups[gIdx] += `<path d="${d}" fill="${grad}" opacity="${opacity}"/>`;
+  }
+
+  let svgString = '';
+  const durations = ['3.2s', '4.0s', '4.8s', '3.6s', '4.4s', '3.8s'];
+  const delays = ['0s', '0.6s', '1.2s', '0.4s', '1.0s', '1.5s'];
+  for (let g = 0; g < NUM_GROUPS; g++) {
+    const style = `animation: grass-group-sway ${durations[g]} ease-in-out infinite alternate; animation-delay: ${delays[g]}; transform-origin: ${CX}px ${CY}px;`;
+    svgString += `<g class="grass-group" style="${style}">${groups[g]}</g>`;
   }
   grassGroup.innerHTML = svgString;
 }
@@ -2841,16 +2846,16 @@ function initCaseStudies() {
   if (!caseItems.length || !caseImageWrap) return;
 
   const CASE_DATA = [
-    { img: 'images-for-landing-page/Case Studies/global chess.jpg',
+    { img: 'images-for-landing-page/case-studies/case-chess.webp',
       title: 'Global Chess League S4',
       sub: 'Multi-camera live broadcast · 9-day event' },
-    { img: 'images-for-landing-page/Case Studies/kick india.jpg',
+    { img: 'images-for-landing-page/case-studies/case-kick.webp',
       title: 'Kick India — Day One Migration',
       sub: '48 creators migrated · 95/5 subscription split' },
-    { img: 'images-for-landing-page/Case Studies/iqoo flagship.jpg',
+    { img: 'images-for-landing-page/case-studies/case-iqoo.webp',
       title: 'iQOO Flagship Smartphone Launch',
       sub: '50M+ reach · Product launch campaign' },
-    { img: 'images-for-landing-page/Case Studies/monster athlete.webp',
+    { img: 'images-for-landing-page/case-studies/case-monster.webp',
       title: 'Monster Athlete Programme',
       sub: '24M+ impressions · Annual mandate' }
   ];
@@ -3242,7 +3247,7 @@ function initCreatorStats() {
       id: 'mortal',
       name: 'MortaL',
       realName: 'Naman Mathur',
-      img: 'images-for-landing-page/creator-mortal.png',
+      img: 'images-for-landing-page/creator-mortal.webp',
       bio: 'Co-founder of S8UL Esports and a pioneer of Indian mobile gaming, celebrated for his calm demeanor, BGMI competitive history, and variety gameplay.',
       categories: 'BGMI, Variety Gaming, Streaming, Esports',
       youtube: { handle: '@Mortalgaming', count: '7.05M', url: 'https://www.youtube.com/@Mortalgaming' },
@@ -3253,7 +3258,7 @@ function initCreatorStats() {
       id: 'payal',
       name: 'Payal',
       realName: 'Payal Dhare',
-      img: 'images-for-landing-page/creator-payal.png',
+      img: 'images-for-landing-page/creator-payal.webp',
       bio: "Prominent S8UL creator and India's leading female gaming content creator, known for BGMI live streams, casual gaming, and lifestyle content.",
       categories: 'BGMI, Variety Streaming, Vlogging',
       youtube: { handle: '@PayalGaming', count: '4.02M', url: 'https://www.youtube.com/@PayalGaming' },
@@ -3264,7 +3269,7 @@ function initCreatorStats() {
       id: 'snax',
       name: 'Snax',
       realName: 'Raj Varma',
-      img: 'images-for-landing-page/creator-snax.png',
+      img: 'images-for-landing-page/creator-snax.webp',
       bio: 'Veteran BGMI athlete and streamer famous for his precision DP-28 burst guide drills, competitive mechanics, and fitness-oriented lifestyle content.',
       categories: 'BGMI, Esports, Gaming Tutorials, Fitness / Vlogging',
       youtube: { handle: '@SnaxGaming', count: '1.65M', url: 'https://www.youtube.com/@SnaxGaming' },
@@ -3286,7 +3291,7 @@ function initCreatorStats() {
       id: 'soulgoblin',
       name: 'Soul Goblin',
       realName: 'Harsh Paudwal',
-      img: 'images-for-landing-page/creator-goblin.png',
+      img: 'images-for-landing-page/creator-goblin.webp',
       bio: 'Top-tier competitive BGMI fragger and MVP champion with Team Soul / Carnival Gaming, renowned for lethal close-range combat skills.',
       categories: 'BGMI, Esports, Competitive Gaming',
       youtube: { handle: '@SoulGoblin', count: '485K', url: 'https://www.youtube.com/@SoulGoblin' },
@@ -3297,7 +3302,7 @@ function initCreatorStats() {
       id: 'mamba',
       name: 'Mamba',
       realName: 'Salman Ahmad',
-      img: 'images-for-landing-page/creator-mamba.png',
+      img: 'images-for-landing-page/creator-mamba.webp',
       bio: 'Former competitive PUBG Mobile player and S8UL member known for immersive GTA V roleplay, BGMI streams, and community gaming banter.',
       categories: 'GTA V RP, BGMI, Variety Gaming, Streaming',
       youtube: { handle: '@8bitMamba', count: '1.41M', url: 'https://www.youtube.com/@8bitMamba' },
@@ -3308,7 +3313,7 @@ function initCreatorStats() {
       id: 'viper',
       name: 'Viper',
       realName: 'Yash Soni',
-      img: 'images-for-landing-page/creator-viper.png',
+      img: 'images-for-landing-page/creator-viper.webp',
       bio: 'Founding member of the classic Team Soul lineup and S8UL creator, known for tactical support gameplay and engaging variety streams.',
       categories: 'BGMI, Variety Gaming, Streaming',
       youtube: { handle: '@SoulViper', count: '1.28M', url: 'https://www.youtube.com/@SoulViper' },
@@ -3319,7 +3324,7 @@ function initCreatorStats() {
       id: 'pahadi',
       name: 'Pahadi',
       realName: 'Lokesh Karakoti',
-      img: 'images-for-landing-page/creator-pahadi.png',
+      img: 'images-for-landing-page/creator-pahadi.webp',
       bio: 'Highly decorated Indian Free Fire esports legend and multi-tournament MVP who expanded into BGMI, sniper mechanics, and variety content.',
       categories: 'Free Fire, BGMI, Esports, Streaming',
       youtube: { handle: '@PahadiGamer', count: '1.43M', url: 'https://www.youtube.com/@PahadiGamer' },
@@ -3330,7 +3335,7 @@ function initCreatorStats() {
       id: 'thug',
       name: 'Thug',
       realName: 'Animesh Agarwal',
-      img: 'images-for-landing-page/creator-thug.png',
+      img: 'images-for-landing-page/creator-thug.webp',
       bio: 'Co-founder of S8UL Esports and 8Bit Creatives, former competitive player, caster, and a foundational business figure in Indian gaming.',
       categories: 'Esports Business, BGMI, Vlogging, Variety Gaming',
       youtube: { handle: '@8bitthug', count: '1.08M', url: 'https://www.youtube.com/@8bitthug' },
@@ -3341,7 +3346,7 @@ function initCreatorStats() {
       id: 'goldy',
       name: 'Goldy',
       realName: 'Lokesh Jain',
-      img: 'images-for-landing-page/creator-goldy.png',
+      img: 'images-for-landing-page/creator-goldy.webp',
       bio: 'Co-owner of 8Bit Creatives and S8UL Esports, well-known for gaming industry podcasts, behind-the-scenes vlogs, and creator mentorship.',
       categories: 'Podcasts, Esports Management, Vlogging, Streaming',
       youtube: { handle: '@GoldyBhai', count: '980K', url: 'https://www.youtube.com/@GoldyBhai' },
@@ -3352,7 +3357,7 @@ function initCreatorStats() {
       id: 'mercy',
       name: 'Beg4Mercy',
       realName: 'Mrinmoy Lahkar',
-      img: 'images-for-landing-page/creator-mercy.png',
+      img: 'images-for-landing-page/creator-mercy.webp',
       bio: 'S8UL gaming creator and longtime mobile player recognized for energetic BGMI squad matches, humor-driven streams, and community collaborations.',
       categories: 'BGMI, Variety Gaming, Streaming',
       youtube: { handle: '@Beg4Mercy', count: '545K', url: 'https://www.youtube.com/@Beg4Mercy' },
@@ -3363,7 +3368,7 @@ function initCreatorStats() {
       id: 'regaltos',
       name: 'Regaltos',
       realName: 'Parv Singh',
-      img: 'images-for-landing-page/creator-regaltos.png',
+      img: 'images-for-landing-page/creator-regaltos.webp',
       bio: 'Former Team Soul competitive assaulter and core S8UL creator, widely followed for his classic BGMI sprays, room matches, and game walk-throughs.',
       categories: 'BGMI, Esports, Variety Gaming, Streaming',
       youtube: { handle: '@SoulRegaltos', count: '2.32M', url: 'https://www.youtube.com/@SoulRegaltos' },
@@ -3904,3 +3909,62 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   }
 })();
 
+
+
+// ====== IDLE PRELOAD FOR CASE STUDIES & KEY CREATOR IMAGES ======
+(function() {
+  const preloadImages = [
+    'images-for-landing-page/case-studies/case-chess.webp',
+    'images-for-landing-page/case-studies/case-kick.webp',
+    'images-for-landing-page/case-studies/case-iqoo.webp',
+    'images-for-landing-page/case-studies/case-monster.webp',
+    'images-for-landing-page/creator-mortal.webp',
+    'images-for-landing-page/creator-payal.webp',
+    'images-for-landing-page/creator-snax.webp',
+    'images-for-landing-page/creator-scout.webp',
+    'images-for-landing-page/creator-goblin.webp'
+  ];
+  function doPreload() {
+    preloadImages.forEach(function(src) {
+      const img = new Image();
+      img.src = src;
+    });
+  }
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(doPreload, { timeout: 2000 });
+  } else {
+    setTimeout(doPreload, 800);
+  }
+})();
+
+
+// ====== SECTION ENTRANCES (Esports & Work Case Studies) ======
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  // Esports Section entrance
+  gsap.from('.esports-section__text-col, .esports-section__image-col', {
+    y: 24,
+    opacity: 0,
+    duration: 0.6,
+    stagger: 0.15,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#esports',
+      start: 'top 80%',
+      once: true
+    }
+  });
+
+  // Case Studies rows staggered reveal
+  gsap.from('.case-item', {
+    y: 20,
+    opacity: 0,
+    duration: 0.5,
+    stagger: 0.1,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '#work',
+      start: 'top 80%',
+      once: true
+    }
+  });
+}

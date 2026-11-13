@@ -21,6 +21,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
+  <link rel="preload" as="image" href="images-for-landing-page/hero-newimage.webp" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="styles.css">
 
   <style>
@@ -219,7 +220,7 @@
      ============================================================ -->
 <!-- Top-Left Mascot Logo (matching Figma reference) -->
 <a href="/" data-section="home" onclick="return false;" class="nav-brand-topleft" aria-label="8Bit Creatives Home">
-  <img src="images-for-landing-page/logo_2.png" alt="8Bit Logo" class="nav-brand-topleft__img">
+  <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo" class="nav-brand-topleft__img">
 </a>
 
 <!-- Centered Floating Glassmorphism Capsule Navbar -->
@@ -263,16 +264,20 @@
      SECTION 2 — HERO
      ============================================================ -->
 <section id="home" class="hero-section" data-bg="light" aria-label="Home">
-  <div class="hero-8bit-bg" aria-hidden="true"></div>
+  <div class="hero-8bit-bg" aria-hidden="true"><canvas class="glyph-fall" id="heroGlyphCanvas"></canvas></div>
   <div class="hero-foreground">
     <!-- Background: div .hero-bg-wrap with blur inside bounds -->
     <div class="hero-bg-wrap">
       <img
-        src="images-for-landing-page/hero-newimage.png"
+        src="images-for-landing-page/hero-newimage.webp"
         alt=""
         class="hero-bg-img"
         aria-hidden="true"
         loading="eager"
+        fetchpriority="high"
+        decoding="sync"
+        width="2048"
+        height="1152"
       ><!-- images-for-landing-page/hero-bg.png -->
       <div class="hero-bg-vignette hero__bg-vignette" aria-hidden="true"></div>
     </div>
@@ -305,13 +310,13 @@
       <div class="hero-right">
         <div class="canvas-container">
           <div class="hero-logo-tilt" id="heroLogoTilt">
-            <img src="images-for-landing-page/logo_2.png" 
+            <img src="images-for-landing-page/logo_2.webp" 
                  alt="8Bit Creatives Logo" 
                  class="hero-logo-img" 
                  id="heroLogoImg"
                  loading="eager">
           </div>
-          <canvas id="heroCanvas" style="display:none;" aria-hidden="true"></canvas>
+          
         </div>
       </div>
     </div>
@@ -543,16 +548,16 @@
           <!-- LEFT: List (4 items only) -->
           <div class="case-list-column">
             <ul class="case-list" id="caseList">
-              <li class="case-item" data-case="0" data-image="images-for-landing-page/case-studies/case-chess.png">
+              <li class="case-item" data-case="0" data-image="images-for-landing-page/case-studies/case-chess.webp">
                 <a href="work.html" class="case-item-link"><span class="case-text">Global Chess League S4<sup class="case-num">[01]</sup></span></a>
               </li>
-              <li class="case-item" data-case="1" data-image="images-for-landing-page/case-studies/case-kick.png">
+              <li class="case-item" data-case="1" data-image="images-for-landing-page/case-studies/case-kick.webp">
                 <a href="work.html" class="case-item-link"><span class="case-text">Kick India — Day One Migration<sup class="case-num">[02]</sup></span></a>
               </li>
-              <li class="case-item" data-case="2" data-image="images-for-landing-page/case-studies/case-iqoo.png">
+              <li class="case-item" data-case="2" data-image="images-for-landing-page/case-studies/case-iqoo.webp">
                 <a href="work.html" class="case-item-link"><span class="case-text">iQOO Flagship Smartphone Launch<sup class="case-num">[03]</sup></span></a>
               </li>
-              <li class="case-item" data-case="3" data-image="images-for-landing-page/case-studies/case-monster.png">
+              <li class="case-item" data-case="3" data-image="images-for-landing-page/case-studies/case-monster.webp">
                 <a href="work.html" class="case-item-link"><span class="case-text">Monster Athlete Programme<sup class="case-num">[04]</sup></span></a>
               </li>
             </ul>
@@ -574,91 +579,7 @@
     </div>
   </div>
 </section>
-<script>
-(function () {
-  var card = document.querySelector('.case-card') || document.querySelector('.case-studies-foreground');
-  if (!card) return;
 
-  var bgLayer = card.querySelector('.case-card__bg-image');
-  var rightImage = document.getElementById('caseImage') || card.querySelector('.case-image-wrap img');
-  var imageWrap = document.getElementById('caseImageWrap');
-  var caption = document.getElementById('caseCaption');
-  var captionTitle = document.getElementById('caseCaptionTitle');
-  var captionSub = document.getElementById('caseCaptionSub');
-  var items = card.querySelectorAll('[data-case]');
-
-  if (!bgLayer || !rightImage || !items.length) return;
-  card.dataset.caseHoverBound = 'true';
-
-  var CASE_CAPTIONS = [
-    { title: 'Global Chess League S4', sub: 'Multi-camera live broadcast · 9-day event' },
-    { title: 'Kick India — Day One Migration', sub: '48 creators migrated · 95/5 subscription split' },
-    { title: 'iQOO Flagship Smartphone Launch', sub: '50M+ reach · Product launch campaign' },
-    { title: 'Monster Athlete Programme', sub: '24M+ impressions · Annual mandate' }
-  ];
-
-  function activate(item) {
-    var imgSrc = item.getAttribute('data-image');
-    if (!imgSrc) return;
-    var idx = parseInt(item.getAttribute('data-case'), 10);
-    // Swap the background image layer (low opacity, behind content)
-    bgLayer.style.backgroundImage = 'url("' + imgSrc + '")';
-    // Swap the right-side image (full opacity)
-    rightImage.src = imgSrc;
-    if (imageWrap) {
-      imageWrap.classList.remove('is-empty');
-      imageWrap.classList.add('is-visible');
-    }
-    // Update caption
-    if (captionTitle && CASE_CAPTIONS[idx]) captionTitle.textContent = CASE_CAPTIONS[idx].title;
-    if (captionSub && CASE_CAPTIONS[idx]) captionSub.textContent = CASE_CAPTIONS[idx].sub;
-    if (caption) caption.classList.add('is-visible');
-    // Add the hovering class to fade both in
-    card.classList.add('is-hovering');
-    // Highlight the active item
-    items.forEach(function (it) { it.classList.remove('is-active'); });
-    item.classList.add('is-active');
-  }
-
-  function deactivate() {
-    card.classList.remove('is-hovering');
-    items.forEach(function (it) { it.classList.remove('is-active'); });
-    if (imageWrap) {
-      imageWrap.classList.remove('is-visible');
-      imageWrap.classList.add('is-empty');
-    }
-    if (caption) caption.classList.remove('is-visible');
-  }
-
-  // On mobile: first case study's image shows by default
-  if ((window.innerWidth < 768 || window.matchMedia('(max-width: 767px)').matches) && items[0]) {
-    activate(items[0]);
-  }
-
-  items.forEach(function (item) {
-    item.addEventListener('mouseenter', function () {
-      if (window.innerWidth >= 768) activate(item);
-    });
-    item.addEventListener('focus', function () {
-      if (window.innerWidth >= 768) activate(item);
-    });
-    // Touch devices / mobile: tap to swap image
-    item.addEventListener('click', function (e) {
-      if (window.innerWidth < 768 || window.matchMedia('(max-width: 767px)').matches || window.matchMedia('(hover: none)').matches) {
-        e.preventDefault();
-        activate(item);
-      }
-    });
-  });
-
-  // When the mouse leaves the entire card, fade out (desktop only)
-  card.addEventListener('mouseleave', function () {
-    if (window.innerWidth >= 768) {
-      deactivate();
-    }
-  });
-})();
-</script>
 
 
 <!-- ============================================================
@@ -1048,45 +969,12 @@
       </div>
       <div class="esports-section__image-col">
         <div class="esports-section__image-col__glow" aria-hidden="true"></div>
-        <img class="esports-section__image-col__img" src="images-for-landing-page/roster/hero-esports.png" alt="8Bit Esports roster photo" width="1122" height="1402" loading="lazy">
+        <img class="esports-section__image-col__img" src="images-for-landing-page/roster/hero-esports.webp" decoding="async" alt="8Bit Esports roster photo" width="1122" height="1402" loading="lazy">
       </div>
     </div>
   </div>
 </section>
-<script>
-(function(){
-  var cols = window.innerWidth < 768 ? 40 : 100, wordCyclesPerCol = 30, pattern = ['8', 'B', 'I', 'T', ''];
-  var bg = document.querySelector('.esports-section__bg');
-  if (!bg) return;
-  bg.innerHTML = '';
-  var frag = document.createDocumentFragment();
-  for (var c = 0; c < cols; c++) {
-    var col = document.createElement('div');
-    col.className = 'bg__col ' + (c % 2 === 0 ? 'bg__col--down' : 'bg__col--up');
-    for (var w = 0; w < wordCyclesPerCol; w++) {
-      for (var p = 0; p < pattern.length; p++) {
-        var span = document.createElement('span');
-        span.textContent = pattern[p];
-        col.appendChild(span);
-      }
-    }
-    frag.appendChild(col);
-  }
-  bg.appendChild(frag);
 
-  // Pause off-screen CSS animation when scrolled away
-  if ('IntersectionObserver' in window) {
-    var esportsObserver = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        bg.classList.remove('is-paused');
-      } else {
-        bg.classList.add('is-paused');
-      }
-    }, { threshold: 0.01 });
-    esportsObserver.observe(bg);
-  }
-})();
-</script>
 
 
 <!-- ====== FOUNDERS SECTION ====== -->
@@ -1119,7 +1007,7 @@
           <div class="founder-card-top">
             <span class="founder-role">Founder</span>
             <div class="founder-photo-wrap">
-              <img src="images-for-landing-page/Founders/thug.png" alt="Animesh Agarwal" width="1856" height="2304" loading="lazy">
+              <img src="images-for-landing-page/Founders/thug.webp" decoding="async" alt="Animesh Agarwal" width="1856" height="2304" loading="lazy">
             </div>
           </div>
           <div class="founder-name">Animesh Agarwal</div>
@@ -1147,7 +1035,7 @@
           <div class="founder-card-top">
             <span class="founder-role">Founder</span>
             <div class="founder-photo-wrap">
-              <img src="images-for-landing-page/Founders/goldy.png" alt="Lokesh Jain" width="1856" height="2304" loading="lazy">
+              <img src="images-for-landing-page/Founders/goldy.webp" decoding="async" alt="Lokesh Jain" width="1856" height="2304" loading="lazy">
             </div>
           </div>
           <div class="founder-name">Lokesh Jain</div>
@@ -1175,7 +1063,7 @@
           <div class="founder-card-top">
             <span class="founder-role">Founder</span>
             <div class="founder-photo-wrap">
-              <img src="images-for-landing-page/Founders/Mercy.png" alt="Mrinmoy Lahkar" width="1856" height="2304" loading="lazy">
+              <img src="images-for-landing-page/Founders/mercy.webp" decoding="async" alt="Mrinmoy Lahkar" width="1856" height="2304" loading="lazy">
             </div>
           </div>
           <div class="founder-name">Mrinmoy Lahkar</div>
@@ -1238,7 +1126,7 @@
       <div class="footer-col footer-col--center footer-center">
         <div class="footer-logo-wrap" id="footerLogoWrap">
           <img
-            src="images-for-landing-page/footer-logo.png"
+            src="images-for-landing-page/footer-logo.webp"
             alt="8Bit Creatives"
             class="footer-logo"
             id="footerLogo"
@@ -1279,7 +1167,7 @@
           <div class="s8ul-logo-wrap">
             <a href="https://s8ul.gg/" target="_blank" rel="noopener noreferrer" class="s8ul-logo-link">
               <img
-              src="images-for-landing-page/s8ul-logo.png"
+              src="images-for-landing-page/s8ul-logo.webp"
               alt="S8UL"
               class="footer-s8ul-logo"
               width="894"
@@ -1399,20 +1287,12 @@
     if (target) target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
   };
 
-  var hamburgerBtn = document.querySelector('.navbar__hamburger');
-  var mobileDrawer = document.querySelector('.navbar__mobile-drawer');
-  if (hamburgerBtn && mobileDrawer) {
-    hamburgerBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var isOpen = mobileDrawer.classList.toggle('open');
-      hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('.navbar-pill')) {
-        closeMobileDrawer();
-      }
-    });
-  }
+  // Mobile drawer outside click closer
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.navbar-pill') && !e.target.closest('.navbar__mobile-drawer')) {
+      closeMobileDrawer();
+    }
+  });
 
   // === ACTIVE SECTION DETECTION (IntersectionObserver — no URL hash needed) ===
   var navLinks = document.querySelectorAll('.navbar__links a[data-section], .navbar__mobile-drawer a[data-section]');
@@ -1712,52 +1592,115 @@ void main() {
 </script>
 
 <!-- ============================================================
-     Hero 8BIT animated letter background — generates grid columns
+     High-Performance Canvas Glyph Background (Hero & Esports)
+     Replaces 30,000 DOM nodes with 2 lightweight 30fps canvas layers
      ============================================================ -->
 <script>
-(function () {
-  function initHero8BitBg() {
-    var root = document.querySelector('.hero-8bit-bg');
-    if (!root) {
-      console.warn('[hero-8bit-bg] Container .hero-8bit-bg not found.');
-      return;
+(function() {
+  function setupGlyphCanvas(canvasId, isDarkTheme) {
+    var canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var parent = canvas.parentElement;
+    var isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var isVisible = true;
+    var rafId = null;
+    var lastTs = 0;
+    var offset = 0;
+    var pattern = ['8', 'B', 'I', 'T', ' '];
+    var cycleLength = 5 * 32; // 160px per full pattern cycle
+    var speed = cycleLength / 24; // 24 seconds per full loop
+
+    function resize() {
+      var w = parent.clientWidth || window.innerWidth;
+      var h = parent.clientHeight || window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+      draw(0);
     }
-    // Clear any existing content (in case this runs twice)
-    root.innerHTML = '';
-    var cols = window.innerWidth < 768 ? 40 : 100;
-    var wordCyclesPerCol = 30;
-    var pattern = ['8', 'B', 'I', 'T', ''];
-    var frag = document.createDocumentFragment();
-    for (var c = 0; c < cols; c++) {
-      var col = document.createElement('div');
-      col.className = 'hero-8bit-bg__col ' + (c % 2 === 0 ? 'hero-8bit-bg__col--down' : 'hero-8bit-bg__col--up');
-      for (var w = 0; w < wordCyclesPerCol; w++) {
-        for (var p = 0; p < pattern.length; p++) {
-          var span = document.createElement('span');
-          span.textContent = pattern[p];
-          col.appendChild(span);
+
+    function draw(delta) {
+      var w = canvas.width;
+      var h = canvas.height;
+      if (!w || !h) return;
+      ctx.clearRect(0, 0, w, h);
+
+      var cols = w < 768 ? 40 : 100;
+      var colWidth = w / cols;
+      var rowHeight = 32;
+      var rows = Math.ceil(h / rowHeight) + 6;
+
+      ctx.font = '100 16px "Geist", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillStyle = isDarkTheme ? '#ECECEC' : '#141210';
+      ctx.globalAlpha = isDarkTheme ? 0.08 : 0.08;
+
+      for (var c = 0; c < cols; c++) {
+        var isDown = (c % 2 === 0);
+        var x = c * colWidth + colWidth / 2;
+        var colOffset = isDown ? (offset % cycleLength) : ((-offset) % cycleLength);
+        if (colOffset < 0) colOffset += cycleLength;
+
+        var startY = (colOffset % rowHeight) - rowHeight * 2;
+        var startIdx = Math.floor(colOffset / rowHeight);
+
+        for (var r = -2; r < rows; r++) {
+          var y = r * rowHeight + startY;
+          if (y > -20 && y < h + 20) {
+            var pIdx = ((r - startIdx) % 5 + 5) % 5;
+            var ch = pattern[pIdx];
+            if (ch && ch !== ' ') {
+              ctx.fillText(ch, x, y);
+            }
+          }
         }
       }
-      frag.appendChild(col);
     }
-    root.appendChild(frag);
 
-    // Pause off-screen CSS animation when scrolled away
+    function loop(ts) {
+      if (!isVisible) { rafId = null; return; }
+      if (!lastTs) lastTs = ts;
+      var dt = Math.min((ts - lastTs) / 1000, 0.1);
+      lastTs = ts;
+
+      if (!isReduced) {
+        offset += speed * dt;
+        draw(dt);
+      }
+      rafId = requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', function() {
+      resize();
+    });
+    resize();
+
     if ('IntersectionObserver' in window) {
-      var heroBgObserver = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) {
-          root.classList.remove('is-paused');
-        } else {
-          root.classList.add('is-paused');
+      var observer = new IntersectionObserver(function(entries) {
+        isVisible = entries[0].isIntersecting;
+        if (isVisible && !rafId) {
+          lastTs = 0;
+          rafId = requestAnimationFrame(loop);
+        } else if (!isVisible && rafId) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
         }
       }, { threshold: 0.01 });
-      heroBgObserver.observe(root);
+      observer.observe(parent);
+    } else {
+      rafId = requestAnimationFrame(loop);
     }
   }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHero8BitBg);
+    document.addEventListener('DOMContentLoaded', function() {
+      setupGlyphCanvas('heroGlyphCanvas', false);
+      setupGlyphCanvas('esportsGlyphCanvas', true);
+    });
   } else {
-    initHero8BitBg();
+    setupGlyphCanvas('heroGlyphCanvas', false);
+    setupGlyphCanvas('esportsGlyphCanvas', true);
   }
 })();
 </script>
