@@ -2164,145 +2164,166 @@ function initHeroDinoGame() {
   const OBSTACLE = '#000000';  // cacti + birds
   const CLOUD = '#DCDCDC';
 
-  // ---------- sprite maps ('.'=empty, 'B'=body, 'W'=eye white) ----------
+  // ---------- sprite maps ('.'=empty, 'B'=body, 'W'=eye white, 'P'=eye pupil) ----------
   const DINO3_ART = {
-    // T-Rex (22 x 24 cells -> 44 x 48 px). Faces right; toes point right.
+    // Authentic Chromium T-Rex (22 x 24 cells -> 44 x 48 px at CELL=2)
+    // Accurate snout, open mouth, eye with pupil, tiny arms, curved tail, running legs
     stand: [
-      '...........BBBBBBBBB..',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBWWBBBB',
-      '..........BBBBBBWWBBBB',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBBBB...',
-      'B.........BBBBBBBB....',
-      'BB.......BBBBBBBBB....',
-      'BBB...BBBBBBBBBBB.....',
-      'BBBBBBBBBBBBBBBBBB....',
-      'BBBBBBBBBBBBBBBBBB....',
-      '.BBBBBBBBBBBBBBBBBB...',
-      '..BBBBBBBBBBBBBBBBBB..',
-      '...BBBBBBBBBBBBBBBBB..',
-      '....BBBBBBBBBBBBBBBB..',
-      '......BBBBBBBBB...BB..',
-      '.......BBBBBBBB...BB..',
-      '.......BBBBBBB........',
-      '.......BB...BB........',
-      '.......BB...BB........',
-      '.......BB...BB........',
-      '.......BB...BB........',
-      '.......BBBB.BBBB......'
+      '......................',
+      '............BBBBBBBB..',
+      '...........BBBBBBBBBB.',
+      '...........BWPBBBBBBB.',
+      '...........BBBBBBBBBB.',
+      '...........BBBBBBBBBB.',
+      '...........BBBBBBBBBB.',
+      '...........BBBBB......',
+      '...........BBBBBBBB...',
+      '.B........BBBBB.......',
+      '.B.......BBBBBB.......',
+      '.BB....BBBBBBBBBB.....',
+      '.BBB..BBBBBBBBB.B.....',
+      '.BBBBBBBBBBBBBB.......',
+      '.BBBBBBBBBBBBBB.......',
+      '..BBBBBBBBBBBB........',
+      '...BBBBBBBBBBB........',
+      '....BBBBBBBBB.........',
+      '.....BBBBBBB..........',
+      '......BBB.BB..........',
+      '......BB...B..........',
+      '......B....B..........',
+      '......BB...BB.........',
+      '......................'
     ],
     dead: [
-      '...........BBBBBBBBB..',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBWBWBBB',
-      '..........BBBBBBBWBBBB',
-      '..........BBBBBBWBWBBB',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBBBB...',
-      'B.........BBBBBBBB....',
-      'BB.......BBBBBBBBB....',
-      'BBB...BBBBBBBBBBB.....',
-      'BBBBBBBBBBBBBBBBBB....',
-      'BBBBBBBBBBBBBBBBBB....',
-      '.BBBBBBBBBBBBBBBBBB...',
-      '..BBBBBBBBBBBBBBBBBB..',
-      '...BBBBBBBBBBBBBBBBB..',
-      '....BBBBBBBBBBBBBBBB..',
-      '......BBBBBBBBB...BB..',
-      '.......BBBBBBBB...BB..',
-      '.......BBBBBBB........',
-      '.......BB...BB........',
-      '.......BB...BB........',
-      '.......BB...BB........',
-      '.......BB...BB........',
-      '.......BBBB.BBBB......'
+      '......................',
+      '............BBBBBBBB..',
+      '...........BBBBBBBBBB.',
+      '...........BW.WBBBBBB.',
+      '............BWWBBBBBB.',
+      '...........BW.WBBBBBB.',
+      '...........BBBBBBBBBB.',
+      '...........BBBBB......',
+      '...........BBBBBBBB...',
+      '.B........BBBBB.......',
+      '.B.......BBBBBB.......',
+      '.BB....BBBBBBBBBB.....',
+      '.BBB..BBBBBBBBB.B.....',
+      '.BBBBBBBBBBBBBB.......',
+      '.BBBBBBBBBBBBBB.......',
+      '..BBBBBBBBBBBB........',
+      '...BBBBBBBBBBB........',
+      '....BBBBBBBBB.........',
+      '.....BBBBBBB..........',
+      '......BBB.BB..........',
+      '......BB...B..........',
+      '......B....B..........',
+      '......BB...BB.........',
+      '......................'
     ],
     runA: [
-      '...........BBBBBBBBB..',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBWWBBBB',
-      '..........BBBBBBWWBBBB',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBBBB...',
-      'B.........BBBBBBBB....',
-      'BB.......BBBBBBBBB....',
-      'BBB...BBBBBBBBBBB.....',
-      'BBBBBBBBBBBBBBBBBB....',
-      'BBBBBBBBBBBBBBBBBB....',
-      '.BBBBBBBBBBBBBBBBBB...',
-      '..BBBBBBBBBBBBBBBBBB..',
-      '...BBBBBBBBBBBBBBBBB..',
-      '....BBBBBBBBBBBBBBBB..',
-      '......BBBBBBBBB...BB..',
-      '.......BBBBBBBB...BB..',
-      '.......BBBBBBB........',
-      '.......BB...BB........',
-      '.......BB...BB........',
-      '.......BB...BB........',
-      '.......BB....BB.......',
-      '.......BBBB...........'
+      '......................',
+      '............BBBBBBBB..',
+      '...........BBBBBBBBBB.',
+      '...........BWPBBBBBBB.',
+      '...........BBBBBBBBBB.',
+      '...........BBBBBBBBBB.',
+      '...........BBBBBBBBBB.',
+      '...........BBBBB......',
+      '...........BBBBBBBB...',
+      '.B........BBBBB.......',
+      '.B.......BBBBBB.......',
+      '.BB....BBBBBBBBBB.....',
+      '.BBB..BBBBBBBBB.B.....',
+      '.BBBBBBBBBBBBBB.......',
+      '.BBBBBBBBBBBBBB.......',
+      '..BBBBBBBBBBBB........',
+      '...BBBBBBBBBBB........',
+      '....BBBBBBBBB.........',
+      '.....BBBBBBB..........',
+      '......BBB..BBB........',
+      '......BB..............',
+      '......B...............',
+      '......BB..............',
+      '......................'
     ],
     runB: [
-      '...........BBBBBBBBB..',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBWWBBBB',
-      '..........BBBBBBWWBBBB',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBBBBBBB',
-      '..........BBBBBBBBB...',
-      'B.........BBBBBBBB....',
-      'BB.......BBBBBBBBB....',
-      'BBB...BBBBBBBBBBB.....',
-      'BBBBBBBBBBBBBBBBBB....',
-      'BBBBBBBBBBBBBBBBBB....',
-      '.BBBBBBBBBBBBBBBBBB...',
-      '..BBBBBBBBBBBBBBBBBB..',
-      '...BBBBBBBBBBBBBBBBB..',
-      '....BBBBBBBBBBBBBBBB..',
-      '......BBBBBBBBB...BB..',
-      '.......BBBBBBBB...BB..',
-      '.......BBBBBBB........',
-      '.......BB...BB........',
-      '.......BB...BB........',
-      '.......BB...BB........',
-      '......BBB...BB........',
-      '............BBBB......'
+      '......................',
+      '............BBBBBBBB..',
+      '...........BBBBBBBBBB.',
+      '...........BWPBBBBBBB.',
+      '...........BBBBBBBBBB.',
+      '...........BBBBBBBBBB.',
+      '...........BBBBBBBBBB.',
+      '...........BBBBB......',
+      '...........BBBBBBBB...',
+      '.B........BBBBB.......',
+      '.B.......BBBBBB.......',
+      '.BB....BBBBBBBBBB.....',
+      '.BBB..BBBBBBBBB.B.....',
+      '.BBBBBBBBBBBBBB.......',
+      '.BBBBBBBBBBBBBB.......',
+      '..BBBBBBBBBBBB........',
+      '...BBBBBBBBBBB........',
+      '....BBBBBBBBB.........',
+      '.....BBBBBBB..........',
+      '......BB..BB..........',
+      '.......BB..B..........',
+      '...........B..........',
+      '...........BB.........',
+      '......................'
     ],
-    // Ducking (35 x 14 cells -> 70 x 28 px)
+    // Ducking (30 x 24 cells -> 60 x 48 px at CELL=2)
     duckA: [
-      '.........................BBBBBBBB..',
-      '........................BBBBBBBBBBB',
-      '........................BBBBBWWBBBB',
-      'B.......................BBBBBBBBBBB',
-      'BB......................BBBBBBBBB..',
-      'BBB..BBBBBBBBBBBBBBBBBBBBBBBBBB....',
-      'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB.....',
-      '.BBBBBBBBBBBBBBBBBBBBBBBBBBBBB.....',
-      '..BBBBBBBBBBBBBBBBBBBBBBBBBBB......',
-      '...BBBBBBBBBBBBBBBBBBBBBBBB........',
-      '....................BB.....BB......',
-      '....................BB.....BB......',
-      '....................BB.....BB......',
-      '...................BBBB...BBBB.....'
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '.B..................BBBBBBBB..',
+      '.BBB....BBBBBBBBB..BBBBBBBBBB.',
+      '.BBBBBBBBBBBBBBBBBBBBWPBBBBBB.',
+      '..BBBBBBBBBBBBBBBBBBBBBBBBBBB.',
+      '...BBBBBBBBBBBBBBBBBBBBBBBBBB.',
+      '....BBBBBBBBBBBBBBBBBBBBBBBBB.',
+      '.....BBBBBBBBBBBBBBBBBBB......',
+      '......BBBBBBBBBBBB..BBBBBBB...',
+      '.......BBBBBB...B.............',
+      '.......B..BBB...BB............',
+      '.......BB.BB..................',
+      '..........B...................',
+      '..........BB..................',
+      '..............................'
     ],
     duckB: [
-      '.........................BBBBBBBB..',
-      '........................BBBBBBBBBBB',
-      '........................BBBBBWWBBBB',
-      'B.......................BBBBBBBBBBB',
-      'BB......................BBBBBBBBB..',
-      'BBB..BBBBBBBBBBBBBBBBBBBBBBBBBB....',
-      'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB.....',
-      '.BBBBBBBBBBBBBBBBBBBBBBBBBBBBB.....',
-      '..BBBBBBBBBBBBBBBBBBBBBBBBBBB......',
-      '...BBBBBBBBBBBBBBBBBBBBBBBB........',
-      '....................BB.....BB......',
-      '....................BB.....BB......',
-      '...................BB.......BB.....',
-      '..................BBBB.....BBB.....'
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '..............................',
+      '.B..................BBBBBBBB..',
+      '.BBB....BBBBBBBBB..BBBBBBBBBB.',
+      '.BBBBBBBBBBBBBBBBBBBBWPBBBBBB.',
+      '..BBBBBBBBBBBBBBBBBBBBBBBBBBB.',
+      '...BBBBBBBBBBBBBBBBBBBBBBBBBB.',
+      '....BBBBBBBBBBBBBBBBBBBBBBBBB.',
+      '.....BBBBBBBBBBBBBBBBBBB......',
+      '......BBBBBBBBBBBB..BBBBBBB...',
+      '.......BBBBBB...B.............',
+      '.......BBB..BB..BB............',
+      '.......BB.....................',
+      '.......B......................',
+      '.......BB.....................',
+      '..............................'
     ],
     // Pterosaur (20 x 12 cells -> 40 x 24 px), flies leftward, beak at left
     birdA: [
@@ -2339,7 +2360,7 @@ function initHeroDinoGame() {
   let cssW = 900, cssH = 200, groundY = 160;
   const CELL = 2;                    // 2 CSS px per sprite pixel
   const DINO_W = 22 * CELL, DINO_H = 24 * CELL;
-  const DUCK_W = 35 * CELL, DUCK_H = 14 * CELL;
+  const DUCK_W = 30 * CELL, DUCK_H = 24 * CELL;
   const BIRD_W = 20 * CELL, BIRD_H = 12 * CELL;
 
   function resizeCanvas() {
@@ -2551,7 +2572,7 @@ function initHeroDinoGame() {
 
   function dinoBox() {
     if (dino.ducking && !dino.jumping) {
-      return { x: dino.x + 4, y: groundY + dino.y - DUCK_H + 4, w: DUCK_W - 10, h: DUCK_H - 6 };
+      return { x: dino.x + 4, y: groundY + dino.y - 28, w: DUCK_W - 8, h: 26 };
     }
     return { x: dino.x + 6, y: groundY + dino.y - DINO_H + 4, w: DINO_W - 14, h: DINO_H - 8 };
   }
@@ -2582,13 +2603,37 @@ function initHeroDinoGame() {
       }
     }
   }
-  function drawEyeWhite(map, ox, oy, cell) {
+
+  function drawDinoSprite(map, ox, oy, cell) {
     const u = cell || CELL;
-    ctx.fillStyle = BG;
+    // Pass 1: Body (B) - run-length filled
+    ctx.fillStyle = FG;
+    for (let r = 0; r < map.length; r++) {
+      const row = map[r];
+      let runStart = -1;
+      for (let c = 0; c <= row.length; c++) {
+        const on = row[c] === 'B';
+        if (on && runStart < 0) runStart = c;
+        else if (!on && runStart >= 0) {
+          ctx.fillRect(ox + runStart * u, oy + r * u, (c - runStart) * u, u);
+          runStart = -1;
+        }
+      }
+    }
+    // Pass 2: Eye white (W)
+    ctx.fillStyle = '#FFFFFF';
     for (let r = 0; r < map.length; r++) {
       const row = map[r];
       for (let c = 0; c < row.length; c++) {
         if (row[c] === 'W') ctx.fillRect(ox + c * u, oy + r * u, u, u);
+      }
+    }
+    // Pass 3: Eye pupil (P)
+    ctx.fillStyle = '#141210';
+    for (let r = 0; r < map.length; r++) {
+      const row = map[r];
+      for (let c = 0; c < row.length; c++) {
+        if (row[c] === 'P') ctx.fillRect(ox + c * u, oy + r * u, u, u);
       }
     }
   }
@@ -2599,15 +2644,13 @@ function initHeroDinoGame() {
       const map = legFrame ?
         DINO3_ART.duckA :
         DINO3_ART.duckB;
-      drawSprite(map, dino.x, yTop - DUCK_H, FG);
-      drawEyeWhite(map, dino.x, yTop - DUCK_H);
+      drawDinoSprite(map, dino.x, yTop - DUCK_H);
     } else {
       let map = DINO3_ART.stand;
       if (state === 'gameover') map = DINO3_ART.dead;
       else if (dino.jumping) map = DINO3_ART.stand;
       else if (state === 'playing') map = legFrame ? DINO3_ART.runA : DINO3_ART.runB;
-      drawSprite(map, dino.x, yTop - DINO_H, FG);
-      drawEyeWhite(map, dino.x, yTop - DINO_H);
+      drawDinoSprite(map, dino.x, yTop - DINO_H);
     }
   }
 
