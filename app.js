@@ -3276,6 +3276,9 @@ function initFoundersGSAP() {
 function initCTAGSAP() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
+  const contactEl = document.getElementById('contact') || document.getElementById('cta') || document.querySelector('.cta-section');
+  if (!contactEl) return;
+
   // Headline fade-up
   gsap.from('.cta-headline, .cta-section__headline', {
     opacity: 0,
@@ -3283,8 +3286,9 @@ function initCTAGSAP() {
     duration: 1.0,
     ease: 'power3.out',
     scrollTrigger: {
-      trigger: '#cta, #contact',
-      start: 'top 70%'
+      trigger: contactEl,
+      start: 'top 85%',
+      toggleActions: 'play none none none'
     }
   });
 
@@ -3295,8 +3299,9 @@ function initCTAGSAP() {
     duration: 0.8,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#cta, #contact',
-      start: 'top 65%'
+      trigger: contactEl,
+      start: 'top 80%',
+      toggleActions: 'play none none none'
     }
   });
 
@@ -3308,8 +3313,9 @@ function initCTAGSAP() {
     duration: 0.7,
     ease: 'power2.out',
     scrollTrigger: {
-      trigger: '#cta, #contact',
-      start: 'top 60%'
+      trigger: contactEl,
+      start: 'top 75%',
+      toggleActions: 'play none none none'
     }
   });
 
@@ -3318,7 +3324,7 @@ function initCTAGSAP() {
     backgroundPositionY: '30%',
     ease: 'none',
     scrollTrigger: {
-      trigger: '#cta, #contact',
+      trigger: contactEl,
       start: 'top bottom',
       end: 'bottom top',
       scrub: 1

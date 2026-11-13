@@ -1254,6 +1254,10 @@
 
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (typeof ScrollTrigger !== 'undefined') {
+        setTimeout(function() { ScrollTrigger.refresh(); }, 150);
+        setTimeout(function() { ScrollTrigger.refresh(); }, 600);
+      }
     }
 
     // Clean the URL — remove any #hash
@@ -1413,7 +1417,8 @@ float snoise(vec2 v){
 
 void main() {
   vec2 uv = vUv;
-  float ratio = u_resolution.x / u_resolution.y;
+  vec2 res = max(u_resolution, vec2(1.0, 1.0));
+  float ratio = res.x / res.y;
   vec2 p = uv - 0.5;
   p.x *= ratio;
 
@@ -1426,7 +1431,7 @@ void main() {
   vec3 col = u_bg;
 
   float dist = length(p) * 1.5;
-  float vignette = 1.0 - smoothstep(0.3, 1.2, dist);
+  float vignette = clamp(1.0 - smoothstep(0.3, 1.2, dist), 0.0, 1.0);
 
   col = mix(col, u_colors[0], smoothstep(-0.2, 0.5, n1) * 0.85);
   col = mix(col, u_colors[1], smoothstep(-0.1, 0.6, n2) * 0.7);
@@ -1441,6 +1446,7 @@ void main() {
   float grain = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453 + u_time);
   col += (grain - 0.5) * u_grain * 0.1;
 
+  col = clamp(col, 0.0, 1.0);
   gl_FragColor = vec4(col, 1.0);
 }`;
 
@@ -1471,11 +1477,17 @@ void main() {
   if (!canvas) return;
   var container = canvas.parentElement;
 
-  var gl = canvas.getContext("webgl", { antialias: true, premultipliedAlpha: false });
+  var gl = canvas.getContext("webgl", { antialias: true, alpha: true }) ||
+           canvas.getContext("experimental-webgl", { antialias: true, alpha: true });
   if (!gl) {
-    console.error("WebGL not supported — gradient will be blank.");
+    console.warn("WebGL not supported — falling back to CSS gradient.");
     return;
   }
+
+  var bgRgb = hexToRgb(CONFIG.bg);
+  // Guarantee backbuffer is dark immediately on creation (prevents white flash on Windows D3D11)
+  gl.clearColor(bgRgb[0], bgRgb[1], bgRgb[2], 1.0);
+  gl.clear(gl.COLOR_BUFFER_BIT);
 
   var vs = createShader(gl, gl.VERTEX_SHADER, VERTEX_SHADER);
   var fs = createShader(gl, gl.FRAGMENT_SHADER, FRAGMENT_SHADER);
@@ -1509,31 +1521,50 @@ void main() {
   var uCols  = gl.getUniformLocation(program, "u_colors");
   var uBg    = gl.getUniformLocation(program, "u_bg");
 
-  // ── Resize handler (cap DPR at 1 for soft gradient mesh to eliminate GPU fill bottleneck) ──
-  function resize() {
-    var dpr = 1;
-    var w = container.clientWidth;
-    var h = container.clientHeight;
-    canvas.width  = w * dpr;
-    canvas.height = h * dpr;
-    gl.viewport(0, 0, canvas.width, canvas.height);
-  }
-  resize();
-  if (window.ResizeObserver) {
-    var ro = new ResizeObserver(resize);
-    ro.observe(container);
-  } else {
-    window.addEventListener("resize", resize, { passive: true });
-  }
-
-  // ── Color uniform setup (4 colors × 3 channels = 12 floats) ──
+  // Color uniform setup (4 colors × 3 channels = 12 floats)
   var flatColors = new Float32Array(
     CONFIG.colors.slice(0, 4).reduce(function (acc, hex) {
       return acc.concat(hexToRgb(hex));
     }, [])
   );
 
-  var bgRgb = hexToRgb(CONFIG.bg);
+  // Draw a single frame with safety guards
+  var lastFrameTime = 0;
+  function drawFrame(t) {
+    if (!gl || gl.isContextLost()) return;
+    lastFrameTime = (typeof t === 'number') ? t : performance.now();
+    var w = Math.max(canvas.width, 1);
+    var h = Math.max(canvas.height, 1);
+    gl.viewport(0, 0, w, h);
+    gl.uniform2f(uRes, w, h);
+    gl.uniform1f(uTime, lastFrameTime * 0.001 * CONFIG.speed);
+    gl.uniform1f(uGrain, CONFIG.grain);
+    gl.uniform3f(uBg, bgRgb[0], bgRgb[1], bgRgb[2]);
+    gl.uniform3fv(uCols, flatColors);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+  }
+
+  // Resize handler
+  function resize() {
+    var dpr = 1;
+    var w = (container && container.clientWidth) || window.innerWidth || 1440;
+    var h = (container && container.clientHeight) || window.innerHeight || 800;
+    if (w <= 0) w = 1440;
+    if (h <= 0) h = 800;
+    canvas.width  = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    drawFrame(lastFrameTime);
+  }
+  resize();
+
+  if (window.ResizeObserver && container) {
+    var ro = new ResizeObserver(function() {
+      resize();
+    });
+    ro.observe(container);
+  } else {
+    window.addEventListener("resize", resize, { passive: true });
+  }
 
   // ── Render loop ──
   var prefersReduced = window.matchMedia &&
@@ -1547,33 +1578,34 @@ void main() {
       raf = null;
       return;
     }
-    gl.uniform2f(uRes, canvas.width, canvas.height);
-    gl.uniform1f(uTime, (t || 0) * 0.001 * CONFIG.speed);
-    gl.uniform1f(uGrain, CONFIG.grain);
-    gl.uniform3f(uBg, bgRgb[0], bgRgb[1], bgRgb[2]);
-    gl.uniform3fv(uCols, flatColors);
-
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-
+    drawFrame(t);
     if (!prefersReduced && isIntersecting) {
       raf = requestAnimationFrame(render);
+    } else {
+      raf = null;
     }
   }
 
-  // Initial single frame render
-  render(0);
+  // CRITICAL: Draw initial frame immediately on load so canvas is NEVER blank or white!
+  drawFrame(0);
 
   // Render loop controlled by IntersectionObserver so off-screen GPU work is zero
-  if ('IntersectionObserver' in window) {
+  if ('IntersectionObserver' in window && container) {
     var ctaObserver = new IntersectionObserver(function (entries) {
-      isIntersecting = entries[0].isIntersecting;
-      if (isIntersecting && !raf && !prefersReduced) {
-        raf = requestAnimationFrame(render);
-      } else if (!isIntersecting && raf) {
+      for (var i = 0; i < entries.length; i++) {
+        isIntersecting = entries[i].isIntersecting;
+      }
+      if (isIntersecting) {
+        if (!raf && !prefersReduced) {
+          raf = requestAnimationFrame(render);
+        } else {
+          drawFrame(performance.now());
+        }
+      } else if (raf) {
         cancelAnimationFrame(raf);
         raf = null;
       }
-    }, { threshold: 0.01 });
+    }, { threshold: [0, 0.01, 0.1] });
     ctaObserver.observe(container);
   } else {
     isIntersecting = true;
@@ -1581,6 +1613,16 @@ void main() {
       raf = requestAnimationFrame(render);
     }
   }
+
+  // WebGL context loss handling
+  canvas.addEventListener('webglcontextlost', function(e) {
+    e.preventDefault();
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+  }, false);
+  canvas.addEventListener('webglcontextrestored', function() {
+    resize();
+    drawFrame(performance.now());
+  }, false);
 
   // Cleanup on page hide
   document.addEventListener("visibilitychange", function () {
