@@ -978,6 +978,41 @@
   </div>
 </section>
 
+<script>
+(function(){
+  var cols = window.innerWidth < 768 ? 40 : 100, wordCyclesPerCol = 30, pattern = ['8', 'B', 'I', 'T', ''];
+  var bg = document.querySelector('.esports-section__bg');
+  if (!bg) return;
+  bg.innerHTML = '';
+  var frag = document.createDocumentFragment();
+  for (var c = 0; c < cols; c++) {
+    var col = document.createElement('div');
+    col.className = 'bg__col ' + (c % 2 === 0 ? 'bg__col--down' : 'bg__col--up');
+    for (var w = 0; w < wordCyclesPerCol; w++) {
+      for (var p = 0; p < pattern.length; p++) {
+        var span = document.createElement('span');
+        span.textContent = pattern[p];
+        col.appendChild(span);
+      }
+    }
+    frag.appendChild(col);
+  }
+  bg.appendChild(frag);
+
+  // Pause off-screen CSS animation when scrolled away
+  if ('IntersectionObserver' in window) {
+    var esportsObserver = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        bg.classList.remove('is-paused');
+      } else {
+        bg.classList.add('is-paused');
+      }
+    }, { threshold: 0.01 });
+    esportsObserver.observe(bg);
+  }
+})();
+</script>
+
 
 
 <!-- ====== FOUNDERS SECTION ====== -->
@@ -1868,11 +1903,9 @@ void main() {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
       setupGlyphCanvas('heroGlyphCanvas', false);
-      setupGlyphCanvas('esportsGlyphCanvas', true);
     });
   } else {
     setupGlyphCanvas('heroGlyphCanvas', false);
-    setupGlyphCanvas('esportsGlyphCanvas', true);
   }
 })();
 </script>
