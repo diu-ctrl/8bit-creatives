@@ -1222,8 +1222,69 @@
   if (window.__navbarAnchorInit) return;
   window.__navbarAnchorInit = true;
 
-  // Clean any initial hash from URL
-  if (window.history && window.history.replaceState && window.location.href.indexOf('#') !== -1) {
+  // === ACTIVE SECTION DETECTION (IntersectionObserver — no URL hash needed) ===
+  var navLinks = document.querySelectorAll('.navbar__links a[data-section], .navbar__mobile-drawer a[data-section]');
+  var linkMap = {};
+  navLinks.forEach(function(link) {
+    var sec = link.getAttribute('data-section');
+    if (sec) {
+      if (!linkMap[sec]) linkMap[sec] = [];
+      linkMap[sec].push(link);
+    }
+  });
+
+  var activeSectionId = 'home';
+  function setActiveSection(sectionId) {
+    if (!sectionId) return;
+    activeSectionId = sectionId;
+    navLinks.forEach(function(l) { l.classList.remove('is-active'); });
+    if (linkMap[sectionId]) {
+      linkMap[sectionId].forEach(function(l) { l.classList.add('is-active'); });
+      var desktopLink = linkMap[sectionId].find(function(l) { return l.closest('.navbar__links'); });
+      if (desktopLink && typeof window.updateNavbarIndicator === 'function') {
+        window.updateNavbarIndicator(desktopLink, false);
+      }
+    }
+  }
+
+  // Check if there is a target section from URL hash or sessionStorage
+  var rawHash = window.location.hash ? window.location.hash.replace('#', '') : '';
+  var storedTarget = '';
+  try {
+    storedTarget = sessionStorage.getItem('8bit_nav_target') || '';
+    if (storedTarget) sessionStorage.removeItem('8bit_nav_target');
+  } catch (e) {}
+
+  var targetId = rawHash || storedTarget;
+  if (targetId === 'hero') targetId = 'home';
+
+  function scrollToSection(id, smooth) {
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    setActiveSection(id);
+    if (typeof ScrollTrigger !== 'undefined') {
+      setTimeout(function() { ScrollTrigger.refresh(); }, 100);
+      setTimeout(function() { ScrollTrigger.refresh(); }, 400);
+    }
+  }
+
+  if (targetId) {
+    scrollToSection(targetId, false);
+    requestAnimationFrame(function() {
+      scrollToSection(targetId, false);
+    });
+    setTimeout(function() {
+      scrollToSection(targetId, true);
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    }, 150);
+    window.addEventListener('load', function() {
+      scrollToSection(targetId, false);
+    });
+  } else if (window.history && window.history.replaceState && window.location.href.indexOf('#') !== -1) {
     window.history.replaceState(null, '', window.location.pathname + window.location.search);
   }
 
@@ -1300,31 +1361,6 @@
       closeMobileDrawer();
     }
   });
-
-  // === ACTIVE SECTION DETECTION (IntersectionObserver — no URL hash needed) ===
-  var navLinks = document.querySelectorAll('.navbar__links a[data-section], .navbar__mobile-drawer a[data-section]');
-  var linkMap = {};
-  navLinks.forEach(function(link) {
-    var sec = link.getAttribute('data-section');
-    if (sec) {
-      if (!linkMap[sec]) linkMap[sec] = [];
-      linkMap[sec].push(link);
-    }
-  });
-
-  var activeSectionId = 'home';
-  function setActiveSection(sectionId) {
-    if (!sectionId) return;
-    activeSectionId = sectionId;
-    navLinks.forEach(function(l) { l.classList.remove('is-active'); });
-    if (linkMap[sectionId]) {
-      linkMap[sectionId].forEach(function(l) { l.classList.add('is-active'); });
-      var desktopLink = linkMap[sectionId].find(function(l) { return l.closest('.navbar__links'); });
-      if (desktopLink && typeof window.updateNavbarIndicator === 'function') {
-        window.updateNavbarIndicator(desktopLink, false);
-      }
-    }
-  }
 
   var observedSections = document.querySelectorAll('section[id]');
   if ('IntersectionObserver' in window) {

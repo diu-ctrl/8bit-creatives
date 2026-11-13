@@ -87,6 +87,39 @@
         clickScrollTimer = setTimeout(() => {
           isClickScrolling = false;
         }, 1000);
+
+        // Record target section so navigation from subpages jumps directly to the section
+        const href = link.getAttribute('href') || '';
+        const dataSec = link.getAttribute('data-section') || '';
+        let targetSec = dataSec;
+        if (!targetSec && href.indexOf('#') !== -1) {
+          targetSec = href.split('#')[1];
+        }
+        if (targetSec === 'hero') targetSec = 'home';
+        if (targetSec) {
+          try {
+            sessionStorage.setItem('8bit_nav_target', targetSec);
+          } catch (err) {}
+        }
+      });
+    });
+
+    // Mobile drawer link listeners
+    const mobileLinks = document.querySelectorAll('.navbar__mobile-drawer a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const href = link.getAttribute('href') || '';
+        const dataSec = link.getAttribute('data-section') || '';
+        let targetSec = dataSec;
+        if (!targetSec && href.indexOf('#') !== -1) {
+          targetSec = href.split('#')[1];
+        }
+        if (targetSec === 'hero') targetSec = 'home';
+        if (targetSec) {
+          try {
+            sessionStorage.setItem('8bit_nav_target', targetSec);
+          } catch (err) {}
+        }
       });
     });
 
