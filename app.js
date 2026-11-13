@@ -3957,21 +3957,15 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     }
   });
 
-  // Cards fly in with stagger (only the visible ones, others stay hidden)
-  gsap.from('.creator-card', {
+  // All creator cards reveal together in a row (unified reveal, no staggered half-right / half-left tilting)
+  gsap.from('.creators-carousel-wrap', {
     opacity: 0,
-    y: 60,
-    rotationY: 90,
-    duration: 0.9,
-    stagger: 0.05,
+    y: 50,
+    duration: 0.85,
     ease: 'power3.out',
     scrollTrigger: {
       trigger: '#creators',
-      start: 'top 60%',
-      onEnter: () => {
-        // After entrance, let the coverflow paint take over
-        // The paint() function will re-position cards correctly
-      }
+      start: 'top 65%'
     }
   });
 
