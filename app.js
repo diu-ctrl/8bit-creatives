@@ -1671,14 +1671,24 @@ function initAboutPhysics() {
     let globe = null;
     let button = null;
 
-    if (eclipseEl) {
-      const r = eclipseEl.getBoundingClientRect();
-      const radius = r.width / 2;
-      const cx = (r.left + r.right) / 2 - secRect.left;
-      const cy = (r.top + r.bottom) / 2 - secRect.top;
-      // Red globe circle (+2px buffer so character doesn't clip into perimeter)
-      globe = { cx, cy, radius: radius + 2 };
+    // The red globe is an 800px circle (radius = 400px) centered at the top-center of the section.
+    // We NEVER compute radius from eclipseEl.getBoundingClientRect() because eclipseEl rotates,
+    // which causes its axis-aligned bounding box to oscillate between 800px and 1131px (566px radius),
+    // creating a massive 166px invisible phantom wall!
+    // Instead, anchor precisely to the non-rotating wrapper and true visual circle geometry:
+    const wrapEl = section.querySelector('.eclipse-wrap') || section.querySelector('.about-eclipse__clip');
+    let cx = secRect.width / 2;
+    let cy = 0;
+    if (wrapEl) {
+      const wrapRect = wrapEl.getBoundingClientRect();
+      cx = (wrapRect.left + wrapRect.right) / 2 - secRect.left;
+      cy = wrapRect.top - secRect.top;
     }
+
+    const isTablet = window.innerWidth <= 768;
+    // Exactly matches the red circle perimeter (800px diameter -> R=400px; hanging characters R_FEET=398px)
+    const radius = isTablet ? 260 : 396;
+    globe = { cx, cy, radius };
 
     if (btnAbout) {
       const r = btnAbout.getBoundingClientRect();
