@@ -1592,8 +1592,6 @@ const characters = [
    ========================================================================== */
 function initAboutPhysics() {
   if (window.matchMedia('(max-width: 767px)').matches || window.matchMedia('(hover: none)').matches) return;
-  // Disable physics on about subpage (characters stay attached and rotate only)
-  if (window.location.pathname.includes('about.html')) return;
 
   const section = document.getElementById('about');
   if (!section) return;
@@ -1720,9 +1718,10 @@ function initAboutPhysics() {
       }
 
       // Keep visual body inside section bounds:
-      // Left edge touches 0, right edge touches secW, top touches 0, feet touch secH
+      // Left edge touches 0, right edge touches secW, top touches 0, feet touch floor line (border)
+      const floorY = secH - 1;
       boxX = Math.max(0, Math.min(boxX, secW - HIT_W));
-      boxY = Math.max(0, Math.min(boxY, secH - HIT_H));
+      boxY = Math.max(0, Math.min(boxY, floorY - HIT_H));
     }
 
     return {
@@ -1910,9 +1909,10 @@ function initAboutPhysics() {
         let newX = body.x + body.vx;
         let newY = body.y + body.vy;
 
-        // Ground collision (feet touch floor)
-        if (newY + HIT_OY + HIT_H >= secH) {
-          newY = secH - HIT_H - HIT_OY;
+        // Ground collision (feet touch floor line / border)
+        const floorY = secH - 1;
+        if (newY + HIT_OY + HIT_H >= floorY) {
+          newY = floorY - HIT_H - HIT_OY;
           body.vy = -body.vy * BOUNCE;
           body.vx *= GROUND_FRICTION;
           if (Math.abs(body.vy) < 1) body.vy = 0;

@@ -105,6 +105,19 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .about-hero-floor-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+      z-index: 6;
+      pointer-events: none;
     }
 
     .about-page-hero .eclipse-wrap {
@@ -941,6 +954,9 @@
       We started in a Mumbai LAN room in 2018. Three gamers who knew the lobby, the room, and the audience. Today, 8Bit manages 50+ of India's biggest creators, broadcasts live to millions, and ships campaigns brands can actually measure.
     </p>
   </div>
+
+  <!-- Bottom White Border / Floor Line for fallen characters -->
+  <div class="about-hero-floor-line" aria-hidden="true"></div>
 </section>
 
 
