@@ -679,64 +679,106 @@
         height: 14px !important;
       }
 
-      /* FIX 2: Compact Creator Cards */
+      /* FIX 2: Modern 2-column Creator Cards */
       .creators-grid {
-        grid-template-columns: 1fr !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 12px !important;
       }
+      @media (max-width: 340px) {
+        .creators-grid {
+          gap: 8px !important;
+        }
+      }
       .creators-grid .creator-card {
-        display: grid !important;
-        grid-template-columns: 80px 1fr !important;
-        grid-template-rows: auto auto auto !important;
-        column-gap: 14px !important;
-        row-gap: 2px !important;
-        align-items: center !important;
-        padding: 12px 14px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        height: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        aspect-ratio: auto !important;
+        padding: 10px !important;
         border-radius: 16px !important;
         background: #0D0D0D !important;
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-sizing: border-box !important;
+        cursor: pointer !important;
+        transition: transform 180ms ease, border-color 180ms ease !important;
+      }
+      .creators-grid .creator-card:active {
+        transform: scale(0.98) !important;
+        border-color: rgba(255, 89, 49, 0.5) !important;
       }
       .creators-grid .creator-card .creator-card-image {
-        grid-column: 1 !important;
-        grid-row: 1 / span 3 !important;
-        width: 80px !important;
-        height: 80px !important;
-        aspect-ratio: 1 / 1 !important;
+        width: 100% !important;
+        aspect-ratio: 4 / 5 !important;
+        height: auto !important;
         border-radius: 12px !important;
         overflow: hidden !important;
-        margin-bottom: 0 !important;
+        background: #1A1A1A !important;
+        margin-bottom: 10px !important;
+        position: relative !important;
       }
       .creators-grid .creator-card .creator-card-image img {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
+        object-position: center top !important;
+        display: block !important;
+        border-radius: 12px !important;
       }
       .creators-grid .creator-card .creator-card-name {
-        grid-column: 2 !important;
-        font-size: 16px !important;
-        line-height: 1.2 !important;
-        margin-bottom: 0 !important;
+        font-family: 'Geist', sans-serif !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: #FFFFFF !important;
+        line-height: 1.25 !important;
+        margin-bottom: 2px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
       }
       .creators-grid .creator-card .creator-card-alias {
-        grid-column: 2 !important;
+        font-family: 'Geist', sans-serif !important;
         font-size: 12px !important;
-        line-height: 1.2 !important;
-        margin-bottom: 4px !important;
+        color: rgba(255, 255, 255, 0.5) !important;
+        line-height: 1.25 !important;
+        margin-bottom: 8px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
       }
       .creators-grid .creator-card .creator-card-meta {
-        grid-column: 2 !important;
         display: flex !important;
         align-items: center !important;
-        gap: 8px !important;
-        margin-top: 0 !important;
+        justify-content: space-between !important;
+        gap: 6px !important;
+        margin-top: auto !important;
+        padding-top: 8px !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
       }
       .creators-grid .creator-card .creator-card-category {
+        font-family: 'Geist', sans-serif !important;
         font-size: 10px !important;
+        font-weight: 500 !important;
+        color: rgba(255, 255, 255, 0.65) !important;
+        background: rgba(255, 255, 255, 0.06) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 999px !important;
         padding: 3px 8px !important;
-        margin-bottom: 0 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: 60% !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.04em !important;
       }
       .creators-grid .creator-card .creator-card-reach {
-        font-size: 13px !important;
+        font-family: 'Geist', sans-serif !important;
+        font-size: 11.5px !important;
+        font-weight: 700 !important;
+        color: #FF5931 !important;
+        white-space: nowrap !important;
       }
 
       /* FIX 3: Remove white space before footer */

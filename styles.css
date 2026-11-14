@@ -4378,7 +4378,7 @@ body.light-page .back-home,
     transform-style: flat !important;
     box-sizing: border-box !important;
   }
-  .creator-card {
+  .coverflow-stage .creator-card {
     position: relative !important;
     left: auto !important;
     top: auto !important;
@@ -4399,7 +4399,7 @@ body.light-page .back-home,
     touch-action: pan-x pan-y !important;
     pointer-events: auto !important;
   }
-  .creator-card img {
+  .coverflow-stage .creator-card img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
