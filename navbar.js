@@ -48,24 +48,24 @@
       if (linkRect.width === 0 || navRect.width === 0) return;
 
       const isMobile = window.innerWidth <= 767;
-      const padX = isMobile ? 12 : 24;
+      const padX = isMobile ? 10 : 24;
       const width = Math.round(linkRect.width + padX);
       const x = Math.round((linkRect.left - navRect.left) - (padX / 2));
-      const height = isMobile ? 30 : Math.round(linkRect.height + 12);
+      const height = isMobile ? 28 : Math.round(linkRect.height + 12);
 
       if (isInstant) {
-        indicator.style.transition = 'none';
-        indicator.style.width = width + 'px';
-        indicator.style.height = height + 'px';
-        indicator.style.transform = 'translate3d(' + x + 'px, -50%, 0)';
-        indicator.style.opacity = '1';
+        indicator.style.setProperty('transition', 'none', 'important');
+        indicator.style.setProperty('width', width + 'px', 'important');
+        indicator.style.setProperty('height', height + 'px', 'important');
+        indicator.style.setProperty('transform', 'translate3d(' + x + 'px, -50%, 0)', 'important');
+        indicator.style.setProperty('opacity', '1', 'important');
         void indicator.offsetHeight; // Force reflow
-        indicator.style.transition = '';
+        indicator.style.removeProperty('transition');
       } else {
-        indicator.style.width = width + 'px';
-        indicator.style.height = height + 'px';
-        indicator.style.transform = 'translate3d(' + x + 'px, -50%, 0)';
-        indicator.style.opacity = '1';
+        indicator.style.setProperty('width', width + 'px', 'important');
+        indicator.style.setProperty('height', height + 'px', 'important');
+        indicator.style.setProperty('transform', 'translate3d(' + x + 'px, -50%, 0)', 'important');
+        indicator.style.setProperty('opacity', '1', 'important');
       }
     }
 
@@ -169,6 +169,25 @@
       const activeLink = linksContainer.querySelector('a.is-active') || currentActive;
       moveIndicator(activeLink, true);
     }, { passive: true });
+
+    linksContainer.addEventListener('scroll', () => {
+      const activeLink = linksContainer.querySelector('a.is-active') || currentActive;
+      moveIndicator(activeLink, true);
+    }, { passive: true });
+
+    window.addEventListener('hashchange', () => {
+      const hash = (window.location.hash || '').replace('#', '');
+      const match = links.find(l => {
+        const sec = l.getAttribute('data-section') || (l.getAttribute('href') || '').split('#')[1];
+        return sec === hash;
+      });
+      if (match) {
+        links.forEach(l => l.classList.remove('is-active'));
+        match.classList.add('is-active');
+        currentActive = match;
+        moveIndicator(currentActive, false);
+      }
+    });
 
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => {
