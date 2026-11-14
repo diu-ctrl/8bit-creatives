@@ -1,8 +1,8 @@
 User-agent: *
 Allow: /
-Disallow: /favicon/
-Disallow: /images-for-landing-page/
 Disallow: /ops.html
 Disallow: /api/
 
+# Host & Sitemap
+Host: https://8bit-creatives.vercel.app
 Sitemap: https://8bit-creatives.vercel.app/sitemap.xml
