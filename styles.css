@@ -51,6 +51,75 @@ body {
   line-height: 1.5;
 }
 
+/* --------------------------------------------------------------------------
+   GLOBAL TYPOGRAPHY & ORPHAN/WIDOW PREVENTION
+   Ensures headings balance evenly across lines on mobile and desktop,
+   preventing lone single words or 2-3 letter words on new lines.
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6,
+.hero-title,
+.creators-title,
+.case-title,
+.case-caption-title,
+.services-title,
+.service-title,
+.service-block-title,
+.esports-section__card__title,
+.founders-title,
+.founders__title,
+.cta-headline,
+.cta-section__headline,
+.cta-title,
+.values-title,
+.map-section__title,
+.creators-hero-title,
+.creators-cta-title,
+.services-hero-title,
+.services-cta-title,
+.work-hero-title,
+.work-title,
+.work-card-name,
+.work-cta-title,
+.team-header__name,
+.es-section-title,
+.form-title,
+.case-hero-h1,
+.case-section-title,
+.case-cta-h2,
+.pillar-card-title,
+.deliverable-heading,
+.next-project-title,
+.related-title,
+.related-card-title,
+.footer-enquiry-heading,
+.section-title {
+  text-wrap: balance;
+}
+
+p,
+.hero-sub,
+.about-lead,
+.about-sub,
+.case-caption-sub,
+.cta-subtext,
+.cta-section__subtext,
+.cta-subtitle,
+.values-subtitle,
+.map-section__subtitle,
+.creators-hero-sub,
+.creators-cta-sub,
+.services-hero-sub,
+.services-cta-sub,
+.work-hero-sub,
+.work-cta-sub,
+.team-header__tagline,
+.form-subtitle,
+.case-hero-sub,
+.case-p,
+.case-cta-sub {
+  text-wrap: pretty;
+}
+
 section {
   scroll-margin-top: 80px;
 }

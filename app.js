@@ -3066,7 +3066,7 @@ function initCaseStudies() {
 
   const CASE_DATA = [
     { img: 'images-for-landing-page/case-studies/case-chess.webp',
-      title: 'Global Chess League S4',
+      title: 'Global Chess League\u00A0S4',
       sub: 'Multi-camera live broadcast · 9-day event' },
     { img: 'images-for-landing-page/case-studies/case-kick.webp',
       title: 'Kick India — Day One Migration',
