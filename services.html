@@ -106,11 +106,10 @@
     .services-hero {
       position: relative;
       background: #000000 !important;
-      min-height: 82vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 160px 32px 90px 32px;
+      padding: 150px 32px 48px 32px;
       box-sizing: border-box;
       overflow: hidden;
       z-index: 1;
@@ -119,11 +118,11 @@
     .services-hero::before {
       content: '';
       position: absolute;
-      top: 45%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       width: min(720px, 90vw);
-      height: 380px;
+      height: 340px;
       background: radial-gradient(ellipse at center, rgba(255, 89, 49, 0.12) 0%, rgba(255, 89, 49, 0.03) 50%, transparent 72%);
       filter: blur(60px);
       pointer-events: none;
@@ -138,40 +137,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-    .services-hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 6px 16px;
-      border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      margin-bottom: 24px;
-      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
-    }
-    .services-hero-badge:hover {
-      border-color: rgba(255, 89, 49, 0.4);
-      background: rgba(255, 89, 49, 0.06);
-      transform: translateY(-1px);
-    }
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #FF5931;
-      box-shadow: 0 0 10px rgba(255, 89, 49, 0.8);
-      flex-shrink: 0;
-    }
-    .badge-text {
-      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.85);
     }
     .services-hero-title {
       font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -196,37 +161,6 @@
       text-wrap: pretty;
       text-transform: none;
     }
-    .services-hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 36px;
-      padding: 12px 28px;
-      border-radius: 9999px;
-      background: #101010;
-      color: #FFFFFF;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
-    }
-    .services-hero-cta:hover {
-      background: #FF5931;
-      border-color: #FF5931;
-      color: #FFFFFF;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(255, 89, 49, 0.35);
-    }
-    .hero-cta-arrow {
-      transition: transform 0.25s ease;
-    }
-    .services-hero-cta:hover .hero-cta-arrow {
-      transform: translateY(2px);
-    }
 
     /* Scroll reveal typography */
     .scroll-reveal-text {
@@ -249,38 +183,13 @@
       transform: translateY(0) rotate(0deg);
     }
 
-    /* ═══ SECTION 2: POSITIONING STATEMENT ═══ */
-    .services-positioning {
-      position: relative;
-      background: #000000;
-      padding: 80px 24px;
-      box-sizing: border-box;
-      z-index: 1;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .positioning-container {
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .positioning-text {
-      font-family: 'Geist', sans-serif;
-      font-weight: 300;
-      font-size: clamp(19px, 2vw, 22px);
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.75);
-      margin: 0;
-      text-transform: none;
-    }
-
-    /* ═══ SECTION 3: SERVICES BREAKDOWN ═══ */
+    /* ═══ SECTION 2: SERVICES BREAKDOWN ═══ */
     .services-breakdown {
       position: relative;
       background: #000000;
-      padding: 80px 48px;
+      padding: 32px 48px 80px 48px;
       box-sizing: border-box;
       z-index: 1;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
     .services-breakdown-container {
       max-width: 1400px;
@@ -696,44 +605,26 @@
 
     @media (max-width: 767px) {
       .services-hero {
-        padding: 110px 20px 60px 20px !important;
-        min-height: 65vh !important;
-      }
-      .services-hero-badge {
-        padding: 5px 13px !important;
-        margin-bottom: 18px !important;
-      }
-      .badge-text {
-        font-size: 11px !important;
-        letter-spacing: 0.06em !important;
+        padding: 100px 20px 28px 20px !important;
+        min-height: auto !important;
       }
       .services-hero-title {
         font-size: clamp(26px, 7vw, 34px) !important;
         line-height: 1.22 !important;
         letter-spacing: -0.02em !important;
-        margin-bottom: 16px !important;
+        margin-bottom: 14px !important;
       }
       .services-hero-sub {
         font-size: 15px !important;
         line-height: 1.55 !important;
       }
-      .services-hero-cta {
-        margin-top: 28px !important;
-        padding: 11px 22px !important;
-        font-size: 13.5px !important;
-      }
-      .services-positioning,
       .services-breakdown,
       .services-approach,
       .services-work,
       .services-capabilities,
       .services-arsenal,
       .services-cta {
-        padding: 32px 24px !important;
-      }
-      .positioning-text {
-        font-size: 14px !important;
-        line-height: 1.5 !important;
+        padding: 24px 20px !important;
       }
       .services-breakdown-container {
         gap: 28px !important;
@@ -955,29 +846,12 @@
   <!-- SECTION 1 — HERO -->
   <section class="services-hero" data-bg="dark">
     <div class="services-hero-content">
-      <div class="services-hero-badge">
-        <span class="badge-dot" aria-hidden="true"></span>
-        <span class="badge-text">Capabilities &amp; Services</span>
-      </div>
       <h1 class="services-hero-title" aria-label="8Bit Creatives Services: We build the infrastructure between gaming culture and brand budgets.">We build the infrastructure between gaming culture and brand&nbsp;budgets.</h1>
       <p class="services-hero-sub">Campaigns, talent management, broadcast production, and platform strategy for India's gaming&nbsp;economy.</p>
-      <a href="#services-breakdown" class="services-hero-cta" aria-label="Explore Capabilities">
-        <span>Explore Capabilities</span>
-        <svg class="hero-cta-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M8 3v10M8 13l4-4M8 13L4 9" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
     </div>
   </section>
 
-  <!-- SECTION 2 — POSITIONING STATEMENT -->
-  <section class="services-positioning" data-bg="dark">
-    <div class="positioning-container">
-      <p class="positioning-text">We're gamers first, agency second. We've been in the lobbies, we've watched the streams, and we understand the culture. That means we don't just buy ads against gaming content — we build campaigns that feel native to the room. Here's what we do.</p>
-    </div>
-  </section>
-
-  <!-- SECTION 3 — SERVICES BREAKDOWN -->
+  <!-- SECTION 2 — SERVICES BREAKDOWN -->
   <section class="services-breakdown" id="services-breakdown" data-bg="dark">
     <div class="services-breakdown-container">
       <!-- Block 1 — For Brands -->
@@ -1430,33 +1304,12 @@
           }, 100);
         }
 
-        gsap.from('.services-hero-badge', {
-          opacity: 0,
-          y: -14,
-          duration: 0.6,
-          ease: 'power2.out'
-        });
-
         gsap.from('.services-hero-sub', {
           opacity: 0,
-          y: 20,
+          y: 18,
           duration: 0.7,
-          delay: 0.3,
+          delay: 0.25,
           ease: 'power2.out'
-        });
-
-        gsap.from('.services-hero-cta', {
-          opacity: 0,
-          y: 20,
-          duration: 0.7,
-          delay: 0.45,
-          ease: 'power2.out'
-        });
-
-        // Positioning statement
-        gsap.from('.positioning-text', {
-          opacity: 0, y: 30, duration: 0.8, ease: 'power3.out',
-          scrollTrigger: { trigger: '.services-positioning', start: 'top 85%' }
         });
 
         // Service blocks
