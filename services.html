@@ -106,58 +106,126 @@
     .services-hero {
       position: relative;
       background: #000000 !important;
-      min-height: 85vh;
+      min-height: 82vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 140px 32px 80px 32px;
+      padding: 160px 32px 90px 32px;
       box-sizing: border-box;
       overflow: hidden;
       z-index: 1;
       text-align: center;
     }
+    .services-hero::before {
+      content: '';
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(720px, 90vw);
+      height: 380px;
+      background: radial-gradient(ellipse at center, rgba(255, 89, 49, 0.12) 0%, rgba(255, 89, 49, 0.03) 50%, transparent 72%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+    }
     .services-hero-content {
       position: relative;
       z-index: 2;
-      max-width: 960px;
+      max-width: 940px;
       text-align: center;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .services-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      margin-bottom: 24px;
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+    }
+    .services-hero-badge:hover {
+      border-color: rgba(255, 89, 49, 0.4);
+      background: rgba(255, 89, 49, 0.06);
+      transform: translateY(-1px);
+    }
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #FF5931;
+      box-shadow: 0 0 10px rgba(255, 89, 49, 0.8);
+      flex-shrink: 0;
+    }
+    .badge-text {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
     }
     .services-hero-title {
-      font-family: 'Geist', sans-serif;
-      font-weight: 700;
-      font-size: clamp(40px, 5.5vw, 72px);
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 500;
+      font-size: clamp(34px, 4.6vw, 58px);
       color: #FFFFFF;
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      margin: 0 auto 24px auto;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin: 0 auto 20px auto;
+      max-width: 900px;
+      text-wrap: balance;
       text-transform: none;
     }
     .services-hero-sub {
-      font-family: 'Geist', sans-serif;
-      font-weight: 300;
-      font-size: clamp(19px, 2.2vw, 22px);
-      color: rgba(255, 255, 255, 0.75);
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      font-size: clamp(16px, 1.35vw, 19px);
+      color: rgba(255, 255, 255, 0.65);
       line-height: 1.6;
-      max-width: 680px;
+      max-width: 620px;
       margin: 0 auto;
+      text-wrap: pretty;
       text-transform: none;
     }
-    .services-hero-discover {
+    .services-hero-cta {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 40px;
-      font-family: 'Geist', sans-serif;
-      font-size: 15px;
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.65);
-      text-decoration: none;
-      text-transform: none;
-      transition: color 200ms ease;
-    }
-    .services-hero-discover:hover {
+      gap: 10px;
+      margin-top: 36px;
+      padding: 12px 28px;
+      border-radius: 9999px;
+      background: #101010;
       color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+    }
+    .services-hero-cta:hover {
+      background: #FF5931;
+      border-color: #FF5931;
+      color: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(255, 89, 49, 0.35);
+    }
+    .hero-cta-arrow {
+      transition: transform 0.25s ease;
+    }
+    .services-hero-cta:hover .hero-cta-arrow {
+      transform: translateY(2px);
     }
 
     /* Scroll reveal typography */
@@ -628,16 +696,31 @@
 
     @media (max-width: 767px) {
       .services-hero {
-        padding: 90px 20px 40px 20px !important;
-        min-height: 60vh !important;
+        padding: 110px 20px 60px 20px !important;
+        min-height: 65vh !important;
+      }
+      .services-hero-badge {
+        padding: 5px 13px !important;
+        margin-bottom: 18px !important;
+      }
+      .badge-text {
+        font-size: 11px !important;
+        letter-spacing: 0.06em !important;
       }
       .services-hero-title {
-        font-size: 32px !important;
+        font-size: clamp(26px, 7vw, 34px) !important;
+        line-height: 1.22 !important;
+        letter-spacing: -0.02em !important;
         margin-bottom: 16px !important;
       }
       .services-hero-sub {
-        font-size: 14px !important;
-        line-height: 1.5 !important;
+        font-size: 15px !important;
+        line-height: 1.55 !important;
+      }
+      .services-hero-cta {
+        margin-top: 28px !important;
+        padding: 11px 22px !important;
+        font-size: 13.5px !important;
       }
       .services-positioning,
       .services-breakdown,
@@ -872,9 +955,18 @@
   <!-- SECTION 1 — HERO -->
   <section class="services-hero" data-bg="dark">
     <div class="services-hero-content">
-      <h1 class="services-hero-title"><span class="visually-hidden">8Bit Creatives Services: </span>We build the infrastructure between gaming culture and brand&nbsp;budgets.</h1>
-      <p class="services-hero-sub">Campaigns, talent management, broadcast production, and platform strategy for India's gaming economy.</p>
-      <a href="#services-breakdown" class="services-hero-discover">Discover ↓</a>
+      <div class="services-hero-badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span class="badge-text">Capabilities &amp; Services</span>
+      </div>
+      <h1 class="services-hero-title" aria-label="8Bit Creatives Services: We build the infrastructure between gaming culture and brand budgets.">We build the infrastructure between gaming culture and brand&nbsp;budgets.</h1>
+      <p class="services-hero-sub">Campaigns, talent management, broadcast production, and platform strategy for India's gaming&nbsp;economy.</p>
+      <a href="#services-breakdown" class="services-hero-cta" aria-label="Explore Capabilities">
+        <span>Explore Capabilities</span>
+        <svg class="hero-cta-arrow" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 3v10M8 13l4-4M8 13L4 9" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
   </section>
 
@@ -1321,10 +1413,12 @@
 
       const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!prefersReduced) {
-        // Hero word-by-word reveal
+        // Hero word-by-word reveal & entrance choreography
         const heroTitle = document.querySelector('.services-hero-title');
         if (heroTitle) {
-          const words = heroTitle.textContent.trim().split(/\s+/);
+          // Split on standard ASCII space to keep &nbsp; paired words (e.g. brand&nbsp;budgets.) intact
+          const rawText = heroTitle.textContent.trim();
+          const words = rawText.split(' ');
           heroTitle.innerHTML = words.map((word, i) => 
             `<span class="scroll-reveal-word" style="--word-index: ${i}">${word}</span> `
           ).join('');
@@ -1335,6 +1429,29 @@
             heroWords.forEach(word => word.classList.add('revealed'));
           }, 100);
         }
+
+        gsap.from('.services-hero-badge', {
+          opacity: 0,
+          y: -14,
+          duration: 0.6,
+          ease: 'power2.out'
+        });
+
+        gsap.from('.services-hero-sub', {
+          opacity: 0,
+          y: 20,
+          duration: 0.7,
+          delay: 0.3,
+          ease: 'power2.out'
+        });
+
+        gsap.from('.services-hero-cta', {
+          opacity: 0,
+          y: 20,
+          duration: 0.7,
+          delay: 0.45,
+          ease: 'power2.out'
+        });
 
         // Positioning statement
         gsap.from('.positioning-text', {
