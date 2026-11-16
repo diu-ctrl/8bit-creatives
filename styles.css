@@ -2975,12 +2975,14 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .footer-signature {
   font-family: 'Geist', sans-serif;
   font-weight: 300;
-  font-size: clamp(11.5px, 1.15vw, 13px);
+  font-size: clamp(10.5px, 1.05vw, 12.5px);
   color: rgba(255, 255, 255, 0.85);
   text-transform: none;
   text-align: center;
   justify-self: center;
-  white-space: nowrap;
+  white-space: nowrap !important;
+  text-wrap: nowrap !important;
+  word-break: keep-all !important;
   margin: 0;
 }
 .footer-heart {
@@ -2991,7 +2993,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   color: #FFFFFF;
   font-weight: 500;
   text-decoration: none;
-  white-space: nowrap;
+  white-space: nowrap !important;
+  text-wrap: nowrap !important;
   transition: color 200ms ease, opacity var(--t-fast) var(--ease);
 }
 .footer-signature-link:hover,
