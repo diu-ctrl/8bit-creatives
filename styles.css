@@ -1692,7 +1692,14 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   border-radius: 20px;
   overflow: hidden;
   background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  transition: border-color 350ms ease, box-shadow 350ms ease;
+}
+
+.coverflow-stage .creator-card.is-active {
+  border-color: rgba(255, 89, 49, 0.45);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 89, 49, 0.2);
 }
 
 .creator-card img {
@@ -1708,14 +1715,24 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   image-rendering: auto;
 }
 
+/* 3D Coverflow: side cards in B&W (grayscale), current middle card in full color */
+.coverflow-stage .creator-card img {
+  filter: grayscale(100%) contrast(1.08) brightness(0.82);
+  transition: filter 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.coverflow-stage .creator-card.is-active img {
+  filter: grayscale(0%) contrast(1) brightness(1);
+}
+
+.coverflow-stage .creator-card:not(.is-active):hover img {
+  filter: grayscale(40%) contrast(1.05) brightness(0.92);
+}
+
 @media (min-width: 768px) {
   .creator-card--clone {
     display: none !important;
   }
-}
-
-.creator-card.is-active img {
-  filter: none;
 }
 
 /* Compatibility classes for legacy verify scripts */

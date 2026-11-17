@@ -3647,8 +3647,9 @@ function initCreatorStats() {
       const edge = LOOP ? Math.min(1, Math.max(0, count / 2 - distance)) : 1;
       card.style.opacity = String(Math.max(0, 1 - FADE * distance) * edge);
       card.style.zIndex = String(100 - Math.round(distance));
-      // active state for grayscale removal
-      if (Math.round(pos) % count === i && distance < 0.5) {
+      // Active state: middle card in full color, all side cards in B&W
+      const activeIdx = indexAt(pos);
+      if (i === activeIdx) {
         card.classList.add('is-active');
       } else {
         card.classList.remove('is-active');
@@ -3941,6 +3942,9 @@ function initCreatorStats() {
         pos = creatorIdx;
         updateCaption();
       }
+      allStageCards.forEach((cCard, cIdx) => {
+        cCard.classList.toggle('is-active', cIdx === closestIdx);
+      });
     }, 40);
   }, { passive: true });
 
