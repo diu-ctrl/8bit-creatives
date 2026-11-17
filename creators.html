@@ -1259,9 +1259,7 @@
     if (!grid) return;
 
     const isLocal = window.location.hostname === 'localhost' || 
-                    window.location.hostname === '127.0.0.1' || 
-                    window.location.protocol === 'file:';
-    const isAdmin = new URLSearchParams(window.location.search).has('admin');
+                    window.location.hostname === '127.0.0.1';
 
     let activePlatform = 'all';
     let searchTerm = '';
@@ -1282,7 +1280,7 @@
           const card = document.createElement('div');
           card.className = 'creator-card';
           
-          const editBtnHtml = (isLocal || isAdmin) 
+          const editBtnHtml = isLocal 
             ? '<button class="card-edit-btn" onclick="event.stopPropagation(); window.location.href=\'add-creator.html?edit=' + encodeURIComponent(c.id || c.name) + '\';" title="Edit ' + c.name + '">\n' +
               '  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>\n' +
               '  <span>Edit</span>\n' +
@@ -1416,7 +1414,7 @@
         '    <div class="creator-modal-name">' + c.name + '</div>',
         '    <div class="creator-modal-alias">' + c.alias + '</div>',
         '    <div class="creator-modal-category">' + (c.categoryLabel || 'Gaming · Content Creation') + '</div>',
-        (isLocal || isAdmin ? '    <a href="add-creator.html?edit=' + encodeURIComponent(c.id || c.name) + '" class="modal-edit-link" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,77,38,0.15);border:1px solid rgba(255,77,38,0.4);border-radius:6px;color:#FF4D26;font-size:12px;font-weight:600;text-decoration:none;margin-top:10px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg><span>Edit Creator Info</span></a>' : ''),
+        (isLocal ? '    <a href="add-creator.html?edit=' + encodeURIComponent(c.id || c.name) + '" class="modal-edit-link" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,77,38,0.15);border:1px solid rgba(255,77,38,0.4);border-radius:6px;color:#FF4D26;font-size:12px;font-weight:600;text-decoration:none;margin-top:10px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg><span>Edit Creator Info</span></a>' : ''),
         '  </div>',
         '</div>',
         '<div class="creator-modal-body morph-content morph-initial">',
@@ -1574,24 +1572,13 @@
 
     renderCards();
 
-    // Admin / Localhost-Only Visibility for "+ Add Creator" Button:
-    // Completely hidden on public website (8bit-creatives.vercel.app) to prevent unauthorized public access.
-    // Visible only on localhost/127.0.0.1, or by appending ?admin=true, or via secret shortcut Ctrl+Shift+A.
-    const isLocal = window.location.hostname === 'localhost' || 
-                    window.location.hostname === '127.0.0.1' || 
-                    window.location.protocol === 'file:';
-    const isAdmin = new URLSearchParams(window.location.search).has('admin');
+    // Localhost-Only Visibility for "+ Add Creator" Button:
+    // Completely hidden on public website (8bit-creatives.vercel.app).
+    // Visible strictly on local development environment (localhost/127.0.0.1).
     const onboardBtn = document.getElementById('onboardCreatorBtn');
-    if (onboardBtn && (isLocal || isAdmin)) {
+    if (onboardBtn && isLocal) {
       onboardBtn.style.display = 'inline-flex';
     }
-
-    // Secret Admin Shortcut: Ctrl+Shift+A opens Creator Studio
-    document.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
-        window.location.href = 'add-creator.html';
-      }
-    });
 
     // GSAP Hero intro
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {

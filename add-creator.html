@@ -3,6 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    // Strict Access Control:
+    // Creator management is strictly restricted to local development (localhost / 127.0.0.1).
+    // All direct traffic on the public live website is immediately redirected.
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      window.location.replace('creators.html');
+    }
+  </script>
   <title>Creator Onboarding Studio — 8Bit Creatives</title>
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="stylesheet" href="styles.css?v=2.1">
@@ -758,16 +766,6 @@
       </p>
     </div>
 
-    <!-- Production Notice (Shown only if accessed directly on live web) -->
-    <div id="productionWarningBanner" style="display: none; background: rgba(255, 77, 38, 0.12); border: 1px solid rgba(255, 77, 38, 0.35); padding: 14px 18px; border-radius: 8px; margin-bottom: 24px; font-size: 13px; color: #F3F4F6; line-height: 1.5;">
-      <div style="display: flex; align-items: flex-start; gap: 10px;">
-        <span style="font-size: 18px;">💡</span>
-        <div>
-          <strong style="color: #FF5931;">Production Notice:</strong> You are viewing this studio on the deployed website. To permanently save new creator portraits and metadata to the official website repository, run this studio locally on your computer at <code style="background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 4px; color: #FFF;">http://localhost:3000/add-creator.html</code> and push with <code style="background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 4px; color: #FFF;">git push</code>.
-        </div>
-      </div>
-    </div>
-
     <div class="studio-grid">
       <!-- Left Column: Form -->
       <section class="form-panel">
@@ -1369,12 +1367,6 @@
       document.getElementById('mockupPlaceholder').style.display = 'flex';
       document.getElementById('successModal').classList.remove('active');
       updateLivePreview();
-    }
-
-    // Show production notice if running on live domain instead of localhost
-    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' && window.location.protocol !== 'file:') {
-      const banner = document.getElementById('productionWarningBanner');
-      if (banner) banner.style.display = 'block';
     }
 
     // Check for Edit Mode (?edit=<id>)
