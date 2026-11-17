@@ -3484,26 +3484,48 @@ function initCreatorStats() {
     : [];
 
   // Parse numerical reach for hierarchy sorting
+  function parseNum(str) {
+    if (!str) return 0;
+    const s = str.toString().toUpperCase().replace(/[^0-9.KM]/g, '');
+    if (s.includes('M')) return Math.round(parseFloat(s) * 1000000);
+    if (s.includes('K')) return Math.round(parseFloat(s) * 1000);
+    return Math.round(parseFloat(s)) || 0;
+  }
   function getReachScore(c) {
-    if (c.name === 'MortaL') return 10000000;
-    if (c.name === 'Payal') return 9000000;
-    if (c.name === '8Bit Thug' || c.name === 'Thug') return 8000000;
-    if (c.name === 'Snax') return 7000000;
-    if (c.name === '8Bit Goldy' || c.name === 'Goldy') return 6000000;
+    if (!c) return 0;
     const r = c.reach;
-    if (!r) return 0;
-    const s = r.toString().toUpperCase().replace(/[^0-9.KM]/g, '');
-    if (s.includes('M')) return parseFloat(s) * 1000000;
-    if (s.includes('K')) return parseFloat(s) * 1000;
-    return parseFloat(s) || 0;
+    if (r) {
+      const s = r.toString().toUpperCase().replace(/[^0-9.KM]/g, '');
+      let val = 0;
+      if (s.includes('M')) val = parseFloat(s) * 1000000;
+      else if (s.includes('K')) val = parseFloat(s) * 1000;
+      else val = parseFloat(s) || 0;
+      if (val > 0) return val;
+    }
+    return 0;
+  }
+  function getMaxPlatform(c) {
+    const yt = parseNum(c.youtube && c.youtube.count);
+    const ig = parseNum(c.instagram && c.instagram.count);
+    const kick = parseNum(c.kick && c.kick.count);
+    return Math.max(yt, ig, kick);
   }
 
   // Symmetrically distribute creators in a pyramid hierarchy:
-  // Center (index 0) = MortaL (largest reach)
-  // Right (+1) = Payal, Left (-1) = 8Bit Thug
-  // Right (+2) = Snax, Left (-2) = 8Bit Goldy
+  // Center (index 0) = MortaL (largest reach: 7M+)
+  // Right (+1) = Payal (5.2M+), Left (-1) = Nishu Tiwari (5M+)
+  // Right (+2) = Snax (3M+), Left (-2) = Jokerkihaveli (2.8M+)
+  // Right (+3) = Regaltos (2.5M+), Left (-3) = Pahadi (1.7M+)
   // Descending outwards symmetrically to the smaller numbers on the outer sides
-  const sortedCreators = [...RAW_CREATORS].sort((a, b) => getReachScore(b) - getReachScore(a));
+  const sortedCreators = [...RAW_CREATORS].sort((a, b) => {
+    const rA = getReachScore(a);
+    const rB = getReachScore(b);
+    if (rB !== rA) return rB - rA;
+    const pB = getMaxPlatform(b);
+    const pA = getMaxPlatform(a);
+    if (pB !== pA) return pB - pA;
+    return a.name.localeCompare(b.name);
+  });
   const n = sortedCreators.length;
   const pyramidCreators = new Array(n);
   

@@ -80,9 +80,46 @@ const server = http.createServer((req, res) => {
           }
         }
 
-        // Prepend or replace
+        // Append or replace, and keep sorted by reach descending
         list = list.filter(c => (c.id || '').toLowerCase() !== (creator.id || '').toLowerCase());
-        list.unshift(creator);
+        list.push(creator);
+
+        function parseNum(str) {
+          if (!str) return 0;
+          const s = str.toString().toUpperCase().replace(/[^0-9.KM]/g, '');
+          if (s.includes('M')) return Math.round(parseFloat(s) * 1000000);
+          if (s.includes('K')) return Math.round(parseFloat(s) * 1000);
+          return Math.round(parseFloat(s)) || 0;
+        }
+        function getReachValue(c) {
+          if (!c) return 0;
+          const r = c.reach;
+          if (r) {
+            const s = r.toString().toUpperCase().replace(/[^0-9.KM]/g, '');
+            let val = 0;
+            if (s.includes('M')) val = parseFloat(s) * 1000000;
+            else if (s.includes('K')) val = parseFloat(s) * 1000;
+            else val = parseFloat(s) || 0;
+            if (val > 0) return val;
+          }
+          return 0;
+        }
+        function getMaxPlatform(c) {
+          const yt = parseNum(c.youtube && c.youtube.count);
+          const ig = parseNum(c.instagram && c.instagram.count);
+          const kick = parseNum(c.kick && c.kick.count);
+          return Math.max(yt, ig, kick);
+        }
+        list.sort((a, b) => {
+          const rA = getReachValue(a);
+          const rB = getReachValue(b);
+          if (rB !== rA) return rB - rA;
+          const pB = getMaxPlatform(b);
+          const pA = getMaxPlatform(a);
+          if (pB !== pA) return pB - pA;
+          return a.name.localeCompare(b.name);
+        });
+
         fs.writeFileSync(jsonPath, JSON.stringify(list, null, 2), 'utf-8');
         console.log(`[Roster API] Updated creators-data.json (total: ${list.length})`);
 
