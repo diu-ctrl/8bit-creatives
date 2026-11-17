@@ -3478,152 +3478,25 @@ function initCreatorStats() {
   const captionStats = document.getElementById('captionStats');
   if (!frame || !stage) return;
 
-  // ── Creator data ──
-  const CREATORS = [
-    {
-      id: 'mortal',
-      name: 'MortaL',
-      realName: 'Naman Mathur',
-      img: 'images-for-landing-page/creator-mortal.webp',
-      bio: 'Co-founder of S8UL Esports and a pioneer of Indian mobile gaming, celebrated for his calm demeanor, BGMI competitive history, and variety gameplay.',
-      categories: 'BGMI, Variety Gaming, Streaming, Esports',
-      youtube: { handle: '@Mortalgaming', count: '7.05M', url: 'https://www.youtube.com/@Mortalgaming' },
-      instagram: { handle: '@ig_mortal', count: '5.3M', url: 'https://www.instagram.com/ig_mortal' },
-      kick: null
-    },
-    {
-      id: 'payal',
-      name: 'Payal',
-      realName: 'Payal Dhare',
-      img: 'images-for-landing-page/creator-payal.webp',
-      bio: "Prominent S8UL creator and India's leading female gaming content creator, known for BGMI live streams, casual gaming, and lifestyle content.",
-      categories: 'BGMI, Variety Streaming, Vlogging',
-      youtube: { handle: '@PayalGaming', count: '4.02M', url: 'https://www.youtube.com/@PayalGaming' },
-      instagram: { handle: '@payalgamingg', count: '3.7M', url: 'https://www.instagram.com/payalgamingg' },
-      kick: { handle: 'payalgaming', count: '2.6K', url: 'https://kick.com/payalgaming' }
-    },
-    {
-      id: 'snax',
-      name: 'Snax',
-      realName: 'Raj Varma',
-      img: 'images-for-landing-page/creator-snax.webp',
-      bio: 'Veteran BGMI athlete and streamer famous for his precision DP-28 burst guide drills, competitive mechanics, and fitness-oriented lifestyle content.',
-      categories: 'BGMI, Esports, Gaming Tutorials, Fitness / Vlogging',
-      youtube: { handle: '@SnaxGaming', count: '1.65M', url: 'https://www.youtube.com/@SnaxGaming' },
-      instagram: { handle: '@snaxgaming', count: '1.4M', url: 'https://www.instagram.com/snaxgaming' },
-      kick: { handle: 'snaxgaming', count: '17.6K', url: 'https://kick.com/snaxgaming' }
-    },
-    {
-      id: 'jokerkihaveli',
-      name: 'Jokerkihaveli',
-      realName: 'Gulrez Khan',
-      img: 'images-for-landing-page/joker.webp',
-      bio: 'Dynamic gaming creator and entertainer with a strong multi-platform footprint across YouTube, Instagram, and Kick, celebrated for high-energy streams, engaging gameplay, and dedicated community culture.',
-      categories: 'Gaming, Entertainment, Variety Streaming',
-      youtube: { handle: '@jokerkihavelii', count: '2.33M', url: 'https://www.youtube.com/@jokerkihavelii' },
-      instagram: { handle: '@jokerkihaveli', count: '1.9M', url: 'https://www.instagram.com/jokerkihaveli/' },
-      kick: { handle: 'jokerkihaveli', count: '8.9K', url: 'https://kick.com/jokerkihaveli' }
-    },
-    {
-      id: 'soulgoblin',
-      name: 'Soul Goblin',
-      realName: 'Harsh Paudwal',
-      img: 'images-for-landing-page/creator-goblin.webp',
-      bio: 'Top-tier competitive BGMI fragger and MVP champion with Team Soul / Carnival Gaming, renowned for lethal close-range combat skills.',
-      categories: 'BGMI, Esports, Competitive Gaming',
-      youtube: { handle: '@SoulGoblin', count: '485K', url: 'https://www.youtube.com/@SoulGoblin' },
-      instagram: { handle: '@soul_goblin', count: '575K', url: 'https://www.instagram.com/soul_goblin' },
-      kick: { handle: 'soulgoblin', count: '19.3K', url: 'https://kick.com/soulgoblin' }
-    },
-    {
-      id: 'mamba',
-      name: 'Mamba',
-      realName: 'Salman Ahmad',
-      img: 'images-for-landing-page/creator-mamba.webp',
-      bio: 'Former competitive PUBG Mobile player and S8UL member known for immersive GTA V roleplay, BGMI streams, and community gaming banter.',
-      categories: 'GTA V RP, BGMI, Variety Gaming, Streaming',
-      youtube: { handle: '@8bitMamba', count: '1.41M', url: 'https://www.youtube.com/@8bitMamba' },
-      instagram: { handle: '@mamba_salman', count: '720K', url: 'https://www.instagram.com/mamba_salman' },
-      kick: { handle: '8bitmamba', count: '7.4K', url: 'https://kick.com/8bitmamba' }
-    },
-    {
-      id: 'viper',
-      name: 'Viper',
-      realName: 'Yash Soni',
-      img: 'images-for-landing-page/creator-viper.webp',
-      bio: 'Founding member of the classic Team Soul lineup and S8UL creator, known for tactical support gameplay and engaging variety streams.',
-      categories: 'BGMI, Variety Gaming, Streaming',
-      youtube: { handle: '@SoulViper', count: '1.28M', url: 'https://www.youtube.com/@SoulViper' },
-      instagram: { handle: '@soul_viper', count: '925K', url: 'https://www.instagram.com/soul_viper' },
-      kick: { handle: 'soulviper', count: '20.2K', url: 'https://kick.com/soulviper' }
-    },
-    {
-      id: 'pahadi',
-      name: 'Pahadi',
-      realName: 'Lokesh Karakoti',
-      img: 'images-for-landing-page/creator-pahadi.webp',
-      bio: 'Highly decorated Indian Free Fire esports legend and multi-tournament MVP who expanded into BGMI, sniper mechanics, and variety content.',
-      categories: 'Free Fire, BGMI, Esports, Streaming',
-      youtube: { handle: '@PahadiGamer', count: '1.43M', url: 'https://www.youtube.com/@PahadiGamer' },
-      instagram: { handle: '@pahadi_gamer', count: '620K', url: 'https://www.instagram.com/pahadi_gamer' },
-      kick: { handle: 'pahadigamer', count: '11.7K', url: 'https://kick.com/pahadigamer' }
-    },
-    {
-      id: 'thug',
-      name: 'Thug',
-      realName: 'Animesh Agarwal',
-      img: 'images-for-landing-page/creator-thug.webp',
-      bio: 'Co-founder of S8UL Esports and 8Bit Creatives, former competitive player, caster, and a foundational business figure in Indian gaming.',
-      categories: 'Esports Business, BGMI, Vlogging, Variety Gaming',
-      youtube: { handle: '@8bitthug', count: '1.08M', url: 'https://www.youtube.com/@8bitthug' },
-      instagram: { handle: '@8bit_thug', count: '1.1M', url: 'https://www.instagram.com/8bit_thug' },
-      kick: { handle: '8bit_thug', count: '8.1K', url: 'https://kick.com/8bit_thug' }
-    },
-    {
-      id: 'goldy',
-      name: 'Goldy',
-      realName: 'Lokesh Jain',
-      img: 'images-for-landing-page/creator-goldy.webp',
-      bio: 'Co-owner of 8Bit Creatives and S8UL Esports, well-known for gaming industry podcasts, behind-the-scenes vlogs, and creator mentorship.',
-      categories: 'Podcasts, Esports Management, Vlogging, Streaming',
-      youtube: { handle: '@GoldyBhai', count: '980K', url: 'https://www.youtube.com/@GoldyBhai' },
-      instagram: { handle: '@goldy.8bit', count: '1.0M', url: 'https://www.instagram.com/goldy.8bit' },
-      kick: { handle: '8bit_goldy', count: '27.6K', url: 'https://kick.com/8bit_goldy' }
-    },
-    {
-      id: 'mercy',
-      name: 'Beg4Mercy',
-      realName: 'Mrinmoy Lahkar',
-      img: 'images-for-landing-page/creator-mercy.webp',
-      bio: 'S8UL gaming creator and longtime mobile player recognized for energetic BGMI squad matches, humor-driven streams, and community collaborations.',
-      categories: 'BGMI, Variety Gaming, Streaming',
-      youtube: { handle: '@Beg4Mercy', count: '545K', url: 'https://www.youtube.com/@Beg4Mercy' },
-      instagram: { handle: '@8bit_mercy', count: '405K', url: 'https://www.instagram.com/8bit_mercy' },
-      kick: null
-    },
-    {
-      id: 'regaltos',
-      name: 'Regaltos',
-      realName: 'Parv Singh',
-      img: 'images-for-landing-page/creator-regaltos.webp',
-      bio: 'Former Team Soul competitive assaulter and core S8UL creator, widely followed for his classic BGMI sprays, room matches, and game walk-throughs.',
-      categories: 'BGMI, Esports, Variety Gaming, Streaming',
-      youtube: { handle: '@SoulRegaltos', count: '2.32M', url: 'https://www.youtube.com/@SoulRegaltos' },
-      instagram: { handle: '@soul_regaltos', count: '1.9M', url: 'https://www.instagram.com/soul_regaltos' },
-      kick: { handle: 'regaltos', count: '53.8K', url: 'https://kick.com/regaltos' }
-    },
-    {
-      id: 'jonty',
-      name: 'Jonty',
-      realName: 'Ajay Kumar Banga',
-      img: 'images-for-landing-page/creator-jonty.webp',
-      bio: 'Accomplished Free Fire esports athlete and high-energy content creator with a massive multi-platform community across YouTube, Instagram, and Kick, celebrated for tactical gameplay and engaging variety streams.',
-      categories: 'Free Fire, Variety Gaming, Streaming, Esports',
-      youtube: { handle: '@JONTYGAMING', count: '2.64M', url: 'https://www.youtube.com/@JONTYGAMING/' },
-      instagram: { handle: '@ab_jonty', count: '557K', url: 'https://www.instagram.com/ab_jonty/' },
-      kick: { handle: 'jontygamings8ul', count: '5.5K', url: 'https://kick.com/jontygamings8ul' }
-    }
-  ];
+  // ── Creator data (dynamically loaded from scripts/creators-data.js & localStorage) ──
+  const RAW_CREATORS = (window.get8BitCreators && window.get8BitCreators().length)
+    ? window.get8BitCreators()
+    : [];
+
+  const CREATORS = RAW_CREATORS.map(c => {
+    const cid = c.id || c.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+    return {
+      id: cid,
+      name: c.name,
+      realName: c.realName || c.alias || c.name,
+      img: c.img,
+      bio: c.bio || 'Official 8Bit Creatives content creator and talent partner.',
+      categories: c.categories || c.categoryLabel || 'Gaming, Content Creation',
+      youtube: c.youtube || (c.youtubeUrl ? { handle: c.youtubeHandle || c.name, count: c.youtubeCount || c.reach || 'Active', url: c.youtubeUrl } : null),
+      instagram: c.instagram || (c.instagramUrl ? { handle: c.instagramHandle || c.name, count: c.instagramCount || 'Active', url: c.instagramUrl } : null),
+      kick: c.kick || (c.kickUrl ? { handle: c.kickHandle || c.name, count: c.kickCount || 'Active', url: c.kickUrl } : null)
+    };
+  });
 
   const count = CREATORS.length;
   const ROTATE = 44;          // deg tilt of first neighbor

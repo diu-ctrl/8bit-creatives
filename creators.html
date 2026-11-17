@@ -853,6 +853,7 @@
   <script defer src="/_vercel/insights/script.js"></script>
   <!-- Vercel Speed Insights — tracks Core Web Vitals (LCP, CLS, TTFB, INP) -->
   <script defer src="/_vercel/speed-insights/script.js" onerror="this.onerror=null;this.src='https://va.vercel-scripts.com/v1/speed-insights/script.js';"></script>
+  <script src="scripts/creators-data.js"></script>
 </head>
 <body>
   <a href="index.html" class="back-home" aria-label="Back to home">
@@ -937,7 +938,13 @@
           <button class="filter-pill" data-filter="platform" data-value="instagram">Instagram</button>
         </div>
 
-        <div class="filter-count" id="creatorCount">Showing 12 of 50+ creators</div>
+        <div style="display: flex; align-items: center; gap: 16px; margin-left: auto; flex-wrap: wrap;">
+          <div class="filter-count" id="creatorCount">Showing 12 of 50+ creators</div>
+          <a href="add-creator.html" class="onboard-creator-pill" style="display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; background: rgba(255, 77, 38, 0.15); border: 1px solid rgba(255, 77, 38, 0.4); border-radius: 9999px; color: #FF4D26; font-family: 'Geist', sans-serif; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.background='#FF4D26';this.style.color='#FFFFFF';this.style.borderColor='#FF4D26';this.style.boxShadow='0 0 16px rgba(255,77,38,0.4)';" onmouseout="this.style.background='rgba(255,77,38,0.15)';this.style.color='#FF4D26';this.style.borderColor='rgba(255,77,38,0.4)';this.style.boxShadow='none';">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>+ Add Creator</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -1219,252 +1226,12 @@
       return path;
     }
 
-    // 2. Creators dataset
-    const CREATORS = [
-      {
-        name: 'MortaL',
-        alias: 'Naman Mathur',
-        category: 'bgmi',
-        categoryLabel: 'BGMI · Variety Gaming · Esports',
-        platforms: ['youtube', 'instagram'],
-        img: 'images-for-landing-page/creator-mortal.webp',
-        reach: '7.05M',
-        youtube: '7.05M',
-        youtubeHandle: '@Mortalgaming',
-        youtubeUrl: 'https://www.youtube.com/@Mortalgaming',
-        instagram: '5.3M',
-        instagramHandle: '@ig_mortal',
-        instagramUrl: 'https://www.instagram.com/ig_mortal',
-        kick: null,
-        bio: 'Co-founder of S8UL Esports and a pioneer of Indian mobile gaming, celebrated for his calm demeanor, BGMI competitive history, and variety gameplay.'
-      },
-      {
-        name: 'Payal',
-        alias: 'Payal Dhare',
-        category: 'variety',
-        categoryLabel: 'BGMI · Variety Gaming · Vlogs',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/creator-payal.webp',
-        reach: '4.02M',
-        youtube: '4.02M',
-        youtubeHandle: '@PayalGaming',
-        youtubeUrl: 'https://www.youtube.com/@PayalGaming',
-        instagram: '3.7M',
-        instagramHandle: '@payalgamingg',
-        instagramUrl: 'https://www.instagram.com/payalgamingg',
-        kick: '2.6K',
-        kickHandle: 'payalgaming',
-        kickUrl: 'https://kick.com/payalgaming',
-        bio: "Prominent S8UL creator and India's leading female gaming content creator, known for BGMI live streams, casual gaming, and lifestyle content."
-      },
-      {
-        name: 'Snax',
-        alias: 'Raj Varma',
-        category: 'bgmi',
-        categoryLabel: 'BGMI · Esports · Tutorials',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/creator-snax.webp',
-        reach: '1.65M',
-        youtube: '1.65M',
-        youtubeHandle: '@SnaxGaming',
-        youtubeUrl: 'https://www.youtube.com/@SnaxGaming',
-        instagram: '1.4M',
-        instagramHandle: '@snaxgaming',
-        instagramUrl: 'https://www.instagram.com/snaxgaming',
-        kick: '17.6K',
-        kickHandle: 'snaxgaming',
-        kickUrl: 'https://kick.com/snaxgaming',
-        bio: 'Veteran BGMI athlete and streamer famous for his precision DP-28 burst guide drills, competitive mechanics, and fitness-oriented lifestyle content.'
-      },
-      {
-        name: 'Jokerkihaveli',
-        alias: 'Gulrez Khan',
-        category: 'variety',
-        categoryLabel: 'Gaming · Variety Streaming',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/joker.webp',
-        reach: '2.33M',
-        youtube: '2.33M',
-        youtubeHandle: '@jokerkihavelii',
-        youtubeUrl: 'https://www.youtube.com/@jokerkihavelii',
-        instagram: '1.9M',
-        instagramHandle: '@jokerkihaveli',
-        instagramUrl: 'https://www.instagram.com/jokerkihaveli/',
-        kick: '8.9K',
-        kickHandle: 'jokerkihaveli',
-        kickUrl: 'https://kick.com/jokerkihaveli',
-        bio: 'Dynamic gaming creator and entertainer with a strong multi-platform footprint across YouTube, Instagram, and Kick, celebrated for high-energy streams, engaging gameplay, and dedicated community culture.'
-      },
-      {
-        name: 'Soul Goblin',
-        alias: 'Harsh Paudwal',
-        category: 'bgmi',
-        categoryLabel: 'BGMI · Esports · Competitive',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/creator-goblin.webp',
-        reach: '575K',
-        youtube: '485K',
-        youtubeHandle: '@SoulGoblin',
-        youtubeUrl: 'https://www.youtube.com/@SoulGoblin',
-        instagram: '575K',
-        instagramHandle: '@soul_goblin',
-        instagramUrl: 'https://www.instagram.com/soul_goblin',
-        kick: '19.3K',
-        kickHandle: 'soulgoblin',
-        kickUrl: 'https://kick.com/soulgoblin',
-        bio: "Top-tier competitive BGMI fragger and MVP champion with Team Soul / Carnival Gaming, renowned for lethal close-range combat skills."
-      },
-      {
-        name: 'Mamba',
-        alias: 'Salman Ahmad',
-        category: 'variety',
-        categoryLabel: 'GTA V RP · BGMI · Streaming',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/creator-mamba.webp',
-        reach: '1.41M',
-        youtube: '1.41M',
-        youtubeHandle: '@8bitMamba',
-        youtubeUrl: 'https://www.youtube.com/@8bitMamba',
-        instagram: '720K',
-        instagramHandle: '@mamba_salman',
-        instagramUrl: 'https://www.instagram.com/mamba_salman',
-        kick: '7.4K',
-        kickHandle: '8bitmamba',
-        kickUrl: 'https://kick.com/8bitmamba',
-        bio: 'Former competitive PUBG Mobile player and S8UL member known for immersive GTA V roleplay, BGMI streams, and community gaming banter.'
-      },
-      {
-        name: 'Viper',
-        alias: 'Yash Soni',
-        category: 'bgmi',
-        categoryLabel: 'BGMI · Variety Gaming · Streaming',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/creator-viper.webp',
-        reach: '1.28M',
-        youtube: '1.28M',
-        youtubeHandle: '@SoulViper',
-        youtubeUrl: 'https://www.youtube.com/@SoulViper',
-        instagram: '925K',
-        instagramHandle: '@soul_viper',
-        instagramUrl: 'https://www.instagram.com/soul_viper',
-        kick: '20.2K',
-        kickHandle: 'soulviper',
-        kickUrl: 'https://kick.com/soulviper',
-        bio: 'Founding member of the classic Team Soul lineup and S8UL creator, known for tactical support gameplay and engaging variety streams.'
-      },
-      {
-        name: 'Pahadi',
-        alias: 'Lokesh Karakoti',
-        category: 'freefire',
-        categoryLabel: 'Free Fire · BGMI · Esports',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/creator-pahadi.webp',
-        reach: '1.43M',
-        youtube: '1.43M',
-        youtubeHandle: '@PahadiGamer',
-        youtubeUrl: 'https://www.youtube.com/@PahadiGamer',
-        instagram: '620K',
-        instagramHandle: '@pahadi_gamer',
-        instagramUrl: 'https://www.instagram.com/pahadi_gamer',
-        kick: '11.7K',
-        kickHandle: 'pahadigamer',
-        kickUrl: 'https://kick.com/pahadigamer',
-        bio: 'Highly decorated Indian Free Fire esports legend and multi-tournament MVP who expanded into BGMI, sniper mechanics, and variety content.'
-      },
-      {
-        name: 'Thug',
-        alias: 'Animesh Agarwal',
-        category: 'variety',
-        categoryLabel: 'Esports Business · BGMI',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/creator-thug.webp',
-        reach: '1.1M',
-        youtube: '1.08M',
-        youtubeHandle: '@8bitthug',
-        youtubeUrl: 'https://www.youtube.com/@8bitthug',
-        instagram: '1.1M',
-        instagramHandle: '@8bit_thug',
-        instagramUrl: 'https://www.instagram.com/8bit_thug',
-        kick: '8.1K',
-        kickHandle: '8bit_thug',
-        kickUrl: 'https://kick.com/8bit_thug',
-        bio: 'Co-founder of S8UL Esports and 8Bit Creatives, former competitive player, caster, and a foundational business figure in Indian gaming.'
-      },
-      {
-        name: 'Goldy',
-        alias: 'Lokesh Jain',
-        category: 'variety',
-        categoryLabel: 'Podcasts · Esports Management',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/creator-goldy.webp',
-        reach: '1.0M',
-        youtube: '980K',
-        youtubeHandle: '@GoldyBhai',
-        youtubeUrl: 'https://www.youtube.com/@GoldyBhai',
-        instagram: '1.0M',
-        instagramHandle: '@goldy.8bit',
-        instagramUrl: 'https://www.instagram.com/goldy.8bit',
-        kick: '27.6K',
-        kickHandle: '8bit_goldy',
-        kickUrl: 'https://kick.com/8bit_goldy',
-        bio: 'Co-owner of 8Bit Creatives and S8UL Esports, well-known for gaming industry podcasts, behind-the-scenes vlogs, and creator mentorship.'
-      },
-      {
-        name: 'Beg4Mercy',
-        alias: 'Mrinmoy Lahkar',
-        category: 'bgmi',
-        categoryLabel: 'BGMI · Variety Gaming · Streaming',
-        platforms: ['youtube', 'instagram'],
-        img: 'images-for-landing-page/creator-mercy.webp',
-        reach: '545K',
-        youtube: '545K',
-        youtubeHandle: '@Beg4Mercy',
-        youtubeUrl: 'https://www.youtube.com/@Beg4Mercy',
-        instagram: '405K',
-        instagramHandle: '@8bit_mercy',
-        instagramUrl: 'https://www.instagram.com/8bit_mercy',
-        kick: null,
-        bio: 'S8UL gaming creator and longtime mobile player recognized for energetic BGMI squad matches, humor-driven streams, and community collaborations.'
-      },
-      {
-        name: 'Regaltos',
-        alias: 'Parv Singh',
-        category: 'bgmi',
-        categoryLabel: 'BGMI · Esports · Streaming',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/creator-regaltos.webp',
-        reach: '2.32M',
-        youtube: '2.32M',
-        youtubeHandle: '@SoulRegaltos',
-        youtubeUrl: 'https://www.youtube.com/@SoulRegaltos',
-        instagram: '1.9M',
-        instagramHandle: '@soul_regaltos',
-        instagramUrl: 'https://www.instagram.com/soul_regaltos',
-        kick: '53.8K',
-        kickHandle: 'regaltos',
-        kickUrl: 'https://kick.com/regaltos',
-        bio: 'Former Team Soul competitive assaulter and core S8UL creator, widely followed for his classic BGMI sprays, room matches, and game walk-throughs.'
-      },
-      {
-        name: 'Jonty',
-        alias: 'Ajay Kumar Banga',
-        category: 'freefire',
-        categoryLabel: 'Free Fire · Esports · Streaming',
-        platforms: ['youtube', 'instagram', 'kick'],
-        img: 'images-for-landing-page/creator-jonty.webp',
-        reach: '2.64M',
-        youtube: '2.64M',
-        youtubeHandle: '@JONTYGAMING',
-        youtubeUrl: 'https://www.youtube.com/@JONTYGAMING/',
-        instagram: '557K',
-        instagramHandle: '@ab_jonty',
-        instagramUrl: 'https://www.instagram.com/ab_jonty/',
-        kick: '5.5K',
-        kickHandle: 'jontygamings8ul',
-        kickUrl: 'https://kick.com/jontygamings8ul',
-        bio: 'Accomplished Free Fire esports athlete and high-energy content creator with a massive multi-platform community across YouTube, Instagram, and Kick, celebrated for tactical gameplay and engaging variety streams.'
-      }
-    ];
+    // 2. Creators dataset (dynamically loaded from scripts/creators-data.js & localStorage)
+    const CREATORS = (window.get8BitCreators && window.get8BitCreators().length)
+      ? window.get8BitCreators()
+      : [
+          // Fallback if script not loaded
+        ];
 
     const grid = document.getElementById('creatorsGrid');
     const countEl = document.getElementById('creatorCount');
@@ -1510,7 +1277,7 @@
         }
       });
       
-      countEl.textContent = 'Showing ' + visibleCount + ' of 50+ creators';
+      countEl.textContent = 'Showing ' + visibleCount + ' of ' + CREATORS.length + ' creators';
     }
 
     // Filter pill clicks

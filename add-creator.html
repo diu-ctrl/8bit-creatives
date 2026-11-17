@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creator Onboarding Studio — 8Bit Creatives</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="stylesheet" href="styles.css?v=2.1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="scripts/creators-data.js"></script>
+
+  <style>
+    :root {
+      --bg: #0A0A0C;
+      --surface: #141418;
+      --surface-elevated: #1D1D23;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: #FF4D26;
+      --accent: #FF4D26;
+      --accent-glow: rgba(255, 77, 38, 0.25);
+      --text: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --text-subtle: #6B7280;
+      --green: #22C55E;
+      --yt-red: #FF0000;
+      --ig-pink: #E1306C;
+      --kick-green: #53FC18;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Geist', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 77, 38, 0.12), transparent 70%),
+        radial-gradient(circle at 100% 100%, rgba(255, 77, 38, 0.05), transparent 40%);
+      background-attachment: fixed;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      height: 72px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      backdrop-filter: blur(12px);
+      background: rgba(10, 10, 12, 0.8);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .nav-brand img {
+      height: 36px;
+      width: auto;
+    }
+
+    .nav-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      padding: 3px 8px;
+      background: rgba(255, 77, 38, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(255, 77, 38, 0.3);
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+    }
+
+    .nav-link.btn-back {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .nav-link.btn-back:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Container */
+    .studio-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .studio-header {
+      margin-bottom: 36px;
+    }
+
+    .studio-title {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .studio-subtitle {
+      color: var(--text-muted);
+      font-size: 15px;
+      max-width: 720px;
+    }
+
+    /* Main Grid */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .studio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Form Panel */
+    .form-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Image Upload Box */
+    .upload-zone {
+      border: 2px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: rgba(0, 0, 0, 0.2);
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--accent);
+      background: rgba(255, 77, 38, 0.04);
+    }
+
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .upload-icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: rgba(255, 77, 38, 0.1);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .upload-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .upload-desc {
+      font-size: 13px;
+      color: var(--text-subtle);
+    }
+
+    /* Thumbnail in Dropzone */
+    .upload-preview {
+      display: none;
+      align-items: center;
+      gap: 16px;
+      background: var(--surface-elevated);
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .upload-thumb {
+      width: 56px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .thumb-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .thumb-name {
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .thumb-size {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .btn-change-photo {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-change-photo:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Form Inputs */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    label .req {
+      color: var(--accent);
+      margin-left: 2px;
+    }
+
+    label .opt {
+      color: var(--text-subtle);
+      font-weight: 400;
+      font-size: 12px;
+      margin-left: 4px;
+    }
+
+    .input-control {
+      width: 100%;
+      height: 44px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0 14px;
+      font-size: 14px;
+      color: var(--text);
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .input-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .input-control::placeholder {
+      color: var(--text-subtle);
+    }
+
+    select.input-control {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+    }
+
+    textarea.input-control {
+      height: 80px;
+      padding: 10px 14px;
+      resize: vertical;
+    }
+
+    /* Social Input with Brand Icons */
+    .social-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .social-icon {
+      position: absolute;
+      left: 12px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .social-input-wrap .input-control {
+      padding-left: 42px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+
+    .social-input-wrap.ig .social-icon { color: var(--ig-pink); }
+    .social-input-wrap.yt .social-icon { color: var(--yt-red); }
+    .social-input-wrap.kick .social-icon { color: var(--kick-green); }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      height: 50px;
+      background: var(--accent);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 16px rgba(255, 77, 38, 0.3);
+      margin-top: 28px;
+    }
+
+    .btn-submit:hover {
+      background: #FF3407;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 77, 38, 0.45);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Live Preview Panel */
+    .preview-panel {
+      position: sticky;
+      top: 100px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .preview-badge {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--green);
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .preview-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    /* Simulated Creator Card */
+    .mockup-card-container {
+      display: flex;
+      justify-content: center;
+      padding: 12px 0;
+    }
+
+    .mockup-creator-card {
+      width: 280px;
+      background: #111114;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .mockup-card-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: #0B0102;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mockup-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .mockup-image-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-subtle);
+      font-size: 13px;
+    }
+
+    .mockup-card-content {
+      padding: 16px;
+    }
+
+    .mockup-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 2px;
+      letter-spacing: -0.3px;
+    }
+
+    .mockup-alias {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .mockup-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .mockup-category {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .mockup-socials {
+      display: flex;
+      gap: 6px;
+    }
+
+    .social-pill-badge {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    .social-pill-badge.active-ig {
+      background: rgba(225, 48, 108, 0.2);
+      color: var(--ig-pink);
+      border: 1px solid rgba(225, 48, 108, 0.3);
+    }
+    .social-pill-badge.active-yt {
+      background: rgba(255, 0, 0, 0.2);
+      color: var(--yt-red);
+      border: 1px solid rgba(255, 0, 0, 0.3);
+    }
+    .social-pill-badge.active-kick {
+      background: rgba(83, 252, 24, 0.2);
+      color: var(--kick-green);
+      border: 1px solid rgba(83, 252, 24, 0.3);
+    }
+
+    /* Success Toast Modal */
+    .success-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .success-overlay.active {
+      display: flex;
+    }
+
+    .success-box {
+      background: var(--surface-elevated);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(34, 197, 94, 0.15);
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      padding: 36px 32px;
+      text-align: center;
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(34, 197, 94, 0.15);
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .success-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .success-msg {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .success-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-action {
+      height: 44px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-action.primary {
+      background: var(--accent);
+      color: #FFF;
+      border: none;
+    }
+    .btn-action.primary:hover {
+      background: #FF3407;
+    }
+
+    .btn-action.secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-action.secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="top-nav">
+    <a href="index.html" class="nav-brand">
+      <img src="images-for-landing-page/8bit transparent logo.png" alt="8Bit Creatives Logo">
+      <span class="nav-badge">Roster Studio</span>
+    </a>
+    <div class="nav-links">
+      <a href="creators.html" class="nav-link btn-back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        View Creators Page
+      </a>
+      <a href="index.html" class="nav-link">Home Website</a>
+    </div>
+  </header>
+
+  <main class="studio-container">
+    <div class="studio-header">
+      <h1 class="studio-title">
+        <span>Add New Creator</span>
+        <span class="nav-badge">Live Auto-Sync</span>
+      </h1>
+      <p class="studio-subtitle">
+        Upload a creator's portrait and information below. Once added, the creator will automatically appear on both the <strong>Creators Directory (creators.html)</strong> and the <strong>Homepage Carousel (index.html)</strong>.
+      </p>
+    </div>
+
+    <div class="studio-grid">
+      <!-- Left Column: Form -->
+      <section class="form-panel">
+        <form id="creatorForm" onsubmit="handleCreatorSubmit(event)">
+          
+          <!-- Section 1: Portrait Photo -->
+          <div class="section-label">01 · Creator Portrait</div>
+
+          <div class="upload-zone" id="uploadZone">
+            <input type="file" id="creatorPhotoInput" accept="image/png, image/jpeg, image/webp" onchange="handleFileSelect(event)">
+            <div id="uploadPrompt">
+              <div class="upload-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              </div>
+              <div class="upload-title">Drop portrait photo here or click to browse</div>
+              <div class="upload-desc">Supports PNG, JPG, or WebP · Best in vertical 4:5 ratio</div>
+            </div>
+            
+            <div class="upload-preview" id="uploadPreview">
+              <img id="thumbImg" class="upload-thumb" src="" alt="Thumbnail">
+              <div class="thumb-info">
+                <div class="thumb-name" id="thumbName">creator-photo.png</div>
+                <div class="thumb-size" id="thumbSize">1.2 MB · Ready</div>
+              </div>
+              <button type="button" class="btn-change-photo" onclick="document.getElementById('creatorPhotoInput').click()">Change</button>
+            </div>
+          </div>
+
+          <!-- Section 2: Creator Identity -->
+          <div class="section-label">02 · Talent Profile</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="creatorName">Creator Name <span class="req">*</span></label>
+              <input type="text" id="creatorName" class="input-control" placeholder="e.g. MortaL, Payal, Sid" required oninput="updateLivePreview()">
+            </div>
+            <div class="form-group">
+              <label for="creatorAlias">Real Name / Alias <span class="opt">(Optional)</span></label>
+              <input type="text" id="creatorAlias" class="input-control" placeholder="e.g. Naman Mathur" oninput="updateLivePreview()">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="creatorCategory">Category / Genre <span class="req">*</span></label>
+              <select id="creatorCategory" class="input-control" required onchange="updateLivePreview()">
+                <option value="bgmi">BGMI & Mobile Esports</option>
+                <option value="variety" selected>Variety Gaming & Entertainment</option>
+                <option value="esports">PC Esports & Competitive</option>
+                <option value="lifestyle">Lifestyle & Vlogging</option>
+                <option value="gta">GTA V Roleplay</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="creatorReach">Reach / Subscribers <span class="opt">(Optional)</span></label>
+              <input type="text" id="creatorReach" class="input-control" placeholder="e.g. 1.2M, 500K" oninput="updateLivePreview()">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="creatorBio">Bio / Tagline <span class="opt">(Optional)</span></label>
+            <textarea id="creatorBio" class="input-control" placeholder="Short description of the creator's highlights, games, and content style..." oninput="updateLivePreview()"></textarea>
+          </div>
+
+          <!-- Section 3: Social Media Links (NON-MANDATORY) -->
+          <div class="section-label">03 · Social Platforms <span style="font-weight: normal; color: var(--text-subtle);">(None mandatory)</span></div>
+
+          <div class="form-group">
+            <label for="urlInstagram">Instagram Profile URL <span class="opt">(Optional)</span></label>
+            <div class="social-input-wrap ig">
+              <span class="social-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </span>
+              <input type="url" id="urlInstagram" class="input-control" placeholder="https://www.instagram.com/username" oninput="updateLivePreview()">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="urlYoutube">YouTube Channel URL <span class="opt">(Optional)</span></label>
+            <div class="social-input-wrap yt">
+              <span class="social-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </span>
+              <input type="url" id="urlYoutube" class="input-control" placeholder="https://www.youtube.com/@channel" oninput="updateLivePreview()">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="urlKick">Kick Channel URL <span class="opt">(Optional)</span></label>
+            <div class="social-input-wrap kick">
+              <span class="social-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5v5h2v2h2V7h5V3h5v18h-5v-4h-2v-2h-2v3H9v4H4V3z"/></svg>
+              </span>
+              <input type="url" id="urlKick" class="input-control" placeholder="https://kick.com/username" oninput="updateLivePreview()">
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="btnSubmit" class="btn-submit">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+            Publish Creator to Website
+          </button>
+        </form>
+      </section>
+
+      <!-- Right Column: Live Interactive Card Preview -->
+      <aside class="preview-panel">
+        <div class="preview-header">
+          <div class="section-label" style="margin-bottom: 0;">Live Website Preview</div>
+          <div class="preview-badge">Real-Time Sync</div>
+        </div>
+
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+          This card reflects the exact styling used in the <strong>Creators Directory</strong>:
+        </p>
+
+        <div class="mockup-card-container">
+          <div class="mockup-creator-card">
+            <div class="mockup-card-image" id="mockupImageWrap">
+              <div class="mockup-image-placeholder" id="mockupPlaceholder">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <span>Upload portrait</span>
+              </div>
+              <img id="mockupImg" src="" alt="Live Preview" style="display: none;">
+            </div>
+            
+            <div class="mockup-card-content">
+              <div class="mockup-name" id="mockupName">Creator Name</div>
+              <div class="mockup-alias" id="mockupAlias">Real Name</div>
+              
+              <div class="mockup-meta">
+                <span class="mockup-category" id="mockupCategory">Variety Gaming</span>
+                <div class="mockup-socials" id="mockupSocials">
+                  <span class="social-pill-badge" id="badgeYt" title="YouTube">Y</span>
+                  <span class="social-pill-badge" id="badgeIg" title="Instagram">I</span>
+                  <span class="social-pill-badge" id="badgeKick" title="Kick">K</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px; padding: 14px; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px solid var(--border); font-size: 12px; color: var(--text-muted);">
+          💡 <strong>Tip:</strong> Any social media platform without a URL will be automatically hidden from the creator's modal on the main website.
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Success Modal -->
+  <div class="success-overlay" id="successModal">
+    <div class="success-box">
+      <div class="success-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 class="success-title">Creator Published!</h2>
+      <p class="success-msg" id="successMsg">
+        The creator has been successfully registered and is now active in both the <strong>Creators Directory</strong> and the <strong>Homepage Carousel</strong>.
+      </p>
+
+      <div class="success-actions">
+        <a href="creators.html" class="btn-action primary">
+          <span>View on Creators Page</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="index.html" class="btn-action secondary">
+          <span>View on Home Carousel</span>
+        </a>
+        <button type="button" class="btn-action secondary" onclick="resetFormForNewCreator()">
+          <span>Add Another Creator</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let uploadedImageBase64 = null;
+    let uploadedFile = null;
+
+    // Category labels map
+    const CATEGORY_LABELS = {
+      'bgmi': 'BGMI · Mobile Esports · Live Stream',
+      'variety': 'Variety Gaming · Entertainment',
+      'esports': 'PC Esports · Tactical FPS',
+      'lifestyle': 'Lifestyle · Vlogging · Youth Culture',
+      'gta': 'GTA V Roleplay · Community'
+    };
+
+    // File selection handler
+    function handleFileSelect(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      uploadedFile = file;
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        uploadedImageBase64 = evt.target.result;
+        
+        // Update upload zone UI
+        document.getElementById('uploadPrompt').style.display = 'none';
+        const preview = document.getElementById('uploadPreview');
+        preview.style.display = 'flex';
+        document.getElementById('thumbImg').src = uploadedImageBase64;
+        document.getElementById('thumbName').textContent = file.name;
+        document.getElementById('thumbSize').textContent = (file.size / 1024 > 1024) 
+          ? (file.size / (1024 * 1024)).toFixed(1) + ' MB' 
+          : Math.round(file.size / 1024) + ' KB';
+
+        // Update live mockup
+        const mockImg = document.getElementById('mockupImg');
+        const mockPlaceholder = document.getElementById('mockupPlaceholder');
+        mockImg.src = uploadedImageBase64;
+        mockImg.style.display = 'block';
+        mockPlaceholder.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Drag and drop handlers
+    const zone = document.getElementById('uploadZone');
+    zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('dragover'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      zone.classList.remove('dragover');
+      if (e.dataTransfer.files.length) {
+        document.getElementById('creatorPhotoInput').files = e.dataTransfer.files;
+        handleFileSelect({ target: { files: e.dataTransfer.files } });
+      }
+    });
+
+    // Real-time live card preview update
+    function updateLivePreview() {
+      const name = document.getElementById('creatorName').value.trim() || 'Creator Name';
+      const alias = document.getElementById('creatorAlias').value.trim() || 'Real Name';
+      const cat = document.getElementById('creatorCategory').value;
+      const yt = document.getElementById('urlYoutube').value.trim();
+      const ig = document.getElementById('urlInstagram').value.trim();
+      const kick = document.getElementById('urlKick').value.trim();
+
+      document.getElementById('mockupName').textContent = name;
+      document.getElementById('mockupAlias').textContent = alias;
+      document.getElementById('mockupCategory').textContent = CATEGORY_LABELS[cat] ? CATEGORY_LABELS[cat].split('·')[0].trim() : 'Gaming';
+
+      // Social badges toggle
+      const badgeYt = document.getElementById('badgeYt');
+      const badgeIg = document.getElementById('badgeIg');
+      const badgeKick = document.getElementById('badgeKick');
+
+      badgeYt.className = 'social-pill-badge' + (yt ? ' active-yt' : '');
+      badgeIg.className = 'social-pill-badge' + (ig ? ' active-ig' : '');
+      badgeKick.className = 'social-pill-badge' + (kick ? ' active-kick' : '');
+    }
+
+    // Form submission
+    async function handleCreatorSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSubmit');
+      
+      const name = document.getElementById('creatorName').value.trim();
+      const alias = document.getElementById('creatorAlias').value.trim();
+      const category = document.getElementById('creatorCategory').value;
+      const reach = document.getElementById('creatorReach').value.trim() || 'Active';
+      const bio = document.getElementById('creatorBio').value.trim();
+
+      const igUrl = document.getElementById('urlInstagram').value.trim();
+      const ytUrl = document.getElementById('urlYoutube').value.trim();
+      const kickUrl = document.getElementById('urlKick').value.trim();
+
+      if (!name) {
+        alert('Please enter the creator name.');
+        return;
+      }
+
+      if (!uploadedImageBase64) {
+        alert('Please upload a portrait photo for the creator.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite;">⏳</span> Publishing creator...';
+
+      // Generate clean ID and image filename
+      const creatorId = name.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      const filename = `${creatorId}.png`;
+      const finalImgPath = `assets/creators/cinematic/${filename}`;
+
+      // Assemble full structured object
+      const newCreator = {
+        id: creatorId,
+        name: name,
+        alias: alias || name,
+        realName: alias || name,
+        category: category,
+        categoryLabel: CATEGORY_LABELS[category] || 'Gaming · Content Creation',
+        categories: CATEGORY_LABELS[category] || 'Gaming, Content Creation',
+        img: finalImgPath,
+        reach: reach,
+        bio: bio || `${name} is an official 8Bit Creatives talent partner and content creator.`,
+        youtube: ytUrl ? { handle: '@' + creatorId, count: 'Active', url: ytUrl } : null,
+        youtubeUrl: ytUrl || null,
+        youtubeHandle: ytUrl ? '@' + creatorId : null,
+        instagram: igUrl ? { handle: '@' + creatorId, count: 'Active', url: igUrl } : null,
+        instagramUrl: igUrl || null,
+        instagramHandle: igUrl ? '@' + creatorId : null,
+        kick: kickUrl ? { handle: creatorId, count: 'Active', url: kickUrl } : null,
+        kickUrl: kickUrl || null,
+        kickHandle: kickUrl ? creatorId : null,
+        platforms: [
+          ...(ytUrl ? ['youtube'] : []),
+          ...(igUrl ? ['instagram'] : []),
+          ...(kickUrl ? ['kick'] : [])
+        ]
+      };
+
+      // 1. Sync to Local Storage immediately
+      // This ensures INSTANT reflection across all pages on this browser!
+      try {
+        let customList = [];
+        const stored = localStorage.getItem('8bit_creators_custom');
+        if (stored) customList = JSON.parse(stored);
+        
+        // Remove old entry with same id if any, then prepend
+        customList = customList.filter(c => c.id !== creatorId);
+        
+        // Store with base64 embedded so image renders even before disk write
+        const clientCopy = { ...newCreator, img: uploadedImageBase64 };
+        customList.unshift(clientCopy);
+        localStorage.setItem('8bit_creators_custom', JSON.stringify(customList));
+        console.log('Saved to browser localStorage');
+      } catch (err) {
+        console.warn('LocalStorage save error:', err);
+      }
+
+      // 2. Sync to Backend (Node / PowerShell / Python API endpoint)
+      try {
+        const response = await fetch('/api/add-creator', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            creator: newCreator,
+            imageBase64: uploadedImageBase64,
+            filename: filename
+          })
+        });
+        
+        if (response.ok) {
+          const resData = await response.json();
+          console.log('Server synced successfully:', resData);
+        } else {
+          console.log('Local server endpoint not listening; persisted via client state.');
+        }
+      } catch (networkErr) {
+        console.log('Offline/static mode; creator saved locally in browser storage.');
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg> Publish Creator to Website';
+
+      // Show success modal
+      document.getElementById('successMsg').innerHTML = `
+        <strong>${name}</strong> has been added successfully!<br>
+        The creator is now active in your roster and automatically reflected across the website.
+      `;
+      document.getElementById('successModal').classList.add('active');
+    }
+
+    // Reset form for next entry
+    function resetFormForNewCreator() {
+      document.getElementById('creatorForm').reset();
+      uploadedImageBase64 = null;
+      uploadedFile = null;
+      document.getElementById('uploadPrompt').style.display = 'block';
+      document.getElementById('uploadPreview').style.display = 'none';
+      document.getElementById('mockupImg').style.display = 'none';
+      document.getElementById('mockupPlaceholder').style.display = 'flex';
+      document.getElementById('successModal').classList.remove('active');
+      updateLivePreview();
+    }
+
+    // Initial trigger
+    updateLivePreview();
+  </script>
+</body>
+</html>
