@@ -592,14 +592,20 @@
       margin-bottom: 24px;
     }
     .creator-modal-stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 12px;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 12px;
       padding: 16px;
       margin-bottom: 24px;
+      text-align: center;
+    }
+    .creator-modal-stat {
+      flex: 1 1 0;
+      min-width: 0;
       text-align: center;
     }
     .creator-modal-stat-value {
