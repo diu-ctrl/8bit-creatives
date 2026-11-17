@@ -1,75 +1,39 @@
 [
   {
-    "id": "bixiop",
-    "name": "Bixiop",
-    "alias": "Abhijeet Singh",
-    "realName": "Abhijeet Singh",
+    "id": "mortal",
+    "name": "MortaL",
+    "alias": "Naman Mathur",
+    "realName": "Naman Mathur",
     "category": "variety",
     "categoryLabel": "Variety Gaming · Entertainment",
     "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/bixiop.png",
-    "reach": "1M+",
-    "bio": "A versatile content creator and charismatic entertainer, Bixiop combines competitive gaming mastery with high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
+    "img": "assets/creators/cinematic/mortal.png",
+    "reach": "7M+",
+    "bio": "Co-founder of S8UL Esports and a pioneer of Indian mobile gaming, celebrated for his calm demeanor, BGMI competitive history, and variety gameplay.",
     "youtube": {
-      "handle": "@bixiop",
-      "count": "1.03m",
-      "url": "https://www.youtube.com/@thebixiop"
+      "handle": "@mortal",
+      "count": "7M",
+      "url": "https://www.youtube.com/@MortaLyt"
     },
-    "youtubeUrl": "https://www.youtube.com/@thebixiop",
-    "youtubeCount": "1.03m",
-    "youtubeHandle": "@bixiop",
+    "youtubeUrl": "https://www.youtube.com/@MortaLyt",
+    "youtubeCount": "7M",
+    "youtubeHandle": "@mortal",
     "instagram": {
-      "handle": "@bixiop",
-      "count": "137K",
-      "url": "https://www.instagram.com/bixiopofficial/"
+      "handle": "@mortal",
+      "count": "5M",
+      "url": "https://www.instagram.com/ig_mortal/"
     },
-    "instagramUrl": "https://www.instagram.com/bixiopofficial/",
-    "instagramCount": "137K",
-    "instagramHandle": "@bixiop",
-    "kick": null,
-    "kickUrl": null,
-    "kickCount": null,
-    "kickHandle": null,
-    "platforms": [
-      "youtube",
-      "instagram"
-    ]
-  },
-  {
-    "id": "gigi",
-    "name": "Gigi",
-    "alias": "Gargi",
-    "realName": "Gargi",
-    "category": "pc",
-    "categoryLabel": "PC Gaming · Entertainment",
-    "categories": "PC Gaming · Entertainment",
-    "img": "assets/creators/cinematic/gigi.png",
-    "reach": "30K+",
-    "bio": "A versatile content creator and charismatic entertainer, Gigi combines competitive gaming mastery with high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
-    "youtube": {
-      "handle": "@gigi",
-      "count": "27K",
-      "url": "https://www.youtube.com/@gigigonemad"
-    },
-    "youtubeUrl": "https://www.youtube.com/@gigigonemad",
-    "youtubeCount": "27K",
-    "youtubeHandle": "@gigi",
-    "instagram": {
-      "handle": "@gigi",
-      "count": "19K",
-      "url": "https://www.instagram.com/gigigonemadyt/"
-    },
-    "instagramUrl": "https://www.instagram.com/gigigonemadyt/",
-    "instagramCount": "19K",
-    "instagramHandle": "@gigi",
+    "instagramUrl": "https://www.instagram.com/ig_mortal/",
+    "instagramCount": "5M",
+    "instagramHandle": "@mortal",
     "kick": {
-      "handle": "gigi",
-      "count": "800",
-      "url": "https://kick.com/gigigonemad"
+      "handle": "mortal",
+      "count": "18K",
+      "url": "https://kick.com/mortal"
     },
-    "kickUrl": "https://kick.com/gigigonemad",
-    "kickCount": "800",
-    "kickHandle": "gigi",
+    "kickUrl": "https://kick.com/mortal",
+    "kickCount": "18K",
+    "kickHandle": "mortal",
     "platforms": [
       "youtube",
       "instagram",
@@ -77,204 +41,40 @@
     ]
   },
   {
-    "id": "binks",
-    "name": "Binks",
-    "alias": "Mithul Nayak",
-    "realName": "Mithul Nayak",
-    "category": "pc",
-    "categoryLabel": "PC Gaming · Entertainment",
-    "categories": "PC Gaming · Entertainment",
-    "img": "assets/creators/cinematic/binks.png",
-    "reach": "520K+",
-    "bio": "High-energy FPS player, caster, and entertainer recognized for his sharp Valorant commentary, clutch moments, and infectious humor.",
-    "youtube": {
-      "handle": "@binks",
-      "count": "520K",
-      "url": "https://www.youtube.com/@8bitBinks69"
-    },
-    "youtubeUrl": "https://www.youtube.com/@8bitBinks69",
-    "youtubeCount": "520K",
-    "youtubeHandle": "@binks",
-    "instagram": {
-      "handle": "@binks",
-      "count": "98K",
-      "url": "https://www.instagram.com/8bit_binks"
-    },
-    "instagramUrl": "https://www.instagram.com/8bit_binks",
-    "instagramCount": "98K",
-    "instagramHandle": "@binks",
-    "kick": {
-      "handle": "binks",
-      "count": "45K",
-      "url": "https://kick.com/binks69"
-    },
-    "kickUrl": "https://kick.com/binks69",
-    "kickCount": "45K",
-    "kickHandle": "binks",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "pothead",
-    "name": "Pothead",
-    "alias": "Nihar Saha",
-    "realName": "Nihar Saha",
-    "category": "pc",
-    "categoryLabel": "PC Gaming · Entertainment",
-    "categories": "PC Gaming · Entertainment",
-    "img": "assets/creators/cinematic/pothead.png",
-    "reach": "160K+",
-    "bio": "Popular creator and longtime gaming community member associated with 8Bit and S8UL, known for comedy gaming sketches and live entertainment.",
-    "youtube": {
-      "handle": "@pothead",
-      "count": "152K",
-      "url": "https://www.youtube.com/@s8ulpothead"
-    },
-    "youtubeUrl": "https://www.youtube.com/@s8ulpothead",
-    "youtubeCount": "152K",
-    "youtubeHandle": "@pothead",
-    "instagram": {
-      "handle": "@pothead",
-      "count": "31K",
-      "url": "https://www.instagram.com/ig_pothead/"
-    },
-    "instagramUrl": "https://www.instagram.com/ig_pothead/",
-    "instagramCount": "31K",
-    "instagramHandle": "@pothead",
-    "kick": {
-      "handle": "pothead",
-      "count": "1K",
-      "url": "https://kick.com/pothead"
-    },
-    "kickUrl": "https://kick.com/pothead",
-    "kickCount": "1K",
-    "kickHandle": "pothead",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "zeref",
-    "name": "Zeref",
-    "alias": "Devdeep Dhar",
-    "realName": "Devdeep Dhar",
-    "category": "pc",
-    "categoryLabel": "PC Gaming · Entertainment",
-    "categories": "PC Gaming · Entertainment",
-    "img": "assets/creators/cinematic/zeref.png",
-    "reach": "400K+",
-    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
-    "youtube": {
-      "handle": "@zeref",
-      "count": "370K",
-      "url": "https://www.youtube.com/@SouLZeref"
-    },
-    "youtubeUrl": "https://www.youtube.com/@SouLZeref",
-    "youtubeCount": "370K",
-    "youtubeHandle": "@zeref",
-    "instagram": {
-      "handle": "@zeref",
-      "count": "75K",
-      "url": "https://www.instagram.com/soul_zeref/"
-    },
-    "instagramUrl": "https://www.instagram.com/soul_zeref/",
-    "instagramCount": "75K",
-    "instagramHandle": "@zeref",
-    "kick": {
-      "handle": "zeref",
-      "count": "20K",
-      "url": "https://kick.com/soulzeref"
-    },
-    "kickUrl": "https://kick.com/soulzeref",
-    "kickCount": "20K",
-    "kickHandle": "zeref",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "willy",
-    "name": "Willy",
-    "alias": "Nishaant Williams",
-    "realName": "Nishaant Williams",
-    "category": "lifestyle",
-    "categoryLabel": "Lifestyle · Vlogging · Youth Culture",
-    "categories": "Lifestyle · Vlogging · Youth Culture",
-    "img": "assets/creators/cinematic/willy.png",
-    "reach": "200K+",
-    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
-    "youtube": {
-      "handle": "@willy",
-      "count": "185K",
-      "url": "https://www.youtube.com/@WILLYGAMINGG"
-    },
-    "youtubeUrl": "https://www.youtube.com/@WILLYGAMINGG",
-    "youtubeCount": "185K",
-    "youtubeHandle": "@willy",
-    "instagram": {
-      "handle": "@willy",
-      "count": "130K",
-      "url": "https://www.instagram.com/willygamingg/"
-    },
-    "instagramUrl": "https://www.instagram.com/willygamingg/",
-    "instagramCount": "130K",
-    "instagramHandle": "@willy",
-    "kick": {
-      "handle": "willy",
-      "count": "2K",
-      "url": "https://kick.com/willygaming"
-    },
-    "kickUrl": "https://kick.com/willygaming",
-    "kickCount": "2K",
-    "kickHandle": "willy",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "viper",
-    "name": "Viper",
-    "alias": "Yash Soni",
-    "realName": "Yash Soni",
+    "id": "payal",
+    "name": "Payal",
+    "alias": "Payal Dhare",
+    "realName": "Payal Dhare",
     "category": "variety",
     "categoryLabel": "Variety Gaming · Entertainment",
     "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/viper.png",
-    "reach": "1.3M+",
-    "bio": "Founding member of Team Soul and beloved community streamer, known for engaging multi-game watch parties, BGMI squads, and wholesome humor.",
+    "img": "assets/creators/cinematic/payal.png",
+    "reach": "5.2M+",
+    "bio": "Prominent S8UL creator and India's leading female gaming content creator, known for BGMI live streams, casual gaming, and lifestyle content.",
     "youtube": {
-      "handle": "@viper",
-      "count": "1.30M",
-      "url": "https://www.youtube.com/c/SOULVipeR18"
+      "handle": "@payal",
+      "count": "4.7M",
+      "url": "https://www.youtube.com/@PAYALGAMING"
     },
-    "youtubeUrl": "https://www.youtube.com/c/SOULVipeR18",
-    "youtubeCount": "1.30M",
-    "youtubeHandle": "@viper",
+    "youtubeUrl": "https://www.youtube.com/@PAYALGAMING",
+    "youtubeCount": "4.7M",
+    "youtubeHandle": "@payal",
     "instagram": {
-      "handle": "@viper",
-      "count": "510K",
-      "url": "https://www.instagram.com/soul_viper/"
+      "handle": "@payal",
+      "count": "5.2M",
+      "url": "https://www.instagram.com/payalgamingg/"
     },
-    "instagramUrl": "https://www.instagram.com/soul_viper/",
-    "instagramCount": "510K",
-    "instagramHandle": "@viper",
+    "instagramUrl": "https://www.instagram.com/payalgamingg/",
+    "instagramCount": "5.2M",
+    "instagramHandle": "@payal",
     "kick": {
-      "handle": "viper",
-      "count": "30K",
-      "url": "https://kick.com/soulviper"
+      "handle": "payal",
+      "count": "5K",
+      "url": "https://kick.com/payalgaming"
     },
-    "kickUrl": "https://kick.com/soulviper",
-    "kickCount": "30K",
-    "kickHandle": "viper",
+    "kickUrl": "https://kick.com/payalgaming",
+    "kickCount": "5K",
+    "kickHandle": "payal",
     "platforms": [
       "youtube",
       "instagram",
@@ -364,32 +164,509 @@
     ]
   },
   {
-    "id": "simarpsy",
-    "name": "Simarpsy",
-    "alias": "Simar Sethi",
-    "realName": "Simar Sethi",
+    "id": "goldy",
+    "name": "8Bit Goldy",
+    "alias": "Lokesh Jain",
+    "realName": "Lokesh Jain",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/goldy.png",
+    "reach": "1M+",
+    "bio": "Co-founder of 8Bit Creatives and driving force behind talent strategy, commercial brand partnerships, and creator operations.",
+    "youtube": {
+      "handle": "@goldy",
+      "count": "1.02M",
+      "url": "https://www.youtube.com/@8bitGoldygg"
+    },
+    "youtubeUrl": "https://www.youtube.com/@8bitGoldygg",
+    "youtubeCount": "1.02M",
+    "youtubeHandle": "@goldy",
+    "instagram": {
+      "handle": "@goldy",
+      "count": "540K",
+      "url": "https://www.instagram.com/8bit_goldy/"
+    },
+    "instagramUrl": "https://www.instagram.com/8bit_goldy/",
+    "instagramCount": "540K",
+    "instagramHandle": "@goldy",
+    "kick": {
+      "handle": "goldy",
+      "count": "40K",
+      "url": "https://kick.com/8bit_goldy"
+    },
+    "kickUrl": "https://kick.com/8bit_goldy",
+    "kickCount": "40K",
+    "kickHandle": "goldy",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "nishu_tiwari",
+    "name": "Nishu Tiwari",
+    "alias": "Nishu Tiwari",
+    "realName": "Nishu Tiwari",
     "category": "lifestyle",
     "categoryLabel": "Lifestyle · Vlogging · Youth Culture",
     "categories": "Lifestyle · Vlogging · Youth Culture",
-    "img": "assets/creators/cinematic/simarpsy.png",
-    "reach": "100K+",
+    "img": "assets/creators/cinematic/nishu_tiwari.png",
+    "reach": "5M+",
+    "bio": "8Bit Creatives flagship lifestyle and vlog creator with over 4.3M YouTube subscribers, bridging youth entertainment and mainstream culture.",
+    "youtube": {
+      "handle": "@nishu_tiwari",
+      "count": "5M",
+      "url": "https://www.youtube.com/@inishutiwari"
+    },
+    "youtubeUrl": "https://www.youtube.com/@inishutiwari",
+    "youtubeCount": "5M",
+    "youtubeHandle": "@nishu_tiwari",
+    "instagram": {
+      "handle": "@nishu_tiwari",
+      "count": "2.1M",
+      "url": "https://www.instagram.com/inishutiwari/"
+    },
+    "instagramUrl": "https://www.instagram.com/inishutiwari/",
+    "instagramCount": "2.1M",
+    "instagramHandle": "@nishu_tiwari",
+    "kick": null,
+    "kickUrl": null,
+    "kickCount": null,
+    "kickHandle": null,
+    "platforms": [
+      "youtube",
+      "instagram"
+    ]
+  },
+  {
+    "id": "joker",
+    "name": "Jokerkihaveli",
+    "alias": "Gulrez Khan",
+    "realName": "Gulrez Khan",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/joker.png",
+    "reach": "2.8M+",
+    "bio": "A defining force in Indian gaming and esports entertainment, Jokerkihaveli (Gulrez Khan) combines athletic discipline with competitive gaming mastery as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
+    "youtube": {
+      "handle": "@joker",
+      "count": "2.75M",
+      "url": "https://www.youtube.com/@jokerkihavelii"
+    },
+    "youtubeUrl": "https://www.youtube.com/@jokerkihavelii",
+    "youtubeCount": "2.75M",
+    "youtubeHandle": "@joker",
+    "instagram": {
+      "handle": "@joker",
+      "count": "2.2M",
+      "url": "https://www.instagram.com/jokerkihaveli/"
+    },
+    "instagramUrl": "https://www.instagram.com/jokerkihaveli/",
+    "instagramCount": "2.2M",
+    "instagramHandle": "@joker",
+    "kick": {
+      "handle": "joker",
+      "count": "10K",
+      "url": "https://kick.com/jokerkihaveli"
+    },
+    "kickUrl": "https://kick.com/jokerkihaveli",
+    "kickCount": "10K",
+    "kickHandle": "joker",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "regaltos",
+    "name": "Regaltos",
+    "alias": "Parv Singh",
+    "realName": "Parv Singh",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/regaltos.png",
+    "reach": "2.5M+",
+    "bio": "Iconic Team Soul competitive champion and prominent BGMI streamer, celebrated for assault mechanics, clutch fights, and vibrant community streams.",
+    "youtube": {
+      "handle": "@regaltos",
+      "count": "2.5M",
+      "url": "https://www.youtube.com/@soulregaltos9810"
+    },
+    "youtubeUrl": "https://www.youtube.com/@soulregaltos9810",
+    "youtubeCount": "2.5M",
+    "youtubeHandle": "@regaltos",
+    "instagram": {
+      "handle": "@regaltos",
+      "count": "1M",
+      "url": "https://www.instagram.com/soul_regaltos/"
+    },
+    "instagramUrl": "https://www.instagram.com/soul_regaltos/",
+    "instagramCount": "1M",
+    "instagramHandle": "@regaltos",
+    "kick": {
+      "handle": "regaltos",
+      "count": "90K",
+      "url": "https://kick.com/regaltos"
+    },
+    "kickUrl": "https://kick.com/regaltos",
+    "kickCount": "90K",
+    "kickHandle": "regaltos",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "pahadi",
+    "name": "Pahadi",
+    "alias": "Lokesh Karakoti",
+    "realName": "Lokesh Karakoti",
+    "category": "bgmi",
+    "categoryLabel": "Mobile Esports · Live Stream",
+    "categories": "Mobile Esports · Live Stream",
+    "img": "assets/creators/cinematic/pahadi.png",
+    "reach": "1.7M+",
+    "bio": "Legendary Indian esports athlete and multi-title sniper champion, renowned for clutch plays, competitive composure, and community gaming sessions.",
+    "youtube": {
+      "handle": "@pahadi",
+      "count": "1.7M",
+      "url": "https://www.youtube.com/@pahadigamer_official"
+    },
+    "youtubeUrl": "https://www.youtube.com/@pahadigamer_official",
+    "youtubeCount": "1.7M",
+    "youtubeHandle": "@pahadi",
+    "instagram": {
+      "handle": "@pahadi",
+      "count": "500K",
+      "url": "https://www.instagram.com/pahadigaming/"
+    },
+    "instagramUrl": "https://www.instagram.com/pahadigaming/",
+    "instagramCount": "500K",
+    "instagramHandle": "@pahadi",
+    "kick": {
+      "handle": "pahadi",
+      "count": "14K",
+      "url": "https://kick.com/pahadigamer"
+    },
+    "kickUrl": "https://kick.com/pahadigamer",
+    "kickCount": "14K",
+    "kickHandle": "pahadi",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "rockybhai",
+    "name": "Rockybhai",
+    "alias": "Rockybhai",
+    "realName": "Rockybhai",
+    "category": "bgmi",
+    "categoryLabel": "Mobile Esports · Live Stream",
+    "categories": "Mobile Esports · Live Stream",
+    "img": "assets/creators/cinematic/rockybhai.png",
+    "reach": "1.6M+",
     "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
     "youtube": {
-      "handle": "@simarpsy",
-      "count": "90K",
-      "url": "https://www.youtube.com/@psyhubyt"
+      "handle": "@rockybhai",
+      "count": "1.6M",
+      "url": "https://www.youtube.com/@ROCKYRDX"
     },
-    "youtubeUrl": "https://www.youtube.com/@psyhubyt",
-    "youtubeCount": "90K",
-    "youtubeHandle": "@simarpsy",
+    "youtubeUrl": "https://www.youtube.com/@ROCKYRDX",
+    "youtubeCount": "1.6M",
+    "youtubeHandle": "@rockybhai",
     "instagram": {
-      "handle": "@simarpsy",
-      "count": "40K",
-      "url": "https://www.instagram.com/simar_psy/"
+      "handle": "@rockybhai",
+      "count": "83K",
+      "url": "https://www.instagram.com/haqserocky"
     },
-    "instagramUrl": "https://www.instagram.com/simar_psy/",
-    "instagramCount": "40K",
-    "instagramHandle": "@simarpsy",
+    "instagramUrl": "https://www.instagram.com/haqserocky",
+    "instagramCount": "83K",
+    "instagramHandle": "@rockybhai",
+    "kick": null,
+    "kickUrl": null,
+    "kickCount": null,
+    "kickHandle": null,
+    "platforms": [
+      "youtube",
+      "instagram"
+    ]
+  },
+  {
+    "id": "mamba",
+    "name": "Mamba",
+    "alias": "Salman Ahmad",
+    "realName": "Salman Ahmad",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/mamba.png",
+    "reach": "1.5M+",
+    "bio": "Veteran 8Bit member and central figure in Indian GTA V roleplay communities, bringing high-energy storytelling and roleplay adventures.",
+    "youtube": {
+      "handle": "@mamba",
+      "count": "1.53M",
+      "url": "https://www.youtube.com/@8bitmamba"
+    },
+    "youtubeUrl": "https://www.youtube.com/@8bitmamba",
+    "youtubeCount": "1.53M",
+    "youtubeHandle": "@mamba",
+    "instagram": {
+      "handle": "@mamba",
+      "count": "475K",
+      "url": "https://www.instagram.com/ig_mamba/"
+    },
+    "instagramUrl": "https://www.instagram.com/ig_mamba/",
+    "instagramCount": "475K",
+    "instagramHandle": "@mamba",
+    "kick": {
+      "handle": "mamba",
+      "count": "8K",
+      "url": "https://kick.com/8bitmamba"
+    },
+    "kickUrl": "https://kick.com/8bitmamba",
+    "kickCount": "8K",
+    "kickHandle": "mamba",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "k18",
+    "name": "K18",
+    "alias": "Ketan Patel",
+    "realName": "Ketan Patel",
+    "category": "lifestyle",
+    "categoryLabel": "Lifestyle · Vlogging · Youth Culture",
+    "categories": "Lifestyle · Vlogging · Youth Culture",
+    "img": "assets/creators/cinematic/k18.png",
+    "reach": "1.4M+",
+    "bio": "One of India’s most celebrated esports casters and analysts, lending his voice and energy to premier national and international BGMI tournaments.",
+    "youtube": {
+      "handle": "@k18",
+      "count": "1.4M",
+      "url": "https://www.youtube.com/@ketan_k18"
+    },
+    "youtubeUrl": "https://www.youtube.com/@ketan_k18",
+    "youtubeCount": "1.4M",
+    "youtubeHandle": "@k18",
+    "instagram": {
+      "handle": "@k18",
+      "count": "440K",
+      "url": "https://www.instagram.com/k18gaming"
+    },
+    "instagramUrl": "https://www.instagram.com/k18gaming",
+    "instagramCount": "440K",
+    "instagramHandle": "@k18",
+    "kick": {
+      "handle": "k18",
+      "count": "2K",
+      "url": "https://kick.com/ketan_k18"
+    },
+    "kickUrl": "https://kick.com/ketan_k18",
+    "kickCount": "2K",
+    "kickHandle": "k18",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "viper",
+    "name": "Viper",
+    "alias": "Yash Soni",
+    "realName": "Yash Soni",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/viper.png",
+    "reach": "1.3M+",
+    "bio": "Founding member of Team Soul and beloved community streamer, known for engaging multi-game watch parties, BGMI squads, and wholesome humor.",
+    "youtube": {
+      "handle": "@viper",
+      "count": "1.30M",
+      "url": "https://www.youtube.com/c/SOULVipeR18"
+    },
+    "youtubeUrl": "https://www.youtube.com/c/SOULVipeR18",
+    "youtubeCount": "1.30M",
+    "youtubeHandle": "@viper",
+    "instagram": {
+      "handle": "@viper",
+      "count": "510K",
+      "url": "https://www.instagram.com/soul_viper/"
+    },
+    "instagramUrl": "https://www.instagram.com/soul_viper/",
+    "instagramCount": "510K",
+    "instagramHandle": "@viper",
+    "kick": {
+      "handle": "viper",
+      "count": "30K",
+      "url": "https://kick.com/soulviper"
+    },
+    "kickUrl": "https://kick.com/soulviper",
+    "kickCount": "30K",
+    "kickHandle": "viper",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "bixiop",
+    "name": "Bixiop",
+    "alias": "Abhijeet Singh",
+    "realName": "Abhijeet Singh",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/bixiop.png",
+    "reach": "1M+",
+    "bio": "A versatile content creator and charismatic entertainer, Bixiop combines competitive gaming mastery with high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
+    "youtube": {
+      "handle": "@bixiop",
+      "count": "1.03m",
+      "url": "https://www.youtube.com/@thebixiop"
+    },
+    "youtubeUrl": "https://www.youtube.com/@thebixiop",
+    "youtubeCount": "1.03m",
+    "youtubeHandle": "@bixiop",
+    "instagram": {
+      "handle": "@bixiop",
+      "count": "137K",
+      "url": "https://www.instagram.com/bixiopofficial/"
+    },
+    "instagramUrl": "https://www.instagram.com/bixiopofficial/",
+    "instagramCount": "137K",
+    "instagramHandle": "@bixiop",
+    "kick": null,
+    "kickUrl": null,
+    "kickCount": null,
+    "kickHandle": null,
+    "platforms": [
+      "youtube",
+      "instagram"
+    ]
+  },
+  {
+    "id": "aman",
+    "name": "Aman",
+    "alias": "Aman Jain",
+    "realName": "Aman Jain",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/aman.png",
+    "reach": "1M+",
+    "bio": "A defining force in Indian gaming and esports entertainment, Aman Jain (Soul Aman) combines athletic discipline, competitive gaming mastery, and high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
+    "youtube": {
+      "handle": "@aman",
+      "count": "1.06M",
+      "url": "https://www.youtube.com/@SoulAman"
+    },
+    "youtubeUrl": "https://www.youtube.com/@SoulAman",
+    "youtubeCount": "1.06M",
+    "youtubeHandle": "@aman",
+    "instagram": {
+      "handle": "@aman",
+      "count": "337K",
+      "url": "http://instagram.com/ig_soul_aman/"
+    },
+    "instagramUrl": "http://instagram.com/ig_soul_aman/",
+    "instagramCount": "337K",
+    "instagramHandle": "@aman",
+    "kick": {
+      "handle": "aman",
+      "count": "24K",
+      "url": "https://kick.com/soulaman"
+    },
+    "kickUrl": "https://kick.com/soulaman",
+    "kickCount": "24K",
+    "kickHandle": "aman",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "krutika",
+    "name": "Krutika",
+    "alias": "Krutika Ojha",
+    "realName": "Krutika Ojha",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/krutika.png",
+    "reach": "900K+",
+    "bio": "Dynamic S8UL content creator bridging competitive gaming, casual story playthroughs, and lifestyle vlogging with an engaged audience.",
+    "youtube": {
+      "handle": "@krutika",
+      "count": "900K",
+      "url": "https://www.youtube.com/@KrutikaPlays"
+    },
+    "youtubeUrl": "https://www.youtube.com/@KrutikaPlays",
+    "youtubeCount": "900K",
+    "youtubeHandle": "@krutika",
+    "instagram": {
+      "handle": "@krutika",
+      "count": "360K",
+      "url": "https://www.instagram.com/ig.krutika/"
+    },
+    "instagramUrl": "https://www.instagram.com/ig.krutika/",
+    "instagramCount": "360K",
+    "instagramHandle": "@krutika",
+    "kick": {
+      "handle": "krutika",
+      "count": "9K",
+      "url": "https://kick.com/krutikaplays"
+    },
+    "kickUrl": "https://kick.com/krutikaplays",
+    "kickCount": "9K",
+    "kickHandle": "krutika",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "dattrax",
+    "name": "Dattrax",
+    "alias": "Harvest Dewangan",
+    "realName": "Harvest Dewangan",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/dattrax.png",
+    "reach": "820K+",
+    "bio": "A versatile content creator and charismatic entertainer, Dattrax brings unmatched energy, charisma, and competitive depth as a premier talent under the 8Bit Creatives roster.",
+    "youtube": {
+      "handle": "@dattrax",
+      "count": "827K",
+      "url": "https://www.youtube.com/@dattraxg"
+    },
+    "youtubeUrl": "https://www.youtube.com/@dattraxg",
+    "youtubeCount": "827K",
+    "youtubeHandle": "@dattrax",
+    "instagram": {
+      "handle": "@dattrax",
+      "count": "277K",
+      "url": "https://www.instagram.com/dattraxgaming/"
+    },
+    "instagramUrl": "https://www.instagram.com/dattraxgaming/",
+    "instagramCount": "277K",
+    "instagramHandle": "@dattrax",
     "kick": null,
     "kickUrl": null,
     "kickCount": null,
@@ -438,6 +715,360 @@
       "youtube",
       "instagram",
       "kick"
+    ]
+  },
+  {
+    "id": "rebel",
+    "name": "Rebel",
+    "alias": "Ayan Ali",
+    "realName": "Ayan Ali",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/rebel.png",
+    "reach": "700K+",
+    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
+    "youtube": {
+      "handle": "@rebel",
+      "count": "620K",
+      "url": "https://www.youtube.com/@8bitrebel"
+    },
+    "youtubeUrl": "https://www.youtube.com/@8bitrebel",
+    "youtubeCount": "620K",
+    "youtubeHandle": "@rebel",
+    "instagram": {
+      "handle": "@rebel",
+      "count": "160K",
+      "url": "https://www.instagram.com/8bit_rebel/"
+    },
+    "instagramUrl": "https://www.instagram.com/8bit_rebel/",
+    "instagramCount": "160K",
+    "instagramHandle": "@rebel",
+    "kick": {
+      "handle": "rebel",
+      "count": "6K",
+      "url": "https://kick.com/8bitrebel"
+    },
+    "kickUrl": "https://kick.com/8bitrebel",
+    "kickCount": "6K",
+    "kickHandle": "rebel",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "mercy",
+    "name": "Beg4Mercy",
+    "alias": "Mrinmoy Lahkar",
+    "realName": "Mrinmoy Lahkar",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/mercy.png",
+    "reach": "600K+",
+    "bio": "Signature GTA V RP creator within S8UL, famous for immersive storylines, police roleplay dynamics, and variety entertainment.",
+    "youtube": {
+      "handle": "@mercy",
+      "count": "560K",
+      "url": "https://www.youtube.com/@8bitbeg4mercy2"
+    },
+    "youtubeUrl": "https://www.youtube.com/@8bitbeg4mercy2",
+    "youtubeCount": "560K",
+    "youtubeHandle": "@mercy",
+    "instagram": {
+      "handle": "@mercy",
+      "count": "210K",
+      "url": "https://www.instagram.com/8bit_beg4mercy/"
+    },
+    "instagramUrl": "https://www.instagram.com/8bit_beg4mercy/",
+    "instagramCount": "210K",
+    "instagramHandle": "@mercy",
+    "kick": null,
+    "kickUrl": null,
+    "kickCount": null,
+    "kickHandle": null,
+    "platforms": [
+      "youtube",
+      "instagram"
+    ]
+  },
+  {
+    "id": "mafia",
+    "name": "Mafia",
+    "alias": "Mukul Anchal",
+    "realName": "Mukul Anchal",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/mafia.png",
+    "reach": "600K+",
+    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
+    "youtube": {
+      "handle": "@mafia",
+      "count": "530K",
+      "url": "https://www.youtube.com/@8bitMafia"
+    },
+    "youtubeUrl": "https://www.youtube.com/@8bitMafia",
+    "youtubeCount": "530K",
+    "youtubeHandle": "@mafia",
+    "instagram": {
+      "handle": "@mafia",
+      "count": "150K",
+      "url": "https://www.instagram.com/8bitmafia/"
+    },
+    "instagramUrl": "https://www.instagram.com/8bitmafia/",
+    "instagramCount": "150K",
+    "instagramHandle": "@mafia",
+    "kick": {
+      "handle": "mafia",
+      "count": "8K",
+      "url": "https://kick.com/8bit_mafia"
+    },
+    "kickUrl": "https://kick.com/8bit_mafia",
+    "kickCount": "8K",
+    "kickHandle": "mafia",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "jonty",
+    "name": "Jonty",
+    "alias": "AJAY KUMAR BANGA",
+    "realName": "AJAY KUMAR BANGA",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/jonty.png",
+    "reach": "600K+",
+    "bio": "A defining force in Indian gaming and esports entertainment, Jonty (AJAY KUMAR BANGA) combines athletic discipline, competitive gaming mastery, and high-octane live streaming as a premier talent under the 8Bit Creatives roster.",
+    "youtube": {
+      "handle": "@jonty",
+      "count": "180K",
+      "url": "https://www.youtube.com/@jontylive2919"
+    },
+    "youtubeUrl": "https://www.youtube.com/@jontylive2919",
+    "youtubeCount": "180K",
+    "youtubeHandle": "@jonty",
+    "instagram": {
+      "handle": "@jonty",
+      "count": "560K",
+      "url": "https://www.instagram.com/ab_jonty/"
+    },
+    "instagramUrl": "https://www.instagram.com/ab_jonty/",
+    "instagramCount": "560K",
+    "instagramHandle": "@jonty",
+    "kick": {
+      "handle": "jonty",
+      "count": "9K",
+      "url": "https://kick.com/jontygamings8ul"
+    },
+    "kickUrl": "https://kick.com/jontygamings8ul",
+    "kickCount": "9K",
+    "kickHandle": "jonty",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "binks",
+    "name": "Binks",
+    "alias": "Mithul Nayak",
+    "realName": "Mithul Nayak",
+    "category": "pc",
+    "categoryLabel": "PC Gaming · Entertainment",
+    "categories": "PC Gaming · Entertainment",
+    "img": "assets/creators/cinematic/binks.png",
+    "reach": "520K+",
+    "bio": "High-energy FPS player, caster, and entertainer recognized for his sharp Valorant commentary, clutch moments, and infectious humor.",
+    "youtube": {
+      "handle": "@binks",
+      "count": "520K",
+      "url": "https://www.youtube.com/@8bitBinks69"
+    },
+    "youtubeUrl": "https://www.youtube.com/@8bitBinks69",
+    "youtubeCount": "520K",
+    "youtubeHandle": "@binks",
+    "instagram": {
+      "handle": "@binks",
+      "count": "98K",
+      "url": "https://www.instagram.com/8bit_binks"
+    },
+    "instagramUrl": "https://www.instagram.com/8bit_binks",
+    "instagramCount": "98K",
+    "instagramHandle": "@binks",
+    "kick": {
+      "handle": "binks",
+      "count": "45K",
+      "url": "https://kick.com/binks69"
+    },
+    "kickUrl": "https://kick.com/binks69",
+    "kickCount": "45K",
+    "kickHandle": "binks",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "goblin",
+    "name": "Soul Goblin",
+    "alias": "Harsh Paudwal",
+    "realName": "Harsh Paudwal",
+    "category": "bgmi",
+    "categoryLabel": "Mobile Esports · Live Stream",
+    "categories": "Mobile Esports · Live Stream",
+    "img": "assets/creators/cinematic/goblin.png",
+    "reach": "500K+",
+    "bio": "Top-tier competitive BGMI fragger and MVP champion with Team Soul / Carnival Gaming, renowned for lethal close-range combat skills.",
+    "youtube": {
+      "handle": "@goblin",
+      "count": "485K",
+      "url": "https://www.youtube.com/@SoulGoblin"
+    },
+    "youtubeUrl": "https://www.youtube.com/@SoulGoblin",
+    "youtubeCount": "485K",
+    "youtubeHandle": "@goblin",
+    "instagram": {
+      "handle": "@goblin",
+      "count": "575K",
+      "url": "https://www.instagram.com/soul_goblin"
+    },
+    "instagramUrl": "https://www.instagram.com/soul_goblin",
+    "instagramCount": "575K",
+    "instagramHandle": "@goblin",
+    "kick": {
+      "handle": "goblin",
+      "count": "21K",
+      "url": "https://kick.com/soulgoblin"
+    },
+    "kickUrl": "https://kick.com/soulgoblin",
+    "kickCount": "21K",
+    "kickHandle": "goblin",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "ankkita",
+    "name": "Ankkita",
+    "alias": "Ankkita C",
+    "realName": "Ankkita C",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/ankkita.png",
+    "reach": "450K+",
+    "bio": "Prominent female gaming creator known for atmospheric story-driven gameplay, Valorant sessions, and authentic community engagement.",
+    "youtube": {
+      "handle": "@ankkita",
+      "count": "450K",
+      "url": "https://www.youtube.com/@AnkkitaC"
+    },
+    "youtubeUrl": "https://www.youtube.com/@AnkkitaC",
+    "youtubeCount": "450K",
+    "youtubeHandle": "@ankkita",
+    "instagram": {
+      "handle": "@ankkita",
+      "count": "173K",
+      "url": "https://www.instagram.com/ankkitac"
+    },
+    "instagramUrl": "https://www.instagram.com/ankkitac",
+    "instagramCount": "173K",
+    "instagramHandle": "@ankkita",
+    "kick": null,
+    "kickUrl": null,
+    "kickCount": null,
+    "kickHandle": null,
+    "platforms": [
+      "youtube",
+      "instagram"
+    ]
+  },
+  {
+    "id": "zeref",
+    "name": "Zeref",
+    "alias": "Devdeep Dhar",
+    "realName": "Devdeep Dhar",
+    "category": "pc",
+    "categoryLabel": "PC Gaming · Entertainment",
+    "categories": "PC Gaming · Entertainment",
+    "img": "assets/creators/cinematic/zeref.png",
+    "reach": "400K+",
+    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
+    "youtube": {
+      "handle": "@zeref",
+      "count": "370K",
+      "url": "https://www.youtube.com/@SouLZeref"
+    },
+    "youtubeUrl": "https://www.youtube.com/@SouLZeref",
+    "youtubeCount": "370K",
+    "youtubeHandle": "@zeref",
+    "instagram": {
+      "handle": "@zeref",
+      "count": "75K",
+      "url": "https://www.instagram.com/soul_zeref/"
+    },
+    "instagramUrl": "https://www.instagram.com/soul_zeref/",
+    "instagramCount": "75K",
+    "instagramHandle": "@zeref",
+    "kick": {
+      "handle": "zeref",
+      "count": "20K",
+      "url": "https://kick.com/soulzeref"
+    },
+    "kickUrl": "https://kick.com/soulzeref",
+    "kickCount": "20K",
+    "kickHandle": "zeref",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "mili",
+    "name": "Mili",
+    "alias": "Saloni Kandalgaonkar",
+    "realName": "Saloni Kandalgaonkar",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/mili.png",
+    "reach": "350K+",
+    "bio": "A versatile content creator and charismatic entertainer, Mili (Saloni Kandalgaonkar) combines competitive gaming mastery with high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
+    "youtube": {
+      "handle": "@mili",
+      "count": "330K",
+      "url": "https://www.youtube.com/@MilikyaMili"
+    },
+    "youtubeUrl": "https://www.youtube.com/@MilikyaMili",
+    "youtubeCount": "330K",
+    "youtubeHandle": "@mili",
+    "instagram": {
+      "handle": "@mili",
+      "count": "195K",
+      "url": "https://www.instagram.com/mili_kya_mili/"
+    },
+    "instagramUrl": "https://www.instagram.com/mili_kya_mili/",
+    "instagramCount": "195K",
+    "instagramHandle": "@mili",
+    "kick": null,
+    "kickUrl": null,
+    "kickCount": null,
+    "kickHandle": null,
+    "platforms": [
+      "youtube",
+      "instagram"
     ]
   },
   {
@@ -518,73 +1149,32 @@
     ]
   },
   {
-    "id": "rusherwow",
-    "name": "Rusherwow",
-    "alias": "Adil Maniar",
-    "realName": "Adil Maniar",
-    "category": "gta",
-    "categoryLabel": "GTA V Roleplay · Community",
-    "categories": "GTA V Roleplay · Community",
-    "img": "assets/creators/cinematic/rusherwow.png",
-    "reach": "100K+",
-    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
+    "id": "motacore",
+    "name": "Motacore",
+    "alias": "Vansh khandeka",
+    "realName": "Vansh khandeka",
+    "category": "lifestyle",
+    "categoryLabel": "Lifestyle · Vlogging · Youth Culture",
+    "categories": "Lifestyle · Vlogging · Youth Culture",
+    "img": "assets/creators/cinematic/motacore.png",
+    "reach": "300K+",
+    "bio": "A versatile content creator and charismatic entertainer, Motacore is widely celebrated for athletic discipline as a premier talent under the 8Bit Creatives roster.",
     "youtube": {
-      "handle": "@rusherwow",
-      "count": "105K",
-      "url": "https://www.youtube.com/rusherwow"
+      "handle": "@motacore",
+      "count": "35K",
+      "url": "https://www.youtube.com/@Motaacore"
     },
-    "youtubeUrl": "https://www.youtube.com/rusherwow",
-    "youtubeCount": "105K",
-    "youtubeHandle": "@rusherwow",
+    "youtubeUrl": "https://www.youtube.com/@Motaacore",
+    "youtubeCount": "35K",
+    "youtubeHandle": "@motacore",
     "instagram": {
-      "handle": "@rusherwow",
-      "count": "18K",
-      "url": "https://www.instagram.com/8bit_rusherwow/"
+      "handle": "@motacore",
+      "count": "270K",
+      "url": "https://www.instagram.com/motaacore/"
     },
-    "instagramUrl": "https://www.instagram.com/8bit_rusherwow/",
-    "instagramCount": "18K",
-    "instagramHandle": "@rusherwow",
-    "kick": {
-      "handle": "rusherwow",
-      "count": "18K",
-      "url": "https://kick.com/8bit_rusherwow"
-    },
-    "kickUrl": "https://kick.com/8bit_rusherwow",
-    "kickCount": "18K",
-    "kickHandle": "rusherwow",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "rockybhai",
-    "name": "Rockybhai",
-    "alias": "Rockybhai",
-    "realName": "Rockybhai",
-    "category": "bgmi",
-    "categoryLabel": "Mobile Esports · Live Stream",
-    "categories": "Mobile Esports · Live Stream",
-    "img": "assets/creators/cinematic/rockybhai.png",
-    "reach": "1.6M+",
-    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
-    "youtube": {
-      "handle": "@rockybhai",
-      "count": "1.6M",
-      "url": "https://www.youtube.com/@ROCKYRDX"
-    },
-    "youtubeUrl": "https://www.youtube.com/@ROCKYRDX",
-    "youtubeCount": "1.6M",
-    "youtubeHandle": "@rockybhai",
-    "instagram": {
-      "handle": "@rockybhai",
-      "count": "83K",
-      "url": "https://www.instagram.com/haqserocky"
-    },
-    "instagramUrl": "https://www.instagram.com/haqserocky",
-    "instagramCount": "83K",
-    "instagramHandle": "@rockybhai",
+    "instagramUrl": "https://www.instagram.com/motaacore/",
+    "instagramCount": "270K",
+    "instagramHandle": "@motacore",
     "kick": null,
     "kickUrl": null,
     "kickCount": null,
@@ -595,81 +1185,40 @@
     ]
   },
   {
-    "id": "regaltos",
-    "name": "Regaltos",
-    "alias": "Parv Singh",
-    "realName": "Parv Singh",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/regaltos.png",
-    "reach": "2.5M+",
-    "bio": "Iconic Team Soul competitive champion and prominent BGMI streamer, celebrated for assault mechanics, clutch fights, and vibrant community streams.",
-    "youtube": {
-      "handle": "@regaltos",
-      "count": "2.5M",
-      "url": "https://www.youtube.com/@soulregaltos9810"
-    },
-    "youtubeUrl": "https://www.youtube.com/@soulregaltos9810",
-    "youtubeCount": "2.5M",
-    "youtubeHandle": "@regaltos",
-    "instagram": {
-      "handle": "@regaltos",
-      "count": "1M",
-      "url": "https://www.instagram.com/soul_regaltos/"
-    },
-    "instagramUrl": "https://www.instagram.com/soul_regaltos/",
-    "instagramCount": "1M",
-    "instagramHandle": "@regaltos",
-    "kick": {
-      "handle": "regaltos",
-      "count": "90K",
-      "url": "https://kick.com/regaltos"
-    },
-    "kickUrl": "https://kick.com/regaltos",
-    "kickCount": "90K",
-    "kickHandle": "regaltos",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "rebel",
-    "name": "Rebel",
-    "alias": "Ayan Ali",
-    "realName": "Ayan Ali",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/rebel.png",
-    "reach": "700K+",
+    "id": "mr_jay",
+    "name": "Mr Jay",
+    "alias": "Jayesh Yadav",
+    "realName": "Jayesh Yadav",
+    "category": "bgmi",
+    "categoryLabel": "Mobile Esports · Live Stream",
+    "categories": "Mobile Esports · Live Stream",
+    "img": "assets/creators/cinematic/mr jay.png",
+    "reach": "250K+",
     "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
     "youtube": {
-      "handle": "@rebel",
-      "count": "620K",
-      "url": "https://www.youtube.com/@8bitrebel"
+      "handle": "@mr_jay",
+      "count": "210K",
+      "url": "https://www.youtube.com/c/MRJAY20"
     },
-    "youtubeUrl": "https://www.youtube.com/@8bitrebel",
-    "youtubeCount": "620K",
-    "youtubeHandle": "@rebel",
+    "youtubeUrl": "https://www.youtube.com/c/MRJAY20",
+    "youtubeCount": "210K",
+    "youtubeHandle": "@mr_jay",
     "instagram": {
-      "handle": "@rebel",
-      "count": "160K",
-      "url": "https://www.instagram.com/8bit_rebel/"
+      "handle": "@mr_jay",
+      "count": "100K",
+      "url": "https://www.instagram.com/ig_mr.jay/"
     },
-    "instagramUrl": "https://www.instagram.com/8bit_rebel/",
-    "instagramCount": "160K",
-    "instagramHandle": "@rebel",
+    "instagramUrl": "https://www.instagram.com/ig_mr.jay/",
+    "instagramCount": "100K",
+    "instagramHandle": "@mr_jay",
     "kick": {
-      "handle": "rebel",
-      "count": "6K",
-      "url": "https://kick.com/8bitrebel"
+      "handle": "mr_jay",
+      "count": "13K",
+      "url": "https://kick.com/mr_jay"
     },
-    "kickUrl": "https://kick.com/8bitrebel",
-    "kickCount": "6K",
-    "kickHandle": "rebel",
+    "kickUrl": "https://kick.com/mr_jay",
+    "kickCount": "13K",
+    "kickHandle": "mr_jay",
     "platforms": [
       "youtube",
       "instagram",
@@ -677,40 +1226,81 @@
     ]
   },
   {
-    "id": "prateek",
-    "name": "Prateek",
-    "alias": "Prateek Shirpurkar",
-    "realName": "Prateek Shirpurkar",
+    "id": "willy",
+    "name": "Willy",
+    "alias": "Nishaant Williams",
+    "realName": "Nishaant Williams",
     "category": "lifestyle",
     "categoryLabel": "Lifestyle · Vlogging · Youth Culture",
     "categories": "Lifestyle · Vlogging · Youth Culture",
-    "img": "assets/creators/cinematic/prateek.png",
-    "reach": "80K+",
+    "img": "assets/creators/cinematic/willy.png",
+    "reach": "200K+",
     "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
     "youtube": {
-      "handle": "@prateek",
-      "count": "75K",
-      "url": "https://www.youtube.com/@PRATEEKYT"
+      "handle": "@willy",
+      "count": "185K",
+      "url": "https://www.youtube.com/@WILLYGAMINGG"
     },
-    "youtubeUrl": "https://www.youtube.com/@PRATEEKYT",
-    "youtubeCount": "75K",
-    "youtubeHandle": "@prateek",
+    "youtubeUrl": "https://www.youtube.com/@WILLYGAMINGG",
+    "youtubeCount": "185K",
+    "youtubeHandle": "@willy",
     "instagram": {
-      "handle": "@prateek",
-      "count": "22K",
-      "url": "https://www.instagram.com/prateek_yt/"
+      "handle": "@willy",
+      "count": "130K",
+      "url": "https://www.instagram.com/willygamingg/"
     },
-    "instagramUrl": "https://www.instagram.com/prateek_yt/",
-    "instagramCount": "22K",
-    "instagramHandle": "@prateek",
+    "instagramUrl": "https://www.instagram.com/willygamingg/",
+    "instagramCount": "130K",
+    "instagramHandle": "@willy",
     "kick": {
-      "handle": "prateek",
-      "count": "5K",
-      "url": "https://kick.com/prateekyt"
+      "handle": "willy",
+      "count": "2K",
+      "url": "https://kick.com/willygaming"
     },
-    "kickUrl": "https://kick.com/prateekyt",
-    "kickCount": "5K",
-    "kickHandle": "prateek",
+    "kickUrl": "https://kick.com/willygaming",
+    "kickCount": "2K",
+    "kickHandle": "willy",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "pothead",
+    "name": "Pothead",
+    "alias": "Nihar Saha",
+    "realName": "Nihar Saha",
+    "category": "pc",
+    "categoryLabel": "PC Gaming · Entertainment",
+    "categories": "PC Gaming · Entertainment",
+    "img": "assets/creators/cinematic/pothead.png",
+    "reach": "160K+",
+    "bio": "Popular creator and longtime gaming community member associated with 8Bit and S8UL, known for comedy gaming sketches and live entertainment.",
+    "youtube": {
+      "handle": "@pothead",
+      "count": "152K",
+      "url": "https://www.youtube.com/@s8ulpothead"
+    },
+    "youtubeUrl": "https://www.youtube.com/@s8ulpothead",
+    "youtubeCount": "152K",
+    "youtubeHandle": "@pothead",
+    "instagram": {
+      "handle": "@pothead",
+      "count": "31K",
+      "url": "https://www.instagram.com/ig_pothead/"
+    },
+    "instagramUrl": "https://www.instagram.com/ig_pothead/",
+    "instagramCount": "31K",
+    "instagramHandle": "@pothead",
+    "kick": {
+      "handle": "pothead",
+      "count": "1K",
+      "url": "https://kick.com/pothead"
+    },
+    "kickUrl": "https://kick.com/pothead",
+    "kickCount": "1K",
+    "kickHandle": "pothead",
     "platforms": [
       "youtube",
       "instagram",
@@ -759,40 +1349,76 @@
     ]
   },
   {
-    "id": "payal",
-    "name": "Payal",
-    "alias": "Payal Dhare",
-    "realName": "Payal Dhare",
+    "id": "amya",
+    "name": "Amya",
+    "alias": "Amya Bhagat",
+    "realName": "Amya Bhagat",
     "category": "variety",
     "categoryLabel": "Variety Gaming · Entertainment",
     "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/payal.png",
-    "reach": "5.2M+",
-    "bio": "Prominent S8UL creator and India's leading female gaming content creator, known for BGMI live streams, casual gaming, and lifestyle content.",
+    "img": "assets/creators/cinematic/amya.png",
+    "reach": "140K+",
+    "bio": "A versatile content creator and charismatic entertainer, Amya (Amya Bhagat) combines high-octane live streaming with dynamic digital storytelling as a premier talent under the 8Bit Creatives roster.",
     "youtube": {
-      "handle": "@payal",
-      "count": "4.7M",
-      "url": "https://www.youtube.com/@PAYALGAMING"
+      "handle": "@amya",
+      "count": "78K",
+      "url": "https://www.youtube.com/@amyabhagat"
     },
-    "youtubeUrl": "https://www.youtube.com/@PAYALGAMING",
-    "youtubeCount": "4.7M",
-    "youtubeHandle": "@payal",
+    "youtubeUrl": "https://www.youtube.com/@amyabhagat",
+    "youtubeCount": "78K",
+    "youtubeHandle": "@amya",
     "instagram": {
-      "handle": "@payal",
-      "count": "5.2M",
-      "url": "https://www.instagram.com/payalgamingg/"
+      "handle": "@amya",
+      "count": "147K",
+      "url": "https://www.instagram.com/amyabhagat/"
     },
-    "instagramUrl": "https://www.instagram.com/payalgamingg/",
-    "instagramCount": "5.2M",
-    "instagramHandle": "@payal",
+    "instagramUrl": "https://www.instagram.com/amyabhagat/",
+    "instagramCount": "147K",
+    "instagramHandle": "@amya",
+    "kick": null,
+    "kickUrl": null,
+    "kickCount": null,
+    "kickHandle": null,
+    "platforms": [
+      "youtube",
+      "instagram"
+    ]
+  },
+  {
+    "id": "headflicker",
+    "name": "Headflicker",
+    "alias": "Arpit Wadhawan",
+    "realName": "Arpit Wadhawan",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/headflicker.png",
+    "reach": "130K+",
+    "bio": "A versatile content creator and charismatic entertainer, Headflicker (Arpit Wadhawan) is widely celebrated for competitive gaming mastery as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
+    "youtube": {
+      "handle": "@headflicker",
+      "count": "125K",
+      "url": "https://www.youtube.com/headflicker"
+    },
+    "youtubeUrl": "https://www.youtube.com/headflicker",
+    "youtubeCount": "125K",
+    "youtubeHandle": "@headflicker",
+    "instagram": {
+      "handle": "@headflicker",
+      "count": "23K",
+      "url": "https://www.instagram.com/8bit_headflicker/"
+    },
+    "instagramUrl": "https://www.instagram.com/8bit_headflicker/",
+    "instagramCount": "23K",
+    "instagramHandle": "@headflicker",
     "kick": {
-      "handle": "payal",
-      "count": "5K",
-      "url": "https://kick.com/payalgaming"
+      "handle": "headflicker",
+      "count": "23K",
+      "url": "https://kick.com/8bitheadflicker"
     },
-    "kickUrl": "https://kick.com/payalgaming",
-    "kickCount": "5K",
-    "kickHandle": "payal",
+    "kickUrl": "https://kick.com/8bitheadflicker",
+    "kickCount": "23K",
+    "kickHandle": "headflicker",
     "platforms": [
       "youtube",
       "instagram",
@@ -800,114 +1426,32 @@
     ]
   },
   {
-    "id": "mr_jay",
-    "name": "Mr Jay",
-    "alias": "Jayesh Yadav",
-    "realName": "Jayesh Yadav",
-    "category": "bgmi",
-    "categoryLabel": "Mobile Esports · Live Stream",
-    "categories": "Mobile Esports · Live Stream",
-    "img": "assets/creators/cinematic/mr jay.png",
-    "reach": "250K+",
+    "id": "simarpsy",
+    "name": "Simarpsy",
+    "alias": "Simar Sethi",
+    "realName": "Simar Sethi",
+    "category": "lifestyle",
+    "categoryLabel": "Lifestyle · Vlogging · Youth Culture",
+    "categories": "Lifestyle · Vlogging · Youth Culture",
+    "img": "assets/creators/cinematic/simarpsy.png",
+    "reach": "100K+",
     "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
     "youtube": {
-      "handle": "@mr_jay",
-      "count": "210K",
-      "url": "https://www.youtube.com/c/MRJAY20"
+      "handle": "@simarpsy",
+      "count": "90K",
+      "url": "https://www.youtube.com/@psyhubyt"
     },
-    "youtubeUrl": "https://www.youtube.com/c/MRJAY20",
-    "youtubeCount": "210K",
-    "youtubeHandle": "@mr_jay",
+    "youtubeUrl": "https://www.youtube.com/@psyhubyt",
+    "youtubeCount": "90K",
+    "youtubeHandle": "@simarpsy",
     "instagram": {
-      "handle": "@mr_jay",
-      "count": "100K",
-      "url": "https://www.instagram.com/ig_mr.jay/"
+      "handle": "@simarpsy",
+      "count": "40K",
+      "url": "https://www.instagram.com/simar_psy/"
     },
-    "instagramUrl": "https://www.instagram.com/ig_mr.jay/",
-    "instagramCount": "100K",
-    "instagramHandle": "@mr_jay",
-    "kick": {
-      "handle": "mr_jay",
-      "count": "13K",
-      "url": "https://kick.com/mr_jay"
-    },
-    "kickUrl": "https://kick.com/mr_jay",
-    "kickCount": "13K",
-    "kickHandle": "mr_jay",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "pahadi",
-    "name": "Pahadi",
-    "alias": "Lokesh Karakoti",
-    "realName": "Lokesh Karakoti",
-    "category": "bgmi",
-    "categoryLabel": "Mobile Esports · Live Stream",
-    "categories": "Mobile Esports · Live Stream",
-    "img": "assets/creators/cinematic/pahadi.png",
-    "reach": "1.7M+",
-    "bio": "Legendary Indian esports athlete and multi-title sniper champion, renowned for clutch plays, competitive composure, and community gaming sessions.",
-    "youtube": {
-      "handle": "@pahadi",
-      "count": "1.7M",
-      "url": "https://www.youtube.com/@pahadigamer_official"
-    },
-    "youtubeUrl": "https://www.youtube.com/@pahadigamer_official",
-    "youtubeCount": "1.7M",
-    "youtubeHandle": "@pahadi",
-    "instagram": {
-      "handle": "@pahadi",
-      "count": "500K",
-      "url": "https://www.instagram.com/pahadigaming/"
-    },
-    "instagramUrl": "https://www.instagram.com/pahadigaming/",
-    "instagramCount": "500K",
-    "instagramHandle": "@pahadi",
-    "kick": {
-      "handle": "pahadi",
-      "count": "14K",
-      "url": "https://kick.com/pahadigamer"
-    },
-    "kickUrl": "https://kick.com/pahadigamer",
-    "kickCount": "14K",
-    "kickHandle": "pahadi",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "nishu_tiwari",
-    "name": "Nishu Tiwari",
-    "alias": "Nishu Tiwari",
-    "realName": "Nishu Tiwari",
-    "category": "lifestyle",
-    "categoryLabel": "Lifestyle · Vlogging · Youth Culture",
-    "categories": "Lifestyle · Vlogging · Youth Culture",
-    "img": "assets/creators/cinematic/nishu_tiwari.png",
-    "reach": "5M+",
-    "bio": "8Bit Creatives flagship lifestyle and vlog creator with over 4.3M YouTube subscribers, bridging youth entertainment and mainstream culture.",
-    "youtube": {
-      "handle": "@nishu_tiwari",
-      "count": "5M",
-      "url": "https://www.youtube.com/@inishutiwari"
-    },
-    "youtubeUrl": "https://www.youtube.com/@inishutiwari",
-    "youtubeCount": "5M",
-    "youtubeHandle": "@nishu_tiwari",
-    "instagram": {
-      "handle": "@nishu_tiwari",
-      "count": "2.1M",
-      "url": "https://www.instagram.com/inishutiwari/"
-    },
-    "instagramUrl": "https://www.instagram.com/inishutiwari/",
-    "instagramCount": "2.1M",
-    "instagramHandle": "@nishu_tiwari",
+    "instagramUrl": "https://www.instagram.com/simar_psy/",
+    "instagramCount": "40K",
+    "instagramHandle": "@simarpsy",
     "kick": null,
     "kickUrl": null,
     "kickCount": null,
@@ -918,76 +1462,40 @@
     ]
   },
   {
-    "id": "motacore",
-    "name": "Motacore",
-    "alias": "Vansh khandeka",
-    "realName": "Vansh khandeka",
-    "category": "lifestyle",
-    "categoryLabel": "Lifestyle · Vlogging · Youth Culture",
-    "categories": "Lifestyle · Vlogging · Youth Culture",
-    "img": "assets/creators/cinematic/motacore.png",
-    "reach": "300K+",
-    "bio": "A versatile content creator and charismatic entertainer, Motacore is widely celebrated for athletic discipline as a premier talent under the 8Bit Creatives roster.",
+    "id": "rusherwow",
+    "name": "Rusherwow",
+    "alias": "Adil Maniar",
+    "realName": "Adil Maniar",
+    "category": "gta",
+    "categoryLabel": "GTA V Roleplay · Community",
+    "categories": "GTA V Roleplay · Community",
+    "img": "assets/creators/cinematic/rusherwow.png",
+    "reach": "100K+",
+    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
     "youtube": {
-      "handle": "@motacore",
-      "count": "35K",
-      "url": "https://www.youtube.com/@Motaacore"
+      "handle": "@rusherwow",
+      "count": "105K",
+      "url": "https://www.youtube.com/rusherwow"
     },
-    "youtubeUrl": "https://www.youtube.com/@Motaacore",
-    "youtubeCount": "35K",
-    "youtubeHandle": "@motacore",
+    "youtubeUrl": "https://www.youtube.com/rusherwow",
+    "youtubeCount": "105K",
+    "youtubeHandle": "@rusherwow",
     "instagram": {
-      "handle": "@motacore",
-      "count": "270K",
-      "url": "https://www.instagram.com/motaacore/"
-    },
-    "instagramUrl": "https://www.instagram.com/motaacore/",
-    "instagramCount": "270K",
-    "instagramHandle": "@motacore",
-    "kick": null,
-    "kickUrl": null,
-    "kickCount": null,
-    "kickHandle": null,
-    "platforms": [
-      "youtube",
-      "instagram"
-    ]
-  },
-  {
-    "id": "mortal",
-    "name": "MortaL",
-    "alias": "Naman Mathur",
-    "realName": "Naman Mathur",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/mortal.png",
-    "reach": "7M+",
-    "bio": "Co-founder of S8UL Esports and a pioneer of Indian mobile gaming, celebrated for his calm demeanor, BGMI competitive history, and variety gameplay.",
-    "youtube": {
-      "handle": "@mortal",
-      "count": "7M",
-      "url": "https://www.youtube.com/@MortaLyt"
-    },
-    "youtubeUrl": "https://www.youtube.com/@MortaLyt",
-    "youtubeCount": "7M",
-    "youtubeHandle": "@mortal",
-    "instagram": {
-      "handle": "@mortal",
-      "count": "5M",
-      "url": "https://www.instagram.com/ig_mortal/"
-    },
-    "instagramUrl": "https://www.instagram.com/ig_mortal/",
-    "instagramCount": "5M",
-    "instagramHandle": "@mortal",
-    "kick": {
-      "handle": "mortal",
+      "handle": "@rusherwow",
       "count": "18K",
-      "url": "https://kick.com/mortal"
+      "url": "https://www.instagram.com/8bit_rusherwow/"
     },
-    "kickUrl": "https://kick.com/mortal",
+    "instagramUrl": "https://www.instagram.com/8bit_rusherwow/",
+    "instagramCount": "18K",
+    "instagramHandle": "@rusherwow",
+    "kick": {
+      "handle": "rusherwow",
+      "count": "18K",
+      "url": "https://kick.com/8bit_rusherwow"
+    },
+    "kickUrl": "https://kick.com/8bit_rusherwow",
     "kickCount": "18K",
-    "kickHandle": "mortal",
+    "kickHandle": "rusherwow",
     "platforms": [
       "youtube",
       "instagram",
@@ -995,235 +1503,40 @@
     ]
   },
   {
-    "id": "mili",
-    "name": "Mili",
-    "alias": "Saloni Kandalgaonkar",
-    "realName": "Saloni Kandalgaonkar",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/mili.png",
-    "reach": "350K+",
-    "bio": "A versatile content creator and charismatic entertainer, Mili (Saloni Kandalgaonkar) combines competitive gaming mastery with high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
-    "youtube": {
-      "handle": "@mili",
-      "count": "330K",
-      "url": "https://www.youtube.com/@MilikyaMili"
-    },
-    "youtubeUrl": "https://www.youtube.com/@MilikyaMili",
-    "youtubeCount": "330K",
-    "youtubeHandle": "@mili",
-    "instagram": {
-      "handle": "@mili",
-      "count": "195K",
-      "url": "https://www.instagram.com/mili_kya_mili/"
-    },
-    "instagramUrl": "https://www.instagram.com/mili_kya_mili/",
-    "instagramCount": "195K",
-    "instagramHandle": "@mili",
-    "kick": null,
-    "kickUrl": null,
-    "kickCount": null,
-    "kickHandle": null,
-    "platforms": [
-      "youtube",
-      "instagram"
-    ]
-  },
-  {
-    "id": "mercy",
-    "name": "Beg4Mercy",
-    "alias": "Mrinmoy Lahkar",
-    "realName": "Mrinmoy Lahkar",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/mercy.png",
-    "reach": "600K+",
-    "bio": "Signature GTA V RP creator within S8UL, famous for immersive storylines, police roleplay dynamics, and variety entertainment.",
-    "youtube": {
-      "handle": "@mercy",
-      "count": "560K",
-      "url": "https://www.youtube.com/@8bitbeg4mercy2"
-    },
-    "youtubeUrl": "https://www.youtube.com/@8bitbeg4mercy2",
-    "youtubeCount": "560K",
-    "youtubeHandle": "@mercy",
-    "instagram": {
-      "handle": "@mercy",
-      "count": "210K",
-      "url": "https://www.instagram.com/8bit_beg4mercy/"
-    },
-    "instagramUrl": "https://www.instagram.com/8bit_beg4mercy/",
-    "instagramCount": "210K",
-    "instagramHandle": "@mercy",
-    "kick": null,
-    "kickUrl": null,
-    "kickCount": null,
-    "kickHandle": null,
-    "platforms": [
-      "youtube",
-      "instagram"
-    ]
-  },
-  {
-    "id": "mamba",
-    "name": "Mamba",
-    "alias": "Salman Ahmad",
-    "realName": "Salman Ahmad",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/mamba.png",
-    "reach": "1.5M+",
-    "bio": "Veteran 8Bit member and central figure in Indian GTA V roleplay communities, bringing high-energy storytelling and roleplay adventures.",
-    "youtube": {
-      "handle": "@mamba",
-      "count": "1.53M",
-      "url": "https://www.youtube.com/@8bitmamba"
-    },
-    "youtubeUrl": "https://www.youtube.com/@8bitmamba",
-    "youtubeCount": "1.53M",
-    "youtubeHandle": "@mamba",
-    "instagram": {
-      "handle": "@mamba",
-      "count": "475K",
-      "url": "https://www.instagram.com/ig_mamba/"
-    },
-    "instagramUrl": "https://www.instagram.com/ig_mamba/",
-    "instagramCount": "475K",
-    "instagramHandle": "@mamba",
-    "kick": {
-      "handle": "mamba",
-      "count": "8K",
-      "url": "https://kick.com/8bitmamba"
-    },
-    "kickUrl": "https://kick.com/8bitmamba",
-    "kickCount": "8K",
-    "kickHandle": "mamba",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "mafia",
-    "name": "Mafia",
-    "alias": "Mukul Anchal",
-    "realName": "Mukul Anchal",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/mafia.png",
-    "reach": "600K+",
-    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
-    "youtube": {
-      "handle": "@mafia",
-      "count": "530K",
-      "url": "https://www.youtube.com/@8bitMafia"
-    },
-    "youtubeUrl": "https://www.youtube.com/@8bitMafia",
-    "youtubeCount": "530K",
-    "youtubeHandle": "@mafia",
-    "instagram": {
-      "handle": "@mafia",
-      "count": "150K",
-      "url": "https://www.instagram.com/8bitmafia/"
-    },
-    "instagramUrl": "https://www.instagram.com/8bitmafia/",
-    "instagramCount": "150K",
-    "instagramHandle": "@mafia",
-    "kick": {
-      "handle": "mafia",
-      "count": "8K",
-      "url": "https://kick.com/8bit_mafia"
-    },
-    "kickUrl": "https://kick.com/8bit_mafia",
-    "kickCount": "8K",
-    "kickHandle": "mafia",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "krutika",
-    "name": "Krutika",
-    "alias": "Krutika Ojha",
-    "realName": "Krutika Ojha",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/krutika.png",
-    "reach": "900K+",
-    "bio": "Dynamic S8UL content creator bridging competitive gaming, casual story playthroughs, and lifestyle vlogging with an engaged audience.",
-    "youtube": {
-      "handle": "@krutika",
-      "count": "900K",
-      "url": "https://www.youtube.com/@KrutikaPlays"
-    },
-    "youtubeUrl": "https://www.youtube.com/@KrutikaPlays",
-    "youtubeCount": "900K",
-    "youtubeHandle": "@krutika",
-    "instagram": {
-      "handle": "@krutika",
-      "count": "360K",
-      "url": "https://www.instagram.com/ig.krutika/"
-    },
-    "instagramUrl": "https://www.instagram.com/ig.krutika/",
-    "instagramCount": "360K",
-    "instagramHandle": "@krutika",
-    "kick": {
-      "handle": "krutika",
-      "count": "9K",
-      "url": "https://kick.com/krutikaplays"
-    },
-    "kickUrl": "https://kick.com/krutikaplays",
-    "kickCount": "9K",
-    "kickHandle": "krutika",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "k18",
-    "name": "K18",
-    "alias": "Ketan Patel",
-    "realName": "Ketan Patel",
+    "id": "prateek",
+    "name": "Prateek",
+    "alias": "Prateek Shirpurkar",
+    "realName": "Prateek Shirpurkar",
     "category": "lifestyle",
     "categoryLabel": "Lifestyle · Vlogging · Youth Culture",
     "categories": "Lifestyle · Vlogging · Youth Culture",
-    "img": "assets/creators/cinematic/k18.png",
-    "reach": "1.4M+",
-    "bio": "One of India’s most celebrated esports casters and analysts, lending his voice and energy to premier national and international BGMI tournaments.",
+    "img": "assets/creators/cinematic/prateek.png",
+    "reach": "80K+",
+    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
     "youtube": {
-      "handle": "@k18",
-      "count": "1.4M",
-      "url": "https://www.youtube.com/@ketan_k18"
+      "handle": "@prateek",
+      "count": "75K",
+      "url": "https://www.youtube.com/@PRATEEKYT"
     },
-    "youtubeUrl": "https://www.youtube.com/@ketan_k18",
-    "youtubeCount": "1.4M",
-    "youtubeHandle": "@k18",
+    "youtubeUrl": "https://www.youtube.com/@PRATEEKYT",
+    "youtubeCount": "75K",
+    "youtubeHandle": "@prateek",
     "instagram": {
-      "handle": "@k18",
-      "count": "440K",
-      "url": "https://www.instagram.com/k18gaming"
+      "handle": "@prateek",
+      "count": "22K",
+      "url": "https://www.instagram.com/prateek_yt/"
     },
-    "instagramUrl": "https://www.instagram.com/k18gaming",
-    "instagramCount": "440K",
-    "instagramHandle": "@k18",
+    "instagramUrl": "https://www.instagram.com/prateek_yt/",
+    "instagramCount": "22K",
+    "instagramHandle": "@prateek",
     "kick": {
-      "handle": "k18",
-      "count": "2K",
-      "url": "https://kick.com/ketan_k18"
+      "handle": "prateek",
+      "count": "5K",
+      "url": "https://kick.com/prateekyt"
     },
-    "kickUrl": "https://kick.com/ketan_k18",
-    "kickCount": "2K",
-    "kickHandle": "k18",
+    "kickUrl": "https://kick.com/prateekyt",
+    "kickCount": "5K",
+    "kickHandle": "prateek",
     "platforms": [
       "youtube",
       "instagram",
@@ -1272,357 +1585,44 @@
     ]
   },
   {
-    "id": "jonty",
-    "name": "Jonty",
-    "alias": "AJAY KUMAR BANGA",
-    "realName": "AJAY KUMAR BANGA",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/jonty.png",
-    "reach": "600K+",
-    "bio": "A defining force in Indian gaming and esports entertainment, Jonty (AJAY KUMAR BANGA) combines athletic discipline, competitive gaming mastery, and high-octane live streaming as a premier talent under the 8Bit Creatives roster.",
+    "id": "gigi",
+    "name": "Gigi",
+    "alias": "Gargi",
+    "realName": "Gargi",
+    "category": "pc",
+    "categoryLabel": "PC Gaming · Entertainment",
+    "categories": "PC Gaming · Entertainment",
+    "img": "assets/creators/cinematic/gigi.png",
+    "reach": "30K+",
+    "bio": "A versatile content creator and charismatic entertainer, Gigi combines competitive gaming mastery with high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
     "youtube": {
-      "handle": "@jonty",
-      "count": "180K",
-      "url": "https://www.youtube.com/@jontylive2919"
+      "handle": "@gigi",
+      "count": "27K",
+      "url": "https://www.youtube.com/@gigigonemad"
     },
-    "youtubeUrl": "https://www.youtube.com/@jontylive2919",
-    "youtubeCount": "180K",
-    "youtubeHandle": "@jonty",
+    "youtubeUrl": "https://www.youtube.com/@gigigonemad",
+    "youtubeCount": "27K",
+    "youtubeHandle": "@gigi",
     "instagram": {
-      "handle": "@jonty",
-      "count": "560K",
-      "url": "https://www.instagram.com/ab_jonty/"
+      "handle": "@gigi",
+      "count": "19K",
+      "url": "https://www.instagram.com/gigigonemadyt/"
     },
-    "instagramUrl": "https://www.instagram.com/ab_jonty/",
-    "instagramCount": "560K",
-    "instagramHandle": "@jonty",
+    "instagramUrl": "https://www.instagram.com/gigigonemadyt/",
+    "instagramCount": "19K",
+    "instagramHandle": "@gigi",
     "kick": {
-      "handle": "jonty",
-      "count": "9K",
-      "url": "https://kick.com/jontygamings8ul"
+      "handle": "gigi",
+      "count": "800",
+      "url": "https://kick.com/gigigonemad"
     },
-    "kickUrl": "https://kick.com/jontygamings8ul",
-    "kickCount": "9K",
-    "kickHandle": "jonty",
+    "kickUrl": "https://kick.com/gigigonemad",
+    "kickCount": "800",
+    "kickHandle": "gigi",
     "platforms": [
       "youtube",
       "instagram",
       "kick"
-    ]
-  },
-  {
-    "id": "joker",
-    "name": "Jokerkihaveli",
-    "alias": "Gulrez Khan",
-    "realName": "Gulrez Khan",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/joker.png",
-    "reach": "2.8M+",
-    "bio": "A defining force in Indian gaming and esports entertainment, Jokerkihaveli (Gulrez Khan) combines athletic discipline with competitive gaming mastery as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
-    "youtube": {
-      "handle": "@joker",
-      "count": "2.75M",
-      "url": "https://www.youtube.com/@jokerkihavelii"
-    },
-    "youtubeUrl": "https://www.youtube.com/@jokerkihavelii",
-    "youtubeCount": "2.75M",
-    "youtubeHandle": "@joker",
-    "instagram": {
-      "handle": "@joker",
-      "count": "2.2M",
-      "url": "https://www.instagram.com/jokerkihaveli/"
-    },
-    "instagramUrl": "https://www.instagram.com/jokerkihaveli/",
-    "instagramCount": "2.2M",
-    "instagramHandle": "@joker",
-    "kick": {
-      "handle": "joker",
-      "count": "10K",
-      "url": "https://kick.com/jokerkihaveli"
-    },
-    "kickUrl": "https://kick.com/jokerkihaveli",
-    "kickCount": "10K",
-    "kickHandle": "joker",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "headflicker",
-    "name": "Headflicker",
-    "alias": "Arpit Wadhawan",
-    "realName": "Arpit Wadhawan",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/headflicker.png",
-    "reach": "130K+",
-    "bio": "A versatile content creator and charismatic entertainer, Headflicker (Arpit Wadhawan) is widely celebrated for competitive gaming mastery as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
-    "youtube": {
-      "handle": "@headflicker",
-      "count": "125K",
-      "url": "https://www.youtube.com/headflicker"
-    },
-    "youtubeUrl": "https://www.youtube.com/headflicker",
-    "youtubeCount": "125K",
-    "youtubeHandle": "@headflicker",
-    "instagram": {
-      "handle": "@headflicker",
-      "count": "23K",
-      "url": "https://www.instagram.com/8bit_headflicker/"
-    },
-    "instagramUrl": "https://www.instagram.com/8bit_headflicker/",
-    "instagramCount": "23K",
-    "instagramHandle": "@headflicker",
-    "kick": {
-      "handle": "headflicker",
-      "count": "23K",
-      "url": "https://kick.com/8bitheadflicker"
-    },
-    "kickUrl": "https://kick.com/8bitheadflicker",
-    "kickCount": "23K",
-    "kickHandle": "headflicker",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "amya",
-    "name": "Amya",
-    "alias": "Amya Bhagat",
-    "realName": "Amya Bhagat",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/amya.png",
-    "reach": "140K+",
-    "bio": "A versatile content creator and charismatic entertainer, Amya (Amya Bhagat) combines high-octane live streaming with dynamic digital storytelling as a premier talent under the 8Bit Creatives roster.",
-    "youtube": {
-      "handle": "@amya",
-      "count": "78K",
-      "url": "https://www.youtube.com/@amyabhagat"
-    },
-    "youtubeUrl": "https://www.youtube.com/@amyabhagat",
-    "youtubeCount": "78K",
-    "youtubeHandle": "@amya",
-    "instagram": {
-      "handle": "@amya",
-      "count": "147K",
-      "url": "https://www.instagram.com/amyabhagat/"
-    },
-    "instagramUrl": "https://www.instagram.com/amyabhagat/",
-    "instagramCount": "147K",
-    "instagramHandle": "@amya",
-    "kick": null,
-    "kickUrl": null,
-    "kickCount": null,
-    "kickHandle": null,
-    "platforms": [
-      "youtube",
-      "instagram"
-    ]
-  },
-  {
-    "id": "goldy",
-    "name": "8Bit Goldy",
-    "alias": "Lokesh Jain",
-    "realName": "Lokesh Jain",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/goldy.png",
-    "reach": "1M+",
-    "bio": "Co-founder of 8Bit Creatives and driving force behind talent strategy, commercial brand partnerships, and creator operations.",
-    "youtube": {
-      "handle": "@goldy",
-      "count": "1.02M",
-      "url": "https://www.youtube.com/@8bitGoldygg"
-    },
-    "youtubeUrl": "https://www.youtube.com/@8bitGoldygg",
-    "youtubeCount": "1.02M",
-    "youtubeHandle": "@goldy",
-    "instagram": {
-      "handle": "@goldy",
-      "count": "540K",
-      "url": "https://www.instagram.com/8bit_goldy/"
-    },
-    "instagramUrl": "https://www.instagram.com/8bit_goldy/",
-    "instagramCount": "540K",
-    "instagramHandle": "@goldy",
-    "kick": {
-      "handle": "goldy",
-      "count": "40K",
-      "url": "https://kick.com/8bit_goldy"
-    },
-    "kickUrl": "https://kick.com/8bit_goldy",
-    "kickCount": "40K",
-    "kickHandle": "goldy",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "goblin",
-    "name": "Soul Goblin",
-    "alias": "Harsh Paudwal",
-    "realName": "Harsh Paudwal",
-    "category": "bgmi",
-    "categoryLabel": "Mobile Esports · Live Stream",
-    "categories": "Mobile Esports · Live Stream",
-    "img": "assets/creators/cinematic/goblin.png",
-    "reach": "500K+",
-    "bio": "Top-tier competitive BGMI fragger and MVP champion with Team Soul / Carnival Gaming, renowned for lethal close-range combat skills.",
-    "youtube": {
-      "handle": "@goblin",
-      "count": "485K",
-      "url": "https://www.youtube.com/@SoulGoblin"
-    },
-    "youtubeUrl": "https://www.youtube.com/@SoulGoblin",
-    "youtubeCount": "485K",
-    "youtubeHandle": "@goblin",
-    "instagram": {
-      "handle": "@goblin",
-      "count": "575K",
-      "url": "https://www.instagram.com/soul_goblin"
-    },
-    "instagramUrl": "https://www.instagram.com/soul_goblin",
-    "instagramCount": "575K",
-    "instagramHandle": "@goblin",
-    "kick": {
-      "handle": "goblin",
-      "count": "21K",
-      "url": "https://kick.com/soulgoblin"
-    },
-    "kickUrl": "https://kick.com/soulgoblin",
-    "kickCount": "21K",
-    "kickHandle": "goblin",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "aman",
-    "name": "Aman",
-    "alias": "Aman Jain",
-    "realName": "Aman Jain",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/aman.png",
-    "reach": "1M+",
-    "bio": "A defining force in Indian gaming and esports entertainment, Aman Jain (Soul Aman) combines athletic discipline, competitive gaming mastery, and high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
-    "youtube": {
-      "handle": "@aman",
-      "count": "1.06M",
-      "url": "https://www.youtube.com/@SoulAman"
-    },
-    "youtubeUrl": "https://www.youtube.com/@SoulAman",
-    "youtubeCount": "1.06M",
-    "youtubeHandle": "@aman",
-    "instagram": {
-      "handle": "@aman",
-      "count": "337K",
-      "url": "http://instagram.com/ig_soul_aman/"
-    },
-    "instagramUrl": "http://instagram.com/ig_soul_aman/",
-    "instagramCount": "337K",
-    "instagramHandle": "@aman",
-    "kick": {
-      "handle": "aman",
-      "count": "24K",
-      "url": "https://kick.com/soulaman"
-    },
-    "kickUrl": "https://kick.com/soulaman",
-    "kickCount": "24K",
-    "kickHandle": "aman",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "ankkita",
-    "name": "Ankkita",
-    "alias": "Ankkita C",
-    "realName": "Ankkita C",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/ankkita.png",
-    "reach": "450K+",
-    "bio": "Prominent female gaming creator known for atmospheric story-driven gameplay, Valorant sessions, and authentic community engagement.",
-    "youtube": {
-      "handle": "@ankkita",
-      "count": "450K",
-      "url": "https://www.youtube.com/@AnkkitaC"
-    },
-    "youtubeUrl": "https://www.youtube.com/@AnkkitaC",
-    "youtubeCount": "450K",
-    "youtubeHandle": "@ankkita",
-    "instagram": {
-      "handle": "@ankkita",
-      "count": "173K",
-      "url": "https://www.instagram.com/ankkitac"
-    },
-    "instagramUrl": "https://www.instagram.com/ankkitac",
-    "instagramCount": "173K",
-    "instagramHandle": "@ankkita",
-    "kick": null,
-    "kickUrl": null,
-    "kickCount": null,
-    "kickHandle": null,
-    "platforms": [
-      "youtube",
-      "instagram"
-    ]
-  },
-  {
-    "id": "dattrax",
-    "name": "Dattrax",
-    "alias": "Harvest Dewangan",
-    "realName": "Harvest Dewangan",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/dattrax.png",
-    "reach": "820K+",
-    "bio": "A versatile content creator and charismatic entertainer, Dattrax brings unmatched energy, charisma, and competitive depth as a premier talent under the 8Bit Creatives roster.",
-    "youtube": {
-      "handle": "@dattrax",
-      "count": "827K",
-      "url": "https://www.youtube.com/@dattraxg"
-    },
-    "youtubeUrl": "https://www.youtube.com/@dattraxg",
-    "youtubeCount": "827K",
-    "youtubeHandle": "@dattrax",
-    "instagram": {
-      "handle": "@dattrax",
-      "count": "277K",
-      "url": "https://www.instagram.com/dattraxgaming/"
-    },
-    "instagramUrl": "https://www.instagram.com/dattraxgaming/",
-    "instagramCount": "277K",
-    "instagramHandle": "@dattrax",
-    "kick": null,
-    "kickUrl": null,
-    "kickCount": null,
-    "kickHandle": null,
-    "platforms": [
-      "youtube",
-      "instagram"
     ]
   }
 ]

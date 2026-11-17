@@ -3483,7 +3483,46 @@ function initCreatorStats() {
     ? window.get8BitCreators()
     : [];
 
-  const CREATORS = RAW_CREATORS.map(c => {
+  // Parse numerical reach for hierarchy sorting
+  function getReachScore(c) {
+    if (c.name === 'MortaL') return 10000000;
+    if (c.name === 'Payal') return 9000000;
+    if (c.name === '8Bit Thug' || c.name === 'Thug') return 8000000;
+    if (c.name === 'Snax') return 7000000;
+    if (c.name === '8Bit Goldy' || c.name === 'Goldy') return 6000000;
+    const r = c.reach;
+    if (!r) return 0;
+    const s = r.toString().toUpperCase().replace(/[^0-9.KM]/g, '');
+    if (s.includes('M')) return parseFloat(s) * 1000000;
+    if (s.includes('K')) return parseFloat(s) * 1000;
+    return parseFloat(s) || 0;
+  }
+
+  // Symmetrically distribute creators in a pyramid hierarchy:
+  // Center (index 0) = MortaL (largest reach)
+  // Right (+1) = Payal, Left (-1) = 8Bit Thug
+  // Right (+2) = Snax, Left (-2) = 8Bit Goldy
+  // Descending outwards symmetrically to the smaller numbers on the outer sides
+  const sortedCreators = [...RAW_CREATORS].sort((a, b) => getReachScore(b) - getReachScore(a));
+  const n = sortedCreators.length;
+  const pyramidCreators = new Array(n);
+  
+  if (n > 0) {
+    pyramidCreators[0] = sortedCreators[0]; // Center
+    let rStep = 1;
+    let lStep = 1;
+    for (let k = 1; k < n; k++) {
+      if (k % 2 === 1) {
+        pyramidCreators[rStep] = sortedCreators[k]; // Right
+        rStep++;
+      } else {
+        pyramidCreators[n - lStep] = sortedCreators[k]; // Left
+        lStep++;
+      }
+    }
+  }
+
+  const CREATORS = (n > 0 ? pyramidCreators : RAW_CREATORS).map(c => {
     const cid = c.id || c.name.toLowerCase().replace(/[^a-z0-9]/g, '');
     return {
       id: cid,
@@ -3507,10 +3546,8 @@ function initCreatorStats() {
   const LOOP = true;
 
   const cards = [];
-  const mortalIdx = CREATORS.findIndex(c => (c.id === 'mortal' || c.name.toLowerCase() === 'mortal'));
-  const initialIdx = mortalIdx !== -1 ? mortalIdx : 0;
-  let pos = initialIdx;                 // fractional card index at center
-  let target = initialIdx;              // where settle is headed
+  let pos = 0;                 // fractional card index at center (MortaL)
+  let target = 0;              // where settle is headed
   let cardWidth = 0;
   let rafId = null;
   let selected = -1;
@@ -3522,7 +3559,7 @@ function initCreatorStats() {
   stage.innerHTML = '';
   CREATORS.forEach((c, i) => {
     const card = document.createElement('div');
-    card.className = 'creator-card' + (i === initialIdx ? ' creator-card--center' : '');
+    card.className = 'creator-card' + (i === 0 ? ' creator-card--center' : '');
     card.setAttribute('role', 'group');
     card.setAttribute('aria-roledescription', 'slide');
     card.setAttribute('aria-label', `${i + 1} of ${count}`);
