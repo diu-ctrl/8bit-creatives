@@ -1690,9 +1690,37 @@
         }
       });
 
+      // URL Parameter support for static freeze & screenshot capture
+      const urlParams = new URLSearchParams(window.location.search);
+      const freezeParam = urlParams.get('freeze');
+      const hideDockParam = urlParams.get('hideDock');
+
+      if (hideDockParam === '1') {
+        const dock = document.querySelector('.lab-controls-dock');
+        const badge = document.querySelector('.lab-watermark');
+        if (dock) dock.style.display = 'none';
+        if (badge) badge.style.display = 'none';
+      }
+
       // Auto start on page load
       window.addEventListener('DOMContentLoaded', () => {
-        setTimeout(triggerPreloader, 150);
+        if (freezeParam !== null) {
+          const pct = parseInt(freezeParam, 10);
+          runConcept1(10000000);
+          setTimeout(() => {
+            if (state.rafId) {
+              cancelAnimationFrame(state.rafId);
+              state.rafId = null;
+            }
+            const wordsEl = document.getElementById('telemetryWords');
+            if (wordsEl) wordsEl.style.transition = 'none';
+            if (state.scrubHook) {
+              state.scrubHook(pct);
+            }
+          }, 80);
+        } else {
+          setTimeout(triggerPreloader, 150);
+        }
       });
     })();
   </script>
