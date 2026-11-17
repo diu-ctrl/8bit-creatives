@@ -211,7 +211,7 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
-      background: #000000;
+      background: transparent;
       z-index: 99990;
       pointer-events: all;
     }
@@ -249,80 +249,77 @@
     }
 
     /* ==========================================================================
-       CONCEPT 1: KINETIC TELEMETRY & SHUTTER SPLIT (AWWWARDS HIGHEST RATED)
+       CONCEPT 1: HORIZONTAL CENTER CURTAIN SPLIT (AWWWARDS HIGHEST RATED)
        ========================================================================== */
     .preloader-concept-telemetry {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
-      background: #000000;
+      width: 100vw;
+      height: 100vh;
+      background: transparent;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: clamp(24px, 4vw, 56px);
       user-select: none;
       font-family: var(--font-primary);
+      pointer-events: all;
     }
 
-    /* Shutter panels - Pure Solid Black, Zero Blur Bleed */
-    .telemetry-shutter-top,
-    .telemetry-shutter-bottom {
+    /* Twin Split Shutters - 50.1vh each for seamless subpixel seam */
+    .telemetry-shutter {
       position: absolute;
       left: 0;
       right: 0;
-      width: 100%;
-      height: 50.5%;
+      width: 100vw;
+      height: 50.1vh;
+      overflow: hidden;
       background: #000000;
-      z-index: 1;
-      border: none;
-      transition: transform 1050ms cubic-bezier(0.85, 0, 0.15, 1);
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
     }
 
     .telemetry-shutter-top {
       top: 0;
-      background: #000000;
+      transform: translate3d(0, 0, 0);
+      transition: transform 1150ms cubic-bezier(0.76, 0, 0.24, 1);
     }
 
     .telemetry-shutter-bottom {
       bottom: 0;
-      background: #000000;
+      transform: translate3d(0, 0, 0);
+      transition: transform 1150ms cubic-bezier(0.76, 0, 0.24, 1);
     }
 
-    /* Seam beam disabled - No glowing lines */
-    .telemetry-seam-beam {
-      display: none;
-    }
-
+    /* Buttery-Smooth Center Split: Top slides UP, Bottom slides DOWN */
     .preloader-concept-telemetry.is-unveiling .telemetry-shutter-top {
-      transform: translateY(-100%);
+      transform: translate3d(0, -100%, 0);
     }
 
     .preloader-concept-telemetry.is-unveiling .telemetry-shutter-bottom {
-      transform: translateY(100%);
+      transform: translate3d(0, 100%, 0);
     }
 
-    .preloader-concept-telemetry.is-unveiling .telemetry-content {
-      opacity: 0;
-      transform: scale(0.98);
-      transition: opacity 350ms ease, transform 550ms cubic-bezier(0.85, 0, 0.15, 1);
-    }
-
-    .telemetry-grid-bg {
-      display: none;
-    }
-
-    .telemetry-content {
-      position: relative;
-      z-index: 3;
-      width: 100%;
-      height: 100%;
+    /* Full-viewport canvas inside each shutter panel */
+    .telemetry-canvas {
+      position: absolute;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: all 0.4s ease;
+      padding: clamp(24px, 4vw, 56px);
+      box-sizing: border-box;
+      pointer-events: none;
       font-family: var(--font-primary);
+      background: #000000;
+    }
+
+    .telemetry-canvas-top {
+      top: 0;
+    }
+
+    .telemetry-canvas-bottom {
+      bottom: 0;
     }
 
     /* Header Row - Centered Established Tag, Pure Geist */
@@ -688,12 +685,11 @@
       width: 100%;
       min-height: 100vh;
       background: #000000;
-      transform: scale(1);
-      transition: transform 1200ms cubic-bezier(0.16, 1, 0.3, 1), filter 1200ms ease;
+      transform: none;
     }
 
     body.is-loading .hero-unveiled-stage {
-      transform: scale(1.02);
+      transform: none;
       filter: none;
     }
 
@@ -1114,47 +1110,61 @@
       }
 
       // ------------------------------------------------------------------------
-      // CONCEPT 1 HTML BUILDER: KINETIC TELEMETRY (Awwwards SOTD Flagship)
+      // CONCEPT 1 HTML BUILDER: HORIZONTAL CENTER CURTAIN SPLIT (Awwwards SOTD Flagship)
       // ------------------------------------------------------------------------
+      function renderConcept1Canvas() {
+        return `
+          <!-- Header -->
+          <div class="telemetry-header">
+            <div>EST. 2018 &bull; MUMBAI, INDIA</div>
+          </div>
+
+          <!-- Center Stage: Logo Emblem & Word Cycler -->
+          <div class="telemetry-center">
+            <div class="telemetry-logo-emblem">
+              <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo">
+            </div>
+
+            <div class="telemetry-cycle-wrapper">
+              <div class="telemetry-cycle-words">
+                <div class="telemetry-cycle-item">Powering Gaming Culture</div>
+                <div class="telemetry-cycle-item">48+ Signed Marquee Talent</div>
+                <div class="telemetry-cycle-item">1.2B+ Combined Social Reach</div>
+                <div class="telemetry-cycle-item">India's Esports Powerhouse</div>
+                <div class="telemetry-cycle-item" style="color: var(--flame);">8Bit Creatives</div>
+              </div>
+            </div>
+
+            <div class="telemetry-progress-rail">
+              <div class="telemetry-progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="telemetry-footer">
+            <div class="telemetry-counter-block">
+              <div class="telemetry-counter-num">00</div>
+              <div class="telemetry-counter-unit">%</div>
+            </div>
+          </div>
+        `;
+      }
+
       function createConcept1() {
+        const canvasHtml = renderConcept1Canvas();
         return `
           <div class="preloader-concept-telemetry" id="concept1Wrap">
-            <div class="telemetry-shutter-top"></div>
-            <div class="telemetry-shutter-bottom"></div>
-
-            <div class="telemetry-content">
-              <!-- Header -->
-              <div class="telemetry-header">
-                <div>EST. 2018 &bull; MUMBAI, INDIA</div>
+            <!-- Top Half Shutter (0 - 50vh) -->
+            <div class="telemetry-shutter telemetry-shutter-top" id="telemetryShutterTop">
+              <div class="telemetry-canvas telemetry-canvas-top">
+                ${canvasHtml}
               </div>
+            </div>
 
-              <!-- Center Stage: Logo Emblem & Word Cycler -->
-              <div class="telemetry-center">
-                <div class="telemetry-logo-emblem">
-                  <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo">
-                </div>
-
-                <div class="telemetry-cycle-wrapper">
-                  <div class="telemetry-cycle-words" id="telemetryWords">
-                    <div class="telemetry-cycle-item">Powering Gaming Culture</div>
-                    <div class="telemetry-cycle-item">48+ Signed Marquee Talent</div>
-                    <div class="telemetry-cycle-item">1.2B+ Combined Social Reach</div>
-                    <div class="telemetry-cycle-item">India's Esports Powerhouse</div>
-                    <div class="telemetry-cycle-item" style="color: var(--flame);">8Bit Creatives</div>
-                  </div>
-                </div>
-
-                <div class="telemetry-progress-rail">
-                  <div class="telemetry-progress-fill" id="telemetryRailFill"></div>
-                </div>
-              </div>
-
-              <!-- Footer -->
-              <div class="telemetry-footer">
-                <div class="telemetry-counter-block">
-                  <div class="telemetry-counter-num" id="telemetryCounter">00</div>
-                  <div class="telemetry-counter-unit">%</div>
-                </div>
+            <!-- Bottom Half Shutter (50vh - 100vh) -->
+            <div class="telemetry-shutter telemetry-shutter-bottom" id="telemetryShutterBottom">
+              <div class="telemetry-canvas telemetry-canvas-bottom">
+                ${canvasHtml}
               </div>
             </div>
           </div>
@@ -1243,34 +1253,34 @@
         document.body.classList.add('is-loading');
 
         const wrap = document.getElementById('concept1Wrap');
-        const counterEl = document.getElementById('telemetryCounter');
-        const railFillEl = document.getElementById('telemetryRailFill');
-        const phaseEl = document.getElementById('telemetryPhase');
-        const wordsEl = document.getElementById('telemetryWords');
-        const fpsEl = document.getElementById('telemetryFps');
-        const skipBtn = document.getElementById('skipHint');
+        const counterEls = wrap.querySelectorAll('.telemetry-counter-num');
+        const railFillEls = wrap.querySelectorAll('.telemetry-progress-fill');
+        const wordsEls = wrap.querySelectorAll('.telemetry-cycle-words');
+        const shutterTop = document.getElementById('telemetryShutterTop');
+        const shutterBottom = document.getElementById('telemetryShutterBottom');
 
         const phases = [
-          { at: 0,  text: "SYS_CHECK // INITIALIZING", wordIdx: 0 },
-          { at: 25, text: "SYNCING // 48+ CREATOR NODES", wordIdx: 1 },
-          { at: 55, text: "ROUTING // 1.2B+ GLOBAL AUDIENCE", wordIdx: 2 },
-          { at: 80, text: "ESPORTS // MAIN CHANNEL ONLINE", wordIdx: 3 },
-          { at: 96, text: "MAINFRAME // ALL SYSTEMS READY", wordIdx: 4 }
+          { at: 0,  wordIdx: 0 },
+          { at: 25, wordIdx: 1 },
+          { at: 55, wordIdx: 2 },
+          { at: 80, wordIdx: 3 },
+          { at: 96, wordIdx: 4 }
         ];
 
         let currentPct = 0;
         const startTime = performance.now();
 
         function applyPct(pct) {
-          counterEl.textContent = pct.toString().padStart(2, '0');
-          railFillEl.style.width = pct + '%';
+          const formatted = pct.toString().padStart(2, '0');
+          counterEls.forEach(el => el.textContent = formatted);
+          railFillEls.forEach(el => el.style.width = pct + '%');
           scrubberSlider.value = pct;
           scrubberVal.textContent = pct + '%';
 
           for (let i = phases.length - 1; i >= 0; i--) {
             if (pct >= phases[i].at) {
-              if (phaseEl) phaseEl.textContent = phases[i].text;
-              wordsEl.style.transform = `translateY(-${phases[i].wordIdx * 48}px)`;
+              const offset = phases[i].wordIdx * 48;
+              wordsEls.forEach(el => el.style.transform = `translateY(-${offset}px)`);
               break;
             }
           }
@@ -1287,16 +1297,8 @@
             setTimeout(() => {
               mount.classList.add('is-hidden');
               state.isRunning = false;
-            }, 1050);
-          }, 240);
-        }
-
-        if (skipBtn) {
-          skipBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (state.rafId) cancelAnimationFrame(state.rafId);
-            finish();
-          });
+            }, 1250);
+          }, 200);
         }
 
         wrap.addEventListener('click', (e) => {
@@ -1327,10 +1329,6 @@
             playTickSound(800 + currentPct * 12);
           }
 
-          if (fpsEl && Math.random() < 0.06) {
-            fpsEl.textContent = (118 + Math.floor(Math.random() * 5)).toString();
-          }
-
           if (progress < 1) {
             state.rafId = requestAnimationFrame(tick);
           } else {
@@ -1340,7 +1338,6 @@
 
         state.rafId = requestAnimationFrame(tick);
 
-        // Expose scrubber hook for Concept 1
         state.scrubHook = (pct) => {
           applyPct(pct);
         };
@@ -1611,6 +1608,7 @@
       // URL Parameter support for static freeze & screenshot capture
       const urlParams = new URLSearchParams(window.location.search);
       const freezeParam = urlParams.get('freeze');
+      const splitParam = urlParams.get('split');
       const hideDockParam = urlParams.get('hideDock');
 
       if (hideDockParam === '1') {
@@ -1622,7 +1620,27 @@
 
       // Auto start on page load
       window.addEventListener('DOMContentLoaded', () => {
-        if (freezeParam !== null) {
+        if (splitParam !== null) {
+          const splitPct = parseInt(splitParam, 10);
+          runConcept1(10000000);
+          setTimeout(() => {
+            if (state.rafId) {
+              cancelAnimationFrame(state.rafId);
+              state.rafId = null;
+            }
+            if (state.scrubHook) {
+              state.scrubHook(100);
+            }
+            const sTop = document.getElementById('telemetryShutterTop');
+            const sBottom = document.getElementById('telemetryShutterBottom');
+            if (sTop && sBottom) {
+              sTop.style.transition = 'none';
+              sBottom.style.transition = 'none';
+              sTop.style.transform = `translate3d(0, -${splitPct}%, 0)`;
+              sBottom.style.transform = `translate3d(0, ${splitPct}%, 0)`;
+            }
+          }, 80);
+        } else if (freezeParam !== null) {
           const pct = parseInt(freezeParam, 10);
           runConcept1(10000000);
           setTimeout(() => {
@@ -1630,8 +1648,8 @@
               cancelAnimationFrame(state.rafId);
               state.rafId = null;
             }
-            const wordsEl = document.getElementById('telemetryWords');
-            if (wordsEl) wordsEl.style.transition = 'none';
+            const wordsEls = document.querySelectorAll('.telemetry-cycle-words');
+            wordsEls.forEach(w => w.style.transition = 'none');
             if (state.scrubHook) {
               state.scrubHook(pct);
             }
