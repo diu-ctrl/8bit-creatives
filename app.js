@@ -3507,18 +3507,22 @@ function initCreatorStats() {
   const LOOP = true;
 
   const cards = [];
-  let pos = 0;                 // fractional card index at center
-  let target = 0;              // where settle is headed
+  const mortalIdx = CREATORS.findIndex(c => (c.id === 'mortal' || c.name.toLowerCase() === 'mortal'));
+  const initialIdx = mortalIdx !== -1 ? mortalIdx : 0;
+  let pos = initialIdx;                 // fractional card index at center
+  let target = initialIdx;              // where settle is headed
   let cardWidth = 0;
   let rafId = null;
   let selected = -1;
   let drag = null;
+  let wasDragged = false;
+  let dragStartX = 0;
 
   // ── Build cards ──
   stage.innerHTML = '';
   CREATORS.forEach((c, i) => {
     const card = document.createElement('div');
-    card.className = 'creator-card' + (i === 0 ? ' creator-card--center' : '');
+    card.className = 'creator-card' + (i === initialIdx ? ' creator-card--center' : '');
     card.setAttribute('role', 'group');
     card.setAttribute('aria-roledescription', 'slide');
     card.setAttribute('aria-label', `${i + 1} of ${count}`);
@@ -3545,6 +3549,13 @@ function initCreatorStats() {
       card.innerHTML = `<span style="font-family:'Geist',sans-serif;font-weight:900;color:#FFFFFF;font-size:24px;">${c.name.toUpperCase()}</span>`;
     };
     card.appendChild(img);
+
+    // Direct click to navigate to any card
+    card.addEventListener('click', (e) => {
+      if (wasDragged) return;
+      goTo(i);
+    });
+
     stage.appendChild(card);
     cards.push(card);
   });
@@ -3701,12 +3712,16 @@ function initCreatorStats() {
     if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
     frame.setPointerCapture(e.pointerId);
     target = pos;
+    wasDragged = false;
+    dragStartX = e.clientX;
     drag = { id: e.pointerId, x: e.clientX, pos: pos, v: 0, t: performance.now() };
   });
 
   frame.addEventListener('pointermove', (e) => {
     if (window.innerWidth < 768 || window.matchMedia('(max-width: 767px)').matches) return;
     if (!drag || drag.id !== e.pointerId) return;
+    const dist = Math.abs(e.clientX - dragStartX);
+    if (dist > 8) wasDragged = true;
     const pitch = cardWidth * (1 + GAP);
     if (!pitch) return;
     const now = performance.now();
@@ -3723,9 +3738,29 @@ function initCreatorStats() {
     const carried = Math.max(-2, Math.min(2, drag.v * 0.18));
     drag = null;
     settle(clampPos(Math.round(pos + carried)));
+    setTimeout(() => { wasDragged = false; }, 80);
   }
   frame.addEventListener('pointerup', endDrag);
   frame.addEventListener('pointercancel', endDrag);
+
+  // ── Mouse Wheel / Trackpad Horizontal Scroll (Desktop) ──
+  let wheelTimer = null;
+  let wheelDelta = 0;
+  frame.addEventListener('wheel', (e) => {
+    if (window.innerWidth < 768) return;
+    const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if (Math.abs(d) < 10) return;
+    e.preventDefault();
+    wheelDelta += d;
+    if (wheelTimer) return;
+    wheelTimer = setTimeout(() => {
+      if (Math.abs(wheelDelta) > 25) {
+        nudge(wheelDelta > 0 ? 1 : -1);
+      }
+      wheelDelta = 0;
+      wheelTimer = null;
+    }, 70);
+  }, { passive: false });
 
   // ── Mobile Navigation, Infinite Loop & Caption Detection ──
   const prevBtn = document.getElementById('creatorPrevBtn');
@@ -3787,15 +3822,23 @@ function initCreatorStats() {
   }, { passive: true });
 
   if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      if (window.innerWidth >= 768) return;
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.innerWidth >= 768) {
+        nudge(-1);
+        return;
+      }
       const stride = cardStride || (frame.clientWidth * 0.75 + 16);
       frame.scrollBy({ left: -stride, behavior: 'smooth' });
     });
   }
   if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      if (window.innerWidth >= 768) return;
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.innerWidth >= 768) {
+        nudge(1);
+        return;
+      }
       const stride = cardStride || (frame.clientWidth * 0.75 + 16);
       frame.scrollBy({ left: stride, behavior: 'smooth' });
     });
