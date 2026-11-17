@@ -5,6 +5,47 @@
 (function() {
   window.INITIAL_CREATORS = [
   {
+    "id": "pothead",
+    "name": "Pothead",
+    "alias": "Nihar Saha",
+    "realName": "Nihar Saha",
+    "category": "pc",
+    "categoryLabel": "PC Gaming · Entertainment",
+    "categories": "PC Gaming · Entertainment",
+    "img": "assets/creators/cinematic/pothead.png",
+    "reach": "160K+",
+    "bio": "Popular creator and longtime gaming community member associated with 8Bit and S8UL, known for comedy gaming sketches and live entertainment.",
+    "youtube": {
+      "handle": "@pothead",
+      "count": "152K",
+      "url": "https://www.youtube.com/@s8ulpothead"
+    },
+    "youtubeUrl": "https://www.youtube.com/@s8ulpothead",
+    "youtubeCount": "152K",
+    "youtubeHandle": "@pothead",
+    "instagram": {
+      "handle": "@pothead",
+      "count": "31K",
+      "url": "https://www.instagram.com/ig_pothead/"
+    },
+    "instagramUrl": "https://www.instagram.com/ig_pothead/",
+    "instagramCount": "31K",
+    "instagramHandle": "@pothead",
+    "kick": {
+      "handle": "pothead",
+      "count": "1K",
+      "url": "https://kick.com/pothead"
+    },
+    "kickUrl": "https://kick.com/pothead",
+    "kickCount": "1K",
+    "kickHandle": "pothead",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
     "id": "zeref",
     "name": "Zeref",
     "alias": "Devdeep Dhar",
@@ -557,47 +598,6 @@
     "kickUrl": "https://kick.com/prateekyt",
     "kickCount": "5K",
     "kickHandle": "prateek",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "pothead",
-    "name": "Pothead",
-    "alias": "Nihar Saha",
-    "realName": "Nihar Saha",
-    "category": "esports",
-    "categoryLabel": "PC Esports · Tactical FPS",
-    "categories": "PC Esports · Tactical FPS",
-    "img": "assets/creators/cinematic/pothead.png",
-    "reach": "160K+",
-    "bio": "Popular creator and longtime gaming community member associated with 8Bit and S8UL, known for comedy gaming sketches and live entertainment.",
-    "youtube": {
-      "handle": "@pothead",
-      "count": "152K",
-      "url": "https://www.youtube.com/@s8ulpothead"
-    },
-    "youtubeUrl": "https://www.youtube.com/@s8ulpothead",
-    "youtubeCount": "152K",
-    "youtubeHandle": "@pothead",
-    "instagram": {
-      "handle": "@pothead",
-      "count": "31K",
-      "url": "https://www.instagram.com/ig_pothead/"
-    },
-    "instagramUrl": "https://www.instagram.com/ig_pothead/",
-    "instagramCount": "31K",
-    "instagramHandle": "@pothead",
-    "kick": {
-      "handle": "pothead",
-      "count": "1K",
-      "url": "https://kick.com/pothead"
-    },
-    "kickUrl": "https://kick.com/pothead",
-    "kickCount": "1K",
-    "kickHandle": "pothead",
     "platforms": [
       "youtube",
       "instagram",
