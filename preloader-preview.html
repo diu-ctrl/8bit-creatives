@@ -211,6 +211,7 @@
       inset: 0;
       width: 100vw;
       height: 100vh;
+      background: #000000;
       z-index: 99990;
       pointer-events: all;
     }
@@ -255,15 +256,17 @@
       inset: 0;
       width: 100%;
       height: 100%;
+      background: #000000;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: clamp(24px, 4vw, 56px);
       user-select: none;
+      font-family: var(--font-primary);
     }
 
-    /* Shutter panels */
+    /* Shutter panels - Pure Solid Black, Zero Blur Bleed */
     .telemetry-shutter-top,
     .telemetry-shutter-bottom {
       position: absolute;
@@ -271,35 +274,25 @@
       right: 0;
       width: 100%;
       height: 50.5%;
-      background: #080808;
+      background: #000000;
       z-index: 1;
+      border: none;
       transition: transform 1050ms cubic-bezier(0.85, 0, 0.15, 1);
     }
 
     .telemetry-shutter-top {
       top: 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      background: radial-gradient(circle at 50% 100%, rgba(255, 89, 49, 0.06) 0%, #070707 65%);
+      background: #000000;
     }
 
     .telemetry-shutter-bottom {
       bottom: 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      background: radial-gradient(circle at 50% 0%, rgba(255, 89, 49, 0.06) 0%, #070707 65%);
+      background: #000000;
     }
 
-    /* Luminous horizontal seam beam */
+    /* Seam beam disabled - No glowing lines */
     .telemetry-seam-beam {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 89, 49, 0.4) 30%, #FFFFFF 50%, rgba(255, 89, 49, 0.4) 70%, transparent 100%);
-      z-index: 2;
-      transform: translateY(-50%);
-      opacity: 0.6;
-      transition: opacity 300ms ease;
+      display: none;
     }
 
     .preloader-concept-telemetry.is-unveiling .telemetry-shutter-top {
@@ -310,25 +303,14 @@
       transform: translateY(100%);
     }
 
-    .preloader-concept-telemetry.is-unveiling .telemetry-seam-beam {
-      opacity: 0;
-    }
-
     .preloader-concept-telemetry.is-unveiling .telemetry-content {
       opacity: 0;
-      transform: scale(0.96);
+      transform: scale(0.98);
       transition: opacity 350ms ease, transform 550ms cubic-bezier(0.85, 0, 0.15, 1);
     }
 
     .telemetry-grid-bg {
-      position: absolute;
-      inset: 0;
-      background-size: 64px 64px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-      z-index: 2;
-      pointer-events: none;
+      display: none;
     }
 
     .telemetry-content {
@@ -340,34 +322,21 @@
       flex-direction: column;
       justify-content: space-between;
       transition: all 0.4s ease;
+      font-family: var(--font-primary);
     }
 
-    /* Header Telemetry Row */
+    /* Header Row - Centered Established Tag, Pure Geist */
     .telemetry-header {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.45);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      gap: 16px;
-    }
-
-    .telemetry-tag {
-      display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 8px;
-    }
-
-    .telemetry-tag-indicator {
-      width: 6px;
-      height: 6px;
-      background: var(--flame);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--flame);
-      animation: audioPulse 1.2s infinite;
+      font-family: var(--font-primary);
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      width: 100%;
     }
 
     /* Center Stage: Logo Emblem & Kinetic Cycler */
@@ -381,7 +350,7 @@
       align-items: center;
       text-align: center;
       width: 100%;
-      max-width: 680px;
+      max-width: 720px;
       padding: 0 16px;
     }
 
@@ -389,7 +358,7 @@
       position: relative;
       width: 76px;
       height: 76px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -399,36 +368,17 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 0 28px rgba(255, 89, 49, 0.5));
+      filter: none; /* No glow */
       position: relative;
       z-index: 2;
     }
 
-    .telemetry-logo-ring {
-      position: absolute;
-      inset: -14px;
-      border: 1px dashed rgba(255, 89, 49, 0.4);
-      border-radius: 50%;
-      animation: spinRing 14s linear infinite;
-    }
-
-    .telemetry-logo-ring-outer {
-      position: absolute;
-      inset: -28px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 50%;
-    }
-
-    @keyframes spinRing {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* Kinetic Status Words */
+    /* Kinetic Status Words - Pure Geist, No glow */
     .telemetry-status-eyebrow {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.22em;
+      font-family: var(--font-primary);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
       color: var(--flame);
       text-transform: uppercase;
       margin-bottom: 12px;
@@ -453,6 +403,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: var(--font-primary);
       font-size: clamp(22px, 3.8vw, 36px);
       font-weight: 800;
       letter-spacing: -0.03em;
@@ -460,14 +411,14 @@
       text-transform: uppercase;
     }
 
-    /* Razor Progress Track */
+    /* Razor Progress Track - Solid Flat Flame, No Glow */
     .telemetry-progress-rail {
       width: 100%;
       max-width: 380px;
       height: 2px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.12);
       border-radius: 2px;
-      margin-top: 32px;
+      margin-top: 30px;
       position: relative;
       overflow: visible;
     }
@@ -475,47 +426,34 @@
     .telemetry-progress-fill {
       height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #FFB658, var(--flame));
+      background: var(--flame);
       border-radius: 2px;
       position: relative;
-      box-shadow: 0 0 16px var(--flame-glow);
+      box-shadow: none; /* No glow */
       transition: width 60ms linear;
     }
 
     .telemetry-progress-fill::after {
       content: '';
       position: absolute;
-      right: -3px;
-      top: -3px;
-      width: 8px;
-      height: 8px;
+      right: -2px;
+      top: -2px;
+      width: 6px;
+      height: 6px;
       background: #FFFFFF;
       border-radius: 50%;
-      box-shadow: 0 0 12px var(--flame), 0 0 20px #FFFFFF;
+      box-shadow: none; /* No glow */
     }
 
-    /* Footer Telemetry Row */
+    /* Footer Telemetry Row - Aligned Right for Counter */
     .telemetry-footer {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: flex-end;
       width: 100%;
-      gap: 20px;
     }
 
-    .telemetry-stats-meta {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: rgba(255, 255, 255, 0.4);
-      line-height: 1.8;
-      letter-spacing: 0.08em;
-    }
-
-    .telemetry-stats-meta strong {
-      color: #FFFFFF;
-      font-weight: 600;
-    }
-
+    /* Percentage Counter - Untouched, 100% Preserved */
     .telemetry-counter-block {
       display: flex;
       align-items: baseline;
@@ -762,8 +700,8 @@
     }
 
     body.is-loading .hero-unveiled-stage {
-      transform: scale(1.06);
-      filter: blur(12px);
+      transform: scale(1.02);
+      filter: none;
     }
 
     .mock-header {
@@ -1190,25 +1128,16 @@
           <div class="preloader-concept-telemetry" id="concept1Wrap">
             <div class="telemetry-shutter-top"></div>
             <div class="telemetry-shutter-bottom"></div>
-            <div class="telemetry-seam-beam"></div>
-            <div class="telemetry-grid-bg"></div>
 
             <div class="telemetry-content">
-              <!-- Header Telemetry -->
+              <!-- Header -->
               <div class="telemetry-header">
-                <div class="telemetry-tag">
-                  <div class="telemetry-tag-indicator"></div>
-                  <span>8BIT.SYSTEM.CORE // V2.6</span>
-                </div>
                 <div>EST. 2018 &bull; MUMBAI, INDIA</div>
-                <div>SYS_CLK: <span id="telemetryFps">120</span> FPS</div>
               </div>
 
               <!-- Center Stage: Logo Emblem & Word Cycler -->
               <div class="telemetry-center">
                 <div class="telemetry-logo-emblem">
-                  <div class="telemetry-logo-ring"></div>
-                  <div class="telemetry-logo-ring-outer"></div>
                   <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo">
                 </div>
 
@@ -1231,22 +1160,14 @@
                 </div>
               </div>
 
-              <!-- Footer Telemetry -->
+              <!-- Footer -->
               <div class="telemetry-footer">
-                <div class="telemetry-stats-meta">
-                  <div>PROTOCOL: <strong>CREATOR TALENT SYNDICATE</strong></div>
-                  <div>NETWORK: <strong>S8UL &bull; 8BIT &bull; SOUL ESPORTS</strong></div>
-                  <div>ALLIANCE: <strong>GLOBAL ENTERTAINMENT ECOSYSTEM</strong></div>
-                </div>
-
                 <div class="telemetry-counter-block">
                   <div class="telemetry-counter-num" id="telemetryCounter">00</div>
                   <div class="telemetry-counter-unit">%</div>
                 </div>
               </div>
             </div>
-
-            <div class="preloader-skip-hint" id="skipHint">Click or Space to Skip &rarr;</div>
           </div>
         `;
       }
@@ -1381,8 +1302,16 @@
           }, 240);
         }
 
-        skipBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
+        if (skipBtn) {
+          skipBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (state.rafId) cancelAnimationFrame(state.rafId);
+            finish();
+          });
+        }
+
+        wrap.addEventListener('click', (e) => {
+          if (e.target.closest('.lab-controls-dock')) return;
           if (state.rafId) cancelAnimationFrame(state.rafId);
           finish();
         });
@@ -1409,7 +1338,7 @@
             playTickSound(800 + currentPct * 12);
           }
 
-          if (Math.random() < 0.06) {
+          if (fpsEl && Math.random() < 0.06) {
             fpsEl.textContent = (118 + Math.floor(Math.random() * 5)).toString();
           }
 
