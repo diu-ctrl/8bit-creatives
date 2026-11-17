@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8Bit Creatives — Preloader Innovation Lab &amp; Awwwards Sandbox</title>
+  <meta name="theme-color" content="#000000">
+
+  <!-- Geist & Geist Mono Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700;800;900&family=Geist+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=2.2">
+
+  <style>
+    /* ==========================================================================
+       RESET & DESIGN SYSTEM TOKENS
+       ========================================================================== */
+    :root {
+      --bg-void: #000000;
+      --bg-surface: #0A0A0A;
+      --bg-card: #121212;
+      --flame: #FF5931;
+      --flame-glow: rgba(255, 89, 49, 0.45);
+      --amber: #FFB658;
+      --cyber-green: #00FF87;
+      --pure-white: #FFFFFF;
+      --muted-gray: #71717A;
+      --dark-border: rgba(255, 255, 255, 0.08);
+      --font-primary: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Geist Mono', 'SF Mono', Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #000000;
+      color: #FFFFFF;
+      font-family: var(--font-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    /* ==========================================================================
+       FLOATING PRELOADER CONTROLLER DOCK
+       ========================================================================== */
+    .lab-controls-dock {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999999;
+      background: rgba(14, 14, 14, 0.92);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 8px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 89, 49, 0.2);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      max-width: 95vw;
+    }
+
+    .lab-controls-dock:hover {
+      border-color: rgba(255, 89, 49, 0.5);
+      box-shadow: 0 24px 54px rgba(0, 0, 0, 0.95), 0 0 35px rgba(255, 89, 49, 0.3);
+    }
+
+    .lab-pill-group {
+      display: flex;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 999px;
+      padding: 3px;
+      gap: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .lab-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.65);
+      font-family: var(--font-primary);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .lab-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .lab-btn.active {
+      background: #FFFFFF;
+      color: #000000;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .lab-btn-replay {
+      background: var(--flame);
+      color: #000000;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 8px 18px;
+    }
+
+    .lab-btn-replay:hover {
+      background: #FF704D;
+      color: #000000;
+      transform: scale(1.03);
+      box-shadow: 0 0 24px var(--flame-glow);
+    }
+
+    .lab-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .lab-toggle-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #E4E4E7;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .lab-toggle-btn.is-active {
+      border-color: var(--flame);
+      color: var(--flame);
+      background: rgba(255, 89, 49, 0.12);
+    }
+
+    .audio-indicator {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #71717A;
+    }
+    .lab-toggle-btn.is-active .audio-indicator {
+      background: var(--flame);
+      box-shadow: 0 0 8px var(--flame);
+      animation: audioPulse 1.2s infinite;
+    }
+
+    @keyframes audioPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+
+    /* Scrubber widget */
+    .lab-scrubber-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .lab-scrubber-slider {
+      -webkit-appearance: none;
+      width: 70px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.15);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .lab-scrubber-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--flame);
+      cursor: pointer;
+      box-shadow: 0 0 8px var(--flame);
+    }
+
+    /* ==========================================================================
+       CONTAINER FOR PRELOADERS
+       ========================================================================== */
+    #preloaderMount {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 99990;
+      pointer-events: all;
+    }
+
+    #preloaderMount.is-hidden {
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    /* Skip Intro Pill (Bottom Center of preloader) */
+    .preloader-skip-hint {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.35);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .preloader-skip-hint:hover {
+      color: #FFFFFF;
+      border-color: rgba(255, 89, 49, 0.4);
+      background: rgba(255, 89, 49, 0.1);
+    }
+
+    /* ==========================================================================
+       CONCEPT 1: KINETIC TELEMETRY & SHUTTER SPLIT (AWWWARDS HIGHEST RATED)
+       ========================================================================== */
+    .preloader-concept-telemetry {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(24px, 4vw, 56px);
+      user-select: none;
+    }
+
+    /* Shutter panels */
+    .telemetry-shutter-top,
+    .telemetry-shutter-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 50.5%;
+      background: #080808;
+      z-index: 1;
+      transition: transform 1050ms cubic-bezier(0.85, 0, 0.15, 1);
+    }
+
+    .telemetry-shutter-top {
+      top: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: radial-gradient(circle at 50% 100%, rgba(255, 89, 49, 0.06) 0%, #070707 65%);
+    }
+
+    .telemetry-shutter-bottom {
+      bottom: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: radial-gradient(circle at 50% 0%, rgba(255, 89, 49, 0.06) 0%, #070707 65%);
+    }
+
+    /* Luminous horizontal seam beam */
+    .telemetry-seam-beam {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 89, 49, 0.4) 30%, #FFFFFF 50%, rgba(255, 89, 49, 0.4) 70%, transparent 100%);
+      z-index: 2;
+      transform: translateY(-50%);
+      opacity: 0.6;
+      transition: opacity 300ms ease;
+    }
+
+    .preloader-concept-telemetry.is-unveiling .telemetry-shutter-top {
+      transform: translateY(-100%);
+    }
+
+    .preloader-concept-telemetry.is-unveiling .telemetry-shutter-bottom {
+      transform: translateY(100%);
+    }
+
+    .preloader-concept-telemetry.is-unveiling .telemetry-seam-beam {
+      opacity: 0;
+    }
+
+    .preloader-concept-telemetry.is-unveiling .telemetry-content {
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 350ms ease, transform 550ms cubic-bezier(0.85, 0, 0.15, 1);
+    }
+
+    .telemetry-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-size: 64px 64px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .telemetry-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.4s ease;
+    }
+
+    /* Header Telemetry Row */
+    .telemetry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      gap: 16px;
+    }
+
+    .telemetry-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .telemetry-tag-indicator {
+      width: 6px;
+      height: 6px;
+      background: var(--flame);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--flame);
+      animation: audioPulse 1.2s infinite;
+    }
+
+    /* Center Stage: Logo Emblem & Kinetic Cycler */
+    .telemetry-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      max-width: 680px;
+      padding: 0 16px;
+    }
+
+    .telemetry-logo-emblem {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .telemetry-logo-emblem img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 28px rgba(255, 89, 49, 0.5));
+      position: relative;
+      z-index: 2;
+    }
+
+    .telemetry-logo-ring {
+      position: absolute;
+      inset: -14px;
+      border: 1px dashed rgba(255, 89, 49, 0.4);
+      border-radius: 50%;
+      animation: spinRing 14s linear infinite;
+    }
+
+    .telemetry-logo-ring-outer {
+      position: absolute;
+      inset: -28px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 50%;
+    }
+
+    @keyframes spinRing {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Kinetic Status Words */
+    .telemetry-status-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      color: var(--flame);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .telemetry-cycle-wrapper {
+      height: 48px;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .telemetry-cycle-words {
+      transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .telemetry-cycle-item {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(22px, 3.8vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+      text-transform: uppercase;
+    }
+
+    /* Razor Progress Track */
+    .telemetry-progress-rail {
+      width: 100%;
+      max-width: 380px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      margin-top: 32px;
+      position: relative;
+      overflow: visible;
+    }
+
+    .telemetry-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #FFB658, var(--flame));
+      border-radius: 2px;
+      position: relative;
+      box-shadow: 0 0 16px var(--flame-glow);
+      transition: width 60ms linear;
+    }
+
+    .telemetry-progress-fill::after {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: -3px;
+      width: 8px;
+      height: 8px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--flame), 0 0 20px #FFFFFF;
+    }
+
+    /* Footer Telemetry Row */
+    .telemetry-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      width: 100%;
+      gap: 20px;
+    }
+
+    .telemetry-stats-meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.4);
+      line-height: 1.8;
+      letter-spacing: 0.08em;
+    }
+
+    .telemetry-stats-meta strong {
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+
+    .telemetry-counter-block {
+      display: flex;
+      align-items: baseline;
+      font-family: var(--font-primary);
+      font-feature-settings: "tnum" 1, "zero" 1;
+    }
+
+    .telemetry-counter-num {
+      font-size: clamp(64px, 12vw, 144px);
+      font-weight: 900;
+      line-height: 0.85;
+      letter-spacing: -0.06em;
+      color: #FFFFFF;
+      background: linear-gradient(180deg, #FFFFFF 30%, rgba(255, 255, 255, 0.35) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .telemetry-counter-unit {
+      font-size: clamp(24px, 4vw, 48px);
+      font-weight: 800;
+      color: var(--flame);
+      margin-left: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    /* ==========================================================================
+       CONCEPT 2: EDITORIAL KINETIC TYPE & LIQUID CURTAIN WIPE
+       ========================================================================== */
+    .preloader-concept-editorial {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(32px, 5vw, 80px);
+      transition: clip-path 1100ms cubic-bezier(0.85, 0, 0.15, 1);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .preloader-concept-editorial.is-unveiling {
+      clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+    }
+
+    .editorial-ambient-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(255, 89, 49, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .editorial-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .editorial-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #A1A1AA;
+    }
+
+    .editorial-brand-mark {
+      color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .editorial-hero-words {
+      margin-top: auto;
+      margin-bottom: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .editorial-line {
+      font-size: clamp(48px, 9.5vw, 136px);
+      font-weight: 900;
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      overflow: hidden;
+    }
+
+    .editorial-line span {
+      display: inline-block;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    }
+
+    .editorial-line.ghost {
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.25);
+    }
+
+    .editorial-line.accent {
+      color: var(--flame);
+    }
+
+    .editorial-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .editorial-counter {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 900;
+      font-feature-settings: "tnum" 1;
+      letter-spacing: -0.04em;
+    }
+
+    .editorial-phase-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--flame);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    /* ==========================================================================
+       CONCEPT 3: 8-BIT CYBER-MATRIX & LOGO RASTER ASSEMBLY
+       ========================================================================== */
+    .preloader-concept-pixel {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: #020202;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: clip-path 950ms cubic-bezier(0.85, 0, 0.15, 1);
+      clip-path: circle(150% at 50% 50%);
+    }
+
+    .preloader-concept-pixel.is-unveiling {
+      clip-path: circle(0% at 50% 50%);
+    }
+
+    .pixel-scanlines {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+      background-size: 100% 4px;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .pixel-canvas-grid {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .pixel-logo-matrix {
+      width: 88px;
+      height: 88px;
+      position: relative;
+    }
+
+    .pixel-logo-matrix img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 32px var(--flame));
+      animation: pixelGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pixelGlow {
+      from { filter: drop-shadow(0 0 16px rgba(255, 89, 49, 0.3)); }
+      to { filter: drop-shadow(0 0 48px rgba(255, 89, 49, 0.95)); }
+    }
+
+    .pixel-counter-display {
+      font-family: var(--font-mono);
+      font-size: clamp(48px, 9vw, 92px);
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: 0.05em;
+      text-shadow: 0 0 24px rgba(255, 89, 49, 0.55);
+      transition: text-shadow 0.1s ease;
+    }
+
+    .pixel-counter-display.has-glitch {
+      text-shadow: -3px 0 var(--cyber-green), 3px 0 var(--flame);
+    }
+
+    .pixel-bracket-bar {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--flame);
+      letter-spacing: 0.15em;
+    }
+
+    .pixel-subline {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #A1A1AA;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ==========================================================================
+       HERO PAGE STAGE (AUTHENTIC 8BIT LANDING PAGE BEHIND PRELOADER)
+       ========================================================================== */
+    .hero-unveiled-stage {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: #000000;
+      transform: scale(1);
+      transition: transform 1200ms cubic-bezier(0.16, 1, 0.3, 1), filter 1200ms ease;
+    }
+
+    body.is-loading .hero-unveiled-stage {
+      transform: scale(1.06);
+      filter: blur(12px);
+    }
+
+    .mock-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .mock-logo {
+      height: 40px;
+      pointer-events: auto;
+    }
+
+    .mock-pill-nav {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 8px 24px;
+      display: flex;
+      gap: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+      pointer-events: auto;
+    }
+
+    .mock-pill-nav span.active {
+      color: #000000;
+      background: #FFFFFF;
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .mock-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 170px 48px 80px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: center;
+      min-height: 85vh;
+      gap: 48px;
+    }
+
+    .mock-hero-left h1 {
+      font-size: clamp(52px, 6.8vw, 96px);
+      font-weight: 900;
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+
+    .mock-hero-left p {
+      font-size: 20px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.65);
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    .mock-btn-group {
+      display: flex;
+      gap: 16px;
+    }
+
+    .mock-btn-pri {
+      background: var(--flame);
+      color: #000000;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 999px;
+      font-size: 15px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 20px rgba(255, 89, 49, 0.35);
+      transition: transform 0.2s ease;
+    }
+
+    .mock-btn-pri:hover {
+      transform: scale(1.03);
+    }
+
+    .mock-btn-sec {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      font-weight: 500;
+      padding: 16px 36px;
+      border-radius: 999px;
+      font-size: 15px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: background 0.2s ease;
+    }
+
+    .mock-btn-sec:hover {
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .mock-hero-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mock-hero-logo {
+      width: clamp(260px, 32vw, 420px);
+      filter: drop-shadow(0 20px 60px rgba(255, 89, 49, 0.4));
+      animation: floatLogo 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatLogo {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-16px) rotate(-2deg); }
+    }
+
+    /* Live Marquee Strip */
+    .mock-marquee-strip {
+      width: 100%;
+      background: #FFFFFF;
+      color: #000000;
+      padding: 18px 0;
+      overflow: hidden;
+      display: flex;
+      white-space: nowrap;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .mock-marquee-inner {
+      display: flex;
+      gap: 36px;
+      animation: mockMarquee 20s linear infinite;
+    }
+
+    @keyframes mockMarquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* Lab HUD Badge */
+    .lab-watermark {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      z-index: 99999;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.5);
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 7px 16px;
+      border-radius: 999px;
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lab-watermark-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--cyber-green);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--cyber-green);
+      animation: audioPulse 2s infinite;
+    }
+
+    @media (max-width: 900px) {
+      .mock-hero-content {
+        grid-template-columns: 1fr;
+        padding-top: 140px;
+        text-align: center;
+      }
+      .mock-hero-left p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .mock-btn-group {
+        justify-content: center;
+      }
+      .lab-controls-dock {
+        width: 96vw;
+        overflow-x: auto;
+        padding: 6px 10px;
+        gap: 8px;
+      }
+      .telemetry-header {
+        flex-direction: column;
+        gap: 6px;
+      }
+      .telemetry-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .telemetry-counter-block {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+<body class="is-loading">
+
+  <!-- ==========================================================================
+       TOP-RIGHT WATERMARK BADGE
+       ========================================================================== -->
+  <aside class="lab-watermark" aria-label="Lab metadata">
+    <div class="lab-watermark-dot" aria-hidden="true"></div>
+    <span>8BIT LAB // AWWWARDS PRELOADER PROTOTYPE</span>
+  </aside>
+
+  <!-- ==========================================================================
+       PRELOADER MOUNT (HOLDS DYNAMIC PRELOADER CONCEPT)
+       ========================================================================== -->
+  <div id="preloaderMount" aria-live="polite">
+    <!-- Rendered dynamically by JavaScript -->
+  </div>
+
+  <!-- ==========================================================================
+       HERO PAGE STAGE (BEHIND THE PRELOADER)
+       ========================================================================== -->
+  <main class="hero-unveiled-stage" id="heroStage">
+    <!-- Top-Left Mascot Logo -->
+    <header class="mock-header">
+      <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo" class="mock-logo">
+      <nav class="mock-pill-nav" aria-label="Mock navigation">
+        <span class="active">Home</span>
+        <span>About</span>
+        <span>Creators</span>
+        <span>Work</span>
+        <span>Services</span>
+        <span>Contact</span>
+      </nav>
+      <div style="width: 40px;" aria-hidden="true"></div>
+    </header>
+
+    <!-- Mock Hero Section -->
+    <section class="mock-hero-content">
+      <div class="mock-hero-left">
+        <h1>Powering<br>India's<br><span style="color: var(--flame);">Gaming Culture</span></h1>
+        <p>8Bit Creatives manages the creators, campaigns, and live moments that move India's massive 500M+ gaming audience.</p>
+        <div class="mock-btn-group">
+          <a href="#" class="mock-btn-pri" onclick="return false;">Start Campaign &rarr;</a>
+          <a href="#" class="mock-btn-sec" onclick="return false;">Explore Creators</a>
+        </div>
+      </div>
+      <div class="mock-hero-right">
+        <img src="images-for-landing-page/logo_2.webp" alt="8Bit Mascot Logo" class="mock-hero-logo">
+      </div>
+    </section>
+
+    <!-- Marquee Brand Strip -->
+    <div class="mock-marquee-strip" aria-hidden="true">
+      <div class="mock-marquee-inner">
+        <span>✦ BGMI ESPORTS</span>
+        <span>✦ KRAFTON</span>
+        <span>✦ RED BULL</span>
+        <span>✦ JIOBLAST</span>
+        <span>✦ S8UL</span>
+        <span>✦ NETFLIX</span>
+        <span>✦ META AI</span>
+        <span>✦ THUMS UP</span>
+        <span>✦ CADBURY FUSE</span>
+        <span>✦ BGMI ESPORTS</span>
+        <span>✦ KRAFTON</span>
+        <span>✦ RED BULL</span>
+        <span>✦ JIOBLAST</span>
+        <span>✦ S8UL</span>
+        <span>✦ NETFLIX</span>
+        <span>✦ META AI</span>
+        <span>✦ THUMS UP</span>
+        <span>✦ CADBURY FUSE</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       FLOATING DIRECTOR CONTROL DOCK
+       ========================================================================== -->
+  <nav class="lab-controls-dock" aria-label="Preloader testing controls">
+    <button class="lab-btn lab-btn-replay" id="btnReplay" title="Replay the preloader animation">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/>
+      </svg>
+      <span>Replay</span>
+    </button>
+
+    <div class="lab-divider"></div>
+
+    <!-- Concept Switcher -->
+    <div class="lab-pill-group" role="tablist" aria-label="Preloader Concepts">
+      <button class="lab-btn active" data-concept="telemetry" role="tab" aria-selected="true" title="Awwwards Kinetic Telemetry with Dual Shutter Split">
+        Concept 1: Kinetic Telemetry
+      </button>
+      <button class="lab-btn" data-concept="editorial" role="tab" aria-selected="false" title="High-Fashion Editorial Kinetic Typography & Liquid Curtain Wipe">
+        Concept 2: Editorial Type
+      </button>
+      <button class="lab-btn" data-concept="pixel" role="tab" aria-selected="false" title="Authentic 8-Bit Cyber Matrix with Aperture Reveal">
+        Concept 3: 8-Bit Matrix
+      </button>
+    </div>
+
+    <div class="lab-divider"></div>
+
+    <!-- Speed Mode Switcher -->
+    <div class="lab-pill-group" role="radiogroup" aria-label="Animation Speed">
+      <button class="lab-btn" data-speed="1400" title="Snappy 1.4s Fast Load">Fast (1.4s)</button>
+      <button class="lab-btn active" data-speed="2200" title="Balanced 2.2s Standard Load">Normal (2.2s)</button>
+      <button class="lab-btn" data-speed="3200" title="Cinematic 3.2s Full Presentation">Cinematic (3.2s)</button>
+    </div>
+
+    <div class="lab-divider"></div>
+
+    <!-- Scrubber for Frame-by-Frame Inspection -->
+    <div class="lab-scrubber-wrap" title="Drag to inspect preloader at any specific percentage">
+      <span>Scrub:</span>
+      <input type="range" min="0" max="100" value="0" class="lab-scrubber-slider" id="scrubberSlider">
+      <span id="scrubberVal">0%</span>
+    </div>
+
+    <div class="lab-divider"></div>
+
+    <!-- Audio FX Synthesizer Toggle -->
+    <button class="lab-toggle-btn" id="btnAudioToggle" title="Toggle Synthesized Sci-Fi UI Sounds (Clicks & Whooshes)">
+      <div class="audio-indicator"></div>
+      <span>SFX</span>
+    </button>
+  </nav>
+
+  <!-- ==========================================================================
+       RUNTIME ENGINE & PRELOADER ANIMATION ORCHESTRATION
+       ========================================================================== -->
+  <script>
+    (function() {
+      // Configuration & State
+      const state = {
+        activeConcept: 'telemetry',
+        speedMs: 2200,
+        audioEnabled: false,
+        isRunning: false,
+        isScrubbing: false,
+        rafId: null
+      };
+
+      const mount = document.getElementById('preloaderMount');
+      const heroStage = document.getElementById('heroStage');
+      const btnReplay = document.getElementById('btnReplay');
+      const conceptBtns = document.querySelectorAll('[data-concept]');
+      const speedBtns = document.querySelectorAll('[data-speed]');
+      const btnAudioToggle = document.getElementById('btnAudioToggle');
+      const scrubberSlider = document.getElementById('scrubberSlider');
+      const scrubberVal = document.getElementById('scrubberVal');
+
+      // Synthesized Audio Context (zero external asset dependencies)
+      let audioCtx = null;
+      function getAudioContext() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      function playTickSound(pitch = 1200) {
+        if (!state.audioEnabled || state.isScrubbing) return;
+        try {
+          const ctx = getAudioContext();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(pitch, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(pitch * 0.4, ctx.currentTime + 0.04);
+          gain.gain.setValueAtTime(0.035, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.04);
+        } catch (e) {}
+      }
+
+      function playWhooshSound() {
+        if (!state.audioEnabled || state.isScrubbing) return;
+        try {
+          const ctx = getAudioContext();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(160, ctx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(35, ctx.currentTime + 0.65);
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.65);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.65);
+        } catch (e) {}
+      }
+
+      // ------------------------------------------------------------------------
+      // CONCEPT 1 HTML BUILDER: KINETIC TELEMETRY (Awwwards SOTD Flagship)
+      // ------------------------------------------------------------------------
+      function createConcept1() {
+        return `
+          <div class="preloader-concept-telemetry" id="concept1Wrap">
+            <div class="telemetry-shutter-top"></div>
+            <div class="telemetry-shutter-bottom"></div>
+            <div class="telemetry-seam-beam"></div>
+            <div class="telemetry-grid-bg"></div>
+
+            <div class="telemetry-content">
+              <!-- Header Telemetry -->
+              <div class="telemetry-header">
+                <div class="telemetry-tag">
+                  <div class="telemetry-tag-indicator"></div>
+                  <span>8BIT.SYSTEM.CORE // V2.6</span>
+                </div>
+                <div>EST. 2018 &bull; MUMBAI, INDIA</div>
+                <div>SYS_CLK: <span id="telemetryFps">120</span> FPS</div>
+              </div>
+
+              <!-- Center Stage: Logo Emblem & Word Cycler -->
+              <div class="telemetry-center">
+                <div class="telemetry-logo-emblem">
+                  <div class="telemetry-logo-ring"></div>
+                  <div class="telemetry-logo-ring-outer"></div>
+                  <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo">
+                </div>
+
+                <div class="telemetry-status-eyebrow">
+                  <span>[</span><span id="telemetryPhase">INITIALIZING</span><span>]</span>
+                </div>
+
+                <div class="telemetry-cycle-wrapper">
+                  <div class="telemetry-cycle-words" id="telemetryWords">
+                    <div class="telemetry-cycle-item">POWERING GAMING CULTURE</div>
+                    <div class="telemetry-cycle-item">48+ SIGNED MARQUEE TALENT</div>
+                    <div class="telemetry-cycle-item">1.2B+ COMBINED SOCIAL REACH</div>
+                    <div class="telemetry-cycle-item">INDIA'S ESPORTS POWERHOUSE</div>
+                    <div class="telemetry-cycle-item" style="color: var(--flame);">8BIT CREATIVES</div>
+                  </div>
+                </div>
+
+                <div class="telemetry-progress-rail">
+                  <div class="telemetry-progress-fill" id="telemetryRailFill"></div>
+                </div>
+              </div>
+
+              <!-- Footer Telemetry -->
+              <div class="telemetry-footer">
+                <div class="telemetry-stats-meta">
+                  <div>PROTOCOL: <strong>CREATOR TALENT SYNDICATE</strong></div>
+                  <div>NETWORK: <strong>S8UL &bull; 8BIT &bull; SOUL ESPORTS</strong></div>
+                  <div>ALLIANCE: <strong>GLOBAL ENTERTAINMENT ECOSYSTEM</strong></div>
+                </div>
+
+                <div class="telemetry-counter-block">
+                  <div class="telemetry-counter-num" id="telemetryCounter">00</div>
+                  <div class="telemetry-counter-unit">%</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="preloader-skip-hint" id="skipHint">Click or Space to Skip &rarr;</div>
+          </div>
+        `;
+      }
+
+      // ------------------------------------------------------------------------
+      // CONCEPT 2 HTML BUILDER: EDITORIAL TYPE & LIQUID CURTAIN WIPE
+      // ------------------------------------------------------------------------
+      function createConcept2() {
+        return `
+          <div class="preloader-concept-editorial" id="concept2Wrap">
+            <div class="editorial-ambient-glow"></div>
+            <div class="editorial-content">
+              <div class="editorial-header">
+                <span class="editorial-brand-mark">8BIT CREATIVES</span>
+                <span>GLOBAL GAMING TALENT AGENCY</span>
+                <span class="editorial-phase-tag" id="editorialStatus">PHASE 01 // ARCHITECTURE</span>
+              </div>
+
+              <div class="editorial-hero-words">
+                <div class="editorial-line ghost">
+                  <span id="editorialLine1">INFLUENCE</span>
+                </div>
+                <div class="editorial-line accent">
+                  <span id="editorialLine2">DISRUPTION</span>
+                </div>
+                <div class="editorial-line">
+                  <span id="editorialLine3">POWER</span>
+                </div>
+              </div>
+
+              <div class="editorial-footer">
+                <div>
+                  <div style="font-family: var(--font-mono); font-size: 11px; color: #71717A; margin-bottom: 6px;">CREATIVE ARCHITECTURE</div>
+                  <div style="font-size: 14px; font-weight: 600; color: #E4E4E7;">MUMBAI &bull; LOS ANGELES &bull; RIYADH</div>
+                </div>
+
+                <div class="editorial-counter" id="editorialCounter">
+                  00%
+                </div>
+              </div>
+            </div>
+
+            <div class="preloader-skip-hint" id="skipHint">Click or Space to Skip &rarr;</div>
+          </div>
+        `;
+      }
+
+      // ------------------------------------------------------------------------
+      // CONCEPT 3 HTML BUILDER: 8-BIT CYBER-MATRIX
+      // ------------------------------------------------------------------------
+      function createConcept3() {
+        return `
+          <div class="preloader-concept-pixel" id="concept3Wrap">
+            <div class="pixel-scanlines"></div>
+            <div class="pixel-canvas-grid">
+              <div class="pixel-logo-matrix">
+                <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo">
+              </div>
+
+              <div class="pixel-counter-display" id="pixelCounter">
+                000%
+              </div>
+
+              <div class="pixel-bracket-bar" id="pixelBracket">
+                [....................]
+              </div>
+
+              <div class="pixel-subline" id="pixelSubline">
+                INITIALIZING 8BIT_MAINFRAME...
+              </div>
+            </div>
+
+            <div class="preloader-skip-hint" id="skipHint">Click or Space to Skip &rarr;</div>
+          </div>
+        `;
+      }
+
+      // ------------------------------------------------------------------------
+      // ENGINE CONCEPT 1
+      // ------------------------------------------------------------------------
+      function runConcept1(durationMs) {
+        mount.innerHTML = createConcept1();
+        mount.classList.remove('is-hidden');
+        document.body.classList.add('is-loading');
+
+        const wrap = document.getElementById('concept1Wrap');
+        const counterEl = document.getElementById('telemetryCounter');
+        const railFillEl = document.getElementById('telemetryRailFill');
+        const phaseEl = document.getElementById('telemetryPhase');
+        const wordsEl = document.getElementById('telemetryWords');
+        const fpsEl = document.getElementById('telemetryFps');
+        const skipBtn = document.getElementById('skipHint');
+
+        const phases = [
+          { at: 0,  text: "SYS_CHECK // INITIALIZING", wordIdx: 0 },
+          { at: 25, text: "SYNCING // 48+ CREATOR NODES", wordIdx: 1 },
+          { at: 55, text: "ROUTING // 1.2B+ GLOBAL AUDIENCE", wordIdx: 2 },
+          { at: 80, text: "ESPORTS // MAIN CHANNEL ONLINE", wordIdx: 3 },
+          { at: 96, text: "MAINFRAME // ALL SYSTEMS READY", wordIdx: 4 }
+        ];
+
+        let currentPct = 0;
+        const startTime = performance.now();
+
+        function applyPct(pct) {
+          counterEl.textContent = pct.toString().padStart(2, '0');
+          railFillEl.style.width = pct + '%';
+          scrubberSlider.value = pct;
+          scrubberVal.textContent = pct + '%';
+
+          for (let i = phases.length - 1; i >= 0; i--) {
+            if (pct >= phases[i].at) {
+              phaseEl.textContent = phases[i].text;
+              wordsEl.style.transform = `translateY(-${phases[i].wordIdx * 48}px)`;
+              break;
+            }
+          }
+        }
+
+        function finish() {
+          applyPct(100);
+          playWhooshSound();
+
+          setTimeout(() => {
+            wrap.classList.add('is-unveiling');
+            document.body.classList.remove('is-loading');
+
+            setTimeout(() => {
+              mount.classList.add('is-hidden');
+              state.isRunning = false;
+            }, 1050);
+          }, 240);
+        }
+
+        skipBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (state.rafId) cancelAnimationFrame(state.rafId);
+          finish();
+        });
+
+        function tick(now) {
+          if (state.isScrubbing) return;
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / durationMs, 1);
+
+          let targetPct;
+          if (progress < 0.3) {
+            targetPct = Math.floor((progress / 0.3) * 35);
+          } else if (progress < 0.7) {
+            targetPct = 35 + Math.floor(((progress - 0.3) / 0.4) * 45);
+          } else if (progress < 0.92) {
+            targetPct = 80 + Math.floor(((progress - 0.7) / 0.22) * 16);
+          } else {
+            targetPct = 96 + Math.floor(((progress - 0.92) / 0.08) * 4);
+          }
+
+          if (targetPct > currentPct) {
+            currentPct = targetPct;
+            applyPct(currentPct);
+            playTickSound(800 + currentPct * 12);
+          }
+
+          if (Math.random() < 0.06) {
+            fpsEl.textContent = (118 + Math.floor(Math.random() * 5)).toString();
+          }
+
+          if (progress < 1) {
+            state.rafId = requestAnimationFrame(tick);
+          } else {
+            finish();
+          }
+        }
+
+        state.rafId = requestAnimationFrame(tick);
+
+        // Expose scrubber hook for Concept 1
+        state.scrubHook = (pct) => {
+          applyPct(pct);
+        };
+      }
+
+      // ------------------------------------------------------------------------
+      // ENGINE CONCEPT 2
+      // ------------------------------------------------------------------------
+      function runConcept2(durationMs) {
+        mount.innerHTML = createConcept2();
+        mount.classList.remove('is-hidden');
+        document.body.classList.add('is-loading');
+
+        const wrap = document.getElementById('concept2Wrap');
+        const counterEl = document.getElementById('editorialCounter');
+        const statusEl = document.getElementById('editorialStatus');
+        const line1 = document.getElementById('editorialLine1');
+        const line2 = document.getElementById('editorialLine2');
+        const line3 = document.getElementById('editorialLine3');
+        const skipBtn = document.getElementById('skipHint');
+
+        const wordSets = [
+          { at: 0,  w1: "INFLUENCE",   w2: "DISRUPTION", w3: "POWER",       status: "PHASE 01 // ARCHITECTURE" },
+          { at: 35, w1: "CREATORS",    w2: "CAMPAIGNS",  w3: "COMMUNITY",   status: "PHASE 02 // AUDIENCE SYNC" },
+          { at: 70, w1: "DOMINANCE",   w2: "ORIGINALS",  w3: "EXCELLENCE",  status: "PHASE 03 // ELEVATION" },
+          { at: 95, w1: "8BIT",        w2: "CREATIVES",  w3: "UNLEASHED",   status: "PHASE 04 // LAUNCH" }
+        ];
+
+        let currentPct = 0;
+        const startTime = performance.now();
+
+        function applyPct(pct) {
+          counterEl.textContent = pct.toString().padStart(2, '0') + '%';
+          scrubberSlider.value = pct;
+          scrubberVal.textContent = pct + '%';
+
+          for (let i = wordSets.length - 1; i >= 0; i--) {
+            if (pct >= wordSets[i].at) {
+              if (statusEl.textContent !== wordSets[i].status) {
+                statusEl.textContent = wordSets[i].status;
+                line1.textContent = wordSets[i].w1;
+                line2.textContent = wordSets[i].w2;
+                line3.textContent = wordSets[i].w3;
+              }
+              break;
+            }
+          }
+        }
+
+        function finish() {
+          applyPct(100);
+          playWhooshSound();
+
+          setTimeout(() => {
+            wrap.classList.add('is-unveiling');
+            document.body.classList.remove('is-loading');
+
+            setTimeout(() => {
+              mount.classList.add('is-hidden');
+              state.isRunning = false;
+            }, 1100);
+          }, 240);
+        }
+
+        skipBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (state.rafId) cancelAnimationFrame(state.rafId);
+          finish();
+        });
+
+        function tick(now) {
+          if (state.isScrubbing) return;
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / durationMs, 1);
+
+          let targetPct = Math.min(Math.floor(progress * 100), 100);
+
+          if (targetPct > currentPct) {
+            currentPct = targetPct;
+            applyPct(currentPct);
+            playTickSound(700 + currentPct * 10);
+          }
+
+          if (progress < 1) {
+            state.rafId = requestAnimationFrame(tick);
+          } else {
+            finish();
+          }
+        }
+
+        state.rafId = requestAnimationFrame(tick);
+        state.scrubHook = (pct) => applyPct(pct);
+      }
+
+      // ------------------------------------------------------------------------
+      // ENGINE CONCEPT 3
+      // ------------------------------------------------------------------------
+      function runConcept3(durationMs) {
+        mount.innerHTML = createConcept3();
+        mount.classList.remove('is-hidden');
+        document.body.classList.add('is-loading');
+
+        const wrap = document.getElementById('concept3Wrap');
+        const counterEl = document.getElementById('pixelCounter');
+        const bracketEl = document.getElementById('pixelBracket');
+        const sublineEl = document.getElementById('pixelSubline');
+        const skipBtn = document.getElementById('skipHint');
+
+        const sublines = [
+          { at: 0,  text: "INITIALIZING 8BIT_MAINFRAME..." },
+          { at: 30, text: "DECOMPRESSING ROSTER_CACHE..." },
+          { at: 65, text: "CALIBRATING STREAM_BANDWIDTH..." },
+          { at: 90, text: "AUTHENTICATING S8UL_CORE..." },
+          { at: 98, text: "SYSTEM ALLOCATION: READY" }
+        ];
+
+        let currentPct = 0;
+        const totalBlocks = 20;
+        const startTime = performance.now();
+
+        function applyPct(pct) {
+          counterEl.textContent = pct.toString().padStart(3, '0') + '%';
+          scrubberSlider.value = pct;
+          scrubberVal.textContent = pct + '%';
+
+          const filledBlocks = Math.round((pct / 100) * totalBlocks);
+          const emptyBlocks = totalBlocks - filledBlocks;
+          bracketEl.textContent = '[' + '#'.repeat(filledBlocks) + '.'.repeat(emptyBlocks) + ']';
+
+          for (let i = sublines.length - 1; i >= 0; i--) {
+            if (pct >= sublines[i].at) {
+              sublineEl.textContent = sublines[i].text;
+              break;
+            }
+          }
+
+          // Subtle glitch flash on milestones
+          if (pct === 33 || pct === 66 || pct === 88 || pct === 100) {
+            counterEl.classList.add('has-glitch');
+            setTimeout(() => counterEl.classList.remove('has-glitch'), 120);
+          }
+        }
+
+        function finish() {
+          applyPct(100);
+          bracketEl.textContent = '[' + '#'.repeat(totalBlocks) + ']';
+          playWhooshSound();
+
+          setTimeout(() => {
+            wrap.classList.add('is-unveiling');
+            document.body.classList.remove('is-loading');
+
+            setTimeout(() => {
+              mount.classList.add('is-hidden');
+              state.isRunning = false;
+            }, 950);
+          }, 280);
+        }
+
+        skipBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (state.rafId) cancelAnimationFrame(state.rafId);
+          finish();
+        });
+
+        function tick(now) {
+          if (state.isScrubbing) return;
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / durationMs, 1);
+
+          let targetPct = Math.min(Math.floor(progress * 100), 100);
+
+          if (targetPct > currentPct) {
+            currentPct = targetPct;
+            applyPct(currentPct);
+            playTickSound(1000 + (currentPct % 10) * 100);
+          }
+
+          if (progress < 1) {
+            state.rafId = requestAnimationFrame(tick);
+          } else {
+            finish();
+          }
+        }
+
+        state.rafId = requestAnimationFrame(tick);
+        state.scrubHook = (pct) => applyPct(pct);
+      }
+
+      // ------------------------------------------------------------------------
+      // ORCHESTRATOR
+      // ------------------------------------------------------------------------
+      function triggerPreloader() {
+        if (state.rafId) {
+          cancelAnimationFrame(state.rafId);
+          state.rafId = null;
+        }
+        state.isRunning = true;
+        state.isScrubbing = false;
+
+        if (state.activeConcept === 'telemetry') {
+          runConcept1(state.speedMs);
+        } else if (state.activeConcept === 'editorial') {
+          runConcept2(state.speedMs);
+        } else if (state.activeConcept === 'pixel') {
+          runConcept3(state.speedMs);
+        }
+      }
+
+      // Scrubbing handler
+      scrubberSlider.addEventListener('input', (e) => {
+        state.isScrubbing = true;
+        if (state.rafId) {
+          cancelAnimationFrame(state.rafId);
+          state.rafId = null;
+        }
+        const val = parseInt(e.target.value, 10);
+        scrubberVal.textContent = val + '%';
+        if (state.scrubHook) {
+          state.scrubHook(val);
+        }
+      });
+
+      scrubberSlider.addEventListener('change', () => {
+        state.isScrubbing = false;
+      });
+
+      // Controls Binding
+      btnReplay.addEventListener('click', () => {
+        triggerPreloader();
+      });
+
+      conceptBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          conceptBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          state.activeConcept = btn.dataset.concept;
+          triggerPreloader();
+        });
+      });
+
+      speedBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          speedBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          state.speedMs = parseInt(btn.dataset.speed, 10);
+          triggerPreloader();
+        });
+      });
+
+      btnAudioToggle.addEventListener('click', () => {
+        state.audioEnabled = !state.audioEnabled;
+        btnAudioToggle.classList.toggle('is-active', state.audioEnabled);
+        if (state.audioEnabled) {
+          getAudioContext();
+          playTickSound(1400);
+        }
+      });
+
+      // Keyboard space shortcut
+      window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' && e.target === document.body) {
+          e.preventDefault();
+          triggerPreloader();
+        }
+      });
+
+      // Auto start on page load
+      window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(triggerPreloader, 150);
+      });
+    })();
+  </script>
+</body>
+</html>
