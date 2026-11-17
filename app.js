@@ -484,11 +484,10 @@ function getEsportsTargetScrollY() {
 }
 
 function getCreatorsTargetScrollY() {
-  const target = document.querySelector('.creators-container') || document.getElementById('creators');
-  if (!target) return null;
-  const targetOffset = getNavbarOffset();
-  const targetAbsoluteTop = target.getBoundingClientRect().top + window.scrollY;
-  return Math.max(0, Math.round(targetAbsoluteTop - targetOffset));
+  const section = document.getElementById('creators');
+  if (!section) return null;
+  const secAbsoluteTop = section.getBoundingClientRect().top + window.scrollY;
+  return Math.max(0, Math.round(secAbsoluteTop));
 }
 
 function getWorkTargetScrollY() {

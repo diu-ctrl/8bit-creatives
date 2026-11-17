@@ -294,7 +294,7 @@
       scroll-margin-top: -56px !important;
     }
     section[id="creators"] {
-      scroll-margin-top: 24px !important;
+      scroll-margin-top: 0 !important;
     }
     section[id="work"] {
       scroll-margin-top: 56px !important;
@@ -674,9 +674,6 @@
     <a href="creators.html" class="view-all-btn" id="viewAllBtn">View All &rarr;</a>
   </div>
 </section>
-
-<!-- GRADIENT TRANSITION: Creators (black) → Case Studies (white) -->
-<div class="section-transition" aria-hidden="true"></div>
 
 <!-- ====== CASE STUDIES SECTION ====== -->
 <section id="work" class="case-studies-section" data-bg="light" aria-label="Case Studies">
@@ -1443,7 +1440,11 @@
     if (sectionId === 'about') {
       target = document.querySelector('.about-intro-section') || document.getElementById('about');
     } else if (sectionId === 'creators') {
-      target = document.querySelector('.creators-container') || document.getElementById('creators');
+      // Fullscreen dark section — align section top flush with viewport to eliminate any gap
+      var sec = document.getElementById('creators');
+      if (sec) {
+        return Math.max(0, Math.round(sec.getBoundingClientRect().top + window.scrollY));
+      }
     } else if (sectionId === 'work') {
       target = document.querySelector('.case-card') || document.getElementById('work');
     } else if (sectionId === 'services') {
