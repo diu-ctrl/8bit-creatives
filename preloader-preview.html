@@ -399,12 +399,36 @@
       text-transform: none; /* Capitalization Writing instead of all caps */
     }
 
-    /* Razor Progress Track - Solid Flat Flame, No Glow */
+    /* Wordmark footer font combo: 8BIT (Bold 900) + Creatives (Thin 100) */
+    .telemetry-cycle-wordmark {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: clamp(24px, 4.2vw, 40px);
+    }
+
+    .telemetry-cycle-wordmark .wordmark-bold {
+      font-family: var(--font-primary);
+      font-weight: 900;
+      color: #FFFFFF;
+      letter-spacing: -0.04em;
+    }
+
+    .telemetry-cycle-wordmark .wordmark-thin {
+      font-family: var(--font-primary);
+      font-weight: 100;
+      color: #FFFFFF;
+      margin-left: 5px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Razor Progress Track - Solid Flat Pure White */
     .telemetry-progress-rail {
       width: 100%;
       max-width: 380px;
       height: 2px;
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 2px;
       margin-top: 30px;
       position: relative;
@@ -414,7 +438,7 @@
     .telemetry-progress-fill {
       height: 100%;
       width: 0%;
-      background: var(--flame);
+      background: #FFFFFF; /* Pure White loading bar */
       border-radius: 2px;
       position: relative;
       box-shadow: none; /* No glow */
@@ -1131,7 +1155,7 @@
                 <div class="telemetry-cycle-item">48+ Signed Marquee Talent</div>
                 <div class="telemetry-cycle-item">1.2B+ Combined Social Reach</div>
                 <div class="telemetry-cycle-item">India's Esports Powerhouse</div>
-                <div class="telemetry-cycle-item" style="color: var(--flame);">8Bit Creatives</div>
+                <div class="telemetry-cycle-item telemetry-cycle-wordmark"><span class="wordmark-bold">8BIT</span><span class="wordmark-thin">Creatives</span></div>
               </div>
             </div>
 
