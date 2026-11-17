@@ -375,16 +375,7 @@
 
     /* Kinetic Status Words - Pure Geist, No glow */
     .telemetry-status-eyebrow {
-      font-family: var(--font-primary);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      color: var(--flame);
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      display: none;
     }
 
     .telemetry-cycle-wrapper {
@@ -406,9 +397,9 @@
       font-family: var(--font-primary);
       font-size: clamp(22px, 3.8vw, 36px);
       font-weight: 800;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.025em;
       color: #FFFFFF;
-      text-transform: uppercase;
+      text-transform: none; /* Capitalization Writing instead of all caps */
     }
 
     /* Razor Progress Track - Solid Flat Flame, No Glow */
@@ -453,7 +444,7 @@
       width: 100%;
     }
 
-    /* Percentage Counter - Untouched, 100% Preserved */
+    /* Percentage Counter - Refined with padding & 2px nudge to prevent 0-glyph clipping */
     .telemetry-counter-block {
       display: flex;
       align-items: baseline;
@@ -465,7 +456,9 @@
       font-size: clamp(64px, 12vw, 144px);
       font-weight: 900;
       line-height: 0.85;
-      letter-spacing: -0.06em;
+      letter-spacing: -0.055em;
+      padding-right: 4px;
+      transform: translateX(-2px);
       color: #FFFFFF;
       background: linear-gradient(180deg, #FFFFFF 30%, rgba(255, 255, 255, 0.35) 100%);
       -webkit-background-clip: text;
@@ -476,7 +469,7 @@
       font-size: clamp(24px, 4vw, 48px);
       font-weight: 800;
       color: var(--flame);
-      margin-left: 4px;
+      margin-left: 2px;
       letter-spacing: -0.02em;
     }
 
@@ -1141,17 +1134,13 @@
                   <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo">
                 </div>
 
-                <div class="telemetry-status-eyebrow">
-                  <span>[</span><span id="telemetryPhase">INITIALIZING</span><span>]</span>
-                </div>
-
                 <div class="telemetry-cycle-wrapper">
                   <div class="telemetry-cycle-words" id="telemetryWords">
-                    <div class="telemetry-cycle-item">POWERING GAMING CULTURE</div>
-                    <div class="telemetry-cycle-item">48+ SIGNED MARQUEE TALENT</div>
-                    <div class="telemetry-cycle-item">1.2B+ COMBINED SOCIAL REACH</div>
-                    <div class="telemetry-cycle-item">INDIA'S ESPORTS POWERHOUSE</div>
-                    <div class="telemetry-cycle-item" style="color: var(--flame);">8BIT CREATIVES</div>
+                    <div class="telemetry-cycle-item">Powering Gaming Culture</div>
+                    <div class="telemetry-cycle-item">48+ Signed Marquee Talent</div>
+                    <div class="telemetry-cycle-item">1.2B+ Combined Social Reach</div>
+                    <div class="telemetry-cycle-item">India's Esports Powerhouse</div>
+                    <div class="telemetry-cycle-item" style="color: var(--flame);">8Bit Creatives</div>
                   </div>
                 </div>
 
@@ -1280,7 +1269,7 @@
 
           for (let i = phases.length - 1; i >= 0; i--) {
             if (pct >= phases[i].at) {
-              phaseEl.textContent = phases[i].text;
+              if (phaseEl) phaseEl.textContent = phases[i].text;
               wordsEl.style.transform = `translateY(-${phases[i].wordIdx * 48}px)`;
               break;
             }
