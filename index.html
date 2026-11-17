@@ -302,11 +302,26 @@
     section[id="services"] {
       scroll-margin-top: 57px !important;
     }
+
+    /* GSAP ScrollSmoother (Method B Test) */
+    #smooth-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    #smooth-content {
+      width: 100%;
+      overflow: visible;
+    }
   </style>
 
-  <!-- GSAP & ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+  <!-- GSAP, ScrollTrigger & ScrollSmoother -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
 
   <!-- SVG filter for ring blur -->
   <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
@@ -369,6 +384,10 @@
 <a href="/" data-section="contact" onclick="return false;" class="nav-cta-topright">Start Campaign</a>
 
 
+<!-- GSAP ScrollSmoother (Method B): Fixed Wrapper & Translating Content -->
+<div id="smooth-wrapper">
+  <div id="smooth-content">
+
 <!-- ============================================================
      SECTION 2 — HERO
      ============================================================ -->
@@ -393,7 +412,7 @@
 
     <div class="hero-content">
       <!-- Left column -->
-      <div class="hero-left">
+      <div class="hero-left" data-speed="0.96">
       <h1 class="hero-title">
         <span class="line">Powering</span><br>
         <span class="line">India's</span><br>
@@ -418,7 +437,7 @@
       <!-- Right column (40%) -->
       <div class="hero-right">
         <div class="canvas-container">
-          <div class="hero-logo-tilt" id="heroLogoTilt">
+          <div class="hero-logo-tilt" id="heroLogoTilt" data-lag="0.12">
             <img src="images-for-landing-page/logo_2.webp" 
                  alt="8Bit Creatives Logo" 
                  class="hero-logo-img" 
@@ -558,7 +577,7 @@
   </div>
 
   <!-- Centered About Text in front of the half-eclipse -->
-  <div class="about-content">
+  <div class="about-content" data-speed="1.06">
     <p class="about-lead">We started in a Mumbai LAN room in 2018. Three<br>gamers who knew the lobby, the room, and the audience.<br>Today, 8Bit manages 40+ of India's biggest creators, broadcasts live to<br>millions, and ships campaigns brands can actually measure.</p>
     <p class="about-sub">From Kick's first India partnership to the Global Chess League broadcast desk,<br>we've built the infrastructure between gaming culture and brand budget.</p>
   </div>
@@ -1368,6 +1387,8 @@
   </div><!-- /.footer-foreground -->
 
 </footer>
+  </div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
 
 <script src="navbar.js"></script>
 <script src="scripts/creators-data.js?v=1.2"></script>
@@ -1444,6 +1465,16 @@
   // === UNINTERRUPTIBLE SMOOTH SCROLLER (immune to layout reflows) ===
   var activeScrollAnim = null;
   function smoothScrollTo(targetY, duration, onComplete) {
+    if (window.__smoother && typeof window.__smoother.scrollTo === 'function') {
+      window.__isSmoothScrolling = true;
+      window.__smoother.scrollTo(targetY, true);
+      setTimeout(function() {
+        window.__isSmoothScrolling = false;
+        if (onComplete) onComplete();
+      }, 1200);
+      return;
+    }
+
     if (typeof duration !== 'number') duration = 550;
 
     if (activeScrollAnim) {
@@ -2086,7 +2117,11 @@ void main() {
   checkScroll();
 
   function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (window.__smoother && typeof window.__smoother.scrollTo === 'function') {
+      window.__smoother.scrollTo(0, true);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   button.addEventListener('click', function (e) {
@@ -2094,6 +2129,51 @@ void main() {
     scrollToTop();
   });
 })();
+</script>
+
+<!-- Interactive ScrollSmoother Test HUD (Desktop only) -->
+<aside id="smootherHUD" aria-label="ScrollSmoother Test Controller" style="position:fixed;bottom:24px;left:24px;z-index:99999;background:rgba(12,12,12,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:8px 16px;display:flex;align-items:center;gap:10px;font-family:'Geist',sans-serif;font-size:12px;color:#FFFFFF;box-shadow:0 8px 32px rgba(0,0,0,0.5);user-select:none;">
+  <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10B981;box-shadow:0 0 8px #10B981;"></span>
+  <span style="font-weight:600;letter-spacing:0.02em;">ScrollSmoother:</span>
+  <span id="smootherStatus" style="color:#FFB658;font-weight:700;">1.2s</span>
+  <div style="display:flex;gap:4px;margin-left:4px;">
+    <button type="button" onclick="setSmootherDuration(0.8)" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);color:#fff;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;">0.8s (Snappy)</button>
+    <button type="button" onclick="setSmootherDuration(1.2)" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);color:#fff;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;">1.2s (Glide)</button>
+    <button type="button" onclick="toggleSmoother()" id="smootherToggleBtn" style="background:#FF5931;border:none;color:#fff;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-weight:600;">Pause (Test 1:1)</button>
+  </div>
+</aside>
+<style>
+  @media (max-width: 768px) {
+    #smootherHUD { display: none !important; }
+  }
+</style>
+<script>
+window.setSmootherDuration = function(sec) {
+  if (!window.__smoother) return;
+  window.__smoother.smooth(sec);
+  var status = document.getElementById('smootherStatus');
+  if (status) status.textContent = sec + 's';
+};
+window.toggleSmoother = function() {
+  if (!window.__smoother) return;
+  var isPaused = window.__smoother.paused();
+  window.__smoother.paused(!isPaused);
+  var btn = document.getElementById('smootherToggleBtn');
+  var status = document.getElementById('smootherStatus');
+  if (btn && status) {
+    if (!isPaused) {
+      btn.textContent = 'Resume (Test Smooth)';
+      btn.style.background = '#10B981';
+      status.textContent = 'PAUSED (Native 1:1)';
+      status.style.color = '#EF4444';
+    } else {
+      btn.textContent = 'Pause (Test 1:1)';
+      btn.style.background = '#FF5931';
+      status.textContent = window.__smoother.smooth() + 's';
+      status.style.color = '#FFB658';
+    }
+  }
+};
 </script>
 
 </body>

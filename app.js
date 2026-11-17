@@ -4,12 +4,45 @@
  * No legacy imports. No external dependencies.
  */
 
-// Register GSAP ScrollTrigger if loaded
-if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
+// Register GSAP ScrollTrigger & ScrollSmoother if loaded
+if (typeof gsap !== 'undefined') {
+  if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+  if (typeof ScrollSmoother !== 'undefined') gsap.registerPlugin(ScrollSmoother);
+}
+
+function initScrollSmoother() {
+  if (typeof gsap === 'undefined' || typeof ScrollSmoother === 'undefined') return null;
+
+  const wrapper = document.getElementById('smooth-wrapper');
+  const content = document.getElementById('smooth-content');
+  if (!wrapper || !content) return null;
+
+  // Accessibility & Mobile Check: Only enable on desktop without reduced-motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 767);
+
+  if (prefersReducedMotion || isTouchDevice) {
+    wrapper.style.position = 'relative';
+    wrapper.style.height = 'auto';
+    wrapper.style.overflow = 'visible';
+    return null;
+  }
+
+  const smoother = ScrollSmoother.create({
+    wrapper: wrapper,
+    content: content,
+    smooth: 1.2,         // Buttery 1.2s catch-up duration (approved sweet spot)
+    effects: true,       // Parse data-speed & data-lag
+    smoothTouch: 0,      // Native touch on mobile
+    normalizeScroll: false
+  });
+
+  window.__smoother = smoother;
+  return smoother;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.__smoother = initScrollSmoother();
   initNavbar();
   initEsportsAnchor();
   initHeroGSAP();
@@ -477,10 +510,14 @@ function getServicesTargetScrollY() {
 function scrollToEsports(smooth = true) {
   const targetY = getEsportsTargetScrollY();
   if (targetY === null) return;
-  window.scrollTo({
-    top: targetY,
-    behavior: smooth ? 'smooth' : 'auto'
-  });
+  if (window.__smoother && smooth && typeof window.__smoother.scrollTo === 'function') {
+    window.__smoother.scrollTo(targetY, true);
+  } else {
+    window.scrollTo({
+      top: targetY,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
+  }
   if (window.history && window.history.pushState) {
     window.history.pushState(null, null, '#esports');
   }
@@ -489,10 +526,14 @@ function scrollToEsports(smooth = true) {
 function scrollToCreators(smooth = true) {
   const targetY = getCreatorsTargetScrollY();
   if (targetY === null) return;
-  window.scrollTo({
-    top: targetY,
-    behavior: smooth ? 'smooth' : 'auto'
-  });
+  if (window.__smoother && smooth && typeof window.__smoother.scrollTo === 'function') {
+    window.__smoother.scrollTo(targetY, true);
+  } else {
+    window.scrollTo({
+      top: targetY,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
+  }
   if (window.history && window.history.pushState) {
     window.history.pushState(null, null, '#creators');
   }
@@ -501,10 +542,14 @@ function scrollToCreators(smooth = true) {
 function scrollToWork(smooth = true) {
   const targetY = getWorkTargetScrollY();
   if (targetY === null) return;
-  window.scrollTo({
-    top: targetY,
-    behavior: smooth ? 'smooth' : 'auto'
-  });
+  if (window.__smoother && smooth && typeof window.__smoother.scrollTo === 'function') {
+    window.__smoother.scrollTo(targetY, true);
+  } else {
+    window.scrollTo({
+      top: targetY,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
+  }
   if (window.history && window.history.pushState) {
     window.history.pushState(null, null, '#work');
   }
@@ -513,10 +558,14 @@ function scrollToWork(smooth = true) {
 function scrollToServices(smooth = true) {
   const targetY = getServicesTargetScrollY();
   if (targetY === null) return;
-  window.scrollTo({
-    top: targetY,
-    behavior: smooth ? 'smooth' : 'auto'
-  });
+  if (window.__smoother && smooth && typeof window.__smoother.scrollTo === 'function') {
+    window.__smoother.scrollTo(targetY, true);
+  } else {
+    window.scrollTo({
+      top: targetY,
+      behavior: smooth ? 'smooth' : 'auto'
+    });
+  }
   if (window.history && window.history.pushState) {
     window.history.pushState(null, null, '#services');
   }
