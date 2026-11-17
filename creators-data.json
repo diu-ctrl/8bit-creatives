@@ -1,5 +1,41 @@
 [
   {
+    "id": "bixiop",
+    "name": "Bixiop",
+    "alias": "Abhijeet Singh",
+    "realName": "Abhijeet Singh",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/bixiop.png",
+    "reach": "1M+",
+    "bio": "A versatile content creator and charismatic entertainer, Bixiop combines competitive gaming mastery with high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
+    "youtube": {
+      "handle": "@bixiop",
+      "count": "1.03m",
+      "url": "https://www.youtube.com/@thebixiop"
+    },
+    "youtubeUrl": "https://www.youtube.com/@thebixiop",
+    "youtubeCount": "1.03m",
+    "youtubeHandle": "@bixiop",
+    "instagram": {
+      "handle": "@bixiop",
+      "count": "137K",
+      "url": "https://www.instagram.com/bixiopofficial/"
+    },
+    "instagramUrl": "https://www.instagram.com/bixiopofficial/",
+    "instagramCount": "137K",
+    "instagramHandle": "@bixiop",
+    "kick": null,
+    "kickUrl": null,
+    "kickCount": null,
+    "kickHandle": null,
+    "platforms": [
+      "youtube",
+      "instagram"
+    ]
+  },
+  {
     "id": "gigi",
     "name": "Gigi",
     "alias": "Gargi",
@@ -1515,42 +1551,6 @@
       "youtube",
       "instagram",
       "kick"
-    ]
-  },
-  {
-    "id": "bixiop",
-    "name": "Bixiop",
-    "alias": "Abhijeet Singh",
-    "realName": "Abhijeet Singh",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/bixiop.png",
-    "reach": "1M+",
-    "bio": "A versatile content creator and charismatic entertainer, Bixiop combines competitive gaming mastery with high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
-    "youtube": {
-      "handle": "@bixiop",
-      "count": "1.03m",
-      "url": "https://www.youtube.com/@thebixiop"
-    },
-    "youtubeUrl": "https://www.youtube.com/@thebixiop",
-    "youtubeCount": "1.03m",
-    "youtubeHandle": "@bixiop",
-    "instagram": {
-      "handle": "@bixiop",
-      "count": "137K",
-      "url": "https://www.instagram.com/bixiopofficial/"
-    },
-    "instagramUrl": "https://www.instagram.com/bixiopofficial/",
-    "instagramCount": "137K",
-    "instagramHandle": "@bixiop",
-    "kick": null,
-    "kickUrl": null,
-    "kickCount": null,
-    "kickHandle": null,
-    "platforms": [
-      "youtube",
-      "instagram"
     ]
   },
   {
