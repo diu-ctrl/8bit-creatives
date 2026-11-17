@@ -3515,6 +3515,7 @@ function initCreatorStats() {
   let drag = null;
 
   // ── Build cards ──
+  stage.innerHTML = '';
   CREATORS.forEach((c, i) => {
     const card = document.createElement('div');
     card.className = 'creator-card' + (i === 0 ? ' creator-card--center' : '');
@@ -3525,15 +3526,12 @@ function initCreatorStats() {
     card.setAttribute('data-name', c.name);
     card.setAttribute('data-bio', c.bio);
     card.setAttribute('data-categories', c.categories);
-    if (c.youtube) {
-      card.setAttribute('data-yt', c.youtube.url);
-    }
-    if (c.instagram) {
-      card.setAttribute('data-ig', c.instagram.url);
-    }
-    if (c.kick) {
-      card.setAttribute('data-kc', c.kick.url);
-    }
+    const ytUrl = (typeof c.youtube === 'object' && c.youtube && c.youtube.url) || c.youtubeUrl;
+    if (ytUrl) card.setAttribute('data-yt', ytUrl);
+    const igUrl = (typeof c.instagram === 'object' && c.instagram && c.instagram.url) || c.instagramUrl;
+    if (igUrl) card.setAttribute('data-ig', igUrl);
+    const kickUrl = (typeof c.kick === 'object' && c.kick && c.kick.url) || c.kickUrl;
+    if (kickUrl) card.setAttribute('data-kc', kickUrl);
     const img = document.createElement('img');
     img.src = c.img;
     img.alt = `${c.name} (${c.realName}) — 8Bit Creatives`;
@@ -3612,23 +3610,46 @@ function initCreatorStats() {
     captionName.textContent = c.name;
     captionAlias.textContent = c.realName;
     
+    function safeCount(val, fallback) {
+      if (!val) return fallback || '';
+      if (typeof val === 'object') {
+        return val.count || val.subscribers || val.followers || fallback || '';
+      }
+      return String(val);
+    }
+    function safeUrl(val, fallback) {
+      if (!val) return fallback || '';
+      if (typeof val === 'object') {
+        return val.url || fallback || '';
+      }
+      return String(val);
+    }
+
     let statsHtml = '';
-    if (c.youtube) {
-      statsHtml += `<a class="stat-link" href="${c.youtube.url}" target="_blank" rel="noopener noreferrer" data-url="${c.youtube.url}">
+    const ytUrl = safeUrl(c.youtube) || c.youtubeUrl;
+    const ytCount = safeCount(c.youtube) || c.youtubeCount || (ytUrl ? 'Active' : '');
+    if (ytUrl && ytCount) {
+      statsHtml += `<a class="stat-link" href="${ytUrl}" target="_blank" rel="noopener noreferrer" data-url="${ytUrl}">
          <span class="stat-label">YouTube</span>
-         <span class="stat-count">${c.youtube.count}</span>
+         <span class="stat-count">${ytCount}</span>
        </a>`;
     }
-    if (c.instagram) {
-      statsHtml += `<a class="stat-link" href="${c.instagram.url}" target="_blank" rel="noopener noreferrer" data-url="${c.instagram.url}">
+
+    const igUrl = safeUrl(c.instagram) || c.instagramUrl;
+    const igCount = safeCount(c.instagram) || c.instagramCount || (igUrl ? 'Active' : '');
+    if (igUrl && igCount) {
+      statsHtml += `<a class="stat-link" href="${igUrl}" target="_blank" rel="noopener noreferrer" data-url="${igUrl}">
          <span class="stat-label">Instagram</span>
-         <span class="stat-count">${c.instagram.count}</span>
+         <span class="stat-count">${igCount}</span>
        </a>`;
     }
-    if (c.kick) {
-      statsHtml += `<a class="stat-link" href="${c.kick.url}" target="_blank" rel="noopener noreferrer" data-url="${c.kick.url}">
+
+    const kickUrl = safeUrl(c.kick) || c.kickUrl;
+    const kickCount = safeCount(c.kick) || c.kickCount || (kickUrl ? 'Active' : '');
+    if (kickUrl && kickCount) {
+      statsHtml += `<a class="stat-link" href="${kickUrl}" target="_blank" rel="noopener noreferrer" data-url="${kickUrl}">
          <span class="stat-label">Kick</span>
-         <span class="stat-count">${c.kick.count}</span>
+         <span class="stat-count">${kickCount}</span>
        </a>`;
     }
     captionStats.innerHTML = statsHtml;

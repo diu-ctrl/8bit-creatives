@@ -1316,19 +1316,68 @@
       currentCard = card;
       const cardRect = card ? card.getBoundingClientRect() : null;
 
-      const platformsHtml = [];
-      if (c.youtubeUrl) platformsHtml.push('<a href="' + c.youtubeUrl + '" target="_blank" rel="noopener noreferrer" class="creator-modal-platform">YouTube ↗</a>');
-      if (c.instagramUrl) platformsHtml.push('<a href="' + c.instagramUrl + '" target="_blank" rel="noopener noreferrer" class="creator-modal-platform">Instagram ↗</a>');
-      if (c.kick && c.kickUrl) platformsHtml.push('<a href="' + c.kickUrl + '" target="_blank" rel="noopener noreferrer" class="creator-modal-platform">Kick ↗</a>');
+      function extractCount(val, fallback) {
+        if (!val) return fallback || null;
+        if (typeof val === 'object') {
+          return val.count || val.subscribers || val.followers || fallback || null;
+        }
+        return String(val);
+      }
 
-      let kickStatHtml = '';
-      if (c.kick) {
-        kickStatHtml = [
-          '    <div class="creator-modal-stat">',
-          '      <div class="creator-modal-stat-value">' + c.kick + '</div>',
-          '      <div class="creator-modal-stat-label">Kick</div>',
+      function extractUrl(val, fallback) {
+        if (!val) return fallback || null;
+        if (typeof val === 'object') {
+          return val.url || fallback || null;
+        }
+        return String(val);
+      }
+
+      const ytUrl = extractUrl(c.youtube) || c.youtubeUrl;
+      const ytCount = extractCount(c.youtube) || c.youtubeCount || (ytUrl ? (c.reach || 'Active') : null);
+
+      const igUrl = extractUrl(c.instagram) || c.instagramUrl;
+      const igCount = extractCount(c.instagram) || c.instagramCount || (igUrl ? (c.reach || 'Active') : null);
+
+      const kickUrl = extractUrl(c.kick) || c.kickUrl;
+      const kickCount = extractCount(c.kick) || c.kickCount || (kickUrl ? 'Active' : null);
+
+      const platformsHtml = [];
+      if (ytUrl) platformsHtml.push('<a href="' + ytUrl + '" target="_blank" rel="noopener noreferrer" class="creator-modal-platform">YouTube ↗</a>');
+      if (igUrl) platformsHtml.push('<a href="' + igUrl + '" target="_blank" rel="noopener noreferrer" class="creator-modal-platform">Instagram ↗</a>');
+      if (kickUrl) platformsHtml.push('<a href="' + kickUrl + '" target="_blank" rel="noopener noreferrer" class="creator-modal-platform">Kick ↗</a>');
+
+      const statsBoxes = [];
+      if (ytCount && (ytUrl || ytCount !== '—')) {
+        statsBoxes.push(
+          '    <div class="creator-modal-stat">\n' +
+          '      <div class="creator-modal-stat-value">' + ytCount + '</div>\n' +
+          '      <div class="creator-modal-stat-label">YouTube</div>\n' +
           '    </div>'
-        ].join('\n');
+        );
+      }
+      if (igCount && (igUrl || igCount !== '—')) {
+        statsBoxes.push(
+          '    <div class="creator-modal-stat">\n' +
+          '      <div class="creator-modal-stat-value">' + igCount + '</div>\n' +
+          '      <div class="creator-modal-stat-label">Instagram</div>\n' +
+          '    </div>'
+        );
+      }
+      if (kickCount && (kickUrl || kickCount !== '—')) {
+        statsBoxes.push(
+          '    <div class="creator-modal-stat">\n' +
+          '      <div class="creator-modal-stat-value">' + kickCount + '</div>\n' +
+          '      <div class="creator-modal-stat-label">Kick</div>\n' +
+          '    </div>'
+        );
+      }
+      if (statsBoxes.length === 0 && c.reach) {
+        statsBoxes.push(
+          '    <div class="creator-modal-stat">\n' +
+          '      <div class="creator-modal-stat-value">' + c.reach + '</div>\n' +
+          '      <div class="creator-modal-stat-label">Audience</div>\n' +
+          '    </div>'
+        );
       }
 
       modalContent.innerHTML = [
@@ -1345,15 +1394,7 @@
         '<div class="creator-modal-body morph-content morph-initial">',
         '  <p class="creator-modal-bio">' + c.bio + '</p>',
         '  <div class="creator-modal-stats">',
-        '    <div class="creator-modal-stat">',
-        '      <div class="creator-modal-stat-value">' + c.youtube + '</div>',
-        '      <div class="creator-modal-stat-label">YouTube</div>',
-        '    </div>',
-        '    <div class="creator-modal-stat">',
-        '      <div class="creator-modal-stat-value">' + c.instagram + '</div>',
-        '      <div class="creator-modal-stat-label">Instagram</div>',
-        '    </div>',
-        kickStatHtml ? kickStatHtml : '',
+        statsBoxes.join('\n'),
         '  </div>',
         '  <div class="creator-modal-platforms">',
         platformsHtml.join(''),

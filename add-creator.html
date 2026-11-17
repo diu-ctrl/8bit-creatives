@@ -373,6 +373,42 @@
     }
 
     /* Social Input with Brand Icons */
+    .form-row-social {
+      display: grid;
+      grid-template-columns: 1fr 140px;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .form-row-social {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .enhance-bio-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, rgba(255, 77, 38, 0.2), rgba(255, 140, 0, 0.2));
+      border: 1px solid rgba(255, 77, 38, 0.4);
+      color: #FF7A45;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Geist', sans-serif;
+    }
+
+    .enhance-bio-btn:hover {
+      background: var(--accent);
+      color: #FFFFFF;
+      box-shadow: 0 0 12px rgba(255, 77, 38, 0.5);
+      border-color: var(--accent);
+    }
+
     .social-input-wrap {
       position: relative;
       display: flex;
@@ -782,40 +818,70 @@
           </div>
 
           <div class="form-group">
-            <label for="creatorBio">Bio / Tagline <span class="opt">(Optional)</span></label>
-            <textarea id="creatorBio" class="input-control" placeholder="Short description of the creator's highlights, games, and content style..." oninput="updateLivePreview()"></textarea>
-          </div>
-
-          <!-- Section 3: Social Media Links (NON-MANDATORY) -->
-          <div class="section-label">03 · Social Platforms <span style="font-weight: normal; color: var(--text-subtle);">(None mandatory)</span></div>
-
-          <div class="form-group">
-            <label for="urlInstagram">Instagram Profile URL <span class="opt">(Optional)</span></label>
-            <div class="social-input-wrap ig">
-              <span class="social-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-              </span>
-              <input type="url" id="urlInstagram" class="input-control" placeholder="https://www.instagram.com/username" oninput="updateLivePreview()">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <label for="creatorBio" style="margin-bottom: 0;">Bio / Tagline <span class="opt">(Optional)</span></label>
+              <button type="button" id="btnEnhanceBio" class="enhance-bio-btn" onclick="enhanceBioWithAI()" title="Auto-improvise draft into a cinematic 8Bit Agency Bio">
+                <span>✨</span> Enhance Bio with AI
+              </button>
+            </div>
+            <textarea id="creatorBio" class="input-control" rows="3" placeholder="Draft your highlights or notes (e.g. I'm Aman Jain, better known as Soul Aman - gamer, streamer, athlete, S8UL)..." oninput="updateLivePreview()"></textarea>
+            <div id="bioEnhanceFeedback" style="display: none; margin-top: 6px; font-size: 12px; color: var(--green); align-items: center; justify-content: space-between;">
+              <span id="bioFeedbackMsg">✨ Polished into 8Bit Agency style!</span>
+              <button type="button" onclick="undoBioEnhance()" style="background: none; border: none; color: var(--text-muted); text-decoration: underline; cursor: pointer; font-size: 11px;">Undo</button>
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="urlYoutube">YouTube Channel URL <span class="opt">(Optional)</span></label>
-            <div class="social-input-wrap yt">
-              <span class="social-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              </span>
-              <input type="url" id="urlYoutube" class="input-control" placeholder="https://www.youtube.com/@channel" oninput="updateLivePreview()">
+          <!-- Section 3: Social Media Links & Numbers (NON-MANDATORY) -->
+          <div class="section-label">03 · Social Platforms & Followers <span style="font-weight: normal; color: var(--text-subtle);">(None mandatory)</span></div>
+
+          <!-- Instagram -->
+          <div class="form-row-social">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="urlInstagram">Instagram Profile URL <span class="opt">(Optional)</span></label>
+              <div class="social-input-wrap ig">
+                <span class="social-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </span>
+                <input type="url" id="urlInstagram" class="input-control" placeholder="https://www.instagram.com/username" oninput="updateLivePreview()">
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="countInstagram">Followers <span class="opt">(Optional)</span></label>
+              <input type="text" id="countInstagram" class="input-control" placeholder="e.g. 560K, 1.2M" oninput="updateLivePreview()">
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="urlKick">Kick Channel URL <span class="opt">(Optional)</span></label>
-            <div class="social-input-wrap kick">
-              <span class="social-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5v5h2v2h2V7h5V3h5v18h-5v-4h-2v-2h-2v3H9v4H4V3z"/></svg>
-              </span>
-              <input type="url" id="urlKick" class="input-control" placeholder="https://kick.com/username" oninput="updateLivePreview()">
+          <!-- YouTube -->
+          <div class="form-row-social">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="urlYoutube">YouTube Channel URL <span class="opt">(Optional)</span></label>
+              <div class="social-input-wrap yt">
+                <span class="social-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </span>
+                <input type="url" id="urlYoutube" class="input-control" placeholder="https://www.youtube.com/@channel" oninput="updateLivePreview()">
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="countYoutube">Subscribers <span class="opt">(Optional)</span></label>
+              <input type="text" id="countYoutube" class="input-control" placeholder="e.g. 1.06M, 700K" oninput="updateLivePreview()">
+            </div>
+          </div>
+
+          <!-- Kick -->
+          <div class="form-row-social">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="urlKick">Kick Channel URL <span class="opt">(Optional)</span></label>
+              <div class="social-input-wrap kick">
+                <span class="social-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3h5v5h2v2h2V7h5V3h5v18h-5v-4h-2v-2h-2v3H9v4H4V3z"/></svg>
+                </span>
+                <input type="url" id="urlKick" class="input-control" placeholder="https://kick.com/username" oninput="updateLivePreview()">
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="countKick">Followers <span class="opt">(Optional)</span></label>
+              <input type="text" id="countKick" class="input-control" placeholder="e.g. 40K, 120K" oninput="updateLivePreview()">
             </div>
           </div>
 
@@ -953,6 +1019,101 @@
       }
     });
 
+    let previousBioDraft = '';
+
+    // Smart Agency Bio Generator / Sentence Improver
+    function synthesizeAgencyBio(raw, name, alias, cat) {
+      const cleanName = name || 'The creator';
+      const cleanAlias = (alias && alias.toLowerCase() !== cleanName.toLowerCase()) ? alias : '';
+      const fullIdentity = cleanAlias ? `${cleanName} (${cleanAlias})` : cleanName;
+
+      const text = (raw || '').trim();
+      const lower = text.toLowerCase();
+
+      // Detect traits from text
+      const isAthlete = /athlete|fitness|gym|bodybuilding|sports|runner/.test(lower);
+      const isStreamer = /streamer|streaming|stream|live stream|broadcast/.test(lower);
+      const isGamer = /gamer|gaming|game|esports|competitive|pro player/.test(lower);
+      const isCreator = /creator|content|vlog|youtube|entertainer/.test(lower);
+      const isS8UL = /s8ul|soul|8bit|team soul/.test(lower);
+      const isBGMI = /bgmi|pubg|battlegrounds/.test(lower);
+      const isVariety = /variety|gta|roleplay|entertaining|humor/.test(lower);
+
+      // Assemble core strengths
+      const strengths = [];
+      if (isAthlete) strengths.push('athletic discipline');
+      if (isGamer || isBGMI) strengths.push('competitive gaming mastery');
+      if (isStreamer) strengths.push('high-octane live streaming');
+      if (isCreator && !isGamer) strengths.push('dynamic digital storytelling');
+
+      let strengthPhrase = '';
+      if (strengths.length >= 3) {
+        strengthPhrase = `combines ${strengths[0]}, ${strengths[1]}, and ${strengths[2]}`;
+      } else if (strengths.length === 2) {
+        strengthPhrase = `combines ${strengths[0]} with ${strengths[1]}`;
+      } else if (strengths.length === 1) {
+        strengthPhrase = `is widely celebrated for ${strengths[0]}`;
+      } else {
+        strengthPhrase = `brings unmatched energy, charisma, and competitive depth`;
+      }
+
+      // Ecosystem / affiliation
+      let affiliation = 'a premier talent under the 8Bit Creatives roster';
+      if (isS8UL) {
+        affiliation = 'a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem';
+      }
+
+      // Opening hook
+      let hook = 'A standout powerhouse in Indian digital entertainment';
+      if (isAthlete && isGamer) {
+        hook = 'A defining force in Indian gaming and esports entertainment';
+      } else if (isBGMI || cat === 'bgmi') {
+        hook = 'One of Indian mobile gaming\'s most celebrated icons';
+      } else if (cat === 'esports') {
+        hook = 'An elite competitive esports talent';
+      } else if (isVariety || cat === 'variety') {
+        hook = 'A versatile content creator and charismatic entertainer';
+      } else if (cat === 'lifestyle') {
+        hook = 'A trendsetter across Indian youth culture and lifestyle content';
+      }
+
+      return `${hook}, ${fullIdentity} ${strengthPhrase} as ${affiliation}.`;
+    }
+
+    function enhanceBioWithAI() {
+      const bioEl = document.getElementById('creatorBio');
+      const name = document.getElementById('creatorName').value.trim() || 'The creator';
+      const alias = document.getElementById('creatorAlias').value.trim();
+      const cat = document.getElementById('creatorCategory').value;
+      const rawText = bioEl.value.trim();
+
+      previousBioDraft = rawText;
+
+      const enhanced = synthesizeAgencyBio(rawText, name, alias, cat);
+      bioEl.value = enhanced;
+
+      // Glow animation
+      bioEl.style.transition = 'box-shadow 0.3s ease, border-color 0.3s ease';
+      bioEl.style.borderColor = 'var(--green)';
+      bioEl.style.boxShadow = '0 0 16px rgba(34, 197, 94, 0.3)';
+      setTimeout(() => {
+        bioEl.style.borderColor = '';
+        bioEl.style.boxShadow = '';
+      }, 1200);
+
+      const feedback = document.getElementById('bioEnhanceFeedback');
+      if (feedback) feedback.style.display = 'flex';
+      updateLivePreview();
+    }
+
+    function undoBioEnhance() {
+      const bioEl = document.getElementById('creatorBio');
+      bioEl.value = previousBioDraft;
+      const feedback = document.getElementById('bioEnhanceFeedback');
+      if (feedback) feedback.style.display = 'none';
+      updateLivePreview();
+    }
+
     // Real-time live card preview update
     function updateLivePreview() {
       const name = document.getElementById('creatorName').value.trim() || 'Creator Name';
@@ -985,11 +1146,14 @@
       const alias = document.getElementById('creatorAlias').value.trim();
       const category = document.getElementById('creatorCategory').value;
       const reach = document.getElementById('creatorReach').value.trim() || 'Active';
-      const bio = document.getElementById('creatorBio').value.trim();
+      let bio = document.getElementById('creatorBio').value.trim();
 
       const igUrl = document.getElementById('urlInstagram').value.trim();
+      const igCount = document.getElementById('countInstagram').value.trim() || 'Active';
       const ytUrl = document.getElementById('urlYoutube').value.trim();
+      const ytCount = document.getElementById('countYoutube').value.trim() || 'Active';
       const kickUrl = document.getElementById('urlKick').value.trim();
+      const kickCount = document.getElementById('countKick').value.trim() || 'Active';
 
       if (!name) {
         alert('Please enter the creator name.');
@@ -999,6 +1163,11 @@
       if (!uploadedImageBase64) {
         alert('Please upload a portrait photo for the creator.');
         return;
+      }
+
+      // Auto-enhance bio if user typed raw first-person notes
+      if (!bio || /^(i'm|i am|my name is|myself|i create|i play|me)/i.test(bio) || /\b(i am|i'm|my channel|my streams|my gaming)\b/i.test(bio)) {
+        bio = synthesizeAgencyBio(bio, name, alias, category);
       }
 
       btn.disabled = true;
@@ -1019,16 +1188,19 @@
         categoryLabel: CATEGORY_LABELS[category] || 'Gaming · Content Creation',
         categories: CATEGORY_LABELS[category] || 'Gaming, Content Creation',
         img: finalImgPath,
-        reach: reach,
-        bio: bio || `${name} is an official 8Bit Creatives talent partner and content creator.`,
-        youtube: ytUrl ? { handle: '@' + creatorId, count: 'Active', url: ytUrl } : null,
+        reach: reach !== 'Active' ? reach : (ytCount !== 'Active' ? ytCount : (igCount !== 'Active' ? igCount : 'Active')),
+        bio: bio,
+        youtube: ytUrl ? { handle: '@' + creatorId, count: ytCount, url: ytUrl } : null,
         youtubeUrl: ytUrl || null,
+        youtubeCount: ytCount !== 'Active' ? ytCount : null,
         youtubeHandle: ytUrl ? '@' + creatorId : null,
-        instagram: igUrl ? { handle: '@' + creatorId, count: 'Active', url: igUrl } : null,
+        instagram: igUrl ? { handle: '@' + creatorId, count: igCount, url: igUrl } : null,
         instagramUrl: igUrl || null,
+        instagramCount: igCount !== 'Active' ? igCount : null,
         instagramHandle: igUrl ? '@' + creatorId : null,
-        kick: kickUrl ? { handle: creatorId, count: 'Active', url: kickUrl } : null,
+        kick: kickUrl ? { handle: creatorId, count: kickCount, url: kickUrl } : null,
         kickUrl: kickUrl || null,
+        kickCount: kickCount !== 'Active' ? kickCount : null,
         kickHandle: kickUrl ? creatorId : null,
         platforms: [
           ...(ytUrl ? ['youtube'] : []),

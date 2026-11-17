@@ -1,36 +1,44 @@
 [
   {
+    "id": "aman",
     "name": "Aman",
     "alias": "Aman Jain",
-    "category": "bgmi",
-    "categoryLabel": "BGMI \u00b7 Esports \u00b7 Competitive Champion",
-    "reach": "980K",
+    "realName": "Aman Jain",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming \u00b7 Entertainment",
+    "categories": "Variety Gaming \u00b7 Entertainment",
+    "img": "assets/creators/cinematic/aman.png",
+    "reach": "1.06M",
+    "bio": "A defining force in Indian gaming and esports entertainment, Aman Jain (Soul Aman) combines athletic discipline, competitive gaming mastery, and high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
     "youtube": {
       "handle": "@SoulAman",
-      "count": "980K",
+      "count": "1.06M",
       "url": "https://www.youtube.com/@SoulAman"
     },
-    "instagram": {
-      "handle": "@soul_aman",
-      "count": "750K",
-      "url": "https://www.instagram.com/soul_aman"
-    },
-    "kick": null,
-    "bio": "Decorated BGMI esports champion and veteran fragger with Team Soul, celebrated for calm decision-making and international competitive experience.",
-    "id": "aman",
-    "img": "assets/creators/cinematic/aman.png",
     "youtubeUrl": "https://www.youtube.com/@SoulAman",
-    "youtubeHandle": "@SoulAman",
-    "instagramUrl": "https://www.instagram.com/soul_aman",
-    "instagramHandle": "@soul_aman",
-    "kickUrl": null,
-    "kickHandle": null,
-    "realName": "Aman Jain",
-    "categories": "BGMI \u00b7 Esports \u00b7 Competitive Champion",
+    "youtubeHandle": "@aman",
+    "instagram": {
+      "handle": "@ig_soul_aman",
+      "count": "560K",
+      "url": "http://instagram.com/ig_soul_aman/"
+    },
+    "instagramUrl": "http://instagram.com/ig_soul_aman/",
+    "instagramHandle": "@aman",
+    "kick": {
+      "handle": "soulaman",
+      "count": "40K",
+      "url": "https://kick.com/soulaman"
+    },
+    "kickUrl": "https://kick.com/soulaman",
+    "kickHandle": "aman",
     "platforms": [
       "youtube",
-      "instagram"
-    ]
+      "instagram",
+      "kick"
+    ],
+    "youtubeCount": "1.06M",
+    "instagramCount": "560K",
+    "kickCount": "40K"
   },
   {
     "id": "amya",
