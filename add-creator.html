@@ -562,6 +562,27 @@
       display: block;
     }
 
+    .mockup-card-badge {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(10, 10, 10, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 9999px;
+      padding: 3px 9px;
+      font-family: 'Geist', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      z-index: 4;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+    }
+
     .mockup-image-placeholder {
       display: flex;
       flex-direction: column;
@@ -921,6 +942,7 @@
                 <span>Upload portrait</span>
               </div>
               <img id="mockupImg" src="" alt="Live Preview" style="display: none;">
+              <div class="mockup-card-badge" id="mockupBadge">7M+</div>
             </div>
             
             <div class="mockup-card-content">
@@ -1214,9 +1236,13 @@
       const ig = document.getElementById('urlInstagram').value.trim();
       const kick = document.getElementById('urlKick').value.trim();
 
+      const reach = document.getElementById('creatorReach').value.trim() || 'Active';
+
       document.getElementById('mockupName').textContent = name;
       document.getElementById('mockupAlias').textContent = alias;
       document.getElementById('mockupCategory').textContent = CATEGORY_LABELS[cat] ? CATEGORY_LABELS[cat].split('·')[0].trim() : 'Gaming';
+      const mockupBadge = document.getElementById('mockupBadge');
+      if (mockupBadge) mockupBadge.textContent = reach;
 
       // Social badges toggle
       const badgeYt = document.getElementById('badgeYt');
