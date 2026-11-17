@@ -303,7 +303,7 @@
       scroll-margin-top: 57px !important;
     }
 
-    /* GSAP ScrollSmoother (Method B Test) */
+    /* GSAP ScrollSmoother Container Styles */
     #smooth-wrapper {
       position: fixed;
       top: 0;
@@ -315,6 +315,13 @@
     #smooth-content {
       width: 100%;
       overflow: visible;
+    }
+    @media (max-width: 767px), (hover: none) and (pointer: coarse) {
+      #smooth-wrapper {
+        position: static !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
     }
   </style>
 
@@ -2129,51 +2136,6 @@ void main() {
     scrollToTop();
   });
 })();
-</script>
-
-<!-- Interactive ScrollSmoother Test HUD (Desktop only) -->
-<aside id="smootherHUD" aria-label="ScrollSmoother Test Controller" style="position:fixed;bottom:24px;left:24px;z-index:99999;background:rgba(12,12,12,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:8px 16px;display:flex;align-items:center;gap:10px;font-family:'Geist',sans-serif;font-size:12px;color:#FFFFFF;box-shadow:0 8px 32px rgba(0,0,0,0.5);user-select:none;">
-  <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#10B981;box-shadow:0 0 8px #10B981;"></span>
-  <span style="font-weight:600;letter-spacing:0.02em;">ScrollSmoother:</span>
-  <span id="smootherStatus" style="color:#FFB658;font-weight:700;">1.2s</span>
-  <div style="display:flex;gap:4px;margin-left:4px;">
-    <button type="button" onclick="setSmootherDuration(0.8)" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);color:#fff;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;">0.8s (Snappy)</button>
-    <button type="button" onclick="setSmootherDuration(1.2)" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.08);color:#fff;border-radius:6px;padding:4px 8px;font-size:11px;cursor:pointer;">1.2s (Glide)</button>
-    <button type="button" onclick="toggleSmoother()" id="smootherToggleBtn" style="background:#FF5931;border:none;color:#fff;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-weight:600;">Pause (Test 1:1)</button>
-  </div>
-</aside>
-<style>
-  @media (max-width: 768px) {
-    #smootherHUD { display: none !important; }
-  }
-</style>
-<script>
-window.setSmootherDuration = function(sec) {
-  if (!window.__smoother) return;
-  window.__smoother.smooth(sec);
-  var status = document.getElementById('smootherStatus');
-  if (status) status.textContent = sec + 's';
-};
-window.toggleSmoother = function() {
-  if (!window.__smoother) return;
-  var isPaused = window.__smoother.paused();
-  window.__smoother.paused(!isPaused);
-  var btn = document.getElementById('smootherToggleBtn');
-  var status = document.getElementById('smootherStatus');
-  if (btn && status) {
-    if (!isPaused) {
-      btn.textContent = 'Resume (Test Smooth)';
-      btn.style.background = '#10B981';
-      status.textContent = 'PAUSED (Native 1:1)';
-      status.style.color = '#EF4444';
-    } else {
-      btn.textContent = 'Pause (Test 1:1)';
-      btn.style.background = '#FF5931';
-      status.textContent = window.__smoother.smooth() + 's';
-      status.style.color = '#FFB658';
-    }
-  }
-};
 </script>
 
 </body>
