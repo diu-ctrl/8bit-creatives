@@ -5,6 +5,88 @@
 (function() {
   window.INITIAL_CREATORS = [
   {
+    "id": "gigi",
+    "name": "Gigi",
+    "alias": "Gargi",
+    "realName": "Gargi",
+    "category": "pc",
+    "categoryLabel": "PC Gaming · Entertainment",
+    "categories": "PC Gaming · Entertainment",
+    "img": "assets/creators/cinematic/gigi.png",
+    "reach": "30K+",
+    "bio": "A versatile content creator and charismatic entertainer, Gigi combines competitive gaming mastery with high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
+    "youtube": {
+      "handle": "@gigi",
+      "count": "27K",
+      "url": "https://www.youtube.com/@gigigonemad"
+    },
+    "youtubeUrl": "https://www.youtube.com/@gigigonemad",
+    "youtubeCount": "27K",
+    "youtubeHandle": "@gigi",
+    "instagram": {
+      "handle": "@gigi",
+      "count": "19K",
+      "url": "https://www.instagram.com/gigigonemadyt/"
+    },
+    "instagramUrl": "https://www.instagram.com/gigigonemadyt/",
+    "instagramCount": "19K",
+    "instagramHandle": "@gigi",
+    "kick": {
+      "handle": "gigi",
+      "count": "800",
+      "url": "https://kick.com/gigigonemad"
+    },
+    "kickUrl": "https://kick.com/gigigonemad",
+    "kickCount": "800",
+    "kickHandle": "gigi",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
+    "id": "binks",
+    "name": "Binks",
+    "alias": "Mithul Nayak",
+    "realName": "Mithul Nayak",
+    "category": "pc",
+    "categoryLabel": "PC Gaming · Entertainment",
+    "categories": "PC Gaming · Entertainment",
+    "img": "assets/creators/cinematic/binks.png",
+    "reach": "520K+",
+    "bio": "High-energy FPS player, caster, and entertainer recognized for his sharp Valorant commentary, clutch moments, and infectious humor.",
+    "youtube": {
+      "handle": "@binks",
+      "count": "520K",
+      "url": "https://www.youtube.com/@8bitBinks69"
+    },
+    "youtubeUrl": "https://www.youtube.com/@8bitBinks69",
+    "youtubeCount": "520K",
+    "youtubeHandle": "@binks",
+    "instagram": {
+      "handle": "@binks",
+      "count": "98K",
+      "url": "https://www.instagram.com/8bit_binks"
+    },
+    "instagramUrl": "https://www.instagram.com/8bit_binks",
+    "instagramCount": "98K",
+    "instagramHandle": "@binks",
+    "kick": {
+      "handle": "binks",
+      "count": "45K",
+      "url": "https://kick.com/binks69"
+    },
+    "kickUrl": "https://kick.com/binks69",
+    "kickCount": "45K",
+    "kickHandle": "binks",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
     "id": "pothead",
     "name": "Pothead",
     "alias": "Nihar Saha",
@@ -1434,88 +1516,6 @@
     "kickUrl": "https://kick.com/soulaman",
     "kickCount": "24K",
     "kickHandle": "aman",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "binks",
-    "name": "Binks",
-    "alias": "Mithul Nayak",
-    "realName": "Mithul Nayak",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/binks.png",
-    "reach": "520K+",
-    "bio": "High-energy FPS player, caster, and entertainer recognized for his sharp Valorant commentary, clutch moments, and infectious humor.",
-    "youtube": {
-      "handle": "@binks",
-      "count": "520K",
-      "url": "https://www.youtube.com/@8bitBinks69"
-    },
-    "youtubeUrl": "https://www.youtube.com/@8bitBinks69",
-    "youtubeCount": "520K",
-    "youtubeHandle": "@binks",
-    "instagram": {
-      "handle": "@binks",
-      "count": "98K",
-      "url": "https://www.instagram.com/8bit_binks"
-    },
-    "instagramUrl": "https://www.instagram.com/8bit_binks",
-    "instagramCount": "98K",
-    "instagramHandle": "@binks",
-    "kick": {
-      "handle": "binks",
-      "count": "45K",
-      "url": "https://kick.com/binks69"
-    },
-    "kickUrl": "https://kick.com/binks69",
-    "kickCount": "45K",
-    "kickHandle": "binks",
-    "platforms": [
-      "youtube",
-      "instagram",
-      "kick"
-    ]
-  },
-  {
-    "id": "gigi",
-    "name": "Gigi",
-    "alias": "Gargi",
-    "realName": "Gargi",
-    "category": "variety",
-    "categoryLabel": "Variety Gaming · Entertainment",
-    "categories": "Variety Gaming · Entertainment",
-    "img": "assets/creators/cinematic/gigi.png",
-    "reach": "30K+",
-    "bio": "A versatile content creator and charismatic entertainer, Gigi combines competitive gaming mastery with high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
-    "youtube": {
-      "handle": "@gigi",
-      "count": "27K",
-      "url": "https://www.youtube.com/@gigigonemad"
-    },
-    "youtubeUrl": "https://www.youtube.com/@gigigonemad",
-    "youtubeCount": "27K",
-    "youtubeHandle": "@gigi",
-    "instagram": {
-      "handle": "@gigi",
-      "count": "19K",
-      "url": "https://www.instagram.com/gigigonemadyt/"
-    },
-    "instagramUrl": "https://www.instagram.com/gigigonemadyt/",
-    "instagramCount": "19K",
-    "instagramHandle": "@gigi",
-    "kick": {
-      "handle": "gigi",
-      "count": "800",
-      "url": "https://kick.com/gigigonemad"
-    },
-    "kickUrl": "https://kick.com/gigigonemad",
-    "kickCount": "800",
-    "kickHandle": "gigi",
     "platforms": [
       "youtube",
       "instagram",
