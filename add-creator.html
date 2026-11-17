@@ -812,8 +812,9 @@
             <div class="form-group">
               <label for="creatorCategory">Category / Genre <span class="req">*</span></label>
               <select id="creatorCategory" class="input-control" required onchange="updateLivePreview()">
-                <option value="bgmi">BGMI & Mobile Esports</option>
+                <option value="bgmi">Mobile Esports</option>
                 <option value="variety" selected>Variety Gaming & Entertainment</option>
+                <option value="pc">PC Gaming</option>
                 <option value="esports">PC Esports & Competitive</option>
                 <option value="lifestyle">Lifestyle & Vlogging</option>
                 <option value="gta">GTA V Roleplay</option>
@@ -980,8 +981,11 @@
 
     // Category labels map
     const CATEGORY_LABELS = {
-      'bgmi': 'BGMI · Mobile Esports · Live Stream',
+      'bgmi': 'Mobile Esports · Live Stream',
+      'mobile': 'Mobile Esports · Live Stream',
       'variety': 'Variety Gaming · Entertainment',
+      'pc': 'PC Gaming · Entertainment',
+      'pcgaming': 'PC Gaming · Entertainment',
       'esports': 'PC Esports · Tactical FPS',
       'lifestyle': 'Lifestyle · Vlogging · Youth Culture',
       'gta': 'GTA V Roleplay · Community'
@@ -1152,8 +1156,10 @@
       let hook = 'A standout powerhouse in Indian digital entertainment';
       if (isAthlete && isGamer) {
         hook = 'A defining force in Indian gaming and esports entertainment';
-      } else if (isBGMI || cat === 'bgmi') {
-        hook = 'One of Indian mobile gaming\'s most celebrated icons';
+      } else if (cat === 'pc' || cat === 'pcgaming') {
+        hook = 'A dynamic powerhouse in Indian PC gaming and interactive entertainment';
+      } else if (isBGMI || cat === 'bgmi' || cat === 'mobile') {
+        hook = 'One of Indian mobile esports\' most celebrated icons';
       } else if (cat === 'esports') {
         hook = 'An elite competitive esports talent';
       } else if (isVariety || cat === 'variety') {
