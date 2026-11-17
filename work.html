@@ -899,7 +899,7 @@
       </div>
 
       <div class="filter-row" style="margin-top: 4px;">
-        <div class="filter-count" id="workCount">Showing 20 of 20 case studies</div>
+        <div class="filter-count" id="workCount">Showing 43 of 43 case studies</div>
       </div>
     </div>
   </div>
@@ -1178,7 +1178,7 @@
     // 2. Case study dataset
     const CASE_STUDIES = [
       {
-        id: 0, featured: true, category: 'broadcast', hasRealImage: true,
+        id: 0, featured: true, category: 'broadcast', hasRealImage: false, thumbnailText: 'Global Chess League',
         label: 'BROADCAST & PRODUCTION', name: 'Global Chess League\u00A0S4', client: 'Tech Mahindra',
         caseStudyUrl: 'gcl-season-4.html',
         img: '/images-for-landing-page/Case Studies/chess.jpg',
@@ -1190,7 +1190,7 @@
         credits: ['8Bit Creatives', 'Tech Mahindra', 'S8UL Production']
       },
       {
-        id: 1, featured: false, category: 'platform', hasRealImage: true,
+        id: 1, featured: false, category: 'platform', hasRealImage: false, thumbnailText: 'Kick',
         label: 'PLATFORM MIGRATION', name: 'Kick India — Day One', client: 'Kick Streaming',
         img: '/images-for-landing-page/Case Studies/kick.jpg',
         metric: '48 creators migrated · Kick\'s 1st India agency partner',
@@ -1201,7 +1201,7 @@
         credits: ['8Bit Creatives', 'Kick', '48 Creators']
       },
       {
-        id: 2, featured: false, category: 'brand', hasRealImage: true,
+        id: 2, featured: false, category: 'brand', hasRealImage: false, thumbnailText: 'iQOO',
         label: 'NAMING RIGHTS DEAL', name: 'iQOO Esports Naming Rights', client: 'iQOO',
         img: '/images-for-landing-page/Case Studies/iqoo.jpg',
         metric: 'Biggest naming rights deal in Indian esports history',
@@ -1212,7 +1212,7 @@
         credits: ['8Bit Creatives', 'iQOO', '8bit Esports', 'Reckoning', 'Revenant Xspark']
       },
       {
-        id: 3, featured: false, category: 'brand', hasRealImage: true,
+        id: 3, featured: false, category: 'brand', hasRealImage: false, thumbnailText: 'Monster Energy',
         label: 'ANNUAL MANDATE', name: 'Monster Energy Partnership', client: 'Monster Energy',
         img: '/images-for-landing-page/Case Studies/monster.jpg',
         metric: 'Official Energy Drink Partner · Annual ambassador program',
@@ -1291,7 +1291,7 @@
       {
         id: 10, featured: false, category: 'tournament', hasRealImage: true,
         label: 'TALENT PARTNERSHIP', name: 'DreamHack India Official Talent', client: 'NODWIN Gaming',
-        img: '/images-for-landing-page/Case Studies/dreamhack.jpg',
+        img: '/images-for-landing-page/Case Studies/dreamhack.png',
         metric: 'Exclusive Talent Partner across 2022 & 2024 editions',
         challenge: 'NODWIN Gaming needed to fill the massive Hitex Exhibition Centre in Hyderabad for DreamHack India with engaged youth gaming audiences.',
         approach: '8Bit Creatives served as the Exclusive Official Talent Partner for DreamHack India, curating creator stages, LAN fan activities, and celebrity cosplay panels.',
@@ -1397,6 +1397,259 @@
         execution: 'Multi-hour stress test streams, creator tech reviews comparing thermal performance, and community squad matches hosted on Galaxy devices.',
         results: '19M+ impressions · Massive boost in pro-gamer perception', reach: '19M+', duration: 'Product Launch', cameras: 'S8UL Athletes',
         credits: ['8Bit Creatives', 'Samsung India']
+      },
+      {
+        id: 20, featured: false, category: 'brand', hasRealImage: true,
+        label: 'TECH / AI INTEGRATION', name: '8-BIT x Meta AI (ft. Payal Gaming)', client: 'Meta',
+        img: '/images-for-landing-page/Case Studies/meta-ai.jpg',
+        metric: 'Multi-million digital reach · Gen-Z AI awareness',
+        challenge: 'Meta needed to drive organic awareness and mainstream adoption of Meta AI on WhatsApp and Instagram among India\'s youth gaming audience.',
+        approach: '8Bit Creatives deployed Payal Gaming to showcase practical, fun daily use-cases of Meta AI—from stream strategy tips to real-time chat queries.',
+        execution: 'Organic in-stream prompts, interactive Instagram reels demonstrating conversational features, and audience engagement contests.',
+        results: 'High interactive chat engagement · 12M+ cross-platform impressions', reach: '12M+', duration: 'Launch Campaign', cameras: 'Payal Gaming',
+        credits: ['8Bit Creatives', 'Meta India', 'Payal Gaming']
+      },
+      {
+        id: 21, featured: false, category: 'brand', hasRealImage: true,
+        label: 'BEVERAGE CAMPAIGN', name: '8-BIT x Thums Up (ft. Snax Gaming)', client: 'The Coca-Cola Company',
+        img: '/images-for-landing-page/Case Studies/thums-up.jpg',
+        metric: 'Top trending gaming beverage activation · Snax signature campaign',
+        challenge: 'The Coca-Cola Company wanted to align Thums Up\'s adrenaline-fueled brand ethos with high-octane competitive mobile gaming.',
+        approach: '8Bit Creatives partnered Snax Gaming (Raj Varma) with Thums Up for high-energy clutch-moment integrations and branded stream breaks.',
+        execution: 'Exclusive stream overlays, custom #ToofaniClutch community highlights, and high-energy social video spots celebrating intense gaming moments.',
+        results: '15M+ video impressions · Distinctive brand recall among youth', reach: '15M+', duration: 'Seasonal Campaign', cameras: 'Snax Gaming',
+        credits: ['8Bit Creatives', 'Thums Up', 'Coca-Cola India', 'Snax']
+      },
+      {
+        id: 22, featured: false, category: 'brand', hasRealImage: true,
+        label: 'AUTOMOTIVE LAUNCH', name: 'MG Comet EV Gamer Launch (ft. Mortal)', client: 'MG Motor India',
+        img: '/images-for-landing-page/Case Studies/mg-comet.jpg',
+        metric: 'India\'s 1st gamer-centric electric vehicle showcase',
+        challenge: 'MG Motor India launched the compact MG Comet EV and wanted to reach tech-forward Gen-Z and millennial creators who prioritize smart mobility.',
+        approach: '8Bit Creatives placed Mortal (Naman Mathur) at the forefront of the MG Comet EV launch campaign, bridging modern car tech with gaming lifestyle.',
+        execution: 'First-look creator unboxing, tech-feature walkthroughs highlighting the dual 10.25-inch infotainment screens, and lifestyle driving vlogs.',
+        results: 'Massive viral tech buzz · Cross-industry automotive recognition', reach: '10M+', duration: 'Product Launch', cameras: 'Mortal',
+        credits: ['8Bit Creatives', 'MG Motor India', 'Mortal']
+      },
+      {
+        id: 23, featured: false, category: 'brand', hasRealImage: true,
+        label: 'LIFESTYLE & ADVOCACY', name: 'Royal Challenge "Naya Sher" (ft. Mortal)', client: 'Diageo India',
+        img: '/images-for-landing-page/Case Studies/royal-challenge.jpg',
+        metric: 'National lifestyle alignment · Mortal as young India icon',
+        challenge: 'Diageo India sought to redefine contemporary sports heroes by showcasing esports icons who broke traditional conventions.',
+        approach: '8Bit Creatives placed Mortal into Royal Challenge\'s celebrated "Naya Sher" campaign celebrating resilient, game-changing Indian youth.',
+        execution: 'Cinematic digital brand films, hero billboards, digital narrative shorts, and long-form storytelling documenting Mortal\'s rise from chawls to esports icon.',
+        results: '16M+ views · Landmark crossover between mainstream brand and esports pioneer', reach: '16M+', duration: 'Brand Campaign', cameras: 'Mortal',
+        credits: ['8Bit Creatives', 'Royal Challenge', 'Diageo', 'Mortal']
+      },
+      {
+        id: 24, featured: false, category: 'brand', hasRealImage: true,
+        label: 'GEN-Z FASHION MANDATE', name: 'OWND! Streetwear Partnership (ft. Payal)', client: 'Aditya Birla Fashion',
+        img: '/images-for-landing-page/Case Studies/ownd.jpg',
+        metric: 'Apparel launch collaboration · Payal Gaming brand ambassador',
+        challenge: 'Aditya Birla Group launched OWND!, a digital-first youth streetwear label, needing immediate traction with female and youth gamer communities.',
+        approach: '8Bit Creatives signed Payal Gaming as the marquee face for OWND!\'s launch collection, styling gaming content with bold streetwear.',
+        execution: 'Fashion haul lookbooks, signature stream fits, Instagram runway reels, and exclusive community discount code drops during live gaming sessions.',
+        results: 'Rapid sell-out of featured collection items · 8M+ social views', reach: '8M+', duration: 'Collection Launch', cameras: 'Payal Gaming',
+        credits: ['8Bit Creatives', 'OWND!', 'Aditya Birla Fashion', 'Payal Gaming']
+      },
+      {
+        id: 25, featured: false, category: 'broadcast', hasRealImage: true,
+        label: 'OTT ENTERTAINMENT IP', name: 'Amazon Prime Video Tie-in (ft. Payal)', client: 'Amazon Prime Video',
+        img: '/images-for-landing-page/Case Studies/amazon-prime.jpg',
+        metric: 'Flagship OTT title promotions · Interactive creator watch-alongs',
+        challenge: 'Amazon Prime Video needed to promote marquee entertainment releases directly to India\'s highly engaged live-stream audiences.',
+        approach: '8Bit Creatives paired premier talent Payal Gaming with Prime Video for dedicated themed streams, reaction content, and community watch activations.',
+        execution: 'Curated reaction streams, custom cosplay streams aligned with show premieres, and interactive social storytelling.',
+        results: '7M+ impressions · High conversion to OTT trial sign-ups', reach: '7M+', duration: 'Premiere Windows', cameras: 'Payal Gaming',
+        credits: ['8Bit Creatives', 'Amazon Prime Video', 'Payal Gaming']
+      },
+      {
+        id: 26, featured: false, category: 'platform', hasRealImage: true,
+        label: 'GLOBAL GAMING MILESTONE', name: 'YouTube x Rockstar GTA 6 Premiere (ft. Payal)', client: 'YouTube Gaming / Rockstar Games',
+        img: '/images-for-landing-page/Case Studies/gta6.jpg',
+        metric: 'Global 24-hour launch stream representative for India',
+        challenge: 'YouTube Gaming hosted a worldwide 24-hour live countdown and reaction stream for the most anticipated trailer in gaming history—GTA VI.',
+        approach: '8Bit Creatives secured Payal Gaming as the premier Indian female gaming creator representing India on the global live stream.',
+        execution: 'Global livestream broadcast integration, live community trailer breakdown, and dedicated multi-platform reaction videos.',
+        results: 'Record-setting live concurrent viewership across YouTube India', reach: '20M+', duration: 'Trailer Premiere', cameras: 'Payal Gaming',
+        credits: ['8Bit Creatives', 'YouTube Gaming', 'Rockstar Games', 'Payal Gaming']
+      },
+      {
+        id: 27, featured: false, category: 'brand', hasRealImage: true,
+        label: 'NATIONWIDE TALENT IP', name: 'iQOO Chief Gaming Officer (CGO) Hunt', client: 'iQOO India',
+        img: '/images-for-landing-page/Case Studies/iqoo-cgo.jpg',
+        metric: '60,000+ pan-India applications · 10 Lakh INR top prize',
+        challenge: 'iQOO sought to recruit a real young gamer as their official Chief Gaming Officer (CGO) in a groundbreaking gamified employer-brand campaign.',
+        approach: '8Bit Creatives orchestrated the full influencer judging panel and campaign activation starring 8Bit Thug (Animesh Agarwal), Payal Gaming, and Rannvijay Singha.',
+        execution: 'Multi-stage recruitment challenges, gaming jury evaluation rounds, web-series production, and nationwide finals crowning India\'s first Gen-Z CGO.',
+        results: 'Over 60K applications · 40M+ campaign impressions across digital', reach: '40M+', duration: '3 months', cameras: '8Bit Thug, Payal Gaming, Rannvijay Singha',
+        credits: ['8Bit Creatives', 'iQOO India', '8Bit Thug', 'Payal Gaming']
+      },
+      {
+        id: 28, featured: false, category: 'brand', hasRealImage: true,
+        label: 'HARDWARE CO-CREATION', name: 'iQOO Smartphone Co-Creation Mandate', client: 'iQOO India',
+        img: '/images-for-landing-page/Case Studies/iqoo-cocreation.jpg',
+        metric: 'First-of-its-kind athlete-designed gaming smartphone features',
+        challenge: 'iQOO wanted to engineer custom firmware and physical gaming optimizations validated directly by competitive mobile gamers.',
+        approach: '8Bit Creatives partnered Mortal, Payal Gaming, and Scout to work directly with iQOO\'s R&D product engineers during device prototyping.',
+        execution: 'Pre-launch software tuning (touch response, gyro sensitivity, haptics), hardware unboxings, and competitive launch scrims proving the flagship performance.',
+        results: 'Direct gamer-endorsed product differentiation · Record launch day shipments', reach: '30M+', duration: 'Annual Mandate', cameras: 'Mortal, Payal, Scout',
+        credits: ['8Bit Creatives', 'iQOO India', 'Mortal', 'Payal Gaming']
+      },
+      {
+        id: 29, featured: false, category: 'platform', hasRealImage: true,
+        label: 'ESPORTS EDUCATION', name: 'FrontRow Gaming & Esports Masterclass', client: 'FrontRow',
+        img: '/images-for-landing-page/Case Studies/frontrow.jpg',
+        metric: 'India\'s 1st structured esports curriculum with Mortal & 8Bit Thug',
+        challenge: 'FrontRow sought to create India\'s first masterclass teaching professional gaming, live streaming, and esports team management.',
+        approach: '8Bit Creatives co-developed the comprehensive video masterclass curriculum fronted by 8Bit founders Animesh "Thug" Agarwal and Naman "Mortal" Mathur.',
+        execution: '15+ high-production video lesson modules covering game mechanics, mental resilience, brand building, and tournament preparation.',
+        results: '25,000+ enrolled students · Established educational milestone in Indian gaming', reach: '10M+', duration: 'Multi-year course', cameras: '8Bit Thug & Mortal',
+        credits: ['8Bit Creatives', 'FrontRow', 'Mortal', '8Bit Thug']
+      },
+      {
+        id: 30, featured: false, category: 'platform', hasRealImage: true,
+        label: 'WEB3 & FAN LOYALTY', name: 'STAN Fan Loyalty & Digital Collectibles', client: 'STAN',
+        img: '/images-for-landing-page/Case Studies/stan.jpg',
+        metric: 'Top grossing esports community engagement app partnership',
+        challenge: 'Fan engagement platform STAN needed to drive daily active users and digital collectible trading among hardcore Indian esports fans.',
+        approach: '8Bit Creatives and S8UL signed a strategic talent partnership introducing official digital collectibles, voice chat rooms, and fan perks featuring Mortal, Goldy, and Thug.',
+        execution: 'In-app digital player cards, creator audio rooms, exclusive fan meetups, and gamified leaderboards integrated into live streams.',
+        results: '1M+ downloads driven · 5M+ collectible interactions', reach: '20M+', duration: 'Multi-year pact', cameras: 'Mortal, Goldy, Thug',
+        credits: ['8Bit Creatives', 'STAN', 'S8UL']
+      },
+      {
+        id: 31, featured: false, category: 'platform', hasRealImage: true,
+        label: 'BROADCAST PARTNERSHIP', name: 'YouTube Official EWC Partner', client: 'YouTube India',
+        img: '/images-for-landing-page/Case Studies/youtube-ewc.jpg',
+        metric: 'Official digital broadcast and creator activation hub',
+        challenge: 'YouTube India needed to deliver uninterrupted, high-definition streaming and exclusive creator vlogs during the Esports World Cup.',
+        approach: '8Bit Creatives and S8UL partnered with YouTube as the official creator broadcast partner, streaming match feeds and behind-the-scenes vlogs from Riyadh.',
+        execution: 'Live match watch-parties on YouTube, dedicated creator Shorts series, and community prediction polls.',
+        results: '50M+ cumulative video views across tournament duration', reach: '50M+', duration: 'Tournament Window', cameras: 'Full S8UL Roster',
+        credits: ['8Bit Creatives', 'YouTube India', 'S8UL', 'EWC']
+      },
+      {
+        id: 32, featured: false, category: 'brand', hasRealImage: true,
+        label: 'STRATEGIC COMMUNICATIONS', name: 'Max Level Strategic PR Mandate', client: 'Max Level',
+        img: '/images-for-landing-page/Case Studies/max-level.jpg',
+        metric: 'Exclusive communications & PR agency of record for 8Bit & S8UL',
+        challenge: '8Bit Creatives and S8UL required a dedicated strategic communications firm to manage high-velocity mainstream corporate press and media relations.',
+        approach: 'Signed Max Level as exclusive strategic brand communications agency to drive national and international trade coverage.',
+        execution: 'National mainstream news features (Economic Times, Forbes, Mint), corporate deal announcements, and founder thought leadership columns.',
+        results: '300+ tier-1 media placements · Institutionalized industry leadership', reach: '75M+ PR Value', duration: 'Annual Mandate', cameras: '8Bit Leadership',
+        credits: ['8Bit Creatives', 'Max Level', 'S8UL']
+      },
+      {
+        id: 33, featured: false, category: 'tournament', hasRealImage: true,
+        label: 'NATIONWIDE FAN TOUR', name: 'S8UL 12-City EWC Watch Party Tour', client: 'S8UL / 8Bit Creatives',
+        img: '/images-for-landing-page/Case Studies/ewc-tour.jpg',
+        metric: '12 Indian cities · 25,000+ attending fans',
+        challenge: 'Bring the physical stadium energy of the Riyadh Esports World Cup directly to regional fans across tier-1 and tier-2 Indian cities.',
+        approach: '8Bit Creatives produced the largest concurrent esports watch party tour across 12 cities (Mumbai, Delhi, Bengaluru, Pune, Ahmedabad, Kolkata, etc.).',
+        execution: 'Cinema hall screenings of S8UL championship matches, creator meet-and-greets, Gaming House 2.0 pop-ups, and live merchandise giveaways.',
+        results: 'Sold-out auditoriums in all 12 cities · 30M+ organic social buzz', reach: '30M+', duration: '12 Cities', cameras: 'Full Roster',
+        credits: ['8Bit Creatives', 'S8UL', 'EWC Watch Parties']
+      },
+      {
+        id: 34, featured: false, category: 'brand', hasRealImage: true,
+        label: 'FOOTWEAR / FASHION', name: 'Crocs India Classic Clog Campaign (ft. Ankkita C)', client: 'Crocs India',
+        img: '/images-for-landing-page/Case Studies/crocs.jpg',
+        metric: 'Gen-Z footwear integration · Gaming lifestyle alignment',
+        challenge: 'Crocs India sought to showcase their Classic Clogs and Jibbitz charms as the quintessential cozy, expressive footwear for gamers and creators.',
+        approach: '8Bit Creatives signed top female creator Ankkita C to feature personalized Crocs and styling vlogs within cozy stream setups and daily life content.',
+        execution: 'Creator unboxing, customized Jibbitz stream styling, lifestyle Instagram reels, and community giveaway activations.',
+        results: 'High engagement across youth fashion demographics · 6M+ impressions', reach: '6M+', duration: 'Campaign Launch', cameras: 'Ankkita C',
+        credits: ['8Bit Creatives', 'Crocs India', 'Ankkita C']
+      },
+      {
+        id: 35, featured: false, category: 'tournament', hasRealImage: true,
+        label: 'TELECOM ESPORTS IP', name: 'JioBLAST BGMI & Free Fire Tournament', client: 'Jio Platforms',
+        img: '/images-for-landing-page/Case Studies/jioblast.jpg',
+        metric: 'Pan-India telecom esports tournament activation',
+        challenge: 'Jio Platforms needed to engage grassroots Indian mobile gamers and promote Jio\'s high-speed gaming networks.',
+        approach: '8Bit Creatives partnered with Jio to anchor the JioBLAST tournament IP with marquee creator showmatches, commentary, and digital promotions.',
+        execution: 'Live streamed qualifier commentary, creator showdowns, and high-visibility digital promotional spots across the 8Bit network.',
+        results: 'Over 20M+ cumulative digital views · Deep brand resonance for Jio Gaming', reach: '20M+', duration: 'Tournament Series', cameras: '8Bit Creators',
+        credits: ['8Bit Creatives', 'Jio Platforms', 'JioGames']
+      },
+      {
+        id: 36, featured: false, category: 'platform', hasRealImage: true,
+        label: 'GAME IP INTEGRATION', name: 'Gameloft Gangstar Mirage City x SoulCity', client: 'Gameloft',
+        img: '/images-for-landing-page/Case Studies/soulcity.jpg',
+        metric: 'Global mobile gaming IP custom in-game integration',
+        challenge: 'Gameloft wanted to localize and promote Gangstar Mirage City in India with an iconic custom server / in-game experience.',
+        approach: '8Bit Creatives collaborated with Gameloft to build "SoulCity"—a dedicated in-game roleplay and competitive hub featuring 8Bit and S8UL creators.',
+        execution: 'Custom server launch streams, exclusive creator avatars, and community squad raids hosted across YouTube.',
+        results: 'Top trending mobile gaming release in India · High player retention', reach: '15M+', duration: 'Game Launch', cameras: 'S8UL & 8Bit Roster',
+        credits: ['8Bit Creatives', 'Gameloft', 'SoulCity']
+      },
+      {
+        id: 37, featured: false, category: 'platform', hasRealImage: true,
+        label: 'GLOBAL AWARDS SHOWCASE', name: 'MOBIES 2024 International Awards (Los Angeles)', client: 'The MOBIES',
+        img: '/images-for-landing-page/Case Studies/mobies.jpg',
+        metric: 'Global Mobile Esports Organization of the Year & Creator Nominations',
+        challenge: 'Represent Indian esports on the international stage at the premier global awards for mobile gaming in Los Angeles.',
+        approach: '8Bit Creatives & S8UL traveled to LA with marquee creators including Payal Gaming and 8Bit Thug, bringing global accolades back to India.',
+        execution: 'Red carpet attendance, live award acceptance broadcast, behind-the-scenes Hollywood vlogs, and international industry networking.',
+        results: 'Global recognition for Indian gaming · 25M+ impressions across social media', reach: '25M+', duration: 'Global Event', cameras: 'Payal Gaming & S8UL',
+        credits: ['8Bit Creatives', 'S8UL', 'The MOBIES', 'Los Angeles']
+      },
+      {
+        id: 38, featured: false, category: 'brand', hasRealImage: true,
+        label: 'FMCG / BEVERAGE', name: 'Nescafé Cold Coffee Late-Night Stream Partner', client: 'Nestlé India',
+        img: '/images-for-landing-page/Case Studies/nescafe.jpg',
+        metric: 'Late-night stream refuel activation · High student/gamer recall',
+        challenge: 'Nestlé India wanted to establish Nescafé Cold Coffee as the go-to fuel for midnight gaming grinds and late-night streams.',
+        approach: '8Bit Creatives integrated Nescafé organically into Ankkita C\'s late-night gaming broadcasts and daily vlogs.',
+        execution: 'Mid-stream coffee breaks, custom stream alerts, comedic relatable reels on late-night gaming fatigue, and product placement.',
+        results: '5M+ organic impressions · High conversational engagement in live chat', reach: '5M+', duration: 'Seasonal Campaign', cameras: 'Ankkita C',
+        credits: ['8Bit Creatives', 'Nestlé India', 'Nescafé', 'Ankkita C']
+      },
+      {
+        id: 39, featured: false, category: 'broadcast', hasRealImage: true,
+        label: 'ENTERTAINMENT EVENT IP', name: 'Netflix Stranger Things Season 5 Finale Premiere', client: 'Netflix India',
+        img: '/images-for-landing-page/Case Studies/stranger-things.jpg',
+        metric: 'Exclusive live fan premiere hosted by Payal Gaming',
+        challenge: 'Netflix India needed an authentic youth-culture bridge to host their major on-ground Stranger Things Season 5 fan premiere event.',
+        approach: '8Bit Creatives placed Payal Gaming as the official host for the live premiere activation, interviewing fans and creating exclusive buzz.',
+        execution: 'Red carpet host coverage, fan reaction segments, cosplay interactions, and real-time social reels during the premiere screening.',
+        results: '18M+ views across social handles · Mainstream entertainment crossover', reach: '18M+', duration: 'Premiere Event', cameras: 'Payal Gaming',
+        credits: ['8Bit Creatives', 'Netflix India', 'Payal Gaming']
+      },
+      {
+        id: 40, featured: false, category: 'tournament', hasRealImage: true,
+        label: 'COLLEGIATE ESPORTS IP', name: 'Red Bull Campus Clutch & Solo Legends', client: 'Red Bull India',
+        img: '/images-for-landing-page/Case Studies/redbull-campus.jpg',
+        metric: 'Collegiate esports activation across 100+ Indian universities',
+        challenge: 'Red Bull wanted to recruit university gaming teams and promote competitive Valorant through their Campus Clutch and Solo Legends IP.',
+        approach: '8Bit Creatives mobilized creators to promote campus registrations, cast university showdowns, and mentor emerging student athletes.',
+        execution: 'On-campus tours, collegiate broadcast casting, creator scrims against top student teams, and social highlights.',
+        results: 'Over 5,000 university participants · 12M+ digital views', reach: '12M+', duration: 'Annual Circuit', cameras: '8Bit Creators',
+        credits: ['8Bit Creatives', 'Red Bull India', 'Campus Clutch']
+      },
+      {
+        id: 41, featured: false, category: 'broadcast', hasRealImage: true,
+        label: 'EXTREME ADVENTURE DOCUSERIES', name: 'Everest Base Camp 5,364m Expedition', client: 'S8UL / 8Bit Creatives',
+        img: '/images-for-landing-page/Case Studies/everest.jpg',
+        metric: 'India\'s 1st gamer-led Himalayan trek docuseries',
+        challenge: 'Break stereotypes about gamers being solely indoor players through a high-altitude expedition to Everest Base Camp.',
+        approach: '8Bit Creatives produced an inspiring multi-episode docuseries following Gulrez Khan (Joker Ki Haveli) trekking to 5,364m at Everest Base Camp.',
+        execution: 'Cinematic 4K episodic YouTube vlog series, daily social dispatches, endurance training reels, and live summit updates.',
+        results: '22M+ views · Praised nationally for inspiring fitness and adventure among youth', reach: '22M+', duration: 'Expedition', cameras: 'Joker Ki Haveli',
+        credits: ['8Bit Creatives', 'S8UL', 'Joker Ki Haveli']
+      },
+      {
+        id: 42, featured: false, category: 'brand', hasRealImage: true,
+        label: 'AUTOMOTIVE / PERFORMANCE', name: 'TVS Apache High-Performance Campaign', client: 'TVS Motor Company',
+        img: '/images-for-landing-page/Case Studies/tvs-apache.jpg',
+        metric: 'Multi-creator high-octane racing & gaming crossover',
+        challenge: 'TVS Motor Company sought to connect the raw racing DNA of TVS Apache motorcycles with the precision and speed of top mobile esports athletes.',
+        approach: '8Bit Creatives deployed an all-star squad—Payal Gaming, Snax, Regaltos, Joker, and Willy—for an adrenaline-packed track and gaming activation.',
+        execution: 'Professional test-track riding days, esports racing showdowns, stylish digital films, and community speed challenges.',
+        results: '20M+ social video views · Strong alignment between high-performance bikes and gaming', reach: '20M+', duration: 'Multi-creator Campaign', cameras: 'Payal, Snax, Regaltos, Joker, Willy',
+        credits: ['8Bit Creatives', 'TVS Motor Company', 'Ampverse DMI', '5 Creators']
       }
     ];
 
