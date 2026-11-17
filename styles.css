@@ -1726,7 +1726,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 .coverflow-stage .creator-card:not(.is-active):hover img {
-  filter: grayscale(40%) contrast(1.05) brightness(0.92);
+  filter: grayscale(0%) contrast(1) brightness(1);
+  transform: none;
 }
 
 @media (min-width: 768px) {

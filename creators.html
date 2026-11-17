@@ -310,14 +310,17 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: none !important;
-      transition: none !important;
+      filter: grayscale(100%) !important;
+      transition: filter 350ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+      transform: none !important;
     }
     .creators-grid .creator-card:hover .creator-card-image img,
     .creators-grid-container .creator-card:hover .creator-card-image img,
-    .creator-card:hover .creator-card-image img {
+    .creator-grid-card:hover .creator-card-image img,
+    .creator-card:hover .creator-card-image img,
+    .creator-card:focus-visible .creator-card-image img {
       transform: none !important;
-      filter: none !important;
+      filter: grayscale(0%) !important;
     }
     .card-edit-btn {
       position: absolute;
@@ -806,10 +809,15 @@
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
         box-sizing: border-box !important;
         cursor: pointer !important;
-        transition: transform 180ms ease, border-color 180ms ease !important;
+        transform: none !important;
+        transition: border-color 180ms ease !important;
+      }
+      .creators-grid .creator-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
       }
       .creators-grid .creator-card:active {
-        transform: scale(0.98) !important;
+        transform: none !important;
         border-color: rgba(255, 89, 49, 0.5) !important;
       }
       .creators-grid .creator-card .creator-card-image {
@@ -829,6 +837,14 @@
         object-position: center top !important;
         display: block !important;
         border-radius: 12px !important;
+        filter: grayscale(100%) !important;
+        transition: filter 350ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+        transform: none !important;
+      }
+      .creators-grid .creator-card:hover .creator-card-image img,
+      .creators-grid .creator-card:active .creator-card-image img {
+        transform: none !important;
+        filter: grayscale(0%) !important;
       }
       .creators-grid .creator-card .creator-card-name {
         font-family: 'Geist', sans-serif !important;
