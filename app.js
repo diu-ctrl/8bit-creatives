@@ -3481,7 +3481,7 @@ function initCreatorStats() {
   // ── Creator data (dynamically loaded from scripts/creators-data.js & localStorage) ──
   const RAW_CREATORS = (window.get8BitCreators && window.get8BitCreators().length)
     ? window.get8BitCreators()
-    : [];
+    : (window.INITIAL_CREATORS && window.INITIAL_CREATORS.length ? window.INITIAL_CREATORS : []);
 
   // Parse numerical reach for hierarchy sorting
   function parseNum(str) {
