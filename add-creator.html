@@ -953,7 +953,7 @@
       <div class="success-icon">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <h2 class="success-title">Creator Published!</h2>
+      <h2 class="success-title" id="successTitle">Creator Published!</h2>
       <p class="success-msg" id="successMsg">
         The creator has been successfully registered and is now active in both the <strong>Creators Directory</strong> and the <strong>Homepage Carousel</strong>.
       </p>
@@ -976,6 +976,9 @@
   <script>
     let uploadedImageBase64 = null;
     let uploadedFile = null;
+    let isEditingMode = false;
+    let editingCreatorId = null;
+    let existingImagePath = null;
 
     // Category labels map
     const CATEGORY_LABELS = {
@@ -985,6 +988,80 @@
       'lifestyle': 'Lifestyle · Vlogging · Youth Culture',
       'gta': 'GTA V Roleplay · Community'
     };
+
+    // Check if loaded in Edit Mode via ?edit=<id>
+    function initEditModeIfRequested() {
+      const params = new URLSearchParams(window.location.search);
+      const editTarget = params.get('edit') || params.get('id');
+      if (!editTarget) return;
+
+      const creators = (window.get8BitCreators && window.get8BitCreators()) || [];
+      const c = creators.find(item => 
+        (item.id && item.id.toLowerCase() === editTarget.toLowerCase()) || 
+        (item.name && item.name.toLowerCase() === editTarget.toLowerCase())
+      );
+
+      if (!c) {
+        console.warn('Creator not found for editing:', editTarget);
+        return;
+      }
+
+      isEditingMode = true;
+      editingCreatorId = c.id || c.name.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      existingImagePath = c.img;
+
+      // Update Header Title & Button
+      const titleSpan = document.querySelector('.studio-title span');
+      if (titleSpan) titleSpan.textContent = 'Edit Creator: ' + c.name;
+      const navBadge = document.querySelector('.studio-title .nav-badge');
+      if (navBadge) navBadge.textContent = 'Editing Profile';
+      
+      const submitBtn = document.getElementById('btnSubmit');
+      if (submitBtn) {
+        submitBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Save Changes & Update Creator';
+      }
+
+      // Populate Form Fields
+      document.getElementById('creatorName').value = c.name || '';
+      document.getElementById('creatorAlias').value = c.alias || c.realName || '';
+      if (c.category) document.getElementById('creatorCategory').value = c.category;
+      document.getElementById('creatorReach').value = c.reach || '';
+      document.getElementById('creatorBio').value = c.bio || '';
+
+      // Socials
+      const igUrl = (c.instagram && c.instagram.url) || c.instagramUrl || '';
+      const igCount = (c.instagram && c.instagram.count) || c.instagramCount || '';
+      document.getElementById('urlInstagram').value = igUrl;
+      document.getElementById('countInstagram').value = igCount !== 'Active' ? igCount : '';
+
+      const ytUrl = (c.youtube && c.youtube.url) || c.youtubeUrl || '';
+      const ytCount = (c.youtube && c.youtube.count) || c.youtubeCount || '';
+      document.getElementById('urlYoutube').value = ytUrl;
+      document.getElementById('countYoutube').value = ytCount !== 'Active' ? ytCount : '';
+
+      const kickUrl = (c.kick && c.kick.url) || c.kickUrl || '';
+      const kickCount = (c.kick && c.kick.count) || c.kickCount || '';
+      document.getElementById('urlKick').value = kickUrl;
+      document.getElementById('countKick').value = kickCount !== 'Active' ? kickCount : '';
+
+      // Image Preview (Existing Photo)
+      if (c.img) {
+        uploadedImageBase64 = c.img;
+        document.getElementById('uploadPrompt').style.display = 'none';
+        const preview = document.getElementById('uploadPreview');
+        preview.style.display = 'flex';
+        document.getElementById('thumbImg').src = c.img;
+        document.getElementById('thumbName').textContent = 'Current Portrait: ' + c.img.split('/').pop();
+        document.getElementById('thumbSize').textContent = 'Existing Studio Photo (Click to replace)';
+
+        const mockImg = document.getElementById('mockupImg');
+        mockImg.src = c.img;
+        mockImg.style.display = 'block';
+        document.getElementById('mockupPlaceholder').style.display = 'none';
+      }
+
+      updateLivePreview();
+    }
 
     // File selection handler
     function handleFileSelect(e) {
@@ -1184,9 +1261,9 @@
       btn.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite;">⏳</span> Publishing creator...';
 
       // Generate clean ID and image filename
-      const creatorId = name.toLowerCase().replace(/[^a-z0-9]/g, '_');
+      const creatorId = isEditingMode ? editingCreatorId : name.toLowerCase().replace(/[^a-z0-9]/g, '_');
       const filename = `${creatorId}.png`;
-      const finalImgPath = `assets/creators/cinematic/${filename}`;
+      const finalImgPath = (uploadedFile ? `assets/creators/cinematic/${filename}` : (existingImagePath || `assets/creators/cinematic/${filename}`));
 
       // Assemble full structured object
       const newCreator = {
@@ -1245,7 +1322,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             creator: newCreator,
-            imageBase64: uploadedImageBase64,
+            imageBase64: uploadedFile ? uploadedImageBase64 : null,
             filename: filename
           })
         });
@@ -1261,11 +1338,14 @@
       }
 
       btn.disabled = false;
-      btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg> Publish Creator to Website';
+      btn.innerHTML = isEditingMode
+        ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Save Changes & Update Creator'
+        : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg> Publish Creator to Website';
 
       // Show success modal
+      document.getElementById('successTitle').textContent = isEditingMode ? 'Creator Updated!' : 'Creator Published!';
       document.getElementById('successMsg').innerHTML = `
-        <strong>${name}</strong> has been added successfully!<br>
+        <strong>${name}</strong> has been ${isEditingMode ? 'updated' : 'added'} successfully!<br>
         The creator is now active in your roster and automatically reflected across the website.
       `;
       document.getElementById('successModal').classList.add('active');
@@ -1276,6 +1356,13 @@
       document.getElementById('creatorForm').reset();
       uploadedImageBase64 = null;
       uploadedFile = null;
+      isEditingMode = false;
+      editingCreatorId = null;
+      existingImagePath = null;
+      document.querySelector('.studio-title span').textContent = 'Add New Creator';
+      const navBadge = document.querySelector('.studio-title .nav-badge');
+      if (navBadge) navBadge.textContent = 'Live Auto-Sync';
+      document.getElementById('btnSubmit').innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg> Publish Creator to Website';
       document.getElementById('uploadPrompt').style.display = 'block';
       document.getElementById('uploadPreview').style.display = 'none';
       document.getElementById('mockupImg').style.display = 'none';
@@ -1289,6 +1376,9 @@
       const banner = document.getElementById('productionWarningBanner');
       if (banner) banner.style.display = 'block';
     }
+
+    // Check for Edit Mode (?edit=<id>)
+    initEditModeIfRequested();
 
     // Initial trigger
     updateLivePreview();

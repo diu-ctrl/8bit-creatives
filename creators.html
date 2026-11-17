@@ -18,8 +18,8 @@
   <meta name="msapplication-config" content="/favicon/browserconfig.xml">
   <meta name="application-name" content="8Bit Creatives">
   <meta name="apple-mobile-web-app-title" content="8Bit Creatives">
-  <title>8Bit Creatives Creators — 50+ Top Indian Gaming Creators &amp; Streamers</title>
-  <meta name="description" content="Explore the official 8Bit Creatives roster: 50+ elite Indian gaming creators, streamers, and talent including MortaL, Payal, Scout, 8Bit Thug, and Goldy.">
+  <title>8Bit Creatives Creators — 40+ Top Indian Gaming Creators &amp; Streamers</title>
+  <meta name="description" content="Explore the official 8Bit Creatives roster: 40+ elite Indian gaming creators, streamers, and talent including MortaL, Payal, Scout, 8Bit Thug, and Goldy.">
   <meta name="keywords" content="8Bit Creatives creators, 8Bit roster, MortaL 8Bit, 8Bit Thug, Payal Gaming, ScoutOP, Indian gaming creators, gaming influencer agency India">
   <link rel="canonical" href="https://8bit-creatives.vercel.app/creators">
 
@@ -27,16 +27,16 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="8Bit Creatives">
   <meta property="og:url" content="https://8bit-creatives.vercel.app/creators">
-  <meta property="og:title" content="8Bit Creatives Creators — 50+ Top Indian Gaming Creators &amp; Streamers">
-  <meta property="og:description" content="Explore the official 8Bit Creatives roster: 50+ elite Indian gaming creators, streamers, and talent including MortaL, Payal, Scout, 8Bit Thug, and Goldy.">
+  <meta property="og:title" content="8Bit Creatives Creators — 40+ Top Indian Gaming Creators &amp; Streamers">
+  <meta property="og:description" content="Explore the official 8Bit Creatives roster: 40+ elite Indian gaming creators, streamers, and talent including MortaL, Payal, Scout, 8Bit Thug, and Goldy.">
   <meta property="og:image" content="https://8bit-creatives.vercel.app/images-for-landing-page/hero-newimage.webp">
   <meta property="og:locale" content="en_IN">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@8Bit_Creatives">
-  <meta name="twitter:title" content="8Bit Creatives Creators — 50+ Top Indian Gaming Creators &amp; Streamers">
-  <meta name="twitter:description" content="Explore the official 8Bit Creatives roster: 50+ elite Indian gaming creators including MortaL, Payal, Scout, 8Bit Thug, and Goldy.">
+  <meta name="twitter:title" content="8Bit Creatives Creators — 40+ Top Indian Gaming Creators &amp; Streamers">
+  <meta name="twitter:description" content="Explore the official 8Bit Creatives roster: 40+ elite Indian gaming creators including MortaL, Payal, Scout, 8Bit Thug, and Goldy.">
   <meta name="twitter:image" content="https://8bit-creatives.vercel.app/images-for-landing-page/hero-newimage.webp">
 
   <!-- JSON-LD: CollectionPage & Breadcrumb -->
@@ -49,7 +49,7 @@
         "@id": "https://8bit-creatives.vercel.app/creators#webpage",
         "url": "https://8bit-creatives.vercel.app/creators",
         "name": "8Bit Creatives Creator Roster",
-        "description": "50+ elite gaming creators and live streamers managed exclusively by 8Bit Creatives.",
+        "description": "40+ elite gaming creators and live streamers managed exclusively by 8Bit Creatives.",
         "isPartOf": { "@id": "https://8bit-creatives.vercel.app/#website" }
       },
       {
@@ -318,6 +318,34 @@
     .creator-card:hover .creator-card-image img {
       transform: none !important;
       filter: none !important;
+    }
+    .card-edit-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      background: rgba(10, 10, 12, 0.88);
+      border: 1px solid rgba(255, 77, 38, 0.6);
+      border-radius: 6px;
+      color: #FF5931;
+      font-family: 'Geist', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .card-edit-btn:hover {
+      background: #FF4D26;
+      color: #FFFFFF;
+      border-color: #FF4D26;
+      box-shadow: 0 0 16px rgba(255, 77, 38, 0.6);
+      transform: translateY(-2px);
     }
     .creator-card-name {
       font-family: 'Geist', sans-serif;
@@ -896,9 +924,9 @@
   <!-- 2. Hero (relative, normal flow) -->
   <section class="creators-hero-section" data-bg="dark">
     <div class="creators-hero-container">
-      <h1 class="creators-hero-title"><span class="visually-hidden">8Bit Creatives Roster — </span>50+ Creators.<br>Single Ecosystem.</h1>
+      <h1 class="creators-hero-title"><span class="visually-hidden">8Bit Creatives Roster — </span>40+ Creators.<br>Single Ecosystem.</h1>
       <p class="creators-hero-sub">
-        From mobile gaming giants to variety streamers, discover the talent powering India's gaming culture.
+        From mobile gaming giants to variety streamers, discover the 40+ talents powering India's gaming culture.
       </p>
     </div>
   </section>
@@ -906,25 +934,14 @@
   <!-- 3. Filter bar (sticky, normal flow) -->
   <div class="creators-filter-bar">
     <div class="filter-bar-container">
-      <div class="filter-row">
-        <!-- Category Pills -->
-        <div class="filter-group" id="categoryFilters">
-          <button class="filter-pill active" data-filter="category" data-value="all">All</button>
-          <button class="filter-pill" data-filter="category" data-value="bgmi">BGMI</button>
-          <button class="filter-pill" data-filter="category" data-value="freefire">Free Fire</button>
-          <button class="filter-pill" data-filter="category" data-value="codm">CODM</button>
-          <button class="filter-pill" data-filter="category" data-value="gta">GTA RP</button>
-          <button class="filter-pill" data-filter="category" data-value="variety">Variety</button>
-          <button class="filter-pill" data-filter="category" data-value="lifestyle">Lifestyle</button>
-        </div>
-
+      <div class="filter-row" style="margin-bottom: 8px;">
         <!-- Search Input -->
-        <div class="filter-search-wrap">
+        <div class="filter-search-wrap" style="width: 100%; max-width: 100%;">
           <svg class="filter-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" class="filter-search-input" id="creatorSearch" placeholder="Search creator or game...">
+          <input type="text" class="filter-search-input" id="creatorSearch" placeholder="Search creators by name, handle, or game...">
         </div>
       </div>
 
@@ -939,7 +956,7 @@
         </div>
 
         <div style="display: flex; align-items: center; gap: 16px; margin-left: auto; flex-wrap: wrap;">
-          <div class="filter-count" id="creatorCount">Showing 12 of 50+ creators</div>
+          <div class="filter-count" id="creatorCount">Showing 41 of 41 creators</div>
           <a href="add-creator.html" id="onboardCreatorBtn" class="onboard-creator-pill" style="display: none; align-items: center; gap: 8px; padding: 7px 16px; background: rgba(255, 77, 38, 0.15); border: 1px solid rgba(255, 77, 38, 0.4); border-radius: 9999px; color: #FF4D26; font-family: 'Geist', sans-serif; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s ease;" onmouseover="this.style.background='#FF4D26';this.style.color='#FFFFFF';this.style.borderColor='#FF4D26';this.style.boxShadow='0 0 16px rgba(255,77,38,0.4)';" onmouseout="this.style.background='rgba(255,77,38,0.15)';this.style.color='#FF4D26';this.style.borderColor='rgba(255,77,38,0.4)';this.style.boxShadow='none';">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             <span>+ Add Creator</span>
@@ -1241,7 +1258,11 @@
     const modalClose = document.getElementById('creatorModalClose');
     if (!grid) return;
 
-    let activeCategory = 'all';
+    const isLocal = window.location.hostname === 'localhost' || 
+                    window.location.hostname === '127.0.0.1' || 
+                    window.location.protocol === 'file:';
+    const isAdmin = new URLSearchParams(window.location.search).has('admin');
+
     let activePlatform = 'all';
     let searchTerm = '';
 
@@ -1250,26 +1271,34 @@
       let visibleCount = 0;
       
       CREATORS.forEach((c, index) => {
-        const matchesCategory = activeCategory === 'all' || c.category === activeCategory;
-        const matchesPlatform = activePlatform === 'all' || c.platforms.includes(activePlatform);
+        const matchesPlatform = activePlatform === 'all' || (c.platforms && c.platforms.includes(activePlatform));
         const matchesSearch = searchTerm === '' || 
           c.name.toLowerCase().includes(searchTerm) || 
           c.alias.toLowerCase().includes(searchTerm) ||
-          c.categoryLabel.toLowerCase().includes(searchTerm);
+          (c.categoryLabel && c.categoryLabel.toLowerCase().includes(searchTerm));
         
-        if (matchesCategory && matchesPlatform && matchesSearch) {
+        if (matchesPlatform && matchesSearch) {
           visibleCount++;
           const card = document.createElement('div');
           card.className = 'creator-card';
+          
+          const editBtnHtml = (isLocal || isAdmin) 
+            ? '<button class="card-edit-btn" onclick="event.stopPropagation(); window.location.href=\'add-creator.html?edit=' + encodeURIComponent(c.id || c.name) + '\';" title="Edit ' + c.name + '">\n' +
+              '  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>\n' +
+              '  <span>Edit</span>\n' +
+              '</button>'
+            : '';
+
           card.innerHTML = [
             '<div class="creator-card-image">',
             '  <img src="' + getImgSrc(c.img) + '" alt="' + c.name + ' (' + c.alias + ')" width="400" height="500" loading="lazy" decoding="async">',
+            editBtnHtml,
             '</div>',
             '<div class="creator-card-name">' + c.name + '</div>',
             '<div class="creator-card-alias">' + c.alias + '</div>',
             '<div class="creator-card-meta">',
-            '  <span class="creator-card-category">' + c.categoryLabel + '</span>',
-            '  <span class="creator-card-reach">' + c.reach + '</span>',
+            '  <span class="creator-card-category">' + (c.categoryLabel || 'Gaming · Content Creation') + '</span>',
+            '  <span class="creator-card-reach">' + (c.reach || 'Active') + '</span>',
             '</div>'
           ].join('');
           card.addEventListener('click', () => openModal(index, card));
@@ -1280,7 +1309,7 @@
       countEl.textContent = 'Showing ' + visibleCount + ' of ' + CREATORS.length + ' creators';
     }
 
-    // Filter pill clicks
+    // Platform filter pill clicks
     document.querySelectorAll('.filter-pill').forEach(pill => {
       pill.addEventListener('click', () => {
         const filterType = pill.dataset.filter;
@@ -1289,9 +1318,7 @@
         document.querySelectorAll('.filter-pill[data-filter="' + filterType + '"]').forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
         
-        if (filterType === 'category') activeCategory = value;
         if (filterType === 'platform') activePlatform = value;
-        
         renderCards();
       });
     });
@@ -1388,7 +1415,8 @@
         '  <div class="creator-modal-info">',
         '    <div class="creator-modal-name">' + c.name + '</div>',
         '    <div class="creator-modal-alias">' + c.alias + '</div>',
-        '    <div class="creator-modal-category">' + c.categoryLabel + '</div>',
+        '    <div class="creator-modal-category">' + (c.categoryLabel || 'Gaming · Content Creation') + '</div>',
+        (isLocal || isAdmin ? '    <a href="add-creator.html?edit=' + encodeURIComponent(c.id || c.name) + '" class="modal-edit-link" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,77,38,0.15);border:1px solid rgba(255,77,38,0.4);border-radius:6px;color:#FF4D26;font-size:12px;font-weight:600;text-decoration:none;margin-top:10px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg><span>Edit Creator Info</span></a>' : ''),
         '  </div>',
         '</div>',
         '<div class="creator-modal-body morph-content morph-initial">',

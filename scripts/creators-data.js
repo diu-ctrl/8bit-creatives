@@ -5,13 +5,49 @@
 (function() {
   window.INITIAL_CREATORS = [
   {
+    "id": "amya",
+    "name": "Amya",
+    "alias": "Amya Bhagat",
+    "realName": "Amya Bhagat",
+    "category": "variety",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
+    "img": "assets/creators/cinematic/amya.png",
+    "reach": "77.1 K",
+    "bio": "A versatile content creator and charismatic entertainer, Amya (Amya Bhagat) combines high-octane live streaming with dynamic digital storytelling as a premier talent under the 8Bit Creatives roster.",
+    "youtube": {
+      "handle": "@amya",
+      "count": "77.1 K",
+      "url": "https://www.youtube.com/@amyabhagat"
+    },
+    "youtubeUrl": "https://www.youtube.com/@amyabhagat",
+    "youtubeCount": "77.1 K",
+    "youtubeHandle": "@amya",
+    "instagram": {
+      "handle": "@amya",
+      "count": "147 K",
+      "url": "https://www.instagram.com/amyabhagat/"
+    },
+    "instagramUrl": "https://www.instagram.com/amyabhagat/",
+    "instagramCount": "147 K",
+    "instagramHandle": "@amya",
+    "kick": null,
+    "kickUrl": null,
+    "kickCount": null,
+    "kickHandle": null,
+    "platforms": [
+      "youtube",
+      "instagram"
+    ]
+  },
+  {
     "id": "aman",
     "name": "Aman",
     "alias": "Aman Jain",
     "realName": "Aman Jain",
     "category": "variety",
-    "categoryLabel": "Variety Gaming \u00b7 Entertainment",
-    "categories": "Variety Gaming \u00b7 Entertainment",
+    "categoryLabel": "Variety Gaming · Entertainment",
+    "categories": "Variety Gaming · Entertainment",
     "img": "assets/creators/cinematic/aman.png",
     "reach": "1.06M",
     "bio": "A defining force in Indian gaming and esports entertainment, Aman Jain (Soul Aman) combines athletic discipline, competitive gaming mastery, and high-octane live streaming as a cornerstone talent of the iconic S8UL and 8Bit Creatives ecosystem.",
@@ -46,43 +82,10 @@
     "kickCount": "40K"
   },
   {
-    "id": "amya",
-    "name": "Amya",
-    "alias": "Amya",
-    "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
-    "img": "assets/creators/cinematic/amya.png",
-    "reach": "250K+",
-    "youtube": {
-      "handle": "@amya",
-      "count": "Active",
-      "url": "https://www.youtube.com/results?search_query=Amya"
-    },
-    "instagram": {
-      "handle": "@amya",
-      "count": "Active",
-      "url": "https://www.instagram.com/amya"
-    },
-    "kick": null,
-    "bio": "Official 8Bit Creatives content creator and talent partner, actively streaming and creating gaming content.",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Amya",
-    "youtubeHandle": "@amya",
-    "instagramUrl": "https://www.instagram.com/amya",
-    "instagramHandle": "@amya",
-    "kickUrl": null,
-    "kickHandle": null,
-    "realName": "Amya",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
-    "platforms": [
-      "youtube",
-      "instagram"
-    ]
-  },
-  {
     "name": "Ankkita",
     "alias": "Ankkita C",
     "category": "variety",
-    "categoryLabel": "Variety Gaming \u00b7 Lifestyle \u00b7 Story Games",
+    "categoryLabel": "Variety Gaming · Lifestyle · Story Games",
     "reach": "420K",
     "youtube": {
       "handle": "@AnkkitaC",
@@ -105,7 +108,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Ankkita C",
-    "categories": "Variety Gaming \u00b7 Lifestyle \u00b7 Story Games",
+    "categories": "Variety Gaming · Lifestyle · Story Games",
     "platforms": [
       "youtube",
       "instagram"
@@ -115,7 +118,7 @@
     "name": "Binks",
     "alias": "Mithul Nayak",
     "category": "esports",
-    "categoryLabel": "Valorant \u00b7 Variety Gaming \u00b7 Esports Caster",
+    "categoryLabel": "Valorant · Variety Gaming · Esports Caster",
     "reach": "520K",
     "youtube": {
       "handle": "@8bitBinks69",
@@ -138,7 +141,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Mithul Nayak",
-    "categories": "Valorant \u00b7 Variety Gaming \u00b7 Esports Caster",
+    "categories": "Valorant · Variety Gaming · Esports Caster",
     "platforms": [
       "youtube",
       "instagram"
@@ -149,7 +152,7 @@
     "name": "Bixiop",
     "alias": "Bixiop",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/bixiop.png",
     "reach": "250K+",
     "youtube": {
@@ -171,7 +174,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Bixiop",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -182,7 +185,7 @@
     "name": "Dattrax",
     "alias": "Dattrax",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/dattrax.png",
     "reach": "250K+",
     "youtube": {
@@ -204,7 +207,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Dattrax",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -215,7 +218,7 @@
     "name": "Gigi",
     "alias": "Gigi",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/gigi.png",
     "reach": "250K+",
     "youtube": {
@@ -237,7 +240,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Gigi",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -247,7 +250,7 @@
     "name": "Soul Goblin",
     "alias": "Harsh Paudwal",
     "category": "bgmi",
-    "categoryLabel": "BGMI \u00b7 Esports \u00b7 Competitive Gaming",
+    "categoryLabel": "BGMI · Esports · Competitive Gaming",
     "reach": "485K",
     "youtube": {
       "handle": "@SoulGoblin",
@@ -274,7 +277,7 @@
     "kickUrl": "https://kick.com/soulgoblin",
     "kickHandle": "soulgoblin",
     "realName": "Harsh Paudwal",
-    "categories": "BGMI \u00b7 Esports \u00b7 Competitive Gaming",
+    "categories": "BGMI · Esports · Competitive Gaming",
     "platforms": [
       "youtube",
       "instagram",
@@ -285,7 +288,7 @@
     "name": "8Bit Goldy",
     "alias": "Lokesh Jain",
     "category": "variety",
-    "categoryLabel": "Co-Founder \u00b7 Talent Management \u00b7 Gaming Executive",
+    "categoryLabel": "Co-Founder · Talent Management · Gaming Executive",
     "reach": "550K",
     "youtube": {
       "handle": "@8bitgoldy",
@@ -308,7 +311,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Lokesh Jain",
-    "categories": "Co-Founder \u00b7 Talent Management \u00b7 Gaming Executive",
+    "categories": "Co-Founder · Talent Management · Gaming Executive",
     "platforms": [
       "youtube",
       "instagram"
@@ -319,7 +322,7 @@
     "name": "Headflicker",
     "alias": "Headflicker",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/headflicker.png",
     "reach": "250K+",
     "youtube": {
@@ -341,7 +344,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Headflicker",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -351,7 +354,7 @@
     "name": "Jokerkihaveli",
     "alias": "Gulrez Khan",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Entertainment \u00b7 Variety Streaming",
+    "categoryLabel": "Gaming · Entertainment · Variety Streaming",
     "reach": "2.33M",
     "youtube": {
       "handle": "@jokerkihavelii",
@@ -378,7 +381,7 @@
     "kickUrl": "https://kick.com/jokerkihaveli",
     "kickHandle": "jokerkihaveli",
     "realName": "Gulrez Khan",
-    "categories": "Gaming \u00b7 Entertainment \u00b7 Variety Streaming",
+    "categories": "Gaming · Entertainment · Variety Streaming",
     "platforms": [
       "youtube",
       "instagram",
@@ -389,7 +392,7 @@
     "name": "Jonty",
     "alias": "Jonty Gaming",
     "category": "esports",
-    "categoryLabel": "Esports \u00b7 Free Fire \u00b7 Competitive Athlete",
+    "categoryLabel": "Esports · Free Fire · Competitive Athlete",
     "reach": "3.1M",
     "youtube": {
       "handle": "@JontyGaming",
@@ -412,7 +415,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Jonty Gaming",
-    "categories": "Esports \u00b7 Free Fire \u00b7 Competitive Athlete",
+    "categories": "Esports · Free Fire · Competitive Athlete",
     "platforms": [
       "youtube",
       "instagram"
@@ -422,7 +425,7 @@
     "name": "Juicy",
     "alias": "Naman Chouhan",
     "category": "bgmi",
-    "categoryLabel": "BGMI \u00b7 Esports Athlete \u00b7 Competitive Gaming",
+    "categoryLabel": "BGMI · Esports Athlete · Competitive Gaming",
     "reach": "350K",
     "youtube": {
       "handle": "@8bit_juicy",
@@ -445,7 +448,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Naman Chouhan",
-    "categories": "BGMI \u00b7 Esports Athlete \u00b7 Competitive Gaming",
+    "categories": "BGMI · Esports Athlete · Competitive Gaming",
     "platforms": [
       "youtube",
       "instagram"
@@ -455,7 +458,7 @@
     "name": "K18",
     "alias": "Karan Pathak",
     "category": "esports",
-    "categoryLabel": "Esports Caster \u00b7 Host \u00b7 Content Creator",
+    "categoryLabel": "Esports Caster · Host · Content Creator",
     "reach": "680K",
     "youtube": {
       "handle": "@ketan_k18",
@@ -468,7 +471,7 @@
       "url": "https://www.instagram.com/k18gaming"
     },
     "kick": null,
-    "bio": "One of India\u2019s most celebrated esports casters and analysts, lending his voice and energy to premier national and international BGMI tournaments.",
+    "bio": "One of India’s most celebrated esports casters and analysts, lending his voice and energy to premier national and international BGMI tournaments.",
     "id": "k18",
     "img": "assets/creators/cinematic/k18.png",
     "youtubeUrl": "https://www.youtube.com/@ketan_k18",
@@ -478,7 +481,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Karan Pathak",
-    "categories": "Esports Caster \u00b7 Host \u00b7 Content Creator",
+    "categories": "Esports Caster · Host · Content Creator",
     "platforms": [
       "youtube",
       "instagram"
@@ -488,7 +491,7 @@
     "name": "Krutika",
     "alias": "Krutika Ojha",
     "category": "variety",
-    "categoryLabel": "Variety Gaming \u00b7 Lifestyle \u00b7 Vlogging",
+    "categoryLabel": "Variety Gaming · Lifestyle · Vlogging",
     "reach": "850K",
     "youtube": {
       "handle": "@KrutikaPlays",
@@ -515,7 +518,7 @@
     "kickUrl": "https://kick.com/krutika",
     "kickHandle": "krutika",
     "realName": "Krutika Ojha",
-    "categories": "Variety Gaming \u00b7 Lifestyle \u00b7 Vlogging",
+    "categories": "Variety Gaming · Lifestyle · Vlogging",
     "platforms": [
       "youtube",
       "instagram",
@@ -527,7 +530,7 @@
     "name": "Mafia",
     "alias": "Mafia",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/mafia.png",
     "reach": "250K+",
     "youtube": {
@@ -549,7 +552,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Mafia",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -559,7 +562,7 @@
     "name": "Mamba",
     "alias": "Salman Ahmad",
     "category": "gta",
-    "categoryLabel": "GTA RP \u00b7 Variety Gaming \u00b7 Vlogs",
+    "categoryLabel": "GTA RP · Variety Gaming · Vlogs",
     "reach": "1.44M",
     "youtube": {
       "handle": "@8bit_mamba",
@@ -586,7 +589,7 @@
     "kickUrl": "https://kick.com/8bitmamba",
     "kickHandle": "8bitmamba",
     "realName": "Salman Ahmad",
-    "categories": "GTA RP \u00b7 Variety Gaming \u00b7 Vlogs",
+    "categories": "GTA RP · Variety Gaming · Vlogs",
     "platforms": [
       "youtube",
       "instagram",
@@ -597,7 +600,7 @@
     "name": "Beg4Mercy",
     "alias": "Karan Salgotra",
     "category": "gta",
-    "categoryLabel": "GTA RP \u00b7 Variety Gaming \u00b7 Entertainment",
+    "categoryLabel": "GTA RP · Variety Gaming · Entertainment",
     "reach": "780K",
     "youtube": {
       "handle": "@Beg4Mercy",
@@ -624,7 +627,7 @@
     "kickUrl": "https://kick.com/beg4mercy",
     "kickHandle": "beg4mercy",
     "realName": "Karan Salgotra",
-    "categories": "GTA RP \u00b7 Variety Gaming \u00b7 Entertainment",
+    "categories": "GTA RP · Variety Gaming · Entertainment",
     "platforms": [
       "youtube",
       "instagram",
@@ -635,7 +638,7 @@
     "name": "Mili",
     "alias": "Saloni Kandalgaonkar",
     "category": "variety",
-    "categoryLabel": "Variety Gaming \u00b7 Entertainment \u00b7 Lifestyle",
+    "categoryLabel": "Variety Gaming · Entertainment · Lifestyle",
     "reach": "460K",
     "youtube": {
       "handle": "@MilikyaMili",
@@ -658,7 +661,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Saloni Kandalgaonkar",
-    "categories": "Variety Gaming \u00b7 Entertainment \u00b7 Lifestyle",
+    "categories": "Variety Gaming · Entertainment · Lifestyle",
     "platforms": [
       "youtube",
       "instagram"
@@ -668,7 +671,7 @@
     "name": "MortaL",
     "alias": "Naman Mathur",
     "category": "bgmi",
-    "categoryLabel": "BGMI \u00b7 Variety Gaming \u00b7 Esports",
+    "categoryLabel": "BGMI · Variety Gaming · Esports",
     "reach": "7.05M",
     "youtube": {
       "handle": "@Mortalgaming",
@@ -691,7 +694,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Naman Mathur",
-    "categories": "BGMI \u00b7 Variety Gaming \u00b7 Esports",
+    "categories": "BGMI · Variety Gaming · Esports",
     "platforms": [
       "youtube",
       "instagram"
@@ -702,7 +705,7 @@
     "name": "Motacore",
     "alias": "Motacore",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/motacore.png",
     "reach": "250K+",
     "youtube": {
@@ -724,7 +727,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Motacore",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -735,7 +738,7 @@
     "name": "Mr Jay",
     "alias": "Mr Jay",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/mr jay.png",
     "reach": "250K+",
     "youtube": {
@@ -757,7 +760,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Mr Jay",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -767,7 +770,7 @@
     "name": "Nishu Tiwari",
     "alias": "Nishu Tiwari",
     "category": "lifestyle",
-    "categoryLabel": "Lifestyle \u00b7 Vlogging \u00b7 Youth Culture",
+    "categoryLabel": "Lifestyle · Vlogging · Youth Culture",
     "reach": "4.37M",
     "youtube": {
       "handle": "@inishutiwari",
@@ -790,7 +793,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Nishu Tiwari",
-    "categories": "Lifestyle \u00b7 Vlogging \u00b7 Youth Culture",
+    "categories": "Lifestyle · Vlogging · Youth Culture",
     "platforms": [
       "youtube",
       "instagram"
@@ -800,7 +803,7 @@
     "name": "Pahadi",
     "alias": "Lokesh Karakoti",
     "category": "bgmi",
-    "categoryLabel": "BGMI \u00b7 Free Fire \u00b7 Esports Champion",
+    "categoryLabel": "BGMI · Free Fire · Esports Champion",
     "reach": "1.5M",
     "youtube": {
       "handle": "@PahadiGamer",
@@ -823,7 +826,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Lokesh Karakoti",
-    "categories": "BGMI \u00b7 Free Fire \u00b7 Esports Champion",
+    "categories": "BGMI · Free Fire · Esports Champion",
     "platforms": [
       "youtube",
       "instagram"
@@ -833,7 +836,7 @@
     "name": "Payal",
     "alias": "Payal Dhare",
     "category": "variety",
-    "categoryLabel": "BGMI \u00b7 Variety Gaming \u00b7 Vlogs",
+    "categoryLabel": "BGMI · Variety Gaming · Vlogs",
     "reach": "4.02M",
     "youtube": {
       "handle": "@PayalGaming",
@@ -860,7 +863,7 @@
     "kickUrl": "https://kick.com/payalgaming",
     "kickHandle": "payalgaming",
     "realName": "Payal Dhare",
-    "categories": "BGMI \u00b7 Variety Gaming \u00b7 Vlogs",
+    "categories": "BGMI · Variety Gaming · Vlogs",
     "platforms": [
       "youtube",
       "instagram",
@@ -872,7 +875,7 @@
     "name": "Pitajiplayz",
     "alias": "Pitajiplayz",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/pitajiplayz.png",
     "reach": "250K+",
     "youtube": {
@@ -894,7 +897,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Pitajiplayz",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -904,7 +907,7 @@
     "name": "Pothead",
     "alias": "Nihar Saha",
     "category": "variety",
-    "categoryLabel": "Variety Gaming \u00b7 Entertainment \u00b7 Lifestyle",
+    "categoryLabel": "Variety Gaming · Entertainment · Lifestyle",
     "reach": "380K",
     "youtube": {
       "handle": "@NiharSaha",
@@ -927,7 +930,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Nihar Saha",
-    "categories": "Variety Gaming \u00b7 Entertainment \u00b7 Lifestyle",
+    "categories": "Variety Gaming · Entertainment · Lifestyle",
     "platforms": [
       "youtube",
       "instagram"
@@ -938,7 +941,7 @@
     "name": "Prateek",
     "alias": "Prateek",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/prateek.png",
     "reach": "250K+",
     "youtube": {
@@ -960,7 +963,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Prateek",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -971,7 +974,7 @@
     "name": "Rebel",
     "alias": "Rebel",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/rebel.png",
     "reach": "250K+",
     "youtube": {
@@ -993,7 +996,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Rebel",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -1003,7 +1006,7 @@
     "name": "Regaltos",
     "alias": "Soumya Pattanayak",
     "category": "bgmi",
-    "categoryLabel": "BGMI \u00b7 Esports \u00b7 Variety Gaming",
+    "categoryLabel": "BGMI · Esports · Variety Gaming",
     "reach": "2.25M",
     "youtube": {
       "handle": "@SoulRegaltos",
@@ -1030,7 +1033,7 @@
     "kickUrl": "https://kick.com/soulregaltos",
     "kickHandle": "soulregaltos",
     "realName": "Soumya Pattanayak",
-    "categories": "BGMI \u00b7 Esports \u00b7 Variety Gaming",
+    "categories": "BGMI · Esports · Variety Gaming",
     "platforms": [
       "youtube",
       "instagram",
@@ -1042,7 +1045,7 @@
     "name": "Rockybhai",
     "alias": "Rockybhai",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/rockybhai.png",
     "reach": "250K+",
     "youtube": {
@@ -1064,7 +1067,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Rockybhai",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -1075,7 +1078,7 @@
     "name": "Rusherwow",
     "alias": "Rusherwow",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/rusherwow.png",
     "reach": "250K+",
     "youtube": {
@@ -1097,7 +1100,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Rusherwow",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -1107,7 +1110,7 @@
     "name": "Sarang",
     "alias": "Sarang Dholwade",
     "category": "bgmi",
-    "categoryLabel": "BGMI \u00b7 Esports Athlete \u00b7 Fragger",
+    "categoryLabel": "BGMI · Esports Athlete · Fragger",
     "reach": "320K",
     "youtube": {
       "handle": "@8bit_sarang",
@@ -1130,7 +1133,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Sarang Dholwade",
-    "categories": "BGMI \u00b7 Esports Athlete \u00b7 Fragger",
+    "categories": "BGMI · Esports Athlete · Fragger",
     "platforms": [
       "youtube",
       "instagram"
@@ -1140,7 +1143,7 @@
     "name": "Sherlock",
     "alias": "Monika Jeph",
     "category": "variety",
-    "categoryLabel": "Valorant \u00b7 Variety Gaming \u00b7 Streaming",
+    "categoryLabel": "Valorant · Variety Gaming · Streaming",
     "reach": "310K",
     "youtube": {
       "handle": "@sherlockgaming",
@@ -1163,7 +1166,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Monika Jeph",
-    "categories": "Valorant \u00b7 Variety Gaming \u00b7 Streaming",
+    "categories": "Valorant · Variety Gaming · Streaming",
     "platforms": [
       "youtube",
       "instagram"
@@ -1173,7 +1176,7 @@
     "name": "Sid",
     "alias": "Siddhant Joshi",
     "category": "variety",
-    "categoryLabel": "Esports Management \u00b7 Variety Gaming \u00b7 Content Creator",
+    "categoryLabel": "Esports Management · Variety Gaming · Content Creator",
     "reach": "450K",
     "youtube": {
       "handle": "@SiddhantJoshi",
@@ -1196,7 +1199,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Siddhant Joshi",
-    "categories": "Esports Management \u00b7 Variety Gaming \u00b7 Content Creator",
+    "categories": "Esports Management · Variety Gaming · Content Creator",
     "platforms": [
       "youtube",
       "instagram"
@@ -1207,7 +1210,7 @@
     "name": "Simarpsy",
     "alias": "Simarpsy",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/simarpsy.png",
     "reach": "250K+",
     "youtube": {
@@ -1229,7 +1232,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Simarpsy",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -1239,7 +1242,7 @@
     "name": "Snax",
     "alias": "Raj Varma",
     "category": "bgmi",
-    "categoryLabel": "BGMI \u00b7 Esports \u00b7 Tutorials",
+    "categoryLabel": "BGMI · Esports · Tutorials",
     "reach": "1.65M",
     "youtube": {
       "handle": "@SnaxGaming",
@@ -1266,7 +1269,7 @@
     "kickUrl": "https://kick.com/snaxgaming",
     "kickHandle": "snaxgaming",
     "realName": "Raj Varma",
-    "categories": "BGMI \u00b7 Esports \u00b7 Tutorials",
+    "categories": "BGMI · Esports · Tutorials",
     "platforms": [
       "youtube",
       "instagram",
@@ -1277,7 +1280,7 @@
     "name": "8Bit Thug",
     "alias": "Animesh Agarwal",
     "category": "variety",
-    "categoryLabel": "Founder \u00b7 Esports Pioneer \u00b7 Gaming Industry Leader",
+    "categoryLabel": "Founder · Esports Pioneer · Gaming Industry Leader",
     "reach": "1.08M",
     "youtube": {
       "handle": "@8bitthug",
@@ -1300,7 +1303,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Animesh Agarwal",
-    "categories": "Founder \u00b7 Esports Pioneer \u00b7 Gaming Industry Leader",
+    "categories": "Founder · Esports Pioneer · Gaming Industry Leader",
     "platforms": [
       "youtube",
       "instagram"
@@ -1310,7 +1313,7 @@
     "name": "Viper",
     "alias": "Yash Soni",
     "category": "variety",
-    "categoryLabel": "BGMI \u00b7 Variety Gaming \u00b7 Community Streams",
+    "categoryLabel": "BGMI · Variety Gaming · Community Streams",
     "reach": "1.27M",
     "youtube": {
       "handle": "@SoulViper",
@@ -1337,7 +1340,7 @@
     "kickUrl": "https://kick.com/soulviper",
     "kickHandle": "soulviper",
     "realName": "Yash Soni",
-    "categories": "BGMI \u00b7 Variety Gaming \u00b7 Community Streams",
+    "categories": "BGMI · Variety Gaming · Community Streams",
     "platforms": [
       "youtube",
       "instagram",
@@ -1349,7 +1352,7 @@
     "name": "Willy",
     "alias": "Willy",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/willy.png",
     "reach": "250K+",
     "youtube": {
@@ -1371,7 +1374,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Willy",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"
@@ -1382,7 +1385,7 @@
     "name": "Zeref",
     "alias": "Zeref",
     "category": "variety",
-    "categoryLabel": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categoryLabel": "Gaming · Content Creation · 8Bit Roster",
     "img": "assets/creators/cinematic/zeref.png",
     "reach": "250K+",
     "youtube": {
@@ -1404,7 +1407,7 @@
     "kickUrl": null,
     "kickHandle": null,
     "realName": "Zeref",
-    "categories": "Gaming \u00b7 Content Creation \u00b7 8Bit Roster",
+    "categories": "Gaming · Content Creation · 8Bit Roster",
     "platforms": [
       "youtube",
       "instagram"

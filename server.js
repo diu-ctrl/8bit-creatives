@@ -61,7 +61,7 @@ const server = http.createServer((req, res) => {
           fs.mkdirSync(cinematicDir, { recursive: true });
         }
 
-        if (imageBase64) {
+        if (imageBase64 && imageBase64.startsWith('data:image')) {
           const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '');
           const buffer = Buffer.from(base64Data, 'base64');
           const destPath = path.join(cinematicDir, targetFilename);
