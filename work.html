@@ -338,18 +338,65 @@
     .work-card.featured .work-card-image {
       aspect-ratio: 16 / 10;
     }
+    .work-card-media-wrap {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0A0A0A;
+    }
+    .work-card-bg-img {
+      display: none;
+    }
+    .work-card-fg-img,
     .work-card-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
       filter: none;
-      transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+      transition: none;
+      transform: none;
+    }
+    /* Square, vertical and fitted thumbnails: contain foreground + dimmed blurred background */
+    .work-card-media-wrap.is-fitted {
+      background: #000000;
+    }
+    .work-card-media-wrap.is-fitted .work-card-bg-img {
+      display: block !important;
+      position: absolute !important;
+      inset: -16px !important;
+      width: calc(100% + 32px) !important;
+      height: calc(100% + 32px) !important;
+      object-fit: cover !important;
+      opacity: 0.38 !important;
+      filter: blur(8px) brightness(0.85) !important;
+      transform: scale(1.06) !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+      user-select: none !important;
+    }
+    .work-card-media-wrap.is-fitted .work-card-fg-img {
+      position: relative !important;
+      width: auto !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      object-fit: contain !important;
+      display: block !important;
+      z-index: 2 !important;
+      filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.7)) !important;
+      transform: none !important;
     }
     .work-card:hover {
       transform: none;
     }
-    .work-card:hover .work-card-image img {
+    .work-card:hover .work-card-image img,
+    .work-card:hover .work-card-media-wrap img {
       transform: none;
     }
     .work-card-overlay {
@@ -362,6 +409,7 @@
       padding: 24px;
       opacity: 0;
       transition: opacity 300ms ease;
+      z-index: 5;
     }
     .work-card:hover .work-card-overlay {
       opacity: 1;
@@ -1178,7 +1226,7 @@
     // 2. Case study dataset
     const CASE_STUDIES = [
       {
-        id: 0, featured: true, category: 'brand', hasRealImage: true, thumbnailText: "Google Gemini",
+        id: 0, featured: true, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: "Google Gemini",
         label: "GENERATIVE AI & CRICKET CAMPAIGN", name: "Google Gemini \"The Switch\" (ft. Kevin Pietersen)", client: "Google India",
         img: "/images-for-landing-page/Case Studies/gemini.jpg",
         metric: "Kevin Pietersen x 8Bit · Google Gemini AI gaming campaign",
@@ -1189,7 +1237,7 @@
         credits: ["8Bit Creatives","Google India","S8UL"]
       },
       {
-        id: 1, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 1, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "TECH / AI INTEGRATION", name: "Meta AI Arcade (ft. Payal Gaming)", client: "Meta",
         img: "/images-for-landing-page/Case Studies/meta-ai.jpg",
         metric: "Multi-million digital reach · Gen-Z AI awareness",
@@ -1200,7 +1248,7 @@
         credits: ["8Bit Creatives","Meta India","Payal Gaming"]
       },
       {
-        id: 2, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 2, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "BEVERAGE CAMPAIGN", name: "Thums Up \"Bring The Rush\" (ft. Snax Gaming)", client: "The Coca-Cola Company",
         img: "/images-for-landing-page/Case Studies/thums-up.jpg",
         metric: "Top trending gaming beverage activation · Snax signature campaign",
@@ -1211,7 +1259,7 @@
         credits: ["8Bit Creatives","Thums Up","Coca-Cola India","Snax"]
       },
       {
-        id: 3, featured: false, category: 'broadcast', hasRealImage: true, thumbnailText: undefined,
+        id: 3, featured: false, category: 'broadcast', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "ENTERTAINMENT EVENT IP", name: "Netflix Stranger Things Season 5 Finale Premiere", client: "Netflix India",
         img: "/images-for-landing-page/Case Studies/stranger-things.jpg",
         metric: "Exclusive live fan premiere hosted by Payal Gaming",
@@ -1222,7 +1270,7 @@
         credits: ["8Bit Creatives","Netflix India","Payal Gaming"]
       },
       {
-        id: 4, featured: false, category: 'platform', hasRealImage: true, thumbnailText: undefined,
+        id: 4, featured: false, category: 'platform', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "GLOBAL GAMING MILESTONE", name: "YouTube x Rockstar Games GTA 6 Premiere (ft. Payal Gaming)", client: "YouTube Gaming / Rockstar Games",
         img: "/images-for-landing-page/Case Studies/gta6.jpg",
         metric: "Global 24-hour launch stream representative for India",
@@ -1233,7 +1281,7 @@
         credits: ["8Bit Creatives","YouTube Gaming","Rockstar Games","Payal Gaming"]
       },
       {
-        id: 5, featured: false, category: 'broadcast', hasRealImage: true, thumbnailText: undefined,
+        id: 5, featured: false, category: 'broadcast', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "OTT ENTERTAINMENT IP", name: "Amazon Prime Video \"Alliance\" & MrBeast (ft. Payal)", client: "Amazon Prime Video",
         img: "/images-for-landing-page/Case Studies/amazon-prime.jpg",
         metric: "Flagship OTT title promotions · Interactive creator watch-alongs",
@@ -1244,7 +1292,7 @@
         credits: ["8Bit Creatives","Amazon Prime Video","Payal Gaming"]
       },
       {
-        id: 6, featured: false, category: 'brand', hasRealImage: true, thumbnailText: "TATA IPL",
+        id: 6, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: "TATA IPL",
         label: "CRICKET ESPORTS CROSSOVER", name: "TATA IPL Fan Face-Offs & Captains Day", client: "TATA IPL / Star Sports / KKR",
         img: "/images-for-landing-page/Case Studies/tata-ipl.jpg",
         metric: "Stadium activations · Star Sports #IPLRevengeWeek",
@@ -1255,7 +1303,7 @@
         credits: ["8Bit Creatives","TATA IPL","Star Sports","KKR","Rajasthan Royals"]
       },
       {
-        id: 7, featured: false, category: 'broadcast', hasRealImage: true, thumbnailText: "ICC T20",
+        id: 7, featured: false, category: 'broadcast', hasRealImage: true, fitThumb: true, thumbnailText: "ICC T20",
         label: "GLOBAL SPORTS FESTIVAL", name: "ICC Men's T20 World Cup Creators Club", client: "International Cricket Council (ICC)",
         img: "/images-for-landing-page/Case Studies/t20-world-cup.jpg",
         metric: "Official Captains Day delegation · Global cricket gaming bridge",
@@ -1266,7 +1314,7 @@
         credits: ["8Bit Creatives","ICC","Disney+ Hotstar"]
       },
       {
-        id: 8, featured: false, category: 'broadcast', hasRealImage: true, thumbnailText: "Wimbledon",
+        id: 8, featured: false, category: 'broadcast', hasRealImage: true, fitThumb: true, thumbnailText: "Wimbledon",
         label: "PREMIUM SPORTS BROADCAST", name: "Wimbledon Championships x Star Sports", client: "Star Sports / Disney+ Hotstar",
         img: "/images-for-landing-page/Case Studies/wimbledon.jpg",
         metric: "Official Centre Court Editorial · London Live Vlogs",
@@ -1277,7 +1325,7 @@
         credits: ["8Bit Creatives","Star Sports","Disney+ Hotstar","Wimbledon"]
       },
       {
-        id: 9, featured: false, category: 'brand', hasRealImage: false, thumbnailText: "Samsung Galaxy",
+        id: 9, featured: false, category: 'brand', hasRealImage: false, fitThumb: false, thumbnailText: "Samsung Galaxy",
         label: "MOBILE PERFORMANCE", name: "Samsung Galaxy S-Series Gaming Showcase", client: "Samsung India",
         img: "/images-for-landing-page/Case Studies/samsung.jpg",
         metric: "19M+ social impressions · Pro-tier device endorsement",
@@ -1288,7 +1336,7 @@
         credits: ["8Bit Creatives","Samsung India"]
       },
       {
-        id: 10, featured: false, category: 'brand', hasRealImage: true, thumbnailText: "Airtel 5G",
+        id: 10, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: "Airtel 5G",
         label: "TELECOM & 5G CLOUD GAMING", name: "Airtel 5G Cloud Gaming Showcase", client: "Bharti Airtel",
         img: "/images-for-landing-page/Case Studies/airtel.jpg",
         metric: "India's 1st 5G Cloud Gaming trial · Ultra-low latency demo",
@@ -1299,7 +1347,7 @@
         credits: ["8Bit Creatives","Bharti Airtel","S8UL"]
       },
       {
-        id: 11, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 11, featured: false, category: 'brand', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "GLOBAL TITLE SPONSOR", name: "Reliance Campa Energy x S8UL EWC", client: "Reliance Consumer Products",
         img: "/images-for-landing-page/Case Studies/campa.jpg",
         metric: "Global Title Sponsor · Esports World Cup 2024 campaign",
@@ -1310,7 +1358,7 @@
         credits: ["8Bit Creatives","Campa Energy","Reliance Consumer Products","S8UL"]
       },
       {
-        id: 12, featured: false, category: 'tournament', hasRealImage: true, thumbnailText: undefined,
+        id: 12, featured: false, category: 'tournament', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "TOURNAMENT ACTIVATION", name: "Red Bull MEO Season", client: "Red Bull",
         img: "/images-for-landing-page/Case Studies/redbull.jpg",
         metric: "18M+ impressions · 14 creators deployed",
@@ -1321,7 +1369,7 @@
         credits: ["8Bit Creatives","Red Bull","MEO"]
       },
       {
-        id: 13, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 13, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "FMCG / BEVERAGE", name: "Nescafé \"Stream Mode On\" (ft. Ankkita C)", client: "Nestlé India",
         img: "/images-for-landing-page/Case Studies/nescafe.jpg",
         metric: "Late-night stream refuel activation · High student/gamer recall",
@@ -1332,7 +1380,7 @@
         credits: ["8Bit Creatives","Nestlé India","Nescafé","Ankkita C"]
       },
       {
-        id: 14, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 14, featured: false, category: 'brand', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "FMCG IN-STREAM CAMPAIGN", name: "Cadbury Fuse #WhileGaming", client: "Mondelez India",
         img: "/images-for-landing-page/Case Studies/cadbury.jpg",
         metric: "18M+ views · Top FMCG gaming campaign award nominee",
@@ -1343,7 +1391,7 @@
         credits: ["8Bit Creatives","Mondelez India","Cadbury Fuse"]
       },
       {
-        id: 15, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 15, featured: false, category: 'brand', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "AUTOMOTIVE LAUNCH", name: "MG Comet EV Gamer Edition (ft. MortaL)", client: "MG Motor India",
         img: "/images-for-landing-page/Case Studies/mg-comet.jpg",
         metric: "India's 1st gamer-centric electric vehicle showcase",
@@ -1354,7 +1402,7 @@
         credits: ["8Bit Creatives","MG Motor India","Mortal"]
       },
       {
-        id: 16, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 16, featured: false, category: 'brand', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "AUTOMOTIVE / PERFORMANCE", name: "TVS Apache High-Performance Campaign", client: "TVS Motor Company",
         img: "/images-for-landing-page/Case Studies/tvs-apache.jpg",
         metric: "Multi-creator high-octane racing & gaming crossover",
@@ -1365,7 +1413,7 @@
         credits: ["8Bit Creatives","TVS Motor Company","Ampverse DMI","5 Creators"]
       },
       {
-        id: 17, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 17, featured: false, category: 'brand', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "GEN-Z FASHION MANDATE", name: "OWND! (Aditya Birla Fashion) \"Gamer Drop\" (ft. Payal)", client: "Aditya Birla Fashion",
         img: "/images-for-landing-page/Case Studies/ownd.jpg",
         metric: "Apparel launch collaboration · Payal Gaming brand ambassador",
@@ -1376,7 +1424,7 @@
         credits: ["8Bit Creatives","OWND!","Aditya Birla Fashion","Payal Gaming"]
       },
       {
-        id: 18, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 18, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "FOOTWEAR / FASHION", name: "Crocs India Classic Clog (ft. Ankkita C)", client: "Crocs India",
         img: "/images-for-landing-page/Case Studies/crocs.jpg",
         metric: "Gen-Z footwear integration · Gaming lifestyle alignment",
@@ -1387,7 +1435,7 @@
         credits: ["8Bit Creatives","Crocs India","Ankkita C"]
       },
       {
-        id: 19, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 19, featured: false, category: 'brand', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "LIFESTYLE & ADVOCACY", name: "Royal Challenge \"Choose Bold / Naya Sher\" (ft. MortaL)", client: "Diageo India",
         img: "/images-for-landing-page/Case Studies/royal-challenge.jpg",
         metric: "National lifestyle alignment · Mortal as young India icon",
@@ -1398,7 +1446,7 @@
         credits: ["8Bit Creatives","Royal Challenge","Diageo","Mortal"]
       },
       {
-        id: 20, featured: false, category: 'brand', hasRealImage: false, thumbnailText: "Gillette",
+        id: 20, featured: false, category: 'brand', hasRealImage: false, fitThumb: false, thumbnailText: "Gillette",
         label: "FMCG / GROOMING", name: "Gillette #KeepItSmooth Challenge", client: "Gillette India",
         img: "/images-for-landing-page/Case Studies/gillette.jpg",
         metric: "18M+ views · 7.5% engagement rate in 16-24 demo",
@@ -1409,7 +1457,7 @@
         credits: ["8Bit Creatives","Gillette India"]
       },
       {
-        id: 21, featured: false, category: 'brand', hasRealImage: false, thumbnailText: "Monster Energy",
+        id: 21, featured: false, category: 'brand', hasRealImage: false, fitThumb: false, thumbnailText: "Monster Energy",
         label: "ANNUAL MANDATE", name: "Monster Energy Official Partnership", client: "Monster Energy",
         img: "/images-for-landing-page/Case Studies/monster.jpg",
         metric: "Official Energy Drink Partner · Annual ambassador program",
@@ -1420,7 +1468,7 @@
         credits: ["8Bit Creatives","Monster Energy","iQOO SOUL","S8UL"]
       },
       {
-        id: 22, featured: false, category: 'brand', hasRealImage: true, thumbnailText: "Lenovo Legion",
+        id: 22, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: "Lenovo Legion",
         label: "HARDWARE & CONTENT IP", name: "Lenovo Legion \"Blaze\" & #LegionLegends", client: "Lenovo India / Intel",
         img: "/images-for-landing-page/Case Studies/legion-legends.jpg",
         metric: "40-min video podcast · Legion 5i launch campaign",
@@ -1431,7 +1479,7 @@
         credits: ["8Bit Creatives","Lenovo Legion","Intel India"]
       },
       {
-        id: 23, featured: false, category: 'tournament', hasRealImage: true, thumbnailText: undefined,
+        id: 23, featured: false, category: 'tournament', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "ON-GROUND GAMING FEST", name: "Lenovo Legion & Intel S8UL Gaming Fest", client: "Lenovo Legion & Intel",
         img: "/images-for-landing-page/Case Studies/lenovo.jpg",
         metric: "13,000+ on-ground footfall · 2-day sold-out LAN festival",
@@ -1442,7 +1490,7 @@
         credits: ["8Bit Creatives","S8UL","Lenovo Legion","Intel"]
       },
       {
-        id: 24, featured: false, category: 'tournament', hasRealImage: true, thumbnailText: undefined,
+        id: 24, featured: false, category: 'tournament', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "ESPORTS IP", name: "OnePlus Dominate Series", client: "OnePlus India",
         img: "/images-for-landing-page/Case Studies/oneplus.jpg",
         metric: "5M+ live views per edition · 35M+ social impressions",
@@ -1453,7 +1501,7 @@
         credits: ["8Bit Creatives","OnePlus","S8UL Creators"]
       },
       {
-        id: 25, featured: false, category: 'brand', hasRealImage: true, thumbnailText: "OnePlus 15",
+        id: 25, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: "OnePlus 15",
         label: "FLAGSHIP SMARTPHONE KEYNOTE", name: "OnePlus 15 Gaming Keynote (ft. Snax Gaming)", client: "OnePlus India",
         img: "/images-for-landing-page/Case Studies/oneplus-15.jpg",
         metric: "Snax Gaming keynote speaker · 165Hz display gaming showcase",
@@ -1464,7 +1512,7 @@
         credits: ["8Bit Creatives","OnePlus India"]
       },
       {
-        id: 26, featured: false, category: 'brand', hasRealImage: true, thumbnailText: "AMD Radeon",
+        id: 26, featured: false, category: 'brand', hasRealImage: true, fitThumb: false, thumbnailText: "AMD Radeon",
         label: "PC HARDWARE & ESPORTS RIGS", name: "AMD Radeon RX & Corsair Setup (ft. 8Bit Binks)", client: "AMD India / Corsair",
         img: "/images-for-landing-page/Case Studies/amd.jpg",
         metric: "Flagship Valorant rig · Branded daily live stream integration",
@@ -1475,7 +1523,7 @@
         credits: ["8Bit Creatives","AMD India","Corsair"]
       },
       {
-        id: 27, featured: false, category: 'brand', hasRealImage: false, thumbnailText: "iQOO",
+        id: 27, featured: false, category: 'brand', hasRealImage: false, fitThumb: false, thumbnailText: "iQOO",
         label: "NAMING RIGHTS DEAL", name: "iQOO Esports Naming Rights", client: "iQOO",
         img: "/images-for-landing-page/Case Studies/iqoo.jpg",
         metric: "Biggest naming rights deal in Indian esports history",
@@ -1486,7 +1534,7 @@
         credits: ["8Bit Creatives","iQOO","8bit Esports","Reckoning","Revenant Xspark"]
       },
       {
-        id: 28, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 28, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "NATIONWIDE TALENT IP", name: "iQOO Chief Gaming Officer (CGO) Hunt", client: "iQOO India",
         img: "/images-for-landing-page/Case Studies/iqoo-cgo.jpg",
         metric: "60,000+ pan-India applications · 10 Lakh INR top prize",
@@ -1497,7 +1545,7 @@
         credits: ["8Bit Creatives","iQOO India","8Bit Thug","Payal Gaming"]
       },
       {
-        id: 29, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 29, featured: false, category: 'brand', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "HARDWARE CO-CREATION", name: "iQOO Smartphone Co-Creation Mandate", client: "iQOO India",
         img: "/images-for-landing-page/Case Studies/iqoo-cocreation.jpg",
         metric: "First-of-its-kind athlete-designed gaming smartphone features",
@@ -1508,7 +1556,7 @@
         credits: ["8Bit Creatives","iQOO India","Mortal","Payal Gaming"]
       },
       {
-        id: 30, featured: false, category: 'tournament', hasRealImage: true, thumbnailText: undefined,
+        id: 30, featured: false, category: 'tournament', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "PUBLISHER MARKETING", name: "Riot Games Valorant India Expansion", client: "Riot Games",
         img: "/images-for-landing-page/Case Studies/riot.jpg",
         metric: "Sold-out venue · 2M+ live-stream impressions",
@@ -1519,7 +1567,7 @@
         credits: ["8Bit Creatives","Riot Games","S8UL"]
       },
       {
-        id: 31, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 31, featured: false, category: 'brand', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "IN-GAME IP", name: "KRAFTON BGMI Creator Voice Packs", client: "Krafton India",
         img: "/images-for-landing-page/Case Studies/krafton.jpg",
         metric: "Most-purchased cosmetic item in BGMI Q1 2022",
@@ -1530,7 +1578,7 @@
         credits: ["8Bit Creatives","Krafton","BGMI"]
       },
       {
-        id: 32, featured: false, category: 'brand', hasRealImage: true, thumbnailText: "Road to Valor",
+        id: 32, featured: false, category: 'brand', hasRealImage: true, fitThumb: false, thumbnailText: "Road to Valor",
         label: "GAME LAUNCH & LOCALIZATION", name: "KRAFTON Road to Valor: Empires Launch", client: "KRAFTON / Dreamotion",
         img: "/images-for-landing-page/Case Studies/road-to-valor.avif",
         metric: "National launch campaign · Custom Hindi faction voiceovers",
@@ -1541,7 +1589,7 @@
         credits: ["8Bit Creatives","KRAFTON India","Dreamotion"]
       },
       {
-        id: 33, featured: false, category: 'brand', hasRealImage: true, thumbnailText: "Honor of Kings",
+        id: 33, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: "Honor of Kings",
         label: "GLOBAL MOBA LAUNCH", name: "Honor of Kings India Launch Night (Level Infinite)", client: "Level Infinite / Tencent Games",
         img: "/images-for-landing-page/Case Studies/hok.jpg",
         metric: "13 8Bit creators assembled · Massive MOBA launch showdown",
@@ -1552,7 +1600,7 @@
         credits: ["8Bit Creatives","Level Infinite","Tencent"]
       },
       {
-        id: 34, featured: false, category: 'tournament', hasRealImage: true, thumbnailText: undefined,
+        id: 34, featured: false, category: 'tournament', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "GLOBAL CLUB PROGRAM", name: "Esports World Cup (EWC) Foundation Club", client: "EWC Foundation",
         img: "/images-for-landing-page/Case Studies/ewc.jpg",
         metric: "Selected among world's elite 30 clubs · Riyadh 2024",
@@ -1563,7 +1611,7 @@
         credits: ["8Bit Creatives","S8UL","EWC Foundation","Riyadh"]
       },
       {
-        id: 35, featured: false, category: 'platform', hasRealImage: true, thumbnailText: undefined,
+        id: 35, featured: false, category: 'platform', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "BROADCAST PARTNERSHIP", name: "YouTube Official EWC Partner", client: "YouTube India",
         img: "/images-for-landing-page/Case Studies/youtube-ewc.jpg",
         metric: "Official digital broadcast and creator activation hub",
@@ -1574,7 +1622,7 @@
         credits: ["8Bit Creatives","YouTube India","S8UL","EWC"]
       },
       {
-        id: 36, featured: false, category: 'broadcast', hasRealImage: true, thumbnailText: "WAVES Esports",
+        id: 36, featured: false, category: 'broadcast', hasRealImage: true, fitThumb: true, thumbnailText: "WAVES Esports",
         label: "NATIONAL ESPORTS CHAMPIONSHIP", name: "WAVES Esports Championship (Ministry of I&B)", client: "Ministry of I&B / ESFI",
         img: "/images-for-landing-page/Case Studies/waves.jpg",
         metric: "Government of India national summit · Official talent partner",
@@ -1585,7 +1633,7 @@
         credits: ["8Bit Creatives","Ministry of I&B","ESFI","S8UL"]
       },
       {
-        id: 37, featured: false, category: 'broadcast', hasRealImage: false, thumbnailText: "Global Chess League",
+        id: 37, featured: false, category: 'broadcast', hasRealImage: false, fitThumb: false, thumbnailText: "Global Chess League",
         label: "BROADCAST & PRODUCTION", name: "Tech Mahindra Global Chess League S4", client: "Tech Mahindra",
         caseStudyUrl: "gcl-season-4.html",
         img: "/images-for-landing-page/Case Studies/chess.jpg",
@@ -1597,7 +1645,7 @@
         credits: ["8Bit Creatives","Tech Mahindra","S8UL Production"]
       },
       {
-        id: 38, featured: false, category: 'tournament', hasRealImage: true, thumbnailText: undefined,
+        id: 38, featured: false, category: 'tournament', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "TALENT PARTNERSHIP", name: "DreamHack India Official Talent Partnership", client: "NODWIN Gaming",
         img: "/images-for-landing-page/Case Studies/dreamhack.png",
         metric: "Exclusive Talent Partner across 2022 & 2024 editions",
@@ -1608,7 +1656,7 @@
         credits: ["8Bit Creatives","NODWIN Gaming","DreamHack India"]
       },
       {
-        id: 39, featured: false, category: 'platform', hasRealImage: true, thumbnailText: undefined,
+        id: 39, featured: false, category: 'platform', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "GLOBAL AWARDS SHOWCASE", name: "MOBIES 2024 International Awards (Los Angeles)", client: "The MOBIES",
         img: "/images-for-landing-page/Case Studies/mobies.jpg",
         metric: "Global Mobile Esports Organization of the Year & Creator Nominations",
@@ -1619,7 +1667,7 @@
         credits: ["8Bit Creatives","S8UL","The MOBIES","Los Angeles"]
       },
       {
-        id: 40, featured: false, category: 'tournament', hasRealImage: true, thumbnailText: undefined,
+        id: 40, featured: false, category: 'tournament', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "COLLEGIATE ESPORTS IP", name: "Red Bull Campus Clutch & Solo Legends", client: "Red Bull India",
         img: "/images-for-landing-page/Case Studies/redbull-campus.jpg",
         metric: "Collegiate esports activation across 100+ Indian universities",
@@ -1630,7 +1678,7 @@
         credits: ["8Bit Creatives","Red Bull India","Campus Clutch"]
       },
       {
-        id: 41, featured: false, category: 'brand', hasRealImage: true, thumbnailText: "Realme Narzo",
+        id: 41, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: "Realme Narzo",
         label: "HARDWARE LAUNCH", name: "Realme Narzo Performance Launches", client: "Realme India",
         img: "/images-for-landing-page/Case Studies/realme.jpg",
         metric: "14M+ views · Contributed to Amazon sell-outs",
@@ -1641,7 +1689,7 @@
         credits: ["8Bit Creatives","Realme India"]
       },
       {
-        id: 42, featured: false, category: 'tournament', hasRealImage: true, thumbnailText: undefined,
+        id: 42, featured: false, category: 'tournament', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "TELECOM ESPORTS IP", name: "JioBLAST BGMI & Free Fire Tournament", client: "Jio Platforms",
         img: "/images-for-landing-page/Case Studies/jioblast.jpg",
         metric: "Pan-India telecom esports tournament activation",
@@ -1652,7 +1700,7 @@
         credits: ["8Bit Creatives","Jio Platforms","JioGames"]
       },
       {
-        id: 43, featured: false, category: 'platform', hasRealImage: true, thumbnailText: "YouTube C2C",
+        id: 43, featured: false, category: 'platform', hasRealImage: true, fitThumb: true, thumbnailText: "YouTube C2C",
         label: "INDUSTRY KEYNOTE & SUMMIT", name: "YouTube Creator 2 Creator (C2C) Summit", client: "YouTube India",
         img: "/images-for-landing-page/Case Studies/youtube-c2c.jpg",
         metric: "Flagship Creator Summit · Gaming industry keynote leadership",
@@ -1663,7 +1711,7 @@
         credits: ["8Bit Creatives","YouTube India"]
       },
       {
-        id: 44, featured: false, category: 'broadcast', hasRealImage: true, thumbnailText: undefined,
+        id: 44, featured: false, category: 'broadcast', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "REALITY SHOW IP", name: "Amazon miniTV Playground Mandate", client: "Amazon miniTV",
         img: "/images-for-landing-page/Case Studies/playground.jpg",
         metric: "Four consecutive seasons · Mortal as Lead Mentor & Judge",
@@ -1674,7 +1722,7 @@
         credits: ["8Bit Creatives","Amazon miniTV","Rusk Media","Mortal"]
       },
       {
-        id: 45, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 45, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "FMCG INTEGRATION", name: "Mamaearth Gamified Integration (11 Creators)", client: "Mamaearth",
         img: "/images-for-landing-page/Case Studies/mamaearth.jpg",
         metric: "14M+ organic reach · 11 creators from 8Bit",
@@ -1685,7 +1733,7 @@
         credits: ["8Bit Creatives","Mamaearth","11 Creators"]
       },
       {
-        id: 46, featured: false, category: 'platform', hasRealImage: false, thumbnailText: "Kick",
+        id: 46, featured: false, category: 'platform', hasRealImage: false, fitThumb: false, thumbnailText: "Kick",
         label: "PLATFORM MIGRATION", name: "Kick India — Day One (48 Creators)", client: "Kick Streaming",
         img: "/images-for-landing-page/Case Studies/kick.jpg",
         metric: "48 creators migrated · Kick's 1st India agency partner",
@@ -1696,7 +1744,7 @@
         credits: ["8Bit Creatives","Kick","48 Creators"]
       },
       {
-        id: 47, featured: false, category: 'platform', hasRealImage: true, thumbnailText: undefined,
+        id: 47, featured: false, category: 'platform', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "PLATFORM EXCLUSIVITY", name: "Loco Exclusive Streaming Deal", client: "Loco",
         img: "/images-for-landing-page/Case Studies/loco.jpg",
         metric: "Accelerated Loco MAU past 50M mark",
@@ -1707,7 +1755,7 @@
         credits: ["8Bit Creatives","Loco","S8UL"]
       },
       {
-        id: 48, featured: false, category: 'platform', hasRealImage: true, thumbnailText: undefined,
+        id: 48, featured: false, category: 'platform', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "GAME IP INTEGRATION", name: "Gameloft Gangstar Mirage City x SoulCity", client: "Gameloft",
         img: "/images-for-landing-page/Case Studies/soulcity.jpg",
         metric: "Global mobile gaming IP custom in-game integration",
@@ -1718,7 +1766,7 @@
         credits: ["8Bit Creatives","Gameloft","SoulCity"]
       },
       {
-        id: 49, featured: false, category: 'platform', hasRealImage: true, thumbnailText: undefined,
+        id: 49, featured: false, category: 'platform', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "WEB3 & FAN LOYALTY", name: "STAN Fan Loyalty & Digital Collectibles", client: "STAN",
         img: "/images-for-landing-page/Case Studies/stan.jpg",
         metric: "Top grossing esports community engagement app partnership",
@@ -1729,7 +1777,7 @@
         credits: ["8Bit Creatives","STAN","S8UL"]
       },
       {
-        id: 50, featured: false, category: 'tournament', hasRealImage: true, thumbnailText: undefined,
+        id: 50, featured: false, category: 'tournament', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "NATIONWIDE FAN TOUR", name: "S8UL 12-City EWC Watch Party Tour", client: "S8UL / 8Bit Creatives",
         img: "/images-for-landing-page/Case Studies/ewc-tour.jpg",
         metric: "12 Indian cities · 25,000+ attending fans",
@@ -1740,7 +1788,7 @@
         credits: ["8Bit Creatives","S8UL","EWC Watch Parties"]
       },
       {
-        id: 51, featured: false, category: 'platform', hasRealImage: true, thumbnailText: undefined,
+        id: 51, featured: false, category: 'platform', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "STRATEGIC STREAMING DEAL", name: "Rooter Strategic Streaming Partnership", client: "Rooter",
         img: "/images-for-landing-page/Case Studies/rooter.jpg",
         metric: "Multi-year content & streaming distribution pact",
@@ -1751,7 +1799,7 @@
         credits: ["8Bit Creatives","Rooter","S8UL"]
       },
       {
-        id: 52, featured: false, category: 'platform', hasRealImage: true, thumbnailText: undefined,
+        id: 52, featured: false, category: 'platform', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "ESPORTS EDUCATION", name: "FrontRow Gaming & Esports Masterclass", client: "FrontRow",
         img: "/images-for-landing-page/Case Studies/frontrow.jpg",
         metric: "India's 1st structured esports curriculum with Mortal & 8Bit Thug",
@@ -1762,7 +1810,7 @@
         credits: ["8Bit Creatives","FrontRow","Mortal","8Bit Thug"]
       },
       {
-        id: 53, featured: false, category: 'broadcast', hasRealImage: true, thumbnailText: undefined,
+        id: 53, featured: false, category: 'broadcast', hasRealImage: true, fitThumb: false, thumbnailText: undefined,
         label: "EXTREME ADVENTURE DOCUSERIES", name: "S8UL Everest Base Camp 5,364m Expedition", client: "S8UL / 8Bit Creatives",
         img: "/images-for-landing-page/Case Studies/everest.jpg",
         metric: "India's 1st gamer-led Himalayan trek docuseries",
@@ -1773,7 +1821,7 @@
         credits: ["8Bit Creatives","S8UL","Joker Ki Haveli"]
       },
       {
-        id: 54, featured: false, category: 'brand', hasRealImage: true, thumbnailText: undefined,
+        id: 54, featured: false, category: 'brand', hasRealImage: true, fitThumb: true, thumbnailText: undefined,
         label: "STRATEGIC COMMUNICATIONS", name: "Max Level Strategic PR Mandate", client: "Max Level",
         img: "/images-for-landing-page/Case Studies/max-level.jpg",
         metric: "Exclusive communications & PR agency of record for 8Bit & S8UL",
@@ -1803,6 +1851,17 @@
       return words.slice(0, Math.min(words.length, 2)).join(' ');
     }
 
+    function checkThumbFit(img) {
+      if (!img || !img.naturalWidth || !img.naturalHeight) return;
+      const ar = img.naturalWidth / img.naturalHeight;
+      if (ar < 1.42) {
+        const wrap = img.closest('.work-card-media-wrap');
+        if (wrap && !wrap.classList.contains('is-fitted')) {
+          wrap.classList.add('is-fitted');
+        }
+      }
+    }
+
     function renderGrid() {
       grid.innerHTML = '';
       let visibleCount = 0;
@@ -1826,7 +1885,13 @@
           let mediaHtml = '';
           if (c.hasRealImage) {
             const imgSrc = (window.location.protocol === 'file:' && c.img && c.img.startsWith('/')) ? c.img.slice(1) : c.img;
-            mediaHtml = '<img src="' + imgSrc + '" alt="' + c.name + '" loading="lazy" onerror="this.parentElement.style.background=\'#0A0A0A\'; this.style.display=\'none\';">';
+            const isFitClass = c.fitThumb ? ' is-fitted' : '';
+            mediaHtml = [
+              '<div class="work-card-media-wrap' + isFitClass + '">',
+              '  <img src="' + imgSrc + '" class="work-card-bg-img" alt="" aria-hidden="true" loading="lazy">',
+              '  <img src="' + imgSrc + '" class="work-card-fg-img" alt="' + c.name + '" loading="lazy" onload="checkThumbFit(this)" onerror="this.closest(\'.work-card-image\').style.background=\'#0A0A0A\'; this.parentElement.style.display=\'none\';">',
+              '</div>'
+            ].join('\n');
           } else {
             const thumbText = getThumbnailText(c);
             mediaHtml = '<div class="work-card-text-thumb">' + thumbText + '</div>';
