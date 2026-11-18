@@ -441,6 +441,47 @@
     ]
   },
   {
+    "id": "mavi",
+    "name": "Mavi",
+    "alias": "Harmandeep Singh",
+    "realName": "Harmandeep Singh",
+    "category": "bgmi",
+    "categoryLabel": "Mobile Esports · Live Stream",
+    "categories": "Mobile Esports · Live Stream",
+    "img": "assets/creators/cinematic/mavi.png",
+    "reach": "1.3M+",
+    "bio": "Legendary Indian BGMI in-game leader (IGL) and esports icon, celebrated for his tactical mastery, clutch decision-making, and high-energy live broadcasts under 8Bit Creatives.",
+    "youtube": {
+      "handle": "@mavi",
+      "count": "1.3M",
+      "url": "https://www.youtube.com/@MaviOfficial"
+    },
+    "youtubeUrl": "https://www.youtube.com/@MaviOfficial",
+    "youtubeCount": "1.3M",
+    "youtubeHandle": "@mavi",
+    "instagram": {
+      "handle": "@mavi_gaming",
+      "count": "1.2M",
+      "url": "https://www.instagram.com/mavi__gaming/"
+    },
+    "instagramUrl": "https://www.instagram.com/mavi__gaming/",
+    "instagramCount": "1.2M",
+    "instagramHandle": "@mavi_gaming",
+    "kick": {
+      "handle": "mavi",
+      "count": "15K",
+      "url": "https://kick.com/mavi"
+    },
+    "kickUrl": "https://kick.com/mavi",
+    "kickCount": "15K",
+    "kickHandle": "mavi",
+    "platforms": [
+      "youtube",
+      "instagram",
+      "kick"
+    ]
+  },
+  {
     "id": "thug",
     "name": "8Bit Thug",
     "alias": "Animesh Agarwal",
