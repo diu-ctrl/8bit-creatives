@@ -1,11 +1,15 @@
 {
-  "name": "8Bit Creatives",
-  "short_name": "8Bit",
-  "description": "8Bit Creatives — India's Premier Gaming & Esports Agency.",
+  "name": "8Bit Creatives | India's Premier Gaming & Esports Agency",
+  "short_name": "8Bit Creatives",
+  "description": "8Bit Creatives — India's Premier Gaming & Esports Agency managing 50+ elite creators, BGMI rosters, and 300+ brand campaigns.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#0A0A0A",
   "theme_color": "#0A0A0A",
+  "lang": "en-IN",
+  "categories": ["entertainment", "games", "business"],
   "icons": [
     {
       "src": "/favicon-48x48.png",

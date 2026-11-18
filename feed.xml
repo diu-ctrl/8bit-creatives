@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>8Bit Creatives | Official News, Campaigns &amp; Gaming Releases</title>
+    <link>https://8bit-creatives.vercel.app/</link>
+    <description>Latest news, campaign receipts, creator additions, and esports tournament broadcasts from India's premier gaming agency, 8Bit Creatives.</description>
+    <language>en-in</language>
+    <lastBuildDate>Wed, 18 Nov 2026 12:00:00 +0530</lastBuildDate>
+    <atom:link href="https://8bit-creatives.vercel.app/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Google Gemini "The Switch" Campaign ft. Kevin Pietersen, MortaL, Payal &amp; Snax</title>
+      <link>https://8bit-creatives.vercel.app/work?open=0</link>
+      <guid>https://8bit-creatives.vercel.app/work#gemini</guid>
+      <pubDate>Mon, 10 Nov 2026 10:00:00 +0530</pubDate>
+      <description>8Bit Creatives unites cricket icon Kevin Pietersen with premier creators MortaL, Payal, and Snax for Google Gemini AI's flagship Indian consumer activation, generating 45M+ views.</description>
+      <category>Brand Campaign</category>
+    </item>
+
+    <item>
+      <title>Meta AI Arcade Campaign Integrates Payal Gaming for Gen-Z AI Adoption</title>
+      <link>https://8bit-creatives.vercel.app/work?open=1</link>
+      <guid>https://8bit-creatives.vercel.app/work#meta-ai</guid>
+      <pubDate>Wed, 05 Nov 2026 10:00:00 +0530</pubDate>
+      <description>Meta partners with 8Bit Creatives and India's top female gaming creator Payal Gaming to drive awareness for Meta AI across WhatsApp and Instagram.</description>
+      <category>AI &amp; Tech</category>
+    </item>
+
+    <item>
+      <title>Thums Up "Bring The Rush" High-Energy Competitive Gaming Campaign ft. Snax</title>
+      <link>https://8bit-creatives.vercel.app/work?open=2</link>
+      <guid>https://8bit-creatives.vercel.app/work#thums-up</guid>
+      <pubDate>Sat, 25 Oct 2026 10:00:00 +0530</pubDate>
+      <description>The Coca-Cola Company teams with 8Bit Creatives and Snax Gaming for #ToofaniClutch stream overlays and clutch gaming integrations, delivering 15M+ video impressions.</description>
+      <category>Brand Campaign</category>
+    </item>
+
+    <item>
+      <title>Payal Gaming Hosts Netflix Stranger Things Season 5 Fan Premiere</title>
+      <link>https://8bit-creatives.vercel.app/work?open=3</link>
+      <guid>https://8bit-creatives.vercel.app/work#stranger-things</guid>
+      <pubDate>Wed, 15 Oct 2026 10:00:00 +0530</pubDate>
+      <description>8Bit Creatives and Netflix India bridge youth culture as Payal Gaming hosts the exclusive on-ground Stranger Things Season 5 fan premiere, amassing 18M+ views.</description>
+      <category>Live Broadcast</category>
+    </item>
+
+    <item>
+      <title>Tech Mahindra Global Chess League Season 4: 8Bit Creatives Produces Live Broadcast</title>
+      <link>https://8bit-creatives.vercel.app/gcl-season-4</link>
+      <guid>https://8bit-creatives.vercel.app/gcl-season-4</guid>
+      <pubDate>Tue, 15 Sep 2026 10:00:00 +0530</pubDate>
+      <description>8Bit Creatives serves as the Official Broadcast &amp; Production Partner for Tech Mahindra Global Chess League Season 4, delivering multi-cam arena production to 160+ countries.</description>
+      <category>Esports Broadcast</category>
+    </item>
+
+    <item>
+      <title>Kick.com Enters India with 8Bit Creatives Platform Migration Deal</title>
+      <link>https://8bit-creatives.vercel.app/work?open=10</link>
+      <guid>https://8bit-creatives.vercel.app/work#kick</guid>
+      <pubDate>Sun, 20 Jul 2026 10:00:00 +0530</pubDate>
+      <description>8Bit Creatives brokers Kick.com's landmark entry into India, onboarding gaming icons MortaL and 8Bit Thug for exclusive streaming partnerships.</description>
+      <category>Platform Migration</category>
+    </item>
+  </channel>
+</rss>

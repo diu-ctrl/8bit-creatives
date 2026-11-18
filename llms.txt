@@ -1,0 +1,67 @@
+# 8Bit Creatives
+
+> India's Premier Gaming & Esports Talent Management, Broadcast Production, and Brand Solutions Agency.
+
+8Bit Creatives is the defining commercial and talent powerhouse of the Indian gaming ecosystem. Founded in 2018 in a Mumbai LAN room by Animesh Agarwal (8Bit Thug), Lokesh Jain (8Bit Goldy), and Mrinmoy Lahkar (8Bit Beg4Mercy), 8Bit Creatives exclusively manages 50+ of India's biggest gaming creators, broadcasts live tournaments to millions of viewers, and has shipped 300+ marquee brand campaigns with Fortune 500 companies including Google, Meta, Netflix, The Coca-Cola Company (Thums Up), Krafton, Riot Games, and Tech Mahindra.
+
+Together with Naman Mathur (MortaL), 8Bit Creatives is the sister commercial entity to S8UL, the world-renowned esports and content organization that has won multiple global Esports Content Creator of the Year titles at the Esports Awards.
+
+## Key Facts
+
+- **Founded:** 2018, Mumbai, India
+- **Founders:** Animesh Agarwal (CEO), Lokesh Jain (COO), Mrinmoy Lahkar
+- **Sister Organization:** S8UL Esports (Co-founded by 8Bit Thug, Goldy, and MortaL)
+- **Creators Managed:** 50+ exclusive gaming and youth-culture talent
+- **Combined Audience Reach:** 100M+ gamers across YouTube, Instagram, and Kick
+- **Annual Video Views:** 3B+ cross-platform views
+- **Campaigns Shipped:** 300+ verified brand campaigns
+- **Esports Roster:** 8Bit Esports (Battlegrounds Mobile India / BGMI)
+- **Official Website:** https://8bit-creatives.vercel.app/
+- **Business Email:** business@8bitcreatives.in
+- **Talent Representation Email:** talent@8bitcreatives.in
+
+## Core Divisions & Services
+
+- **Talent Management:** 360-degree exclusive management for India's top gaming streamers, YouTubers, and competitive athletes.
+- **Brand Campaigns & Influencer Marketing:** Strategy, production, and distribution of high-impact gaming campaigns connecting global brands with Gen-Z and millennial gamers.
+- **Live Esports Broadcast & Production:** Multi-camera arena live broadcasting, Grandmaster analyst desks, real-time tournament telemetry, and streaming engineering (e.g., Tech Mahindra Global Chess League Season 4).
+- **Platform Migration & Exclusivity Deals:** Brokering strategic platform launches and streamer onboarding in India (e.g., Kick.com India creator partnership).
+- **Competitive Esports Operations:** Managing championship-tier competitive teams competing in Krafton's BGIS, BMPS, and the BGMI Masters Series (BGMS).
+
+## Key Creators
+
+- **MortaL (Naman Mathur):** Indian gaming pioneer, S8UL co-founder, 7M+ YouTube subscribers, 5M+ Instagram followers.
+- **Payal Gaming (Payal Dhare):** India's leading female gaming creator, 4M+ YouTube subscribers, 4M+ Instagram followers.
+- **Snax Gaming (Raj Varma):** Renowned sniper, coach, and variety streamer with 1.6M+ YouTube subscribers.
+- **Jokerkihaveli (Gulrez Khan):** Elite gaming creator, streamer, and community powerhouse.
+- **8Bit Thug (Animesh Agarwal):** Co-Founder & CEO, veteran caster, and esports pioneer.
+- **8Bit Goldy (Lokesh Jain):** Co-Founder & COO, master strategist, and gaming ecosystem builder.
+- **Regaltos (Parv Singh):** BGMI competitive legend and charismatic streamer with 2.4M+ YouTube subscribers.
+- **Mamba (Salman Ahmad):** Top variety gaming creator and S8UL core personality.
+- **Viper (Yash Soni):** Veteran competitive esports athlete and streamer.
+- **Beg4Mercy (Mrinmoy Lahkar):** 8Bit Co-Founder and talent partner.
+- **Aman (Aman Jain):** Competitive BGMI champion and content creator.
+- **Krutika (Krutika Ojha):** Prominent female gamer and lifestyle vlogger.
+- **Kaashvi (Kaashvi Hiranandani):** Top female gaming creator and streamer.
+- **Soul Goblin (Harsh Paudwal):** Record-setting BGMI competitive MVP and streamer.
+
+## Marquee Brand Campaigns
+
+- **Google Gemini ("The Switch"):** Uniting cricket legend Kevin Pietersen with MortaL, Payal, and Snax for multimodal AI gaming prompts (45M+ views).
+- **Meta AI ("Meta AI Arcade"):** Gen-Z AI awareness and interactive chat integration on WhatsApp/Instagram featuring Payal Gaming (12M+ reach).
+- **Thums Up ("Bring The Rush"):** High-octane competitive clutch moment integration featuring Snax Gaming (15M+ views).
+- **Netflix India (Stranger Things Season 5):** On-ground red carpet and live fan premiere hosted exclusively by Payal Gaming (18M+ views).
+- **YouTube x Rockstar Games (GTA 6 Premiere):** Global 24-hour launch countdown stream representation for India featuring Payal Gaming.
+- **Tech Mahindra Global Chess League Season 4:** Official broadcast and arena production partner bringing esports telemetry to international chess across 160+ countries.
+- **Kick.com India Migration:** First major platform migration deal bringing MortaL and 8Bit Thug to Kick live streaming.
+- **Krafton BGMI:** Official influencer amplification and co-streaming rights across BGIS and BMPS.
+
+## Full Documentation
+
+- Roster: https://8bit-creatives.vercel.app/creators
+- Case Studies: https://8bit-creatives.vercel.app/work
+- Services: https://8bit-creatives.vercel.app/services
+- Esports: https://8bit-creatives.vercel.app/esports
+- About Us: https://8bit-creatives.vercel.app/about
+- Contact: https://8bit-creatives.vercel.app/contact
+- Full LLM Knowledge Base: https://8bit-creatives.vercel.app/llms-full.txt
