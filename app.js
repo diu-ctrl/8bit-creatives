@@ -3872,7 +3872,17 @@ function initCreatorStats() {
     const kickUrl = (typeof c.kick === 'object' && c.kick && c.kick.url) || c.kickUrl;
     if (kickUrl) card.setAttribute('data-kc', kickUrl);
     const img = document.createElement('img');
-    img.src = c.img;
+    const coverflowCustomImgs = {
+      aman: 'assets/creators/coverflow/aman.webp',
+      sid: 'assets/creators/coverflow/sid.webp',
+      juicy: 'assets/creators/coverflow/juicy.webp',
+      sarang: 'assets/creators/coverflow/sarang.webp',
+      mercy: 'assets/creators/coverflow/mercy.webp',
+      mamba: 'assets/creators/coverflow/mamba.webp',
+      nishu_tiwari: 'assets/creators/coverflow/nishu_tiwari.webp',
+      mortal: 'assets/creators/coverflow/mortal.webp'
+    };
+    img.src = coverflowCustomImgs[c.id] || c.img;
     img.alt = `${c.name} (${c.realName}) · 8Bit Creatives`;
     img.loading = 'lazy';
     img.onerror = function() {

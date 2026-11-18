@@ -1769,16 +1769,6 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   transform: none;
 }
 
-/* Headroom framing adjustments for Coverflow creator cards (Aman, Sid, Juicy, Sarang, Beg4Mercy) */
-.coverflow-stage .creator-card[data-creator="aman"] img,
-.coverflow-stage .creator-card[data-creator="sid"] img,
-.coverflow-stage .creator-card[data-creator="juicy"] img,
-.coverflow-stage .creator-card[data-creator="sarang"] img,
-.coverflow-stage .creator-card[data-creator="mercy"] img {
-  transform: translateY(4.5%) scale(1.12) !important;
-  transform-origin: center center;
-}
-
 @media (min-width: 768px) {
   .creator-card--clone {
     display: none !important;
@@ -5336,7 +5326,9 @@ canvas.glyph-fall {
   position: fixed;
   inset: 0;
   width: 100vw;
+  width: 100dvw;
   height: 100vh;
+  height: 100dvh;
   background: transparent;
   z-index: 999990;
   pointer-events: all;
@@ -5361,7 +5353,9 @@ body.is-loading {
   position: absolute;
   inset: 0;
   width: 100vw;
+  width: 100dvw;
   height: 100vh;
+  height: 100dvh;
   background: transparent;
   overflow: hidden;
   user-select: none;
@@ -5370,13 +5364,15 @@ body.is-loading {
   cursor: pointer;
 }
 
-/* Twin Split Shutters - 50.1vh each for seamless subpixel seam */
+/* Twin Split Shutters - 50.1vh / 50.1dvh each for seamless subpixel seam */
 .telemetry-shutter {
   position: absolute;
   left: 0;
   right: 0;
   width: 100vw;
+  width: 100dvw;
   height: 50.1vh;
+  height: 50.1dvh;
   overflow: hidden;
   background: #000000;
   will-change: transform;
@@ -5410,11 +5406,17 @@ body.is-loading {
   position: absolute;
   left: 0;
   width: 100vw;
+  width: 100dvw;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: clamp(24px, 4vw, 56px);
+  padding-top: max(clamp(24px, 4vw, 56px), env(safe-area-inset-top, 24px));
+  padding-bottom: max(clamp(24px, 4vw, 56px), env(safe-area-inset-bottom, 24px));
+  padding-left: max(clamp(24px, 4vw, 56px), env(safe-area-inset-left, 24px));
+  padding-right: max(clamp(24px, 4vw, 56px), env(safe-area-inset-right, 24px));
   box-sizing: border-box;
   pointer-events: none;
   font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -5600,17 +5602,38 @@ body.is-loading {
 }
 
 @media (max-width: 900px) {
+  .telemetry-canvas {
+    padding: 20px 20px max(28px, calc(env(safe-area-inset-bottom, 0px) + 24px)) 20px !important;
+    padding-top: max(16px, env(safe-area-inset-top, 16px)) !important;
+  }
   .telemetry-header {
     flex-direction: column;
     gap: 6px;
+    padding-top: max(4px, env(safe-area-inset-top, 0px));
   }
   .telemetry-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: flex-end !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding-bottom: max(6px, env(safe-area-inset-bottom, 0px)) !important;
   }
   .telemetry-counter-block {
-    align-self: flex-end;
+    display: flex !important;
+    align-items: baseline !important;
+    align-self: flex-end !important;
+    margin-right: 4px !important;
+    margin-bottom: 2px !important;
+  }
+  .telemetry-counter-num {
+    font-size: clamp(48px, 13vw, 76px) !important;
+    line-height: 0.95 !important;
+    padding-right: 2px !important;
+  }
+  .telemetry-counter-unit {
+    font-size: clamp(20px, 4.5vw, 28px) !important;
+    margin-left: 2px !important;
   }
   .telemetry-logo-emblem {
     width: 64px;
