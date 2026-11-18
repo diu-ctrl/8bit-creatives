@@ -3134,6 +3134,7 @@ function initCaseStudies() {
   const caseItems = document.querySelectorAll('.case-item');
   const caseImageWrap = document.getElementById('caseImageWrap');
   const caseImage = document.getElementById('caseImage');
+  const caseImageBg = document.getElementById('caseImageBg');
   const caseCaption = document.getElementById('caseCaption');
   const caseCaptionTitle = document.getElementById('caseCaptionTitle');
   const caseCaptionSub = document.getElementById('caseCaptionSub');
@@ -3143,19 +3144,23 @@ function initCaseStudies() {
     { img: 'images-for-landing-page/Case Studies/gemini.jpg',
       title: 'Google Gemini: The Switch',
       sub: 'Kevin Pietersen x 8Bit · 45M+ views',
-      link: 'work.html?open=0' },
+      link: 'work.html?open=0',
+      fitThumb: true },
     { img: 'images-for-landing-page/Case Studies/meta-ai.jpg',
       title: 'Meta AI: Play. Create. Discover.',
       sub: 'Payal Gaming x Meta AI · 12M+ impressions',
-      link: 'work.html?open=1' },
+      link: 'work.html?open=1',
+      fitThumb: true },
     { img: 'images-for-landing-page/Case Studies/thums-up.jpg',
       title: 'Thums Up: Bring The Rush',
       sub: 'Snax Gaming signature campaign · 15M+ impressions',
-      link: 'work.html?open=2' },
+      link: 'work.html?open=2',
+      fitThumb: true },
     { img: 'images-for-landing-page/Case Studies/stranger-things.jpg',
       title: 'Netflix: Stranger Things Premiere',
       sub: 'Live fan premiere hosted by Payal Gaming · 18M+ views',
-      link: 'work.html?open=3' }
+      link: 'work.html?open=3',
+      fitThumb: true }
   ];
 
   // Branded placeholder gradient if image fails to load during active hover
@@ -3184,8 +3189,22 @@ function initCaseStudies() {
     caseImage.style.display = 'block';
     caseImageWrap.classList.remove('is-empty');
     caseImageWrap.classList.add('is-visible');
+
+    // Update foreground contain image and blurred ambient background
     caseImage.src = data.img;
     caseImage.alt = data.title;
+    if (caseImageBg) {
+      caseImageBg.src = data.img;
+      caseImageBg.style.display = 'block';
+    }
+
+    // Apply fitted double-image ambient blur + contain for portrait/poster deals
+    if (data.fitThumb !== false) {
+      caseImageWrap.classList.add('is-fitted');
+    } else {
+      caseImageWrap.classList.remove('is-fitted');
+    }
+
     caseImage.onerror = () => showBrandedPlaceholder(index);
     caseCaptionTitle.textContent = data.title;
     caseCaptionSub.textContent = data.sub;
@@ -3203,6 +3222,7 @@ function initCaseStudies() {
       if (caseImageWrap.classList.contains('is-empty')) {
         caseImage.src = '';
         caseImage.alt = '';
+        if (caseImageBg) caseImageBg.src = '';
         caseCaptionTitle.textContent = '';
         caseCaptionSub.textContent = '';
         const p = caseImageWrap.querySelector('.case-placeholder');

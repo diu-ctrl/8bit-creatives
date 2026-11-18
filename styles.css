@@ -2091,7 +2091,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   aspect-ratio: 16 / 10;
   border-radius: 16px;
   overflow: hidden;
-  background: transparent;
+  background: #050505;
   position: relative;
   opacity: 0;
   pointer-events: none;
@@ -2099,6 +2099,9 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   transition: opacity 150ms ease, transform 250ms ease; /* opacity 150ms */
   margin-left: auto;
   margin-right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .case-image-wrap.is-visible {
   opacity: 1;
@@ -2119,6 +2122,52 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   height: 100%;
   object-fit: cover;
   display: block;
+}
+.case-image-bg {
+  display: none;
+}
+
+/* Fitted double-image layout for portrait/poster deals (same as work page) */
+.case-image-wrap.is-fitted {
+  background: #050505;
+}
+.case-image-wrap.is-fitted .case-image-bg {
+  display: block;
+  position: absolute;
+  inset: -14px;
+  width: calc(100% + 28px);
+  height: calc(100% + 28px);
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.35;
+  filter: blur(10px) brightness(0.65);
+  transform: scale(1.05);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 400ms ease, transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.case-image-wrap.is-fitted .case-image-fg,
+.case-image-wrap.is-fitted #caseImage {
+  position: relative;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  margin: 0 auto;
+  z-index: 2;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6));
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.case-image-wrap.is-fitted:hover .case-image-fg,
+.case-image-wrap.is-fitted:hover #caseImage {
+  transform: scale(1.02);
+}
+.case-image-wrap.is-fitted:hover .case-image-bg {
+  opacity: 0.45;
+  transform: scale(1.08);
 }
 .case-caption {
   text-align: left;
@@ -4004,15 +4053,43 @@ body.light-page .back-home,
     pointer-events: auto !important;
     transform: none !important;
     margin: 0 auto !important;
-    background: #111111 !important;
-    display: block !important;
+    background: #050505 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
-  .case-image-wrap img {
+  .case-image-wrap:not(.is-fitted) img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
     border-radius: 16px !important;
     display: block !important;
+  }
+  .case-image-wrap.is-fitted .case-image-bg {
+    display: block !important;
+    position: absolute !important;
+    inset: -14px !important;
+    width: calc(100% + 28px) !important;
+    height: calc(100% + 28px) !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    filter: blur(10px) brightness(0.65) !important;
+    opacity: 0.35 !important;
+  }
+  .case-image-wrap.is-fitted .case-image-fg,
+  .case-image-wrap.is-fitted #caseImage {
+    position: relative !important;
+    width: auto !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    display: block !important;
+    margin: 0 auto !important;
+    border-radius: 0 !important;
   }
   .case-caption {
     align-items: center !important;
