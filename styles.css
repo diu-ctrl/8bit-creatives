@@ -5055,6 +5055,15 @@ canvas.glyph-fall {
   text-align: left;
 }
 
+.hero-monument__text-group {
+  position: relative;
+  top: clamp(-52px, -4.2vh, -36px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .hero-monument .hero-monument__title,
 .hero-monument .hero-title {
   font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
@@ -5175,6 +5184,9 @@ canvas.glyph-fall {
     border-radius: 20px;
     padding: 20px 24px 20px 0;
   }
+  .hero-monument__text-group {
+    top: clamp(-36px, -3.2vh, -20px);
+  }
   .hero-monument .hero-monument__title,
   .hero-monument .hero-title {
     font-size: clamp(34px, 4.2vw, 54px) !important;
@@ -5208,6 +5220,9 @@ canvas.glyph-fall {
     border-radius: 24px;
     padding: 28px 24px;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  }
+  .hero-monument__text-group {
+    top: 0;
   }
   .hero-monument .hero-monument__title,
   .hero-monument .hero-title {
