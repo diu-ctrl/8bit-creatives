@@ -387,6 +387,10 @@
       object-fit: cover;
       display: block;
       filter: none;
+      transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .work-card:hover .work-card-image img {
+      transform: scale(1.03);
     }
     .work-card-content {
       display: flex;
@@ -945,42 +949,42 @@
     <div class="work-container">
       <h2 class="work-title">Selected work</h2>
       <div class="work-grid">
-        <!-- Card 1 -->
-        <div class="work-card">
+        <!-- Card 1: Reliance Campa Energy x S8UL EWC (Corporate Prestige & Title Sponsor) -->
+        <div class="work-card" onclick="window.location.href='work.html?open=10';" style="cursor: pointer;">
           <div class="work-card-image">
-            <img src="Images for Landing Page/Case Studies/kick india.jpg" alt="Kick India — Day One Migration" loading="lazy">
+            <img src="images-for-landing-page/Case Studies/campa.jpg" alt="Reliance Campa Energy x S8UL EWC" loading="lazy">
           </div>
           <div class="work-card-content">
-            <div class="work-card-label">Platform migration</div>
-            <h3 class="work-card-name">Kick India — Day One Migration</h3>
-            <div class="work-card-metric">48 creators migrated · 95/5 subscription split</div>
-            <a href="work.html" class="work-card-link">Read case study →</a>
+            <div class="work-card-label">Global title sponsor</div>
+            <h3 class="work-card-name">Reliance Campa Energy x S8UL EWC</h3>
+            <div class="work-card-metric">40M+ reach · Global Title Sponsor in Riyadh</div>
+            <a href="work.html?open=10" class="work-card-link" onclick="event.stopPropagation();">Read case study →</a>
           </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="work-card">
+        <!-- Card 2: Tech Mahindra Global Chess League S4 (Broadcast & Production Mastery) -->
+        <div class="work-card" onclick="window.location.href='work.html?open=33';" style="cursor: pointer;">
           <div class="work-card-image">
-            <img src="Images for Landing Page/Case Studies/global chess.jpg" alt="Global Chess League S4" loading="lazy">
+            <img src="images-for-landing-page/Case Studies/chess.jpg" alt="Global Chess League S4" loading="lazy">
           </div>
           <div class="work-card-content">
             <div class="work-card-label">Broadcast & production</div>
             <h3 class="work-card-name">Global Chess League&nbsp;S4</h3>
             <div class="work-card-metric">12M+ reach · 9 days · 6 camera angles</div>
-            <a href="work.html" class="work-card-link">Read case study →</a>
+            <a href="work.html?open=33" class="work-card-link" onclick="event.stopPropagation();">Read case study →</a>
           </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="work-card">
+        <!-- Card 3: iQOO Esports Naming Rights (Historic Commercial Scale & Hardware Partnership) -->
+        <div class="work-card" onclick="window.location.href='work.html?open=25';" style="cursor: pointer;">
           <div class="work-card-image">
-            <img src="Images for Landing Page/Case Studies/iqoo flagship.jpg" alt="iQOO Flagship Smartphone Launch" loading="lazy">
+            <img src="images-for-landing-page/Case Studies/iqoo.jpg" alt="iQOO Esports Naming Rights" loading="lazy">
           </div>
           <div class="work-card-content">
-            <div class="work-card-label">Brand campaign</div>
-            <h3 class="work-card-name">iQOO Flagship Smartphone Launch</h3>
-            <div class="work-card-metric">4.98M YouTube · 4.2M Instagram</div>
-            <a href="work.html" class="work-card-link">Read case study →</a>
+            <div class="work-card-label">Naming rights deal</div>
+            <h3 class="work-card-name">iQOO Esports Naming Rights</h3>
+            <div class="work-card-metric">100M+ impressions · India's largest naming rights deal</div>
+            <a href="work.html?open=25" class="work-card-link" onclick="event.stopPropagation();">Read case study →</a>
           </div>
         </div>
       </div>

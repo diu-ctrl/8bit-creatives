@@ -2174,20 +2174,26 @@
 
     // Deep linking support: open case study modal via query param ?open=<id>
     const urlParams = new URLSearchParams(window.location.search);
-    const openParam = urlParams.get('open');
+    const openParam = urlParams.get('open') || urlParams.get('case') || urlParams.get('id');
     if (openParam !== null) {
       const targetId = parseInt(openParam, 10);
       const targetIndex = CASE_STUDIES.findIndex(item => item.id === targetId);
       if (targetIndex !== -1) {
         setTimeout(() => {
-          openModal(targetIndex, null);
+          const card = grid.children[targetIndex];
+          if (card) {
+            try {
+              card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } catch (e) {}
+          }
+          openModal(targetIndex, card || null);
           if (urlParams.get('scroll') === 'bottom') {
             setTimeout(() => {
               const m = document.querySelector('.work-modal');
               if (m) m.scrollTop = m.scrollHeight;
             }, 300);
           }
-        }, 150);
+        }, 250);
       }
     }
 
