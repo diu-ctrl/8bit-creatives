@@ -19,7 +19,7 @@
   <meta name="application-name" content="8Bit Creatives">
   <meta name="apple-mobile-web-app-title" content="8Bit Creatives">
   <title>8Bit Creatives Case Studies — Esports Broadcast &amp; Campaign Receipts</title>
-  <meta name="description" content="Browse verified gaming campaign results by 8Bit Creatives: Tech Mahindra Global Chess League S4 broadcast, Kick India creator migration, and iQOO launches.">
+  <meta name="description" content="Explore marquee gaming campaigns, live sports broadcasts, and platform migrations by 8Bit Creatives: Tech Mahindra Global Chess League S4 broadcast, Kick India creator migration, and iQOO launches.">
   <meta name="keywords" content="8Bit Creatives case studies, 8Bit work portfolio, Global Chess League broadcast, Kick India migration, gaming campaign results India">
   <link rel="canonical" href="https://8bit-creatives.vercel.app/work">
 
@@ -28,7 +28,7 @@
   <meta property="og:site_name" content="8Bit Creatives">
   <meta property="og:url" content="https://8bit-creatives.vercel.app/work">
   <meta property="og:title" content="Case Studies &amp; Campaign Receipts | 8Bit Creatives">
-  <meta property="og:description" content="Browse verified gaming campaign results by 8Bit Creatives: Tech Mahindra Global Chess League S4 broadcast, Kick India creator migration, and iQOO launches.">
+  <meta property="og:description" content="Explore marquee gaming campaigns, live sports broadcasts, and platform migrations by 8Bit Creatives: Tech Mahindra Global Chess League S4 broadcast, Kick India creator migration, and iQOO launches.">
   <meta property="og:image" content="https://8bit-creatives.vercel.app/images-for-landing-page/Case%20Studies/global%20chess.jpg">
   <meta property="og:locale" content="en_IN">
 
@@ -36,7 +36,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@8Bit_Creatives">
   <meta name="twitter:title" content="Case Studies &amp; Campaign Receipts | 8Bit Creatives">
-  <meta name="twitter:description" content="Browse verified gaming campaign results by 8Bit Creatives across broadcast, launches, and platform migrations.">
+  <meta name="twitter:description" content="Explore marquee gaming campaigns, live sports broadcasts, and platform migrations by 8Bit Creatives across broadcast, launches, and platform migrations.">
   <meta name="twitter:image" content="https://8bit-creatives.vercel.app/images-for-landing-page/Case%20Studies/global%20chess.jpg">
 
   <!-- JSON-LD: CollectionPage & Breadcrumb -->
@@ -142,7 +142,7 @@
       font-size: 17px;
       color: rgba(255, 255, 255, 0.6);
       line-height: 1.6;
-      max-width: 540px;
+      max-width: 620px;
       margin: 0 auto;
       text-transform: none;
     }
@@ -987,8 +987,8 @@
   <!-- 2. HERO -->
   <section class="work-hero" data-bg="dark">
     <div class="work-hero-container">
-      <h1 class="work-hero-title"><span class="visually-hidden">8Bit Creatives Case Studies — </span>Work that moved&nbsp;numbers.</h1>
-      <p class="work-hero-sub">Verified campaign results across smartphone launches, live sports broadcasting, and platform migrations. Click any case for deep-dive receipts.</p>
+      <h1 class="work-hero-title">8Bit Creatives Case Studies</h1>
+      <p class="work-hero-sub">From stadium takeovers and midnight device drops to historic platform shifts. Here’s what happens when the world’s most ambitious brands plug directly into India’s gaming culture.</p>
     </div>
   </section>
 
@@ -2208,25 +2208,7 @@
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
 
-      // Hero word-by-word reveal
-      const heroTitle = document.querySelector('.work-hero-title');
-      if (heroTitle) {
-        const words = heroTitle.textContent.trim().split(/\s+/);
-        heroTitle.innerHTML = words.map((word, i) => 
-          `<span class="scroll-reveal-word" style="--word-index: ${i}">${word}</span> `
-        ).join('');
-        heroTitle.classList.add('scroll-reveal-text');
-        
-        const heroWords = heroTitle.querySelectorAll('.scroll-reveal-word');
-        setTimeout(() => {
-          heroWords.forEach(word => word.classList.add('revealed'));
-        }, 100);
-      }
-
-      gsap.from('.work-hero-sub', {
-        opacity: 0, y: 30, duration: 0.8, ease: 'power3.out',
-        scrollTrigger: { trigger: '.work-hero', start: 'top 70%' }
-      });
+      // CTA animations
       gsap.from('.work-cta-title, .work-cta-sub, .btn-obsidian', {
         opacity: 0, y: 30, duration: 0.8, stagger: 0.15, ease: 'power3.out',
         scrollTrigger: { trigger: '.work-cta', start: 'top 80%' }
