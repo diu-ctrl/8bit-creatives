@@ -251,10 +251,11 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .navbar-pill {
   position: fixed;
   top: 24px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
+  left: 0 !important;
+  right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transform: none;
   z-index: 100;
   border-radius: 999px;
   width: -webkit-fit-content;
@@ -1329,7 +1330,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   top: 0;
   left: 0;
   width: 70px;
-  height: 116px;
+  height: 105px;
   z-index: 5;
   cursor: grab;
   user-select: none;
@@ -3725,6 +3726,17 @@ body.light-page .back-home,
     left: 16px !important;
   }
 
+  /* Prevent iOS Safari automatic camera zoom when focusing inputs (iOS zooms if fontSize < 16px) */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+  textarea,
+  select,
+  .form-input,
+  .form-select,
+  .form-textarea,
+  .filter-search-input {
+    font-size: 16px !important;
+  }
+
   /* G1: NAVBAR - Mobile open horizontal capsule pill with sliding black active capsule */
   .navbar,
   .navbar-pill,
@@ -3742,6 +3754,7 @@ body.light-page .back-home,
     right: 0 !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    transform: none !important;
     border-radius: 999px !important;
     background: #FFFFFF !important;
     border: 1px solid rgba(0, 0, 0, 0.08) !important;

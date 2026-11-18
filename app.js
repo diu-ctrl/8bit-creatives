@@ -923,6 +923,7 @@ const characters = [
           <stop offset="0%" stop-color="#D8C0A8"/><stop offset="100%" stop-color="#C0A088"/>
         </linearGradient>
       </defs>
+      <g transform="translate(0, 2)">
       <!-- Hair bun -->
       <ellipse cx="60" cy="12" rx="14" ry="10" fill="#1A1A1A"/>
       <rect x="48" y="8" width="24" height="8" rx="4" fill="#1A1A1A"/>
@@ -984,7 +985,8 @@ const characters = [
       <line x1="72" y1="166" x2="72" y2="175" stroke="#181818" stroke-width="1"/>
       <rect x="40" y="175" width="20" height="3" fill="#8B0000"/>
       <rect x="60" y="175" width="20" height="3" fill="#8B0000"/>
-  </g>`,
+        </g>
+</g>`,
   // Character 2
   `<g>
 <defs>
@@ -998,6 +1000,7 @@ const characters = [
           <stop offset="0%" stop-color="#2A2A2A"/><stop offset="100%" stop-color="#1A1A1A"/>
         </linearGradient>
       </defs>
+      <g transform="translate(0, 1)">
       <!-- Head -->
       <rect x="48" y="24" width="24" height="22" rx="4" fill="#D8B88C"/>
       <!-- Face details -->
@@ -1060,7 +1063,8 @@ const characters = [
       <rect x="60" y="163" width="22" height="16" rx="2" fill="#0A0A0A"/>
       <line x1="38" y1="166" x2="60" y2="166" stroke="#333" stroke-width="1"/>
       <line x1="60" y1="166" x2="82" y2="166" stroke="#333" stroke-width="1"/>
-  </g>`,
+        </g>
+</g>`,
   // Character 3
   `<g>
 <defs>
@@ -1157,12 +1161,12 @@ const characters = [
       <!-- Legs with rx: 5 -->
       <rect x="40" y="105" width="18" height="40" rx="5" fill="#1A1A1A" transform="rotate(12, 49, 125)"/>
       <rect x="62" y="105" width="18" height="40" rx="5" fill="#1A1A1A" transform="rotate(-10, 71, 125)"/>
-      <rect x="38" y="145" width="16" height="30" rx="4" fill="#1A1A1A"/>
-      <rect x="66" y="145" width="16" height="30" rx="4" fill="#1A1A1A"/>
-      <rect x="36" y="173" width="20" height="14" rx="2" fill="#0A0A0A"/>
-      <rect x="64" y="173" width="20" height="14" rx="2" fill="#0A0A0A"/>
-      <line x1="36" y1="176" x2="56" y2="176" stroke="#333" stroke-width="1"/>
-      <line x1="64" y1="176" x2="84" y2="176" stroke="#333" stroke-width="1"/>
+      <rect x="38" y="142" width="16" height="26" rx="4" fill="#1A1A1A"/>
+      <rect x="66" y="142" width="16" height="26" rx="4" fill="#1A1A1A"/>
+      <rect x="36" y="166" width="20" height="14" rx="2" fill="#0A0A0A"/>
+      <rect x="64" y="166" width="20" height="14" rx="2" fill="#0A0A0A"/>
+      <line x1="36" y1="169" x2="56" y2="169" stroke="#333" stroke-width="1"/>
+      <line x1="64" y1="169" x2="84" y2="169" stroke="#333" stroke-width="1"/>
   </g>`,
   // Character 5
   `<g>
@@ -1209,14 +1213,14 @@ const characters = [
       <circle cx="32" cy="106" r="5" fill="#1A1A1A"/>
       <circle cx="88" cy="106" r="5" fill="#1A1A1A"/>
       <!-- Legs -->
-      <rect x="40" y="112" width="18" height="58" rx="4" fill="#2A3A4E"/>
-      <rect x="62" y="112" width="18" height="58" rx="4" fill="#2A3A4E"/>
+      <rect x="40" y="112" width="18" height="55" rx="4" fill="#2A3A4E"/>
+      <rect x="62" y="112" width="18" height="55" rx="4" fill="#2A3A4E"/>
       <rect x="40" y="140" width="18" height="7" rx="2" fill="#1A2A3E"/>
       <rect x="62" y="140" width="18" height="7" rx="2" fill="#1A2A3E"/>
       <!-- Slightly wider boots (24px) for solid proportion -->
-      <rect x="37" y="167" width="24" height="16" rx="2" fill="#1A1A1A"/>
-      <rect x="59" y="167" width="24" height="16" rx="2" fill="#1A1A1A"/>
-      <line x1="37" y1="170" x2="61" y2="170" stroke="#333" stroke-width="1"/>
+      <rect x="37" y="164" width="24" height="16" rx="2" fill="#1A1A1A"/>
+      <rect x="59" y="164" width="24" height="16" rx="2" fill="#1A1A1A"/>
+      <line x1="37" y1="167" x2="61" y2="167" stroke="#333" stroke-width="1"/>
       <line x1="59" y1="170" x2="83" y2="170" stroke="#333" stroke-width="1"/>
   </g>`,
   // Character 6
@@ -1232,6 +1236,7 @@ const characters = [
           <stop offset="0%" stop-color="#242220"/><stop offset="100%" stop-color="#141210"/>
         </linearGradient>
       </defs>
+      <g transform="translate(0, 6)">
       <!-- Head & Athletic Jawline (boxy-cut with clean chamfers) -->
       <path d="M44 14 L76 14 L78 34 L72 42 L48 42 L42 34 Z" fill="url(#efcSkin)"/>
       <!-- Hair: sharp modern athletic crop -->
@@ -1286,7 +1291,8 @@ const characters = [
         <line x1="-1.8" y1="2.8" x2="-5.5" y2="7.5" stroke="#141210" stroke-width="1"/>
         <line x1="-3" y1="-1.2" x2="-7.5" y2="-3.5" stroke="#141210" stroke-width="1"/>
       </g>
-  </g>`,
+        </g>
+</g>`,
   // Character 7
   `<g>
 <defs>
@@ -1303,6 +1309,7 @@ const characters = [
           <stop offset="0%" stop-color="#FFFFFF"/><stop offset="60%" stop-color="#E8E8E8"/><stop offset="100%" stop-color="#FF5931"/>
         </linearGradient>
       </defs>
+      <g transform="translate(0, 4)">
       <!-- Esports Gaming Headset (matte obsidian band with brand orange glowing earcups) -->
       <path d="M36 22 Q60 10 84 22" stroke="#141210" stroke-width="4.5" fill="none" stroke-linecap="round"/>
       <path d="M42 18 Q60 12 78 18" stroke="#333333" stroke-width="1.5" fill="none" opacity="0.6"/>
@@ -1379,7 +1386,8 @@ const characters = [
       <path d="M60 174 L86 174 Q87 174 87 171 L85 170 L60 170 Z" fill="url(#ffSneaker)"/>
       <rect x="34" y="174" width="26" height="2" fill="#141210"/>
       <rect x="60" y="174" width="26" height="2" fill="#141210"/>
-  </g>`,
+        </g>
+</g>`,
   // Character 8
   `<g>
 <defs>
@@ -1393,6 +1401,7 @@ const characters = [
           <stop offset="0%" stop-color="#E0E0E0"/><stop offset="50%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#C0C0C0"/>
         </linearGradient>
       </defs>
+      <g transform="translate(0, 7)">
       <!-- Cape with 3 fold lines -->
       <path d="M38 42 L82 42 L92 155 L28 155 Z" fill="url(#mobaCape)" opacity="0.85"/>
       <path d="M46 45 Q42 100 34 155" stroke="#5A0800" stroke-width="2" fill="none" opacity="0.7"/>
@@ -1443,7 +1452,8 @@ const characters = [
       <rect x="62" y="102" width="16" height="55" rx="4" fill="url(#mobaArmor)"/>
       <rect x="40" y="155" width="20" height="18" rx="3" fill="#2A4A7A"/>
       <rect x="60" y="155" width="20" height="18" rx="3" fill="#2A4A7A"/>
-  </g>`,
+        </g>
+</g>`,
   // Character 9
   `<g>
 <defs>
@@ -1454,6 +1464,7 @@ const characters = [
           <stop offset="0%" stop-color="#FFF2A3"/><stop offset="100%" stop-color="#FFD659"/>
         </linearGradient>
       </defs>
+      <g transform="translate(0, 19)">
       <!-- Iconic Pointed Ears with Black Tips -->
       <path d="M34 46 L14 10 L28 8 L44 38 Z" fill="url(#pikaBody)"/>
       <polygon points="14,10 28,8 24,20 18,22" fill="#141210"/>
@@ -1510,7 +1521,8 @@ const characters = [
       <!-- Cute Nose & Mouth -->
       <circle cx="60" cy="57" r="1.3" fill="#141210"/>
       <path d="M54 62 Q57 65 60 62 Q63 65 66 62" stroke="#141210" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-  </g>`,
+        </g>
+</g>`,
   // Character 10
   `<g>
 <defs>
@@ -1521,6 +1533,7 @@ const characters = [
           <stop offset="0%" stop-color="#E2B897"/><stop offset="100%" stop-color="#C89A78"/>
         </linearGradient>
       </defs>
+      <g transform="translate(0, 6)">
       <!-- Sharp Spiky Hair Polygons (iconic Jin Kazama fringe) -->
       <polygon points="40,20 44,2 52,18" fill="#141210"/>
       <polygon points="48,18 55,0 62,17" fill="#141210"/>
@@ -1573,7 +1586,8 @@ const characters = [
       <rect x="61" y="162" width="21" height="12" rx="3" fill="#8C1410"/>
       <line x1="38" y1="166" x2="59" y2="166" stroke="#FFFFFF" stroke-width="1.5"/>
       <line x1="61" y1="166" x2="82" y2="166" stroke="#FFFFFF" stroke-width="1.5"/>
-  </g>`,
+        </g>
+</g>`,
   // Character 11
   `<g>
 <defs>
@@ -1597,6 +1611,7 @@ const characters = [
           </feMerge>
         </filter>
       </defs>
+      <g transform="translate(0, 3)">
       <!-- Flowing cascading hair framing shoulders -->
       <path d="M38 10 Q31 40 32 96 L42 96 Q40 46 45 16 Z" fill="url(#valHair)"/>
       <path d="M82 10 Q89 40 88 96 L78 96 Q80 46 75 16 Z" fill="url(#valHair)"/>
@@ -1662,7 +1677,8 @@ const characters = [
       <rect x="65" y="163" width="15" height="14" rx="2" fill="#C5A059"/>
       <rect x="40" y="174" width="15" height="3" fill="#141210"/>
       <rect x="65" y="174" width="15" height="3" fill="#141210"/>
-  </g>`,
+        </g>
+</g>`,
   // Character 12
   `<g>
 <defs>
@@ -1670,6 +1686,7 @@ const characters = [
           <stop offset="0%" stop-color="#C4A484"/><stop offset="100%" stop-color="#B89868"/>
         </linearGradient>
       </defs>
+      <g transform="translate(0, 26)">
       <!-- LARGE SQUARE 44x40 HEAD (Steve's iconic 1:1 proportion with torso width) -->
       <rect x="38" y="6" width="44" height="40" fill="url(#mcHead)"/>
       <!-- Dark brown blocky hair covering top and sides -->
@@ -1724,7 +1741,8 @@ const characters = [
       <rect x="60" y="142" width="23" height="12" fill="#3A3A3A"/>
       <rect x="50" y="142" width="10" height="12" fill="#222222" opacity="0.45"/>
       <rect x="73" y="142" width="10" height="12" fill="#222222" opacity="0.45"/>
-  </g>`
+        </g>
+</g>`
 ];
 
 
@@ -1764,18 +1782,18 @@ function initAboutPhysics() {
   const eclipseEl = section.querySelector('.eclipse');
   const btnAbout = section.querySelector('.btn-about');
 
-  // Physics constants (from minecraft-hang.html)
+  // Physics constants (calibrated so character feet land flush on floor with zero gap)
   const GRAVITY = 0.8;
   const BOUNCE = 0.4;
   const GROUND_FRICTION = 0.85;
   const CHAR_W = 70;
-  const CHAR_H = 116;
+  const CHAR_H = 105;
 
-  // Collision hitbox calibrated to character body inside 70x116 container
-  const HIT_OX = 12;
-  const HIT_OY = 6;
-  const HIT_W = 46;
-  const HIT_H = 104;
+  // Collision hitbox calibrated to 70x105 container (feet at exact bottom edge y=105)
+  const HIT_OX = 10;
+  const HIT_OY = 0;
+  const HIT_W = 50;
+  const HIT_H = 105;
 
   const physicsBodies = [];
   let activeDragBody = null;
@@ -1934,7 +1952,7 @@ function initAboutPhysics() {
     // Create detached physics DOM element
     const charDiv = document.createElement('div');
     charDiv.className = 'eclipse-physics-char';
-    charDiv.innerHTML = `<svg viewBox="0 0 120 200" preserveAspectRatio="xMidYMid meet">${svgContent}</svg>`;
+    charDiv.innerHTML = `<svg viewBox="0 0 120 180" preserveAspectRatio="xMidYMax meet">${svgContent}</svg>`;
     charDiv.style.transform = `translate(${startX.toFixed(1)}px, ${startY.toFixed(1)}px)`;
     section.appendChild(charDiv);
 

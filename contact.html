@@ -87,8 +87,11 @@
     .navbar-pill {
       position: fixed;
       top: 24px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0 !important;
+      right: 0 !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      transform: none !important;
       z-index: 100;
       opacity: 0 !important;
       pointer-events: none !important;
@@ -106,6 +109,10 @@
         opacity: 1 !important;
         pointer-events: auto !important;
         visibility: visible !important;
+        transform: none !important;
+      }
+      .form-input, .form-select, .form-textarea {
+        font-size: 16px !important;
       }
     }
 
