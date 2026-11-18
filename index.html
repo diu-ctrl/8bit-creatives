@@ -256,7 +256,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="images-for-landing-page/hero-monument-bg-v2.webp" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=4.3">
+  <link rel="stylesheet" href="styles.css?v=4.4">
 
   <style>
     .creator-card:hover {
@@ -1601,7 +1601,7 @@
 <script src="preloader.js"></script>
 <script src="navbar.js?v=2.1"></script>
 <script src="scripts/creators-data.js?v=2.2"></script>
-<script src="app.js?v=3.0"></script>
+<script src="app.js?v=3.1"></script>
 
 <!-- Navbar Clean URL Smooth Scroll (No Hashes) & Active Section Detection -->
 <script>
@@ -1819,10 +1819,25 @@
 
   // Mobile drawer outside click closer
   document.addEventListener('click', function (e) {
-    if (!e.target.closest('.navbar-pill') && !e.target.closest('.navbar__mobile-drawer')) {
+    if (!e.target.closest('.navbar-pill') && !e.target.closest('.navbar__mobile-drawer') && !e.target.closest('.navbar__hamburger')) {
       closeMobileDrawer();
     }
   });
+
+  // Dual-state mobile navbar: Horizontal 7 words in hero <-> Circular hamburger when scrolled away
+  var checkMobileHeroScroll = function() {
+    var hero = document.getElementById('hero') || document.querySelector('.hero-monument') || document.querySelector('.hero-section');
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    var heroH = hero ? hero.offsetHeight : 500;
+    var threshold = Math.min(100, Math.round(heroH * 0.25));
+    if (scrollY > threshold) {
+      document.body.classList.add('scrolled-past-hero');
+    } else {
+      document.body.classList.remove('scrolled-past-hero');
+    }
+  };
+  window.addEventListener('scroll', checkMobileHeroScroll, { passive: true });
+  checkMobileHeroScroll();
 
   // === INCOMING NAVIGATION & REFRESH SCROLL RESTORATION ===
   var rawHash = window.location.hash ? window.location.hash.replace('#', '') : '';

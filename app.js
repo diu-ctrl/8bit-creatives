@@ -233,6 +233,10 @@ function initNavbar() {
       hide();
     }
 
+    // Toggle scrolled-past-hero state for mobile navbar morphing
+    const isPastHero = scrollY > Math.max(70, Math.round(cachedHeroHeight * 0.25));
+    document.body.classList.toggle('scrolled-past-hero', isPastHero);
+
     // Drop navbar lower on hero (80px), top (24px) on other sections
     if (scrollY < cachedHeroHeight * 0.6) {
       navbar.classList.add('navbar-on-hero');
