@@ -5232,8 +5232,8 @@ canvas.glyph-fall {
     --hero-title-size: clamp(26px, 6.8vw, 34px);
     --hero-sub-size: calc(var(--hero-title-size) * 7 / 18);
     min-height: 100vh !important;
-    min-height: 100dvh !important;
-    height: 100dvh !important;
+    min-height: 100svh !important;
+    height: 100svh !important;
     padding: 72px 16px 24px 16px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -5249,15 +5249,28 @@ canvas.glyph-fall {
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    height: clamp(340px, 64dvh, 580px) !important;
+    height: clamp(340px, 64vh, 580px) !important;
+    height: clamp(340px, 64svh, 580px) !important;
     overflow: hidden !important;
     pointer-events: none !important;
+    -webkit-mask-image: linear-gradient(to bottom, #000000 0%, #000000 58%, rgba(0, 0, 0, 0) 100%) !important;
+    mask-image: linear-gradient(to bottom, #000000 0%, #000000 58%, rgba(0, 0, 0, 0) 100%) !important;
+  }
+  .hero-monument__bg-wrap::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 90px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 60%, #FFFFFF 100%);
+    pointer-events: none;
   }
   .hero-monument__bg-img {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    object-position: 88% center !important;
+    object-position: 84.5% center !important;
   }
   .hero-monument__content {
     width: 100% !important;

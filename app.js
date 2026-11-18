@@ -2429,11 +2429,12 @@ function initHeroGSAP() {
     runHeroAnimation();
   }
 
-  // 2. Parallax background on scroll
+  // 2. Parallax background on scroll (Desktop only - prevents mobile scroll metric jump)
   if (typeof ScrollTrigger !== 'undefined') {
+    const isMobile = window.innerWidth <= 768;
     const heroBgImg = document.querySelector('.hero-monument__bg-img') || document.querySelector('.hero-bg-wrap img');
     const heroSection = document.getElementById('home') || document.getElementById('hero');
-    if (heroBgImg && heroSection) {
+    if (heroBgImg && heroSection && !isMobile) {
       gsap.to(heroBgImg, {
         yPercent: 12,
         ease: 'none',
