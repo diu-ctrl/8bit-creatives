@@ -1,5 +1,5 @@
 /**
- * 8Bit Creatives — app.js
+ * 8Bit Creatives - app.js
  * Fresh build v2 per AGENTS.md v2 + GSAP hero animations.
  * No legacy imports. No external dependencies.
  */
@@ -134,8 +134,8 @@ function initNavbar() {
 
   // === STEP 2: HIDE LOGO + BUTTON WHEN SCROLLED PAST HERO ===
   if (!hero) return;
-  if (!logo) console.warn('Logo element not found — selector wrong');
-  if (!cta)  console.warn('CTA button not found — selector wrong');
+  if (!logo) console.warn('Logo element not found - selector wrong');
+  if (!cta)  console.warn('CTA button not found - selector wrong');
 
   // Set transitions
   [logo, cta].forEach(el => {
@@ -156,10 +156,10 @@ function initNavbar() {
     if (cta)  { cta.style.opacity  = '0'; cta.style.transform  = 'translateY(-8px)'; cta.style.pointerEvents  = 'none'; }
   }
 
-  // Initial state — visible
+  // Initial state - visible
   show();
 
-  // Observe hero — if hero is at least 5% visible, show. Otherwise hide.
+  // Observe hero - if hero is at least 5% visible, show. Otherwise hide.
   const heroObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting && entry.intersectionRatio > 0.05) {
@@ -221,7 +221,7 @@ function initNavbar() {
 
   // === PAUSE ESPORTS 8BIT BACKGROUND WHEN OFF-SCREEN ===
   // The esports section has its own animated 8BIT letter columns.
-  // Without this observer, they run forever — even when off-screen —
+  // Without this observer, they run forever - even when off-screen -
   // consuming GPU compositing cycles. This pauses them when the
   // esports section is not visible, and resumes when it scrolls into view.
   (function() {
@@ -240,7 +240,7 @@ function initNavbar() {
         });
       }, {
         threshold: 0,
-        rootMargin: '50px 0px'  // small buffer — pause slightly after the section leaves the viewport
+        rootMargin: '50px 0px'  // small buffer - pause slightly after the section leaves the viewport
       });
       esportsBgObserver.observe(esportsSection);
     }
@@ -751,9 +751,9 @@ function initEclipseGrass() {
   if (!grassGroup) return;
 
   const CX = 400, CY = 400;            // center of the 800x800 viewBox
-  const GRASS_RADIUS = 400;            // was 405 — remove the gap, anchor exactly on the circle edge
-  const NUM_BLADES = 240;              // was 320 — much denser
-  const MIN_H = 12;                    // SHORT — so characters stay visible
+  const GRASS_RADIUS = 400;            // was 405 - remove the gap, anchor exactly on the circle edge
+  const NUM_BLADES = 240;              // was 320 - much denser
+  const MIN_H = 12;                    // SHORT - so characters stay visible
   const MAX_H = 22;
   const MIN_W = 2;
   const MAX_W = 4;
@@ -776,7 +776,7 @@ function initEclipseGrass() {
     const tipX = anchorX + Math.cos(outwardAngle) * h;
     const tipY = anchorY + Math.sin(outwardAngle) * h;
 
-    // Bezier control points — create an organic S-curve
+    // Bezier control points - create an organic S-curve
     // The blade bends slightly perpendicular to its length
     const bend = randRange(-4, 4);
     const ctrlPerpX = perpX * bend;
@@ -1628,7 +1628,7 @@ const characters = [
       <line x1="48" y1="6" x2="48" y2="46" stroke="#000" stroke-width="0.75" opacity="0.06"/>
       <line x1="60" y1="6" x2="60" y2="46" stroke="#000" stroke-width="0.75" opacity="0.06"/>
       <line x1="72" y1="6" x2="72" y2="46" stroke="#000" stroke-width="0.75" opacity="0.06"/>
-      <!-- BLOCKY TORSO (44px wide — teal/cyan shirt) -->
+      <!-- BLOCKY TORSO (44px wide - teal/cyan shirt) -->
       <rect x="38" y="46" width="44" height="46" fill="#00AA9B"/>
       <rect x="68" y="46" width="14" height="46" fill="#008B7A" opacity="0.45"/>
       <rect x="54" y="46" width="12" height="4" fill="#008B7A"/>
@@ -1666,7 +1666,7 @@ const characters = [
   // Generate 12 unique positions (no repeats)
   let svgString = '';
   for (let i = 0; i < NUM_POSITIONS; i++) {
-    const charIndex = i;               // 0 to 11 — each character used ONCE
+    const charIndex = i;               // 0 to 11 - each character used ONCE
     const angleDeg = i * ANGLE_STEP;
     const angleRad = angleDeg * Math.PI / 180;
     
@@ -1746,7 +1746,7 @@ function initAboutPhysics() {
     return { x, y, hit: false, nx: 0, ny: 0 };
   }
 
-  // AABB collision resolution — push character out of the solid obstacle along shallowest penetration edge
+  // AABB collision resolution - push character out of the solid obstacle along shallowest penetration edge
   function resolveAABB(x, y, w, h, sx, sy, sw, sh) {
     if (x + w <= sx || x >= sx + sw || y + h <= sy || y >= sy + sh) {
       return { x, y, hit: false, nx: 0, ny: 0 };
@@ -2141,7 +2141,7 @@ function initAboutPhysics() {
 
     const pickedCharG = pickRandomCharacter();
     if (!pickedCharG) {
-      // Characters not generated yet — retry in 500ms (up to 10 times)
+      // Characters not generated yet - retry in 500ms (up to 10 times)
       if (!triggerAutoFall._retries) triggerAutoFall._retries = 0;
       triggerAutoFall._retries++;
       if (triggerAutoFall._retries <= 10) {
@@ -2152,7 +2152,7 @@ function initAboutPhysics() {
 
     const body = detachCharacter(pickedCharG);
     if (!body) {
-      // Detach failed — retry with a different character in 500ms (up to 5 times)
+      // Detach failed - retry with a different character in 500ms (up to 5 times)
       if (!triggerAutoFall._detachRetries) triggerAutoFall._detachRetries = 0;
       triggerAutoFall._detachRetries++;
       if (triggerAutoFall._detachRetries <= 5) {
@@ -2995,7 +2995,7 @@ function initHeroDinoGame() {
       ctx.font = '700 22px "Geist", sans-serif';
       ctx.fillText('Space or Click to Start', cx, cssH * 0.30);
       ctx.font = '600 13px "Geist", sans-serif';
-      ctx.fillText('SPACE / UP for jump  —  DOWN / C for crouch', cx, cssH * 0.30 + 30);
+      ctx.fillText('SPACE / UP for jump  |  DOWN / C for crouch', cx, cssH * 0.30 + 30);
     }
     ctx.textAlign = 'left';
   }
@@ -3062,7 +3062,7 @@ function initHeroDinoGame() {
 
 
 /* ==========================================================================
-   3. SCROLL REVEAL — IntersectionObserver on .reveal elements
+   3. SCROLL REVEAL - IntersectionObserver on .reveal elements
    ========================================================================== */
 function initScrollReveal() {
   const revealEls = document.querySelectorAll('.reveal');
@@ -3081,7 +3081,7 @@ function initScrollReveal() {
 }
 
 /* ==========================================================================
-   4. STATS COUNTER — count-up on scroll-into-view
+   4. STATS COUNTER - count-up on scroll-into-view
    ========================================================================== */
 function initStatsCounter() {
   const statEls = document.querySelectorAll('[data-count-target]');
@@ -3121,7 +3121,7 @@ function initStatsCounter() {
 }
 
 /* ==========================================================================
-   5. CASE STUDIES — hover list → swap image
+   5. CASE STUDIES - hover list → swap image
    ========================================================================== */
 function initCaseStudies() {
   const card = document.querySelector('.case-card') || document.querySelector('.case-studies-foreground');
@@ -3139,7 +3139,7 @@ function initCaseStudies() {
       title: 'Global Chess League\u00A0S4',
       sub: 'Multi-camera live broadcast · 9-day event' },
     { img: 'images-for-landing-page/case-studies/case-kick.webp',
-      title: 'Kick India — Day One Migration',
+      title: 'Kick India: Day One Migration',
       sub: '48 creators migrated · 95/5 subscription split' },
     { img: 'images-for-landing-page/case-studies/case-iqoo.webp',
       title: 'iQOO Flagship Smartphone Launch',
@@ -3287,7 +3287,7 @@ function initServicesGSAP() {
     }
   });
 
-  // Cards stagger in — all at the same level in a row (no y offset)
+  // Cards stagger in - all at the same level in a row (no y offset)
   gsap.from('.service-card', {
     opacity: 0,
     y: 0,
@@ -3450,7 +3450,7 @@ function initCTAGSAP() {
 }
 
 /* ==========================================================================
-   7. FOOTER LOGO — perspective tilt on mouse move (smoothed)
+   7. FOOTER LOGO - perspective tilt on mouse move (smoothed)
    ========================================================================== */
 function initFooterLogoTilt() {
   const logoWrap = document.getElementById('footerLogoWrap') || document.querySelector('.footer-logo-wrap');
@@ -3525,7 +3525,7 @@ setTimeout(initFooterLogoTilt, 2000);
 
 
 /* ==========================================================================
-   7. CREATOR STATS — tap turns orange, opens platform link
+   7. CREATOR STATS - tap turns orange, opens platform link
    ========================================================================== */
 function initCreatorStats() {
   const statLinks = document.querySelectorAll('.creator-card__stat[data-url]');
@@ -3667,7 +3667,7 @@ function initCreatorStats() {
     if (kickUrl) card.setAttribute('data-kc', kickUrl);
     const img = document.createElement('img');
     img.src = c.img;
-    img.alt = `${c.name} (${c.realName}) — 8Bit Creatives`;
+    img.alt = `${c.name} (${c.realName}) · 8Bit Creatives`;
     img.loading = 'lazy';
     img.onerror = function() {
       // Branded placeholder if image missing
@@ -4156,7 +4156,7 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         });
 
         if (response.ok) {
-          // Success — show success box, hide form
+          // Success - show success box, hide form
           form.hidden = true;
           if (successBox) successBox.hidden = false;
           // Reset for next time (in case user clicks "send another")

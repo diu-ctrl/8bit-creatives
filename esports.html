@@ -18,7 +18,7 @@
   <meta name="msapplication-config" content="/favicon/browserconfig.xml">
   <meta name="application-name" content="8Bit Creatives">
   <meta name="apple-mobile-web-app-title" content="8Bit Creatives">
-  <title>8Bit Esports — Official BGMI Competitive Roster &amp; Team | 8Bit Creatives</title>
+  <title>8Bit Esports | Official BGMI Competitive Roster &amp; Team · 8Bit Creatives</title>
   <meta name="description" content="Official 8Bit Esports BGMI roster: Juicy, Sarangg, Skipz, Shubh, Shorty. Tournament track record, team statistics, and Krafton India Esports profile.">
   <meta name="keywords" content="8Bit esports agency, 8Bit BGMI roster, 8Bit esports team, 8Bit lineup, Juicy 8Bit, Sarangg 8Bit, BGMI competitive India, 8Bit Creatives">
   <link rel="canonical" href="https://8bit-creatives.vercel.app/esports">
@@ -27,7 +27,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="8Bit Creatives">
   <meta property="og:url" content="https://8bit-creatives.vercel.app/esports">
-  <meta property="og:title" content="8Bit Esports — Official BGMI Competitive Roster &amp; Team | 8Bit Creatives">
+  <meta property="og:title" content="8Bit Esports | Official BGMI Competitive Roster &amp; Team · 8Bit Creatives">
   <meta property="og:description" content="Official 8Bit Esports BGMI roster: Juicy, Sarangg, Skipz, Shubh, Shorty. Tournament track record, team statistics, and Krafton India Esports profile.">
   <meta property="og:image" content="https://8bit-creatives.vercel.app/images-for-landing-page/hero-esports.png">
   <meta property="og:locale" content="en_IN">
@@ -35,7 +35,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@8Bit_Creatives">
-  <meta name="twitter:title" content="8Bit Esports — Official BGMI Competitive Roster &amp; Team | 8Bit Creatives">
+  <meta name="twitter:title" content="8Bit Esports | Official BGMI Competitive Roster &amp; Team · 8Bit Creatives">
   <meta name="twitter:description" content="Official 8Bit Esports BGMI roster representing 8Bit Creatives in competitive tournaments.">
   <meta name="twitter:image" content="https://8bit-creatives.vercel.app/images-for-landing-page/hero-esports.png">
 
@@ -172,7 +172,7 @@
     }
 
     /* ==========================================================================
-       SECTION 1: TEAM HEADER (HERO — Dark Background)
+       SECTION 1: TEAM HEADER (HERO - Dark Background)
        ========================================================================== */
     .team-header-section,
     #team-header {
@@ -840,7 +840,7 @@
       }
     }
 
-    /* Mobile (<= 767px) — Compact, proportional layout */
+    /* Mobile (<= 767px) - Compact, proportional layout */
     @media (max-width: 767px) {
       .es-container {
         padding: 0 18px !important;
@@ -1126,9 +1126,9 @@
       }
     }
   </style>
-  <!-- Vercel Web Analytics — tracks page views, unique visitors, top pages, referrers, devices -->
+  <!-- Vercel Web Analytics - tracks page views, unique visitors, top pages, referrers, devices -->
   <script defer src="/_vercel/insights/script.js"></script>
-  <!-- Vercel Speed Insights — tracks Core Web Vitals (LCP, CLS, TTFB, INP) -->
+  <!-- Vercel Speed Insights - tracks Core Web Vitals (LCP, CLS, TTFB, INP) -->
   <script defer src="/_vercel/speed-insights/script.js" onerror="this.onerror=null;this.src='https://va.vercel-scripts.com/v1/speed-insights/script.js';"></script>
 </head>
 <body>
@@ -1879,15 +1879,15 @@
   </script>
 
   <!-- ============================================================
-       Velaris — WebGL animated gradient for Esports Hero section
+       Velaris - WebGL animated gradient for Esports Hero section
        ============================================================ -->
   <script>
   (function () {
-    // ── Configuration — 8Bit color palette ──
+    // ── Configuration - 8Bit color palette ──
     var CONFIG = {
       bg:       "#0A0A0A",
       colors:   ["#FFB37A", "#FC964B", "#FF5931", "#141210"],
-      speed:    1.4,         // slower than the default 2.0 — calmer
+      speed:    1.4,         // slower than the default 2.0 - calmer
       grain:    0.25,        // subtle film grain (default 0.3)
       height:   "100vh"
     };
@@ -2001,7 +2001,7 @@
 
     var gl = canvas.getContext("webgl", { antialias: true, premultipliedAlpha: false });
     if (!gl) {
-      console.error("WebGL not supported — gradient will be blank.");
+      console.error("WebGL not supported - gradient will be blank.");
       return;
     }
 
@@ -2128,7 +2128,7 @@
 (function () {
   if (typeof Lenis === 'undefined') return;
   var lenis = new Lenis({
-    duration: 1.2,           // smooth scroll duration — 1.2s feels natural
+    duration: 1.2,           // smooth scroll duration - 1.2s feels natural
     easing: function (t) {    // ease-out-expo for a natural deceleration
       return Math.min(1, 1.001 - Math.pow(2, -10 * t));
     },
@@ -2146,7 +2146,7 @@
     });
     gsap.ticker.lagSmoothing(500, 33);
   } else {
-    // No GSAP — use requestAnimationFrame
+    // No GSAP - use requestAnimationFrame
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -2154,7 +2154,7 @@
     requestAnimationFrame(raf);
   }
 
-  // Respect reduced motion — disable Lenis smoothing if user prefers reduced motion
+  // Respect reduced motion - disable Lenis smoothing if user prefers reduced motion
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     lenis.destroy();
   }

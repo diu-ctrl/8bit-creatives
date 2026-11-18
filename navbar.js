@@ -1,5 +1,5 @@
 /**
- * 8Bit Creatives — navbar.js
+ * 8Bit Creatives - navbar.js
  * Smooth sliding active indicator for navbar-pill
  * Animates with ~300ms cubic-bezier(0.4, 0, 0.2, 1) transition between links
  */
@@ -79,7 +79,7 @@
       }
     };
 
-    // Click listeners on each nav link — indicator stays rock-solid on active link
+    // Click listeners on each nav link - indicator stays rock-solid on active link
     links.forEach(link => {
       link.addEventListener('click', () => {
         isClickScrolling = true;
