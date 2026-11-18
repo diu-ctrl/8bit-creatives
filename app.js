@@ -11,34 +11,48 @@ if (typeof gsap !== 'undefined') {
 }
 
 function initScrollSmoother() {
-  if (typeof gsap === 'undefined' || typeof ScrollSmoother === 'undefined') return null;
-
   const wrapper = document.getElementById('smooth-wrapper');
   const content = document.getElementById('smooth-content');
   if (!wrapper || !content) return null;
+
+  // Defensive fallback: ensure wrapper is never frozen
+  const makeResilient = () => {
+    wrapper.style.position = 'relative';
+    wrapper.style.height = 'auto';
+    wrapper.style.overflow = 'visible';
+  };
+
+  if (typeof gsap === 'undefined' || typeof ScrollSmoother === 'undefined') {
+    makeResilient();
+    return null;
+  }
 
   // Accessibility & Mobile Check: Only enable on desktop without reduced-motion preference
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 767);
 
   if (prefersReducedMotion || isTouchDevice) {
-    wrapper.style.position = 'relative';
-    wrapper.style.height = 'auto';
-    wrapper.style.overflow = 'visible';
+    makeResilient();
     return null;
   }
 
-  const smoother = ScrollSmoother.create({
-    wrapper: wrapper,
-    content: content,
-    smooth: 1.2,         // Buttery 1.2s catch-up duration (approved sweet spot)
-    effects: true,       // Parse data-speed & data-lag
-    smoothTouch: 0,      // Native touch on mobile
-    normalizeScroll: false
-  });
+  try {
+    const smoother = ScrollSmoother.create({
+      wrapper: wrapper,
+      content: content,
+      smooth: 1.2,         // Buttery 1.2s catch-up duration (approved sweet spot)
+      effects: true,       // Parse data-speed & data-lag
+      smoothTouch: 0,      // Native touch on mobile
+      normalizeScroll: false
+    });
 
-  window.__smoother = smoother;
-  return smoother;
+    window.__smoother = smoother;
+    return smoother;
+  } catch (err) {
+    console.warn('ScrollSmoother init fallback:', err);
+    makeResilient();
+    return null;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

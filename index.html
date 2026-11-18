@@ -303,14 +303,12 @@
       scroll-margin-top: 57px !important;
     }
 
-    /* GSAP ScrollSmoother Container Styles */
+    /* Resilient Scroll Container Styles — defaults to clean relative/visible for 100% resilient native scrolling; ScrollSmoother elevates dynamically when active */
     #smooth-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
+      position: relative;
       width: 100%;
-      height: 100%;
-      overflow: hidden;
+      height: auto;
+      overflow: visible;
     }
     #smooth-content {
       width: 100%;
@@ -325,10 +323,10 @@
     }
   </style>
 
-  <!-- GSAP, ScrollTrigger & ScrollSmoother -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+  <!-- GSAP & ScrollTrigger (High-availability CDN with jsdelivr fallback) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollSmoother.min.js"></script>
 
   <!-- SVG filter for ring blur -->
   <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
