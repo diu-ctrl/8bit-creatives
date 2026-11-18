@@ -917,28 +917,40 @@ function initAboutGSAP() {
       }
     });
 
-    // 4. Stat numbers count-up with ScrollTrigger
-    document.querySelectorAll('.stat-num').forEach(el => {
-      const targetText = el.textContent.trim();
-      const target = parseInt(targetText.replace(/[^0-9]/g, '')) || 0;
-      const suffix = targetText.replace(/[0-9]/g, '');
-      const obj = { val: 0 };
-      gsap.to(obj, {
-        val: target,
-        duration: 1.2,
-        ease: 'power2.out',
-        onUpdate: () => {
-          el.textContent = Math.round(obj.val) + suffix;
-        },
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%'
+    // 4. Stat numbers count-up with ScrollTrigger (runs strictly ONCE)
+    const statsSection = document.querySelector('.about-stats');
+    if (statsSection && statsSection.dataset.counted !== 'true') {
+      ScrollTrigger.create({
+        trigger: statsSection,
+        start: 'top 75%',
+        once: true,
+        onEnter: () => {
+          if (statsSection.dataset.counted === 'true') return;
+          statsSection.dataset.counted = 'true';
+
+          const statEls = statsSection.querySelectorAll('.stat-num');
+          statEls.forEach(el => {
+            const target = parseFloat(el.getAttribute('data-count-target')) || parseInt(el.textContent.replace(/[^0-9]/g, '')) || 0;
+            const suffix = el.getAttribute('data-count-suffix') !== null ? el.getAttribute('data-count-suffix') : (el.textContent.replace(/[0-9]/g, '') || '');
+            const obj = { val: 0 };
+            gsap.to(obj, {
+              val: target,
+              duration: 1.2,
+              ease: 'power2.out',
+              onUpdate: () => {
+                el.textContent = Math.round(obj.val) + suffix;
+              },
+              onComplete: () => {
+                el.textContent = target + suffix;
+              }
+            });
+          });
         }
       });
-    });
+    }
 
-    // 5. Stat labels and descriptions entrance
-    gsap.from('.about-stats .stat-label, .about-stats .stat-desc', {
+    // 5. Stat labels and descriptions entrance (runs strictly ONCE)
+    gsap.from('.about-stats .stat-label, .about-stats .stat-desc, .about-stats .stat-divider', {
       opacity: 0,
       y: 20,
       duration: 0.6,
@@ -946,7 +958,8 @@ function initAboutGSAP() {
       ease: 'power2.out',
       scrollTrigger: {
         trigger: '.about-stats',
-        start: 'top 75%'
+        start: 'top 75%',
+        once: true
       }
     });
   }
@@ -3355,28 +3368,35 @@ function initScrollReveal() {
 }
 
 /* ==========================================================================
-   4. STATS COUNTER - count-up on scroll-into-view
+   4. STATS COUNTER - fallback count-up on scroll-into-view (only if GSAP inactive)
    ========================================================================== */
 function initStatsCounter() {
-  const statEls = document.querySelectorAll('[data-count-target]');
-  if (!statEls.length) return;
+  const statsSection = document.querySelector('.about-stats');
+  if (!statsSection || statsSection.dataset.counted === 'true') return;
 
-  let counted = false;
+  // When GSAP and ScrollTrigger are active, initAboutGSAP handles the count-up with ScrollTrigger
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    return;
+  }
+
+  const statEls = statsSection.querySelectorAll('.stat-num');
+  if (!statEls.length) return;
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting && !counted) {
-        counted = true;
+      if (entry.isIntersecting && statsSection.dataset.counted !== 'true') {
+        statsSection.dataset.counted = 'true';
+        observer.disconnect();
+
         statEls.forEach(el => {
-          const target = parseFloat(el.getAttribute('data-count-target'));
-          const suffix = el.getAttribute('data-count-suffix') || '';
-          const duration = 800;
+          const target = parseFloat(el.getAttribute('data-count-target')) || parseInt(el.textContent.replace(/[^0-9]/g, '')) || 0;
+          const suffix = el.getAttribute('data-count-suffix') !== null ? el.getAttribute('data-count-suffix') : (el.textContent.replace(/[0-9]/g, '') || '');
+          const duration = 1000;
           const start = performance.now();
 
           function step(now) {
             const elapsed  = now - start;
             const progress = Math.min(elapsed / duration, 1);
-            // ease-out
             const eased = 1 - Math.pow(1 - progress, 3);
             const value = Math.floor(eased * target);
             el.textContent = value + suffix;
@@ -3390,8 +3410,7 @@ function initStatsCounter() {
     });
   }, { threshold: 0.2 });
 
-  const statsSection = document.querySelector('.about-stats');
-  if (statsSection) observer.observe(statsSection);
+  observer.observe(statsSection);
 }
 
 /* ==========================================================================
