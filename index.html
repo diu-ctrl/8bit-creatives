@@ -1454,7 +1454,12 @@
     } else if (sectionId === 'esports') {
       target = document.querySelector('.esports-section__card') || document.getElementById('esports');
     } else if (sectionId === 'contact') {
-      target = document.getElementById('contact') || document.querySelector('.footer-section');
+      // Fullscreen dark CTA section — align section top flush with viewport to eliminate any gap
+      var sec = document.getElementById('contact');
+      if (sec) {
+        return Math.max(0, Math.round(sec.getBoundingClientRect().top + window.scrollY));
+      }
+      target = document.querySelector('.footer-section');
     } else {
       target = document.getElementById(sectionId);
     }
