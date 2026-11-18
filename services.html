@@ -994,7 +994,7 @@
         <!-- Card 1: Reliance Campa Energy x S8UL EWC (Corporate Prestige & Title Sponsor) -->
         <div class="work-card" onclick="window.location.href='work.html?open=10';" style="cursor: pointer;">
           <div class="work-card-image">
-            <img src="images-for-landing-page/Case Studies/campa.jpg" alt="Reliance Campa Energy x S8UL EWC" loading="lazy">
+            <img decoding="async" width="600" height="375" src="images-for-landing-page/Case Studies/campa.webp" alt="Reliance Campa Energy x S8UL EWC" loading="lazy">
           </div>
           <div class="work-card-content">
             <div class="work-card-label">Global title sponsor</div>
@@ -1007,7 +1007,7 @@
         <!-- Card 2: Tech Mahindra Global Chess League S4 (Broadcast & Production Mastery) -->
         <div class="work-card" onclick="window.location.href='work.html?open=33';" style="cursor: pointer;">
           <div class="work-card-image">
-            <img src="images-for-landing-page/Case Studies/chess.jpg" alt="Global Chess League S4" loading="lazy">
+            <img decoding="async" width="600" height="375" src="images-for-landing-page/Case Studies/chess.webp" alt="Global Chess League S4" loading="lazy">
           </div>
           <div class="work-card-content">
             <div class="work-card-label">Broadcast & production</div>
@@ -1020,7 +1020,7 @@
         <!-- Card 3: iQOO Esports Naming Rights (Historic Commercial Scale & Hardware Partnership) -->
         <div class="work-card" onclick="window.location.href='work.html?open=25';" style="cursor: pointer;">
           <div class="work-card-image">
-            <img src="images-for-landing-page/Case Studies/iqoo.jpg" alt="iQOO Esports Naming Rights" loading="lazy">
+            <img decoding="async" width="600" height="375" src="images-for-landing-page/Case Studies/iqoo.webp" alt="iQOO Esports Naming Rights" loading="lazy">
           </div>
           <div class="work-card-content">
             <div class="work-card-label">Naming rights deal</div>
@@ -1124,8 +1124,8 @@
 
         <div class="footer-col footer-col--center footer-center">
           <div class="footer-logo-wrap" id="footerLogoWrap">
-            <img
-              src="images-for-landing-page/footer-logo.png"
+            <img decoding="async" width="1024" height="1024"
+              src="images-for-landing-page/footer-logo.webp"
               alt="8Bit Creatives"
               class="footer-logo"
               id="footerLogo"
@@ -1163,8 +1163,8 @@
           <div class="footer-s8ul-block">
             <div class="s8ul-logo-wrap">
               <a href="https://s8ul.gg/" target="_blank" rel="noopener noreferrer" class="s8ul-logo-link">
-              <img
-                src="images-for-landing-page/s8ul-logo.png"
+              <img decoding="async" width="894" height="1198"
+                src="images-for-landing-page/s8ul-logo.webp"
                 alt="S8UL"
                 class="footer-s8ul-logo"
                 style="width: 100px; max-width: 100px; height: auto; object-fit: contain;"
@@ -1511,48 +1511,9 @@
   })();
   </script>
 
-<!-- Lenis Smooth Scroll -->
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous"></script>
-<script>
-(function () {
-  if (typeof Lenis === 'undefined') return;
-  var lenis = new Lenis({
-    duration: 1.2,           // smooth scroll duration - 1.2s feels natural
-    easing: function (t) {    // ease-out-expo for a natural deceleration
-      return Math.min(1, 1.001 - Math.pow(2, -10 * t));
-    },
-    smoothWheel: true,        // smooth mouse wheel scroll
-    smoothTouch: false,       // keep native touch scroll (smoother on mobile)
-    touchMultiplier: 1.5,
-  });
-  window.lenis = lenis;
-
-  // Sync with GSAP ScrollTrigger if present
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(function (time) {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(500, 33);
-  } else {
-    // No GSAP - use requestAnimationFrame
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-  }
-
-  // Respect reduced motion - disable Lenis smoothing if user prefers reduced motion
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    lenis.destroy();
-  }
-})();
-</script>
-
-  <!-- Floating cursor image for Capabilities section -->
+<!-- Floating cursor image for Capabilities section -->
   <div class="cursor-image" id="cursorImage" aria-hidden="true">
-    <img src="" alt="" class="cursor-image__img" />
+    <img decoding="async" src="" alt="" class="cursor-image__img" width="320" height="200" />
   </div>
 
   <!-- Cursor-to-image hover effect (Desktop only) -->

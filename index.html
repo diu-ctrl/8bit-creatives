@@ -340,7 +340,6 @@
   <script defer src="/_vercel/insights/script.js"></script>
   <!-- Vercel Speed Insights - tracks Core Web Vitals (LCP, CLS, TTFB, INP) -->
   <script defer src="/_vercel/speed-insights/script.js" onerror="this.onerror=null;this.src='https://va.vercel-scripts.com/v1/speed-insights/script.js';"></script>
-  <script src="scripts/creators-data.js?v=2.2"></script>
   <script>
     try {
       if (window.scrollY < 120 && (!window.sessionStorage || !sessionStorage.getItem('8bit_last_section') || sessionStorage.getItem('8bit_last_section') === 'home')) {
@@ -367,7 +366,7 @@
         <!-- Center Stage: Logo Emblem & Word Cycler -->
         <div class="telemetry-center">
           <div class="telemetry-logo-emblem">
-            <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo">
+            <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo" width="130" height="34" decoding="async">
           </div>
 
           <div class="telemetry-cycle-wrapper">
@@ -406,7 +405,7 @@
         <!-- Center Stage: Logo Emblem & Word Cycler -->
         <div class="telemetry-center">
           <div class="telemetry-logo-emblem">
-            <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo">
+            <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo" width="130" height="34" decoding="async">
           </div>
 
           <div class="telemetry-cycle-wrapper">
@@ -441,7 +440,7 @@
      ============================================================ -->
 <!-- Top-Left Mascot Logo (matching Figma reference) -->
 <a href="/" data-section="home" onclick="return false;" class="nav-brand-topleft" aria-label="8Bit Creatives Home">
-  <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo" class="nav-brand-topleft__img">
+  <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo" width="130" height="34" decoding="async" class="nav-brand-topleft__img">
 </a>
 
 <!-- Centered Floating Glassmorphism Capsule Navbar -->
@@ -771,16 +770,16 @@
           <!-- LEFT: List (4 items only) -->
           <div class="case-list-column">
             <ul class="case-list" id="caseList">
-              <li class="case-item is-active" data-case="0" data-image="images-for-landing-page/Case Studies/gemini.jpg">
+              <li class="case-item is-active" data-case="0" data-image="images-for-landing-page/Case Studies/gemini.webp">
                 <a href="work.html?open=0" class="case-item-link"><span class="case-text">Google Gemini: The Switch<sup class="case-num">[01]</sup></span></a>
               </li>
-              <li class="case-item" data-case="1" data-image="images-for-landing-page/Case Studies/meta-ai.jpg">
+              <li class="case-item" data-case="1" data-image="images-for-landing-page/Case Studies/meta-ai.webp">
                 <a href="work.html?open=1" class="case-item-link"><span class="case-text">Meta AI: Play. Create. Discover.<sup class="case-num">[02]</sup></span></a>
               </li>
-              <li class="case-item" data-case="2" data-image="images-for-landing-page/Case Studies/thums-up.jpg">
+              <li class="case-item" data-case="2" data-image="images-for-landing-page/Case Studies/thums-up.webp">
                 <a href="work.html?open=2" class="case-item-link"><span class="case-text">Thums Up: Bring The Rush<sup class="case-num">[03]</sup></span></a>
               </li>
-              <li class="case-item" data-case="3" data-image="images-for-landing-page/Case Studies/stranger-things.jpg">
+              <li class="case-item" data-case="3" data-image="images-for-landing-page/Case Studies/stranger-things.webp">
                 <a href="work.html?open=3" class="case-item-link"><span class="case-text">Netflix: Stranger Things Premiere<sup class="case-num">[04]</sup></span></a>
               </li>
             </ul>
@@ -790,8 +789,8 @@
           <!-- RIGHT: Image + Caption (right-aligned) -->
           <div class="case-image-column">
             <div class="case-image-wrap is-visible is-fitted" id="caseImageWrap">
-              <img id="caseImageBg" class="case-image-bg" src="images-for-landing-page/Case Studies/gemini.jpg" alt="" aria-hidden="true" loading="lazy">
-              <img id="caseImage" class="case-image-fg" src="images-for-landing-page/Case Studies/gemini.jpg" alt="Google Gemini: The Switch" width="600" height="375" loading="lazy">
+              <img decoding="async" width="600" height="375" id="caseImageBg" class="case-image-bg" src="images-for-landing-page/Case Studies/gemini.webp" alt="" aria-hidden="true" loading="lazy">
+              <img decoding="async" id="caseImage" class="case-image-fg" src="images-for-landing-page/Case Studies/gemini.webp" alt="Google Gemini: The Switch" width="600" height="375" loading="lazy">
             </div>
             <div class="case-caption is-visible" id="caseCaption">
               <div class="case-caption-title" id="caseCaptionTitle">Google Gemini: The Switch</div>
@@ -1176,7 +1175,7 @@
 }
 </style>
 <section class="esports-section" id="esports" data-bg="light" aria-label="Esports">
-  <div class="esports-section__bg" id="bg"></div>
+  <div class="esports-section__bg" id="bg"><canvas id="esportsGlyphCanvas" class="glyph-fall"></canvas></div>
   <div class="esports-section__card">
     <div class="esports-section__card__header">
       <h2 class="esports-section__card__title">8Bit Esports</h2>
@@ -1202,40 +1201,7 @@
   </div>
 </section>
 
-<script>
-(function(){
-  var cols = window.innerWidth < 768 ? 40 : 100, wordCyclesPerCol = 30, pattern = ['8', 'B', 'I', 'T', ''];
-  var bg = document.querySelector('.esports-section__bg');
-  if (!bg) return;
-  bg.innerHTML = '';
-  var frag = document.createDocumentFragment();
-  for (var c = 0; c < cols; c++) {
-    var col = document.createElement('div');
-    col.className = 'bg__col ' + (c % 2 === 0 ? 'bg__col--down' : 'bg__col--up');
-    for (var w = 0; w < wordCyclesPerCol; w++) {
-      for (var p = 0; p < pattern.length; p++) {
-        var span = document.createElement('span');
-        span.textContent = pattern[p];
-        col.appendChild(span);
-      }
-    }
-    frag.appendChild(col);
-  }
-  bg.appendChild(frag);
 
-  // Pause off-screen CSS animation when scrolled away
-  if ('IntersectionObserver' in window) {
-    var esportsObserver = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting) {
-        bg.classList.remove('is-paused');
-      } else {
-        bg.classList.add('is-paused');
-      }
-    }, { threshold: 0.01 });
-    esportsObserver.observe(bg);
-  }
-})();
-</script>
 
 
 
@@ -1388,7 +1354,7 @@
       <!-- Center: large logo + address + socials + divider + signature -->
       <div class="footer-col footer-col--center footer-center">
         <div class="footer-logo-wrap" id="footerLogoWrap">
-          <img
+          <img decoding="async"
             src="images-for-landing-page/footer-logo.webp"
             alt="8Bit Creatives"
             class="footer-logo"
@@ -1429,7 +1395,7 @@
         <div class="footer-s8ul-block">
           <div class="s8ul-logo-wrap">
             <a href="https://s8ul.gg/" target="_blank" rel="noopener noreferrer" class="s8ul-logo-link">
-              <img
+              <img decoding="async"
               src="images-for-landing-page/s8ul-logo.webp"
               alt="S8UL"
               class="footer-s8ul-logo"
@@ -2211,9 +2177,11 @@ void main() {
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
       setupGlyphCanvas('heroGlyphCanvas', false);
+      setupGlyphCanvas('esportsGlyphCanvas', false);
     });
   } else {
     setupGlyphCanvas('heroGlyphCanvas', false);
+    setupGlyphCanvas('esportsGlyphCanvas', false);
   }
 })();
 </script>

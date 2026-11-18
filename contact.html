@@ -389,7 +389,7 @@
      NAVBAR (Shared Component)
      ============================================================ -->
 <a href="index.html#home" data-section="home" class="nav-brand-topleft" aria-label="8Bit Creatives Home">
-  <img src="images-for-landing-page/logo_2.png" alt="8Bit Logo" class="nav-brand-topleft__img">
+  <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo" width="130" height="34" decoding="async" class="nav-brand-topleft__img">
 </a>
 
 <nav class="navbar-pill" id="top" aria-label="Main navigation">
@@ -803,8 +803,8 @@
 
       <div class="footer-col footer-col--center footer-center">
         <div class="footer-logo-wrap" id="footerLogoWrap">
-          <img
-            src="images-for-landing-page/footer-logo.png"
+          <img decoding="async" width="1024" height="1024"
+            src="images-for-landing-page/footer-logo.webp"
             alt="8Bit Creatives"
             class="footer-logo"
             id="footerLogo"
@@ -842,8 +842,8 @@
         <div class="footer-s8ul-block">
           <div class="s8ul-logo-wrap">
             <a href="https://s8ul.gg/" target="_blank" rel="noopener noreferrer" class="s8ul-logo-link">
-              <img
-              src="images-for-landing-page/s8ul-logo.png"
+              <img decoding="async" width="894" height="1198"
+              src="images-for-landing-page/s8ul-logo.webp"
               alt="S8UL"
               class="footer-s8ul-logo"
               style="width: 100px; max-width: 100px; height: auto; object-fit: contain;"
@@ -1566,43 +1566,5 @@
 })();
 </script>
 
-<!-- Lenis Smooth Scroll -->
-<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous"></script>
-<script>
-(function () {
-  if (typeof Lenis === 'undefined') return;
-  var lenis = new Lenis({
-    duration: 1.2,           // smooth scroll duration - 1.2s feels natural
-    easing: function (t) {    // ease-out-expo for a natural deceleration
-      return Math.min(1, 1.001 - Math.pow(2, -10 * t));
-    },
-    smoothWheel: true,        // smooth mouse wheel scroll
-    smoothTouch: false,       // keep native touch scroll (smoother on mobile)
-    touchMultiplier: 1.5,
-  });
-  window.lenis = lenis;
-
-  // Sync with GSAP ScrollTrigger if present
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(function (time) {
-      lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(500, 33);
-  } else {
-    // No GSAP - use requestAnimationFrame
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-  }
-
-  // Respect reduced motion - disable Lenis smoothing if user prefers reduced motion
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    lenis.destroy();
-  }
-})();
-</script>
 </body>
 </html>

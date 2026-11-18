@@ -162,6 +162,7 @@ function initSitePreloader() {
 
     if (splitParam !== null) {
       const splitPct = parseInt(splitParam, 10) || 50;
+      wordsEls.forEach(el => { el.style.transition = 'none'; });
       applyPct(100);
       const sTop = document.getElementById('telemetryShutterTop');
       const sBottom = document.getElementById('telemetryShutterBottom');
@@ -2595,15 +2596,7 @@ function initHeroGSAP() {
     });
   }
 
-  // 4. Button hover micro-interactions
-  document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-      gsap.to(btn, { scale: 1.04, duration: 0.2, ease: 'power2.out' });
-    });
-    btn.addEventListener('mouseleave', () => {
-      gsap.to(btn, { scale: 1, duration: 0.2, ease: 'power2.out' });
-    });
-  });
+
 }
 
 
