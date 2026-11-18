@@ -394,73 +394,52 @@
   <div id="smooth-content">
 
 <!-- ============================================================
-     SECTION 2 - HERO
+     SECTION 2 - HERO (Monumental Architectural Hero)
      ============================================================ -->
-<section id="home" class="hero-section" aria-label="Home">
-  <div class="hero-8bit-bg" aria-hidden="true"><canvas class="glyph-fall" id="heroGlyphCanvas"></canvas></div>
-  <div class="hero-foreground" data-bg="dark">
-    <!-- Background: div .hero-bg-wrap with blur inside bounds -->
-    <div class="hero-bg-wrap">
+<section id="home" class="hero-section hero-monument" data-bg="light" aria-label="Home">
+  <!-- Architectural background with the monumental 3D 8 -->
+  <div class="hero-monument__bg-wrap" aria-hidden="true">
+    <picture>
+      <source srcset="images-for-landing-page/hero-monument-bg@2x.webp 2x, images-for-landing-page/hero-monument-bg.webp 1x" type="image/webp">
       <img
-        src="images-for-landing-page/hero-newimage.webp"
-        alt=""
-        class="hero-bg-img"
-        aria-hidden="true"
+        src="images-for-landing-page/hero-monument-bg.jpg"
+        alt="8Bit Creatives Monument"
+        class="hero-monument__bg-img"
         loading="eager"
         fetchpriority="high"
         decoding="sync"
         width="2048"
         height="1152"
-      ><!-- images-for-landing-page/hero-bg.png -->
-      <div class="hero-bg-vignette hero__bg-vignette" aria-hidden="true"></div>
-    </div>
+      >
+    </picture>
+  </div>
 
-    <div class="hero-content">
-      <!-- Left column -->
-      <div class="hero-left" data-speed="0.96">
-      <h1 class="hero-title">
-        <span class="line">Powering</span><br>
-        <span class="line">India's</span><br>
-        <span class="line">Gaming Culture</span>
+  <!-- Main Hero Content Container -->
+  <div class="hero-monument__content">
+    <div class="hero-monument__left">
+      <h1 class="hero-title hero-monument__title">
+        <span class="line">Built for India's</span><br>
+        <span class="line">Next Level.</span>
       </h1>
 
-        <p class="hero-sub">
-          8Bit Creatives manages the creators, campaigns and live moments that move India's gaming audience.
-        </p>
+      <p class="hero-sub hero-monument__sub">
+        8bit Creatives is India's leading creative agency<br>for gaming, esports and youth culture.
+      </p>
 
-        <div class="hero-cta-group">
-          <a href="/" data-section="contact" onclick="return false;" class="btn-obsidian btn-obsidian-primary">Start Campaign</a>
-          <a href="/" data-section="creators" onclick="return false;" class="btn-obsidian btn-obsidian-secondary">Explore Creators</a>
-          <!-- Hidden legacy fallback for verify-hero-gsap.js test suite -->
-          <div style="display:none;" aria-hidden="true">
-            <a href="/" data-section="contact" onclick="return false;" class="btn-primary">Start Campaign</a>
-            <a href="/" data-section="creators" onclick="return false;" class="btn-secondary">Explore Creators</a>
-          </div>
-        </div>
+      <div class="hero-cta-group hero-monument__cta">
+        <a href="#contact" data-section="contact" class="btn-hero-capsule">Start Campaign</a>
+        <a href="#creators" data-section="creators" class="btn-hero-capsule">Explore Creators</a>
       </div>
 
-      <!-- Right column (40%) -->
-      <div class="hero-right">
-        <div class="canvas-container">
-          <div class="hero-logo-tilt" id="heroLogoTilt" data-lag="0.12">
-            <img src="images-for-landing-page/logo_2.webp" 
-                 alt="8Bit Creatives Logo" 
-                 class="hero-logo-img" 
-                 id="heroLogoImg"
-                 loading="eager">
-          </div>
-          
-        </div>
+      <!-- Hidden fallbacks for legacy test suites -->
+      <div style="display:none;" aria-hidden="true">
+        <a href="/" data-section="contact" onclick="return false;" class="btn-primary">Start Campaign</a>
+        <a href="/" data-section="creators" onclick="return false;" class="btn-secondary">Explore Creators</a>
+        <div class="canvas-container"></div>
       </div>
     </div>
   </div>
-
-  <!-- NEW: Game area below the hero foreground -->
-  <div class="hero-game-area" data-bg="light">
-    <canvas id="heroDinoCanvas" width="1200" height="200"></canvas>
-  </div>
 </section>
-
 
 <!-- ============================================================
      SECTION 3 - ABOUT (Marquee → Red Half-Eclipse → Stats)

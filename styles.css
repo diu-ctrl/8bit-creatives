@@ -4896,3 +4896,218 @@ canvas.glyph-fall {
 .creators-grid, .work-grid {
   transition: opacity 200ms ease, transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+
+/* ==========================================================================
+   MONUMENTAL ARCHITECTURAL HERO SECTION
+   ========================================================================== */
+.hero-section.hero-monument {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #FFFFFF;
+  padding: 130px 80px 80px 80px;
+  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  gap: 0 !important;
+  overflow: hidden;
+}
+
+.hero-monument__bg-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-monument__bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+  display: block;
+}
+
+.hero-monument__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+.hero-monument__left {
+  max-width: 680px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hero-monument .hero-monument__title,
+.hero-monument .hero-title {
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: clamp(38px, 5.6vw, 108px) !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.035em !important;
+  color: #000000 !important;
+  text-transform: none !important;
+  margin: 0 0 28px 0 !important;
+  max-width: 720px !important;
+}
+
+.hero-monument .hero-monument__title .line,
+.hero-monument .hero-title .line {
+  display: inline-block;
+  color: #000000 !important;
+}
+
+.hero-monument .hero-monument__sub,
+.hero-monument .hero-sub {
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 400 !important;
+  font-size: clamp(17px, 2.1vw, 42px) !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.015em !important;
+  color: #000000 !important;
+  opacity: 0.55 !important;
+  margin: 0 0 44px 0 !important;
+  max-width: 620px !important;
+}
+
+.hero-monument .hero-monument__cta,
+.hero-monument .hero-cta-group {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hero-monument .btn-hero-capsule {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 34px;
+  border: 1.5px solid #000000;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #000000;
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: clamp(14px, 0.95vw, 17px);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-monument .btn-hero-capsule:hover {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  border-color: #000000 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1440px) {
+  .hero-section.hero-monument {
+    padding: 120px 60px 60px 60px;
+  }
+  .hero-monument__left {
+    max-width: 520px;
+  }
+  .hero-monument .hero-monument__title,
+  .hero-monument .hero-title {
+    font-size: clamp(36px, 4.8vw, 76px) !important;
+    max-width: 520px !important;
+  }
+  .hero-monument .hero-monument__sub,
+  .hero-monument .hero-sub {
+    font-size: clamp(16px, 1.9vw, 28px) !important;
+    max-width: 500px !important;
+  }
+}
+
+@media (max-width: 1080px) {
+  .hero-section.hero-monument {
+    padding: 120px 40px 50px 40px;
+  }
+  .hero-monument__left {
+    max-width: 480px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.8) 70%, rgba(255,255,255,0) 100%);
+    border-radius: 20px;
+    padding: 20px 24px 20px 0;
+  }
+  .hero-monument .hero-monument__title,
+  .hero-monument .hero-title {
+    margin-bottom: 20px !important;
+  }
+  .hero-monument .hero-monument__sub,
+  .hero-monument .hero-sub {
+    margin-bottom: 32px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section.hero-monument {
+    padding: 140px 20px 40px 20px;
+    align-items: center;
+  }
+  .hero-monument__bg-img {
+    object-position: 75% center;
+  }
+  .hero-monument__left {
+    max-width: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 24px;
+    padding: 28px 24px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  }
+  .hero-monument .hero-monument__title,
+  .hero-monument .hero-title {
+    font-size: clamp(30px, 8vw, 44px) !important;
+    margin-bottom: 14px !important;
+  }
+  .hero-monument .hero-monument__sub,
+  .hero-monument .hero-sub {
+    font-size: clamp(15px, 4vw, 19px) !important;
+    margin-bottom: 24px !important;
+  }
+  .hero-monument .hero-monument__cta,
+  .hero-monument .hero-cta-group {
+    flex-direction: column !important;
+    width: 100%;
+    gap: 12px !important;
+  }
+  .hero-monument .btn-hero-capsule {
+    width: 100%;
+    text-align: center;
+  }
+}
