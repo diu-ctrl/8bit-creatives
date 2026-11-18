@@ -61,10 +61,10 @@
           </div>
           <div class="telemetry-cycle-wrapper">
             <div class="telemetry-cycle-words">
-              <div class="telemetry-cycle-item">Powering Gaming Culture</div>
-              <div class="telemetry-cycle-item">48+ Signed Marquee Talent</div>
-              <div class="telemetry-cycle-item">1.2B+ Combined Social Reach</div>
-              <div class="telemetry-cycle-item">India's Esports Powerhouse</div>
+              <div class="telemetry-cycle-item">Warming up the lobby...</div>
+              <div class="telemetry-cycle-item">Telling creators to touch grass...</div>
+              <div class="telemetry-cycle-item">Cooking unskippable moments...</div>
+              <div class="telemetry-cycle-item">Locking in for the clutch...</div>
               <div class="telemetry-cycle-item telemetry-cycle-wordmark"><span class="wordmark-bold">8BIT</span><span class="wordmark-thin">Creatives</span></div>
             </div>
           </div>
@@ -92,10 +92,10 @@
           </div>
           <div class="telemetry-cycle-wrapper">
             <div class="telemetry-cycle-words">
-              <div class="telemetry-cycle-item">Powering Gaming Culture</div>
-              <div class="telemetry-cycle-item">48+ Signed Marquee Talent</div>
-              <div class="telemetry-cycle-item">1.2B+ Combined Social Reach</div>
-              <div class="telemetry-cycle-item">India's Esports Powerhouse</div>
+              <div class="telemetry-cycle-item">Warming up the lobby...</div>
+              <div class="telemetry-cycle-item">Telling creators to touch grass...</div>
+              <div class="telemetry-cycle-item">Cooking unskippable moments...</div>
+              <div class="telemetry-cycle-item">Locking in for the clutch...</div>
               <div class="telemetry-cycle-item telemetry-cycle-wordmark"><span class="wordmark-bold">8BIT</span><span class="wordmark-thin">Creatives</span></div>
             </div>
           </div>
@@ -322,7 +322,7 @@
     // Safety timeout: Maximum 4.5 seconds on very slow mobile networks
     const maxSafetyTimer = setTimeout(() => {
       targetPct = 100;
-    }, 4500);
+    }, 6000);
 
     function finish() {
       if (isFinished) return;
@@ -360,24 +360,28 @@
 
     // Smooth monotonic counter tick
     const startTime = performance.now();
-    const minShowTime = 750; // Minimum smooth progression feel
+    const minShowTime = 3000; // Minimum smooth progression feel
 
     function tick(now) {
       if (isFinished) return;
 
       const elapsed = now - startTime;
-      const minProgressPct = Math.min(100, Math.floor((elapsed / minShowTime) * 100));
+      const timeRatio = Math.min(1, elapsed / minShowTime);
+      const pacedCap = Math.floor(timeRatio * 100);
 
-      // Advance currentPct toward targetPct with smooth increments
-      if (currentPct < targetPct) {
-        const step = Math.max(1, Math.ceil((targetPct - currentPct) * 0.22));
-        currentPct = Math.min(targetPct, currentPct + step);
+      // Effective progress is capped by pacedCap to guarantee at least 3.0s duration on fast devices,
+      // while on slower networks, targetPct holds it accurately until assets finish:
+      const effectivePct = Math.min(targetPct, pacedCap);
+
+      if (effectivePct > currentPct) {
+        const step = Math.max(1, Math.ceil((effectivePct - currentPct) * 0.22));
+        currentPct = Math.min(effectivePct, currentPct + step);
         applyPct(currentPct);
-      } else if (currentPct === 0 && targetPct === 0) {
+      } else if (currentPct === 0) {
         applyPct(0);
       }
 
-      // Complete when all assets ready (targetPct == 100) and minShowTime satisfied
+      // Complete when all assets ready (targetPct >= 100), visual counter reached 100, and 3s has elapsed
       if (targetPct >= 100 && currentPct >= 100 && elapsed >= minShowTime) {
         finish();
       } else {
