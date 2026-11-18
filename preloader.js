@@ -9,27 +9,64 @@
 (function () {
   'use strict';
 
-  // === 1. PERSISTENT SCROLL TRACKING & RESTORATION ===
+  // === 1. NAVIGATION DETECTION & PERSISTENT SCROLL TRACKING ===
+  const navEntry = (typeof performance !== 'undefined' && performance.getEntriesByType)
+    ? performance.getEntriesByType('navigation')[0]
+    : null;
+  const isReload = navEntry
+    ? (navEntry.type === 'reload')
+    : (typeof performance !== 'undefined' && performance.navigation && performance.navigation.type === 1);
+
+  let isInternalNav = false;
+  try {
+    if (sessionStorage.getItem('8bit_internal_nav') === 'true') {
+      isInternalNav = true;
+      sessionStorage.removeItem('8bit_internal_nav');
+    }
+  } catch (e) {}
+
+  if (!isInternalNav && !isReload && document.referrer) {
+    try {
+      const ref = new URL(document.referrer, window.location.href);
+      if (ref.origin === window.location.origin) {
+        isInternalNav = true;
+      }
+    } catch (e) {}
+  }
+
+  // If internal button / link navigation: immediately apply skip class so preloader never paints
+  if (isInternalNav) {
+    try {
+      document.documentElement.classList.add('skip-preloader');
+    } catch (e) {}
+  }
+
   const pathKey = '8bit_scroll_' + window.location.pathname;
   let savedScrollY = null;
 
-  try {
-    const rawPath = sessionStorage.getItem(pathKey);
-    const rawGlobal = sessionStorage.getItem('8bit_last_scroll_y');
-    const val = rawPath !== null && rawPath !== '' ? rawPath : rawGlobal;
-    if (val !== null && val !== '') {
-      const parsed = parseInt(val, 10);
-      if (!isNaN(parsed) && parsed > 0) {
-        savedScrollY = parsed;
+  if (isReload) {
+    // Only restore scroll on explicit browser page refresh, strictly for this exact pathname
+    try {
+      const rawPath = sessionStorage.getItem(pathKey);
+      if (rawPath !== null && rawPath !== '') {
+        const parsed = parseInt(rawPath, 10);
+        if (!isNaN(parsed) && parsed > 0) {
+          savedScrollY = parsed;
+        }
       }
+    } catch (e) {}
+  } else {
+    // On internal navigation or new entry: always start at the hero top (0, 0)
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
     }
-  } catch (e) {}
+    window.scrollTo(0, 0);
+  }
 
   function saveCurrentScroll() {
     try {
       const y = Math.round(window.scrollY);
       sessionStorage.setItem(pathKey, String(y));
-      sessionStorage.setItem('8bit_last_scroll_y', String(y));
     } catch (e) {}
   }
 
@@ -37,14 +74,27 @@
   window.addEventListener('pagehide', saveCurrentScroll);
   window.addEventListener('beforeunload', saveCurrentScroll);
 
-  // Restore scroll position early if user was scrolled down before refresh
+  // Restore scroll position early ONLY on same-page reload
   if (savedScrollY !== null && savedScrollY > 0) {
     window.scrollTo(0, savedScrollY);
-    // Prevent browser auto-scroll reset to top
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
   }
+
+  // Intercept all internal page-to-page link/button navigations
+  document.addEventListener('click', function (e) {
+    const link = e.target.closest('a');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href) return;
+    // Don't mark in-page hash links like #about or #creators on index.html
+    if (href.startsWith('#') || href.startsWith('javascript:')) return;
+
+    try {
+      sessionStorage.setItem('8bit_internal_nav', 'true');
+    } catch (err) {}
+  }, true);
 
   // === 2. TEMPLATE HTML FOR PRELOADER (AUTO-MOUNT FALLBACK) ===
   const PRELOADER_HTML = `
@@ -130,6 +180,40 @@
 
   // === 3. PRELOADER CONTROLLER & ASSET MONITOR ===
   function initPreloader() {
+    // Skip preloader on internal button/link redirects - land immediately at hero
+    if (isInternalNav || document.documentElement.classList.contains('skip-preloader')) {
+      const existing = document.getElementById('preloaderMount');
+      if (existing) {
+        existing.classList.add('is-hidden');
+        existing.style.display = 'none';
+        try { existing.remove(); } catch (e) {}
+      }
+      document.body.classList.remove('is-loading');
+
+      // Guarantee hero top landing
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+
+      // Trigger hero entrance immediately if hero exists
+      if (typeof window.__triggerHeroEntrance === 'function') {
+        window.__triggerHeroEntrance();
+      }
+
+      // Trigger about stats animation immediately if in view
+      if (typeof window.__triggerStatsAnimation === 'function') {
+        const statsSection = document.querySelector('.about-stats');
+        if (statsSection) {
+          const rect = statsSection.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            window.__triggerStatsAnimation();
+          }
+        }
+      }
+      return;
+    }
+
     // Accessibility check: Skip animation if reduced motion preferred
     const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) {

@@ -5284,10 +5284,12 @@ canvas.glyph-fall {
   user-select: none;
 }
 
+html.skip-preloader #preloaderMount,
+.skip-preloader #preloaderMount,
 #preloaderMount.is-hidden {
   display: none !important;
-  pointer-events: none;
-  visibility: hidden;
+  pointer-events: none !important;
+  visibility: hidden !important;
 }
 
 body.is-loading {
