@@ -883,7 +883,8 @@ function initAboutGSAP() {
           trigger: '.about-eclipse-section',
           start: 'top 70%',
           end: 'top 30%',
-          toggleActions: 'play none none reverse'
+          toggleActions: 'play none none none',
+          once: true
         }
       }
     );
@@ -4547,6 +4548,19 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     scrollTrigger: {
       trigger: '#work',
       start: 'top 80%',
+      once: true
+    }
+  });
+
+  // Footer subtle entrance
+  gsap.from('.footer-container', {
+    y: 20,
+    opacity: 0,
+    duration: 0.6,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.footer-gradient-wrap',
+      start: 'top 90%',
       once: true
     }
   });
