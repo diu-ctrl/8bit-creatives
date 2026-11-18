@@ -47,6 +47,33 @@ function initScrollSmoother() {
     });
 
     window.__smoother = smoother;
+
+    // Restore scroll position after ScrollSmoother creates fixed wrapper
+    let restoredSec = window.__restoredSection;
+    if (!restoredSec) {
+      try {
+        restoredSec = sessionStorage.getItem('8bit_last_section') || sessionStorage.getItem('8bit_nav_target') || '';
+      } catch (e) {}
+    }
+    if (restoredSec && restoredSec !== 'home') {
+      const restoreScrollSmoother = () => {
+        let targetY = null;
+        if (typeof window.getSectionScrollY === 'function') {
+          targetY = window.getSectionScrollY(restoredSec);
+        } else {
+          const el = document.getElementById(restoredSec);
+          if (el) targetY = Math.max(0, Math.round(el.getBoundingClientRect().top + window.scrollY));
+        }
+        if (targetY !== null && typeof smoother.scrollTo === 'function') {
+          smoother.scrollTo(targetY, false);
+        }
+      };
+      restoreScrollSmoother();
+      requestAnimationFrame(restoreScrollSmoother);
+      setTimeout(restoreScrollSmoother, 100);
+      setTimeout(restoreScrollSmoother, 300);
+    }
+
     return smoother;
   } catch (err) {
     console.warn('ScrollSmoother init fallback:', err);
@@ -625,12 +652,18 @@ function initEsportsAnchor() {
     });
   });
 
-  // Handle direct page loads or external navigation to index.html#[section]
+  // Handle direct page loads or external navigation to index.html#[section] or refresh restoration
   const currentHash = (window.location.hash || '').replace('#', '');
-  const activeSec = sections.find(s => s.id === currentHash);
-  if (activeSec) {
+  let activeSecId = currentHash || window.__restoredSection;
+  if (!activeSecId) {
+    try {
+      activeSecId = sessionStorage.getItem('8bit_last_section') || sessionStorage.getItem('8bit_nav_target') || '';
+    } catch (e) {}
+  }
+  const activeSec = sections.find(s => s.id === activeSecId);
+  if (activeSec && activeSecId !== 'home') {
     const handleHashJump = () => {
-      const targetY = activeSec.getScrollY();
+      const targetY = typeof window.getSectionScrollY === 'function' ? window.getSectionScrollY(activeSec.id) : activeSec.getScrollY();
       if (targetY !== null) {
         if (window.__smoother && typeof window.__smoother.scrollTo === 'function') {
           window.__smoother.scrollTo(targetY, false);

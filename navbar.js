@@ -25,7 +25,22 @@
       navbar.insertBefore(indicator, navbar.firstChild);
     }
 
-    let currentActive = linksContainer.querySelector('a.is-active') || links[0];
+    let restoredSec = window.__restoredSection;
+    if (!restoredSec) {
+      try {
+        restoredSec = sessionStorage.getItem('8bit_last_section') || sessionStorage.getItem('8bit_nav_target') || '';
+      } catch (e) {}
+    }
+    if (restoredSec === 'hero') restoredSec = 'home';
+    let restoredLink = null;
+    if (restoredSec) {
+      restoredLink = links.find(l => l.getAttribute('data-section') === restoredSec || (l.getAttribute('href') || '').split('#')[1] === restoredSec);
+    }
+    let currentActive = restoredLink || linksContainer.querySelector('a.is-active') || links[0];
+    if (restoredLink) {
+      links.forEach(l => { if (l !== restoredLink) l.classList.remove('is-active'); });
+      restoredLink.classList.add('is-active');
+    }
     let isHovering = false;
     let isClickScrolling = false;
     let clickScrollTimer = null;
@@ -103,6 +118,7 @@
         if (targetSec) {
           try {
             sessionStorage.setItem('8bit_nav_target', targetSec);
+            sessionStorage.setItem('8bit_last_section', targetSec);
           } catch (err) {}
         }
       });
@@ -122,6 +138,7 @@
         if (targetSec) {
           try {
             sessionStorage.setItem('8bit_nav_target', targetSec);
+            sessionStorage.setItem('8bit_last_section', targetSec);
           } catch (err) {}
         }
       });
@@ -150,11 +167,23 @@
 
     // Initial position
     function placeInitial() {
-      const activeLink = linksContainer.querySelector('a.is-active') || links[0];
+      let restoredSec = window.__restoredSection;
+      if (!restoredSec) {
+        try {
+          restoredSec = sessionStorage.getItem('8bit_last_section') || sessionStorage.getItem('8bit_nav_target') || '';
+        } catch (e) {}
+      }
+      if (restoredSec === 'hero') restoredSec = 'home';
+      let activeLink = null;
+      if (restoredSec) {
+        activeLink = links.find(l => l.getAttribute('data-section') === restoredSec || (l.getAttribute('href') || '').split('#')[1] === restoredSec);
+      }
+      if (!activeLink) {
+        activeLink = linksContainer.querySelector('a.is-active') || links[0];
+      }
       if (activeLink) {
-        if (!activeLink.classList.contains('is-active')) {
-          activeLink.classList.add('is-active');
-        }
+        links.forEach(l => { if (l !== activeLink) l.classList.remove('is-active'); });
+        activeLink.classList.add('is-active');
         currentActive = activeLink;
         moveIndicator(currentActive, true);
       }
