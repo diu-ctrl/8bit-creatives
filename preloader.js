@@ -350,6 +350,17 @@
           window.__triggerHeroEntrance();
         }
 
+        // Trigger about stats animation immediately if user lands or refreshes on about section
+        if (typeof window.__triggerStatsAnimation === 'function') {
+          const statsSection = document.querySelector('.about-stats');
+          if (statsSection) {
+            const rect = statsSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              window.__triggerStatsAnimation();
+            }
+          }
+        }
+
         setTimeout(() => {
           mount.classList.add('is-hidden');
           mount.style.display = 'none';

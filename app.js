@@ -750,51 +750,73 @@ function initAboutGSAP() {
       }
     });
 
-    // 4. Stat numbers count-up with ScrollTrigger (runs strictly ONCE)
+    // 4. Stat numbers count-up & labels entrance (runs strictly ONCE)
     const statsSection = document.querySelector('.about-stats');
-    if (statsSection && statsSection.dataset.counted !== 'true') {
+    if (statsSection) {
+      function triggerStatsAnimation() {
+        if (statsSection.dataset.counted === 'true') return;
+        statsSection.dataset.counted = 'true';
+
+        const statEls = statsSection.querySelectorAll('.stat-num');
+        statEls.forEach(el => {
+          const target = parseFloat(el.getAttribute('data-count-target')) || parseInt(el.textContent.replace(/[^0-9]/g, '')) || 0;
+          const suffix = el.getAttribute('data-count-suffix') !== null ? el.getAttribute('data-count-suffix') : (el.textContent.replace(/[0-9]/g, '') || '');
+          const obj = { val: 0 };
+          gsap.to(obj, {
+            val: target,
+            duration: 1.2,
+            ease: 'power2.out',
+            onUpdate: () => {
+              el.textContent = Math.round(obj.val) + suffix;
+            },
+            onComplete: () => {
+              el.textContent = target + suffix;
+            }
+          });
+        });
+
+        gsap.fromTo('.about-stats .stat-label, .about-stats .stat-desc, .about-stats .stat-divider',
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out' }
+        );
+      }
+
+      window.__triggerStatsAnimation = triggerStatsAnimation;
+
+      // Trigger the moment any part of the stats strip enters the viewport from the bottom
       ScrollTrigger.create({
         trigger: statsSection,
-        start: 'top 75%',
+        start: 'top bottom',
         once: true,
-        onEnter: () => {
-          if (statsSection.dataset.counted === 'true') return;
-          statsSection.dataset.counted = 'true';
-
-          const statEls = statsSection.querySelectorAll('.stat-num');
-          statEls.forEach(el => {
-            const target = parseFloat(el.getAttribute('data-count-target')) || parseInt(el.textContent.replace(/[^0-9]/g, '')) || 0;
-            const suffix = el.getAttribute('data-count-suffix') !== null ? el.getAttribute('data-count-suffix') : (el.textContent.replace(/[0-9]/g, '') || '');
-            const obj = { val: 0 };
-            gsap.to(obj, {
-              val: target,
-              duration: 1.2,
-              ease: 'power2.out',
-              onUpdate: () => {
-                el.textContent = Math.round(obj.val) + suffix;
-              },
-              onComplete: () => {
-                el.textContent = target + suffix;
-              }
-            });
-          });
-        }
+        onEnter: triggerStatsAnimation
       });
-    }
 
-    // 5. Stat labels and descriptions entrance (runs strictly ONCE)
-    gsap.from('.about-stats .stat-label, .about-stats .stat-desc, .about-stats .stat-divider', {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      stagger: 0.05,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.about-stats',
-        start: 'top 75%',
-        once: true
+      // Also trigger if the stats strip is visible via IntersectionObserver (works on refresh & instant navigation)
+      if ('IntersectionObserver' in window) {
+        const statsObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting && statsSection.dataset.counted !== 'true') {
+              triggerStatsAnimation();
+              statsObserver.disconnect();
+            }
+          });
+        }, { rootMargin: '0px 0px 50px 0px', threshold: 0.01 });
+        statsObserver.observe(statsSection);
       }
-    });
+
+      // Immediate check if already visible on load or refresh
+      function checkStatsVisibility() {
+        if (statsSection.dataset.counted === 'true') return;
+        const rect = statsSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          triggerStatsAnimation();
+        }
+      }
+
+      checkStatsVisibility();
+      window.addEventListener('load', checkStatsVisibility, { passive: true });
+      window.addEventListener('scroll', checkStatsVisibility, { passive: true });
+    }
   }
 
   // 6. Marquee pause on hover

@@ -1638,7 +1638,14 @@
         setActiveSection(targetSec);
         closeMobileDrawer();
 
+        if (targetSec === 'about' && typeof window.__triggerStatsAnimation === 'function') {
+          window.__triggerStatsAnimation();
+        }
+
         smoothScrollTo(targetY, 550, function() {
+          if (targetSec === 'about' && typeof window.__triggerStatsAnimation === 'function') {
+            window.__triggerStatsAnimation();
+          }
           if (window.history && window.history.replaceState) {
             window.history.replaceState(null, '', window.location.pathname + window.location.search);
           }
