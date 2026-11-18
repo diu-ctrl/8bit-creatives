@@ -7,9 +7,14 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/hero-newimage.webp</image:loc>
-      <image:title>8Bit Creatives - India's Premier Gaming &amp; Esports Agency</image:title>
-      <image:caption>8Bit Creatives headquarters monument visual and branding</image:caption>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/hero-google-search-1200x675.png</image:loc>
+      <image:title>8Bit Creatives - Built for India's Next Level</image:title>
+      <image:caption>8Bit Creatives headquarters monument and gaming agency showcase</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/hero-google-search-1080x1080.png</image:loc>
+      <image:title>8Bit Creatives 3D Monument</image:title>
+      <image:caption>8Bit Creatives 3D monumental 8 entrance with golden sunset city skyline</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/logo.png</image:loc>
