@@ -5481,12 +5481,11 @@ canvas.glyph-fall {
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    height: clamp(340px, 64vh, 580px) !important;
-    height: clamp(340px, 64svh, 580px) !important;
+    height: 60% !important;
     overflow: hidden !important;
     pointer-events: none !important;
-    -webkit-mask-image: linear-gradient(to bottom, #000000 0%, #000000 86%, rgba(0, 0, 0, 0.4) 95%, rgba(0, 0, 0, 0) 100%) !important;
-    mask-image: linear-gradient(to bottom, #000000 0%, #000000 86%, rgba(0, 0, 0, 0.4) 95%, rgba(0, 0, 0, 0) 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, #000000 0%, #000000 52%, rgba(0, 0, 0, 0.85) 68%, rgba(0, 0, 0, 0.45) 82%, rgba(0, 0, 0, 0.12) 93%, rgba(0, 0, 0, 0) 100%) !important;
+    mask-image: linear-gradient(to bottom, #000000 0%, #000000 52%, rgba(0, 0, 0, 0.85) 68%, rgba(0, 0, 0, 0.45) 82%, rgba(0, 0, 0, 0.12) 93%, rgba(0, 0, 0, 0) 100%) !important;
   }
   .hero-monument__bg-wrap::after {
     display: none !important;
@@ -5495,7 +5494,10 @@ canvas.glyph-fall {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    object-position: 84.5% center !important;
+    object-position: 84.46% center !important;
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
   .hero-monument__content {
     width: 100% !important;
