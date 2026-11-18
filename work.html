@@ -338,6 +338,60 @@
     .work-card.featured .work-card-image {
       aspect-ratio: 16 / 10;
     }
+    .work-card-media-wrap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0A0A0A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .work-card-fg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: none;
+      transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .work-card-bg-img {
+      display: none;
+    }
+
+    /* Fitted double-image layout for square, vertical, or portrait posters */
+    .work-card-media-wrap.is-fitted {
+      background: #050505;
+    }
+    .work-card-media-wrap.is-fitted .work-card-bg-img {
+      display: block;
+      position: absolute;
+      inset: -14px;
+      width: calc(100% + 28px);
+      height: calc(100% + 28px);
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.35;
+      filter: blur(10px) brightness(0.65);
+      transform: scale(1.05);
+      pointer-events: none;
+      z-index: 1;
+      transition: opacity 400ms ease, transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .work-card-media-wrap.is-fitted .work-card-fg-img {
+      position: relative;
+      width: auto;
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      z-index: 2;
+      filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6));
+    }
     .work-card-image img {
       width: 100%;
       height: 100%;
@@ -350,8 +404,16 @@
     .work-card:hover {
       transform: none;
     }
-    .work-card:hover .work-card-image img {
+    .work-card:hover .work-card-media-wrap:not(.is-fitted) .work-card-fg-img,
+    .work-card:hover .work-card-image > img {
       transform: scale(1.03);
+    }
+    .work-card:hover .work-card-media-wrap.is-fitted .work-card-fg-img {
+      transform: scale(1.02);
+    }
+    .work-card:hover .work-card-media-wrap.is-fitted .work-card-bg-img {
+      opacity: 0.45;
+      transform: scale(1.08);
     }
     .work-card-overlay {
       position: absolute;
@@ -1744,6 +1806,32 @@
     let activeFilter = 'all';
     let searchTerm = '';
 
+    function checkThumbFit(img) {
+      if (!img || !img.naturalWidth || !img.naturalHeight) return;
+      const ar = img.naturalWidth / img.naturalHeight;
+      const wrap = img.closest('.work-card-media-wrap');
+      if (!wrap) return;
+      if (ar < 1.25) {
+        if (!wrap.classList.contains('is-fitted')) {
+          wrap.classList.add('is-fitted');
+        }
+        if (!wrap.querySelector('.work-card-bg-img')) {
+          const bg = document.createElement('img');
+          bg.className = 'work-card-bg-img';
+          bg.alt = '';
+          bg.setAttribute('aria-hidden', 'true');
+          bg.loading = 'lazy';
+          bg.src = img.src;
+          wrap.insertBefore(bg, img);
+        }
+      } else if (ar >= 1.35) {
+        if (wrap.classList.contains('is-fitted')) {
+          wrap.classList.remove('is-fitted');
+        }
+      }
+    }
+    window.checkThumbFit = checkThumbFit;
+
     function getThumbnailText(c) {
       if (c.thumbnailText) return c.thumbnailText;
       const clean = (c.name || '').replace(/["'#]/g, '').trim();
@@ -1774,7 +1862,21 @@
           let mediaHtml = '';
           if (c.hasRealImage) {
             const imgSrc = (window.location.protocol === 'file:' && c.img && c.img.startsWith('/')) ? c.img.slice(1) : c.img;
-            mediaHtml = '<img src="' + imgSrc + '" alt="' + c.name + '" loading="lazy" onerror="this.parentElement.style.background=\'#0A0A0A\'; this.style.display=\'none\';">';
+            const isFitted = Boolean(c.fitThumb);
+            if (isFitted) {
+              mediaHtml = [
+                '<div class="work-card-media-wrap is-fitted">',
+                '  <img src="' + imgSrc + '" class="work-card-bg-img" alt="" aria-hidden="true" loading="lazy">',
+                '  <img src="' + imgSrc + '" class="work-card-fg-img" alt="' + c.name + '" loading="lazy" onload="checkThumbFit(this)" onerror="this.closest(\'.work-card-image\').style.background=\'#0A0A0A\'; this.parentElement.style.display=\'none\';">',
+                '</div>'
+              ].join('\n');
+            } else {
+              mediaHtml = [
+                '<div class="work-card-media-wrap">',
+                '  <img src="' + imgSrc + '" class="work-card-fg-img" alt="' + c.name + '" loading="lazy" onload="checkThumbFit(this)" onerror="this.closest(\'.work-card-image\').style.background=\'#0A0A0A\'; this.parentElement.style.display=\'none\';">',
+                '</div>'
+              ].join('\n');
+            }
           } else {
             const thumbText = getThumbnailText(c);
             mediaHtml = '<div class="work-card-text-thumb">' + thumbText + '</div>';
