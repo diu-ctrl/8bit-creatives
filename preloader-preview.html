@@ -156,17 +156,7 @@
       background: rgba(255, 89, 49, 0.12);
     }
 
-    .audio-indicator {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #71717A;
-    }
-    .lab-toggle-btn.is-active .audio-indicator {
-      background: var(--flame);
-      box-shadow: 0 0 8px var(--flame);
-      animation: audioPulse 1.2s infinite;
-    }
+
 
     @keyframes audioPulse {
       0%, 100% { transform: scale(1); opacity: 1; }
@@ -1051,14 +1041,6 @@
       <input type="range" min="0" max="100" value="0" class="lab-scrubber-slider" id="scrubberSlider">
       <span id="scrubberVal">0%</span>
     </div>
-
-    <div class="lab-divider"></div>
-
-    <!-- Audio FX Synthesizer Toggle -->
-    <button class="lab-toggle-btn" id="btnAudioToggle" title="Toggle Synthesized Sci-Fi UI Sounds (Clicks & Whooshes)">
-      <div class="audio-indicator"></div>
-      <span>SFX</span>
-    </button>
   </nav>
 
   <!-- ==========================================================================
@@ -1070,7 +1052,6 @@
       const state = {
         activeConcept: 'telemetry',
         speedMs: 2200,
-        audioEnabled: false,
         isRunning: false,
         isScrubbing: false,
         rafId: null
@@ -1081,57 +1062,8 @@
       const btnReplay = document.getElementById('btnReplay');
       const conceptBtns = document.querySelectorAll('[data-concept]');
       const speedBtns = document.querySelectorAll('[data-speed]');
-      const btnAudioToggle = document.getElementById('btnAudioToggle');
       const scrubberSlider = document.getElementById('scrubberSlider');
       const scrubberVal = document.getElementById('scrubberVal');
-
-      // Synthesized Audio Context (zero external asset dependencies)
-      let audioCtx = null;
-      function getAudioContext() {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
-        }
-        return audioCtx;
-      }
-
-      function playTickSound(pitch = 1200) {
-        if (!state.audioEnabled || state.isScrubbing) return;
-        try {
-          const ctx = getAudioContext();
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(pitch, ctx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(pitch * 0.4, ctx.currentTime + 0.04);
-          gain.gain.setValueAtTime(0.035, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start();
-          osc.stop(ctx.currentTime + 0.04);
-        } catch (e) {}
-      }
-
-      function playWhooshSound() {
-        if (!state.audioEnabled || state.isScrubbing) return;
-        try {
-          const ctx = getAudioContext();
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(160, ctx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(35, ctx.currentTime + 0.65);
-          gain.gain.setValueAtTime(0.12, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.65);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start();
-          osc.stop(ctx.currentTime + 0.65);
-        } catch (e) {}
-      }
 
       // ------------------------------------------------------------------------
       // CONCEPT 1 HTML BUILDER: HORIZONTAL CENTER CURTAIN SPLIT (Awwwards SOTD Flagship)
@@ -1312,7 +1244,6 @@
 
         function finish() {
           applyPct(100);
-          playWhooshSound();
 
           setTimeout(() => {
             wrap.classList.add('is-unveiling');
@@ -1350,7 +1281,6 @@
           if (targetPct > currentPct) {
             currentPct = targetPct;
             applyPct(currentPct);
-            playTickSound(800 + currentPct * 12);
           }
 
           if (progress < 1) {
@@ -1413,7 +1343,6 @@
 
         function finish() {
           applyPct(100);
-          playWhooshSound();
 
           setTimeout(() => {
             wrap.classList.add('is-unveiling');
@@ -1442,7 +1371,6 @@
           if (targetPct > currentPct) {
             currentPct = targetPct;
             applyPct(currentPct);
-            playTickSound(700 + currentPct * 10);
           }
 
           if (progress < 1) {
@@ -1508,7 +1436,6 @@
         function finish() {
           applyPct(100);
           bracketEl.textContent = '[' + '#'.repeat(totalBlocks) + ']';
-          playWhooshSound();
 
           setTimeout(() => {
             wrap.classList.add('is-unveiling');
@@ -1537,7 +1464,6 @@
           if (targetPct > currentPct) {
             currentPct = targetPct;
             applyPct(currentPct);
-            playTickSound(1000 + (currentPct % 10) * 100);
           }
 
           if (progress < 1) {
@@ -1610,15 +1536,6 @@
           state.speedMs = parseInt(btn.dataset.speed, 10);
           triggerPreloader();
         });
-      });
-
-      btnAudioToggle.addEventListener('click', () => {
-        state.audioEnabled = !state.audioEnabled;
-        btnAudioToggle.classList.toggle('is-active', state.audioEnabled);
-        if (state.audioEnabled) {
-          getAudioContext();
-          playTickSound(1400);
-        }
       });
 
       // Keyboard space shortcut

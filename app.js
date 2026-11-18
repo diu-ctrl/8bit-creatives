@@ -2933,23 +2933,9 @@ function initHeroDinoGame() {
   let cloudTimer = 40;
   let lastTs = 0;
 
-  // ---------- audio (tiny WebAudio blips, created on first gesture) ----------
-  let audioCtx = null;
-  function beep(freq, dur, type, vol) {
-    try {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      if (audioCtx.state === 'suspended') audioCtx.resume();
-      const o = audioCtx.createOscillator();
-      const g = audioCtx.createGain();
-      o.type = type || 'square';
-      o.frequency.value = freq;
-      g.gain.value = vol || 0.03;
-      o.connect(g); g.connect(audioCtx.destination);
-      const t = audioCtx.currentTime;
-      g.gain.setValueAtTime(vol || 0.03, t);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-      o.start(t); o.stop(t + dur);
-    } catch (err) { /* audio is optional */ }
+  // ---------- audio completely disabled ----------
+  function beep() {
+    /* No audio */
   }
 
   // ---------- input ----------
@@ -3430,22 +3416,22 @@ function initCaseStudies() {
   if (!caseItems.length || !caseImageWrap) return;
 
   const CASE_DATA = [
-    { img: 'images-for-landing-page/Case Studies/gemini.jpg',
+    { img: 'images-for-landing-page/Case Studies/gemini.webp',
       title: 'Google Gemini: The Switch',
       sub: 'Kevin Pietersen x 8Bit · 45M+ views',
       link: 'work.html?open=0',
       fitThumb: true },
-    { img: 'images-for-landing-page/Case Studies/meta-ai.jpg',
+    { img: 'images-for-landing-page/Case Studies/meta-ai.webp',
       title: 'Meta AI: Play. Create. Discover.',
       sub: 'Payal Gaming x Meta AI · 12M+ impressions',
       link: 'work.html?open=1',
       fitThumb: true },
-    { img: 'images-for-landing-page/Case Studies/thums-up.jpg',
+    { img: 'images-for-landing-page/Case Studies/thums-up.webp',
       title: 'Thums Up: Bring The Rush',
       sub: 'Snax Gaming signature campaign · 15M+ impressions',
       link: 'work.html?open=2',
       fitThumb: true },
-    { img: 'images-for-landing-page/Case Studies/stranger-things.jpg',
+    { img: 'images-for-landing-page/Case Studies/stranger-things.webp',
       title: 'Netflix: Stranger Things Premiere',
       sub: 'Live fan premiere hosted by Payal Gaming · 18M+ views',
       link: 'work.html?open=3',
@@ -4518,15 +4504,15 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 // ====== IDLE PRELOAD FOR CASE STUDIES & KEY CREATOR IMAGES ======
 (function() {
   const preloadImages = [
-    'images-for-landing-page/Case Studies/gemini.jpg',
-    'images-for-landing-page/Case Studies/meta-ai.jpg',
-    'images-for-landing-page/Case Studies/thums-up.jpg',
-    'images-for-landing-page/Case Studies/stranger-things.jpg',
-    'images-for-landing-page/creator-mortal.webp',
-    'images-for-landing-page/creator-payal.webp',
-    'images-for-landing-page/creator-snax.webp',
-    'images-for-landing-page/creator-scout.webp',
-    'images-for-landing-page/creator-goblin.webp'
+    'images-for-landing-page/Case Studies/gemini.webp',
+    'images-for-landing-page/Case Studies/meta-ai.webp',
+    'images-for-landing-page/Case Studies/thums-up.webp',
+    'images-for-landing-page/Case Studies/stranger-things.webp',
+    'assets/creators/cinematic/mortal.webp',
+    'assets/creators/cinematic/payal.webp',
+    'assets/creators/cinematic/nishu_tiwari.webp',
+    'assets/creators/cinematic/snax.webp',
+    'assets/creators/cinematic/joker.webp'
   ];
   function doPreload() {
     preloadImages.forEach(function(src) {
