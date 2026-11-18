@@ -3140,18 +3140,22 @@ function initCaseStudies() {
   if (!caseItems.length || !caseImageWrap) return;
 
   const CASE_DATA = [
-    { img: 'images-for-landing-page/case-studies/case-chess.webp',
-      title: 'Global Chess League\u00A0S4',
-      sub: 'Multi-camera live broadcast · 9-day event' },
-    { img: 'images-for-landing-page/case-studies/case-kick.webp',
-      title: 'Kick India: Day One Migration',
-      sub: '48 creators migrated · 95/5 subscription split' },
-    { img: 'images-for-landing-page/case-studies/case-iqoo.webp',
-      title: 'iQOO Flagship Smartphone Launch',
-      sub: '50M+ reach · Product launch campaign' },
-    { img: 'images-for-landing-page/case-studies/case-monster.webp',
-      title: 'Monster Athlete Programme',
-      sub: '24M+ impressions · Annual mandate' }
+    { img: 'images-for-landing-page/Case Studies/gemini.jpg',
+      title: 'Google Gemini: The Switch',
+      sub: 'Kevin Pietersen x 8Bit · 45M+ views',
+      link: 'work.html?open=0' },
+    { img: 'images-for-landing-page/Case Studies/meta-ai.jpg',
+      title: 'Meta AI: Play. Create. Discover.',
+      sub: 'Payal Gaming x Meta AI · 12M+ impressions',
+      link: 'work.html?open=1' },
+    { img: 'images-for-landing-page/Case Studies/thums-up.jpg',
+      title: 'Thums Up: Bring The Rush',
+      sub: 'Snax Gaming signature campaign · 15M+ impressions',
+      link: 'work.html?open=2' },
+    { img: 'images-for-landing-page/Case Studies/stranger-things.jpg',
+      title: 'Netflix: Stranger Things Premiere',
+      sub: 'Live fan premiere hosted by Payal Gaming · 18M+ views',
+      link: 'work.html?open=3' }
   ];
 
   // Branded placeholder gradient if image fails to load during active hover
@@ -3207,7 +3211,7 @@ function initCaseStudies() {
     }, 200);
   }
 
-  // Default state: Global Chess League S4 (first case study) highlighted and displayed
+  // Default state: Google Gemini: The Switch (first case study) highlighted and displayed
   const defaultIdx = 0;
   showCase(defaultIdx);
   if (caseItems[defaultIdx]) {
@@ -3233,9 +3237,11 @@ function initCaseStudies() {
     item.addEventListener('mouseleave', () => {
       // Handled by container mouseleave to keep smooth active state
     });
-    // Tap / Click -> redirect to work.html
+    // Tap / Click -> redirect to specific case study modal or work.html
     item.addEventListener('click', () => {
-      window.location.href = 'work.html';
+      const link = item.querySelector('a');
+      const href = link?.getAttribute('href') || (CASE_DATA[idx]?.link || 'work.html');
+      window.location.href = href;
     });
     // Make the line a link for accessibility
     item.setAttribute('tabindex', '0');
@@ -3243,12 +3249,14 @@ function initCaseStudies() {
     item.setAttribute('aria-label', CASE_DATA[idx]?.title || 'Case study');
     item.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
-        window.location.href = 'work.html';
+        const link = item.querySelector('a');
+        const href = link?.getAttribute('href') || (CASE_DATA[idx]?.link || 'work.html');
+        window.location.href = href;
       }
     });
   });
 
-  // Reset to default Global Chess League S4 when mouse leaves the list or foreground
+  // Reset to default Google Gemini: The Switch when mouse leaves the list or foreground
   const caseList = document.getElementById('caseList');
   if (caseList) {
     caseList.addEventListener('mouseleave', () => {
@@ -4201,10 +4209,10 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
 // ====== IDLE PRELOAD FOR CASE STUDIES & KEY CREATOR IMAGES ======
 (function() {
   const preloadImages = [
-    'images-for-landing-page/case-studies/case-chess.webp',
-    'images-for-landing-page/case-studies/case-kick.webp',
-    'images-for-landing-page/case-studies/case-iqoo.webp',
-    'images-for-landing-page/case-studies/case-monster.webp',
+    'images-for-landing-page/Case Studies/gemini.jpg',
+    'images-for-landing-page/Case Studies/meta-ai.jpg',
+    'images-for-landing-page/Case Studies/thums-up.jpg',
+    'images-for-landing-page/Case Studies/stranger-things.jpg',
     'images-for-landing-page/creator-mortal.webp',
     'images-for-landing-page/creator-payal.webp',
     'images-for-landing-page/creator-snax.webp',
