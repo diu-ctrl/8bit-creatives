@@ -2273,37 +2273,90 @@ function initAboutPhysics() {
    HERO GSAP ANIMATIONS
    ========================================================================== */
 function initHeroGSAP() {
-  if (typeof gsap === 'undefined') return;
+  if (typeof gsap === 'undefined') {
+    document.documentElement.classList.remove('js-hero-anim');
+    return;
+  }
 
-  // 1. Hero load animation (0.3s delay)
-  const heroTl = gsap.timeline({ delay: 0.3 });
+  // Safety fallback: ensure js-hero-anim is removed within 1.5s no matter what
+  setTimeout(() => {
+    document.documentElement.classList.remove('js-hero-anim');
+  }, 1500);
+
+  // Accessibility Check: Skip animation if user prefers reduced motion
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    document.documentElement.classList.remove('js-hero-anim');
+    gsap.set(['.navbar-pill', '.nav-brand-topleft', '.hero-title .line', '.hero-monument__sub-line', '.hero-sub', '.hero-cta-group a'], {
+      opacity: 1,
+      y: 0,
+      clearProps: 'transform,opacity'
+    });
+    return;
+  }
+
+  // If user loaded or restored into a lower section, reveal hero elements immediately
+  const isScrolledPastHero = window.scrollY > 150 || (window.__restoredSection && window.__restoredSection !== 'home');
+  if (isScrolledPastHero) {
+    document.documentElement.classList.remove('js-hero-anim');
+    gsap.set(['.navbar-pill', '.nav-brand-topleft', '.hero-title .line', '.hero-monument__sub-line', '.hero-sub', '.hero-cta-group a'], {
+      opacity: 1,
+      y: 0,
+      clearProps: 'transform,opacity'
+    });
+    return;
+  }
+
+  // 1. Hero Reveal Sequence:
+  // - Background stays from the start (no fade/scale, already fully rendered)
+  // - 1. Navbar whole together
+  // - 2. Title lines ("Built for India's", "Next Level.")
+  // - 3. Subtitle lines ("8bit Creatives is India's leading creative agency...", "for gaming...")
+  // - 4. Capsule buttons ("Start Campaign", "Explore Creators")
+  // Snappy, energetic pacing
+  const subLines = document.querySelectorAll('.hero-monument__sub-line').length ? '.hero-monument__sub-line' : '.hero-sub';
+  const ctaButtons = document.querySelectorAll('.hero-cta-group .btn-hero-capsule').length ? '.hero-cta-group .btn-hero-capsule' : '.hero-cta-group a:not([style*="display:none"])';
+
+  const heroTl = gsap.timeline({
+    delay: 0.05,
+    onComplete: () => {
+      document.documentElement.classList.remove('js-hero-anim');
+      // Clear inline transform and opacity so native CSS hover states and alignment remain pure
+      gsap.set(['.navbar-pill', '.nav-brand-topleft', '.hero-title .line', subLines, ctaButtons], {
+        clearProps: 'opacity,transform'
+      });
+    }
+  });
+
   heroTl
-    .from('.hero-title .line', {
-      y: 40,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.12,
-      ease: 'power3.out'
-    })
-    .from('.hero-sub', {
-      y: 20,
-      opacity: 0,
-      duration: 0.6,
-      ease: 'power2.out'
-    }, '-=0.4')
-    .from('.hero-cta-group a', {
-      y: 20,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.1,
-      ease: 'power2.out'
-    }, '-=0.3')
-    .from('.canvas-container', {
-      scale: 0.8,
-      opacity: 0,
-      duration: 1.0,
-      ease: 'power2.out'
-    }, '-=0.8');
+    // Step 1: Navbar whole together
+    .fromTo('.navbar-pill', 
+      { y: -20, opacity: 0, xPercent: -50 },
+      { y: 0, opacity: 1, xPercent: -50, duration: 0.28, ease: 'power2.out' }
+    )
+    .fromTo('.nav-brand-topleft',
+      { y: -14, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.28, ease: 'power2.out' },
+      '<0.02'
+    )
+    // Step 2: Title lines
+    .fromTo('.hero-title .line',
+      { y: 22, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.30, stagger: 0.06, ease: 'power3.out' },
+      '-=0.12'
+    )
+    // Step 3: Subtitle lines
+    .fromTo(subLines,
+      { y: 16, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.26, stagger: 0.05, ease: 'power2.out' },
+      '-=0.12'
+    )
+    // Step 4: Capsule buttons
+    .fromTo(ctaButtons,
+      { y: 12, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.24, stagger: 0.05, ease: 'power2.out' },
+      '-=0.10'
+    );
 
   // 2. Parallax background on scroll
   if (typeof ScrollTrigger !== 'undefined') {

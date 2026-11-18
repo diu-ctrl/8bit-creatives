@@ -5064,6 +5064,16 @@ canvas.glyph-fall {
   align-items: flex-start;
 }
 
+/* Hero entrance initial state (background stays 100% visible from start; content cascades in) */
+.js-hero-anim .navbar-pill,
+.js-hero-anim .nav-brand-topleft,
+.js-hero-anim .hero-monument__title .line,
+.js-hero-anim .hero-title .line,
+.js-hero-anim .hero-monument__sub-line,
+.js-hero-anim .hero-cta-group .btn-hero-capsule {
+  opacity: 0;
+}
+
 .hero-monument .hero-monument__title,
 .hero-monument .hero-title {
   font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
