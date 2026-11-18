@@ -3197,11 +3197,11 @@ function initHeroDinoGame() {
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(resizeCanvas, 200);
-  });
+  }, { passive: true });
   window.addEventListener('orientationchange', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(resizeCanvas, 250);
-  });
+  }, { passive: true });
 }
 
 
