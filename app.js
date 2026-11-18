@@ -4133,7 +4133,47 @@ function initCreatorStats() {
     });
   }
 
-  let mobileScrollTimer = null;
+  let mobileScrollRaf = null;
+  let lastActiveIdx = -1;
+
+  function updateMobileActiveState() {
+    mobileScrollRaf = null;
+    const allStageCards = stage.children;
+    const len = allStageCards.length;
+    if (!len) return;
+
+    // Center of visible frame in stage scroll coordinates
+    const targetCenter = frame.scrollLeft + frame.clientWidth / 2;
+    let closestIdx = 0;
+    let minDiff = Infinity;
+
+    for (let i = 0; i < len; i++) {
+      const card = allStageCards[i];
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const diff = Math.abs(cardCenter - targetCenter);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIdx = i;
+      }
+    }
+
+    if (closestIdx !== lastActiveIdx) {
+      lastActiveIdx = closestIdx;
+      for (let i = 0; i < len; i++) {
+        if (i === closestIdx) {
+          allStageCards[i].classList.add('is-active');
+        } else {
+          allStageCards[i].classList.remove('is-active');
+        }
+      }
+      const creatorIdx = ((closestIdx % count) + count) % count;
+      if (creatorIdx !== selected) {
+        pos = creatorIdx;
+        updateCaption();
+      }
+    }
+  }
+
   frame.addEventListener('scroll', () => {
     if (window.innerWidth >= 768) return;
 
@@ -4150,31 +4190,23 @@ function initCreatorStats() {
       }
     }
 
-    clearTimeout(mobileScrollTimer);
-    mobileScrollTimer = setTimeout(() => {
-      const frameRect = frame.getBoundingClientRect();
-      const frameCenter = frameRect.left + frameRect.width / 2;
-      let closestIdx = 0;
-      let minDiff = Infinity;
-      const allStageCards = Array.from(stage.querySelectorAll('.creator-card'));
-      allStageCards.forEach((card, i) => {
-        const cardRect = card.getBoundingClientRect();
-        const cardCenter = cardRect.left + cardRect.width / 2;
-        const diff = Math.abs(cardCenter - frameCenter);
-        if (diff < minDiff) {
-          minDiff = diff;
-          closestIdx = i;
-        }
-      });
-      const creatorIdx = ((closestIdx % count) + count) % count;
-      if (creatorIdx !== selected) {
-        pos = creatorIdx;
-        updateCaption();
-      }
-      allStageCards.forEach((cCard, cIdx) => {
-        cCard.classList.toggle('is-active', cIdx === closestIdx);
-      });
-    }, 40);
+    // Real-time 60fps/120fps active card update during swipe
+    if (!mobileScrollRaf) {
+      mobileScrollRaf = requestAnimationFrame(updateMobileActiveState);
+    }
+  }, { passive: true });
+
+  // Instant update while finger is touching and dragging
+  frame.addEventListener('touchmove', () => {
+    if (window.innerWidth >= 768) return;
+    if (!mobileScrollRaf) {
+      mobileScrollRaf = requestAnimationFrame(updateMobileActiveState);
+    }
+  }, { passive: true });
+
+  frame.addEventListener('touchend', () => {
+    if (window.innerWidth >= 768) return;
+    updateMobileActiveState();
   }, { passive: true });
 
   // ── Keyboard ──

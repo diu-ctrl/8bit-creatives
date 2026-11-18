@@ -1749,9 +1749,15 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* 3D Coverflow: side cards in B&W (grayscale), current middle card in full color */
+.coverflow-stage .creator-card {
+  transform: translateZ(0);
+}
+
 .coverflow-stage .creator-card img {
   filter: grayscale(100%) contrast(1.08) brightness(0.82);
-  transition: filter 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateZ(0);
+  will-change: filter;
+  transition: filter 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .coverflow-stage .creator-card.is-active img {
@@ -4737,6 +4743,9 @@ body.light-page .back-home,
     object-position: center top !important;
     border-radius: 20px !important;
     display: block !important;
+    transform: translateZ(0) !important;
+    will-change: filter !important;
+    transition: filter 160ms cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
   .creator-nav-btn {
     display: flex !important;
