@@ -1763,6 +1763,16 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   transform: none;
 }
 
+/* Headroom framing adjustments for Coverflow creator cards (Aman, Sid, Juicy, Sarang, Beg4Mercy) */
+.coverflow-stage .creator-card[data-creator="aman"] img,
+.coverflow-stage .creator-card[data-creator="sid"] img,
+.coverflow-stage .creator-card[data-creator="juicy"] img,
+.coverflow-stage .creator-card[data-creator="sarang"] img,
+.coverflow-stage .creator-card[data-creator="mercy"] img {
+  transform: translateY(4.5%) scale(1.12) !important;
+  transform-origin: center center;
+}
+
 @media (min-width: 768px) {
   .creator-card--clone {
     display: none !important;

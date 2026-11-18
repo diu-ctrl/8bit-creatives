@@ -1,56 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://8bit-creatives.vercel.app/</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://8bit-creatives.vercel.app/about</loc>
-    <lastmod>2026-11-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/hero-newimage.webp</image:loc>
+      <image:title>8Bit Creatives - India's Premier Gaming &amp; Esports Agency</image:title>
+      <image:caption>8Bit Creatives headquarters monument visual and branding</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/logo.png</image:loc>
+      <image:title>8Bit Creatives Logo</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://8bit-creatives.vercel.app/creators</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/assets/creators/cinematic/mortal.webp</image:loc>
+      <image:title>MortaL (Naman Mathur) - 8Bit Creatives &amp; S8UL Co-Founder</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/assets/creators/cinematic/payal.webp</image:loc>
+      <image:title>Payal Gaming (Payal Dhare) - 8Bit Creatives Top Female Creator</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/assets/creators/cinematic/snax.webp</image:loc>
+      <image:title>Snax (Raj Varma) - 8Bit Creatives Creator</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/assets/creators/cinematic/regaltos.webp</image:loc>
+      <image:title>Regaltos (Parv Singh) - 8Bit Creatives Creator</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/assets/creators/cinematic/mamba.webp</image:loc>
+      <image:title>Mamba (Salman Ahmad) - 8Bit Creatives Creator</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/assets/creators/cinematic/viper.webp</image:loc>
+      <image:title>Viper (Yash Soni) - 8Bit Creatives Creator</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/assets/creators/cinematic/aman.webp</image:loc>
+      <image:title>Aman (Aman Jain) - 8Bit Creatives Creator</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/assets/creators/cinematic/krutika.webp</image:loc>
+      <image:title>Krutika (Krutika Ojha) - 8Bit Creatives Creator</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/assets/creators/cinematic/juicy.webp</image:loc>
+      <image:title>Juicy (Vishwas Battoo) - 8Bit Esports BGMI IGL</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://8bit-creatives.vercel.app/work</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/Case%20Studies/gemini.webp</image:loc>
+      <image:title>Google Gemini AI Campaign ft. Kevin Pietersen, MortaL &amp; Payal Gaming</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/Case%20Studies/meta-ai.webp</image:loc>
+      <image:title>Meta AI Arcade Campaign ft. Payal Gaming</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/Case%20Studies/thums-up.webp</image:loc>
+      <image:title>Thums Up Bring The Rush Campaign ft. Snax Gaming</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/Case%20Studies/stranger-things.webp</image:loc>
+      <image:title>Netflix Stranger Things Season 5 Fan Premiere Host</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/Case%20Studies/global%20chess.jpg</image:loc>
+      <image:title>Tech Mahindra Global Chess League Live Esports Broadcast</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://8bit-creatives.vercel.app/about</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/hero-newimage.webp</image:loc>
+      <image:title>8Bit Creatives Story - Mumbai 2018 to India's Premier Agency</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://8bit-creatives.vercel.app/services</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://8bit-creatives.vercel.app/work</loc>
-    <lastmod>2026-11-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
     <loc>https://8bit-creatives.vercel.app/esports</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://8bit-creatives.vercel.app/images-for-landing-page/roster/hero-esports.webp</image:loc>
+      <image:title>8Bit Esports Official BGMI Competitive Lineup</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://8bit-creatives.vercel.app/gcl-season-4</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://8bit-creatives.vercel.app/contact</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://8bit-creatives.vercel.app/privacy-policy</loc>
-    <lastmod>2026-11-14</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
