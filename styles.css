@@ -277,7 +277,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   top: 24px;
 }
 
-/* When navbar is over a light/white section, add a thin black border around the navbar */
+/* When navbar is over a light/white section, remove black outline - drop shadow provides clean separation */
 .navbar.navbar-on-light,
 .site-header.navbar-on-light,
 .nav-pill.navbar-on-light,
@@ -285,8 +285,9 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 #navbar.navbar-on-light,
 #top.navbar-on-light {
   background: #FFFFFF !important;
-  border: 1px solid #000000 !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12) !important;
 }
 
 /* All inactive text inside the navbar turns BLACK on light sections */
