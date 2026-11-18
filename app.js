@@ -82,9 +82,185 @@ function initScrollSmoother() {
   }
 }
 
+/* ==========================================================================
+   SITE PRELOADER (CONCEPT 1: HORIZONTAL SPLIT SHUTTER UNVEIL)
+   ========================================================================== */
+function initSitePreloader() {
+  const mount = document.getElementById('preloaderMount');
+  if (!mount) {
+    document.body.classList.remove('is-loading');
+    return;
+  }
+
+  // Accessibility Check: skip instantly if user prefers reduced motion
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) {
+    document.body.classList.remove('is-loading');
+    mount.classList.add('is-hidden');
+    mount.style.display = 'none';
+    if (typeof window.__triggerHeroEntrance === 'function') {
+      window.__triggerHeroEntrance();
+    }
+    return;
+  }
+
+  // If user loaded or restored into a lower section, skip preloader immediately
+  const isScrolledPastHero = window.scrollY > 150 || (window.__restoredSection && window.__restoredSection !== 'home');
+  if (isScrolledPastHero) {
+    document.body.classList.remove('is-loading');
+    mount.classList.add('is-hidden');
+    mount.style.display = 'none';
+    if (typeof window.__triggerHeroEntrance === 'function') {
+      window.__triggerHeroEntrance();
+    }
+    return;
+  }
+
+  const wrap = document.getElementById('concept1Wrap') || mount.querySelector('.preloader-concept-telemetry');
+  if (!wrap) {
+    document.body.classList.remove('is-loading');
+    return;
+  }
+
+  const counterEls = wrap.querySelectorAll('.telemetry-counter-num');
+  const railFillEls = wrap.querySelectorAll('.telemetry-progress-fill');
+  const wordsEls = wrap.querySelectorAll('.telemetry-cycle-words');
+
+  const phases = [
+    { at: 0,  wordIdx: 0 },
+    { at: 25, wordIdx: 1 },
+    { at: 55, wordIdx: 2 },
+    { at: 80, wordIdx: 3 },
+    { at: 96, wordIdx: 4 }
+  ];
+
+  let currentPct = 0;
+  const durationMs = 2100;
+  const startTime = performance.now();
+  let rafId = null;
+  let isFinished = false;
+
+  function applyPct(pct) {
+    const formatted = pct.toString().padStart(2, '0');
+    counterEls.forEach(el => { el.textContent = formatted; });
+    railFillEls.forEach(el => { el.style.width = pct + '%'; });
+
+    for (let i = phases.length - 1; i >= 0; i--) {
+      if (pct >= phases[i].at) {
+        const offset = phases[i].wordIdx * 48;
+        wordsEls.forEach(el => { el.style.transform = `translateY(-${offset}px)`; });
+        break;
+      }
+    }
+  }
+
+  // URL Parameter support for static freeze & screenshot inspection
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const freezeParam = urlParams.get('freeze');
+    const splitParam = urlParams.get('split');
+
+    if (splitParam !== null) {
+      const splitPct = parseInt(splitParam, 10) || 50;
+      applyPct(100);
+      const sTop = document.getElementById('telemetryShutterTop');
+      const sBottom = document.getElementById('telemetryShutterBottom');
+      if (sTop && sBottom) {
+        sTop.style.transition = 'none';
+        sBottom.style.transition = 'none';
+        sTop.style.transform = `translate3d(0, -${splitPct}%, 0)`;
+        sBottom.style.transform = `translate3d(0, ${splitPct}%, 0)`;
+      }
+      document.body.classList.remove('is-loading');
+      if (typeof window.__triggerHeroEntrance === 'function') {
+        window.__triggerHeroEntrance();
+      }
+      return;
+    }
+
+    if (freezeParam !== null) {
+      const pct = parseInt(freezeParam, 10);
+      const wordsElsAll = wrap.querySelectorAll('.telemetry-cycle-words');
+      wordsElsAll.forEach(w => { w.style.transition = 'none'; });
+      applyPct(pct);
+      return;
+    }
+  } catch (e) {}
+
+  function finish() {
+    if (isFinished) return;
+    isFinished = true;
+    if (rafId) cancelAnimationFrame(rafId);
+    applyPct(100);
+
+    setTimeout(() => {
+      wrap.classList.add('is-unveiling');
+      document.body.classList.remove('is-loading');
+
+      // Trigger hero entrance sequence as shutters part
+      if (typeof window.__triggerHeroEntrance === 'function') {
+        window.__triggerHeroEntrance();
+      }
+
+      setTimeout(() => {
+        mount.classList.add('is-hidden');
+        mount.style.display = 'none';
+        mount.setAttribute('aria-hidden', 'true');
+      }, 1250);
+    }, 200);
+  }
+
+  // Fast skip handlers (click anywhere, press Space or Escape)
+  mount.addEventListener('click', () => {
+    finish();
+  });
+  wrap.addEventListener('click', () => {
+    finish();
+  });
+
+  const handleKeydown = (e) => {
+    if (e.code === 'Space' || e.code === 'Escape') {
+      window.removeEventListener('keydown', handleKeydown);
+      finish();
+    }
+  };
+  window.addEventListener('keydown', handleKeydown);
+
+  function tick(now) {
+    if (isFinished) return;
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / durationMs, 1);
+
+    let targetPct;
+    if (progress < 0.3) {
+      targetPct = Math.floor((progress / 0.3) * 35);
+    } else if (progress < 0.7) {
+      targetPct = 35 + Math.floor(((progress - 0.3) / 0.4) * 45);
+    } else if (progress < 0.92) {
+      targetPct = 80 + Math.floor(((progress - 0.7) / 0.22) * 16);
+    } else {
+      targetPct = 96 + Math.floor(((progress - 0.92) / 0.08) * 4);
+    }
+
+    if (targetPct > currentPct) {
+      currentPct = targetPct;
+      applyPct(currentPct);
+    }
+
+    if (progress < 1) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      finish();
+    }
+  }
+
+  rafId = requestAnimationFrame(tick);
+}
+
 function bootstrapApp() {
   if (window.__appInitialized) return;
   window.__appInitialized = true;
+  initSitePreloader();
   window.__smoother = initScrollSmoother();
   initNavbar();
   initEsportsAnchor();
@@ -2317,59 +2493,86 @@ function initHeroGSAP() {
   const subLines = document.querySelectorAll('.hero-monument__sub-line').length ? '.hero-monument__sub-line' : '.hero-sub';
   const ctaButtons = document.querySelectorAll('.hero-cta-group .btn-hero-capsule').length ? '.hero-cta-group .btn-hero-capsule' : '.hero-cta-group a:not([style*="display:none"])';
 
-  const heroTl = gsap.timeline({
-    delay: 0.05,
-    onComplete: () => {
-      document.documentElement.classList.remove('js-hero-anim');
-      // Clear inline transform and opacity so native CSS hover states and alignment remain pure
-      gsap.set(['.navbar-pill', '.nav-brand-topleft', '.hero-title .line', subLines, ctaButtons], {
-        clearProps: 'opacity,transform'
-      });
-    }
-  });
+  let heroEntranceRan = false;
+  const runHeroAnimation = () => {
+    if (heroEntranceRan) return;
+    heroEntranceRan = true;
 
-  heroTl
-    // Step 1: Navbar whole together
-    .fromTo('.navbar-pill', 
-      { y: -20, opacity: 0, xPercent: -50 },
-      { y: 0, opacity: 1, xPercent: -50, duration: 0.28, ease: 'power2.out' }
-    )
-    .fromTo('.nav-brand-topleft',
-      { y: -14, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.28, ease: 'power2.out' },
-      '<0.02'
-    )
-    // Step 2: Title lines
-    .fromTo('.hero-title .line',
-      { y: 22, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.30, stagger: 0.06, ease: 'power3.out' },
-      '-=0.12'
-    )
-    // Step 3: Subtitle lines
-    .fromTo(subLines,
-      { y: 16, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.26, stagger: 0.05, ease: 'power2.out' },
-      '-=0.12'
-    )
-    // Step 4: Capsule buttons
-    .fromTo(ctaButtons,
-      { y: 12, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.24, stagger: 0.05, ease: 'power2.out' },
-      '-=0.10'
-    );
+    const heroTl = gsap.timeline({
+      delay: 0.05,
+      onComplete: () => {
+        document.documentElement.classList.remove('js-hero-anim');
+        // Clear inline transform and opacity so native CSS hover states and alignment remain pure
+        gsap.set(['.navbar-pill', '.nav-brand-topleft', '.hero-title .line', subLines, ctaButtons], {
+          clearProps: 'opacity,transform'
+        });
+      }
+    });
+
+    heroTl
+      // Step 1: Navbar whole together
+      .fromTo('.navbar-pill', 
+        { y: -20, opacity: 0, xPercent: -50 },
+        { y: 0, opacity: 1, xPercent: -50, duration: 0.28, ease: 'power2.out' }
+      )
+      .fromTo('.nav-brand-topleft',
+        { y: -14, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.28, ease: 'power2.out' },
+        '<0.02'
+      )
+      // Step 2: Title lines
+      .fromTo('.hero-title .line',
+        { y: 22, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.30, stagger: 0.06, ease: 'power3.out' },
+        '-=0.12'
+      )
+      // Step 3: Subtitle lines
+      .fromTo(subLines,
+        { y: 16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.26, stagger: 0.05, ease: 'power2.out' },
+        '-=0.12'
+      )
+      // Step 4: Capsule buttons
+      .fromTo(ctaButtons,
+        { y: 12, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.24, stagger: 0.05, ease: 'power2.out' },
+        '-=0.10'
+      );
+  };
+
+  window.__triggerHeroEntrance = runHeroAnimation;
+
+  const preloader = document.getElementById('preloaderMount');
+  const isPreloaderActive = preloader && !preloader.classList.contains('is-hidden') && !preloader.classList.contains('is-unveiling');
+
+  if (isPreloaderActive && !isScrolledPastHero) {
+    gsap.set(['.navbar-pill', '.nav-brand-topleft', '.hero-title .line', subLines, ctaButtons], {
+      opacity: 0
+    });
+    // Safety fallback: ensure hero entrance always triggers within 3.2s
+    setTimeout(() => {
+      if (!heroEntranceRan) runHeroAnimation();
+    }, 3200);
+  } else {
+    runHeroAnimation();
+  }
 
   // 2. Parallax background on scroll
   if (typeof ScrollTrigger !== 'undefined') {
-    gsap.to('.hero-bg-wrap img', {
-      yPercent: 15,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1
-      }
-    });
+    const heroBgImg = document.querySelector('.hero-monument__bg-img') || document.querySelector('.hero-bg-wrap img');
+    const heroSection = document.getElementById('home') || document.getElementById('hero');
+    if (heroBgImg && heroSection) {
+      gsap.to(heroBgImg, {
+        yPercent: 12,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroSection,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1
+        }
+      });
+    }
 
     // 3. Floating canvas animation
     const floatTween = gsap.to('.canvas-container', {

@@ -127,10 +127,10 @@
   <!-- Geist - ALL weights loaded -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="images-for-landing-page/hero-monument-bg-v2.webp" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=3.3">
+  <link rel="stylesheet" href="styles.css?v=3.4">
 
   <style>
     .creator-card:hover {
@@ -349,7 +349,92 @@
     } catch (e) {}
   </script>
 </head>
-<body>
+<body class="is-loading">
+
+<!-- ============================================================
+     SITE PRELOADER (CONCEPT 1: HORIZONTAL SPLIT SHUTTER UNVEIL)
+     ============================================================ -->
+<div id="preloaderMount" aria-live="polite">
+  <div class="preloader-concept-telemetry" id="concept1Wrap">
+    <!-- Top Half Shutter (0 - 50.1vh) -->
+    <div class="telemetry-shutter telemetry-shutter-top" id="telemetryShutterTop">
+      <div class="telemetry-canvas telemetry-canvas-top">
+        <!-- Header -->
+        <div class="telemetry-header">
+          <div>EST. 2018 &bull; MUMBAI, INDIA</div>
+        </div>
+
+        <!-- Center Stage: Logo Emblem & Word Cycler -->
+        <div class="telemetry-center">
+          <div class="telemetry-logo-emblem">
+            <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo">
+          </div>
+
+          <div class="telemetry-cycle-wrapper">
+            <div class="telemetry-cycle-words">
+              <div class="telemetry-cycle-item">Powering Gaming Culture</div>
+              <div class="telemetry-cycle-item">48+ Signed Marquee Talent</div>
+              <div class="telemetry-cycle-item">1.2B+ Combined Social Reach</div>
+              <div class="telemetry-cycle-item">India's Esports Powerhouse</div>
+              <div class="telemetry-cycle-item telemetry-cycle-wordmark"><span class="wordmark-bold">8BIT</span><span class="wordmark-thin">Creatives</span></div>
+            </div>
+          </div>
+
+          <div class="telemetry-progress-rail">
+            <div class="telemetry-progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="telemetry-footer">
+          <div class="telemetry-counter-block">
+            <div class="telemetry-counter-num">00</div>
+            <div class="telemetry-counter-unit">%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Half Shutter (50.1vh - 100vh) -->
+    <div class="telemetry-shutter telemetry-shutter-bottom" id="telemetryShutterBottom">
+      <div class="telemetry-canvas telemetry-canvas-bottom">
+        <!-- Header -->
+        <div class="telemetry-header">
+          <div>EST. 2018 &bull; MUMBAI, INDIA</div>
+        </div>
+
+        <!-- Center Stage: Logo Emblem & Word Cycler -->
+        <div class="telemetry-center">
+          <div class="telemetry-logo-emblem">
+            <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo">
+          </div>
+
+          <div class="telemetry-cycle-wrapper">
+            <div class="telemetry-cycle-words">
+              <div class="telemetry-cycle-item">Powering Gaming Culture</div>
+              <div class="telemetry-cycle-item">48+ Signed Marquee Talent</div>
+              <div class="telemetry-cycle-item">1.2B+ Combined Social Reach</div>
+              <div class="telemetry-cycle-item">India's Esports Powerhouse</div>
+              <div class="telemetry-cycle-item telemetry-cycle-wordmark"><span class="wordmark-bold">8BIT</span><span class="wordmark-thin">Creatives</span></div>
+            </div>
+          </div>
+
+          <div class="telemetry-progress-rail">
+            <div class="telemetry-progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="telemetry-footer">
+          <div class="telemetry-counter-block">
+            <div class="telemetry-counter-num">00</div>
+            <div class="telemetry-counter-unit">%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ============================================================
      SECTION 1 - NAVBAR & HEADER CONTROLS
@@ -1392,7 +1477,7 @@
 
 <script src="navbar.js?v=2.1"></script>
 <script src="scripts/creators-data.js?v=2.2"></script>
-<script src="app.js?v=2.1"></script>
+<script src="app.js?v=2.2"></script>
 
 <!-- Navbar Clean URL Smooth Scroll (No Hashes) & Active Section Detection -->
 <script>
