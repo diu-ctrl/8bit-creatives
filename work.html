@@ -615,29 +615,82 @@
     .work-modal-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 32px 0;
+      gap: 14px;
+      margin: 28px 0;
     }
     .work-modal-stat {
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 12px;
-      padding: 16px;
-      text-align: center;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      text-align: left;
+      min-height: 96px;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
-    .work-modal-stat-value {
-      font-family: 'Geist', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      color: #FF5931;
+    .work-modal-stat:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.16);
     }
     .work-modal-stat-label {
       font-family: 'Geist', sans-serif;
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.5);
-      margin-top: 4px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.45);
+      margin-bottom: 8px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .work-modal-stat-label::before {
+      content: '';
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #FF5931;
+      opacity: 0.85;
+      flex-shrink: 0;
+    }
+    .work-modal-stat-value {
+      font-family: 'Geist', sans-serif;
+      color: #FFFFFF;
+      margin: 0;
+    }
+    .work-modal-stat-value.stat-reach {
+      font-size: 26px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .work-modal-stat-value.stat-scope {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: #F4F4F5;
+      line-height: 1.35;
+    }
+    .work-modal-stat-value.stat-talent {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.4;
+      word-break: normal;
+    }
+    @media (max-width: 680px) {
+      .work-modal-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .work-modal-stat {
+        min-height: auto;
+        padding: 14px 16px;
+      }
     }
     .work-modal-credits {
       display: flex;
@@ -1261,7 +1314,7 @@
         challenge: "Meta needed to drive organic awareness and mainstream adoption of Meta AI on WhatsApp and Instagram among India's youth gaming audience.",
         approach: "8Bit Creatives deployed Payal Gaming to showcase practical, fun daily use-cases of Meta AI—from stream strategy tips to real-time chat queries.",
         execution: "Organic in-stream prompts, interactive Instagram reels demonstrating conversational features, and audience engagement contests.",
-        results: "High interactive chat engagement · 12M+ cross-platform impressions", reach: "12M+", duration: "Launch Campaign", cameras: "Payal Gaming",
+        results: "High interactive chat engagement · 12M+ cross-platform impressions", reach: "12M+", duration: "National Launch Campaign", cameras: "Payal Gaming",
         credits: ["8Bit Creatives","Meta India","Payal Gaming"]
       },
       {
@@ -1272,7 +1325,7 @@
         challenge: "The Coca-Cola Company wanted to align Thums Up's adrenaline-fueled brand ethos with high-octane competitive mobile gaming.",
         approach: "8Bit Creatives partnered Snax Gaming (Raj Varma) with Thums Up for high-energy clutch-moment integrations and branded stream breaks.",
         execution: "Exclusive stream overlays, custom #ToofaniClutch community highlights, and high-energy social video spots celebrating intense gaming moments.",
-        results: "15M+ video impressions · Distinctive brand recall among youth", reach: "15M+", duration: "Seasonal Campaign", cameras: "Snax Gaming",
+        results: "15M+ video impressions · Distinctive brand recall among youth", reach: "15M+", duration: "Adrenaline Brand Campaign", cameras: "Snax Gaming",
         credits: ["8Bit Creatives","Thums Up","Coca-Cola India","Snax"]
       },
       {
@@ -1283,7 +1336,7 @@
         challenge: "Netflix India needed an authentic youth-culture bridge to host their major on-ground Stranger Things Season 5 fan premiere event.",
         approach: "8Bit Creatives placed Payal Gaming as the official host for the live premiere activation, interviewing fans and creating exclusive buzz.",
         execution: "Red carpet host coverage, fan reaction segments, cosplay interactions, and real-time social reels during the premiere screening.",
-        results: "18M+ views across social handles · Mainstream entertainment crossover", reach: "18M+", duration: "Premiere Event", cameras: "Payal Gaming",
+        results: "18M+ views across social handles · Mainstream entertainment crossover", reach: "18M+", duration: "On-Ground Fan Premiere & Host", cameras: "Payal Gaming (Official Host)",
         credits: ["8Bit Creatives","Netflix India","Payal Gaming"]
       },
       {
@@ -1294,7 +1347,7 @@
         challenge: "YouTube Gaming hosted a worldwide 24-hour live countdown and reaction stream for the most anticipated trailer in gaming history—GTA VI.",
         approach: "8Bit Creatives secured Payal Gaming as the premier Indian female gaming creator representing India on the global live stream.",
         execution: "Global livestream broadcast integration, live community trailer breakdown, and dedicated multi-platform reaction videos.",
-        results: "Record-setting live concurrent viewership across YouTube India", reach: "20M+", duration: "Trailer Premiere", cameras: "Payal Gaming",
+        results: "Record-setting live concurrent viewership across YouTube India", reach: "20M+", duration: "Global 24-Hour Broadcast", cameras: "Payal Gaming (India Representative)",
         credits: ["8Bit Creatives","YouTube Gaming","Rockstar Games","Payal Gaming"]
       },
       {
@@ -1305,7 +1358,7 @@
         challenge: "Amazon Prime Video needed to promote marquee entertainment releases directly to India's highly engaged live-stream audiences.",
         approach: "8Bit Creatives paired premier talent Payal Gaming with Prime Video for dedicated themed streams, reaction content, and community watch activations.",
         execution: "Curated reaction streams, custom cosplay streams aligned with show premieres, and interactive social storytelling.",
-        results: "7M+ impressions · High conversion to OTT trial sign-ups", reach: "7M+", duration: "Premiere Windows", cameras: "Payal Gaming",
+        results: "7M+ impressions · High conversion to OTT trial sign-ups", reach: "7M+", duration: "Flagship OTT Watch-Along", cameras: "Payal Gaming",
         credits: ["8Bit Creatives","Amazon Prime Video","Payal Gaming"]
       },
       {
@@ -1316,7 +1369,7 @@
         challenge: "IPL franchises and Star Sports sought to gamify cricket coverage and engage millions of young Indian gamers during India's biggest sporting festival.",
         approach: "8Bit Creatives deployed top creators — Payal Gaming, Regaltos (Parv Singh), Snax Gaming, MortaL, and 8Bit Thug — across TATA IPL Captains Day, Rajasthan Royals, and Kolkata Knight Riders activations.",
         execution: "On-pitch and stadium gaming challenges, #KnightsUnplugged face-offs with KKR stars (Rinku Singh, Shreyas Iyer), Star Sports #IPLRevengeWeek broadcast segments, and live stadium matchday vlogs.",
-        results: "65M+ collective reach · 10+ franchise collaborations across IPL season", reach: "65M+", duration: "IPL Season Activation", cameras: "Payal Gaming, Regaltos, Snax, MortaL, Thug",
+        results: "65M+ collective reach · 10+ franchise collaborations across IPL season", reach: "65M+", duration: "Season-Long Stadium & Media IP", cameras: "Payal, Regaltos, Snax, MortaL, 8Bit Thug",
         credits: ["8Bit Creatives","TATA IPL","Star Sports","KKR","Rajasthan Royals"]
       },
       {
@@ -1327,7 +1380,7 @@
         challenge: "The International Cricket Council (ICC) aimed to expand cricket fandom among Gen-Z and mobile gamers during the ICC Men's T20 World Cup with digital-native creators.",
         approach: "8Bit Creatives creators Payal Gaming and Snax Gaming were officially selected as flagship delegates for the ICC Creators Club with VIP access to Captains Day and stadium matches.",
         execution: "Exclusive access to international team captains, matchday behind-the-scenes vlogs, interactive fan zone live streams, and viral creator reels during Team India matches.",
-        results: "38M+ video views · Historic crossover linking international cricket to gaming fans", reach: "38M+", duration: "T20 World Cup Tournament", cameras: "Payal Gaming, Snax Gaming",
+        results: "38M+ video views · Historic crossover linking international cricket to gaming fans", reach: "38M+", duration: "World Cup Broadcast & Fan Zone", cameras: "Payal Gaming, Snax Gaming",
         credits: ["8Bit Creatives","ICC","Disney+ Hotstar"]
       },
       {
@@ -1338,7 +1391,7 @@
         challenge: "Disney+ Hotstar and Star Sports wanted to bridge traditional English grand slam tennis with India's vibrant Gen-Z gaming audience during the Wimbledon Championships in London.",
         approach: "8Bit Creatives flew creators including Nishu Tiwari and Joker Ki Haveli (Gulrez Khan) to the All England Lawn Tennis Club in London for on-ground Centre Court access, cross-culture vlogs, and matchday features.",
         execution: "Exclusive behind-the-scenes access at Centre Court, creator player interactions, daily lifestyle and sports vlogs, and social broadcast integration on Star Sports digital channels.",
-        results: "22M+ cross-platform views · Cultural crossover connecting grand slam tennis to youth fandom", reach: "22M+", duration: "Wimbledon Championships", cameras: "Nishu Tiwari, Joker Ki Haveli",
+        results: "22M+ cross-platform views · Cultural crossover connecting grand slam tennis to youth fandom", reach: "22M+", duration: "Grand Slam Broadcast Creator Hub", cameras: "Nishu Tiwari, Joker Ki Haveli",
         credits: ["8Bit Creatives","Star Sports","Disney+ Hotstar","Wimbledon"]
       },
       {
@@ -1349,7 +1402,7 @@
         challenge: "Bharti Airtel needed to prove the real-world high throughput and ultra-low latency power of their next-gen 5G network to hardcore competitive gamers skeptical of wireless cloud gaming.",
         approach: "8Bit Creatives partnered with Airtel to stage an official 5G cloud gaming showcase featuring gaming icons MortaL (Naman Mathur) and 8Bit Mamba (Salman Ahmad), streaming cloud titles live directly over Airtel's 5G network.",
         execution: "Hands-on live stream trial in Airtel's advanced testing facility, benchmarking latency, frame drops, and input response live on stream with community play.",
-        results: "15M+ digital impressions · Demonstrated sub-10ms cloud gaming response live on stream", reach: "15M+", duration: "National 5G Campaign", cameras: "MortaL, 8Bit Mamba",
+        results: "15M+ digital impressions · Demonstrated sub-10ms cloud gaming response live on stream", reach: "15M+", duration: "National 5G Tech Showcase", cameras: "MortaL, 8Bit Mamba",
         credits: ["8Bit Creatives","Bharti Airtel","S8UL"]
       },
       {
@@ -1360,7 +1413,7 @@
         challenge: "Reliance Consumer Products launched Campa Energy and needed immediate high-energy cultural resonance and dominant share-of-voice across the gaming demographic.",
         approach: "8Bit Creatives and S8UL signed Campa Energy as the Title Sponsor for S8UL at the historic Esports World Cup (EWC) in Riyadh.",
         execution: "Global jersey branding, exclusive creator content behind-the-scenes in Riyadh, celebratory bootcamps, and high-frequency digital video spots.",
-        results: "40M+ campaign impressions · Historic EWC title alignment", reach: "40M+", duration: "EWC 2024", cameras: "S8UL EWC Contingent",
+        results: "40M+ campaign impressions · Historic EWC title alignment", reach: "40M+", duration: "Global Title Sponsorship", cameras: "S8UL Esports Championship Roster",
         credits: ["8Bit Creatives","Campa Energy","Reliance Consumer Products","S8UL"]
       },
       {
@@ -1371,7 +1424,7 @@
         challenge: "Red Bull needed to activate their Mobile Esports Open (MEO) tournament with authentic gaming creator content that felt native, not interruptive.",
         approach: "We deployed 14 creators from the 8Bit roster across live qualifiers, offline LAN finals, and social reel coverage.",
         execution: "Live stream qualifiers, on-ground LAN event coverage, and post-event highlight reels distributed across YouTube and Instagram.",
-        results: "18M+ impressions · 14 creators", reach: "18M+", duration: "Season-long", cameras: "14 creators",
+        results: "18M+ impressions · 14 creators", reach: "18M+", duration: "Season-Long Mobile Esports IP", cameras: "14 8Bit & S8UL Creators",
         credits: ["8Bit Creatives","Red Bull","MEO"]
       },
       {
@@ -1382,7 +1435,7 @@
         challenge: "Nestlé India wanted to establish Nescafé Cold Coffee as the go-to fuel for midnight gaming grinds and late-night streams.",
         approach: "8Bit Creatives integrated Nescafé organically into Ankkita C's late-night gaming broadcasts and daily vlogs.",
         execution: "Mid-stream coffee breaks, custom stream alerts, comedic relatable reels on late-night gaming fatigue, and product placement.",
-        results: "5M+ organic impressions · High conversational engagement in live chat", reach: "5M+", duration: "Seasonal Campaign", cameras: "Ankkita C",
+        results: "5M+ organic impressions · High conversational engagement in live chat", reach: "5M+", duration: "Seasonal In-Stream Campaign", cameras: "Ankkita C",
         credits: ["8Bit Creatives","Nestlé India","Nescafé","Ankkita C"]
       },
       {
@@ -1393,7 +1446,7 @@
         challenge: "Mondelez wanted to position Cadbury Fuse and 5 Star as the ultimate quick-refuel snack for gamers during intense clutch moments and long live streams.",
         approach: "8Bit Creatives engineered the #CadburyFuseWhileGaming challenge, integrating bite-sized chocolate snacking directly into between-match stream breaks.",
         execution: "Live stream product integration across top creators, customized comedic stream overlays, clutch-moment eating challenges, and giveaway activations.",
-        results: "18M+ views · 4.2× recall rate among Gen-Z gamers", reach: "18M+", duration: "6 weeks", cameras: "10 Creators",
+        results: "18M+ views · 4.2× recall rate among Gen-Z gamers", reach: "18M+", duration: "6-Week Multichannel Campaign", cameras: "10 8Bit & S8UL Creators",
         credits: ["8Bit Creatives","Mondelez India","Cadbury Fuse"]
       },
       {
@@ -1404,7 +1457,7 @@
         challenge: "MG Motor India launched the compact MG Comet EV and wanted to reach tech-forward Gen-Z and millennial creators who prioritize smart mobility.",
         approach: "8Bit Creatives placed Mortal (Naman Mathur) at the forefront of the MG Comet EV launch campaign, bridging modern car tech with gaming lifestyle.",
         execution: "First-look creator unboxing, tech-feature walkthroughs highlighting the dual 10.25-inch infotainment screens, and lifestyle driving vlogs.",
-        results: "Massive viral tech buzz · Cross-industry automotive recognition", reach: "10M+", duration: "Product Launch", cameras: "Mortal",
+        results: "Massive viral tech buzz · Cross-industry automotive recognition", reach: "10M+", duration: "EV Gamer Edition Co-Branding", cameras: "MortaL (Naman Mathur)",
         credits: ["8Bit Creatives","MG Motor India","Mortal"]
       },
       {
@@ -1415,7 +1468,7 @@
         challenge: "TVS Motor Company sought to connect the raw racing DNA of TVS Apache motorcycles with the precision and speed of top mobile esports athletes.",
         approach: "8Bit Creatives deployed an all-star squad—Payal Gaming, Snax, Regaltos, Joker, and Willy—for an adrenaline-packed track and gaming activation.",
         execution: "Professional test-track riding days, esports racing showdowns, stylish digital films, and community speed challenges.",
-        results: "20M+ social video views · Strong alignment between high-performance bikes and gaming", reach: "20M+", duration: "Multi-creator Campaign", cameras: "Payal, Snax, Regaltos, Joker, Willy",
+        results: "20M+ social video views · Strong alignment between high-performance bikes and gaming", reach: "20M+", duration: "High-Performance Auto Campaign", cameras: "Payal, Snax, Regaltos, Joker, Willy",
         credits: ["8Bit Creatives","TVS Motor Company","Ampverse DMI","5 Creators"]
       },
       {
@@ -1426,7 +1479,7 @@
         challenge: "Aditya Birla Group launched OWND!, a digital-first youth streetwear label, needing immediate traction with female and youth gamer communities.",
         approach: "8Bit Creatives signed Payal Gaming as the marquee face for OWND!'s launch collection, styling gaming content with bold streetwear.",
         execution: "Fashion haul lookbooks, signature stream fits, Instagram runway reels, and exclusive community discount code drops during live gaming sessions.",
-        results: "Rapid sell-out of featured collection items · 8M+ social views", reach: "8M+", duration: "Collection Launch", cameras: "Payal Gaming",
+        results: "Rapid sell-out of featured collection items · 8M+ social views", reach: "8M+", duration: "Gen-Z Fashion Brand Launch", cameras: "Payal Gaming",
         credits: ["8Bit Creatives","OWND!","Aditya Birla Fashion","Payal Gaming"]
       },
       {
@@ -1437,7 +1490,7 @@
         challenge: "Crocs India sought to showcase their Classic Clogs and Jibbitz charms as the quintessential cozy, expressive footwear for gamers and creators.",
         approach: "8Bit Creatives signed top female creator Ankkita C to feature personalized Crocs and styling vlogs within cozy stream setups and daily life content.",
         execution: "Creator unboxing, customized Jibbitz stream styling, lifestyle Instagram reels, and community giveaway activations.",
-        results: "High engagement across youth fashion demographics · 6M+ impressions", reach: "6M+", duration: "Campaign Launch", cameras: "Ankkita C",
+        results: "High engagement across youth fashion demographics · 6M+ impressions", reach: "6M+", duration: "Footwear Style Campaign", cameras: "Ankkita C",
         credits: ["8Bit Creatives","Crocs India","Ankkita C"]
       },
       {
@@ -1448,7 +1501,7 @@
         challenge: "Diageo India sought to redefine contemporary sports heroes by showcasing esports icons who broke traditional conventions.",
         approach: "8Bit Creatives placed Mortal into Royal Challenge's celebrated \"Naya Sher\" campaign celebrating resilient, game-changing Indian youth.",
         execution: "Cinematic digital brand films, hero billboards, digital narrative shorts, and long-form storytelling documenting Mortal's rise from chawls to esports icon.",
-        results: "16M+ views · Landmark crossover between mainstream brand and esports pioneer", reach: "16M+", duration: "Brand Campaign", cameras: "Mortal",
+        results: "16M+ views · Landmark crossover between mainstream brand and esports pioneer", reach: "16M+", duration: "Youth Culture & Advocacy Campaign", cameras: "MortaL (Naman Mathur)",
         credits: ["8Bit Creatives","Royal Challenge","Diageo","Mortal"]
       },
       {
@@ -1459,7 +1512,7 @@
         challenge: "Monster Energy wanted to build long-term brand affinity with Indian gamers, positioning esports athletes alongside extreme sports heroes.",
         approach: "iQOO SOUL (the BGMI division of S8UL) partnered with Monster Energy as the official Energy Drink Partner, creating an annual ambassador program.",
         execution: "Year-long brand ambassadorship with custom content, tournament integrations, lifestyle crossover events, and co-branded merchandise.",
-        results: "24M+ impressions · Annual mandate", reach: "24M+", duration: "12 months", cameras: "Multi-creator",
+        results: "24M+ impressions · Annual mandate", reach: "24M+", duration: "Annual Official Energy Partner", cameras: "8Bit & S8UL Creator Syndicate",
         credits: ["8Bit Creatives","Monster Energy","iQOO SOUL","S8UL"]
       },
       {
@@ -1470,7 +1523,7 @@
         challenge: "Lenovo Legion needed authentic PC gaming authority to drive adoption of their Intel-powered Legion 5i gaming laptops among mobile-first creators and audiences.",
         approach: "8Bit Creatives partnered with Lenovo and Intel to co-produce the #LegionLegends talk-show/podcast series and the 'Blaze' showcase starring MortaL, 8Bit Thug, Ankkita C, and Snax Gaming.",
         execution: "Branded episodic podcast 'Gaming Secrets Revealed', professional studio video production, Legion 5i competitive performance tests, and high-engagement community laptop giveaways.",
-        results: "18M+ views across series · Thousands of qualified laptop purchase inquiries", reach: "18M+", duration: "Multi-episode series", cameras: "MortaL, 8Bit Thug, Ankkita C, Snax",
+        results: "18M+ views across series · Thousands of qualified laptop purchase inquiries", reach: "18M+", duration: "Travel-Gaming Docuseries", cameras: "MortaL, 8Bit Thug, Ankkita C, Snax",
         credits: ["8Bit Creatives","Lenovo Legion","Intel India"]
       },
       {
@@ -1481,7 +1534,7 @@
         challenge: "Hardware giants Lenovo Legion and Intel needed an unmissable physical brand showcase that bridged esports athletes directly with passionate Indian gamers.",
         approach: "8Bit Creatives and S8UL engineered the massive 2-day S8UL Gaming Fest at the Manpho Convention Centre in Bengaluru with free community entry.",
         execution: "Set up Lenovo Legion experiential zones, pro-creator show matches, exclusive LAN stages, meet-and-greets with the full S8UL roster, and hardware demo rigs.",
-        results: "13K+ attendees · 50M+ digital views · National media coverage", reach: "50M+", duration: "2 days", cameras: "Full Roster",
+        results: "13K+ attendees · 50M+ digital views · National media coverage", reach: "50M+", duration: "2-Day On-Ground Mega Expo & LAN", cameras: "Full S8UL & 8Bit Talent Roster",
         credits: ["8Bit Creatives","S8UL","Lenovo Legion","Intel"]
       },
       {
@@ -1492,7 +1545,7 @@
         challenge: "OnePlus sought to demonstrate that its mainstream flagship phones matched or beat dedicated gaming devices in sustained frame rates and thermal stability.",
         approach: "8Bit Creatives conceptualized the \"OnePlus Dominate\" show-match tournament IP and deployed creators for performance testing.",
         execution: "Broadcast multi-stage invitational tournaments pairing creators with celebrity cricketers (e.g., KL Rahul, Yuzvendra Chahal), backed by creator-led livestream tech teardowns.",
-        results: "35M+ social impressions per launch window", reach: "35M+", duration: "2021-2023", cameras: "Multi-creator",
+        results: "35M+ social impressions per launch window", reach: "35M+", duration: "Multi-Season Esports Invitational", cameras: "8Bit & S8UL Creator Syndicate",
         credits: ["8Bit Creatives","OnePlus","S8UL Creators"]
       },
       {
@@ -1503,7 +1556,7 @@
         challenge: "OnePlus needed to demonstrate the unrivaled gaming prowess, thermal architecture, and 165Hz display capabilities of the flagship OnePlus 15 to discerning competitive mobile gamers.",
         approach: "8Bit Creatives partnered with OnePlus to feature Snax Gaming (Raj Varma) as an official keynote presenter and performance benchmark ambassador at the national OnePlus 15 launch event.",
         execution: "Snax took the keynote stage to deliver a real-world esports breakdown of touch sampling rates, frame stability, and cooling performance, followed by an experiential gaming booth.",
-        results: "2.5M+ live keynote viewers · 14M+ social impressions establishing OnePlus 15 as top gaming phone", reach: "14M+", duration: "Flagship Launch", cameras: "Snax Gaming",
+        results: "2.5M+ live keynote viewers · 14M+ social impressions establishing OnePlus 15 as top gaming phone", reach: "14M+", duration: "Global Hardware Launch Keynote", cameras: "Snax Gaming",
         credits: ["8Bit Creatives","OnePlus India"]
       },
       {
@@ -1514,7 +1567,7 @@
         challenge: "AMD and Corsair needed targeted, ongoing brand visibility among competitive PC gaming and Valorant enthusiasts seeking elite frame rates and setup aesthetics.",
         approach: "8Bit Creatives partnered with AMD and Corsair to build a custom dream battle station powered by AMD Radeon RX GPUs, Ryzen processors, and Corsair RGB peripherals for 8Bit Binks (Mithul Nayak).",
         execution: "Branded daily Valorant competitive streams (#VALO #S8UL #BINKS #ad), benchmark breakdowns on 240Hz+ gaming, setup room tours, and peripheral giveaways.",
-        results: "12M+ organic stream impressions · Direct uplift in AMD Radeon GPU interest among FPS gamers", reach: "12M+", duration: "Annual Hardware Sponsorship", cameras: "8Bit Binks",
+        results: "12M+ organic stream impressions · Direct uplift in AMD Radeon GPU interest among FPS gamers", reach: "12M+", duration: "Annual PC Hardware Mandate", cameras: "8Bit Binks",
         credits: ["8Bit Creatives","AMD India","Corsair"]
       },
       {
@@ -1525,7 +1578,7 @@
         challenge: "iQOO wanted to establish deep, long-term credibility with India's mobile gaming audience beyond one-off sponsorships.",
         approach: "8Bit Creatives secured the mandate for India's largest-ever esports naming rights deal. iQOO became title sponsor for 3 teams: 8bit Esports, Reckoning Esports, and Revenant Xspark.",
         execution: "Multi-team title sponsorship across BGMI and mobile esports tournaments. Deepened in March 2025 to revolutionize mobile gaming integration.",
-        results: "3 teams sponsored · Largest deal in Indian esports", reach: "100M+", duration: "Ongoing", cameras: "3 teams",
+        results: "3 teams sponsored · Largest deal in Indian esports", reach: "100M+", duration: "Multi-Year Title Naming Rights", cameras: "S8UL Esports Championship Teams",
         credits: ["8Bit Creatives","iQOO","8bit Esports","Reckoning","Revenant Xspark"]
       },
       {
@@ -1536,7 +1589,7 @@
         challenge: "iQOO sought to recruit a real young gamer as their official Chief Gaming Officer (CGO) in a groundbreaking gamified employer-brand campaign.",
         approach: "8Bit Creatives orchestrated the full influencer judging panel and campaign activation starring 8Bit Thug (Animesh Agarwal), Payal Gaming, and Rannvijay Singha.",
         execution: "Multi-stage recruitment challenges, gaming jury evaluation rounds, web-series production, and nationwide finals crowning India's first Gen-Z CGO.",
-        results: "Over 60K applications · 40M+ campaign impressions across digital", reach: "40M+", duration: "3 months", cameras: "8Bit Thug, Payal Gaming, Rannvijay Singha",
+        results: "Over 60K applications · 40M+ campaign impressions across digital", reach: "40M+", duration: "Nationwide Reality IP & Hunt", cameras: "8Bit Thug, Payal Gaming, Rannvijay",
         credits: ["8Bit Creatives","iQOO India","8Bit Thug","Payal Gaming"]
       },
       {
@@ -1547,7 +1600,7 @@
         challenge: "iQOO wanted to engineer custom firmware and physical gaming optimizations validated directly by competitive mobile gamers.",
         approach: "8Bit Creatives partnered Mortal, Payal Gaming, and Scout to work directly with iQOO's R&D product engineers during device prototyping.",
         execution: "Pre-launch software tuning (touch response, gyro sensitivity, haptics), hardware unboxings, and competitive launch scrims proving the flagship performance.",
-        results: "Direct gamer-endorsed product differentiation · Record launch day shipments", reach: "30M+", duration: "Annual Mandate", cameras: "Mortal, Payal, Scout",
+        results: "Direct gamer-endorsed product differentiation · Record launch day shipments", reach: "30M+", duration: "Annual Co-Creation Mandate", cameras: "MortaL, Payal Gaming, Sc0ut",
         credits: ["8Bit Creatives","iQOO India","Mortal","Payal Gaming"]
       },
       {
@@ -1558,7 +1611,7 @@
         challenge: "KRAFTON and Korean studio Dreamotion wanted to successfully launch real-time PvP strategy title 'Road to Valor: Empires' in India with deep cultural resonance and immediate player adoption.",
         approach: "KRAFTON signed 8Bit Creatives and S8UL co-founders (MortaL, 8Bit Thug, 8Bit Goldy) as the primary talent partners and brand ambassadors for the Indian market launch.",
         execution: "Co-creation of Indian faction elements, custom voice lines, simultaneous day-one creator tournament streams, TV & digital ad campaigns, and nationwide competitive launch cups.",
-        results: "#1 Trending strategy title on Google Play · 5M+ downloads in opening weeks", reach: "30M+", duration: "Launch Mandate", cameras: "MortaL, 8Bit Thug, 8Bit Goldy, Regaltos",
+        results: "#1 Trending strategy title on Google Play · 5M+ downloads in opening weeks", reach: "30M+", duration: "Pan-India Game Launch Mandate", cameras: "MortaL, 8Bit Thug, 8Bit Goldy, Regaltos",
         credits: ["8Bit Creatives","KRAFTON India","Dreamotion"]
       },
       {
@@ -1569,7 +1622,7 @@
         challenge: "Level Infinite needed an explosive India launch for the world's most popular MOBA game, Honor of Kings (HOK), demanding immediate mass gaming awareness and live gameplay adoption.",
         approach: "8Bit Creatives mobilized an all-star 13-creator roster — including Mili Kya Mili, Mr Jay, Sheek, Sid, Harshita, Dattrax, Rebel, and Beg4Mercy — for an official launch night tournament activation.",
         execution: "High-production 5v5 showmatches, live casting, game tutorial reels, hero character cosplays, and community giveaway lobbies on launch day.",
-        results: "25M+ impressions · Catapulted Honor of Kings to top trending status in India", reach: "25M+", duration: "Launch Campaign", cameras: "Mili, Mr Jay, Sheek, Sid, Harshita, Dattrax, Rebel",
+        results: "25M+ impressions · Catapulted Honor of Kings to top trending status in India", reach: "25M+", duration: "Pan-India Launch & Showmatch", cameras: "Mili, Mr Jay, Sheek, Sid, Harshita, Rebel",
         credits: ["8Bit Creatives","Level Infinite","Tencent"]
       },
       {
@@ -1580,7 +1633,7 @@
         challenge: "The Esports World Cup Foundation established a global incentive program seeking the world's most impactful esports organisations to expand multi-title participation.",
         approach: "S8UL / 8Bit Creatives secured official selection in the prestigious EWC Club Program, representing India on the world's grandest competitive stage in Riyadh.",
         execution: "Fielded competitive rosters across world-class titles including BGMI, Pokémon UNITE, and FC24, supported by extensive broadcast coverage and international creator vlogs.",
-        results: "Only Indian organisation selected · Multimillion-dollar global club incentive", reach: "65M+", duration: "2024-Present", cameras: "Global Rosters",
+        results: "Only Indian organisation selected · Multimillion-dollar global club incentive", reach: "65M+", duration: "Official Global Club Program", cameras: "S8UL Championship Rosters",
         credits: ["8Bit Creatives","S8UL","EWC Foundation","Riyadh"]
       },
       {
@@ -1591,7 +1644,7 @@
         challenge: "YouTube India needed to deliver uninterrupted, high-definition streaming and exclusive creator vlogs during the Esports World Cup.",
         approach: "8Bit Creatives and S8UL partnered with YouTube as the official creator broadcast partner, streaming match feeds and behind-the-scenes vlogs from Riyadh.",
         execution: "Live match watch-parties on YouTube, dedicated creator Shorts series, and community prediction polls.",
-        results: "50M+ cumulative video views across tournament duration", reach: "50M+", duration: "Tournament Window", cameras: "Full S8UL Roster",
+        results: "50M+ cumulative video views across tournament duration", reach: "50M+", duration: "Official Broadcast & Content Mandate", cameras: "Full S8UL & 8Bit Creator Roster",
         credits: ["8Bit Creatives","YouTube India","S8UL","EWC"]
       },
       {
@@ -1602,7 +1655,7 @@
         challenge: "The Ministry of Information & Broadcasting (Govt of India) and the Esports Federation of India (ESFI) sought to launch the landmark World Audio Visual & Entertainment Summit (WAVES) esports vertical.",
         approach: "8Bit Creatives was engaged as the lead creator and talent powerhouse, bringing India's premier gaming leaders to the forefront of national policy, youth entertainment, and competitive esports.",
         execution: "On-stage keynote presentations, exhibition showcase matches, creator meet-and-greets, and national digital broadcast coverage advocating for esports recognition in India.",
-        results: "Historic state recognition · 40M+ national digital impressions across national media", reach: "40M+", duration: "National Summit", cameras: "8Bit Thug, MortaL, Payal Gaming, Goldy",
+        results: "Historic state recognition · 40M+ national digital impressions across national media", reach: "40M+", duration: "National Government Esports Summit", cameras: "8Bit Thug, MortaL, Payal Gaming, 8Bit Goldy",
         credits: ["8Bit Creatives","Ministry of I&B","ESFI","S8UL"]
       },
       {
@@ -1614,7 +1667,7 @@
         challenge: "Tech Mahindra needed to elevate the Global Chess League Season 4 — the world's largest franchise chess league — into a watchable, social-first esports spectacle for a modern digital audience.",
         approach: "8Bit Creatives was named the Official Broadcast & Production Agency, deploying a full multi-camera studio with real-time chess analytics, professional commentary, and simultaneous distribution across digital platforms.",
         execution: "End-to-end live broadcast production in Bengaluru (Sep 5-13, 2026) with 6 camera angles, commentary desk, real-time telemetry graphics, and live social media integration.",
-        results: "12M+ live viewers · World's largest chess franchise league", reach: "12M+", duration: "9 days", cameras: "6 angles",
+        results: "12M+ live viewers · World's largest chess franchise league", reach: "12M+", duration: "Multi-Camera Global Broadcast", cameras: "8Bit Production Crew & Talent",
         credits: ["8Bit Creatives","Tech Mahindra","S8UL Production"]
       },
       {
@@ -1625,7 +1678,7 @@
         challenge: "NODWIN Gaming needed to fill the massive Hitex Exhibition Centre in Hyderabad for DreamHack India with engaged youth gaming audiences.",
         approach: "8Bit Creatives served as the Exclusive Official Talent Partner for DreamHack India, curating creator stages, LAN fan activities, and celebrity cosplay panels.",
         execution: "Deployed 30+ top agency creators across live panel discussions, stage matches, fan meet-and-greets, and real-time social reels highlighting sponsor booths.",
-        results: "Record-setting DreamHack footfalls · 35M+ digital impressions", reach: "35M+", duration: "Annual Editions", cameras: "30+ Creators",
+        results: "Record-setting DreamHack footfalls · 35M+ digital impressions", reach: "35M+", duration: "Annual Official Talent Mandate", cameras: "30+ 8Bit & S8UL Creators",
         credits: ["8Bit Creatives","NODWIN Gaming","DreamHack India"]
       },
       {
@@ -1636,7 +1689,7 @@
         challenge: "Represent Indian esports on the international stage at the premier global awards for mobile gaming in Los Angeles.",
         approach: "8Bit Creatives & S8UL traveled to LA with marquee creators including Payal Gaming and 8Bit Thug, bringing global accolades back to India.",
         execution: "Red carpet attendance, live award acceptance broadcast, behind-the-scenes Hollywood vlogs, and international industry networking.",
-        results: "Global recognition for Indian gaming · 25M+ impressions across social media", reach: "25M+", duration: "Global Event", cameras: "Payal Gaming & S8UL",
+        results: "Global recognition for Indian gaming · 25M+ impressions across social media", reach: "25M+", duration: "Global Live Ceremony", cameras: "Payal Gaming & S8UL Contingent",
         credits: ["8Bit Creatives","S8UL","The MOBIES","Los Angeles"]
       },
       {
@@ -1647,7 +1700,7 @@
         challenge: "Realme sought to position its Narzo line as the premier high-FPS budget smartphone series for entry-level competitive mobile gamers.",
         approach: "8Bit Creatives utilized competitive players to rigorously stress-test the phone's touch sampling rate, fast charging, and thermals in real-time gaming sessions.",
         execution: "Multi-hour live \"Battery Drain Challenges,\" creator unboxings, and custom scrim tournaments hosted exclusively on Narzo smartphones.",
-        results: "14M+ views · Amazon sell-outs", reach: "14M+", duration: "2021-2022", cameras: "Competitive players",
+        results: "14M+ views · Amazon sell-outs", reach: "14M+", duration: "Smartphone Launch Series", cameras: "8Bit Esports Athletes & Creators",
         credits: ["8Bit Creatives","Realme India"]
       },
       {
@@ -1658,7 +1711,7 @@
         challenge: "Jio Platforms needed to engage grassroots Indian mobile gamers and promote Jio's high-speed gaming networks.",
         approach: "8Bit Creatives partnered with Jio to anchor the JioBLAST tournament IP with marquee creator showmatches, commentary, and digital promotions.",
         execution: "Live streamed qualifier commentary, creator showdowns, and high-visibility digital promotional spots across the 8Bit network.",
-        results: "Over 20M+ cumulative digital views · Deep brand resonance for Jio Gaming", reach: "20M+", duration: "Tournament Series", cameras: "8Bit Creators",
+        results: "Over 20M+ cumulative digital views · Deep brand resonance for Jio Gaming", reach: "20M+", duration: "Pan-India Telecom Esports Series", cameras: "8Bit & S8UL Creators",
         credits: ["8Bit Creatives","Jio Platforms","JioGames"]
       },
       {
@@ -1669,7 +1722,7 @@
         challenge: "YouTube India wanted to spotlight top-tier gaming creator economy best practices, monetization innovation, and long-term community building at its annual Creator 2 Creator Summit.",
         approach: "8Bit Creatives talents Snax Gaming (Raj Varma) and Aman Jain represented the gaming sector as keynote speakers and panel thought leaders alongside YouTube executive leadership.",
         execution: "Mainstage fireside conversations on algorithmic retention, multi-format shorts-to-longform pipelines, brand integration ethics, and sustainable creator-first monetization.",
-        results: "500+ top creators in attendance · Positioned 8Bit talent at the pinnacle of YouTube India", reach: "Industry Summit", duration: "Keynote Summit", cameras: "Snax Gaming, Aman Jain",
+        results: "500+ top creators in attendance · Positioned 8Bit talent at the pinnacle of YouTube India", reach: "5M+", duration: "National Keynote & Panel Mandate", cameras: "Snax Gaming & Aman Jain",
         credits: ["8Bit Creatives","YouTube India"]
       },
       {
@@ -1680,7 +1733,7 @@
         challenge: "Amazon miniTV wanted to pioneer India's first-ever gaming reality entertainment show, blending arcade challenges, physical tasks, and esports rivalries.",
         approach: "8Bit Creatives placed Mortal (Naman Mathur) as the anchor mentor leading \"OP Unicorns\" and secured creator placements across Seasons 1, 2, 3, and 4.",
         execution: "Multi-week studio production, live gaming arena clashes, mentor strategy rooms, and cross-channel viral promotion across OTT and YouTube.",
-        results: "Over 150M+ total views across four seasons · Top trending OTT IP", reach: "150M+", duration: "4 Seasons", cameras: "Mortal & Creators",
+        results: "Over 150M+ total views across four seasons · Top trending OTT IP", reach: "150M+", duration: "4 Seasons Prime-Time Reality IP", cameras: "MortaL & 8Bit Mentors",
         credits: ["8Bit Creatives","Amazon miniTV","Rusk Media","Mortal"]
       },
       {
@@ -1691,7 +1744,7 @@
         challenge: "Mamaearth wanted to reach gaming and youth audiences across India through native, non-intrusive product integrations during live gaming streams.",
         approach: "8Bit Creatives designed a high-impact multi-creator campaign deploying 11 creators from the 8Bit roster to integrate personal care and skincare routines authentically into organic daily livestreams.",
         execution: "Seamless lifestyle gaming integration across 11 creators from 8Bit Creatives, driving authentic engagement, high community chat interactions, and a 3.4× lift over traditional static ads.",
-        results: "14M+ organic reach · 3.4× engagement lift", reach: "14M+", duration: "4 weeks", cameras: "11 creators from 8Bit",
+        results: "14M+ organic reach · 3.4× engagement lift", reach: "14M+", duration: "4-Week In-Stream FMCG Campaign", cameras: "11 Premier 8Bit Creators",
         credits: ["8Bit Creatives","Mamaearth","11 Creators"]
       },
       {
@@ -1702,7 +1755,7 @@
         challenge: "Kick needed to establish a credible creator presence in India from zero, competing against entrenched platforms like YouTube and Twitch.",
         approach: "8Bit Creatives executed India's largest simultaneous live streaming migration, moving 48 creators to Kick on day one with an unprecedented 95/5 subscription revenue split.",
         execution: "Coordinated onboarding across 48 creators including Snax, Pahadi, Goblin, Mamba, and Viper. Full technical setup, audience routing, and daily live schedules.",
-        results: "500M+ reach mobilized · 95/5 creator split", reach: "500M+", duration: "Day 1", cameras: "48 creators",
+        results: "500M+ reach mobilized · 95/5 creator split", reach: "500M+", duration: "Day-1 National Platform Launch", cameras: "48 Signed 8Bit & S8UL Creators",
         credits: ["8Bit Creatives","Kick","48 Creators"]
       },
       {
@@ -1713,7 +1766,7 @@
         challenge: "Loco needed to establish itself as India's primary home-grown live streaming platform while competing with YouTube Gaming.",
         approach: "8Bit Creatives orchestrated a multi-creator broadcasting agreement bringing prominent talent exclusively onto Loco for live hours.",
         execution: "Talent streamed dedicated weekly hours, hosted VIP community rooms, participated in watch parties, and ran interactive tournaments with platform users.",
-        results: "50M+ MAU milestone reached", reach: "50M+", duration: "2020-2022", cameras: "Thug, Goldy, Snax, Beg4Mercy",
+        results: "50M+ MAU milestone reached", reach: "50M+", duration: "Multi-Year Exclusive Streaming Pact", cameras: "8Bit Thug, 8Bit Goldy, Snax, Beg4Mercy",
         credits: ["8Bit Creatives","Loco","S8UL"]
       },
       {
@@ -1724,7 +1777,7 @@
         challenge: "Gameloft wanted to localize and promote Gangstar Mirage City in India with an iconic custom server / in-game experience.",
         approach: "8Bit Creatives collaborated with Gameloft to build \"SoulCity\"—a dedicated in-game roleplay and competitive hub featuring 8Bit and S8UL creators.",
         execution: "Custom server launch streams, exclusive creator avatars, and community squad raids hosted across YouTube.",
-        results: "Top trending mobile gaming release in India · High player retention", reach: "15M+", duration: "Game Launch", cameras: "S8UL & 8Bit Roster",
+        results: "Top trending mobile gaming release in India · High player retention", reach: "15M+", duration: "Custom In-Game City & IP Launch", cameras: "Full S8UL & 8Bit Creator Roster",
         credits: ["8Bit Creatives","Gameloft","SoulCity"]
       },
       {
@@ -1735,7 +1788,7 @@
         challenge: "Fan engagement platform STAN needed to drive daily active users and digital collectible trading among hardcore Indian esports fans.",
         approach: "8Bit Creatives and S8UL signed a strategic talent partnership introducing official digital collectibles, voice chat rooms, and fan perks featuring Mortal, Goldy, and Thug.",
         execution: "In-app digital player cards, creator audio rooms, exclusive fan meetups, and gamified leaderboards integrated into live streams.",
-        results: "1M+ downloads driven · 5M+ collectible interactions", reach: "20M+", duration: "Multi-year pact", cameras: "Mortal, Goldy, Thug",
+        results: "1M+ downloads driven · 5M+ collectible interactions", reach: "20M+", duration: "Multi-Year Web3 & Collectibles Pact", cameras: "MortaL, 8Bit Goldy, 8Bit Thug",
         credits: ["8Bit Creatives","STAN","S8UL"]
       },
       {
@@ -1746,7 +1799,7 @@
         challenge: "Bring the physical stadium energy of the Riyadh Esports World Cup directly to regional fans across tier-1 and tier-2 Indian cities.",
         approach: "8Bit Creatives produced the largest concurrent esports watch party tour across 12 cities (Mumbai, Delhi, Bengaluru, Pune, Ahmedabad, Kolkata, etc.).",
         execution: "Cinema hall screenings of S8UL championship matches, creator meet-and-greets, Gaming House 2.0 pop-ups, and live merchandise giveaways.",
-        results: "Sold-out auditoriums in all 12 cities · 30M+ organic social buzz", reach: "30M+", duration: "12 Cities", cameras: "Full Roster",
+        results: "Sold-out auditoriums in all 12 cities · 30M+ organic social buzz", reach: "30M+", duration: "12-City Nationwide Fan Arena Tour", cameras: "Full S8UL Creator Contingent",
         credits: ["8Bit Creatives","S8UL","EWC Watch Parties"]
       },
       {
@@ -1757,7 +1810,7 @@
         challenge: "India's homegrown game-streaming platform Rooter wanted to bolster its daily live viewership and community engagement with top-flight esports talent.",
         approach: "8Bit Creatives entered into a long-term strategic partnership to onboard elite creators onto Rooter for exclusive streaming windows and community tournaments.",
         execution: "Creators broadcast dedicated streaming hours, hosted interactive community cups, and produced high-engagement live gaming content directly on the Rooter app.",
-        results: "Multi-million daily active user engagement · Landmark domestic media rights", reach: "45M+", duration: "Multi-year", cameras: "S8UL Creators",
+        results: "Multi-million daily active user engagement · Landmark domestic media rights", reach: "45M+", duration: "Multi-Year Strategic Streaming Pact", cameras: "S8UL & 8Bit Creator Syndicate",
         credits: ["8Bit Creatives","Rooter","S8UL"]
       },
       {
@@ -1768,7 +1821,7 @@
         challenge: "FrontRow sought to create India's first masterclass teaching professional gaming, live streaming, and esports team management.",
         approach: "8Bit Creatives co-developed the comprehensive video masterclass curriculum fronted by 8Bit founders Animesh \"Thug\" Agarwal and Naman \"Mortal\" Mathur.",
         execution: "15+ high-production video lesson modules covering game mechanics, mental resilience, brand building, and tournament preparation.",
-        results: "25,000+ enrolled students · Established educational milestone in Indian gaming", reach: "10M+", duration: "Multi-year course", cameras: "8Bit Thug & Mortal",
+        results: "25,000+ enrolled students · Established educational milestone in Indian gaming", reach: "10M+", duration: "Masterclass Curriculum & Education", cameras: "8Bit Thug & MortaL (Naman Mathur)",
         credits: ["8Bit Creatives","FrontRow","Mortal","8Bit Thug"]
       },
       {
@@ -1779,7 +1832,7 @@
         challenge: "Break stereotypes about gamers being solely indoor players through a high-altitude expedition to Everest Base Camp.",
         approach: "8Bit Creatives produced an inspiring multi-episode docuseries following Gulrez Khan (Joker Ki Haveli) trekking to 5,364m at Everest Base Camp.",
         execution: "Cinematic 4K episodic YouTube vlog series, daily social dispatches, endurance training reels, and live summit updates.",
-        results: "22M+ views · Praised nationally for inspiring fitness and adventure among youth", reach: "22M+", duration: "Expedition", cameras: "Joker Ki Haveli",
+        results: "22M+ views · Praised nationally for inspiring fitness and adventure among youth", reach: "22M+", duration: "High-Altitude Extreme Docuseries", cameras: "Joker Ki Haveli (Pranav)",
         credits: ["8Bit Creatives","S8UL","Joker Ki Haveli"]
       },
       {
@@ -1790,7 +1843,7 @@
         challenge: "8Bit Creatives and S8UL required a dedicated strategic communications firm to manage high-velocity mainstream corporate press and media relations.",
         approach: "Signed Max Level as exclusive strategic brand communications agency to drive national and international trade coverage.",
         execution: "National mainstream news features (Economic Times, Forbes, Mint), corporate deal announcements, and founder thought leadership columns.",
-        results: "300+ tier-1 media placements · Institutionalized industry leadership", reach: "75M+ PR Value", duration: "Annual Mandate", cameras: "8Bit Leadership",
+        results: "300+ tier-1 media placements · Institutionalized industry leadership", reach: "75M+", duration: "Annual Global Strategic Mandate", cameras: "8Bit Leadership & Founders",
         credits: ["8Bit Creatives","Max Level","S8UL"]
       }
     ];
@@ -1928,9 +1981,21 @@
     function openModal(index, cardEl) {
       if (isAnimating) return;
       const c = CASE_STUDIES[index];
-      const card = cardEl || grid.children[index];
+      const card = cardEl !== undefined ? cardEl : grid.children[index];
       currentCard = card;
       const cardRect = card ? card.getBoundingClientRect() : null;
+
+      // Category-specific stat labels tailored for each category tab
+      const categoryLabels = {
+        brand: { l1: 'Total Reach', l2: 'Campaign Scope', l3: 'Key Talent' },
+        broadcast: { l1: 'Broadcast Reach', l2: 'Production Scope', l3: 'Talent & Crew' },
+        platform: { l1: 'Audience Reach', l2: 'Platform Mandate', l3: 'Creator Roster' },
+        tournament: { l1: 'Tournament Reach', l2: 'Event Scope', l3: 'Competing Roster' }
+      };
+      const catConfig = categoryLabels[c.category] || categoryLabels.brand;
+      const stat1Label = c.stat1Label || catConfig.l1;
+      const stat2Label = c.stat2Label || catConfig.l2;
+      const stat3Label = c.stat3Label || catConfig.l3;
 
       modalContent.innerHTML = [
         '<div class="work-modal-header">',
@@ -1954,16 +2019,16 @@
         '  </div>',
         '  <div class="work-modal-stats">',
         '    <div class="work-modal-stat">',
-        '      <div class="work-modal-stat-value">' + c.reach + '</div>',
-        '      <div class="work-modal-stat-label">Reach</div>',
+        '      <div class="work-modal-stat-label">' + stat1Label + '</div>',
+        '      <div class="work-modal-stat-value stat-reach">' + c.reach + '</div>',
         '    </div>',
         '    <div class="work-modal-stat">',
-        '      <div class="work-modal-stat-value">' + c.duration + '</div>',
-        '      <div class="work-modal-stat-label">Duration</div>',
+        '      <div class="work-modal-stat-label">' + stat2Label + '</div>',
+        '      <div class="work-modal-stat-value stat-scope">' + c.duration + '</div>',
         '    </div>',
         '    <div class="work-modal-stat">',
-        '      <div class="work-modal-stat-value">' + c.cameras + '</div>',
-        '      <div class="work-modal-stat-label">Deployment</div>',
+        '      <div class="work-modal-stat-label">' + stat3Label + '</div>',
+        '      <div class="work-modal-stat-value stat-talent">' + c.cameras + '</div>',
         '    </div>',
         '  </div>',
         '  <div class="work-modal-credits">',
@@ -2119,6 +2184,25 @@
     });
 
     renderGrid();
+
+    // Deep linking support: open case study modal via query param ?open=<id>
+    const urlParams = new URLSearchParams(window.location.search);
+    const openParam = urlParams.get('open');
+    if (openParam !== null) {
+      const targetId = parseInt(openParam, 10);
+      const targetIndex = CASE_STUDIES.findIndex(item => item.id === targetId);
+      if (targetIndex !== -1) {
+        setTimeout(() => {
+          openModal(targetIndex, null);
+          if (urlParams.get('scroll') === 'bottom') {
+            setTimeout(() => {
+              const m = document.querySelector('.work-modal');
+              if (m) m.scrollTop = m.scrollHeight;
+            }, 300);
+          }
+        }, 150);
+      }
+    }
 
     // GSAP animations
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
