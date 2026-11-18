@@ -1475,7 +1475,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .about-btn-wrap,
 .about-cta-wrap {
   position: absolute;
-  bottom: 44px;
+  bottom: 84px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
