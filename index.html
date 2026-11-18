@@ -256,7 +256,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="images-for-landing-page/hero-monument-bg-v2.webp" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=4.2">
+  <link rel="stylesheet" href="styles.css?v=4.3">
 
   <style>
     .creator-card:hover {
@@ -631,7 +631,6 @@
   </div>
   <div class="mobile-drawer__footer">
     <a href="/" data-section="contact" onclick="return false;" class="mobile-drawer__cta">Start Campaign</a>
-    <div class="mobile-drawer__meta">EST. 2018 &bull; MUMBAI, INDIA</div>
   </div>
 </aside>
 
@@ -2429,7 +2428,7 @@ void main() {
         });
       }
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js?v=2.0').then(function(reg) {
+        navigator.serviceWorker.register('/sw.js?v=2.1').then(function(reg) {
           if (reg) reg.update();
         }).catch(function(){});
       });

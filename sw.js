@@ -4,7 +4,7 @@
  * Strategy: Stale-While-Revalidate for CSS, JS, fonts & images; Network-First for HTML.
  */
 
-const CACHE_NAME = '8bit-static-v2.0';
+const CACHE_NAME = '8bit-static-v2.1';
 const CORE_PRECACHE = [
   '/',
   '/styles.css',
