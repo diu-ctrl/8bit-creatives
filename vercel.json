@@ -64,7 +64,7 @@
       ]
     },
     {
-      "source": "/((?!.*\\.[^/]+$).*)",
+      "source": "/(about|creators|work|services|esports|contact|gcl-season-4|privacy-policy|index|)",
       "headers": [
         {
           "key": "Cache-Control",
