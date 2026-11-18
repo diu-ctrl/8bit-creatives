@@ -632,12 +632,17 @@ function initEsportsAnchor() {
     const handleHashJump = () => {
       const targetY = activeSec.getScrollY();
       if (targetY !== null) {
-        window.scrollTo({ top: targetY, behavior: 'instant' });
+        if (window.__smoother && typeof window.__smoother.scrollTo === 'function') {
+          window.__smoother.scrollTo(targetY, false);
+        } else {
+          window.scrollTo({ top: targetY, behavior: 'instant' });
+        }
       }
     };
     requestAnimationFrame(handleHashJump);
     setTimeout(handleHashJump, 50);
     setTimeout(handleHashJump, 250);
+    setTimeout(handleHashJump, 600);
   }
 
   window.addEventListener('hashchange', () => {

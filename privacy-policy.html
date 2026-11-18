@@ -71,7 +71,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px 8px 12px;
+      padding: 8px 16px;
       border: 1px solid rgba(255, 255, 255, 0.20);
       border-radius: 100px;
       background: transparent;
@@ -86,12 +86,7 @@
     }
 
     .back-home__arrow {
-      display: inline-block;
-      font-family: 'Geist', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1;
-      transform: translateY(-1px);
+      display: none !important;
     }
 
     @media (hover: hover) {
@@ -424,7 +419,6 @@
 
   <!-- Back to Home Capsule Pill -->
   <a href="index.html" class="back-home" aria-label="Back to home">
-    <span class="back-home__arrow">←</span>
     <span>back to home</span>
   </a>
 

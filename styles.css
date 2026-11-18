@@ -3432,7 +3432,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 16px 8px 12px;
+  padding: 8px 16px;
   border: 1px solid rgba(255, 255, 255, 0.20);
   border-radius: 100px;
   background: rgba(10, 10, 10, 0.6);
@@ -3448,12 +3448,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   transition: background-color 200ms ease-out, color 200ms ease-out, border-color 200ms ease-out;
 }
 .back-home__arrow {
-  display: inline-block;
-  font-family: 'Geist', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1;
-  transform: translateY(-1px);
+  display: none !important;
 }
 body.light-page .back-home,
 .back-home--on-light {
@@ -3479,10 +3474,10 @@ body.light-page .back-home,
     top: 20px;
     left: 20px;
     font-size: 12px;
-    padding: 6px 14px 6px 10px;
+    padding: 6px 14px;
   }
   .back-home__arrow {
-    font-size: 13px;
+    display: none !important;
   }
 }
 

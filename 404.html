@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=1920, initial-scale=1.0">
-  <title>404 — Page not found · 8Bit Creatives</title>
+  <title>404 - Page not found · 8Bit Creatives</title>
   <meta name="description" content="The page you are looking for does not exist.">
   <link rel="canonical" href="https://8bit-creatives.vercel.app/404">
   <meta name="theme-color" content="#0A0A0A">
@@ -82,7 +82,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 16px 8px 12px;
+      padding: 8px 16px;
       border: 1px solid rgba(255, 255, 255, 0.20);
       border-radius: 100px;
       background: transparent;
@@ -96,12 +96,7 @@
       transition: background-color 200ms ease-out, border-color 200ms ease-out;
     }
     .back-home__arrow {
-      display: inline-block;
-      font-family: 'Geist', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 1;
-      transform: translateY(-1px);
+      display: none !important;
     }
     .back-home:hover {
       background: #FFFFFF;
@@ -122,7 +117,7 @@
     }
     .four-oh-four {
       font-family: 'Geist', sans-serif;
-      font-weight: 100;          /* Thin — matches the editorial tone */
+      font-weight: 100;          /* Thin - matches the editorial tone */
       font-size: 320px;
       line-height: 0.9;
       letter-spacing: -0.04em;
@@ -153,9 +148,9 @@
       color: rgba(255, 255, 255, 0.25);
     }
   </style>
-  <!-- Vercel Web Analytics — tracks page views, unique visitors, top pages, referrers, devices -->
+  <!-- Vercel Web Analytics - tracks page views, unique visitors, top pages, referrers, devices -->
   <script defer src="/_vercel/insights/script.js"></script>
-  <!-- Vercel Speed Insights — tracks Core Web Vitals (LCP, CLS, TTFB, INP) -->
+  <!-- Vercel Speed Insights - tracks Core Web Vitals (LCP, CLS, TTFB, INP) -->
   <script defer src="/_vercel/speed-insights/script.js" onerror="this.onerror=null;this.src='https://va.vercel-scripts.com/v1/speed-insights/script.js';"></script>
 </head>
 <body>
@@ -164,7 +159,6 @@
     <span class="wordmark">8Bit&nbsp;Creatives</span>
     <div class="divider"></div>
     <a href="index.html" class="back-home" aria-label="Back to home">
-      <span class="back-home__arrow">←</span>
       <span>back to home</span>
     </a>
   </div>

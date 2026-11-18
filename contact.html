@@ -382,7 +382,6 @@
 </head>
 <body>
   <a href="index.html" class="back-home" aria-label="Back to home">
-    <span class="back-home__arrow">←</span>
     <span>back to home</span>
   </a>
 
@@ -755,7 +754,7 @@
 
       <!-- Navigation -->
       <div class="form-nav">
-        <a href="#" class="form-back" id="backBtn" style="display: none;">← Back</a>
+        <a href="#" class="form-back" id="backBtn" style="display: none;">Back</a>
         <button type="button" class="btn-obsidian form-continue" id="continueBtn">Continue</button>
       </div>
     </form>
@@ -1415,6 +1414,56 @@
     if (form) form.hidden = true;
     if (successBox) successBox.hidden = false;
   }
+
+  // Smart "Back to Home" navigation:
+  // If came from landing page services section -> index.html#services
+  // If came from services page -> services.html
+  // Otherwise -> index.html#hero
+  (function initSmartBackNav() {
+    const backHomeBtn = document.querySelector('.back-home');
+    if (!backHomeBtn) return;
+
+    const currentUrlParams = new URLSearchParams(window.location.search);
+    const fromParam = (currentUrlParams.get('from') || '').toLowerCase();
+    const referrer = (document.referrer || '').toLowerCase();
+
+    // Persist in sessionStorage across form interactions/tab switches
+    let source = '';
+    try { source = sessionStorage.getItem('8bit_contact_from') || ''; } catch (e) {}
+
+    if (fromParam) {
+      source = fromParam;
+      try { sessionStorage.setItem('8bit_contact_from', fromParam); } catch (e) {}
+    } else if (!source && referrer) {
+      if (referrer.includes('services.html') || referrer.includes('/services')) {
+        source = 'services-page';
+        try { sessionStorage.setItem('8bit_contact_from', 'services-page'); } catch (e) {}
+      } else if (referrer.includes('#services') || (referrer.includes('index.html') && currentUrlParams.has('type'))) {
+        source = 'services-section';
+        try { sessionStorage.setItem('8bit_contact_from', 'services-section'); } catch (e) {}
+      } else {
+        source = 'other';
+        try { sessionStorage.setItem('8bit_contact_from', 'other'); } catch (e) {}
+      }
+    }
+
+    let targetUrl = 'index.html#hero';
+    if (source === 'services-section' || source === 'landing-services') {
+      targetUrl = 'index.html#services';
+    } else if (source === 'services-page' || source === 'services') {
+      targetUrl = 'services.html';
+    } else {
+      targetUrl = 'index.html#hero';
+    }
+
+    backHomeBtn.setAttribute('href', targetUrl);
+
+    backHomeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      try { sessionStorage.removeItem('8bit_contact_from'); } catch (e) {}
+      window.location.href = targetUrl;
+    });
+  })();
 })();
 </script>
 
