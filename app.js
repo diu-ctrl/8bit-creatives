@@ -2525,15 +2525,15 @@ function initHeroGSAP() {
     });
 
     heroTl
-      // Step 1: Navbar whole together
+      // Step 1: Navbar whole together (slides down smoothly from top)
       .fromTo('.navbar-pill', 
-        { y: -20, opacity: 0, xPercent: -50 },
-        { y: 0, opacity: 1, xPercent: -50, duration: 0.28, ease: 'power2.out' }
+        { y: -65, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.45, ease: 'power3.out' }
       )
       .fromTo('.nav-brand-topleft',
-        { y: -14, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.28, ease: 'power2.out' },
-        '<0.02'
+        { y: -50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.45, ease: 'power3.out' },
+        '<0.04'
       )
       // Step 2: Title lines
       .fromTo('.hero-title .line',

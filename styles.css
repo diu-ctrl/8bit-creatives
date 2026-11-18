@@ -251,8 +251,10 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .navbar-pill {
   position: fixed;
   top: 24px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   z-index: 100;
   border-radius: 999px;
   width: -webkit-fit-content;
@@ -267,7 +269,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   align-items: center;
   justify-content: center;
   padding: 12px 24px;
-  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1), background 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+  transition: background 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
 }
 
 .navbar.navbar-on-hero,
@@ -3753,8 +3755,10 @@ body.light-page .back-home,
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
     border-radius: 999px !important;
     background: #FFFFFF !important;
     border: 1px solid rgba(0, 0, 0, 0.08) !important;
