@@ -424,21 +424,62 @@
       margin-bottom: 16px;
       line-height: 1.5;
     }
+    /* Aaron Iker animated underline-to-arrow hover effect */
     .work-card-link {
-      font-family: 'Geist', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: #FFFFFF;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      text-transform: none;
-      transition: color 200ms ease;
+      --line: #FF5931;
+      --color: #FFFFFF;
+      text-decoration: none !important;
+      color: var(--color);
+      position: relative;
       display: inline-flex;
       align-items: center;
       width: fit-content;
+      font-family: 'Geist', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      cursor: pointer;
+      text-transform: none;
+      transition: color 0.2s linear;
     }
-    .work-card-link:hover {
-      color: rgba(255, 255, 255, 0.75);
+
+    .work-card-link span {
+      background-image: linear-gradient(0deg, var(--line) 0%, var(--line) 100%);
+      background-position: 100% 100%;
+      background-repeat: no-repeat;
+      background-size: var(--background-size, 100%) 1px;
+      transition: background-size 0.2s linear var(--background-delay, 0.15s);
+      font-size: 14px;
+      line-height: 20px;
+      transform: translateZ(0);
+    }
+
+    .work-card-link svg {
+      vertical-align: top;
+      display: inline;
+      line-height: 1;
+      width: 13px;
+      height: 20px;
+      position: relative;
+      left: -2px;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1px;
+      stroke: var(--line);
+      stroke-dasharray: 7.95 30;
+      stroke-dashoffset: var(--stroke-dashoffset, 46);
+      transition: stroke-dashoffset var(--stroke-duration, 0.15s) var(--stroke-easing, linear) var(--stroke-delay, 0s);
+    }
+
+    .work-card-link:hover,
+    .work-card:hover .work-card-link {
+      --color: #FF5931;
+      --background-size: 0%;
+      --background-delay: 0s;
+      --stroke-dashoffset: 26;
+      --stroke-duration: 0.3s;
+      --stroke-easing: cubic-bezier(0.3, 1.5, 0.5, 1);
     }
 
     /* ═══ SECTION 6: CAPABILITIES ═══ */
@@ -959,7 +1000,7 @@
             <div class="work-card-label">Global title sponsor</div>
             <h3 class="work-card-name">Reliance Campa Energy x S8UL EWC</h3>
             <div class="work-card-metric">40M+ reach · Global Title Sponsor in Riyadh</div>
-            <a href="work.html?open=10" class="work-card-link" onclick="event.stopPropagation();">Read case study →</a>
+            <a href="work.html?open=10" class="work-card-link" onclick="event.stopPropagation();"><span>Read case study</span><svg viewBox="0 0 13 20"><polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" /></svg></a>
           </div>
         </div>
 
@@ -972,7 +1013,7 @@
             <div class="work-card-label">Broadcast & production</div>
             <h3 class="work-card-name">Global Chess League&nbsp;S4</h3>
             <div class="work-card-metric">12M+ reach · 9 days · 6 camera angles</div>
-            <a href="work.html?open=33" class="work-card-link" onclick="event.stopPropagation();">Read case study →</a>
+            <a href="work.html?open=33" class="work-card-link" onclick="event.stopPropagation();"><span>Read case study</span><svg viewBox="0 0 13 20"><polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" /></svg></a>
           </div>
         </div>
 
@@ -985,7 +1026,7 @@
             <div class="work-card-label">Naming rights deal</div>
             <h3 class="work-card-name">iQOO Esports Naming Rights</h3>
             <div class="work-card-metric">100M+ impressions · India's largest naming rights deal</div>
-            <a href="work.html?open=25" class="work-card-link" onclick="event.stopPropagation();">Read case study →</a>
+            <a href="work.html?open=25" class="work-card-link" onclick="event.stopPropagation();"><span>Read case study</span><svg viewBox="0 0 13 20"><polyline points="0.5 19.5 3 19.5 12.5 10 3 0.5" /></svg></a>
           </div>
         </div>
       </div>
