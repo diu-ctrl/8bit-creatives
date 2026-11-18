@@ -5250,9 +5250,24 @@ canvas.glyph-fall {
     justify-content: flex-end !important;
     align-items: center !important;
     box-sizing: border-box !important;
+    background-color: #FFFFFF !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  .hero-monument__bg-wrap {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: clamp(340px, 64dvh, 580px) !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
   }
   .hero-monument__bg-img {
-    object-position: 72% 25% !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: 88% center !important;
   }
   .hero-monument__content {
     width: 100% !important;
@@ -5264,6 +5279,7 @@ canvas.glyph-fall {
     align-items: center !important;
     margin-top: auto !important;
     z-index: 2 !important;
+    position: relative !important;
   }
   .hero-monument__left {
     max-width: 100% !important;

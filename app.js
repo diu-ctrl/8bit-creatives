@@ -3402,21 +3402,49 @@ function initCaseStudies() {
     item.addEventListener('mouseleave', () => {
       // Handled by container mouseleave to keep smooth active state
     });
-    // Tap / Click -> redirect to specific case study modal or work.html
-    item.addEventListener('click', () => {
+    // Tap / Click behavior:
+    // On mobile view (<768px), tapping only selects the field and previews the deal's thumbnail below.
+    // User redirects to work.html when tapping 'Show All'.
+    const handleCaseSelect = (e) => {
+      const isMobile = window.innerWidth < 768 || window.matchMedia('(max-width: 767px)').matches;
+      if (isMobile) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        caseItems.forEach(i => i.classList.remove('is-active'));
+        item.classList.add('is-active');
+        showCase(idx);
+        return;
+      }
       const link = item.querySelector('a');
       const href = link?.getAttribute('href') || (CASE_DATA[idx]?.link || 'work.html');
       window.location.href = href;
-    });
+    };
+
+    item.addEventListener('click', handleCaseSelect);
+
+    const link = item.querySelector('a');
+    if (link) {
+      link.addEventListener('click', (e) => {
+        const isMobile = window.innerWidth < 768 || window.matchMedia('(max-width: 767px)').matches;
+        if (isMobile) {
+          e.preventDefault();
+          e.stopPropagation();
+          caseItems.forEach(i => i.classList.remove('is-active'));
+          item.classList.add('is-active');
+          showCase(idx);
+        }
+      });
+    }
+
     // Make the line a link for accessibility
     item.setAttribute('tabindex', '0');
-    item.setAttribute('role', 'link');
+    item.setAttribute('role', 'button');
     item.setAttribute('aria-label', CASE_DATA[idx]?.title || 'Case study');
     item.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
-        const link = item.querySelector('a');
-        const href = link?.getAttribute('href') || (CASE_DATA[idx]?.link || 'work.html');
-        window.location.href = href;
+        handleCaseSelect(e);
       }
     });
   });
