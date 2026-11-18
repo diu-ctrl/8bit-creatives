@@ -256,7 +256,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="images-for-landing-page/hero-monument-bg-v2.webp" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=4.0">
+  <link rel="stylesheet" href="styles.css?v=4.2">
 
   <style>
     .creator-card:hover {
@@ -1602,7 +1602,7 @@
 <script src="preloader.js"></script>
 <script src="navbar.js?v=2.1"></script>
 <script src="scripts/creators-data.js?v=2.2"></script>
-<script src="app.js?v=2.8"></script>
+<script src="app.js?v=3.0"></script>
 
 <!-- Navbar Clean URL Smooth Scroll (No Hashes) & Active Section Detection -->
 <script>
@@ -2421,8 +2421,17 @@ void main() {
   <!-- Service Worker Registration for High-Traffic Resilience -->
   <script>
     if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+      if (window.caches) {
+        caches.keys().then(function(keys) {
+          keys.forEach(function(k) {
+            if (k.indexOf('v2.0') === -1) caches.delete(k);
+          });
+        });
+      }
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').catch(function(){});
+        navigator.serviceWorker.register('/sw.js?v=2.0').then(function(reg) {
+          if (reg) reg.update();
+        }).catch(function(){});
       });
     }
   </script>

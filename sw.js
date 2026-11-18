@@ -4,7 +4,7 @@
  * Strategy: Stale-While-Revalidate for CSS, JS, fonts & images; Network-First for HTML.
  */
 
-const CACHE_NAME = '8bit-static-v1.2';
+const CACHE_NAME = '8bit-static-v2.0';
 const CORE_PRECACHE = [
   '/',
   '/styles.css',
@@ -28,7 +28,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate: Clean up old cache versions
+// Activate: Clean up old cache versions immediately
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -74,10 +74,26 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 2. Static Assets (CSS, JS, WebP, PNG, SVG, Fonts) -> Stale-While-Revalidate
-  const isStaticAsset = /\.(css|js|webp|png|jpg|jpeg|svg|woff2|ico)$/i.test(url.pathname) || isCdn;
+  // 2. Code Assets (CSS, JS) -> Network First (guarantees instant deployment of style/script changes)
+  const isCodeAsset = /\.(css|js)$/i.test(url.pathname);
+  if (isCodeAsset) {
+    event.respondWith(
+      fetch(request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(request, responseClone);
+          });
+        }
+        return networkResponse;
+      }).catch(() => caches.match(request))
+    );
+    return;
+  }
 
-  if (isStaticAsset) {
+  // 3. Media & Fonts (WebP, PNG, JPG, SVG, Fonts) -> Stale-While-Revalidate
+  const isMediaAsset = /\.(webp|png|jpg|jpeg|svg|woff2|ico)$/i.test(url.pathname) || isCdn;
+  if (isMediaAsset) {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {
         const fetchPromise = fetch(request).then((networkResponse) => {
@@ -90,7 +106,6 @@ self.addEventListener('fetch', (event) => {
           return networkResponse;
         }).catch(() => cachedResponse);
 
-        // Return cached instantly if available; otherwise await network
         return cachedResponse || fetchPromise;
       })
     );
