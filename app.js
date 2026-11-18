@@ -3878,25 +3878,6 @@ function initCreatorStats() {
   frame.addEventListener('pointerup', endDrag);
   frame.addEventListener('pointercancel', endDrag);
 
-  // ── Mouse Wheel / Trackpad Horizontal Scroll (Desktop) ──
-  let wheelTimer = null;
-  let wheelDelta = 0;
-  frame.addEventListener('wheel', (e) => {
-    if (window.innerWidth < 768) return;
-    const d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    if (Math.abs(d) < 10) return;
-    e.preventDefault();
-    wheelDelta += d;
-    if (wheelTimer) return;
-    wheelTimer = setTimeout(() => {
-      if (Math.abs(wheelDelta) > 25) {
-        nudge(wheelDelta > 0 ? 1 : -1);
-      }
-      wheelDelta = 0;
-      wheelTimer = null;
-    }, 70);
-  }, { passive: false });
-
   // ── Mobile Navigation, Infinite Loop & Caption Detection ──
   const prevBtn = document.getElementById('creatorPrevBtn');
   const nextBtn = document.getElementById('creatorNextBtn');
