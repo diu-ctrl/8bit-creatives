@@ -4981,13 +4981,18 @@ canvas.glyph-fall {
 .hero-monument .hero-sub {
   font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif !important;
   font-weight: 400 !important;
-  font-size: clamp(17px, 2.1vw, 42px) !important;
-  line-height: 1.35 !important;
+  font-size: clamp(15px, 1.25vw, 24px) !important;
+  line-height: 1.45 !important;
   letter-spacing: -0.015em !important;
   color: #000000 !important;
   opacity: 0.55 !important;
-  margin: 0 0 44px 0 !important;
-  max-width: 620px !important;
+  margin: 0 0 40px 0 !important;
+  max-width: 720px !important;
+}
+
+.hero-monument .hero-monument__sub-line {
+  display: block;
+  white-space: nowrap;
 }
 
 .hero-monument .hero-monument__cta,
@@ -5039,17 +5044,17 @@ canvas.glyph-fall {
     padding: 120px 60px 60px 60px;
   }
   .hero-monument__left {
-    max-width: 520px;
+    max-width: 580px;
   }
   .hero-monument .hero-monument__title,
   .hero-monument .hero-title {
     font-size: clamp(36px, 4.8vw, 76px) !important;
-    max-width: 520px !important;
+    max-width: 580px !important;
   }
   .hero-monument .hero-monument__sub,
   .hero-monument .hero-sub {
-    font-size: clamp(16px, 1.9vw, 28px) !important;
-    max-width: 500px !important;
+    font-size: clamp(14px, 1.35vw, 20px) !important;
+    max-width: 580px !important;
   }
 }
 
@@ -5058,7 +5063,7 @@ canvas.glyph-fall {
     padding: 120px 40px 50px 40px;
   }
   .hero-monument__left {
-    max-width: 480px;
+    max-width: 500px;
     background: linear-gradient(90deg, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.8) 70%, rgba(255,255,255,0) 100%);
     border-radius: 20px;
     padding: 20px 24px 20px 0;
@@ -5069,6 +5074,7 @@ canvas.glyph-fall {
   }
   .hero-monument .hero-monument__sub,
   .hero-monument .hero-sub {
+    font-size: clamp(14px, 1.5vw, 18px) !important;
     margin-bottom: 32px !important;
   }
 }
@@ -5097,8 +5103,12 @@ canvas.glyph-fall {
   }
   .hero-monument .hero-monument__sub,
   .hero-monument .hero-sub {
-    font-size: clamp(15px, 4vw, 19px) !important;
+    font-size: clamp(13px, 3.8vw, 16px) !important;
     margin-bottom: 24px !important;
+  }
+  .hero-monument .hero-monument__sub-line {
+    display: block;
+    white-space: normal;
   }
   .hero-monument .hero-monument__cta,
   .hero-monument .hero-cta-group {
