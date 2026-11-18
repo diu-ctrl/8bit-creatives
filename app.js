@@ -806,16 +806,16 @@ function initAboutGSAP() {
 }
 
 /* ==========================================================================
-   ABOUT: SHORT ANIMATED GRASS ON ECLIPSE PERIMETER
+   ABOUT: SHORT STATIC GRASS ON ECLIPSE PERIMETER (1.5X DENSITY: 360 BLADES)
    ========================================================================== */
 function initEclipseGrass() {
   const grassGroup = document.getElementById('eclipse-grass-blades');
   if (!grassGroup) return;
 
   const CX = 400, CY = 400;            // center of the 800x800 viewBox
-  const GRASS_RADIUS = 400;            // was 405 - remove the gap, anchor exactly on the circle edge
-  const NUM_BLADES = 240;              // was 320 - much denser
-  const MIN_H = 12;                    // SHORT - so characters stay visible
+  const GRASS_RADIUS = 400;            // anchor exactly on circle edge
+  const NUM_BLADES = 360;              // 1.5x density (increased from 240)
+  const MIN_H = 12;                    // SHORT so characters remain fully visible
   const MAX_H = 22;
   const MIN_W = 2;
   const MAX_W = 4;
@@ -825,7 +825,7 @@ function initEclipseGrass() {
   function randRange(min, max) { return min + rand() * (max - min); }
 
   function bladePath(anchorX, anchorY, h, w, outwardAngle) {
-    // Compute base corners (on the circle edge, perpendicular to outward direction)
+    // Compute base corners on circle edge, perpendicular to outward direction
     const perpX = -Math.sin(outwardAngle);
     const perpY = Math.cos(outwardAngle);
     const halfW = w / 2;
@@ -834,30 +834,24 @@ function initEclipseGrass() {
     const baseRX = anchorX - perpX * halfW;
     const baseRY = anchorY - perpY * halfW;
 
-    // Tip (radially outward by height h)
+    // Tip radially outward by height h
     const tipX = anchorX + Math.cos(outwardAngle) * h;
     const tipY = anchorY + Math.sin(outwardAngle) * h;
 
-    // Bezier control points - create an organic S-curve
-    // The blade bends slightly perpendicular to its length
+    // Bezier control points create an organic S-curve
     const bend = randRange(-4, 4);
     const ctrlPerpX = perpX * bend;
     const ctrlPerpY = perpY * bend;
-    // Mid-point of the blade (at 50% height)
+    // Mid-point of blade at 50% height
     const midX = anchorX + Math.cos(outwardAngle) * (h * 0.5) + ctrlPerpX;
     const midY = anchorY + Math.sin(outwardAngle) * (h * 0.5) + ctrlPerpY;
 
-    // Cubic Bezier path: left base → mid (with curve) → tip → mid (mirror) → right base
-    return `M ${baseLX.toFixed(2)} ${baseLY.toFixed(2)}
-            Q ${midX.toFixed(2)} ${midY.toFixed(2)} ${(tipX + perpX * 0.5).toFixed(2)} ${(tipY + perpY * 0.5).toFixed(2)}
-            L ${tipX.toFixed(2)} ${tipY.toFixed(2)}
-            Q ${midX.toFixed(2)} ${midY.toFixed(2)} ${baseRX.toFixed(2)} ${baseRY.toFixed(2)}
-            Z`;
+    // Bezier path: left base to mid to tip to mid to right base
+    return `M ${baseLX.toFixed(2)} ${baseLY.toFixed(2)} Q ${midX.toFixed(2)} ${midY.toFixed(2)} ${(tipX + perpX * 0.5).toFixed(2)} ${(tipY + perpY * 0.5).toFixed(2)} L ${tipX.toFixed(2)} ${tipY.toFixed(2)} Q ${midX.toFixed(2)} ${midY.toFixed(2)} ${baseRX.toFixed(2)} ${baseRY.toFixed(2)} Z`;
   }
 
-  const NUM_GROUPS = 6;
-  const groups = Array.from({ length: NUM_GROUPS }, () => '');
-
+  // Render static grass blades directly on the surface (no swaying, wiggling or moving)
+  let bladesHtml = '';
   for (let i = 0; i < NUM_BLADES; i++) {
     const angle = (i / NUM_BLADES) * Math.PI * 2 + randRange(-0.015, 0.015);
     const anchorX = CX + Math.cos(angle) * GRASS_RADIUS;
@@ -868,20 +862,10 @@ function initEclipseGrass() {
     const d = bladePath(anchorX, anchorY, h, w, outwardAngle);
     const opacity = randRange(0.8, 1.0).toFixed(2);
     const grad = rand() < 0.3 ? 'url(#eclipseGrassGradDark)' : 'url(#eclipseGrassGrad)';
-    
-    // Assign blade to one of the 6 sector groups
-    const gIdx = Math.floor((i / NUM_BLADES) * NUM_GROUPS) % NUM_GROUPS;
-    groups[gIdx] += `<path d="${d}" fill="${grad}" opacity="${opacity}"/>`;
+    bladesHtml += `<path d="${d}" fill="${grad}" opacity="${opacity}"/>`;
   }
 
-  let svgString = '';
-  const durations = ['3.2s', '4.0s', '4.8s', '3.6s', '4.4s', '3.8s'];
-  const delays = ['0s', '0.6s', '1.2s', '0.4s', '1.0s', '1.5s'];
-  for (let g = 0; g < NUM_GROUPS; g++) {
-    const style = `animation: grass-group-sway ${durations[g]} ease-in-out infinite alternate; animation-delay: ${delays[g]}; transform-origin: ${CX}px ${CY}px;`;
-    svgString += `<g class="grass-group" style="${style}">${groups[g]}</g>`;
-  }
-  grassGroup.innerHTML = svgString;
+  grassGroup.innerHTML = bladesHtml;
 }
 
 /* ==========================================================================

@@ -1374,7 +1374,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   height: 137px;
 }
 
-/* Animated Grass on Eclipse Perimeter (INSIDE rotator) */
+/* Grass on Eclipse Perimeter (INSIDE rotator, static on circle surface) */
 .eclipse-grass {
   position: absolute;
   top: 0;
@@ -1384,18 +1384,6 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   pointer-events: none;
   z-index: 3;            /* IN FRONT of characters */
   overflow: visible;
-}
-@keyframes grass-sway-eclipse {
-  0%   { transform: rotate(var(--sway-min)); }
-  50%  { transform: rotate(var(--sway-max)); }
-  100% { transform: rotate(var(--sway-min)); }
-}
-.eclipse-grass .grass-blade {
-  animation: grass-sway-eclipse var(--sway-duration) ease-in-out infinite alternate;
-  animation-delay: var(--sway-delay);
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  will-change: transform;
 }
 
 /* 24 character positions at 15° intervals (cx = 400, cy = 400, R_FEET = 398px)
@@ -4986,13 +4974,6 @@ canvas.glyph-fall {
   height: 100%;
   pointer-events: none;
   display: block;
-}
-
-
-@keyframes grass-group-sway {
-  0%   { transform: rotate(-0.8deg); }
-  50%  { transform: rotate(0.8deg); }
-  100% { transform: rotate(-0.8deg); }
 }
 
 
