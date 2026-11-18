@@ -454,24 +454,24 @@
     "categoryLabel": "Mobile Esports · Live Stream",
     "categories": "Mobile Esports · Live Stream",
     "img": "assets/creators/cinematic/mavi.png",
-    "reach": "1.3M+",
+    "reach": "1.26M+",
     "bio": "Legendary Indian BGMI in-game leader (IGL) and esports icon, celebrated for his tactical mastery, clutch decision-making, and high-energy live broadcasts under 8Bit Creatives.",
     "youtube": {
-      "handle": "@mavi",
-      "count": "1.3M",
-      "url": "https://www.youtube.com/@MaviOfficial"
+      "handle": "@MAVIOP",
+      "count": "1.26M",
+      "url": "https://www.youtube.com/@MAVIOP"
     },
-    "youtubeUrl": "https://www.youtube.com/@MaviOfficial",
-    "youtubeCount": "1.3M",
-    "youtubeHandle": "@mavi",
+    "youtubeUrl": "https://www.youtube.com/@MAVIOP",
+    "youtubeCount": "1.26M",
+    "youtubeHandle": "@MAVIOP",
     "instagram": {
-      "handle": "@mavi_gaming",
-      "count": "1.2M",
-      "url": "https://www.instagram.com/mavi__gaming/"
+      "handle": "@mavi.harman",
+      "count": "440K",
+      "url": "https://www.instagram.com/mavi.harman/"
     },
-    "instagramUrl": "https://www.instagram.com/mavi__gaming/",
-    "instagramCount": "1.2M",
-    "instagramHandle": "@mavi_gaming",
+    "instagramUrl": "https://www.instagram.com/mavi.harman/",
+    "instagramCount": "440K",
+    "instagramHandle": "@mavi.harman",
     "kick": {
       "handle": "mavi",
       "count": "15K",
@@ -1681,11 +1681,14 @@
         const custom = JSON.parse(customStr);
         if (Array.isArray(custom)) {
           const existing = new Set(list.map(c => (c.id || c.name || '').toLowerCase()));
+          const existingAliases = new Set(list.map(c => (c.alias || c.realName || '').toLowerCase()).filter(Boolean));
           custom.forEach(c => {
             const key = (c.id || c.name || '').toLowerCase();
-            if (!existing.has(key)) {
+            const aliasKey = (c.alias || c.realName || '').toLowerCase();
+            if (!existing.has(key) && (!aliasKey || !existingAliases.has(aliasKey))) {
               list.push(c);
               existing.add(key);
+              if (aliasKey) existingAliases.add(aliasKey);
             }
           });
         }
