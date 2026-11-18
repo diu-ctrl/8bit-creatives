@@ -1217,8 +1217,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   background: var(--black);
   position: relative;
   overflow: hidden;
-  min-height: 480px;
-  padding-bottom: 24px;
+  min-height: max(620px, calc(100vh - 216px));
+  padding-bottom: 48px;
 }
 
 /* Half-disc clipping container:
@@ -1230,8 +1230,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 900px;
-  height: 430px;
+  width: 960px;
+  height: 480px;
   overflow: hidden;
   pointer-events: none;
   z-index: 1;
@@ -1492,7 +1492,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .about-btn-wrap,
 .about-cta-wrap {
   position: absolute;
-  bottom: 22px;
+  bottom: 44px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
