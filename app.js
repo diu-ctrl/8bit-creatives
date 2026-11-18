@@ -28,10 +28,10 @@ function initScrollSmoother() {
   }
 
   // Accessibility & Mobile Check: Only enable on desktop without reduced-motion preference
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 767);
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobileViewport = window.innerWidth <= 767;
 
-  if (prefersReducedMotion || isTouchDevice) {
+  if (prefersReducedMotion || isMobileViewport) {
     makeResilient();
     return null;
   }
@@ -55,7 +55,9 @@ function initScrollSmoother() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function bootstrapApp() {
+  if (window.__appInitialized) return;
+  window.__appInitialized = true;
   window.__smoother = initScrollSmoother();
   initNavbar();
   initEsportsAnchor();
@@ -75,7 +77,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initAboutCharacters();
   initAboutPhysics();
   initHeroDinoGame();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', bootstrapApp);
+} else {
+  bootstrapApp();
+}
 
 /* ==========================================================================
    1. NAVBAR BEHAVIOR (Dark on light sections + Hide logo & CTA outside hero)
