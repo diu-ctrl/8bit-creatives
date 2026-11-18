@@ -2248,32 +2248,43 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 .service-card:hover,
 .service-card.is-active {
-  background: #FF5931;
-  box-shadow: 0 16px 40px rgba(255, 89, 49, 0.28);
+  box-shadow: 0 20px 48px rgba(178, 28, 1, 0.32);
 }
 .service-card-gradient {
   position: absolute;
-  inset: 0;
+  inset: -14px;
   opacity: 0;
-  transition: opacity 400ms ease;
+  background-image: url('images-for-landing-page/gradient2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(18px);
+  transform: scale(1.08) translateZ(0);
+  transition: opacity 450ms cubic-bezier(0.4, 0, 0.2, 1), filter 450ms cubic-bezier(0.4, 0, 0.2, 1), transform 450ms cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   z-index: 0;
 }
+.service-card-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 35%, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.32) 100%);
+  pointer-events: none;
+}
 .service-card[data-card="brands"] .service-card-gradient {
-  background: radial-gradient(ellipse at 50% 40%, #FF7F4C 0%, #FF5931 35%, #F0461E 65%, #D4340C 100%);
-  transform: scale(1.1) translateZ(0);
+  background-position: 30% center;
 }
 .service-card[data-card="creators"] .service-card-gradient {
-  background: radial-gradient(ellipse at 55% 40%, #FF7F4C 0%, #FF5931 35%, #F0461E 65%, #D4340C 100%);
-  transform: scale(1.1) translateZ(0);
+  background-position: 50% center;
 }
 .service-card[data-card="platforms"] .service-card-gradient {
-  background: radial-gradient(ellipse at 45% 40%, #FF7F4C 0%, #FF5931 35%, #F0461E 65%, #D4340C 100%);
-  transform: scale(1.1) translateZ(0);
+  background-position: 70% center;
 }
 .service-card:hover .service-card-gradient,
 .service-card.is-active .service-card-gradient {
   opacity: 1;
+  filter: blur(8px);
+  transform: scale(1.02) translateZ(0);
 }
 .service-card-content {
   position: relative;
@@ -2318,23 +2329,23 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .service-btn {
   display: inline-block;
   margin-top: 16px;
-  padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #FFFFFF;
+  padding: 12px 28px;
+  background: #FFFFFF !important;
+  border: 1.5px solid #FFFFFF;
+  color: #000000 !important;
   font-family: 'Geist', sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 13px;
+  letter-spacing: -0.01em;
   border-radius: 999px;
   text-decoration: none;
   cursor: pointer;
-  transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+  transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1), border-color 250ms cubic-bezier(0.4, 0, 0.2, 1), color 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: none;
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
 }
 .service-card:hover .service-btn,
 .service-card.is-active .service-btn {
@@ -2343,9 +2354,11 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   pointer-events: auto;
 }
 .service-btn:hover {
-  background: #FFFFFF;              /* solid white background */
-  border-color: #FFFFFF;            /* white border */
-  color: #000000;                   /* BLACK text — maximum contrast */
+  background: #000000 !important;
+  border-color: #000000 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35) !important;
 }
 @media (hover: none) {
   .service-btn {
