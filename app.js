@@ -139,32 +139,44 @@ function initNavbar() {
   const cta  = document.querySelector('.nav-cta-topright');
   const hero = document.getElementById('hero') || document.getElementById('home') || document.querySelector('.hero-section');
 
-  // Mobile drawer toggle
+  // Mobile drawer toggle (Floating White Circle Hamburger <-> Close Morph)
   const hamburger = document.querySelector('.navbar__hamburger');
   const drawer    = document.querySelector('.navbar__mobile-drawer');
+  const backdrop  = document.querySelector('.navbar__mobile-backdrop');
   if (hamburger && drawer) {
+    const toggleMenu = (open) => {
+      const isOpen = typeof open === 'boolean' ? open : !drawer.classList.contains('open');
+      drawer.classList.toggle('open', isOpen);
+      if (backdrop) backdrop.classList.toggle('open', isOpen);
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      document.body.classList.toggle('mobile-nav-open', isOpen);
+    };
+
     hamburger.addEventListener('click', (e) => {
       e.stopPropagation();
-      drawer.classList.toggle('open');
-      const expanded = drawer.classList.contains('open');
-      hamburger.setAttribute('aria-expanded', expanded);
+      toggleMenu();
     });
+
+    if (backdrop) {
+      backdrop.addEventListener('click', () => toggleMenu(false));
+    }
+
     drawer.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
-        drawer.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
+        toggleMenu(false);
       });
     });
+
     document.addEventListener('click', (e) => {
-      if (!drawer.contains(e.target) && !hamburger.contains(e.target)) {
-        drawer.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
+      if (drawer.classList.contains('open') && !drawer.contains(e.target) && !hamburger.contains(e.target)) {
+        toggleMenu(false);
       }
     });
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && drawer.classList.contains('open')) {
-        drawer.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
+        toggleMenu(false);
       }
     });
   }
@@ -635,10 +647,16 @@ function initEsportsAnchor() {
 
   const closeMobileDrawer = () => {
     const drawer = document.querySelector('.navbar__mobile-drawer');
+    const backdrop = document.querySelector('.navbar__mobile-backdrop');
     const hamburger = document.querySelector('.navbar__hamburger');
     if (drawer && (drawer.classList.contains('open') || drawer.classList.contains('is-open'))) {
       drawer.classList.remove('open', 'is-open');
-      if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+      if (backdrop) backdrop.classList.remove('open');
+      if (hamburger) {
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+      document.body.classList.remove('mobile-nav-open');
     }
   };
 

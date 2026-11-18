@@ -256,7 +256,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <link rel="preload" as="image" href="images-for-landing-page/hero-monument-bg-v2.webp" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="styles.css?v=3.9">
+  <link rel="stylesheet" href="styles.css?v=4.0">
 
   <style>
     .creator-card:hover {
@@ -584,23 +584,56 @@
     <li><a href="/" data-section="esports" onclick="return false;">Esports</a></li>
     <li><a href="/" data-section="contact" onclick="return false;">Contact</a></li>
   </ul>
-
-  <!-- Mobile Hamburger (visible on mobile only) -->
-  <button class="navbar__hamburger" aria-label="Open navigation" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-
-  <!-- Mobile glassmorphism dropdown panel -->
-  <div class="navbar__mobile-drawer" aria-label="Mobile navigation">
-    <a href="/" data-section="home" onclick="return false;">Home</a>
-    <a href="/" data-section="about" onclick="return false;">About</a>
-    <a href="/" data-section="creators" onclick="return false;">Creators</a>
-    <a href="/" data-section="work" onclick="return false;">Work</a>
-    <a href="/" data-section="services" onclick="return false;">Services</a>
-    <a href="/" data-section="esports" onclick="return false;">Esports</a>
-    <a href="/" data-section="contact" onclick="return false;">Contact</a>
-  </div>
 </nav>
+
+<!-- Mobile Floating Circular Hamburger Button (top-right) -->
+<button class="navbar__hamburger" id="mobileNavToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- Mobile Vertical Navigation Drawer & Backdrop -->
+<div class="navbar__mobile-backdrop" id="mobileNavBackdrop" aria-hidden="true"></div>
+<aside class="navbar__mobile-drawer" id="mobileNavDrawer" aria-label="Mobile navigation">
+  <div class="mobile-drawer__top">
+    <div class="mobile-drawer__header">
+      <span class="mobile-drawer__badge">MENU</span>
+    </div>
+    <nav class="mobile-drawer__nav">
+      <a href="/" data-section="home" onclick="return false;" class="mobile-drawer__link is-active">
+        <span class="mobile-drawer__link-text">Home</span>
+        <span class="mobile-drawer__link-dot" aria-hidden="true"></span>
+      </a>
+      <a href="/" data-section="about" onclick="return false;" class="mobile-drawer__link">
+        <span class="mobile-drawer__link-text">About</span>
+        <span class="mobile-drawer__link-dot" aria-hidden="true"></span>
+      </a>
+      <a href="/" data-section="creators" onclick="return false;" class="mobile-drawer__link">
+        <span class="mobile-drawer__link-text">Creators</span>
+        <span class="mobile-drawer__link-dot" aria-hidden="true"></span>
+      </a>
+      <a href="/" data-section="work" onclick="return false;" class="mobile-drawer__link">
+        <span class="mobile-drawer__link-text">Work</span>
+        <span class="mobile-drawer__link-dot" aria-hidden="true"></span>
+      </a>
+      <a href="/" data-section="services" onclick="return false;" class="mobile-drawer__link">
+        <span class="mobile-drawer__link-text">Services</span>
+        <span class="mobile-drawer__link-dot" aria-hidden="true"></span>
+      </a>
+      <a href="/" data-section="esports" onclick="return false;" class="mobile-drawer__link">
+        <span class="mobile-drawer__link-text">Esports</span>
+        <span class="mobile-drawer__link-dot" aria-hidden="true"></span>
+      </a>
+      <a href="/" data-section="contact" onclick="return false;" class="mobile-drawer__link">
+        <span class="mobile-drawer__link-text">Contact</span>
+        <span class="mobile-drawer__link-dot" aria-hidden="true"></span>
+      </a>
+    </nav>
+  </div>
+  <div class="mobile-drawer__footer">
+    <a href="/" data-section="contact" onclick="return false;" class="mobile-drawer__cta">Start Campaign</a>
+    <div class="mobile-drawer__meta">EST. 2018 &bull; MUMBAI, INDIA</div>
+  </div>
+</aside>
 
 <!-- Top-Right Fixed CTA Button (OUTSIDE the navbar capsule) -->
 <a href="/" data-section="contact" onclick="return false;" class="nav-cta-topright">Start Campaign</a>
@@ -1569,7 +1602,7 @@
 <script src="preloader.js"></script>
 <script src="navbar.js?v=2.1"></script>
 <script src="scripts/creators-data.js?v=2.2"></script>
-<script src="app.js?v=2.7"></script>
+<script src="app.js?v=2.8"></script>
 
 <!-- Navbar Clean URL Smooth Scroll (No Hashes) & Active Section Detection -->
 <script>
@@ -1733,10 +1766,16 @@
 
   var closeMobileDrawer = function() {
     var drawer = document.querySelector('.navbar__mobile-drawer');
+    var backdrop = document.querySelector('.navbar__mobile-backdrop');
     var hamburger = document.querySelector('.navbar__hamburger');
     if (drawer && (drawer.classList.contains('open') || drawer.classList.contains('is-open'))) {
       drawer.classList.remove('open', 'is-open');
-      if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+      if (backdrop) backdrop.classList.remove('open');
+      if (hamburger) {
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+      document.body.classList.remove('mobile-nav-open');
     }
   };
 
