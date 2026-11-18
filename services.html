@@ -231,20 +231,34 @@
     .service-block-cta {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 20px;
-      color: #FFFFFF;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+      padding: 12px 24px;
+      background: #FFFFFF;
+      color: #000000;
       font-family: 'Geist', sans-serif;
       font-size: 14px;
-      font-weight: 500;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      opacity: 0.8;
-      transition: opacity 200ms ease, transform 200ms ease;
+      font-weight: 600;
+      line-height: 1;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid #FFFFFF;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 200ms ease, opacity 200ms ease;
+      transform: none !important;
     }
     .service-block-cta:hover {
-      opacity: 1;
-      transform: translateX(4px);
+      background: #F0F0F0;
+      color: #000000;
+      text-decoration: none;
+      opacity: 0.95;
+      transform: none !important;
+    }
+    .service-block-cta:active {
+      background: #E5E5E5;
+      transform: none !important;
     }
     .service-tags {
       display: flex;
