@@ -1,5 +1,5 @@
 /* ==========================================================================
-   8Bit Creatives — styles.css
+   8Bit Creatives - styles.css
    Fresh build v2. Strict 6-color palette. Geist ONLY. No legacy classes.
    AGENTS.md v2 compliant.
    ========================================================================== */
@@ -166,7 +166,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
    GLOBAL UTILITIES
    -------------------------------------------------------------------------- */
 
-/* Primary CTA — solid #FF5931 pill */
+/* Primary CTA - solid #FF5931 pill */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -196,7 +196,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-/* Light glassmorphism (on light sections — rare) */
+/* Light glassmorphism (on light sections - rare) */
 .glass-light {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
@@ -216,7 +216,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 1 — NAVBAR & HEADER CONTROLS
+   SECTION 1 - NAVBAR & HEADER CONTROLS
    ========================================================================== */
 /* Top-Left Mascot Logo (matching Figma reference) */
 .nav-brand-topleft {
@@ -350,7 +350,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   color: var(--orange-red);
 }
 
-/* Active section nav link highlighting — crisp pure white inside black capsule indicator */
+/* Active section nav link highlighting - crisp pure white inside black capsule indicator */
 .navbar .nav-link.is-active,
 .navbar nav a.is-active,
 .navbar nav a.active,
@@ -384,7 +384,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   color: #FFFFFF !important;
 }
 
-/* The capsule — sits behind the text */
+/* The capsule - sits behind the text */
 .navbar .nav-link.is-active::before,
 .navbar nav a.is-active::before,
 .navbar__links a.is-active::before,
@@ -405,7 +405,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   transition: opacity 300ms ease, background 300ms ease, border-color 300ms ease;
 }
 
-/* On dark sections (default navbar) — use white tint */
+/* On dark sections (default navbar) - use white tint */
 /* ── The sliding capsule indicator inside .navbar-pill ── */
 .navbar-pill__indicator {
   position: absolute;
@@ -426,7 +426,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   will-change: transform, width;
 }
 
-/* Default on dark sections (default navbar) — subtle white tint */
+/* Default on dark sections (default navbar) - subtle white tint */
 .navbar:not(.navbar-on-light) .navbar-pill__indicator,
 .navbar-pill:not(.navbar-on-light) .navbar-pill__indicator,
 .navbar.navbar-on-light .navbar-pill__indicator,
@@ -565,7 +565,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 2 — HERO (GSAP-powered)
+   SECTION 2 - HERO (GSAP-powered)
    ========================================================================== */
 #hero.legacy-compat {
   overflow: hidden;
@@ -597,7 +597,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   overflow: hidden;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
-  transform: translateZ(0);          /* GPU compositing — stabilizes border-radius during child transforms */
+  transform: translateZ(0);          /* GPU compositing - stabilizes border-radius during child transforms */
 }
 
 .hero-game-area {
@@ -636,7 +636,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   height: 100%;
   object-fit: cover;
   /* Test fallback: filter: blur(8px); transform: scale(1.06); */
-  filter: blur(10px) brightness(0.45);     /* was blur(14px) — slightly less */
+  filter: blur(10px) brightness(0.45);     /* was blur(14px) - slightly less */
   transform: scale(1.08);
 }
 
@@ -668,10 +668,10 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   height: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 80px 48px;                /* was 120px 64px — less padding since card is shorter */
+  padding: 80px 48px;                /* was 120px 64px - less padding since card is shorter */
   display: grid;
   grid-template-columns: 60% 40%;
-  gap: 32px;                         /* was 48px — tighter */
+  gap: 32px;                         /* was 48px - tighter */
   align-items: center;
   box-sizing: border-box;
 }
@@ -689,7 +689,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .hero-title {
   font-family: 'Geist', sans-serif;
   font-weight: 700;
-  font-size: clamp(36px, 5vw, 64px); /* was clamp(40px, 6vw, 80px) — slightly smaller */
+  font-size: clamp(36px, 5vw, 64px); /* was clamp(40px, 6vw, 80px) - slightly smaller */
   color: #FFFFFF;
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -715,10 +715,10 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .hero-sub {
   font-family: 'Geist', sans-serif;
   font-weight: 400;
-  font-size: 16px;                   /* was 18px — slightly smaller */
+  font-size: 16px;                   /* was 18px - slightly smaller */
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.6;
-  max-width: 400px;                  /* was 480px — narrower */
+  max-width: 400px;                  /* was 480px - narrower */
   margin: 20px auto 0 0;
 }
 
@@ -743,7 +743,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   font-family: 'Geist', sans-serif;
   font-weight: 500;
   font-size: 13px;                  /* was 14px */
-  padding: 12px 28px;               /* was 16px 32px — slightly smaller */
+  padding: 12px 28px;               /* was 16px 32px - slightly smaller */
   border-radius: 999px;
   border: none;
   text-decoration: none;
@@ -763,7 +763,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   font-family: 'Geist', sans-serif;
   font-weight: 500;
   font-size: 13px;                  /* was 14px */
-  padding: 12px 28px;               /* was 16px 32px — slightly smaller */
+  padding: 12px 28px;               /* was 16px 32px - slightly smaller */
   border-radius: 999px;
   border: 1.5px solid #FFFFFF;
   text-decoration: none;
@@ -817,7 +817,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .hero-right {
   display: flex;
   align-items: center;
-  justify-content: flex-end;             /* was center — push canvas to the right */
+  justify-content: flex-end;             /* was center - push canvas to the right */
   padding-right: 24px;                    /* small gap from the right edge */
 }
 
@@ -873,7 +873,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   border-radius: 16px;
 }
 
-/* ─── Hero right-column 8Bit logo — desktop sizing (surgical) ─── */
+/* ─── Hero right-column 8Bit logo - desktop sizing (surgical) ─── */
 .hero-right {
   display: flex !important;
   align-items: center !important;
@@ -967,12 +967,12 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 3a — ABOUT: MARQUEE (white bg)
+   SECTION 3a - ABOUT: MARQUEE (white bg)
    ========================================================================== */
 .about-marquee,
 .marquee-strip,
 .marquee-container {
-  height: 96px;            /* was 56px — now tall enough for 2 lines */
+  height: 96px;            /* was 56px - now tall enough for 2 lines */
   display: flex;
   align-items: center;
   padding: 16px 48px;      /* vertical padding to center the content */
@@ -990,7 +990,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   outline: none !important;
 }
 
-/* Top dashed line — moves RIGHT */
+/* Top dashed line - moves RIGHT */
 .marquee-dash-top {
   position: absolute;
   top: 8px;
@@ -1006,7 +1006,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   z-index: 1;
 }
 
-/* Bottom dashed line — moves LEFT */
+/* Bottom dashed line - moves LEFT */
 .marquee-dash-bottom {
   position: absolute;
   bottom: 8px;
@@ -1039,7 +1039,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   align-items: center;
   gap: 16px;
   flex-shrink: 0;
-  padding-right: 32px;      /* was 48px — logos start closer to the title now */
+  padding-right: 32px;      /* was 48px - logos start closer to the title now */
   position: relative;
   z-index: 10;
   background: #FFFFFF;
@@ -1191,7 +1191,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 3b — ABOUT: RED HALF-ECLIPSE + CHARACTERS (black bg)
+   SECTION 3b - ABOUT: RED HALF-ECLIPSE + CHARACTERS (black bg)
    ========================================================================== */
 
 .about-eclipse-section {
@@ -1245,7 +1245,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   to   { transform: rotate(-360deg); }
 }
 
-/* The red filled circle — 800x800px inside rotator */
+/* The red filled circle - 800x800px inside rotator */
 .eclipse {
   position: absolute;
   top: 0;
@@ -1414,7 +1414,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   display: none;
 }
 
-/* Centered About Text — sits in front of the red eclipse */
+/* Centered About Text - sits in front of the red eclipse */
 .about-content {
   position: relative;
   z-index: 10;
@@ -1433,7 +1433,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .about-content > * {
 }
 
-/* Lead paragraph — Title Case / sentence case per global rule */
+/* Lead paragraph - Title Case / sentence case per global rule */
 .about-lead {
   font-family: 'Geist', sans-serif;
   font-weight: 400;
@@ -1469,7 +1469,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   text-transform: none;
 }
 
-/* "About Us" button container — sits in the dark area below the red circle */
+/* "About Us" button container - sits in the dark area below the red circle */
 .about-btn-wrap,
 .about-cta-wrap {
   position: absolute;
@@ -1504,7 +1504,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 3c — ABOUT: STATS BAR (white bg)
+   SECTION 3c - ABOUT: STATS BAR (white bg)
    ========================================================================== */
 .about-stats {
   background: var(--white);
@@ -1536,7 +1536,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   border: none;
 }
 
-/* Big bold number — Geist font */
+/* Big bold number - Geist font */
 .stat-num {
   font-family: var(--font), sans-serif;
   font-weight: 900;
@@ -1575,7 +1575,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 4 — CREATORS
+   SECTION 4 - CREATORS
    ========================================================================== */
 /* ====== CREATORS SECTION ====== */
 .creators-section {
@@ -1687,7 +1687,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   right: 20px;
 }
 
-/* Coverflow frame — the perspective container */
+/* Coverflow frame - the perspective container */
 .coverflow-frame {
   width: 100%;
   height: clamp(280px, 32vw, 400px);
@@ -1925,7 +1925,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 5 — CASE STUDIES
+   SECTION 5 - CASE STUDIES
    ========================================================================== */
 /* ====== CASE STUDIES SECTION ====== */
 .case-studies-section {
@@ -2076,7 +2076,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 .show-all-link:hover { color: #FF5931; }
 
-/* RIGHT: image + caption — RIGHT-ALIGNED */
+/* RIGHT: image + caption - RIGHT-ALIGNED */
 .case-image-column {
   display: flex;
   flex-direction: column;
@@ -2168,14 +2168,14 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 6 — SERVICES
+   SECTION 6 - SERVICES
    ========================================================================== */
 /* ====== SERVICES SECTION ====== */
 .services-section {
   background: #FFFFFF;
   min-height: 100vh;
   width: 100%;
-  padding: 40px 48px;                 /* REDUCED from 80px 48px — less white top/bottom */
+  padding: 40px 48px;                 /* REDUCED from 80px 48px - less white top/bottom */
   box-sizing: border-box;
   display: flex;
   align-items: center;                 /* vertically center the content block */
@@ -2400,7 +2400,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 7 — FOUNDERS
+   SECTION 7 - FOUNDERS
    ========================================================================== */
 /* ====== FOUNDERS SECTION ====== */
 .founders-section, .founders {
@@ -2452,7 +2452,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   pointer-events: none;
   z-index: 0;
   overflow: visible;
-  /* Fade all 4 ends of every line — horizontal + vertical */
+  /* Fade all 4 ends of every line - horizontal + vertical */
   -webkit-mask-image:
     linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
     linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
@@ -2692,7 +2692,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 8 — CTA
+   SECTION 8 - CTA
    ========================================================================== */
 .cta-section {
   background: #0A0A0A radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255, 89, 49, 0.35) 0%, rgba(252, 150, 75, 0.18) 30%, rgba(20, 18, 16, 0.95) 70%, #0A0A0A 100%);
@@ -2767,13 +2767,16 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   cursor: pointer;
   text-transform: none;
   letter-spacing: -0.01em;
-  transition: background 250ms ease, border-color 250ms ease, transform 250ms ease;
+  transition: background 250ms ease, border-color 250ms ease, color 250ms ease, transform 250ms ease;
+  transform: none !important;
 }
 
 .cta-button:hover, .cta-section__btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.6);
-  border-color: #FF5931;
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #FFFFFF;
+  transform: none !important;
+  text-decoration: none;
 }
 
 /* Responsive */
@@ -2785,7 +2788,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 
 /* ==========================================================================
-   SECTION 9 — FOOTER (new spec)
+   SECTION 9 - FOOTER (new spec)
    ========================================================================== */
 
 /* ── Outer wrapper: white top fading to orange at bottom ── */
@@ -3776,7 +3779,7 @@ body.light-page .back-home,
     transform: none !important;
   }
 
-  /* G3: GRID LAYOUTS — STACK TO 1 COLUMN */
+  /* G3: GRID LAYOUTS - STACK TO 1 COLUMN */
   .hero-content {
     flex-direction: column !important;
   }
@@ -3833,7 +3836,7 @@ body.light-page .back-home,
     padding: 24px 20px 24px !important;
     position: relative !important;
   }
-  /* === MOBILE HERO LOGO FIX — bigger + moved up === */
+  /* === MOBILE HERO LOGO FIX - bigger + moved up === */
   .hero-content {
     min-height: auto !important;
     height: auto !important;
@@ -4840,7 +4843,7 @@ body.light-page .back-home,
   display: none !important;
 }
 
-/* === SCROLL-INTERACTION FIX — preserve pointer events during scroll === */
+/* === SCROLL-INTERACTION FIX - preserve pointer events during scroll === */
 body, html {
   pointer-events: auto !important;
 }
