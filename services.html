@@ -866,7 +866,76 @@
   <!-- Vercel Speed Insights - tracks Core Web Vitals (LCP, CLS, TTFB, INP) -->
   <script defer src="/_vercel/speed-insights/script.js" onerror="this.onerror=null;this.src='https://va.vercel-scripts.com/v1/speed-insights/script.js';"></script>
 </head>
-<body>
+<body class="is-loading">
+<!-- ============================================================
+     SITE PRELOADER (HORIZONTAL SPLIT SHUTTER UNVEIL)
+     ============================================================ -->
+<div id="preloaderMount" aria-live="polite">
+  <div class="preloader-concept-telemetry" id="concept1Wrap">
+    <!-- Top Half Shutter (0 - 50.1vh) -->
+    <div class="telemetry-shutter telemetry-shutter-top" id="telemetryShutterTop">
+      <div class="telemetry-canvas telemetry-canvas-top">
+        <div class="telemetry-header">
+          <div>EST. 2018 &bull; MUMBAI, INDIA</div>
+        </div>
+        <div class="telemetry-center">
+          <div class="telemetry-logo-emblem">
+            <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo" width="130" height="34" decoding="async">
+          </div>
+          <div class="telemetry-cycle-wrapper">
+            <div class="telemetry-cycle-words">
+              <div class="telemetry-cycle-item">Powering Gaming Culture</div>
+              <div class="telemetry-cycle-item">48+ Signed Marquee Talent</div>
+              <div class="telemetry-cycle-item">1.2B+ Combined Social Reach</div>
+              <div class="telemetry-cycle-item">India's Esports Powerhouse</div>
+              <div class="telemetry-cycle-item telemetry-cycle-wordmark"><span class="wordmark-bold">8BIT</span><span class="wordmark-thin">Creatives</span></div>
+            </div>
+          </div>
+          <div class="telemetry-progress-rail">
+            <div class="telemetry-progress-fill"></div>
+          </div>
+        </div>
+        <div class="telemetry-footer">
+          <div class="telemetry-counter-block">
+            <div class="telemetry-counter-num">00</div>
+            <div class="telemetry-counter-unit">%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom Half Shutter (50.1vh - 100vh) -->
+    <div class="telemetry-shutter telemetry-shutter-bottom" id="telemetryShutterBottom">
+      <div class="telemetry-canvas telemetry-canvas-bottom">
+        <div class="telemetry-header">
+          <div>EST. 2018 &bull; MUMBAI, INDIA</div>
+        </div>
+        <div class="telemetry-center">
+          <div class="telemetry-logo-emblem">
+            <img src="images-for-landing-page/logo_2.webp" alt="8Bit Logo" width="130" height="34" decoding="async">
+          </div>
+          <div class="telemetry-cycle-wrapper">
+            <div class="telemetry-cycle-words">
+              <div class="telemetry-cycle-item">Powering Gaming Culture</div>
+              <div class="telemetry-cycle-item">48+ Signed Marquee Talent</div>
+              <div class="telemetry-cycle-item">1.2B+ Combined Social Reach</div>
+              <div class="telemetry-cycle-item">India's Esports Powerhouse</div>
+              <div class="telemetry-cycle-item telemetry-cycle-wordmark"><span class="wordmark-bold">8BIT</span><span class="wordmark-thin">Creatives</span></div>
+            </div>
+          </div>
+          <div class="telemetry-progress-rail">
+            <div class="telemetry-progress-fill"></div>
+          </div>
+        </div>
+        <div class="telemetry-footer">
+          <div class="telemetry-counter-block">
+            <div class="telemetry-counter-num">00</div>
+            <div class="telemetry-counter-unit">%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   <a href="index.html" class="back-home" aria-label="Back to home">
     <span>Back to home</span>
   </a>
@@ -1596,5 +1665,6 @@
     });
   })();
   </script>
+<script src="preloader.js"></script>
 </body>
 </html>

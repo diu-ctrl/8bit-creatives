@@ -83,179 +83,12 @@ function initScrollSmoother() {
 }
 
 /* ==========================================================================
-   SITE PRELOADER (CONCEPT 1: HORIZONTAL SPLIT SHUTTER UNVEIL)
+   SITE PRELOADER (DELEGATED TO REAL ASSET & IMAGE LOADER IN PRELOADER.JS)
    ========================================================================== */
 function initSitePreloader() {
-  const mount = document.getElementById('preloaderMount');
-  if (!mount) {
-    document.body.classList.remove('is-loading');
-    return;
+  if (typeof window.initSitePreloader === 'function' && window.initSitePreloader !== initSitePreloader) {
+    window.initSitePreloader();
   }
-
-  // Accessibility Check: skip instantly if user prefers reduced motion
-  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) {
-    document.body.classList.remove('is-loading');
-    mount.classList.add('is-hidden');
-    mount.style.display = 'none';
-    if (typeof window.__triggerHeroEntrance === 'function') {
-      window.__triggerHeroEntrance();
-    }
-    return;
-  }
-
-  // If user loaded or restored into a lower section, skip preloader immediately
-  const isScrolledPastHero = window.scrollY > 150 || (window.__restoredSection && window.__restoredSection !== 'home');
-  if (isScrolledPastHero) {
-    document.body.classList.remove('is-loading');
-    mount.classList.add('is-hidden');
-    mount.style.display = 'none';
-    if (typeof window.__triggerHeroEntrance === 'function') {
-      window.__triggerHeroEntrance();
-    }
-    return;
-  }
-
-  const wrap = document.getElementById('concept1Wrap') || mount.querySelector('.preloader-concept-telemetry');
-  if (!wrap) {
-    document.body.classList.remove('is-loading');
-    return;
-  }
-
-  const counterEls = wrap.querySelectorAll('.telemetry-counter-num');
-  const railFillEls = wrap.querySelectorAll('.telemetry-progress-fill');
-  const wordsEls = wrap.querySelectorAll('.telemetry-cycle-words');
-
-  const phases = [
-    { at: 0,  wordIdx: 0 },
-    { at: 25, wordIdx: 1 },
-    { at: 55, wordIdx: 2 },
-    { at: 80, wordIdx: 3 },
-    { at: 96, wordIdx: 4 }
-  ];
-
-  let currentPct = 0;
-  const durationMs = 2100;
-  const startTime = performance.now();
-  let rafId = null;
-  let isFinished = false;
-
-  function applyPct(pct) {
-    const formatted = pct.toString().padStart(2, '0');
-    counterEls.forEach(el => { el.textContent = formatted; });
-    railFillEls.forEach(el => { el.style.width = pct + '%'; });
-
-    for (let i = phases.length - 1; i >= 0; i--) {
-      if (pct >= phases[i].at) {
-        const offset = phases[i].wordIdx * 48;
-        wordsEls.forEach(el => { el.style.transform = `translateY(-${offset}px)`; });
-        break;
-      }
-    }
-  }
-
-  // URL Parameter support for static freeze & screenshot inspection
-  try {
-    const urlParams = new URLSearchParams(window.location.search);
-    const freezeParam = urlParams.get('freeze');
-    const splitParam = urlParams.get('split');
-
-    if (splitParam !== null) {
-      const splitPct = parseInt(splitParam, 10) || 50;
-      wordsEls.forEach(el => { el.style.transition = 'none'; });
-      applyPct(100);
-      const sTop = document.getElementById('telemetryShutterTop');
-      const sBottom = document.getElementById('telemetryShutterBottom');
-      if (sTop && sBottom) {
-        sTop.style.transition = 'none';
-        sBottom.style.transition = 'none';
-        sTop.style.transform = `translate3d(0, -${splitPct}%, 0)`;
-        sBottom.style.transform = `translate3d(0, ${splitPct}%, 0)`;
-      }
-      document.body.classList.remove('is-loading');
-      if (typeof window.__triggerHeroEntrance === 'function') {
-        window.__triggerHeroEntrance();
-      }
-      return;
-    }
-
-    if (freezeParam !== null) {
-      const pct = parseInt(freezeParam, 10);
-      const wordsElsAll = wrap.querySelectorAll('.telemetry-cycle-words');
-      wordsElsAll.forEach(w => { w.style.transition = 'none'; });
-      applyPct(pct);
-      return;
-    }
-  } catch (e) {}
-
-  function finish() {
-    if (isFinished) return;
-    isFinished = true;
-    if (rafId) cancelAnimationFrame(rafId);
-    applyPct(100);
-
-    setTimeout(() => {
-      wrap.classList.add('is-unveiling');
-      document.body.classList.remove('is-loading');
-
-      // Trigger hero entrance sequence as shutters part
-      if (typeof window.__triggerHeroEntrance === 'function') {
-        window.__triggerHeroEntrance();
-      }
-
-      setTimeout(() => {
-        mount.classList.add('is-hidden');
-        mount.style.display = 'none';
-        mount.setAttribute('aria-hidden', 'true');
-      }, 1250);
-    }, 200);
-  }
-
-  // Fast skip handlers (click anywhere, press Space or Escape)
-  mount.addEventListener('click', () => {
-    finish();
-  });
-  wrap.addEventListener('click', () => {
-    finish();
-  });
-
-  const handleKeydown = (e) => {
-    if (e.code === 'Space' || e.code === 'Escape') {
-      window.removeEventListener('keydown', handleKeydown);
-      finish();
-    }
-  };
-  window.addEventListener('keydown', handleKeydown);
-
-  function tick(now) {
-    if (isFinished) return;
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / durationMs, 1);
-
-    let targetPct;
-    if (progress < 0.3) {
-      targetPct = Math.floor((progress / 0.3) * 35);
-    } else if (progress < 0.7) {
-      targetPct = 35 + Math.floor(((progress - 0.3) / 0.4) * 45);
-    } else if (progress < 0.92) {
-      targetPct = 80 + Math.floor(((progress - 0.7) / 0.22) * 16);
-    } else {
-      targetPct = 96 + Math.floor(((progress - 0.92) / 0.08) * 4);
-    }
-
-    if (targetPct > currentPct) {
-      currentPct = targetPct;
-      applyPct(currentPct);
-    }
-
-    if (progress < 1) {
-      rafId = requestAnimationFrame(tick);
-    } else {
-      finish();
-    }
-  }
-
-  rafId = requestAnimationFrame(tick);
 }
 
 function bootstrapApp() {
@@ -1061,7 +894,7 @@ function initAboutCharacters() {
 
   const CX = 400, CY = 400;
   const RADIUS = 400;
-  const SCALE = 0.70;
+  const SCALE = 0.58;
   const NUM_CHARS = 12;
   const NUM_POSITIONS = 12;
   const ANGLE_STEP = 360 / 12;  // 30° apart
@@ -1929,14 +1762,14 @@ function initAboutPhysics() {
   const GRAVITY = 0.8;
   const BOUNCE = 0.4;
   const GROUND_FRICTION = 0.85;
-  const CHAR_W = 84;
-  const CHAR_H = 140;
+  const CHAR_W = 70;
+  const CHAR_H = 116;
 
-  // Collision hitbox calibrated to character body inside 84x140 container
-  const HIT_OX = 14;
-  const HIT_OY = 8;
-  const HIT_W = 56;
-  const HIT_H = 124;
+  // Collision hitbox calibrated to character body inside 70x116 container
+  const HIT_OX = 12;
+  const HIT_OY = 6;
+  const HIT_W = 46;
+  const HIT_H = 104;
 
   const physicsBodies = [];
   let activeDragBody = null;
@@ -2009,8 +1842,8 @@ function initAboutPhysics() {
     }
 
     const isTablet = window.innerWidth <= 768;
-    // Exactly matches the red circle perimeter (800px diameter -> R=400px; hanging characters R_FEET=398px)
-    const radius = isTablet ? 260 : 396;
+    // Exactly matches the red circle perimeter (660px diameter -> R=330px; hanging characters R_FEET=328px)
+    const radius = isTablet ? 260 : 328;
     globe = { cx, cy, radius };
 
     if (btnAbout) {
