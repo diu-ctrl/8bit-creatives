@@ -1364,7 +1364,7 @@
 }
 </style>
 <section class="esports-section" id="esports" data-bg="light" aria-label="Esports">
-  <div class="esports-section__bg" id="bg"><canvas id="esportsGlyphCanvas" class="glyph-fall"></canvas></div>
+  <div class="esports-section__bg" id="bg"></div>
   <div class="esports-section__card">
     <div class="esports-section__card__header">
       <h2 class="esports-section__card__title">8Bit Esports</h2>
@@ -1389,6 +1389,43 @@
     </div>
   </div>
 </section>
+
+<script>
+(function () {
+  function initEsportsBg() {
+    var bg = document.getElementById('bg');
+    if (!bg) return;
+    bg.innerHTML = '';
+    var cols = window.innerWidth < 768 ? 40 : 100;
+    var wordCyclesPerCol = 20;
+    var pattern = ['8', 'B', 'I', 'T', ''];
+    var frag = document.createDocumentFragment();
+    for (var c = 0; c < cols; c++) {
+      var col = document.createElement('div');
+      col.className = 'bg__col ' + (c % 2 === 0 ? 'bg__col--down' : 'bg__col--up');
+      for (var w = 0; w < wordCyclesPerCol; w++) {
+        for (var p = 0; p < pattern.length; p++) {
+          var span = document.createElement('span');
+          span.textContent = pattern[p];
+          col.appendChild(span);
+        }
+      }
+      frag.appendChild(col);
+    }
+    bg.appendChild(frag);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEsportsBg);
+  } else {
+    initEsportsBg();
+  }
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(initEsportsBg, 250);
+  }, { passive: true });
+})();
+</script>
 
 
 
@@ -2293,119 +2330,7 @@ void main() {
 })();
 </script>
 
-<!-- ============================================================
-     High-Performance Canvas Glyph Background (Hero & Esports)
-     Replaces 30,000 DOM nodes with 2 lightweight 30fps canvas layers
-     ============================================================ -->
-<script>
-(function() {
-  function setupGlyphCanvas(canvasId, isDarkTheme) {
-    var canvas = document.getElementById(canvasId);
-    if (!canvas) return;
-    var ctx = canvas.getContext('2d');
-    var parent = canvas.parentElement;
-    var isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var isVisible = true;
-    var rafId = null;
-    var lastTs = 0;
-    var offset = 0;
-    var pattern = ['8', 'B', 'I', 'T', ' '];
-    var cycleLength = 5 * 32; // 160px per full pattern cycle
-    var speed = cycleLength / 24; // 24 seconds per full loop
 
-    function resize() {
-      var w = parent.clientWidth || window.innerWidth;
-      var h = parent.clientHeight || window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
-      draw(0);
-    }
-
-    function draw(delta) {
-      var w = canvas.width;
-      var h = canvas.height;
-      if (!w || !h) return;
-      ctx.clearRect(0, 0, w, h);
-
-      var cols = w < 768 ? 40 : 100;
-      var colWidth = w / cols;
-      var rowHeight = 32;
-      var rows = Math.ceil(h / rowHeight) + 6;
-
-      ctx.font = '100 16px "Geist", sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = isDarkTheme ? '#ECECEC' : '#141210';
-      ctx.globalAlpha = isDarkTheme ? 0.08 : 0.08;
-
-      for (var c = 0; c < cols; c++) {
-        var isDown = (c % 2 === 0);
-        var x = c * colWidth + colWidth / 2;
-        var colOffset = isDown ? (offset % cycleLength) : ((-offset) % cycleLength);
-        if (colOffset < 0) colOffset += cycleLength;
-
-        var startY = (colOffset % rowHeight) - rowHeight * 2;
-        var startIdx = Math.floor(colOffset / rowHeight);
-
-        for (var r = -2; r < rows; r++) {
-          var y = r * rowHeight + startY;
-          if (y > -20 && y < h + 20) {
-            var pIdx = ((r - startIdx) % 5 + 5) % 5;
-            var ch = pattern[pIdx];
-            if (ch && ch !== ' ') {
-              ctx.fillText(ch, x, y);
-            }
-          }
-        }
-      }
-    }
-
-    function loop(ts) {
-      if (!isVisible) { rafId = null; return; }
-      if (!lastTs) lastTs = ts;
-      var dt = Math.min((ts - lastTs) / 1000, 0.1);
-      lastTs = ts;
-
-      if (!isReduced) {
-        offset += speed * dt;
-        draw(dt);
-      }
-      rafId = requestAnimationFrame(loop);
-    }
-
-    window.addEventListener('resize', function() {
-      resize();
-    });
-    resize();
-
-    if ('IntersectionObserver' in window) {
-      var observer = new IntersectionObserver(function(entries) {
-        isVisible = entries[0].isIntersecting;
-        if (isVisible && !rafId) {
-          lastTs = 0;
-          rafId = requestAnimationFrame(loop);
-        } else if (!isVisible && rafId) {
-          cancelAnimationFrame(rafId);
-          rafId = null;
-        }
-      }, { threshold: 0.01 });
-      observer.observe(parent);
-    } else {
-      rafId = requestAnimationFrame(loop);
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-      setupGlyphCanvas('heroGlyphCanvas', false);
-      setupGlyphCanvas('esportsGlyphCanvas', false);
-    });
-  } else {
-    setupGlyphCanvas('heroGlyphCanvas', false);
-    setupGlyphCanvas('esportsGlyphCanvas', false);
-  }
-})();
-</script>
 
 <!-- Back to Top Button -->
 <button class="back-to-top" id="backToTop" aria-label="Back to top">
