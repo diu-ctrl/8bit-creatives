@@ -2848,10 +2848,17 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 /* ── Outer wrapper: white top fading to orange at bottom ── */
 .footer-section {
-  background: #FFFFFF;
-  min-height: auto;
+  background: linear-gradient(to bottom,
+    #FFFFFF 0%,
+    #FFFFFF 45%,
+    #FFB658 100%
+  );
+  min-height: 100vh;
   width: 100%;
-  padding: 40px 0 0 0;
+  padding-top: clamp(260px, 28vw, 400px);
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
   box-sizing: border-box;
   position: relative;
   display: flex;
