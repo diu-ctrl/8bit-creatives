@@ -571,6 +571,9 @@
          The image background is now #0A0A0A - exact match to the section background,
          so there's no visible seam between the image and the rest of the section. */
     }
+    .map-location-chips {
+      display: none;
+    }
 
     /* ────────────────────────────────────────────────
        RESPONSIVE - Tablet (768-1279px)
@@ -613,12 +616,12 @@
        ──────────────────────────────────────────────── */
     @media (max-width: 767px) {
       .map-section {
-        margin: 16px auto !important;
-        padding: 28px 18px !important;
+        margin: 24px auto !important;
+        padding: 36px 18px 32px 18px !important;
         min-height: auto !important;
         grid-template-columns: 1fr !important;
-        grid-template-rows: auto 1fr !important;
-        gap: 16px 0 !important;
+        grid-template-rows: auto auto !important;
+        gap: 20px 0 !important;
         align-items: start !important;
       }
       .map-section__title-block {
@@ -629,35 +632,81 @@
         text-align: center !important;
       }
       .map-section__title {
-        font-size: 24px !important;
+        font-size: clamp(26px, 7vw, 34px) !important;
         line-height: 1.15 !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 12px !important;
       }
       .map-section__subtitle {
-        font-size: 13px !important;
-        line-height: 1.5 !important;
+        font-size: 14px !important;
+        line-height: 1.55 !important;
         max-width: 100% !important;
-        margin-bottom: 16px !important;
+        margin-bottom: 20px !important;
       }
       .map-section__stats {
         justify-content: center !important;
-        gap: 24px !important;
+        gap: 28px !important;
       }
       .map-section__stat-value {
-        font-size: 24px !important;
+        font-size: 28px !important;
       }
       .map-section__stat-label {
-        font-size: 10px !important;
-        margin-top: 3px !important;
+        font-size: 11px !important;
+        margin-top: 4px !important;
+        color: rgba(255, 255, 255, 0.65) !important;
       }
       .map-section__map-wrap {
         grid-column: 1 !important;
         grid-row: 2 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-top: 4px !important;
       }
       .map-section__map {
-        max-width: 80% !important;
-        max-height: 180px !important;
+        width: 100% !important;
+        max-width: 420px !important;
+        height: auto !important;
+        max-height: none !important;
+        display: block !important;
         margin: 0 auto !important;
+      }
+      .map-location-chips {
+        display: flex !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 14px;
+        width: 100%;
+      }
+      .map-location-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        padding: 6px 14px;
+        font-family: 'Geist', sans-serif;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .map-location-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #FF4D00;
+        box-shadow: 0 0 8px rgba(255, 77, 0, 0.8);
+        flex-shrink: 0;
+      }
+      .map-location-chip strong {
+        color: #FFFFFF;
+        font-weight: 600;
+      }
+      .map-location-chip span {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 11px;
       }
     }
 
@@ -1251,10 +1300,25 @@
 
   <!-- RIGHT - India map (PNG image, now with #0A0A0A background to match the site) -->
   <div class="map-section__map-wrap">
-    <img decoding="async" width="800" height="600" class="map-section__map"
-         src="images-for-landing-page/india_locations_map.webp"
-         alt="India map showing 8Bit's Delhi NCR and Guwahati locations"
-         loading="lazy">
+    <picture>
+      <source srcset="images-for-landing-page/india_locations_map.webp" type="image/webp">
+      <img decoding="async" width="1000" height="1000" class="map-section__map"
+           src="images-for-landing-page/india_locations_map.png"
+           alt="India map showing 8Bit's Delhi NCR and Guwahati locations"
+           loading="lazy">
+    </picture>
+    <div class="map-location-chips" aria-label="Key City Locations">
+      <div class="map-location-chip">
+        <span class="map-location-dot" aria-hidden="true"></span>
+        <strong>Delhi NCR</strong>
+        <span>Corporate Office</span>
+      </div>
+      <div class="map-location-chip">
+        <span class="map-location-dot" aria-hidden="true"></span>
+        <strong>Guwahati</strong>
+        <span>Registered Office</span>
+      </div>
+    </div>
   </div>
 
 </section>
