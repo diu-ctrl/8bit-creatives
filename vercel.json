@@ -73,7 +73,7 @@
       ]
     },
     {
-      "source": "/(about|creators|work|services|esports|contact|gcl-season-4|privacy-policy)",
+      "source": "/(about|creators|work|services|esports|contact|gcl-season-4|privacy-policy|ops|brand-dashboard|creator-dashboard|platform-dashboard|portal|login)",
       "headers": [
         {
           "key": "Cache-Control",

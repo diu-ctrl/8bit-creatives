@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <meta name="msapplication-TileColor" content="#0A0A0A">
+  <title>Access Gateway &amp; Portals — 8Bit Creatives</title>
+
+  <!-- Google Fonts & Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #070707;
+      --surface: #101010;
+      --surface-2: #161616;
+      --surface-3: #1f1f1f;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.2);
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.55);
+      --text-dim: rgba(255, 255, 255, 0.35);
+      --accent: #ffffff;
+      --green: #22c55e;
+      --yellow: #eab308;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+      --red: #ef4444;
+      --font: 'Geist', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, #090909 0%, #070707 100%);
+      background-size: 28px 28px, 100% 100%;
+    }
+
+    /* Topbar */
+    .gateway-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .topbar-brand img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .topbar-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .clock-pill {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .clock-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+      animation: pulseGreen 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGreen {
+      0%, 100% { opacity: 0.6; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    .btn-return {
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 150ms ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-return:hover {
+      background: var(--surface-2);
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+
+    /* Main Container */
+    .gateway-container {
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Hero Header */
+    .gateway-header {
+      text-align: center;
+      max-width: 680px;
+      margin-bottom: 48px;
+    }
+
+    .gateway-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .gateway-badge svg {
+      color: var(--green);
+    }
+
+    .gateway-title {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gateway-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Unified Auth Command Bar */
+    .command-box {
+      width: 100%;
+      max-width: 640px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 56px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.03);
+      position: relative;
+    }
+
+    .command-box-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .command-input-group {
+      display: flex;
+      gap: 10px;
+      position: relative;
+    }
+
+    .command-input-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .command-input {
+      width: 100%;
+      background: #151515;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 14px 44px 14px 16px;
+      font-size: 14px;
+      color: #ffffff;
+      font-family: var(--font);
+      transition: all 150ms ease;
+    }
+
+    .command-input:focus {
+      outline: none;
+      border-color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+      background: #181818;
+    }
+
+    .command-eye {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .command-eye:hover { color: #ffffff; }
+
+    .btn-unlock {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      border-radius: 10px;
+      padding: 0 24px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 150ms ease;
+      white-space: nowrap;
+    }
+
+    .btn-unlock:hover {
+      background: #e8e8e8;
+      transform: translateY(-1px);
+    }
+
+    .btn-unlock:active {
+      transform: translateY(0);
+    }
+
+    .command-feedback {
+      margin-top: 12px;
+      font-size: 12px;
+      min-height: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .command-feedback.error { color: var(--red); }
+    .command-feedback.success { color: var(--green); }
+
+    /* Active Session Banner */
+    #active-session-banner {
+      width: 100%;
+      max-width: 640px;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 40px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .session-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .session-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 10px var(--green);
+    }
+
+    .session-text-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .session-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .session-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-session-enter {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 6px;
+      background: var(--green);
+      color: #000000;
+      text-decoration: none;
+      transition: opacity 150ms ease;
+    }
+
+    .btn-session-enter:hover { opacity: 0.9; }
+
+    .btn-session-logout {
+      padding: 6px 12px;
+      font-size: 11px;
+      border-radius: 6px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .btn-session-logout:hover {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    /* Portals Grid */
+    .portals-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      width: 100%;
+    }
+
+    @media (max-width: 860px) {
+      .portals-grid { grid-template-columns: 1fr; }
+      .gateway-title { font-size: 32px; }
+      .command-input-group { flex-direction: column; }
+      .btn-unlock { padding: 14px; justify-content: center; }
+    }
+
+    .portal-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 200ms ease;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .portal-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--border);
+      transition: background 200ms ease;
+    }
+
+    .portal-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .portal-card.card-ops:hover::before { background: var(--blue); }
+    .portal-card.card-brand:hover::before { background: var(--yellow); }
+    .portal-card.card-creator:hover::before { background: var(--green); }
+    .portal-card.card-platform:hover::before { background: var(--purple); }
+
+    .portal-card-top {
+      margin-bottom: 24px;
+    }
+
+    .portal-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .portal-role-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .portal-card.card-ops .portal-role-tag { color: var(--blue); border-color: rgba(59, 130, 246, 0.3); }
+    .portal-card.card-brand .portal-role-tag { color: var(--yellow); border-color: rgba(234, 179, 8, 0.3); }
+    .portal-card.card-creator .portal-role-tag { color: var(--green); border-color: rgba(34, 197, 94, 0.3); }
+    .portal-card.card-platform .portal-role-tag { color: var(--purple); border-color: rgba(168, 85, 247, 0.3); }
+
+    .portal-status-pill {
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-dim);
+    }
+
+    .portal-status-pill.unlocked {
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .portal-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .portal-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .portal-feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .portal-feature-item {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .portal-feature-item svg {
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    .portal-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .portal-target-url {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .btn-portal-launch {
+      padding: 9px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 8px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: #ffffff;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 150ms ease;
+    }
+
+    .btn-portal-launch:hover {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+    }
+
+    /* Modal for Quick Direct Portal Key */
+    .portal-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(20px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .portal-modal-overlay.active {
+      display: flex;
+    }
+
+    .portal-modal {
+      width: 100%;
+      max-width: 440px;
+      background: #111111;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 32px 28px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.8);
+      position: relative;
+      animation: modalPop 200ms ease-out;
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .modal-close-btn:hover { color: #ffffff; }
+
+    /* Footer */
+    .gateway-footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 40px;
+      text-align: center;
+      background: rgba(10, 10, 10, 0.5);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .footer-link {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    .footer-link:hover { color: #ffffff; }
+
+    .shake {
+      animation: shake 300ms cubic-bezier(.36,.07,.19,.97) both;
+    }
+
+    @keyframes shake {
+      10%, 90% { transform: translate3d(-1px, 0, 0); }
+      20%, 80% { transform: translate3d(2px, 0, 0); }
+      30%, 50%, 70% { transform: translate3d(-3px, 0, 0); }
+      40%, 60% { transform: translate3d(3px, 0, 0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="gateway-topbar">
+    <a href="/" class="topbar-brand">
+      <img src="images-for-landing-page/logo_2.png" alt="8Bit Creatives">
+      <span class="topbar-tag">Central Command Gateway</span>
+    </a>
+    <div class="topbar-right">
+      <div class="clock-pill">
+        <span class="clock-dot"></span>
+        <span id="gateway-clock">IST --:--:--</span>
+      </div>
+      <a href="/" class="btn-return">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Public Website
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="gateway-container">
+
+    <!-- Hero Header -->
+    <div class="gateway-header">
+      <div class="gateway-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        8Bit Vault Protocol • 256-Bit SHA Encryption
+      </div>
+      <h1 class="gateway-title">Access Command Gateway</h1>
+      <p class="gateway-sub">
+        Secure unified access terminal for 8Bit Operations, Verified Brand Partners, Exclusive Talent, and Streaming Platforms.
+      </p>
+    </div>
+
+    <!-- Active Session Banner (Shown if already authenticated) -->
+    <div id="active-session-banner">
+      <div class="session-info">
+        <div class="session-indicator"></div>
+        <div>
+          <div class="session-text-title" id="session-role-title">Active Session Authenticated</div>
+          <div class="session-text-sub" id="session-role-sub">Access key valid for this device</div>
+        </div>
+      </div>
+      <div class="session-actions">
+        <a href="#" id="session-launch-btn" class="btn-session-enter">Enter Terminal &rarr;</a>
+        <button id="session-logout-btn" class="btn-session-logout">Sign Out</button>
+      </div>
+    </div>
+
+    <!-- Smart Passphrase Command Box -->
+    <div class="command-box" id="command-box">
+      <div class="command-box-label">
+        <span>SECURITY KEY / PASSPHRASE AUTHENTICATION</span>
+        <span style="font-family: var(--font-mono); font-size: 10px;">AUTO-ROUTING ENABLED</span>
+      </div>
+      <form id="gateway-auth-form" onsubmit="return false;">
+        <div class="command-input-group">
+          <div class="command-input-wrap">
+            <input type="password" id="gateway-key-input" class="command-input" placeholder="Enter security key (Ops / Brand / Creator / Platform / Master)..." autocomplete="off" autofocus>
+            <button type="button" id="gateway-eye-btn" class="command-eye" title="Show/Hide">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+          <button type="submit" id="gateway-submit-btn" class="btn-unlock">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            Unlock Portal
+          </button>
+        </div>
+        <div id="gateway-feedback" class="command-feedback"></div>
+      </form>
+    </div>
+
+    <!-- 4 Dedicated Portals Grid -->
+    <div class="portals-grid">
+
+      <!-- 1. Ops Portal -->
+      <div class="portal-card card-ops" onclick="handleCardClick('ops')">
+        <div class="portal-card-top">
+          <div class="portal-badge-row">
+            <span class="portal-role-tag">Core Ops &amp; Management</span>
+            <span class="portal-status-pill" id="status-ops">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Locked
+            </span>
+          </div>
+          <h2 class="portal-title">Insider Ops Portal</h2>
+          <p class="portal-desc">
+            Central agency management terminal. Real-time creator roster, active deal pipeline, campaign briefs, deliverables review, and commercial SOWs.
+          </p>
+          <ul class="portal-feature-list">
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              40+ Exclusive Gaming Creators Roster
+            </li>
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Interactive Kanban &amp; Deal Pipeline
+            </li>
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Commercial Contracts &amp; Payout Audit
+            </li>
+          </ul>
+        </div>
+        <div class="portal-bottom">
+          <span class="portal-target-url">/ops</span>
+          <a href="/ops" class="btn-portal-launch" onclick="event.stopPropagation();">
+            Enter Terminal &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- 2. Brand Dashboard -->
+      <div class="portal-card card-brand" onclick="handleCardClick('brand')">
+        <div class="portal-card-top">
+          <div class="portal-badge-row">
+            <span class="portal-role-tag">Brand Partner</span>
+            <span class="portal-status-pill" id="status-brand">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Locked
+            </span>
+          </div>
+          <h2 class="portal-title">Brand Dashboard</h2>
+          <p class="portal-desc">
+            Official brand portal for Samsung, iQOO, ROG, Red Bull, boAt &amp; Spotify. Inspect video cuts, approve deliverables, and monitor live telemetry.
+          </p>
+          <ul class="portal-feature-list">
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Real-time Impressions &amp; Viewership Telemetry
+            </li>
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Interactive 1-Click Deliverable Approval
+            </li>
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Certified Campaign ROI Decks &amp; CSV Reports
+            </li>
+          </ul>
+        </div>
+        <div class="portal-bottom">
+          <span class="portal-target-url">/brand-dashboard</span>
+          <a href="/brand-dashboard" class="btn-portal-launch" onclick="event.stopPropagation();">
+            Enter Terminal &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. Creator Dashboard -->
+      <div class="portal-card card-creator" onclick="handleCardClick('creator')">
+        <div class="portal-card-top">
+          <div class="portal-badge-row">
+            <span class="portal-role-tag">Creator Talent</span>
+            <span class="portal-status-pill" id="status-creator">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Locked
+            </span>
+          </div>
+          <h2 class="portal-title">Creator Dashboard</h2>
+          <p class="portal-desc">
+            Talent workspace for Mortal, Payal, Snax, Goblin &amp; exclusive roster. Track assigned brand briefs, upload preview links, and view payment remittances.
+          </p>
+          <ul class="portal-feature-list">
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Active Sponsored Campaigns &amp; Deadlines
+            </li>
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Draft Submission &amp; Preview Proof Links
+            </li>
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Official GST Invoices &amp; Net TDS Payouts
+            </li>
+          </ul>
+        </div>
+        <div class="portal-bottom">
+          <span class="portal-target-url">/creator-dashboard</span>
+          <a href="/creator-dashboard" class="btn-portal-launch" onclick="event.stopPropagation();">
+            Enter Terminal &rarr;
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. Platform Dashboard -->
+      <div class="portal-card card-platform" onclick="handleCardClick('platform')">
+        <div class="portal-card-top">
+          <div class="portal-badge-row">
+            <span class="portal-role-tag">Streaming Platform</span>
+            <span class="portal-status-pill" id="status-platform">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Locked
+            </span>
+          </div>
+          <h2 class="portal-title">Platform Dashboard</h2>
+          <p class="portal-desc">
+            Broadcast &amp; platform partnership portal. Telemetry tracking for Kick India Day One migration, streamer broadcast hours, CCV stats, and RTMP ingest.
+          </p>
+          <ul class="portal-feature-list">
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              18 Streamers Day One Migration Telemetry
+            </li>
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Broadcast Watch Hours (1.4M hrs) &amp; CCV Peaks
+            </li>
+            <li class="portal-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              RTMP Ingest Configuration &amp; Exclusivity
+            </li>
+          </ul>
+        </div>
+        <div class="portal-bottom">
+          <span class="portal-target-url">/platform-dashboard</span>
+          <a href="/platform-dashboard" class="btn-portal-launch" onclick="event.stopPropagation();">
+            Enter Terminal &rarr;
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="gateway-footer">
+    <div class="footer-copy">
+      8Bit Creatives (A division of S8UL Gaming Private Limited) &bull; Official Agency Intranet &bull; Strictly Confidential
+    </div>
+    <div class="footer-links">
+      <a href="/" class="footer-link">Home</a>
+      <a href="/about" class="footer-link">About</a>
+      <a href="/creators" class="footer-link">Roster</a>
+      <a href="/work" class="footer-link">Case Studies</a>
+      <a href="/services" class="footer-link">Services</a>
+      <a href="/contact" class="footer-link">Contact Ops</a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="scripts/portal-auth.js"></script>
+  <script>
+    // Live IST Clock
+    function updateClock() {
+      const now = new Date();
+      const options = { timeZone: 'Asia/Kolkata', hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      const istString = now.toLocaleTimeString('en-GB', options);
+      const clockEl = document.getElementById('gateway-clock');
+      if (clockEl) clockEl.textContent = 'IST ' + istString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Check Active Session on Load
+    function refreshSessionUI() {
+      const session = EightBitAuth.getSession();
+      const banner = document.getElementById('active-session-banner');
+      const roleTitle = document.getElementById('session-role-title');
+      const roleSub = document.getElementById('session-role-sub');
+      const launchBtn = document.getElementById('session-launch-btn');
+
+      // Update card status pills
+      ['ops', 'brand', 'creator', 'platform'].forEach(role => {
+        const pill = document.getElementById('status-' + role);
+        if (pill) {
+          if (EightBitAuth.isAuthorized(role)) {
+            pill.className = 'portal-status-pill unlocked';
+            pill.innerHTML = `
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Unlocked
+            `;
+          } else {
+            pill.className = 'portal-status-pill';
+            pill.innerHTML = `
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Locked
+            `;
+          }
+        }
+      });
+
+      if (session) {
+        banner.style.display = 'flex';
+        roleTitle.textContent = 'Active Session: ' + session.roleName;
+        roleSub.textContent = 'Role: ' + (session.roleBadge || session.role.toUpperCase()) + ' &bull; Authenticated on this device';
+        launchBtn.href = session.targetUrl;
+      } else {
+        banner.style.display = 'none';
+      }
+    }
+
+    refreshSessionUI();
+
+    // Sign out button
+    document.getElementById('session-logout-btn').addEventListener('click', () => {
+      EightBitAuth.clearSession();
+      refreshSessionUI();
+      const fb = document.getElementById('gateway-feedback');
+      fb.className = 'command-feedback';
+      fb.textContent = 'Session terminated. All terminals locked.';
+    });
+
+    // Eye toggle
+    const eyeBtn = document.getElementById('gateway-eye-btn');
+    const keyInput = document.getElementById('gateway-key-input');
+    eyeBtn.addEventListener('click', () => {
+      keyInput.type = keyInput.type === 'password' ? 'text' : 'password';
+    });
+
+    // Form submit
+    const authForm = document.getElementById('gateway-auth-form');
+    const feedback = document.getElementById('gateway-feedback');
+    const commandBox = document.getElementById('command-box');
+    const submitBtn = document.getElementById('gateway-submit-btn');
+
+    async function handleGatewaySubmit() {
+      const key = keyInput.value.trim();
+      if (!key) {
+        feedback.className = 'command-feedback error';
+        feedback.textContent = 'Please enter an authorized security key.';
+        keyInput.focus();
+        return;
+      }
+
+      feedback.className = 'command-feedback';
+      feedback.textContent = 'Decrypting security key with 256-bit SHA exchange...';
+      submitBtn.disabled = true;
+
+      const res = await EightBitAuth.authenticateKey(key, true);
+      submitBtn.disabled = false;
+
+      if (!res.success) {
+        feedback.className = 'command-feedback error';
+        feedback.textContent = res.message;
+        commandBox.classList.remove('shake');
+        void commandBox.offsetWidth;
+        commandBox.classList.add('shake');
+        keyInput.focus();
+        return;
+      }
+
+      // Success
+      feedback.className = 'command-feedback success';
+      feedback.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        Authorization verified: <strong>${res.meta.name}</strong>. Launching terminal...
+      `;
+
+      refreshSessionUI();
+
+      // Highlight target card
+      const targetCard = document.querySelector('.card-' + res.role);
+      if (targetCard) {
+        targetCard.style.boxShadow = '0 0 30px rgba(34, 197, 94, 0.4)';
+      }
+
+      setTimeout(() => {
+        window.location.href = res.meta.url;
+      }, 700);
+    }
+
+    authForm.addEventListener('submit', handleGatewaySubmit);
+
+    // Card click: If not unlocked, focus input; if unlocked, navigate
+    function handleCardClick(role) {
+      if (EightBitAuth.isAuthorized(role)) {
+        const meta = EightBitAuth.PORTALS[role];
+        window.location.href = meta.url;
+      } else {
+        keyInput.focus();
+        keyInput.placeholder = `Enter Security Key for ${EightBitAuth.PORTALS[role].name}...`;
+        feedback.className = 'command-feedback';
+        feedback.textContent = `Enter security key to unlock ${EightBitAuth.PORTALS[role].name}.`;
+      }
+    }
+  </script>
+</body>
+</html>

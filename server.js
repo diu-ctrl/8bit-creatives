@@ -185,8 +185,14 @@ const server = http.createServer((req, res) => {
     reqPath = '/index.html';
   }
 
-  const filePath = path.join(ROOT, reqPath.replace(/^\//, ''));
-  const ext = path.extname(filePath).toLowerCase();
+  let filePath = path.join(ROOT, reqPath.replace(/^\//, ''));
+  let ext = path.extname(filePath).toLowerCase();
+
+  // Support clean URLs (e.g. /ops -> /ops.html, /portal -> /portal.html)
+  if (!ext && !fs.existsSync(filePath) && fs.existsSync(filePath + '.html')) {
+    filePath = filePath + '.html';
+    ext = '.html';
+  }
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {

@@ -853,6 +853,12 @@
   }
 
 </style>
+  <style id="auth-guard-style">
+    body:not(.authenticated) > :not(#auth-lock-overlay) {
+      display: none !important;
+    }
+  </style>
+  <script src="scripts/portal-auth.js"></script>
   <!-- Vercel Web Analytics — tracks page views, unique visitors, top pages, referrers, devices -->
   <script defer src="/_vercel/insights/script.js"></script>
   <!-- Vercel Speed Insights — tracks Core Web Vitals (LCP, CLS, TTFB, INP) -->
@@ -983,13 +989,13 @@
       <div class="page-header" style="margin-bottom: 16px;">
         <div class="page-title" style="font-size: 20px;">Campaign pipeline</div>
         <div class="view-toggle">
-          <button class="view-btn active">Kanban</button>
-          <button class="view-btn">List</button>
-          <button class="view-btn">Calendar</button>
+          <button class="view-btn active" onclick="switchPipelineMode('kanban', this)">Kanban</button>
+          <button class="view-btn" onclick="switchPipelineMode('list', this)">List</button>
+          <button class="view-btn" onclick="switchPipelineMode('calendar', this)">Calendar</button>
         </div>
       </div>
       
-      <div class="kanban-board">
+      <div id="pipeline-kanban" class="kanban-board">
         <div class="kanban-column">
           <div class="kanban-header">
             <div class="kanban-title"><span class="kanban-dot briefing"></span> Briefing</div>
@@ -1082,6 +1088,272 @@
           </div>
         </div>
       </div>
+
+      <!-- Pipeline List View -->
+      <div id="pipeline-list" class="table-card" style="display: none; margin-top: 16px;">
+        <table class="ops-table">
+          <thead>
+            <tr>
+              <th>Campaign</th>
+              <th>Brand</th>
+              <th>Assigned Creators</th>
+              <th>Stage</th>
+              <th>Deliverables Summary</th>
+              <th>Deadline</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="pipeline-list-tbody">
+            <tr>
+              <td><strong>Galaxy Gaming Cup</strong></td>
+              <td>Samsung</td>
+              <td><span class="creator-pill">Mortal</span></td>
+              <td><span class="badge-tag yellow">Briefing</span></td>
+              <td>Live Stream Tournament Finals</td>
+              <td>Oct 1</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('galaxy gaming cup')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Legion PC Launch</strong></td>
+              <td>Lenovo</td>
+              <td><span class="creator-pill">Snax</span></td>
+              <td><span class="badge-tag yellow">Briefing</span></td>
+              <td>Benchmark &amp; Unboxing Video</td>
+              <td>Oct 5</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('legion pc launch')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>MEO Season Finals</strong></td>
+              <td>Red Bull</td>
+              <td><span class="creator-pill">Mortal</span> <span class="creator-pill">Jokerkihaveli</span></td>
+              <td><span class="badge-tag blue">In production</span></td>
+              <td>Live Co-stream + Arena Vlog</td>
+              <td>Sep 12</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('meo season finals')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Phone 8 Showcase</strong></td>
+              <td>ASUS ROG</td>
+              <td><span class="creator-pill">Payal</span></td>
+              <td><span class="badge-tag blue">In production</span></td>
+              <td>BGMI AirTrigger Gameplay</td>
+              <td>Sep 15</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('phone 8 showcase')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Gaming Playlist S2</strong></td>
+              <td>Spotify</td>
+              <td><span class="creator-pill">Goblin</span></td>
+              <td><span class="badge-tag blue">In production</span></td>
+              <td>Curated Playlist + On-Stream QR</td>
+              <td>Sep 20</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('gaming playlist s2')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Flagship Drop v2</strong></td>
+              <td>iQOO</td>
+              <td><span class="creator-pill">Mortal</span> <span class="creator-pill">Payal</span></td>
+              <td><span class="badge-tag yellow">Pending approval</span></td>
+              <td>VOD Benchmark + Reels</td>
+              <td>Sep 11</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('flagship drop v2')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Athlete Program Q3</strong></td>
+              <td>Monster Energy</td>
+              <td><span class="creator-pill">Snax</span></td>
+              <td><span class="badge-tag yellow">Pending approval</span></td>
+              <td>Integration Reel + Overlay</td>
+              <td>Sep 14</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('athlete program q3')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Black Adam Crossover</strong></td>
+              <td>Warner Bros</td>
+              <td><span class="creator-pill">Mortal</span></td>
+              <td><span class="badge-tag green">Delivered</span></td>
+              <td>Sketch Video + Premiere Stories</td>
+              <td>Done</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('black adam crossover')">Inspect</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pipeline Calendar Milestones View -->
+      <div id="pipeline-calendar" class="table-card" style="display: none; margin-top: 16px;">
+        <div class="table-header-bar">
+          <div class="table-title">Upcoming Delivery Milestones (Calendar Schedule)</div>
+          <span style="font-size: 12px; color: var(--text-muted);">Q3 - Q4 2026 Deliverables Schedule</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 6px 0;">
+          <div style="display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: var(--surface-2); border-left: 3px solid var(--red); border-radius: 6px;">
+            <div style="min-width: 90px; font-weight: 700; color: var(--red);">Sep 11, 2026</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">iQOO Flagship Drop v2 — Final VOD Review Cut</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Talent: Mortal &bull; Priority: Urgent Brand Sign-off</div>
+            </div>
+            <span class="badge-tag yellow">48h Window</span>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: var(--surface-2); border-left: 3px solid var(--yellow); border-radius: 6px;">
+            <div style="min-width: 90px; font-weight: 700; color: var(--yellow);">Sep 12, 2026</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">Red Bull MEO Season Finals — Live Co-stream Watch Party</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Talent: Mortal, Jokerkihaveli &bull; Arena Broadcast</div>
+            </div>
+            <span class="badge-tag blue">Live Broadcast</span>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: var(--surface-2); border-left: 3px solid var(--blue); border-radius: 6px;">
+            <div style="min-width: 90px; font-weight: 700; color: var(--blue);">Sep 15, 2026</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">ASUS ROG Phone 8 — AirTrigger Gameplay Stream</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Talent: Payal &bull; Deliverable: 2h Stream + 2 Reels</div>
+            </div>
+            <span class="badge-tag neutral">Scheduled</span>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: var(--surface-2); border-left: 3px solid var(--green); border-radius: 6px;">
+            <div style="min-width: 90px; font-weight: 700; color: var(--green);">Oct 1, 2026</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">Samsung Galaxy Gaming Cup — Official Kickoff Integration</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Talent: Mortal &bull; National Tournament Sponsorship</div>
+            </div>
+            <span class="badge-tag neutral">Contract Signoff</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pipeline List View -->
+      <div id="pipeline-list" class="table-card" style="display: none; margin-top: 16px;">
+        <table class="ops-table">
+          <thead>
+            <tr>
+              <th>Campaign</th>
+              <th>Brand</th>
+              <th>Assigned Creators</th>
+              <th>Stage</th>
+              <th>Deliverables Summary</th>
+              <th>Deadline</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="pipeline-list-tbody">
+            <tr>
+              <td><strong>Galaxy Gaming Cup</strong></td>
+              <td>Samsung</td>
+              <td><span class="creator-pill">Mortal</span></td>
+              <td><span class="badge-tag yellow">Briefing</span></td>
+              <td>Live Stream Tournament Finals</td>
+              <td>Oct 1</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('galaxy gaming cup')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Legion PC Launch</strong></td>
+              <td>Lenovo</td>
+              <td><span class="creator-pill">Snax</span></td>
+              <td><span class="badge-tag yellow">Briefing</span></td>
+              <td>Benchmark &amp; Unboxing Video</td>
+              <td>Oct 5</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('legion pc launch')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>MEO Season Finals</strong></td>
+              <td>Red Bull</td>
+              <td><span class="creator-pill">Mortal</span> <span class="creator-pill">Jokerkihaveli</span></td>
+              <td><span class="badge-tag blue">In production</span></td>
+              <td>Live Co-stream + Arena Vlog</td>
+              <td>Sep 12</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('meo season finals')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Phone 8 Showcase</strong></td>
+              <td>ASUS ROG</td>
+              <td><span class="creator-pill">Payal</span></td>
+              <td><span class="badge-tag blue">In production</span></td>
+              <td>BGMI AirTrigger Gameplay</td>
+              <td>Sep 15</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('phone 8 showcase')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Gaming Playlist S2</strong></td>
+              <td>Spotify</td>
+              <td><span class="creator-pill">Goblin</span></td>
+              <td><span class="badge-tag blue">In production</span></td>
+              <td>Curated Playlist + On-Stream QR</td>
+              <td>Sep 20</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('gaming playlist s2')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Flagship Drop v2</strong></td>
+              <td>iQOO</td>
+              <td><span class="creator-pill">Mortal</span> <span class="creator-pill">Payal</span></td>
+              <td><span class="badge-tag yellow">Pending approval</span></td>
+              <td>VOD Benchmark + Reels</td>
+              <td>Sep 11</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('flagship drop v2')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Athlete Program Q3</strong></td>
+              <td>Monster Energy</td>
+              <td><span class="creator-pill">Snax</span></td>
+              <td><span class="badge-tag yellow">Pending approval</span></td>
+              <td>Integration Reel + Overlay</td>
+              <td>Sep 14</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('athlete program q3')">Inspect</button></td>
+            </tr>
+            <tr>
+              <td><strong>Black Adam Crossover</strong></td>
+              <td>Warner Bros</td>
+              <td><span class="creator-pill">Mortal</span></td>
+              <td><span class="badge-tag green">Delivered</span></td>
+              <td>Sketch Video + Premiere Stories</td>
+              <td>Done</td>
+              <td><button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="openCampaignDetail('black adam crossover')">Inspect</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pipeline Calendar Milestones View -->
+      <div id="pipeline-calendar" class="table-card" style="display: none; margin-top: 16px;">
+        <div class="table-header-bar">
+          <div class="table-title">Upcoming Delivery Milestones (Calendar Schedule)</div>
+          <span style="font-size: 12px; color: var(--text-muted);">Q3 - Q4 2026 Deliverables Schedule</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px; padding: 6px 0;">
+          <div style="display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: var(--surface-2); border-left: 3px solid var(--red); border-radius: 6px;">
+            <div style="min-width: 90px; font-weight: 700; color: var(--red);">Sep 11, 2026</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">iQOO Flagship Drop v2 — Final VOD Review Cut</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Talent: Mortal &bull; Priority: Urgent Brand Sign-off</div>
+            </div>
+            <span class="badge-tag yellow">48h Window</span>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: var(--surface-2); border-left: 3px solid var(--yellow); border-radius: 6px;">
+            <div style="min-width: 90px; font-weight: 700; color: var(--yellow);">Sep 12, 2026</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">Red Bull MEO Season Finals — Live Co-stream Watch Party</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Talent: Mortal, Jokerkihaveli &bull; Arena Broadcast</div>
+            </div>
+            <span class="badge-tag blue">Live Broadcast</span>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: var(--surface-2); border-left: 3px solid var(--blue); border-radius: 6px;">
+            <div style="min-width: 90px; font-weight: 700; color: var(--blue);">Sep 15, 2026</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">ASUS ROG Phone 8 — AirTrigger Gameplay Stream</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Talent: Payal &bull; Deliverable: 2h Stream + 2 Reels</div>
+            </div>
+            <span class="badge-tag neutral">Scheduled</span>
+          </div>
+          <div style="display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: var(--surface-2); border-left: 3px solid var(--green); border-radius: 6px;">
+            <div style="min-width: 90px; font-weight: 700; color: var(--green);">Oct 1, 2026</div>
+            <div style="flex: 1;">
+              <div style="font-weight: 600;">Samsung Galaxy Gaming Cup — Official Kickoff Integration</div>
+              <div style="font-size: 12px; color: var(--text-muted);">Talent: Mortal &bull; National Tournament Sponsorship</div>
+            </div>
+            <span class="badge-tag neutral">Contract Signoff</span>
+          </div>
+        </div>
+      </div>
     </div>
     
     <!-- Roster View (hidden by default) -->
@@ -1097,6 +1369,23 @@
         </div>
       </div>
       
+      
+      <!-- Live Roster Search & Category Filters -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 24px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 260px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-dim);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="roster-search-input" placeholder="Search creators by handle, alias, category, or status..." oninput="filterRoster()" style="width: 100%; background: transparent; border: none; color: #fff; font-size: 13px; outline: none; font-family: inherit;">
+        </div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;" id="roster-category-pills">
+          <button type="button" class="btn btn-cat active" onclick="setRosterCategory('All', this)" style="padding: 5px 12px; font-size: 11px;">All</button>
+          <button type="button" class="btn btn-cat" onclick="setRosterCategory('BGMI', this)" style="padding: 5px 12px; font-size: 11px;">BGMI</button>
+          <button type="button" class="btn btn-cat" onclick="setRosterCategory('PC Gaming', this)" style="padding: 5px 12px; font-size: 11px;">PC Gaming</button>
+          <button type="button" class="btn btn-cat" onclick="setRosterCategory('Variety Gaming', this)" style="padding: 5px 12px; font-size: 11px;">Variety</button>
+          <button type="button" class="btn btn-cat" onclick="setRosterCategory('Esports', this)" style="padding: 5px 12px; font-size: 11px;">Esports</button>
+          <button type="button" class="btn btn-cat" onclick="setRosterCategory('Streaming', this)" style="padding: 5px 12px; font-size: 11px;">Streaming</button>
+          <button type="button" class="btn btn-cat" onclick="setRosterCategory('GTA V RP', this)" style="padding: 5px 12px; font-size: 11px;">GTA V RP</button>
+        </div>
+      </div>
       <div class="roster-grid">
         <div class="roster-card" onclick="openCreatorDetail(this)">
           <div class="roster-avatar">M</div>
@@ -1166,7 +1455,7 @@
         </div>
       </div>
       
-      <div class="kanban-board">
+      <div id="pipeline-kanban" class="kanban-board">
         <div class="kanban-column">
           <div class="kanban-header">
             <div class="kanban-title">Pending internal review</div>
@@ -1224,7 +1513,7 @@
         <button class="btn btn-accent" onclick="showView('briefs')">+ New campaign</button>
       </div>
 
-      <div class="kanban-board">
+      <div id="pipeline-kanban" class="kanban-board">
         <div class="kanban-column">
           <div class="kanban-header">
             <div class="kanban-title"><span class="kanban-dot briefing"></span> Brief intake</div>
@@ -1360,7 +1649,7 @@
       </div>
 
       <div class="form-card">
-        <form onsubmit="event.preventDefault(); alert('Campaign brief submitted successfully! Record created in Airtable and notified #campaign-alerts on Slack.');">
+        <form id="ops-brief-form" onsubmit="handleOpsBriefSubmit(event)">
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Brand name</label>
@@ -1500,7 +1789,7 @@
           <div class="page-title">Campaign reports &amp; analytics</div>
           <div class="page-subtitle">Consolidated performance metrics and brand handoff reporting.</div>
         </div>
-        <button class="btn">Export CSV</button>
+        <button class="btn" onclick="exportOpsCSV()">Export CSV</button>
       </div>
 
       <div class="stats-row">
@@ -2750,6 +3039,77 @@ function closeCreatorDetail() {
     </div>
   </div>
 </div>
+
+
+
+<style id="toast-notification-styles">
+  .toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+    font-family: 'Geist', -apple-system, sans-serif;
+  }
+  .toast-item {
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: auto;
+    animation: toastSlideUp 200ms ease-out forwards;
+    max-width: 380px;
+  }
+  .toast-item.success { border-color: rgba(34, 197, 94, 0.5); }
+  .toast-item.error { border-color: rgba(239, 68, 68, 0.5); }
+  .toast-item.info { border-color: rgba(59, 130, 246, 0.5); }
+  .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .toast-item.success .toast-dot { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
+  .toast-item.error .toast-dot { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+  .toast-item.info .toast-dot { background: #3b82f6; box-shadow: 0 0 8px #3b82f6; }
+  @keyframes toastSlideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script>
+
+function showToast(message, type = 'success') {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+  const item = document.createElement('div');
+  item.className = 'toast-item ' + type;
+  item.innerHTML = '<span class="toast-dot"></span><span>' + message + '</span>';
+  container.appendChild(item);
+  setTimeout(() => {
+    item.style.transition = 'opacity 200ms ease, transform 200ms ease';
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(8px)';
+    setTimeout(() => item.remove(), 200);
+  }, 3500);
+}
+
+
+// Initialize Auth Gate for Ops Portal
+document.addEventListener('DOMContentLoaded', function() {
+  EightBitAuth.mountSecurityGate({ role: 'ops' });
+});
+</script>
 
 </body>
 </html>
