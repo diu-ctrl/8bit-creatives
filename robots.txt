@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /portal
+Disallow: /brand-dashboard
+Disallow: /creator-dashboard
+Disallow: /platform-dashboard
 Disallow: /ops.html
 Disallow: /api/
 

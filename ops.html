@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#000000">
@@ -106,15 +107,7 @@
     background: var(--surface-2);
   }
   
-  .bell-dot {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #ef4444;
-  }
+  
   
   .topbar-user {
     display: flex;
@@ -336,16 +329,6 @@
     font-size: 11px;
     color: var(--text-muted);
   }
-  
-  .kanban-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-  }
-  
-  .kanban-dot.briefing { background: #eab308; }
-  .kanban-dot.production { background: #3b82f6; }
-  .kanban-dot.approval { background: #ffffff; }
-  .kanban-dot.delivered { background: #22c55e; }
   
   .kanban-card {
     background: var(--surface-2);
@@ -878,7 +861,7 @@
         <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
         <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
       </svg>
-      <span class="bell-dot"></span>
+      
     </button>
     <div class="topbar-user">
       <div class="user-badge admin">Admin · Thug</div>
@@ -998,7 +981,7 @@
       <div id="pipeline-kanban" class="kanban-board">
         <div class="kanban-column">
           <div class="kanban-header">
-            <div class="kanban-title"><span class="kanban-dot briefing"></span> Briefing</div>
+            <div class="kanban-title">Briefing</div>
             <span class="kanban-count">2</span>
           </div>
           <div class="kanban-card" onclick="openCampaignDetail(this)">
@@ -1021,7 +1004,7 @@
         
         <div class="kanban-column">
           <div class="kanban-header">
-            <div class="kanban-title"><span class="kanban-dot production"></span> In production</div>
+            <div class="kanban-title">In production</div>
             <span class="kanban-count">3</span>
           </div>
           <div class="kanban-card" onclick="openCampaignDetail(this)">
@@ -1052,7 +1035,7 @@
         
         <div class="kanban-column">
           <div class="kanban-header">
-            <div class="kanban-title"><span class="kanban-dot approval"></span> Pending approval</div>
+            <div class="kanban-title">Pending approval</div>
             <span class="kanban-count">4</span>
           </div>
           <div class="kanban-card" onclick="openCampaignDetail(this)">
@@ -1075,7 +1058,7 @@
         
         <div class="kanban-column">
           <div class="kanban-header">
-            <div class="kanban-title"><span class="kanban-dot delivered"></span> Delivered</div>
+            <div class="kanban-title">Delivered</div>
             <span class="kanban-count">3</span>
           </div>
           <div class="kanban-card" onclick="openCampaignDetail(this)">
@@ -1416,7 +1399,7 @@
           <div class="roster-reach">2.1M YouTube</div>
         </div>
         <div class="roster-card" onclick="openCreatorDetail(this)">
-          <div class="roster-avatar">S</div>
+          <div class="roster-avatar">J</div>
           <div class="roster-name">Jokerkihaveli</div>
           <div class="roster-alias">Gulrez Khan</div>
           <div class="roster-status booked">Booked · Red Bull</div>
@@ -1516,7 +1499,7 @@
       <div id="pipeline-kanban" class="kanban-board">
         <div class="kanban-column">
           <div class="kanban-header">
-            <div class="kanban-title"><span class="kanban-dot briefing"></span> Brief intake</div>
+            <div class="kanban-title">Brief intake</div>
             <span class="kanban-count">2</span>
           </div>
           <div class="kanban-card" onclick="openCampaignDetail(this)">
@@ -1539,7 +1522,7 @@
 
         <div class="kanban-column">
           <div class="kanban-header">
-            <div class="kanban-title"><span class="kanban-dot production"></span> In production</div>
+            <div class="kanban-title">In production</div>
             <span class="kanban-count">3</span>
           </div>
           <div class="kanban-card" onclick="openCampaignDetail(this)">
@@ -1570,7 +1553,7 @@
 
         <div class="kanban-column">
           <div class="kanban-header">
-            <div class="kanban-title"><span class="kanban-dot approval"></span> Pending approval</div>
+            <div class="kanban-title">Pending approval</div>
             <span class="kanban-count">2</span>
           </div>
           <div class="kanban-card" onclick="openCampaignDetail(this)">
@@ -1593,7 +1576,7 @@
 
         <div class="kanban-column">
           <div class="kanban-header">
-            <div class="kanban-title"><span class="kanban-dot delivered"></span> Delivered</div>
+            <div class="kanban-title">Delivered</div>
             <span class="kanban-count">2</span>
           </div>
           <div class="kanban-card" onclick="openCampaignDetail(this)">
@@ -1616,7 +1599,7 @@
 
         <div class="kanban-column">
           <div class="kanban-header">
-            <div class="kanban-title"><span class="kanban-dot" style="background: rgba(255,255,255,0.4);"></span> Live &amp; reporting</div>
+            <div class="kanban-title">Live &amp; reporting</div>
             <span class="kanban-count">2</span>
           </div>
           <div class="kanban-card" onclick="openCampaignDetail(this)">
@@ -3072,11 +3055,11 @@ function closeCreatorDetail() {
   .toast-item.success { border-color: rgba(34, 197, 94, 0.5); }
   .toast-item.error { border-color: rgba(239, 68, 68, 0.5); }
   .toast-item.info { border-color: rgba(59, 130, 246, 0.5); }
-  .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .toast-item.success .toast-dot { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
-  .toast-item.error .toast-dot { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
-  .toast-item.info .toast-dot { background: #3b82f6; box-shadow: 0 0 8px #3b82f6; }
-  @keyframes toastSlideUp {
+    .toast-item { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+  .toast-item.success { border-color: rgba(34, 197, 94, 0.4); border-left-color: #22c55e; }
+  .toast-item.error { border-color: rgba(239, 68, 68, 0.4); border-left-color: #ef4444; }
+  .toast-item.info { border-color: rgba(59, 130, 246, 0.4); border-left-color: #3b82f6; }
+@keyframes toastSlideUp {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
@@ -3094,7 +3077,7 @@ function showToast(message, type = 'success') {
   }
   const item = document.createElement('div');
   item.className = 'toast-item ' + type;
-  item.innerHTML = '<span class="toast-dot"></span><span>' + message + '</span>';
+  item.innerHTML = '<span>' + message + '</span>';
   container.appendChild(item);
   setTimeout(() => {
     item.style.transition = 'opacity 200ms ease, transform 200ms ease';

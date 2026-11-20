@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="robots" content="noindex, nofollow">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0a0a0a">
@@ -110,20 +111,6 @@
       display: flex;
       align-items: center;
       gap: 8px;
-    }
-
-    .clock-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 10px var(--green);
-      animation: pulseGreen 2s infinite ease-in-out;
-    }
-
-    @keyframes pulseGreen {
-      0%, 100% { opacity: 0.6; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.1); }
     }
 
     .btn-return {
@@ -333,13 +320,7 @@
       gap: 12px;
     }
 
-    .session-indicator {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 10px var(--green);
-    }
+    
 
     .session-text-title {
       font-size: 13px;
@@ -648,7 +629,6 @@
     </a>
     <div class="topbar-right">
       <div class="clock-pill">
-        <span class="clock-dot"></span>
         <span id="gateway-clock">IST --:--:--</span>
       </div>
       <a href="/" class="btn-return">
@@ -676,7 +656,6 @@
     <!-- Active Session Banner (Shown if already authenticated) -->
     <div id="active-session-banner">
       <div class="session-info">
-        <div class="session-indicator"></div>
         <div>
           <div class="session-text-title" id="session-role-title">Active Session Authenticated</div>
           <div class="session-text-sub" id="session-role-sub">Access key valid for this device</div>
@@ -926,7 +905,7 @@
       if (session) {
         banner.style.display = 'flex';
         roleTitle.textContent = 'Active Session: ' + session.roleName;
-        roleSub.textContent = 'Role: ' + (session.roleBadge || session.role.toUpperCase()) + ' &bull; Authenticated on this device';
+        roleSub.textContent = 'Role: ' + (session.roleBadge || session.role.toUpperCase()) + ' | Authenticated on this device';
         launchBtn.href = session.targetUrl;
       } else {
         banner.style.display = 'none';

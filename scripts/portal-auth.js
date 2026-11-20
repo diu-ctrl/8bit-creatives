@@ -10,11 +10,11 @@
   // 1. One-Way Cryptographic Hashes (SHA-256) of Authorized Security Keys
   // Plain text keys are never stored in client code.
   const VAULT_HASHES = {
-    ops: '807242df0cf31761e38c220311ea3d6141b8650d443de6242b5f8d5b166c04fd',      // 8BIT-OPS-2026#SECURE
-    brand: '2bad5314304440de4459bade195b9179b95fc3759119e47b6fa4a2dada3b303b',    // 8BIT-BRAND-PARTNER*77
-    creator: 'f6fa1b12208a7683bc02b7583505945c4ebb2236049d59019477139a26e4914f',  // 8BIT-CREATOR-VIP@88
-    platform: 'f9d628632ab2debef879a85833c2fc129a7ff13a48ab730235983291f9356a7e', // 8BIT-PLATFORM-STREAM%99
-    master: '12cc0d13670c1e00c82cd36b3cab57eb1203fecb1f20cc0925d9029a7eae7b86'    // 8BIT-MASTER-VAULT-2026!
+    ops: '807242df0cf31761e38c220311ea3d6141b8650d443de6242b5f8d5b166c04fd',      
+    brand: '2bad5314304440de4459bade195b9179b95fc3759119e47b6fa4a2dada3b303b',    
+    creator: 'f6fa1b12208a7683bc02b7583505945c4ebb2236049d59019477139a26e4914f',  
+    platform: 'f9d628632ab2debef879a85833c2fc129a7ff13a48ab730235983291f9356a7e', 
+    master: '12cc0d13670c1e00c82cd36b3cab57eb1203fecb1f20cc0925d9029a7eae7b86'    
   };
 
   const PORTAL_META = {
@@ -288,7 +288,6 @@
     // Enhance topbar user badge & add logout button
     userContainer.innerHTML = `
       <div class="user-badge admin" style="display: inline-flex; align-items: center; gap: 8px;">
-        <span style="width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e; display: inline-block;"></span>
         <span>${roleBadgeText}</span>
       </div>
       <button id="btn-topbar-logout" class="btn" style="padding: 6px 12px; font-size: 11px; display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #ffffff; cursor: pointer; border-radius: 6px; transition: background 150ms ease;">
@@ -304,9 +303,7 @@
     const logoutBtn = document.getElementById('btn-topbar-logout');
     if (logoutBtn) {
       logoutBtn.addEventListener('click', () => {
-        if (confirm('Lock this terminal and return to 8Bit Access Gateway?')) {
-          logout('/portal');
-        }
+        logout('/portal');
       });
     }
   }
@@ -332,7 +329,7 @@
           <p class="lock-sub">${portalSubtitle}</p>
         </div>
 
-        <form id="lock-form" class="lock-form" onsubmit="return false;">
+        <form id="lock-form" class="lock-form">
           <div class="lock-field-group">
             <label class="lock-label">SECURITY KEY / ACCESS PASSPHRASE</label>
             <div class="lock-input-wrap">
@@ -346,7 +343,7 @@
 
           <div class="lock-row">
             <label class="lock-checkbox-label">
-              <input type="checkbox" id="lock-remember" checked>
+              <input type="checkbox" id="lock-remember">
               <span>Keep unlocked on this device</span>
             </label>
           </div>
@@ -645,6 +642,14 @@
       }
     }
 
+    if (input) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          handleUnlock();
+        }
+      });
+    }
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -654,6 +659,7 @@
   }
 
   // Export 8Bit Auth API
+  window.logout = logout;
   window.EightBitAuth = {
     computeSHA256,
     getSession,

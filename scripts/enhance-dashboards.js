@@ -40,11 +40,11 @@ const TOAST_CSS = `
   .toast-item.success { border-color: rgba(34, 197, 94, 0.5); }
   .toast-item.error { border-color: rgba(239, 68, 68, 0.5); }
   .toast-item.info { border-color: rgba(59, 130, 246, 0.5); }
-  .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .toast-item.success .toast-dot { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
-  .toast-item.error .toast-dot { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
-  .toast-item.info .toast-dot { background: #3b82f6; box-shadow: 0 0 8px #3b82f6; }
-  @keyframes toastSlideUp {
+    .toast-item { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+  .toast-item.success { border-color: rgba(34, 197, 94, 0.4); border-left-color: #22c55e; }
+  .toast-item.error { border-color: rgba(239, 68, 68, 0.4); border-left-color: #ef4444; }
+  .toast-item.info { border-color: rgba(59, 130, 246, 0.4); border-left-color: #3b82f6; }
+@keyframes toastSlideUp {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
@@ -62,7 +62,7 @@ function showToast(message, type = 'success') {
   }
   const item = document.createElement('div');
   item.className = 'toast-item ' + type;
-  item.innerHTML = '<span class="toast-dot"></span><span>' + message + '</span>';
+  item.innerHTML = '<span>' + message + '</span>';
   container.appendChild(item);
   setTimeout(() => {
     item.style.transition = 'opacity 200ms ease, transform 200ms ease';
@@ -392,13 +392,13 @@ function toggleTalentAvailability() {
     btn.style.background = 'rgba(34, 197, 94, 0.12)';
     btn.style.color = '#22c55e';
     btn.style.borderColor = 'rgba(34, 197, 94, 0.3)';
-    btn.innerHTML = '&bull; Available for Bookings';
+    btn.innerHTML = 'Available for Bookings';
     showToast('Status updated: Open for new brand campaigns', 'success');
   } else {
     btn.style.background = 'rgba(239, 68, 68, 0.12)';
     btn.style.color = '#ef4444';
     btn.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-    btn.innerHTML = '&bull; Currently Booked Out';
+    btn.innerHTML = 'Currently Booked Out';
     showToast('Status updated: Calendar locked / Booked out', 'info');
   }
 }

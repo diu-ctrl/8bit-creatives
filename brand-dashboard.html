@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#000000">
@@ -721,7 +722,7 @@
           </div>
 
           <div class="creator-mini-card">
-            <div class="creator-mini-avatar">S</div>
+            <div class="creator-mini-avatar">J</div>
             <div>
               <div style="font-size: 14px; font-weight: 600;">Jokerkihaveli</div>
               <div style="font-size: 12px; color: var(--text-muted);">4.8M YouTube · Neo Sprint Host</div>
@@ -896,7 +897,7 @@
           </div>
         </div>
         <div class="stat-card">
-          <div class="creator-mini-avatar" style="margin-bottom: 12px;">S</div>
+          <div class="creator-mini-avatar" style="margin-bottom: 12px;">J</div>
           <div style="font-size: 16px; font-weight: 600;">Jokerkihaveli</div>
           <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Gulrez Khan · 4.8M Subs</div>
           <div style="font-size: 12px; color: var(--text-muted); line-height: 1.6;">
@@ -1022,11 +1023,11 @@ function showView(viewName, el) {
   .toast-item.success { border-color: rgba(34, 197, 94, 0.5); }
   .toast-item.error { border-color: rgba(239, 68, 68, 0.5); }
   .toast-item.info { border-color: rgba(59, 130, 246, 0.5); }
-  .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .toast-item.success .toast-dot { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
-  .toast-item.error .toast-dot { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
-  .toast-item.info .toast-dot { background: #3b82f6; box-shadow: 0 0 8px #3b82f6; }
-  @keyframes toastSlideUp {
+    .toast-item { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+  .toast-item.success { border-color: rgba(34, 197, 94, 0.4); border-left-color: #22c55e; }
+  .toast-item.error { border-color: rgba(239, 68, 68, 0.4); border-left-color: #ef4444; }
+  .toast-item.info { border-color: rgba(59, 130, 246, 0.4); border-left-color: #3b82f6; }
+@keyframes toastSlideUp {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
@@ -1042,14 +1043,14 @@ function showView(viewName, el) {
     
     <div style="font-size: 11px; font-weight: 700; color: var(--yellow); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">DELIVERABLE INSPECTION &amp; SIGN-OFF</div>
     <h3 id="del-modal-title" style="font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 4px;">launch_stream_vod_v2.mp4</h3>
-    <div id="del-modal-sub" style="font-size: 12px; color: var(--text-muted); margin-bottom: 20px;">Flagship Drop v2 &bull; Creator: Mortal &bull; Version: v2.1</div>
+    <div id="del-modal-sub" style="font-size: 12px; color: var(--text-muted); margin-bottom: 20px;">Flagship Drop v2 | Creator: Mortal | Version: v2.1</div>
 
     <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 20px;">
       <div style="font-size: 12px; color: var(--text-muted); line-height: 1.6;">
-        <div>&bull; <strong>Resolution &amp; Format:</strong> 1080p 60fps (ProRes Master Cut)</div>
-        <div>&bull; <strong>Video Duration:</strong> 14m 32s (Dedicated Benchmark Segment at 03:20)</div>
-        <div>&bull; <strong>Brand Talking Points:</strong> 144Hz AMOLED Display, 120W Fast Charging &amp; BGMI 90FPS</div>
-        <div>&bull; <strong>Drive Master:</strong> <a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: underline;">Open High-Res VOD Cut</a></div>
+        <div><strong>Resolution &amp; Format:</strong> 1080p 60fps (ProRes Master Cut)</div>
+        <div><strong>Video Duration:</strong> 14m 32s (Dedicated Benchmark Segment at 03:20)</div>
+        <div><strong>Brand Talking Points:</strong> 144Hz AMOLED Display, 120W Fast Charging &amp; BGMI 90FPS</div>
+        <div><strong>Drive Master:</strong> <a href="https://drive.google.com/drive/folders/1E6TSNzgO8nAjw0Db52ip7A0RPz7mYBQr" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: underline;">Open High-Res VOD Cut</a></div>
       </div>
     </div>
 
@@ -1126,7 +1127,7 @@ function showToast(message, type = 'success') {
   }
   const item = document.createElement('div');
   item.className = 'toast-item ' + type;
-  item.innerHTML = '<span class="toast-dot"></span><span>' + message + '</span>';
+  item.innerHTML = '<span>' + message + '</span>';
   container.appendChild(item);
   setTimeout(() => {
     item.style.transition = 'opacity 200ms ease, transform 200ms ease';

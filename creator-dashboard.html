@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#000000">
@@ -584,7 +585,7 @@
               <option value="goblin">Goblin (Abhijeet Andhare)</option>
             </select>
             <button id="talent-avail-btn" onclick="toggleTalentAvailability()" style="background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 999px; padding: 3px 10px; font-size: 11px; color: #22c55e; cursor: pointer; font-weight: 500;">
-              &bull; Available for Bookings
+              Available for Bookings
             </button>
           </div>
           <div class="page-subtitle">Welcome back, Naman. Track your active campaigns, upcoming deadlines, and payouts.</div>
@@ -1087,11 +1088,11 @@ function showView(viewName, el) {
   .toast-item.success { border-color: rgba(34, 197, 94, 0.5); }
   .toast-item.error { border-color: rgba(239, 68, 68, 0.5); }
   .toast-item.info { border-color: rgba(59, 130, 246, 0.5); }
-  .toast-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-  .toast-item.success .toast-dot { background: #22c55e; box-shadow: 0 0 8px #22c55e; }
-  .toast-item.error .toast-dot { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
-  .toast-item.info .toast-dot { background: #3b82f6; box-shadow: 0 0 8px #3b82f6; }
-  @keyframes toastSlideUp {
+    .toast-item { border-left: 3px solid rgba(255, 255, 255, 0.4); }
+  .toast-item.success { border-color: rgba(34, 197, 94, 0.4); border-left-color: #22c55e; }
+  .toast-item.error { border-color: rgba(239, 68, 68, 0.4); border-left-color: #ef4444; }
+  .toast-item.info { border-color: rgba(59, 130, 246, 0.4); border-left-color: #3b82f6; }
+@keyframes toastSlideUp {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
@@ -1137,16 +1138,16 @@ function showView(viewName, el) {
     
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
       <div>
-        <div style="font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: 0.08em; text-transform: uppercase;">TAX INVOICE &bull; 8BIT CREATIVES</div>
+        <div style="font-size: 11px; font-weight: 700; color: var(--green); letter-spacing: 0.08em; text-transform: uppercase;">TAX INVOICE | 8BIT CREATIVES</div>
         <h3 id="inv-modal-num" style="font-size: 20px; font-weight: 700; color: #ffffff;">#8BIT-2026-89</h3>
       </div>
       <span class="badge-tag green">Approved for Remittance</span>
     </div>
 
     <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; font-size: 12px; color: var(--text-muted); line-height: 1.6;">
-      <div><strong>Agency:</strong> S8UL Gaming Pvt. Ltd. &bull; 8Bit Creatives Division</div>
-      <div><strong>GSTIN:</strong> 27AABCS8899Z1Z5 &bull; Mumbai, Maharashtra</div>
-      <div><strong>Talent:</strong> Naman Mathur (Mortal) &bull; PAN: ABCPM8892K</div>
+      <div><strong>Agency:</strong> S8UL Gaming Pvt. Ltd. | 8Bit Creatives Division</div>
+      <div><strong>GSTIN:</strong> 27AABCS8899Z1Z5 | Mumbai, Maharashtra</div>
+      <div><strong>Talent:</strong> Naman Mathur (Mortal) | PAN: ABCPM8892K</div>
       <div><strong>Payment Cycle:</strong> Net 30 Commercial Remittance (Due Sep 25, 2026)</div>
     </div>
 
@@ -1200,7 +1201,7 @@ function showToast(message, type = 'success') {
   }
   const item = document.createElement('div');
   item.className = 'toast-item ' + type;
-  item.innerHTML = '<span class="toast-dot"></span><span>' + message + '</span>';
+  item.innerHTML = '<span>' + message + '</span>';
   container.appendChild(item);
   setTimeout(() => {
     item.style.transition = 'opacity 200ms ease, transform 200ms ease';
@@ -1237,13 +1238,13 @@ function toggleTalentAvailability() {
     btn.style.background = 'rgba(34, 197, 94, 0.12)';
     btn.style.color = '#22c55e';
     btn.style.borderColor = 'rgba(34, 197, 94, 0.3)';
-    btn.innerHTML = '&bull; Available for Bookings';
+    btn.innerHTML = 'Available for Bookings';
     showToast('Status updated: Open for new brand campaigns', 'success');
   } else {
     btn.style.background = 'rgba(239, 68, 68, 0.12)';
     btn.style.color = '#ef4444';
     btn.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-    btn.innerHTML = '&bull; Currently Booked Out';
+    btn.innerHTML = 'Currently Booked Out';
     showToast('Status updated: Calendar locked / Booked out', 'info');
   }
 }
